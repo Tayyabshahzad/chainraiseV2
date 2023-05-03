@@ -75,7 +75,7 @@
                         data-kt-image-input="true"
                         @if ($user->getFirstMediaUrl('profile_photo', 'thumb')) @php $photo_path = $user->getFirstMediaUrl('profile_photo', 'thumb')@endphp
                         @else
-                            @php $photo_path = "http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg";  @endphp @endif
+                            @php $photo_path = "https://investchainraise.io/assets/media/svg/avatars/blank.svg";  @endphp @endif
                         style="background-image: url('{{ $photo_path }}')">
                         <!--begin::Preview existing avatar-->
                         <div class="image-input-wrapper" style="background-image: none;"></div>
@@ -386,6 +386,7 @@
                                                                 <input type="text" class="form-control" name="phone"
                                                                     id="phone_number" value="{{ $user->phone }}" />
                                                             </div>
+                                                            <code>-999-999-9999</code>  
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -405,7 +406,7 @@
                                                     data-kt-image-input="true"
                                                     @if ($user->getFirstMediaUrl('profile_photo', 'thumb')) @php $photo_path = $user->getFirstMediaUrl('profile_photo', 'thumb')@endphp
                                                 @else
-                                                @php $photo_path = "http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg";  @endphp @endif
+                                                @php $photo_path = "https://investchainraise.io/assets/media/svg/avatars/blank.svg";  @endphp @endif
                                                     style="background-image: url('{{ $photo_path }}')">
                                                     <!--begin::Preview existing avatar-->
                                                     <div class="image-input-wrapper w-150px h-150px"
@@ -445,7 +446,7 @@
                                         </div>  
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-lg-12 mb-5">
+                                        <div class="col-lg-6 mb-5">
                                             <label>User Type: <span class="text-danger">*</span> </label>
                                             <select class="form-control user_type" data-control="select2"
                                                 name="user_type">
@@ -530,7 +531,7 @@
 
                                         <div class="col-lg-6">
                                             <label> Suit / Unit </label>
-                                            <input type="text" class="form-control" name="suit"
+                                            <input type="number" class="form-control" name="suit"
                                                 @if ($user->userDetail) value="{{ $user->userDetail->suit }}" @endif
                                                 placeholder="Suit / Unit">
                                         </div>
@@ -540,21 +541,21 @@
                                             <label>City <span class="text-danger">*</span> </label>
                                             <input type="text" class="form-control" name="city"
                                                 @if ($user->userDetail) value="{{ $user->userDetail->city }}" @endif
-                                                placeholder="City*" required>
+                                                placeholder="City" required>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <label>State / Region <span class="text-danger">*</span> </label>
                                             <input type="text" class="form-control" name="state"
                                                 @if ($user->userDetail) value="{{ $user->userDetail->state }}" @endif
-                                                placeholder="State / Region*" required>
+                                                placeholder="State / Region" required>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <label>Zip / Postal Code <span class="text-danger">*</span> </label>
-                                            <input type="text" class="form-control" name="zip" id="zip_code"
+                                            <input type="number" placeholder="12345" class="form-control" name="zip" id="zip_code" min="5" max="5"
                                                 @if ($user->userDetail) value="{{ $user->userDetail->zip }}" @endif
-                                                placeholder="Zip / Postal Code*" required>
+                                                placeholder="Zip / Postal Code (12345) " required>
                                         </div>
                                     </div> 
                                     @if ($user->hasRole('issuer'))
@@ -825,7 +826,7 @@
                                         </div>
 
                                     </div> 
-                                    @if($user->hasRole('investor'))
+                                    @if($user->hasRole('issuer'))
                                         <div class="card-body bg-danger"
                                             style=" color:#fff!important;border-radius:5px;font-size:15px;  ">
                                             <div class="card-title mt-6 mb-3">
@@ -907,103 +908,105 @@
 
                                         </div>
                                     @endif
-                                    <div class="card-title mt-6">
-                                        <h2>Trust Setting<i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                data-kt-initialized="1"></i></h2>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <div class="d-flex align-items-center">
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="bypass_account_setup"
-                                                        @if ($user->trustSetting and $user->trustSetting->bypass_account_setup == 1) checked="checked" @endif>
+                                    @if($user->hasRole('issuer'))
+                                        <div class="card-title mt-6">
+                                            <h2>Trust Setting<i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip" aria-label="Specify a target priorty"
+                                                    data-kt-initialized="1"></i></h2>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <div class="d-flex align-items-center">
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="bypass_account_setup"
+                                                            @if ($user->trustSetting and $user->trustSetting->bypass_account_setup == 1) checked="checked" @endif>
 
-                                                    <span class="form-check-label fw-semibold">Bypass Account Setup<i
-                                                            class="fas fa-exclamation-circle ms-2 fs-7"
-                                                            data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                            data-kt-initialized="1"></i></span>
-                                                </label>
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="bypass_kyc_checkup"
-                                                        @if ($user->trustSetting and $user->trustSetting->bypass_kyc_checkup == 1) checked="checked" @endif>
-                                                    <span class="form-check-label fw-semibold">Bypass KYC Checks</span>
-                                                </label>
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="bypass_accreditation_checks"
-                                                        @if ($user->trustSetting and $user->trustSetting->bypass_accreditation_checks == 1) checked="checked" @endif>
-                                                    <span class="form-check-label fw-semibold">Bypass Accreditation
-                                                        Checks</span>
-                                                </label>
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="bypass_document_restrictions"
-                                                        @if ($user->trustSetting and $user->bypass_document_restrictions == 1) checked="checked" @endif>
-                                                    <span class="form-check-label fw-semibold">Bypass Document
-                                                        Restrictions</span>
-                                                </label>
+                                                        <span class="form-check-label fw-semibold">Bypass Account Setup<i
+                                                                class="fas fa-exclamation-circle ms-2 fs-7"
+                                                                data-bs-toggle="tooltip" aria-label="Specify a target priorty"
+                                                                data-kt-initialized="1"></i></span>
+                                                    </label>
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="bypass_kyc_checkup"
+                                                            @if ($user->trustSetting and $user->trustSetting->bypass_kyc_checkup == 1) checked="checked" @endif>
+                                                        <span class="form-check-label fw-semibold">Bypass KYC Checks</span>
+                                                    </label>
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="bypass_accreditation_checks"
+                                                            @if ($user->trustSetting and $user->trustSetting->bypass_accreditation_checks == 1) checked="checked" @endif>
+                                                        <span class="form-check-label fw-semibold">Bypass Accreditation
+                                                            Checks</span>
+                                                    </label>
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="bypass_document_restrictions"
+                                                            @if ($user->trustSetting and $user->bypass_document_restrictions == 1) checked="checked" @endif>
+                                                        <span class="form-check-label fw-semibold">Bypass Document
+                                                            Restrictions</span>
+                                                    </label>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row mt-6">
-                                            <div class="d-flex align-items-center">
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="view_all_invite_offers"
-                                                        @if ($user->trustSetting and $user->trustSetting->view_all_invite_offers == true) checked="checked" @endif>
-                                                    <span class="form-check-label fw-semibold">View All Invite Only
-                                                        Offers</span>
-                                                </label>
-                                                <label class="form-check form-check-custom form-check-solid me-10">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                        name="allow_manual_ach_bank_input"
-                                                        @if ($user->trustSetting and $user->trustSetting->allow_manual_ach_bank_input == true) checked="checked" @endif>
-                                                    <span class="form-check-label fw-semibold">Allow Manual ACH Bank
-                                                        Input<i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                            data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                            data-kt-initialized="1"></i></span>
-                                                </label>
+                                            <div class="form-group row mt-6">
+                                                <div class="d-flex align-items-center">
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="view_all_invite_offers"
+                                                            @if ($user->trustSetting and $user->trustSetting->view_all_invite_offers == true) checked="checked" @endif>
+                                                        <span class="form-check-label fw-semibold">View All Invite Only
+                                                            Offers</span>
+                                                    </label>
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="allow_manual_ach_bank_input"
+                                                            @if ($user->trustSetting and $user->trustSetting->allow_manual_ach_bank_input == true) checked="checked" @endif>
+                                                        <span class="form-check-label fw-semibold">Allow Manual ACH Bank
+                                                            Input<i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                                data-bs-toggle="tooltip" aria-label="Specify a target priorty"
+                                                                data-kt-initialized="1"></i></span>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div> 
-                                    <div class="card-body">
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label class="fw-semibold">Bypass Restrictions on Specific
-                                                    Documents</label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Select an Offer">
-                                                    <option></option>
-                                                    <option value="1">Option 1</option>
-                                                    <option value="2">Option 2</option>
-                                                </select>
+                                        </div> 
+                                        <div class="card-body">
+                                            <div class="form-group row mb-10">
+                                                <div class="col-lg-6">
+                                                    <label class="fw-semibold">Bypass Restrictions on Specific
+                                                        Documents</label>
+                                                    <select class="form-select" data-control="select2"
+                                                        data-placeholder="Select an Offer">
+                                                        <option></option>
+                                                        <option value="1">Option 1</option>
+                                                        <option value="2">Option 2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="hidden"></label>
+                                                    <select class="form-select" data-control="select2"
+                                                        data-placeholder="Select a Document">
+                                                        <option></option>
+                                                        <option value="1">Option 1</option>
+                                                        <option value="2">Option 2</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <label class="hidden"></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Select a Document">
-                                                    <option></option>
-                                                    <option value="1">Option 1</option>
-                                                    <option value="2">Option 2</option>
-                                                </select>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label class="fw-semibold">Bypass E-Sign Document Restrictions</label>
+                                                    <select class="form-select" data-control="select2"
+                                                        data-placeholder="Select an E-Sign Template">
+                                                        <option></option>
+                                                        <option value="1">Option 1</option>
+                                                        <option value="2">Option 2</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-lg-6">
-                                                <label class="fw-semibold">Bypass E-Sign Document Restrictions</label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Select an E-Sign Template">
-                                                    <option></option>
-                                                    <option value="1">Option 1</option>
-                                                    <option value="2">Option 2</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
@@ -2220,7 +2223,7 @@
                         $('.profilePhoto').css('background-image', 'url(' + response.photo + ')');
                     } else {
                         $('.profilePhoto').css('background-image',
-                            'url(http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg)');
+                            'url(https://investchainraise.io/assets/media/svg/avatars/blank.svg)');
                     }
 
 
@@ -2571,7 +2574,7 @@
             "mask": "99-9999999"
         }).mask("#ein_number");
         Inputmask({
-                        "mask": "***-**-***"
+                        "mask": "***-**-****"
         }).mask("#primary_contact_social_security");
     </script>
 @endsection

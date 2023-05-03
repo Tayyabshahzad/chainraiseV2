@@ -75,7 +75,7 @@
                         data-kt-image-input="true"
                         @if ($user->getFirstMediaUrl('profile_photo', 'thumb')) @php $photo_path = $user->getFirstMediaUrl('profile_photo', 'thumb')@endphp
                         @else
-                            @php $photo_path = "http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg";  @endphp @endif
+                            @php $photo_path = "https://investchainraise.io/assets/media/svg/avatars/blank.svg";  @endphp @endif
                         style="background-image: url('{{ $photo_path }}')">
                         <!--begin::Preview existing avatar-->
                         <div class="image-input-wrapper" style="background-image: none;"></div> 
@@ -245,7 +245,9 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="phone"
                                                                 id="phone_number" value="{{ $user->phone }}" />
+                                                               
                                                         </div>
+                                                        <code>-999-999-9999</code>  
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
@@ -265,7 +267,7 @@
                                                 data-kt-image-input="true"
                                                 @if ($user->getFirstMediaUrl('profile_photo', 'thumb')) @php $photo_path = $user->getFirstMediaUrl('profile_photo', 'thumb')@endphp
                                             @else
-                                            @php $photo_path = "http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg";  @endphp @endif
+                                            @php $photo_path = "https://investchainraise.io/assets/media/svg/avatars/blank.svg";  @endphp @endif
                                                 style="background-image: url('{{ $photo_path }}')">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-150px h-150px"
@@ -305,7 +307,7 @@
                                     </div>  
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-12 mb-5">
+                                    <div class="col-lg-6 mb-5">
                                         <label>User Type: <span class="text-danger">*</span> </label>
                                         <select class="form-control user_type" data-control="select2"
                                             name="user_type">
@@ -390,7 +392,7 @@
 
                                     <div class="col-lg-6">
                                         <label> Suit / Unit </label>
-                                        <input type="text" class="form-control" name="suit"
+                                        <input type="number" class="form-control" name="suit"
                                             @if ($user->userDetail) value="{{ $user->userDetail->suit }}" @endif
                                             placeholder="Suit / Unit">
                                     </div>
@@ -400,21 +402,21 @@
                                         <label>City <span class="text-danger">*</span> </label>
                                         <input type="text" class="form-control" name="city"
                                             @if ($user->userDetail) value="{{ $user->userDetail->city }}" @endif
-                                            placeholder="City*" required>
+                                            placeholder="City" required>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <label>State / Region <span class="text-danger">*</span> </label>
                                         <input type="text" class="form-control" name="state"
                                             @if ($user->userDetail) value="{{ $user->userDetail->state }}" @endif
-                                            placeholder="State / Region*" required>
+                                            placeholder="State / Region" required>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <label>Zip / Postal Code <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="zip" id="zip_code"
+                                        <input type="number" class="form-control" name="zip" id="zip_code" min="5" max="5"
                                             @if ($user->userDetail) value="{{ $user->userDetail->zip }}" @endif
-                                            placeholder="Zip / Postal Code*" required>
+                                            placeholder="Zip / Postal Code (12345)" required>
                                     </div>
                                 </div> 
                                 @if ($user->hasRole('issuer'))
@@ -607,7 +609,7 @@
                                     </div>
 
                                 </div> 
-                                @if($user->hasRole('investor'))
+                                @if($user->hasRole('issuer'))
                                     <div class="card-body bg-danger"
                                         style=" color:#fff!important;border-radius:5px;font-size:15px;  ">
                                         <div class="card-title mt-6 mb-3">
@@ -689,6 +691,7 @@
 
                                     </div>
                                 @endif
+                                @if($user->hasRole('issuer'))
                                 <div class="card-title mt-6">
                                     <h2>Trust Setting<i class="fas fa-exclamation-circle ms-2 fs-7"
                                             data-bs-toggle="tooltip" aria-label="Specify a target priorty"
@@ -786,6 +789,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -1473,7 +1477,7 @@
                         $('.profilePhoto').css('background-image', 'url(' + response.photo + ')');
                     } else {
                         $('.profilePhoto').css('background-image',
-                            'url(http://127.0.0.1:8000/assets/media/svg/avatars/blank.svg)');
+                            'url(https://investchainraise.io/assets/media/svg/avatars/blank.svg)');
                     }
 
 
@@ -1655,7 +1659,7 @@
             });
         }
         Inputmask({
-                        "mask": "***-**-***"
+                        "mask": "***-**-****"
         }).mask("#primary_contact_social_security");
         </script>
-@endsection
+@endsection 
