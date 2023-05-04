@@ -25,7 +25,7 @@
 @section('title', 'Home')
 @section('content')
     <div class="container-fluid header-sec py-3">
-        <div class="row ">
+        <div class="row ">nano in
             <div class="col-lg-12 d-flex justify-content-center align-items-center py-4">
                 <img src="{{ asset('media/logo/logo-h.jpg') }}" alt="logo" width="80" height="60">
                 <h2>Build an <span style="color:#4b1dff">Ambitious</span> Portfolio.</h2>
