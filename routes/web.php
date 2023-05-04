@@ -22,8 +22,11 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 //----
+Route::group(['middleware' => ['auth','verified']], function () {
+    Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
+});
 
-Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
+
 Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
 Route::get('mailTrap', [TestController::class, 'mailTrap'])->name('mailTrap');
 Route::get('message', [TestController::class, 'message'])->name('messss');
@@ -126,10 +129,14 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     Route::get('kyc/check/update/{id}', ['as' => 'update.kyc.check','uses' => 'KycController@updateKycCheck']);
 
     //Front Listing Page
-    /// Added new roure
+    /// Added new route
     Route::post('esign-template-save', ['as' => 'esign.template.save','uses' => 'UserController@templateSave']);
-    Route::post('basic/details/update', ['as' => 'basic.details.update','uses' => 'UserController@basicDetailUpdate']);
+   
 
+});
+
+Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\User'], function () {
+    Route::post('basic/details/update', ['as' => 'basic.details.update','uses' => 'UserController@basicDetailUpdate']);
 });
 
 Route::group(['as'=> 'user.info.','prefix'=>'users/info','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\User'], function () {

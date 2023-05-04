@@ -500,7 +500,9 @@
 
         $('.account_type').click(function() {
             $('.account_type_wrapper_row').hide('slow');
+            $('input[name=account_type]').prop('checked', false);
             $('.row_individual').removeClass('d-none');
+            $(window).scrollTop(0);
             if ($(this).val() == 'individual') {
                 $('.type-label').html('Individual')
                 $('.show_when_type_entity').addClass('d-none');

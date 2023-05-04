@@ -16,7 +16,10 @@
             color:#fff
         }
         
-        
+        .account_type_wrapper{
+            min-height: 15em;
+            line-height: 1.5em;
+        }
     </style>
 @endsection
 @section('title', 'Home')
