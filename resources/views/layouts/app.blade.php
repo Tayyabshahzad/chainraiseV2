@@ -636,16 +636,7 @@
         </span>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    
     <script>
         var hostUrl = "assets/";
     </script>
@@ -672,6 +663,17 @@
                 toastr.error("{{ session('error') }}", "Error");
             @endif
         </script>
+
+
+    @endif
+     
+    @if ($errors->any())
+    
+            @foreach ($errors->all() as $error)
+                <script> toastr.error("{{ $error }}", "Error");</script> 
+            @endforeach
+        
+    </div>
     @endif
 
     @section('page_js')

@@ -40,25 +40,23 @@ class KycController extends Controller
     }
     public function checkKyc(Request $request)
     {
-
+         
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token'; 
         $fortress_base_url = 'https://api.fortressapi.com/api/trust/v1/'; 
         $request->validate([
             'id' => 'required',
-        ]); 
+        ]);  
         $errors = []; 
-        $user = User::with('userDetail')->find($request->id);  
-        $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);  
-        if ($user->hasRole('issuer')) {
-            if (!$user->getFirstMediaUrl('kyc_document_collection')) {
-                $errors[] = 'Please Upload Document First';
-                return response([
-                    'status' => 'document',
-                    'success' => false,
-                    'errors' => $errors,
-                ]);
-            }
-        }   
+        $user = User::with('userDetail')->find($request->id);    
+        $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);   
+        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+            $errors[] = 'Please Upload Document First';
+            return response([
+                'status' => 'document',
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
         // Token Request
         try {
             $get_token = Http::withHeaders([
@@ -322,8 +320,9 @@ class KycController extends Controller
         if($user->user_type  != 'entity'){
             //dump('Doc Upload');
             try{ 
+                
                 $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
-                $path =  $mediaCollection->getFullUrl();
+                $path =  $mediaCollection?->getFullUrl();
                 //$path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
                 $document_path = fopen($path, 'r');   
                 $url = $endPoint;

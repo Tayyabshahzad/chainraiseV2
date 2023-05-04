@@ -352,7 +352,7 @@ class UserController extends Controller
             //'suit' => 'required',
             'city' => 'required',
             'state' => 'required',
-            'zip' => 'required',
+            'zip' => 'required|min:5|max:5',
             //'legal_formation'=>'required',
             //'date_incorporation'=>'required',
             // Identity Verifiation

@@ -42,15 +42,7 @@
                         <!--end::Item-->
                     </ul>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                 
                     <!--end::Breadcrumb-->
                 </div>
                 <!--end::Page title-->
@@ -235,7 +227,7 @@
                                                 <div class="col-lg-7 row">
                                                     <label>Phone Number: <span class="text-danger">*</span> </label>
                                                     <div class="col-lg-4">
-                                                        <select class="form-control cc" name="cc"
+                                                        <select class="form-control cc" name="cc" required
                                                             data-control="select2">
                                                             @include('user.partials.cc')
                                                         </select>
@@ -243,7 +235,7 @@
                                                     </div>
                                                     <div class="col-lg-8">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="phone"
+                                                            <input type="text" class="form-control" name="phone" required
                                                                 id="phone_number" value="{{ $user->phone }}" />
                                                                
                                                         </div>
@@ -255,8 +247,7 @@
                                                     <div class="input-group" id="">
                                                         <input type="date" class="form-control"
                                                             placeholder="Date of Birth*" required name="dob"
-                                                            @if ($user->userDetail) value="{{ $user->userDetail->dob }}" @endif>
-
+                                                            @if ($user->userDetail) value="{{ $user->userDetail->dob }}" @endif> 
                                                     </div>
 
                                                 </div>
@@ -320,7 +311,7 @@
                                 </div>
 
                                 <div class="form-group row mb-10">
-                                    @if ($user->hasRole('issuer'))
+                                    @if ($user->user_type == 'entity')
                                         <div class="col-lg-12 mb-3">
                                             <h3>
                                                 COMPANY INFORMATION
@@ -414,7 +405,7 @@
 
                                     <div class="col-lg-4">
                                         <label>Zip / Postal Code <span class="text-danger">*</span> </label>
-                                        <input type="number" class="form-control" name="zip" id="zip_code" min="5" max="5"
+                                        <input type="number" class="form-control" name="zip" id="zip_code"   min="5"
                                             @if ($user->userDetail) value="{{ $user->userDetail->zip }}" @endif
                                             placeholder="Zip / Postal Code (12345)" required>
                                     </div>

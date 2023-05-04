@@ -42,15 +42,7 @@
                         <!--end::Item-->
                     </ul>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                   
                     <!--end::Breadcrumb-->
                 </div>
                 <!--end::Page title-->
@@ -326,19 +318,7 @@
                                             <h3>
                                                 CONTACT INFORMATION
                                             </h3>
-                                            @if ($errors->any())
-                                                <div>
-                                                    @foreach ($errors->all() as $error)
-                                                        <div
-                                                            class="fv-plugins-message-container invalid-feedback mb-3 text-center">
-                                                            <div data-field="email" data-validator="notEmpty">
-                                                                {{ $error }}
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <br>
-                                            @endif
+                                          
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-10">
@@ -459,7 +439,7 @@
                                     </div>
 
                                     <div class="form-group row mb-10">
-                                        @if ($user->hasRole('issuer'))
+                                        @if ($user->user_type == 'entity')
                                             <div class="col-lg-12 mb-3">
                                                 <h3>
                                                     COMPANY INFORMATION
@@ -516,12 +496,9 @@
                                             <h6>
                                                 Address
                                             </h6>
-                                        </div>
+                                        </div> 
 
-
-                                        {{-- End Issuer Details --}}
-
-
+                                        {{-- End Issuer Details --}} 
                                         <div class="col-lg-6">
                                             <label>Address <span class="text-danger">*</span> </label>
                                             <input type="text" class="form-control" name="address"
@@ -553,7 +530,7 @@
 
                                         <div class="col-lg-4">
                                             <label>Zip / Postal Code <span class="text-danger">*</span> </label>
-                                            <input type="number" placeholder="12345" class="form-control" name="zip" id="zip_code" min="5" max="5"
+                                            <input type="number" placeholder="12345" class="form-control" name="zip" id="zip_code" min="5"  
                                                 @if ($user->userDetail) value="{{ $user->userDetail->zip }}" @endif
                                                 placeholder="Zip / Postal Code (12345) " required>
                                         </div>
