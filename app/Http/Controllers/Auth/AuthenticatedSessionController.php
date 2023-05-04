@@ -29,13 +29,17 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
       
         if ($request->ajax()) {
- 
+                if(Auth::user()->profile_status == 0){
+                    $url = route('user.setup');
+                }else{
+                    $url = route('index');
+                }
                 return response([
                     'status'=>'true',
+                    'route'=>$url,
                     'role'=>Auth::user()->roles->first()->name, 
                 ]);
             

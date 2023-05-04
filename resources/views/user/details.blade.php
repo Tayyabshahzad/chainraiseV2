@@ -317,8 +317,7 @@
                                         <div class="col-lg-12 mb-3">
                                             <h3>
                                                 CONTACT INFORMATION
-                                            </h3>
-                                          
+                                            </h3> 
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-10">

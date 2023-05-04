@@ -650,9 +650,7 @@
     <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/new-target.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-
-
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script> 
     <script src="{{asset('assets/js/custom/utilities/modals/top-up-wallet.js')}}"></script>
     @if (Session::has('success') or Session::has('error'))
         <script>

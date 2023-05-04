@@ -21,6 +21,7 @@ class RouteServiceProvider extends ServiceProvider
     public const ISSUER = '/offers/listing';
     public const INVESTOR = '/users/account';
     public const PROFILE = '/users/account';
+    public const LISTINGS = '/setup';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *

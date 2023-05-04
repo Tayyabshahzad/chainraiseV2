@@ -4,6 +4,7 @@ use App\Exports\UsersExport;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\InitialSetupController;
 use App\Http\Controllers\MakeInvestmentController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\TestController;
@@ -22,11 +23,8 @@ use Laravel\Socialite\Facades\Socialite;
 */
 //----
 
-
-Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');
-
-
-Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
+Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
+Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
 Route::get('mailTrap', [TestController::class, 'mailTrap'])->name('mailTrap');
 Route::get('message', [TestController::class, 'message'])->name('messss');
 Route::post('message-sent', [TestController::class, 'message_send']);
@@ -37,39 +35,38 @@ Route::get('dummer', [UserController::class, 'dummy'])->name('dummer');
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('error.logs');
 Route::get('custom_login/{email}/{password}', [UserController::class, 'custom_login']);
 Route::get('redirect-user/{email}/{password}', [UserController::class, 'redirection']); 
-Route::get('privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy.policy'); 
-Route::get('investors', [FrontendController::class, 'investors'])->name('investors');
-Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses');
-
-Route::get('faq', [FrontendController::class, 'faq'])->name('faq'); 
-Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
-Route::get('/', [FrontendController::class, 'index'])->name('index');
 
 Route::get('login-social', [FrontendController::class, 'socialLogin'])->name('login.social');
-Route::get('otp', [GeneralController::class, 'otp'])->name('otp');
-
+Route::get('otp', [GeneralController::class, 'otp'])->name('otp'); 
 Route::get('login/google', [App\Http\Controllers\SocialiteController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);
-
-
+Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']); 
 Route::get('login/google', [App\Http\Controllers\SocialiteController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);
-
+Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']); 
 Route::get('login/facebook', [App\Http\Controllers\SocialiteController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController::class, 'handleFacebookCallback']);
 
 
-Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('check.profile.complete')->group(function () {
+    Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details'); 
+    Route::get('faq', [FrontendController::class, 'faq'])->name('faq');
+    Route::get('privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy.policy'); 
+    Route::get('investors', [FrontendController::class, 'investors'])->name('investors');
+    Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses'); 
+    Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
+    Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
+    Route::get('/', [FrontendController::class, 'index'])->name('index'); 
+});
 
-// Investor Dashbaord
 
-Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Investor'], function () {
+Route::middleware(['check.profile.complete','verified','auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+}); 
+Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Investor'], function () {
     Route::get('/dashboard', ['as' => 'make','uses' => 'InvestorController@dashbaord']);
 });
 
-Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers'], function () {
+Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers'], function () {
     Route::get('make', ['as' => 'make','uses' => 'MakeInvestmentController@make']);
     Route::get('submit', ['as' => 'submit','uses' => 'MakeInvestmentController@submitInvestment']);
     Route::get('step/two', ['as' => 'step.two','uses' => 'MakeInvestmentController@step_two']);
@@ -78,9 +75,7 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
     Route::get('step/four', ['as' => 'step.four','uses' => 'MakeInvestmentController@step_four']);
     Route::get('step/five', ['as' => 'step.five','uses' => 'MakeInvestmentController@step_five']);
     Route::get('step/six/e/template', ['as' => 'step.six.e.template','uses' => 'MakeInvestmentController@e_template']);
-    Route::post('save', ['as' => 'save','uses' => 'MakeInvestmentController@save']);
-
-
+    Route::post('save', ['as' => 'save','uses' => 'MakeInvestmentController@save']); 
     Route::get('details/{id}', ['as' => 'detail','uses' => 'MakeInvestmentController@detail']);
     Route::post('submit-kyc', ['as' => 'kyc.submit','uses' => 'MakeInvestmentController@kycSubmit']);
     Route::get('verify-identity', ['as' => 'verify.identity','uses' => 'MakeInvestmentController@verify_identity']);
@@ -90,24 +85,18 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
     Route::get('sign-subscription', ['as' => 'sign.subscription','uses' => 'MakeInvestmentController@sign_subscription']);
     Route::post('get.template', ['as' => 'get.template','uses' => 'MakeInvestmentController@getTemplate']);
 });
-Route::get('login', function () {
-    return view('auth.login');
-});
-Route::get('login-test', function () {
-    return view('auth.login_test');
-});
-Route::get('db2', function () {
-    return view('layouts.dashboard-issuer');
-});
-Route::group(['as'=> 'role.','prefix'=>'roles','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Role'], function () {
+Route::get('login', function () {  return view('auth.login');});
+Route::get('login-test', function () { return view('auth.login_test');});
+Route::get('db2', function () {   return view('layouts.dashboard-issuer'); });
+Route::group(['as'=> 'role.','prefix'=>'roles','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Role'], function () {
     Route::get('index', ['as' => 'index','uses' => 'RoleController@index']);
     Route::post('create', ['as' => 'save','uses' => 'RoleController@save']);
 });
 
-Route::group(['as'=> 'payment.','prefix'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers'], function () {
+Route::group(['as'=> 'payment.','prefix'=>'users','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers'], function () {
     Route::post('ach', ['as' => 'ach','uses' => 'PaymentController@ach']);
 });
-Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\User'], function () {
+Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\User'], function () {
     Route::get('index', ['as' => 'index','uses' => 'UserController@index']);
     Route::get('get-childs', ['as' => 'childs','uses' => 'UserController@getChilds']);
     Route::get('details/{id}', ['as' => 'details','uses' => 'UserController@details']);
@@ -143,7 +132,7 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
 
 });
 
-Route::group(['as'=> 'user.info.','prefix'=>'users/info','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\User'], function () {
+Route::group(['as'=> 'user.info.','prefix'=>'users/info','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\User'], function () {
     Route::post('update/trust/setting', ['as' => 'update.trust.setting','uses' => 'UpdateBasicDetailController@update_trust_settings']);
     Route::post('upload/document', ['as' => 'update.document','uses' => 'UpdateBasicDetailController@updateDocument']);
     Route::post('e/document', ['as' => 'e.document','uses' => 'UpdateBasicDetailController@eDocument']);
@@ -153,11 +142,11 @@ Route::group(['as'=> 'user.info.','prefix'=>'users/info','middleware' => ['auth'
 });
 
 
-Route::group(['as'=> 'accreditation.','accreditation'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Accreditation'], function () {
+Route::group(['as'=> 'accreditation.','accreditation'=>'users','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Accreditation'], function () {
     Route::post('update', ['as' => 'update','uses' => 'accreditationController@update']);
 });
 
-Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verified','role:admin|investor'],'namespace'=>'App\Http\Controllers\Offers'], function () {
+Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verified','check.profile.complete','role:admin|investor'],'namespace'=>'App\Http\Controllers\Offers'], function () {
     Route::get('active/listing', ['as' => 'active.index','uses' => 'OfferController@active_index']);
     Route::get('inactive/listing', ['as' => 'inactive.index','uses' => 'OfferController@inactive_index']);
     Route::get('create', ['as' => 'create','uses' => 'OfferController@create']);
@@ -175,7 +164,7 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::post('policy/delete', ['as' => 'policy.delete','uses' => 'OfferController@policyDelete']);
 });
 
-Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Organizations'], function () {
+Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Organizations'], function () {
     Route::get('listing', ['as' => 'index','uses' => 'OrganizationsController@index']);
     Route::post('create', ['as' => 'create','uses' => 'OrganizationsController@create']);
    // Route::get('list', ['as' => 'list','uses' => 'OfferController@list']);
@@ -183,17 +172,17 @@ Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' =
     Route::post('delete', ['as' => 'delete','uses' => 'OrganizationsController@delete']);
 });
 
-Route::group(['as'=> 'folder.','prefix'=>'folder','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Folder'], function () {
+Route::group(['as'=> 'folder.','prefix'=>'folder','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Folder'], function () {
     Route::post('create', ['as' => 'create','uses' => 'FolderController@create']);
     Route::post('upload-file', ['as' => 'upload.file','uses' => 'FolderController@uploadFile']);
     Route::get('get-files', ['as' => 'get.files','uses' => 'FolderController@getFiles']);
 });
 
-Route::group(['as'=> 'transaction.','prefix'=>'transaction','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Transaction'], function () {
+Route::group(['as'=> 'transaction.','prefix'=>'transaction','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Transaction'], function () {
     Route::get('transaction', ['as' => 'index','uses' => 'TransactionController@index']);
 });
 
-Route::group(['as'=> 'engagments.','prefix'=>'engagments','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\Engagment'], function () {
+Route::group(['as'=> 'engagments.','prefix'=>'engagments','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Engagment'], function () {
     Route::get('', ['as' => 'index','uses' => 'EngagmentController@index']);
 });
 

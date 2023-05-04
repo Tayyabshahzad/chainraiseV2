@@ -212,7 +212,7 @@ class UserController extends Controller
             //'suit' => 'required',
             'city' => 'required',
             'state' => 'required',
-            'zip_code' => 'required',
+            'zip_code' => 'required|min:5|max:5', 
             'account_type' => 'required|in:investor,issuer',
             //'agree_consent_electronic' => 'required',
             //'password' => 'required',
@@ -281,8 +281,7 @@ class UserController extends Controller
         return view('user.issuer.create');
     }
     public function issuerSave(Request $request)
-    {
-      
+    { 
         $request->validate([
             'email' => 'required',
             'first_name' => 'required',
@@ -295,8 +294,8 @@ class UserController extends Controller
             'address' => 'required',
             //'suit' => 'required',
             'city' => 'required',
-            'state' => 'required',
-            'zip_code' => 'required',
+            'state' => 'required', 
+            'zip_code' => 'required|min:5|max:5',
             'agree_consent_electronic' => 'required',
             //'password' => 'required',
         ]);
