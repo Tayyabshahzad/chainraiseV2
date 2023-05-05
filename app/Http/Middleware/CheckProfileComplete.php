@@ -20,7 +20,7 @@ class CheckProfileComplete
     if (Auth::check()) {
         // Check if the user's profile is complete
         $user = Auth::user();
-        if ($user->profile_status !=1) {
+        if ($user->profile_status !=1  && $user->user_type == null ) {
             // Redirect the user to the setup page
             return redirect()->route('user.setup');
         }

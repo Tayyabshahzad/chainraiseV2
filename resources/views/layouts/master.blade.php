@@ -328,13 +328,7 @@
                                 <div class="my-3 ">
                                     <input type="password" class="form-control user_password" id="password12"
                                         placeholder="Your password..." required name="password_confirmation">
-                                </div>
-                                <div class="my-3 ">
-                                    <select name="user_type" id="" class="form-control">
-                                        <option value="individual"> Individual </option>
-                                        <option value="entity"> Entity </option>
-                                    </select>
-                                </div>
+                                </div> 
                                 <div class="row">
                                     <div class="col-5 d-flex align-items-center">
                                         <div class="form-group form-check">

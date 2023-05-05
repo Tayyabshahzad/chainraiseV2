@@ -44,8 +44,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'last_name' => '-', 
             'agree_consent_electronic'=>true,
-            'status'=>'active',
-            'user_type'=> $request->user_type,
+            'status'=>'active', 
             'password' => Hash::make($request->password),
         ]);
         $user->assignRole('investor');

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Account Users')
+@section('title', 'Issuer Create')
 @section('page_name','Issuer')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
@@ -137,7 +137,7 @@
                                     </div> 
                                 </div>
                             </div>
-                            <div class="form-group row mb-10">
+                            <div class="form-group row mb-10 d-none">
                                 <div class="col-lg-6">
                                     <label>Entity Type: <span class="text-danger">*</span></label>
                                     <select name="user_type" id="" class="form-control">
@@ -166,27 +166,24 @@
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <label>Suite / Unit <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="suite" value="{{ old('suite') }}" placeholder="Suite / Unit*" required>
+                                    <label>Suite / Unit   </label>
+                                    <input type="number" class="form-control" name="suite" value="{{ old('suite') }}" placeholder="Suite / Unit"  >
                                 </div>
 
                                 <div class="col-lg-4">
                                     <label>City <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="city" id="city" value="{{ old('city') }}" placeholder="City*" required>
+                                    <input type="text" class="form-control" name="city" id="city" value="{{ old('city') }}" placeholder="City" required>
                                 </div>
                             </div>
                             <div class="form-group row mb-10">
 
                                 <div class="col-lg-4">
                                     <label>State Region<span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" placeholder="State / Region*" required>
-                                </div>
-
-
-
+                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" placeholder="State / Region" required>
+                                </div> 
                                 <div class="col-lg-4">
                                     <label>Zip Code <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="zip_code" id="zip_code" value="{{ old('zip_code') }}" placeholder="City*" required>
+                                    <input type="number" class="form-control" name="zip_code" id="zip_code" min="5" value="{{ old('zip_code') }}" placeholder="Zip Code" required>
                                 </div>
                             </div>
                             <div class="form-group row mb-10">
@@ -200,16 +197,81 @@
 
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <div class="col-lg-6 text-right">
+                            <div class="card-body bg-danger"  style=" color:#fff!important;border-radius:5px;font-size:15px;  ">
+                                <div class="card-title mt-6 mb-3">
+                                    <h2>Important Note </h2>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <label class="form-check form-check-custom form-check-solid me-10">
+                                            <input class="form-check-input h-15px w-15px" type="checkbox"   required name="e_sign_agreement"  >
+                                            <span class="form-check-label fw-semibold" style="color:#ffffff">
+                                                I have read the <a  href="https://fortresstrustcompany.com/disclosures-e-sign" target="_blank"> E-Sign Agreement </a> and understand I will not receive documents in the mail.
+                                            </span>
+                                        </label>
+                                    </div> 
+                                    <div class="d-flex align-items-center">
+                                        <label class="form-check form-check-custom form-check-solid me-10">
+                                            <input class="form-check-input h-15px w-15px" type="checkbox" required name="disclosures">
+                                            <span class="form-check-label fw-semibold" style="color:#ffffff">  I have read and agree to the following: </span>
+                                        </label> 
+                                    </div>
+                                    <div class="d-flex align-items-center mt-4">
+                                        <ul>
+                                            <li>
+                                                <a href="" target="_blank"> <b>“Chainraise” Terms of
+                                                        Service and Privacy Policy</b> </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://fortresstrustcompany.com/disclosures-consumer"
+                                                    target="_blank"> <b>Fortress Trust Consumer Disclosures</b>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://fortress.xyz/terms-of-use" target="_blank">
+                                                    <b> Fortress Trust Privacy Policy and Terms and Conditions
+                                                    </b> </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ asset('assets/documents/forme-fortress-fevocable-trust.docx') }}"
+                                                    download="Forme-Fortress-Revocable-Trust.docx"> <b>Fortress
+                                                        Trust Account Agreement</b> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="align-items-center mt-4">
+                                        <p>
+                                            <b>
+                                                USA Patriot Act Disclosure - The below disclosure should be
+                                                displayed before CIP information is collected. In our case, name
+                                                and phone number.
+                                            </b>
+                                        </p>
+                                        <p>
+                                            <b>
+                                                "IMPORTANT INFORMATION ABOUT PROCEDURES FOR OPENING A NEW
+                                                ACCOUNT: To help the government fight the funding of terrorism
+                                                and money laundering activities, federal law requires all
+                                                financial institutions to obtain, verify, and record information
+                                                that identifies each person who opens an Account. What this
+                                                means for you: When you open an Account, we will ask for your
+                                                name, address, date of birth, and other information that will
+                                                allow us to identify you. We may also ask to see a copy of your
+                                                driver's license or other identifying documents."
+                                            </b>
+                                        </p>
+                                    </div>
+
+                                </div> 
+                            </div>
 
 
+                            <div class="form-group row align-items-center mt-5">
+                                <div class="col-lg-6 text-right"> 
                                     <label class="form-check form-check-custom form-check-solid">
                                         <input class="form-check-input h-15px w-15px" type="checkbox"  id="set_password">
                                         <span class="form-check-label fw-semibold">   Create a password for this account user </span>
-                                    </label>
-
-
+                                    </label> 
                                 </div>
                                 <div class="col-lg-3 mt-10 offset-md-4 d-none" id="user_password_field">
                                     <input type="password" class="password_filed form-control" name="password" placeholder="Enter User Password*">
@@ -219,9 +281,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-lg-12 text-right">
-                                    <a  href="{{ route('user.index')}}" class="btn-sm btn btn-default mr-2">Cancel</a>
-                                    <button type="submit" class="btn-sm btn-square btn btn-primary mr-2">Save Account</button>
+                                <div class="col-lg-12 text-right" style="text-align: right"> 
+                                    <button type="submit" class="btn-sm no-radius btn btn-dark">Save Account</button>
                                 </div>
                             </div>
                         </div>

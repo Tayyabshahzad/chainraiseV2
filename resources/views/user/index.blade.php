@@ -237,7 +237,7 @@
                                          </th> 
                                          
                                          <th class="ps-9"> 
-                                            <a href="#" class="text-dark  text-hover-primary d-block mb-1 fs-6"> {{ ucfirst($user->roles->pluck('name')->implode(' '))  }} ({{  $user->user_type }}) </a>
+                                            <a href="#" class="text-dark  text-hover-primary d-block mb-1 fs-6"> {{ ucfirst($user->roles->pluck('name')->implode(' '))  }}  @if($user->user_type != null )({{  $user->user_type }}) @endif </a>
                                          </th> 
                                          <th class="ps-9"> 
                                             @if($user->kyc) {{ $user->kyc->kyc_level}} @else -- @endif

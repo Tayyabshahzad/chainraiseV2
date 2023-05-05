@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Account Users')
+@section('title', 'Investor Create')
 @section('page_name','Individual Investor')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
@@ -99,16 +99,7 @@
                                     <label>Last Name: <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name')}}"/>
                                 </div>
-                            </div>
-                            <div class="form-group row mb-10">
-                                <div class="col-lg-6">
-                                    <label>Entity Type: <span class="text-danger">*</span></label>
-                                    <select name="user_type" id="" class="form-control">
-                                        <option value="individual"> Individual  </option>
-                                        <option value="entity"> Entity  </option>
-                                    </select>
-                                </div>
-                            </div>
+                            </div> 
                             <div class="form-group row mb-10">
                                 <div class="col-lg-2">
                                     <label>Title:</label>
@@ -240,12 +231,9 @@
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <a  href="{{ route('user.index')}}" class="btn-sm btn btn-default mr-2">Cancel</a>
-                                    <button type="submit" class="btn-sm btn btn-primary mr-2">Save Account</button>
-
-                                </div>
-
+                                <div class="col-lg-12 text-right" style="text-align: right"> 
+                                    <button type="submit" class="btn-sm no-radius btn btn-dark">Save Account</button>
+                                </div> 
                             </div>
                         </div>
                     </form>

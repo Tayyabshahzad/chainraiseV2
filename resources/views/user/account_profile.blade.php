@@ -296,20 +296,7 @@
                                             </div>
                                         </div>
                                     </div>  
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-lg-6 mb-5">
-                                        <label>User Type: <span class="text-danger">*</span> </label>
-                                        <select class="form-control user_type" data-control="select2"
-                                            name="user_type">
-                                            <option value="individual"
-                                                @if ($user->user_type == 'individual') selected @endif> Individual </option>
-                                            <option value="entity" @if ($user->user_type == 'entity') selected @endif>
-                                                Entity </option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                </div> 
                                 <div class="form-group row mb-10">
                                     @if ($user->user_type == 'entity')
                                         <div class="col-lg-12 mb-3">

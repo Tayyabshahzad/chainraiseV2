@@ -423,20 +423,7 @@
                                                 </div>
                                             </div>
                                         </div>  
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-lg-6 mb-5">
-                                            <label>User Type: <span class="text-danger">*</span> </label>
-                                            <select class="form-control user_type" data-control="select2"
-                                                name="user_type">
-                                                <option value="individual"
-                                                    @if ($user->user_type == 'individual') selected @endif> Individual </option>
-                                                <option value="entity" @if ($user->user_type == 'entity') selected @endif>
-                                                    Entity </option>
-                                            </select>
-                                        </div>
-                                    </div>
-
+                                    </div> 
                                     <div class="form-group row mb-10">
                                         @if ($user->user_type == 'entity')
                                             <div class="col-lg-12 mb-3">
@@ -454,26 +441,26 @@
                                             </div>
 
                                             <div class="col-lg-6 mb-10">
-                                                <label>Ein <span class="text-danger">*</span> </label>
+                                                <label>EIN <span class="text-danger">*</span> </label>
                                                 <input type="text" class="form-control" name="ein"
-                                                    id="ein_number" placeholder="Ein"
+                                                    id="ein_number" placeholder="EIN"
                                                     @if ($user->userDetail) value="{{ $user->userDetail->ein }}" @endif
                                                     required>
                                             </div>
 
                                             <div class="col-lg-6 mb-10">
-                                                <label>Naics <span class="text-danger">*</span> </label>
+                                                <label>NAICS <span class="text-danger">*</span> </label>
                                                 <input type="text" class="form-control" name="naics" id="naics"
-                                                    placeholder="Naics"
+                                                    placeholder="NAICS"
                                                     @if ($user->userDetail) value="{{ $user->userDetail->naics }}" @endif
                                                     required>
                                             </div>
 
 
                                             <div class="col-lg-6 mb-10">
-                                                <label>Naics Description <span class="text-danger">*</span> </label>
+                                                <label>NAICS Description <span class="text-danger">*</span> </label>
                                                 <input type="text" class="form-control" name="naics_description"
-                                                    id="naics_description" placeholder="Naics Description"
+                                                    id="naics_description" placeholder="NAICS Description"
                                                     @if ($user->userDetail) value="{{ $user->userDetail->naics_description }}" @endif
                                                     required>
                                             </div>
@@ -797,192 +784,9 @@
                                                 <input type="file" name="kyc_document"
                                                     class="new_profile_photo  d-none change_photo"
                                                     data-type="project_logo">
-                                            </div>
-
-                                        </div>
-
-                                    </div> 
-                                    @if($user->hasRole('issuer'))
-                                        <div class="card-body bg-danger"
-                                            style=" color:#fff!important;border-radius:5px;font-size:15px;  ">
-                                            <div class="card-title mt-6 mb-3">
-                                                <h2>Important Note </h2>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            required name="e_sign_agreement"
-                                                            @if ($user->trustSetting and $user->trustSetting->e_sign_agreement == 1) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold" style="color:#ffffff">
-                                                            I have read the <a
-                                                                href="https://fortresstrustcompany.com/disclosures-e-sign
-                                                                "
-                                                                target="_blank"> E-Sign Agreement </a> and understand I
-                                                            will not receive documents in the mail.
-                                                        </span>
-                                                    </label>
-                                                </div>
-
-                                                <div class="d-flex align-items-center">
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            required name="disclosures"
-                                                            @if ($user->trustSetting and $user->trustSetting->disclosures == 1) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold" style="color:#ffffff">
-                                                            I have read and agree to the following: </span>
-                                                    </label>
-
-                                                </div>
-                                                <div class="d-flex align-items-center mt-4">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="" target="_blank"> <b>“Chainraise” Terms of
-                                                                    Service and Privacy Policy</b> </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://fortresstrustcompany.com/disclosures-consumer"
-                                                                target="_blank"> <b>Fortress Trust Consumer Disclosures</b>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://fortress.xyz/terms-of-use" target="_blank">
-                                                                <b> Fortress Trust Privacy Policy and Terms and Conditions
-                                                                </b> </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="{{ asset('assets/documents/forme-fortress-fevocable-trust.docx') }}"
-                                                                download="Forme-Fortress-Revocable-Trust.docx"> <b>Fortress
-                                                                    Trust Account Agreement</b> </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="align-items-center mt-4">
-                                                    <p>
-                                                        <b>
-                                                            USA Patriot Act Disclosure - The below disclosure should be
-                                                            displayed before CIP information is collected. In our case, name
-                                                            and phone number.
-                                                        </b>
-                                                    </p>
-                                                    <p>
-                                                        <b>
-                                                            "IMPORTANT INFORMATION ABOUT PROCEDURES FOR OPENING A NEW
-                                                            ACCOUNT: To help the government fight the funding of terrorism
-                                                            and money laundering activities, federal law requires all
-                                                            financial institutions to obtain, verify, and record information
-                                                            that identifies each person who opens an Account. What this
-                                                            means for you: When you open an Account, we will ask for your
-                                                            name, address, date of birth, and other information that will
-                                                            allow us to identify you. We may also ask to see a copy of your
-                                                            driver's license or other identifying documents."
-                                                        </b>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    @endif
-                                    @if($user->hasRole('issuer'))
-                                        <div class="card-title mt-6">
-                                            <h2>Trust Setting<i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                    data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                    data-kt-initialized="1"></i></h2>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center">
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="bypass_account_setup"
-                                                            @if ($user->trustSetting and $user->trustSetting->bypass_account_setup == 1) checked="checked" @endif>
-
-                                                        <span class="form-check-label fw-semibold">Bypass Account Setup<i
-                                                                class="fas fa-exclamation-circle ms-2 fs-7"
-                                                                data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                                data-kt-initialized="1"></i></span>
-                                                    </label>
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="bypass_kyc_checkup"
-                                                            @if ($user->trustSetting and $user->trustSetting->bypass_kyc_checkup == 1) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold">Bypass KYC Checks</span>
-                                                    </label>
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="bypass_accreditation_checks"
-                                                            @if ($user->trustSetting and $user->trustSetting->bypass_accreditation_checks == 1) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold">Bypass Accreditation
-                                                            Checks</span>
-                                                    </label>
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="bypass_document_restrictions"
-                                                            @if ($user->trustSetting and $user->bypass_document_restrictions == 1) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold">Bypass Document
-                                                            Restrictions</span>
-                                                    </label>
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group row mt-6">
-                                                <div class="d-flex align-items-center">
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="view_all_invite_offers"
-                                                            @if ($user->trustSetting and $user->trustSetting->view_all_invite_offers == true) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold">View All Invite Only
-                                                            Offers</span>
-                                                    </label>
-                                                    <label class="form-check form-check-custom form-check-solid me-10">
-                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                            name="allow_manual_ach_bank_input"
-                                                            @if ($user->trustSetting and $user->trustSetting->allow_manual_ach_bank_input == true) checked="checked" @endif>
-                                                        <span class="form-check-label fw-semibold">Allow Manual ACH Bank
-                                                            Input<i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                                data-bs-toggle="tooltip" aria-label="Specify a target priorty"
-                                                                data-kt-initialized="1"></i></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
+                                            </div>  
                                         </div> 
-                                        <div class="card-body">
-                                            <div class="form-group row mb-10">
-                                                <div class="col-lg-6">
-                                                    <label class="fw-semibold">Bypass Restrictions on Specific
-                                                        Documents</label>
-                                                    <select class="form-select" data-control="select2"
-                                                        data-placeholder="Select an Offer">
-                                                        <option></option>
-                                                        <option value="1">Option 1</option>
-                                                        <option value="2">Option 2</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="hidden"></label>
-                                                    <select class="form-select" data-control="select2"
-                                                        data-placeholder="Select a Document">
-                                                        <option></option>
-                                                        <option value="1">Option 1</option>
-                                                        <option value="2">Option 2</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-6">
-                                                    <label class="fw-semibold">Bypass E-Sign Document Restrictions</label>
-                                                    <select class="form-select" data-control="select2"
-                                                        data-placeholder="Select an E-Sign Template">
-                                                        <option></option>
-                                                        <option value="1">Option 1</option>
-                                                        <option value="2">Option 2</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    </div>  
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
