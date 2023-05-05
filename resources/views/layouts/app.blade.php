@@ -665,13 +665,10 @@
 
     @endif
      
-    @if ($errors->any())
-    
+    @if ($errors->any()) 
             @foreach ($errors->all() as $error)
                 <script> toastr.error("{{ $error }}", "Error");</script> 
-            @endforeach
-        
-    </div>
+            @endforeach 
     @endif
 
     @section('page_js')

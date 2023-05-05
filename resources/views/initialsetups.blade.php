@@ -57,7 +57,7 @@
                                             Individual or Joint investor managing a single account
                                         </p>
                                         <p>
-                                            <input type="radio" name="account_type" class="account_type" value="individual">
+                                            <input type="radio" name="account_type" class="account_type" value="individual"  >
                                         </p>
 
                                     </div>
@@ -73,8 +73,7 @@
                                             IRAs or those investing on behalf of an entity
                                         </p>
                                         <p>
-                                            <input type="radio" name="account_type" class="account_type"
-                                                value="entity">
+                                            <input type="radio" name="account_type" class="account_type"  value="entity">
                                         </p>
                                     </div>
                                 </div>

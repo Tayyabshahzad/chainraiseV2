@@ -37,7 +37,7 @@ class OfferController extends Controller
         $this->offerRepository = $offerRepository;
     }
     public function active_index()
-    {
+    { 
         $issuers = User::role('issuer')->get();
         $offers = Offer::where('status','active')->orderBy('id','desc')->get();
         return view('offers.active_index',compact('issuers','offers'));

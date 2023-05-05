@@ -24,6 +24,8 @@
             background: #f1f1f1;
         } */
     </style>
+    <link rel="stylesheet" href="https://rabhinav77.github.io/js-toastr/toast.min.css">
+    <link rel="stylesheet" href="https://rabhinav77.github.io/js-toastr/toast.min.js">
 @endsection
 @section('title', 'Details')
 @section('content')
@@ -230,7 +232,7 @@
                                     @if (Auth::user())
                                         <button class="btn btn-primary" type="submit"> Invest </button>
                                     @else
-                                        <button class="btn btn-primary" type="button">Learn More</button>
+                                        <button class="btn btn-primary" disabled type="button" title=""> Login to Invest </button>
                                     @endif
                                 </div>
                                 <div class="d-grid gap-2 mt-3">
@@ -315,6 +317,7 @@
             </div>
         </div>
     </div>
+    
 
 @endsection
 

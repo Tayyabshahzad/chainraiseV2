@@ -153,7 +153,7 @@ Route::group(['as'=> 'accreditation.','accreditation'=>'users','middleware' => [
     Route::post('update', ['as' => 'update','uses' => 'accreditationController@update']);
 });
 
-Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verified','check.profile.complete','role:admin|investor'],'namespace'=>'App\Http\Controllers\Offers'], function () {
+Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Offers'], function () {
     Route::get('active/listing', ['as' => 'active.index','uses' => 'OfferController@active_index']);
     Route::get('inactive/listing', ['as' => 'inactive.index','uses' => 'OfferController@inactive_index']);
     Route::get('create', ['as' => 'create','uses' => 'OfferController@create']);

@@ -49,10 +49,17 @@ class KycController extends Controller
        
         $errors = []; 
         $user = User::with('userDetail')->find($request->id);    
-        $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);   
-//dd($decodedSsn);       
- if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+        $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
+        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
+            return response([
+                'status' => 'document',
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
+        if ($user->user_type == null) {
+            $errors[] = 'Please Update Settings Selected User Type is not Defined';
             return response([
                 'status' => 'document',
                 'success' => false,
@@ -86,10 +93,9 @@ class KycController extends Controller
                     'errors' => $errors,
                 ]);
         }  
-        $date_of_birth = $user->userDetail->dob; 
-         
+        $date_of_birth = $user->userDetail->dob;  
         if($user->user_type  == 'individual'){     
-             
+           
             if($user->fortress_id == null){    
                 
                 try{ 
@@ -323,8 +329,7 @@ class KycController extends Controller
 
         if($user->user_type  == 'entity'){
             //dump('Doc Upload');
-            try{ 
-                
+            try{  
                 $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
                 $path =  $mediaCollection?->getFullUrl();
                 //$path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";

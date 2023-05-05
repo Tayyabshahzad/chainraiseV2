@@ -16,7 +16,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <title> Chain Rasied Portal | @yield('title') </title>
+
     <style>
         .bg-image {
             background-image: url("{{ asset('media/portfolio/background-chainraise.jpg') }}");
@@ -164,7 +166,8 @@
             </div>
         </div>
     </div>
-
+    
+ 
 
 
     @section('content')
@@ -494,7 +497,7 @@
 
         $('.account_type').click(function() {
             $('.account_type_wrapper_row').hide('slow');
-            $('input[name=account_type]').prop('checked', false);
+           
             $('.row_individual').removeClass('d-none');
             $(window).scrollTop(0);
             if ($(this).val() == 'individual') {
@@ -508,6 +511,7 @@
 
         $('.goto-account_type').click(function() {
             $('.account_type_wrapper_row').show('slow');
+            $('input[name=account_type]').prop('checked', false);
             $('.row_individual').addClass('d-none');
         });
 
@@ -531,6 +535,9 @@
             $('#update_profile').submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
+               
+                var value = formData.get('account_type');
+                console.log(value)
                 $.ajax({
                     url: "{{ route('user.basic.details.update') }}",
                     type: 'POST',
@@ -625,7 +632,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     @section('page_js')
     @show
 </body>
@@ -646,5 +653,35 @@
 
 
  
+    @if ($errors->any()) 
+        
+        <script> 
+            var notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+            });
+            @foreach ($errors->all() as $error)
+                notyf.error('{{  $error }}'); 
+            @endforeach 
+           
+         </script>
+       
+    @endif
+
+    
+        @if (session('error'))
+            <script>
+                var notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+                });
+                notyf.error('{{ session('error') }}'); 
+            </script>
+        @endif
+
 
 </html>

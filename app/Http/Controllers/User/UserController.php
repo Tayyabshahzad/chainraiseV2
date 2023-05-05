@@ -333,7 +333,7 @@ class UserController extends Controller
     }
     public function issuerAccountUpdate(Request $request)
     {   
-     
+    
         $request->validate([
             //Users Table
             'id' => 'required',
@@ -359,18 +359,16 @@ class UserController extends Controller
             //'tax_entity_type'=>'required',
             //'tax_identification'=>'required',
             'nationality' => 'required',
-            'country_residence' => 'required',
-
+            'country_residence' => 'required', 
             //Trust Settings
             //'bypass_account_setup' => 'required',
             //'bypass_kyc_checkup' => 'required',
             //'bypass_accreditation_checks' => 'required',
             //'bypass_document_restrictions' => 'required',
            // 'view_all_invite_offers' => 'required',
-            //'allow_manual_ach_bank_input' => 'required',
-
+            //'allow_manual_ach_bank_input' => 'required', 
         ]);
-
+      
         $user = User::find($request->id);
         $user->name = $request->first_name;
         $user->phone = $request->phone;
@@ -403,15 +401,12 @@ class UserController extends Controller
              'date_incorporation'=>$request->date_incorporation,
              'state'=> $request->state,'zip'=> $request->zip,'entity_name'=>$request->entity_name
             ]
-        ); 
-        
-        if($request->primary_contact_social_security == '999-99-999'){ 
-            $ssn = $user->identityVerification->primary_contact_social_security;
-        }else{ 
-            $ssn = Crypt::encryptString($request->primary_contact_social_security);
-        }   
-        
-         
+        );  
+        if($request->primary_contact_social_security == '999-99-9999'){   
+            $ssn = $user->identityVerification->primary_contact_social_security; 
+        }else{  
+            $ssn = Crypt::encryptString($request->primary_contact_social_security); 
+        }  
         $identityVerification = IdentityVerification::updateOrCreate(
             ['user_id' => $request->id],
             [
@@ -422,13 +417,7 @@ class UserController extends Controller
              'doc_type' => $request->doc_type,
              'country_residence' => $request->country_residence
             ]
-        );
-
-         
-
-
-
-
+        ); 
         // $userDetails = UserDetail::where('user_id',$request->id)->first();
         // $userDetails->middle_name = $request->middle_name;
         // $userDetails->last_name = $request->last_name;
@@ -937,8 +926,9 @@ class UserController extends Controller
 
     } 
     public function basicDetailUpdate(Request $request){ 
-         $user = Auth::user();
-        try{
+         
+        $user = Auth::user();
+        try{  
             $user->name = $request->first_name;    
             $user->user_type = $request->account_type;    
             $user->accreditation_id = $request->accreditation;  
@@ -948,7 +938,7 @@ class UserController extends Controller
                 $agree_consent_electronic =false;
             }
             $user->agree_consent_electronic = $agree_consent_electronic;   
-            $user->save();
+            $user->save(); 
             UserDetail::updateOrCreate(
                 ['user_id' => $user->id],
                 [
@@ -956,9 +946,9 @@ class UserController extends Controller
                  'entity_name'=>  $request->entity_name,
                 ]
             );
-            $user->profile_status = true;
-            $user->save();
             
+            $user->profile_status = true;
+            $user->save(); 
             return response([
                 'status'=>true,
                 'message'=>'Data Updated Successfully'
