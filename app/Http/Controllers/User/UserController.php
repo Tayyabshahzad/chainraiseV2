@@ -373,7 +373,7 @@ class UserController extends Controller
         $user->name = $request->first_name;
         $user->phone = $request->phone;
         $user->cc = $request->cc;
-        $user->user_type = $request->user_type;
+       // $user->user_type = $request->user_type;
         $user->save();
 
         if($request->has('profile_avatar')){
