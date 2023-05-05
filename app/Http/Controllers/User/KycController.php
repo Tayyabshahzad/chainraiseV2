@@ -46,6 +46,7 @@ class KycController extends Controller
         $request->validate([
             'id' => 'required',
         ]);  
+       
         $errors = []; 
         $user = User::with('userDetail')->find($request->id);    
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);   
@@ -85,8 +86,10 @@ class KycController extends Controller
                 ]);
         }  
         $date_of_birth = $user->userDetail->dob; 
+         
         if($user->user_type  == 'individual'){     
-            if($user->fortress_id == null){   
+             
+            if($user->fortress_id == null){    
                 
                 try{ 
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
@@ -317,7 +320,7 @@ class KycController extends Controller
             $endPoint = $fortress_base_url.'personal-identities/'.$id.'/documents';
         } 
 
-        if($user->user_type  != 'entity'){
+        if($user->user_type  == 'entity'){
             //dump('Doc Upload');
             try{ 
                 

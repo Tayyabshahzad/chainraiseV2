@@ -157,6 +157,16 @@
 
                                 </div>
                             </div>
+                            <div class="form-group row mb-10 d-none">
+                                <div class="col-lg-6">
+                                    <label>Entity Type: <span class="text-danger">*</span></label>
+                                    <select name="user_type" id="" class="form-control">
+                                        <option value="individual" selected> Individual  </option>
+                                        <option value="entity" > Entity  </option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-10">
                                 <div class="col-lg-6">
                                     <label>Address <span class="text-danger">*</span> </label>
