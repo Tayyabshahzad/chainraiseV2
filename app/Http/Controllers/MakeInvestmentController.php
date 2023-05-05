@@ -54,14 +54,13 @@ class MakeInvestmentController extends Controller
     {
         //dump($request->investment_amount);dd(1);
        $request->validate([
-         	// 'offer_id' => 'required',
+         	 'offer_id' => 'required',
           	'investment_amount' => 'integer',
         ]);
 
-
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';
         $investment_amount = $request->investment_amount;
-        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find(7);
+        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);
 //dd($offer);        
 $investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
         $user = User::where('id', Auth::user()->id)->first();

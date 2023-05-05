@@ -27,7 +27,16 @@
 @endsection
 @section('title', 'Details')
 @section('content')
-    <div class="container-fluid pt-5 bg-image">
+  
+ @if ($errors->any())
+    this is error
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
+        
+    
+    @endif
+  <div class="container-fluid pt-5 bg-image">
         <div class="container">
             <div class="row ">
                 <div class="col-lg-8">
