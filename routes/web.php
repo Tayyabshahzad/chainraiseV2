@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
-| Web Routes // new // eew tayyab hamza
+| Web Routes // new // eew tayyab makeinvest
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
