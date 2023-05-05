@@ -52,22 +52,25 @@ class MakeInvestmentController extends Controller
     }
     public function submitInvestment(Request $request)
     {
-        // dump($request->investment_amount);dd(1);
-        $request->validate([
-            'offer_id' => 'required',
-            'investment_amount' => 'integer',
+        //dump($request->investment_amount);dd(1);
+       $request->validate([
+         	// 'offer_id' => 'required',
+          	'investment_amount' => 'integer',
         ]);
+
 
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';
         $investment_amount = $request->investment_amount;
-        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);
-        $investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
+        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find(7);
+//dd($offer);        
+$investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
         $user = User::where('id', Auth::user()->id)->first();
         $fortress_personal_identity = Auth::user()->fortress_personal_identity;
         $fortress_id = Auth::user()->fortress_id;
         // Redirect to Offer Page
         $user = Auth::user();
-        try {
+//dd(1);      
+  try {
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
             ])->post($production_auth, [
@@ -79,29 +82,35 @@ class MakeInvestmentController extends Controller
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true);
             if ($get_token->failed()) {
-                Session::put('error', 'Internal Server Error');
+dd(11);              
+  Session::put('error', 'Internal Server Error');
                 return redirect()->back()->with('error', 'Internal Server Error');
             }
         } catch (Exception $error) {
-            Session::put('error', 'Internal Server Error');
+dd(123);           
+ Session::put('error', 'Internal Server Error');
             return redirect()->back()->with('error', 'Internal Server Error');
         }
-
+//dd(12333);
+dd($fortress_personal_identity);
         try {
             $url_widget =  $this->fortressBaseUrl . "external-accounts/financial/widget-url/" . $fortress_personal_identity;
             $widget = Http::withToken($token_json['access_token'])->get($url_widget);
             $json_widget =  json_decode((string) $widget->getBody(), true);
             if ($widget->failed()) {
-                Session::put('error', 'Internal Server Error');
+dd($json_widget);               
+ Session::put('error', 'Internal Server Error');
                 return redirect()->back()->with('error', 'Internal Server Error');
             }
         } catch (Exception $error) {
-            Session::put('error', 'Internal Server Error');
+dd($error);           
+ Session::put('error', 'Internal Server Error');
             return redirect()->back()->with('error', 'Internal Server Error');
         }
         $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
         $json_e_sign_templates = json_decode((string) $e_sign->getBody(), true);
-        if ($e_sign->failed()) {
+dd(1);       
+ if ($e_sign->failed()) {
             Session::put('error', 'Internal Server Error');
             return redirect()->back()->with('error', 'Internal Server Error');
         }

@@ -50,7 +50,8 @@ class KycController extends Controller
         $errors = []; 
         $user = User::with('userDetail')->find($request->id);    
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);   
-        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+//dd($decodedSsn);       
+ if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
             return response([
                 'status' => 'document',
