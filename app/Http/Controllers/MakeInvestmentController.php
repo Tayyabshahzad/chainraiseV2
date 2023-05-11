@@ -323,14 +323,27 @@ class MakeInvestmentController extends Controller
     { 
         $request->validate([
             'offer_id' => 'required',
+            'account_type'=>'required',
+            'investment_limit'=>'required',
+            'bypass_account_setup'=>'required', 
             'user_guid' => 'required',
             'templates' => 'required',
             'investment_amount' => 'required',
-        ]); 
+        ]);
+        if($request->investment_limit == 'yes'){
+            $request->validate([
+                'total_amount_invested_crowdfunding_offerings' => 'required', 
+            ]);
+        }elseif($request->investment_limit == 'no'){
+            $request->validate([
+                'net_worth_greater_than_60000' => 'required', 
+                'new_investment_amount' => 'required', 
+            ]);
+        }
+      
         $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
-        if (!$custodial_account) {
-            Session::put('error', 'Custodial Account Id Not Found for Selected Offer');
-            return redirect()->route('dashboard');
+        if (!$custodial_account) { 
+            return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
        
         $member_id = explode(',', $request->user_guid);
@@ -355,9 +368,8 @@ class MakeInvestmentController extends Controller
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true);
             // dd($token_json['access_token']);
-        } catch (Exception $error) {
-            Session::put('error', 'Internal Server Error');
-            return redirect()->route('dashboard');
+        } catch (Exception $error) { 
+            return redirect()->back()->with('error','Internal Server Error [Step 2]-'.$error);
         }
        
         try {
@@ -370,9 +382,8 @@ class MakeInvestmentController extends Controller
                 ]
             ); 
             $member_identity =  json_decode((string) $member_identity->getBody(), true);  
-        } catch (Exception $error) {
-            Session::put('error', 'Internal Server Error');
-            return redirect()->route('dashboard');
+        } catch (Exception $error) { 
+            return redirect()->back()->with('error','Internal Server Error [Step 3]-'.$error);
         }
         //Retrieve any bank accounts that are connected
       
@@ -394,9 +405,8 @@ class MakeInvestmentController extends Controller
                 $accountGuid = $account['accountGuid'];
             }
         } catch (Exception $error) {
-            //  dd($error);
-            Session::put('error', 'Internal Server Error');
-            return redirect()->route('dashboard');
+            //  dd($error); 
+            return redirect()->back()->with('error','Internal Server Error [Step 4]-'.$error);
         }
         //Now that you have the accountGuid, you will follow up with one last call to create a persistent object referencing the linked bank.
         if (Auth::user()->external_account == null) { 
@@ -411,195 +421,78 @@ class MakeInvestmentController extends Controller
                     ]
                 );
                 $externalAccountJson =  json_decode((string) $externalAccounts->getBody(), true);
-                $externalAccountId = $externalAccountJson['id'];
-
+                $externalAccountId = $externalAccountJson['id']; 
                 $acc_user->external_account = $externalAccountId;
                 $acc_user->save();
-            } catch (Exception $error) {
-                Session::put('error', 'Internal Server Error' . $error);
-                return redirect()->route('dashboard');
+            } catch (Exception $error) { 
+                return redirect()->back()->with('error','Error While Making Payment [Step 5]-'.$error);
             }
         } else {
             $externalAccountId = Auth::user()->external_account;
         }
         try {
-            DB::beginTransaction();
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL =>  $this->fortressBaseUrl . 'payments',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '{
-                "source": {
-                    "externalAccountId": "' . $externalAccountId . '"
-                },
-                "destination": {
-                    "custodialAccountId": "' . $custodial_account->custodial_id . '"
-                },
-                "comment": "Offering Payment",
-                "funds": ' . $request->investment_amount . '
-                }',
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer ' . $token_json['access_token'],
-                    'Content-Type: application/json'
-                ),
-            ));
-            $response_ach = curl_exec($curl);
-            curl_close($curl);
-            $json_response_ach = json_decode($response_ach);
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '{
-                "template_id":"' . $request->templates . '",
-                "title":"Loan Agreement - Saver package",
-                "metadata":"ID0001",
-                "locale":"en",
-                "test":"no",
-                "custom_webhook_url":"https://google.com",
-                "signers":[
-                {
-                    "name":"' . $offer->user->name . '",
-                    "email":"' . $offer->user->email . '",
-                    "mobile":"' . $offer->user->phone . '",
-                    "company_name":"Investor Company",
-                "signing_order":"1",
-                "auto_sign":"no",
-                "signature_request_delivery_method":"email",
-                "signed_document_delivery_method":"email",
-                "required_identification_methods":[
-                    "email",
-                    "sms"
+            DB::beginTransaction(); 
+            $payment_url =  $this->fortressBaseUrl . 'payments';
+            $data = [
+                'source' => [
+                    'externalAccountId' => $externalAccountId,
                 ],
-                    "redirect_url":"https://your-website.com/aftersign",
-                    "embedded_redirect_iframe_only":"no"
-                },
-                {
-                    "name":"' . Auth::user()->name . '",
-                    "email":"' . Auth::user()->email . '",
-                    "mobile":"' . Auth::user()->phone . '",
-                    "company_name":"Issuer Company",
-                    "signing_order":"1",
-                    "auto_sign":"no",
-                    "signature_request_delivery_method":"email",
-                    "signed_document_delivery_method":"email",
-                    "required_identification_methods":[
-                        "email",
-                        "sms"
-                    ],
-                "redirect_url":"https://your-website.com/aftersign",
-                "embedded_redirect_iframe_only":"no"
-            }
-            ],
-            "placeholder_fields":[
-                {
-                    "api_key":"interest_rate",
-                    "value":"3.2%"
-                },
-                {
-                    "api_key":"floor-plan",
-                    "document_elements":[
-                        {
-                        "type":"image",
-                        "image_base64":"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
-                        }
-                    ]
-                }
-            ],
-            "signer_fields":[
-                {
-                    "signer_field_id":"preferred_term",
-                    "default_value":"15 years"
-                }
-            ],
-            "emails":{
-                "signature_request_subject":"Your document is ready to sign",
-                "signature_request_text":"Hi __FULL_NAME__, \\n\\n To review and sign the contract please press the button below \\n\\n Kind Regards",
-                "final_contract_subject":"Your document is signed",
-                "final_contract_text":"Hi __FULL_NAME__, \\n\\n Your document is signed.\\n\\nKind Regards",
-                "cc_email_addresses":[
-                    "tom@email.com",
-                    "francis@email.com"
+                'destination' => [
+                    'custodialAccountId' => $custodial_account->custodial_id,
                 ],
-                "reply_to":"support@customdomain.com"
-            },
-            "custom_branding":{
-                "company_name":"WhiteLabel LLC",
-                "logo_url":"https://online-logo-store.com/yourclient-logo.png"
+                "useIsa" => false,
+                'comment' => 'Offering Payment',
+                'funds' => $request->investment_amount,
+            ];
+            $payment = Http::withToken($token_json['access_token'])
+            ->withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ])->post($payment_url,$data);
+            $json_response_ach =  json_decode((string) $payment->getBody(), true);   
+            if ($payment->failed()) {
+                return redirect()->back()->with('error', 'Internal Server Error  [Step 6]'.$json_response_ach);
             }
-            }',
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json'
-                ),
-            ));
-
-            $response = curl_exec($curl);
-            curl_close($curl);
-            $order = new Order();
-            $order->offer_id = $offer->id;
-            $order->investor_id = Auth::user()->id;
-            $order->total = $request->investment_amount;
-            // $order->currency = $json_response_ach->currency;
-            $order->currency = "USD";
-            // $order->type = $json_response_ach->type;
-            $order->type = 'ACH';
-            $order->payment_method = 'wire';
-            $order->e_sign = 'incomplete';
-            $order->status = 'pending';
-            $order->save();
-
-            $db_transaction = new Transaction;
-            $db_transaction->order_id = $order->id;
-            $db_transaction->offer_id = $offer->id;
-            $db_transaction->investor_id = Auth::user()->id;
-            $db_transaction->funds = $request->investment_amount;
-            $db_transaction->kyc_status = '---';
-            $db_transaction->status = 'will-set';
-            // $db_transaction->type = $json_response_ach->type;
-            $db_transaction->type = "ACH";
-            $db_transaction->payment_method = 'wire';
-            $db_transaction->e_sign = 'incomplete';
-
-            $db_transaction->transaction_id = $json_response_ach->id;
-            $db_transaction->source_identityId = $json_response_ach->source->identityId;
-            $db_transaction->source_externalAccountId = $json_response_ach->source->externalAccountId;
-            $db_transaction->destination_identityId = $json_response_ach->destination->identityId;
-            $db_transaction->destination_custodialAccountId = $json_response_ach->destination->custodialAccountId;
-            $db_transaction->comment = $json_response_ach->comment;
-            $db_transaction->funds = $json_response_ach->funds;
-            $db_transaction->currency = $json_response_ach->currency;
-
-            // $db_transaction->transaction_id = 12333455454;   
-            // $db_transaction->source_identityId = 'f4g4-g4-g4g44-4555';
-            // $db_transaction->source_externalAccountId = 'd334-334-455-555'; 
-            // $db_transaction->destination_identityId = 'd33224-334-42255-555';
-            // $db_transaction->destination_custodialAccountId = '23-88099-98'; 
-            // $db_transaction->comment = 'Offer Comments';
-            // $db_transaction->funds = '786';
-            // $db_transaction->currency = 'USD'; 
-            $db_transaction->save();
-            DB::commit();
-            Session::put('success', 'Your Investment Has Been Completed');
-            return redirect()->route('dashboard');
+            if($payment->successful()){
+                $order = new Order();
+                $order->offer_id = $offer->id;
+                $order->investor_id = Auth::user()->id;
+                $order->total = $request->investment_amount; 
+                $order->currency = "USD"; 
+                $order->type = 'ACH';
+                $order->payment_method = 'wire';
+                $order->e_sign = 'incomplete';
+                $order->status = 'pending';
+                $order->save(); 
+                $db_transaction = new Transaction;
+                $db_transaction->order_id = $order->id;
+                $db_transaction->offer_id = $offer->id;
+                $db_transaction->investor_id = Auth::user()->id;
+                $db_transaction->funds = $request->investment_amount;
+                $db_transaction->kyc_status = '---';
+                $db_transaction->status = 'will-set'; 
+                $db_transaction->type = "ACH";
+                $db_transaction->payment_method = 'wire';
+                $db_transaction->e_sign = 'incomplete'; 
+                $db_transaction->transaction_id = $json_response_ach->id;
+                $db_transaction->source_identityId = $json_response_ach->source->identityId;
+                $db_transaction->source_externalAccountId = $json_response_ach->source->externalAccountId;
+                $db_transaction->destination_identityId = $json_response_ach->destination->identityId;
+                $db_transaction->destination_custodialAccountId = $json_response_ach->destination->custodialAccountId;
+                $db_transaction->comment = $json_response_ach->comment;
+                $db_transaction->funds = $json_response_ach->funds;
+                $db_transaction->currency = $json_response_ach->currency; 
+                $db_transaction->save();
+                DB::commit();
+                return redirect()->route('dashboard')->with('success', 'Investment Has Been Completed');
+            }    
         } catch (Exception $error) {
-
-            DB::rollBack();
-            dd($error);
-            Session::put('error', 'Internal Server Error');
-            return redirect()->route('dashboard')->with('error', 'Internal Server Error');
+            DB::rollBack();   
+            return redirect()->back()->with('error', 'Internal Server Error [Step 7]'.$error);
         }
+             
+            
+        
     }
     public function verify_identity(Request $request)
     {

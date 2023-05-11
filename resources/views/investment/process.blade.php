@@ -385,7 +385,7 @@
                                                                     <input type="" class="form-control"
                                                                         placeholder="Primary Contact Social Security"
                                                                         required="" name="primary_contact_social_security"
-                                                                        @if ($user->identityVerification) value="{{ $user->identityVerification->primary_contact_social_security }}" @endif />
+                                                                        @if ($user->identityVerification) value="********" @endif />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-10">
@@ -545,7 +545,7 @@
                                                                 <!--begin:Input-->
                                                                 <span class="form-check form-check-custom form-check-solid">
                                                                     <input class="form-check-input investment_limit"
-                                                                        type="radio" name="category" value="yes"
+                                                                        type="radio" name="investment_limit" value="yes"
                                                                           />
                                                                 </span>
                                                                 <!--end:Input-->
@@ -583,7 +583,7 @@
                                                                 <!--begin:Input-->
                                                                 <span class="form-check form-check-custom form-check-solid">
                                                                     <input class="form-check-input investment_limit"
-                                                                        type="radio" name="category" value="no"
+                                                                        type="radio" name="investment_limit" value="no"
                                                                           />
                                                                 </span>
                                                                 <!--end:Input-->
@@ -593,7 +593,7 @@
                                                                     <label for="" class="mb-3"> Total Amount
                                                                         Invested in
                                                                         Crowdfunding Offerings </label>
-                                                                    <input type="text" class="form-control" name=""
+                                                                    <input type="text" class="form-control" name="total_amount_invested_crowdfunding_offerings"
                                                                         id=""
                                                                         placeholder="Total Amount Invested in Crowdfunding Offerings">
                                                                 </div>
@@ -606,25 +606,21 @@
                                                                         greater than US $60,000.00?
                                                                     </label>
                                                                     <br> <br>
-                                                                    <input type="radio" name="net_worth" class="net_worth"
+                                                                    <input type="radio" name="net_worth_greater_than_60000" class="net_worth"
                                                                         value="yes"> Yes, I confirm this is true
                                                                     &nbsp;&nbsp;&nbsp;
-                                                                    <input type="radio" name="net_worth" class="net_worth"
+                                                                    <input type="radio" name="net_worth_greater_than_60000" class="net_worth"
                                                                         value="no"> No, decrease my investment amount
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-4 net_worth_form d-none">
-                                                                <div class="col-lg-10">
+                                                                <div class="col-lg-12">
                                                                     <label for="" class="mb-4"> Update Investment
                                                                         Amount
                                                                     </label>
-                                                                    <input type="text" class="form-control" name=""
-                                                                        id="" value="300">
+                                                                    <input type="text" class="form-control" name="new_investment_amount" id="" value="{{ $investment_amount}}">
                                                                 </div>
-                                                                <div class="col-lg-2 pt-10">
-                                                                    <button class="btn btn-md btn-dark no-radius"> UPDATE
-                                                                    </button>
-                                                                </div>
+                                                                 
                                                                 <div class="col-lg-12 pt-3 fw-bold text-center"
                                                                     style="color:#b73d3d!important">
                                                                     After updating, please review the above question again, and
@@ -898,7 +894,7 @@
                                                 </div>
                                                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                                                     <div id="load_widget"></div>
-                                                        <input type=" " name="user_guid" id="user_guid" required>
+                                                        <input type="hidden" name="user_guid" id="user_guid" required>
                                                         <script src="https://atrium.mx.com/connect.js"></script>
                                                         <script>
                                                             var arr = [];
