@@ -20,6 +20,18 @@ return [
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
         'scheme' => 'https',
     ],
+    
+    'google' => [
+        'client_id' => '267275484890-dabde5ler61qd3lpa4k2t7ft2e0fga3d.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'https://investchainraise.io/login/google/callback',
+    ], 
+
+    'facebook' => [
+        'client_id' => '1600777097062911',
+        'client_secret' => '110fa51eadb59f8993d82c30a03a62cf',
+        'redirect' => 'https://investchainraise.io/login/facebook/callback',
+    ], 
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

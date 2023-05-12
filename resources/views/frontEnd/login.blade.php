@@ -55,11 +55,11 @@
                 <div class="row">
                     <div class="col-lg-6">
                         
-                        <a href="{{ route('login.facebook') }}" class="btn-sm btn btn-primary lernbtn mt-4" 
+                        {{-- <a href="{{ route('login.facebook') }}" class="btn-sm btn btn-primary lernbtn mt-4" 
                         style="padding:5px 5px;text-transform:uppercase;width:100%;border-radius:0;
                         background:#ffffff;border-color:#4B1DFF;color:#000">
                            <i class="fab fa-facebook-f"></i>
-                        </a>
+                        </a> --}}
                     </div>
                     <div class="col-lg-6">
                         <a href="{{ route('login.google') }}" class="btn-sm btn btn-primary lernbtn mt-4" 
