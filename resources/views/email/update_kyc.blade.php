@@ -1,7 +1,7 @@
 @extends('email.layout')
 @section('email_title')
     <strong style="text-transform: uppercase">
-        KYC Status Updated To <span class="text-danger" style="color:rgb(173, 9, 9)">L1</span>
+        KYC Status Updated To <span class="text-danger" style="color:rgb(173, 9, 9)">  {{ ucfirst($data->kyc->kyc_level) }} </span>
     </strong>
    
 @endsection

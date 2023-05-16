@@ -466,7 +466,7 @@ class KycController extends Controller
 
     public function re_run_kyc(Request $request)
     {
-
+      
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';  
         try{
             $get_token = Http::withHeaders([
@@ -495,6 +495,8 @@ class KycController extends Controller
             'id' => 'required',
         ]);
         $user = User::find($request->id);
+       
+        
         if($user->user_type  == 'entity'){
             if($user->business_id == null){
                 return response([

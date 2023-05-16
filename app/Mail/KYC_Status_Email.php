@@ -47,7 +47,7 @@ class KYC_Status_Email extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.kyc_email',
+            view: 'email.update_kyc',
         );
     }
 
