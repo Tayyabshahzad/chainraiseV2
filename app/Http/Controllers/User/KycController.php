@@ -6,7 +6,7 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\KYC;
 use App\Models\User;
-use App\Mail\UpdateKYC;
+use App\Mail\UPDATEKYC;
 use App\Models\Custodial;
 use App\Mail\UploadDocument;
 use Illuminate\Http\Request; 
