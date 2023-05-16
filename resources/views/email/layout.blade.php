@@ -258,8 +258,7 @@
                                         border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <!-- START MODULE: Header 7 -->
+                                                <td> 
                                                     <table border="0" cellpadding="0" cellspacing="0"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                                         width="100%">
@@ -268,13 +267,7 @@
                                                                 <td class="pc-header-box-s6 pc-m-header-7"
                                                                     background="images/header-7-image-2.jpg'"
                                                                     style="vertical-align: top; background-color: #1B1B1B; background-image: url('images/header-7-image-2.jpg'); background-position: top center; background-size: cover; width: 600px"
-                                                                    width="600" valign="top" bgcolor="#1B1B1B">
-                                                                    <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:547px;">
-                <v:fill type="frame" src="{{ asset('assets/email_images/header-7-image-2.jpg')}}" color="#1B1B1B"></v:fill>
-                <v:textbox inset="26px,29px,26px,26px">
-                    <div>
-            <![endif]-->
+                                                                    width="600" valign="top" bgcolor="#1B1B1B"> 
                                                                     <div class="pc-header-box-in"
                                                                         style="padding: 29px 26px 26px;">
                                                                         <table border="0" cellpadding="0"
@@ -284,12 +277,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td style="vertical-align: top"
-                                                                                        valign="top">
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td width="248" valign="top">
-                            <![endif]-->
+                                                                                        valign="top"> 
                                                                                         <table class="pc-header-logo-s1"
                                                                                             align="left"
                                                                                             border="0"
@@ -301,17 +289,18 @@
                                                                                                 <tr>
                                                                                                     <td style="vertical-align: top; padding: 10px;"
                                                                                                         valign="top">
-                                                                                                        <a href="#"   style="text-decoration: none;color:#fff">
-                                                                                                         MY LOGO
+                                                                                                        <a href="http://example.com"
+                                                                                                            style="text-decoration: none;">
+                                                                                                            <img src="https://investchainraise.io/media/logo/logo.webp"
+                                                                                                                width="130"
+                                                                                                                height="22"
+                                                                                                                alt=""
+                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; display: block; Margin: 0 auto; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; color: #ffffff;">
                                                                                                         </a>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
-                                                                                        </table>
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                            <td width="300" valign="top" align="right" style="text-align:right;">
-                            <![endif]-->
+                                                                                        </table> 
                                                                                         <table class="pc-header-nav-s1"
                                                                                             align="right"
                                                                                             border="0"
@@ -324,24 +313,21 @@
                                                                                                         style="vertical-align: top; padding: 9px 10px 10px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1; text-align: center;"
                                                                                                         align="center"
                                                                                                         valign="top">
-                                                                                                        <a href="http://example.com"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Rise</a>
-                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">FAQ</a>
-                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="{{ route('index') }}"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Offerings</a>
                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Learn</a>
+                                                                                                        <a href="{{ route('privacy.policy') }}"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Privacy Policy</a>
+                                                                                                        <span>&nbsp;&nbsp;</span>
+                                                                                                        <a href="{{ route('contact') }}"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Contact</a>
+                                                                                                            <span>&nbsp;&nbsp;</span>
+                                                                                                        <a href="{{ route('faq') }}"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">FAQ</a>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
-                                                                                        </table>
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            </td></tr></table>
-                            <![endif]-->
+                                                                                        </table> 
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -352,12 +338,7 @@
                                                                                 <tr>
                                                                                     <td class="pc-header-cta-s4"
                                                                                         style="vertical-align: top; font-size: 0;"
-                                                                                        valign="top">
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            <table width="334" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td width="50%" valign="top">
-                            <![endif]-->
+                                                                                        valign="top"> 
                                                                                         <div class="pc-header-cta-col"
                                                                                             style="display: inline-block; width: 100%; max-width: 334px; vertical-align: top;">
                                                                                             <table border="0"
@@ -381,7 +362,8 @@
                                                                                                                         <td class="pc-header-cta-title pc-fb-font"
                                                                                                                             valign="top"
                                                                                                                             style="vertical-align: top; padding: 14px 7px 0 7px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; line-height: 1.42; letter-spacing: -0.4px; color: #ffffff;">
-                                                                                                                            KYC STATUS UPDATED
+                                                                                                                            @section('email_title')
+                                                                                                                            @show
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     
@@ -398,39 +380,20 @@
                                                                                                     </tr>
                                                                                                 </tbody>
                                                                                             </table>
-                                                                                        </div>
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                            <td width="214" valign="top">
-                            <![endif]-->
-                                                                                        <div class="pc-header-cta-col"
-                                                                                            style="display: inline-block; width: 100%; vertical-align: top; max-width: 214px;">
-                                                                                          
-                                                                                        </div>
-                                                                                        <!--[if (gte mso 9)|(IE)]>
-                            </td></tr></table>
-                            <![endif]-->
+                                                                                        </div> 
+                                                                                        <div class="pc-header-cta-col"  style="display: inline-block; width: 100%; vertical-align: top; max-width: 214px;">
+                                                                                         </div> 
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
-                                                                    </div>
-                                                                    <!--[if gte mso 9]>
-            </div>
-            <p style="margin:0;mso-hide:all">
-                <o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p>
-            </p>
-            </v:textbox>
-            </v:rect>
-            <![endif]-->
+                                                                    </div> 
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <p style="padding:25px 20px;background:#fff;font-size:15px">
-                                                        KYC STATUS UPDATED
-                                                    </p>
-                                                   
+                                                    @section('email_content')
+                                                    @show
                                                     <table border="0" cellpadding="0" cellspacing="0"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                                         width="100%">
@@ -458,9 +421,7 @@
                                                                                             width="100%">
                                                                                             <tbody>
                                                                                                 <tr>
-                                                                                                    <td style="vertical-align: top; padding: 20px;"
-                                                                                                        valign="top">
-                                                                                                       
+                                                                                                    <td style="vertical-align: top; padding: 20px;" valign="top"> 
                                                                                                         <table
                                                                                                             class="pc-spacing pc-m-footer-h-57"
                                                                                                             border="0"
@@ -484,7 +445,7 @@
                                                                                                                         valign="top">
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png')}}"
+                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png') }}"
                                                                                                                                 width="20"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -493,7 +454,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png')}}"
+                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png') }}"
                                                                                                                                 width="21"
                                                                                                                                 height="18"
                                                                                                                                 alt=""
@@ -502,7 +463,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png')}}"
+                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png') }}"
                                                                                                                                 width="21"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -511,7 +472,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png')}}"
+                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png') }}"
                                                                                                                                 width="20"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -525,15 +486,7 @@
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
-                                                                                    </div>
-                                                                                    <!--[if (gte mso 9)|(IE)]>
-                        </td>
-                        <td width="280" style="width:280px;" valign="top">
-                        <![endif]-->
-                                                                                   
-                                                                                    <!--[if (gte mso 9)|(IE)]>
-                        </td></tr></table>
-                        <![endif]-->
+                                                                                    </div> 
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -562,8 +515,10 @@
                         </tbody>
                     </table>
                     <!--[if (gte mso 9)|(IE)]>
-      </td></tr></table>
-      <![endif]-->
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <![endif]-->
                 </td>
             </tr>
         </tbody>

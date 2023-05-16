@@ -210,9 +210,12 @@
                                               <th class="ps-9 fw-bold"> 
                                                 Action
                                                </th> 
+                                               <th class="ps-9 fw-bold"> 
+                                                Status
+                                               </th> 
                                     </tr>
                                     @foreach($users as $user)
-                                    <tr class="odd">
+                                    <tr class="odd @if($user->status == 'inactive') bg-light-danger @endif"  >
                                         <td class="ps-9"> 
                                             <div class="form-check form-check-sm form-check-custom form-check-solid mt-3">
                                                 <input class="form-check-input multi_select" name="user_check" type="checkbox" value="{{ $user->id }}">
@@ -258,6 +261,22 @@
                                                 </a>
                                             @endif
                                            </th> 
+
+                                           <th class=" "> 
+                                            {{ $user->status}}  
+                                          </th> 
+                                          <th class=" " colspan="9"> 
+                                               @if( $user->status != 'active') 
+                                                <button class="btn btn-sm btn-square btn-light-danger updateStatus" data-id="{{ $user->id }}" type="button" > <i class="fa fa-check"></i> </button>
+                                               @else
+                                                <button class="btn btn-sm btn-square btn-light-info updateStatus" data-id="{{ $user->id }}" type="button" > <i class="fa fa-times"></i> </button>
+                                               @endif
+                                               <img src="https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif"
+                                               class="img img-thumbnail d-none loader_img"
+                                               style="width: 40px;" alt="">
+                                              
+                                          </th> 
+                                        
                                 </tr>
                                     @endforeach
 
@@ -526,6 +545,40 @@
                 }
             });
         });
+
+        $('body').on('click','.updateStatus',function(event){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(this).html('Loading ...')
+            
+            var id = $(this).data('id'); 
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "{{ route('user.status.update') }}",
+                data: {
+                    id:id
+                }, 
+                success: function(result) {
+                    toastr.success('Account Status Has Been Updated',  "Success");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000); // 4 seconds delay
+                   
+                },
+                error:function(error){
+                    alert(error.responseText)  
+                }
+            });
+        });
+
+
+
+        
         $('body').on('submit','#upload_e_sign_document_form',function(event){
             event.preventDefault();
             $.ajaxSetup({

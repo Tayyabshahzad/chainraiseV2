@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,7 +13,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable  implements HasMedia 
+class User extends Authenticatable  implements MustVerifyEmail , HasMedia 
 {
 
     use HasApiTokens, HasFactory, Notifiable, HasRoles,InteractsWithMedia;
@@ -31,6 +30,7 @@ class User extends Authenticatable  implements HasMedia
         'phone',
         'agree_consent_electronic',
         'user_type',
+        'status',
         'cc'
     ];
 

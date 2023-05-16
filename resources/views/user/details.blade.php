@@ -326,7 +326,7 @@
                                                         <label>First Name: <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control"
                                                             placeholder="First Name*" required name="first_name"
-                                                            value="{{ $user->name }}" />
+                                                            value="{{ $user->name }}"  />
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <label>Middle Name: <span class="text-danger"></span></label>

@@ -25,8 +25,8 @@ use Laravel\Socialite\Facades\Socialite;
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
 });
-
-
+ 
+Route::get('email-layout', [FrontendController::class, 'layout_email']);
 Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
 Route::get('mailTrap', [TestController::class, 'mailTrap'])->name('mailTrap');
 Route::get('message', [TestController::class, 'message'])->name('messss');
@@ -104,6 +104,8 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     Route::get('get-childs', ['as' => 'childs','uses' => 'UserController@getChilds']);
     Route::get('details/{id}', ['as' => 'details','uses' => 'UserController@details']);
     Route::post('accountUpdate', ['as' => 'issuer.account.update','uses' => 'UserController@issuerAccountUpdate']);
+    Route::post('update/status', ['as' => 'status.update','uses' => 'UserController@UpdateStatus']);
+    
     Route::get('investor/create', ['as' => 'investor.create','uses' => 'UserController@investor']);
     Route::get('issuer/create', ['as' => 'issuer.create','uses' => 'UserController@issuer']);
     Route::post('investor/save', ['as' => 'save','uses' => 'UserController@save']);

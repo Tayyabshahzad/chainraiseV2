@@ -2,24 +2,32 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Mail\KYC_Status_Email;
-use App\Mail\UploadDocument;
-use App\Models\Custodial;
+use Exception;
+use Carbon\Carbon;
 use App\Models\KYC;
 use App\Models\User;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Http\Request;
+use App\Mail\UpdateKYC;
+use App\Models\Custodial;
+use App\Mail\UploadDocument;
+use Illuminate\Http\Request; 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt; 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Crypt;
+
+
 class KycController extends Controller
 {
-
+    private $baseUrl;
+    public function __construct()
+    { 
+        $environment = config('app.env'); 
+        $this->baseUrl = config('credentials.api.' . $environment);
+    } 
     public function updateKycCheck($id){ 
+        //dd($this->baseUrl . 'your-endpoint');
         $user = User::find($id);  
         if($user->check_kyc == true){
             $kyc = false;
@@ -40,15 +48,23 @@ class KycController extends Controller
     }
     public function checkKyc(Request $request)
     {
-         
+      
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token'; 
         $fortress_base_url = 'https://api.fortressapi.com/api/trust/v1/'; 
         $request->validate([
             'id' => 'required',
         ]);  
-       
+        
         $errors = []; 
-        $user = User::with('userDetail')->find($request->id);    
+        $user = User::with('userDetail')->find($request->id); 
+        if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
+            $errors[] = 'Please complete user profile first';
+            return response([
+                'status' => 'document',
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        } 
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
         if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
@@ -94,8 +110,7 @@ class KycController extends Controller
                 ]);
         }  
         $date_of_birth = $user->userDetail->dob;  
-        if($user->user_type  == 'individual'){     
-           
+        if($user->user_type  == 'individual'){      
             if($user->fortress_id == null){    
                 
                 try{ 
@@ -422,6 +437,7 @@ class KycController extends Controller
                     ['user_id' => $user->id],
                     ['kyc_level' => $json_check_user_kyc_level['kycLevel'],'doc_status'=>$docStatus]
                 );
+                Mail::to($user->email)->send(new UPDATEKYC($user)); 
                 return response([
                     'status' => $check_user_kyc_level->status(),  
                     'success'  => true,
@@ -432,9 +448,8 @@ class KycController extends Controller
                     'errors' => $errors,
                     'success'  => false,
                 ]); 
-            } 
-          
-          
+            }  
+         
 
         }catch(Exception $check_kyc_error){
             

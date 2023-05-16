@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Accreditation;
 class FrontendController extends Controller
 {
+
+    public function layout_email(){
+        return view('email.verify_email');
+    }
     public function index()
     {   
        

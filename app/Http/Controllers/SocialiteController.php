@@ -32,7 +32,7 @@ class SocialiteController extends Controller
                 $user->password  =  Hash::make('Google@123');
                 $user->phone = '0000-000-00';
                 $user->agree_consent_electronic = false;
-                $user->status = 'active';
+                $user->status = 'inactive';
                 $user->is_primary = 'yes';
                 $user->social_id = $google_data->id;
                 $user->social_type = 'google';
@@ -70,10 +70,10 @@ class SocialiteController extends Controller
                 $user->password  =  Hash::make('Google@123');
                 $user->phone = '0000-000-00';
                 $user->agree_consent_electronic = false;
-                $user->status = 'active';
+                $user->status = 'inactive';
                 $user->is_primary = 'yes';
                 $user->social_id = $faceBook->id;
-                $user->social_type = 'google';
+                $user->social_type = 'facebook';
                 $user->save();
                 $user->addMediaFromUrl($faceBook->avatar)->toMediaCollection('profile_photo');
                 $user->assignRole('investor');

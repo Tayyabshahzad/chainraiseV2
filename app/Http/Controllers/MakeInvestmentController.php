@@ -58,7 +58,9 @@ class MakeInvestmentController extends Controller
          	'offer_id' => 'required',
           	'investment_amount' => 'integer',
         ]);
-      
+        if(Auth::user()->status  == 'inactive'){
+            return redirect()->back()->with('error', 'Your account has been locked, Please Contact System Administrator');
+        }
         if (Auth::user()->kyc  == null || Auth::user()->kyc->kyc_level== null ){ 
             return redirect()->back()->with('error', 'Please Run KYC Check First');
         }  

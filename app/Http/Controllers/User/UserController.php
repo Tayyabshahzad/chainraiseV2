@@ -2,31 +2,33 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Mail\InvesterUpdate;
-use App\Mail\InvestorAccountDelete;
-use App\Mail\IssuerSubAcccount;
-use App\Mail\WelcomeEmail;
-use App\Models\Accreditation;
-use App\Models\Folder;
-use App\Models\IdentityVerification;
-use App\Models\InvesmentProfile;
-use App\Models\Offer;
-use App\Models\TrustSetting;
-use App\Models\User;
-use App\Models\UserDetail;
-use Carbon\Carbon;
 use Exception;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Offer;
+use App\Models\Folder;
+use App\Mail\WelcomeEmail;
+use App\Models\UserDetail;
+use App\Mail\InvesterUpdate;
+use App\Models\TrustSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Accreditation;
+use App\Mail\UserStatusUpdate;
+use App\Mail\IssuerSubAcccount;
+use App\Models\InvesmentProfile;
 use Illuminate\Support\Facades\DB;
+use App\Mail\InvestorAccountDelete;
+use App\Http\Controllers\Controller;
+use App\Models\IdentityVerification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\Facades\DataTables;
+
 class UserController extends Controller
 {
     public function custom_login($email,$password)
@@ -88,11 +90,32 @@ class UserController extends Controller
                         $query->where('name', '!=', 'admin');
                   })->get();
           $issuers = User::role('issuer')->orderby('id','DESC')->get();
-
-
+               
 
         return view('user.index',compact('users','offers','issuers'));
     }
+
+    public function UpdateStatus(Request $request)
+    {
+        $request->validate([
+            'id' => 'required', 
+        ]);
+        $user = User::find($request->id);
+        if ($user->status == 'active') {
+            $user->status = 'inactive'; 
+        }elseif($user->status == 'inactive'){
+            $user->status = 'active';
+        }
+        $user->save();
+        Mail::to($user)->send(new UserStatusUpdate($user));
+        return response([
+            'status' => true,
+            'message' => 'Status Updated to '.$user->status
+        ]);
+    }
+
+    
+
     public function details($id)
     {
 
@@ -173,8 +196,7 @@ class UserController extends Controller
     {
         $request->validate([
             'id' => 'required',
-        ]);
-
+        ]); 
         try {
             $user = User::find($request->id);
             Mail::to($user)->send(new InvestorAccountDelete($user));
@@ -184,7 +206,7 @@ class UserController extends Controller
                     'message' => 'User has been deleted successfully'
                 ]);
             }
-            Mail::to($user)->send(new InvestorAccountDelete($user));
+          
         } catch (Exception $error) {
             return response([
                 'status' => false,
