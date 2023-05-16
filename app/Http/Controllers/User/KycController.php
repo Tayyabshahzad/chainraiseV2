@@ -333,7 +333,7 @@ class KycController extends Controller
             }   
         }  
 
-        // dump('End KYC');
+        ///// dump('End KYC');
         if($user->user_type  == 'entity'){
             $id =  $user->business_id; 
             $endPoint = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$id.'/documents';
