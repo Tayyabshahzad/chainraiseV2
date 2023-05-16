@@ -509,31 +509,7 @@ class KycController extends Controller
                     'message' =>'Please run KYC Check First then try again individual account',
                 ]);
             } 
-        } 
-       
-        try{
-            $get_token = Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($production_auth, [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
-            ]);
-            $token_json =  json_decode((string) $get_token->getBody(), true); 
-            if($get_token->failed()) {  
-                return response([
-                    'status' => $get_token->status(),
-                    'data'   => $token_json,
-                ]);
-            }
-        }catch(Exception $token_error){
-            return response([
-                'status' => $token_json->status(),
-                'data'   => $token_json,
-            ]);
-        }
+        }  
         
         if($user->user_type  == 'entity'){
             $url_check_kyc = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$user->business_id ;
@@ -565,6 +541,7 @@ class KycController extends Controller
                         ]
                 );       
             }
+            Mail::to($user->email)->send(new UPDATEKYC($user)); 
             return response([
                 'status' => $upgrade_existing_l0->status(),
                 'data'=> $json_upgrade_existing_l0,
