@@ -517,10 +517,8 @@ class KycController extends Controller
             $url_check_kyc = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$user->business_id ;
         }else{
             $url_check_kyc = 'https://api.fortressapi.com/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
-        }
-        
-        try { 
-          
+        } 
+        try {  
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
             withHeaders(['Content-Type' => 'application/json'])->
             get($url_check_kyc);
