@@ -30,8 +30,7 @@
 @section('title', 'Details')
 @section('content')
   
- @if ($errors->any())
-    this is error
+ @if ($errors->any()) 
             @foreach ($errors->all() as $error)
                 {{ $error }}
             @endforeach
@@ -248,7 +247,10 @@
                                     <button class="btn bg-change py-2" type="button">Add to Wishlist</button>
                                 </div>
                             </div>
-                        </form> 
+                        </form>
+
+
+
                         <div class="d-grid gap-2 mt-3">
                             <button class="btn bg-change py-2" type="button">Add to Wishlist</button>
                         </div>

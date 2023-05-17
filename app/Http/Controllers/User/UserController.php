@@ -355,7 +355,7 @@ class UserController extends Controller
     }
     public function issuerAccountUpdate(Request $request)
     {   
-    
+        
         $request->validate([
             //Users Table
             'id' => 'required',
@@ -390,14 +390,15 @@ class UserController extends Controller
            // 'view_all_invite_offers' => 'required',
             //'allow_manual_ach_bank_input' => 'required', 
         ]);
-      
+    
         $user = User::find($request->id);
+        if($user->roles->first()->name == 'issuer'){
+            $user->profile_status = true;
+        }
         $user->name = $request->first_name;
         $user->phone = $request->phone;
         $user->cc = $request->cc;
-       // $user->user_type = $request->user_type;
         $user->save();
-
         if($request->has('profile_avatar')){
             $user->clearMediaCollection('profile_photo');
             $user->addMediaFromRequest('profile_avatar')->toMediaCollection('profile_photo');

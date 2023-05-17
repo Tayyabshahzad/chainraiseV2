@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserStatusUpdate extends Mailable
+class TransactionCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,11 +35,10 @@ class UserStatusUpdate extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Chainraise - KYC Status Update',
+            subject: 'Chainraise - Transaction Approved',
             from: 'noreply@invest.chainraise.io',
         );
     }
-
     /**
      * Get the message content definition.
      *
@@ -48,7 +47,7 @@ class UserStatusUpdate extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.status_update',
+            view: 'email.transaction.approved',
         );
     }
 

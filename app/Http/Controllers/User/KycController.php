@@ -21,10 +21,12 @@ use Illuminate\Support\Facades\Storage;
 class KycController extends Controller
 {
     private $baseUrl;
+    private $authUrl;
     public function __construct()
     { 
         $environment = config('app.env'); 
-        $this->baseUrl = config('credentials.api.' . $environment);
+        $this->baseUrl = config('credentials.api.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment); 
     } 
     public function updateKycCheck($id){ 
         //dd($this->baseUrl . 'your-endpoint');
@@ -54,7 +56,7 @@ class KycController extends Controller
         $request->validate([
             'id' => 'required',
         ]);  
-        
+       
         $errors = []; 
         $user = User::with('userDetail')->find($request->id); 
         if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
@@ -83,17 +85,18 @@ class KycController extends Controller
             ]);
         }
         // Token Request
+      
         try {
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post($production_auth, [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
             ]);
-            $token_json =  json_decode((string) $get_token->getBody(), true);   
+            $token_json =  json_decode((string) $get_token->getBody(), true);  
             if ($get_token->failed()) {
                 $errors[] = 'Error While Creating Token';
                 return response([
@@ -109,14 +112,15 @@ class KycController extends Controller
                     'errors' => $errors,
                 ]);
         }  
-        $date_of_birth = $user->userDetail->dob;  
-        if($user->user_type  == 'individual'){      
-            if($user->fortress_id == null){    
+        $date_of_birth = $user->userDetail->dob; 
+      
+        if($user->user_type  == 'individual'){  
                 
+            if($user->fortress_id == null){    
                 try{ 
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
-                    ])->post($fortress_base_url.'identity-containers', [
+                    ])->post($this->baseUrl.'/api/trust/v1/identity-containers', [
                         'firstName' => $user->name,
                         'middleName' => $user->userDetail->middle_name,
                         'lastName' => $user->userDetail->last_name,
@@ -145,6 +149,7 @@ class KycController extends Controller
                                 'status' => $identity_containers->status(),
                                 'success'  => false,
                                 'errors' => $errors,
+                                'step'=>'individual step 1',
                             ]);
                         } 
                         return response([
@@ -168,6 +173,7 @@ class KycController extends Controller
                     return response([ 
                         'errors' => $errors,
                         'success'  => false,
+                        'step'=>'individual step 1 Exception',
                     ]);
                 } 
             }
@@ -180,7 +186,7 @@ class KycController extends Controller
                  try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
-                    ])->post('https://api.fortressapi.com/api/compliance/v1/identity-containers', [
+                    ])->post($this->baseUrl.'/api/compliance/v1/identity-containers', [
                         'firstName' => $user->name,
                         'middleName' => $user->userDetail->middle_name,
                         'lastName' => $user->userDetail->last_name,
@@ -224,6 +230,7 @@ class KycController extends Controller
                             'status' => $identity_containers->status(), 
                             'errors' => $errors,
                             'success'  => false,
+                            'step'=>'entity step 1',
                         ]);
                     }else{
                         if ($identity_containers->successful()) {  
@@ -238,17 +245,17 @@ class KycController extends Controller
                         return response([ 
                             'errors' => $errors,
                             'success'  => false,
+                            'step'=>'entity step 1 exception',
                         ]);
                 } 
                 // Business  Indentity
             }   
             //dump('Business is calling');
-            if($user->business_id == null){ 
-               
+            if($user->business_id == null){  
                 try{ 
                     $business_identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
-                    ])->post('https://api.fortressapi.com/api/compliance/v1/business-identities', [
+                    ])->post($this->baseUrl.'/api/compliance/v1/business-identities', [
                         'identityContainerId' => $user->identity_container_id,
                         'companyName' => $user->userDetail->entity_name,
                         'ein' => $user->userDetail->ein,
@@ -282,6 +289,7 @@ class KycController extends Controller
                                 'status' => $status,
                                 'success'  => false,
                                 'errors' => $errors,
+                                'step'=>'entity business 1 on 400 status',
                             ]);   
                         }
                         $errors[] = $json_business_identity_containers['errors'];
@@ -290,6 +298,7 @@ class KycController extends Controller
                             'status' => $status,
                             'success'  => false,
                             'errors' => $errors,
+                            'step'=>'entity business 1 failed',
                         ]);
                     }  
                         
@@ -302,6 +311,7 @@ class KycController extends Controller
                                     'status' => $status,
                                     'success'  => false,
                                     'errors' => $json_business_identity_containers['errors'],
+                                    'step'=>'entity business 1 not successful',
                                 ]);   
                             } 
                             if($status == 409){ 
@@ -318,9 +328,7 @@ class KycController extends Controller
                             $user->save();
                         }  
 
-                        if($business_identity_containers->failed()){
-                            
-                        }
+                        
                         
                 }catch(Exception $business_identity_containers){ 
                     $errors[] = 'Error While Creating Identity Containers';
@@ -328,6 +336,7 @@ class KycController extends Controller
                     return response([ 
                         'errors' => $errors,
                         'success'  => false,
+                        'step'=>'entity exception',
                     ]);
                 }
             }   
@@ -335,19 +344,23 @@ class KycController extends Controller
 
         ///// dump('End KYC');
         if($user->user_type  == 'entity'){
-            $id =  $user->business_id; 
-            $endPoint = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$id.'/documents';
+            $id =  $user->business_id;
+            $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
         }  else{
-            $id =  $user->fortress_personal_identity;
-            $endPoint = $fortress_base_url.'personal-identities/'.$id.'/documents';
+            $id =  $user->fortress_personal_identity; 
+           //base URL https://api.fortressapi.com/api/trust/v1/
+            $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
         } 
 
         if($user->user_type  == 'entity'){
             //dump('Doc Upload');
             try{  
                 $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
-                $path =  $mediaCollection?->getFullUrl();
-                //$path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                if(env('APP_ENV') == 'sandbox'){
+                    $path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                }else{
+                    $path =  $mediaCollection?->getFullUrl();
+                } 
                 $document_path = fopen($path, 'r');   
                 $url = $endPoint;
                 $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
@@ -371,6 +384,7 @@ class KycController extends Controller
                         'status' => $upload_document->status(),
                         'success'  => false,
                         'errors' => $errors,
+                        'step'=>'entity document upload 400 error',
                     ]);
                 }
                 if ($upload_document->failed()) {
@@ -384,6 +398,7 @@ class KycController extends Controller
                             'status' => $upload_document->status(),
                             'success'  => false,
                             'errors' => $errors,
+                            'step'=>'entity document  upload 400 error 2',
                         ]);
                     }    
                     return response([
@@ -391,6 +406,7 @@ class KycController extends Controller
                         'data'   => $json_upload_document,
                         'errors' => $errors,
                         'success'  => false,
+                        'step'=>'entity document failed to upload',
                     ]); 
                 }
                 if($upload_document->requestTimeout()){
@@ -400,6 +416,7 @@ class KycController extends Controller
                         'data'   => $json_upload_document,
                         'errors' => $errors,
                         'success'  => false,
+                        'step'=>'entity document Request Time OUT',
                     ]); 
                 } 
             }catch(Exception $upload_document_error){ 
@@ -409,15 +426,16 @@ class KycController extends Controller
                     'data'   => $upload_document_error,
                     'success'  => false,
                     'errors' => $errors,
+                    'step'=>'entity document exception',
                 ]);
             } 
         }
         
 
-        if($user->user_type  == 'entity'){
-            $url_check_kyc = $fortress_base_url.'business-identities/'.$user->business_id ;
+        if($user->user_type  == 'entity'){  
+            $url_check_kyc =  $this->baseUrl.'/api/trust/v1/business-identities/'.$user->business_id;
         }else{
-            $url_check_kyc = $fortress_base_url.'personal-identities/'.$user->fortress_personal_identity ;
+            $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         }
         try{ 
             $check_user_kyc_level = Http::withToken($token_json['access_token'])->
@@ -441,12 +459,14 @@ class KycController extends Controller
                 return response([
                     'status' => $check_user_kyc_level->status(),  
                     'success'  => true,
+                    ''
                 ]); 
             }else{
                 return response([
                     'status' => $check_user_kyc_level->status(), 
                     'errors' => $errors,
                     'success'  => false,
+                    'step'=>'entity document updating db status',
                 ]); 
             }  
          
@@ -456,6 +476,7 @@ class KycController extends Controller
             return response([ 
                 'success'  => false,
                 'data'   => $check_kyc_error,
+                'step'=>'entity document updating exception',
             ]);
         }
                  
@@ -467,16 +488,15 @@ class KycController extends Controller
     public function re_run_kyc(Request $request)
     {
       
-        $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';  
         try{
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post($production_auth, [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true); 
             if($get_token->failed()) {  
@@ -486,17 +506,17 @@ class KycController extends Controller
                 ]);
             }
         }catch(Exception $token_error){
-            return response([
-                'status' => $token_json->status(),
-                'data'   => $token_json,
+         
+            return response([ 
+                'success' => false,
+                'data'   => $token_error,
             ]);
         } 
+        
         $request->validate([
             'id' => 'required',
         ]);
-        $user = User::find($request->id);
-       
-        
+        $user = User::find($request->id); 
         if($user->user_type  == 'entity'){
             if($user->business_id == null){
                 return response([
@@ -514,9 +534,9 @@ class KycController extends Controller
         }  
         
         if($user->user_type  == 'entity'){
-            $url_check_kyc = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$user->business_id ;
+            $url_check_kyc = $this->baseUrl.'/api/compliance/v1/business-identities/'.$user->business_id ;
         }else{
-            $url_check_kyc = 'https://api.fortressapi.com/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
+            $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         } 
         try {  
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
@@ -553,9 +573,6 @@ class KycController extends Controller
                 'error'=>$error,
             ]);
         }
-
-      
-
 
     }
     public function re_run_kyc_2(Request $request)
@@ -614,48 +631,51 @@ class KycController extends Controller
         $request->validate([
             'id' => 'required',
         ]);
+       
         $user = User::find($request->id);
-        $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token'; 
-        $fortress_base_url = 'https://api.fortressapi.com/api/trust/v1/'; 
+        $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
+        if($mediaCollection == null){
+            return response([
+                'status' => false,
+                'message' =>'Please Upload Documents First',
+            ]);
+        }
         if($user->user_type  == 'entity'){ 
             if($user->identity_container_id == null || $user->business_id == null){
                 return response([
                     'status' => false,
                     'message' =>'Please run KYC Process First for your entity/busines account',
                 ]);
-            }
-            
+            } 
             $id =  $user->business_id; 
-            $endPoint = 'https://api.fortressapi.com/api/compliance/v1/business-identities/'.$id.'/documents';
+            $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
         }else{
-
             if($user->fortress_id == null || $user->fortress_personal_identity == null){
                 return response([
                     'status' => false,
                     'message' =>'Please run KYC Process First for your personal/individual account',
                 ]);
             }
- 
-            $id =  $user->fortress_personal_identity;
-            $endPoint = $fortress_base_url.'personal-identities/'.$id.'/documents';
-        } 
-        
-        
+            $id =  $user->fortress_personal_identity; 
+            $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
+        }  
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post($production_auth, [
-            'grant_type' => 'password',
-            'username'   => 'Portal@chainraise.io',
-            'password'   => '?dm3JeXgkgQNA?ue8sHI',
-            'audience'   => 'https://fortressapi.com/api',
-            'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+        ])->post($this->authUrl['url'], [
+            'grant_type' => $this->authUrl['grant_type'],
+            'username'   => $this->authUrl['username'],
+            'password'   => $this->authUrl['password'],
+            'audience'   => $this->authUrl['audience'],
+            'client_id'  => $this->authUrl['client_id'],
         ]);
-        $token_json =  json_decode((string) $get_token->getBody(), true);   
-
+        $token_json =  json_decode((string) $get_token->getBody(), true);    
         try{ 
             $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
-            //$path =  $mediaCollection->getFullUrl();
-            $path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+            if(env('APP_ENV') == 'sandbox'){
+                $path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+            }else{
+                $path =  $mediaCollection?->getFullUrl();
+            }  
             $document_path = fopen($path, 'r');   
             $url = $endPoint;
             $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
@@ -663,28 +683,31 @@ class KycController extends Controller
             attach('DocumentBack', $document_path)->
             withToken($token_json['access_token'])->
             post($url);
-            $json_upload_document =  json_decode((string) $upload_document->getBody(), true);
+            
+            $json_upload_document =  json_decode((string) $upload_document->getBody(), true); 
             $status = $upload_document->status();
-            if($status == 400){
+            
+            if($status == 400){ 
                 foreach($json_upload_document['errors'] as $error) {
                     if(is_array($error)) {
-                    $errors[] = 'Try to change document type';
-                    $errors[] = $error[0];
+                        $errors[] = 'Try to change document type';
+                        $errors[] = $error[0];
+                        $errors[] = $json_upload_document['title'];
                     }
                 }
+               
                 $errors[] = 'Error While Uploading '.$user->user_type.' documents';
                 $errors[] = $json_upload_document['errors'];
-                $errors[] = $json_upload_document['title'];    
+                $errors[] = $json_upload_document['title'];  
                 return response([
                     'status' => $upload_document->status(),
                     'success'  => false,
                     'errors' => $errors,
                 ]);
             }
-            if ($upload_document->failed()) {
+            if ($upload_document->failed()) { 
                 $status = $upload_document->status();
-                if($status == 400){  
-                    
+                if($status == 400){   
                     $errors[] = $json_upload_document['errors'];
                     $errors[] = $json_upload_document['title'];  
                     $errors[] = 'Personal Identity Has Been Created But Error While Uploding Documents';

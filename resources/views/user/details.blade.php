@@ -99,13 +99,9 @@
                             <div class="d-flex flex-column m-lg-8">
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
-                                    <span class="text-gray-900 text-hover-primary fs-2 fw-bold"> {{ $user->name }} |
-                                        {{ $user->email }}
-                                        @if ($user->userDetail)
-                                            {{ $user->userDetail->last_name }}
-                                        @endif
-                                        - <small class="text-info">
-                                            {{ ucfirst($user->roles()->pluck('name')->implode(' ')) }}</small>
+                                    <span class="text-gray-900 text-hover-primary fs-2 fw-bold"> {{ $user->name }} |  @if ($user->userDetail)  {{ $user->userDetail->last_name }}     @endif
+                                        <br/>
+                                        <small class="text-warning">{{ $user->email }} </small>  - <small class="text-info">  {{ ucfirst($user->roles()->pluck('name')->implode(' ')) }} </small> - <small class="text-success" style="font-size: 13px"> [ {{ $user->user_type }} ]</small>
                                     </span>
                                 </div>
                                 <!--end::Name-->
@@ -113,7 +109,7 @@
                                 <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                                     <span class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
-                                        <!--end::Svg Icon--> {{ $user->phone }} <br> {{ $user->user_type }}
+                                        <!--end::Svg Icon--> {{ $user->phone }} <br>
                                     </span>
                                 </div>
 
@@ -2258,15 +2254,18 @@
                     id: id
                 },
                 success: function(response) {
-
-                    //$('.loader_img_for_update_document').addClass('d-none');
-                    //$('.update_document').removeClass('d-none');
+                    $('.loader_img_for_update_document').addClass('d-none');
+                    $('.update_document').removeClass('d-none');
                     console.log(response);
                     //$('.update_document_wrapper').load(' .update_document_wrapper');
                     if (response.status == 201) {
                         toastr.success('Document Has Been Updated', "Success");
-                    } else {
-                        toastr.error('Error while updating status', "Error");
+                    } else { 
+                        console.log(response);
+                        jQuery.each(response.errors, function(index, item) {
+                            toastr.error(item, "Error");
+                        });
+                       // toastr.error(response.message, "Error");
                     }
                 }
             });

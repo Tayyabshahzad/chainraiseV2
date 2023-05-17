@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccountGUID;
-use App\Models\Custodial;
-use App\Models\ExternalAccount;
-use App\Models\InvestmentStep;
-use App\Models\MemberGuid;
-use App\Models\Offer;
-use App\Models\Order;
-use App\Models\Transaction;
-use App\Models\User;
-use Carbon\Carbon;
+use File;
 use CURLFile;
 use Exception;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Offer;
+use App\Models\Order;
 use GuzzleHttp\Client;
+use App\Models\Custodial;
+use App\Models\MemberGuid;
+use App\Models\AccountGUID;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\InvestmentStep;
+use App\Models\ExternalAccount;
+use App\Mail\TransactionCreated;
+use Illuminate\Support\Facades\DB;
+use  Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use  Illuminate\Support\Collection;
-use File;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class MakeInvestmentController extends Controller
@@ -358,6 +360,8 @@ class MakeInvestmentController extends Controller
         }
         $identityId = Auth::user()->fortress_personal_identity;
         $offer = Offer::with('user')->findOrFail($request->offer_id); 
+
+        
         try { 
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -486,6 +490,19 @@ class MakeInvestmentController extends Controller
                 $db_transaction->currency = $json_response_ach->currency; 
                 $db_transaction->save();
                 DB::commit();
+                $transaction_details = [
+                    'investor'=> Auth::user()->name,
+                    'investment_amount' => $request->investment_amount,
+                    'type_of_security' => 'Common Shares',
+                    'share_price' => 123,
+                    'share_count' => 0,
+                    'share_sold_date' =>Carbon::now()->format('D-m-Y'),
+                    'total_raised' => $offer->base_currency . $offer->size,
+                    'offer_name' =>  $offer->name,
+                    'trnx_total_raised' => 0,
+                    'trnx_last_cancel_date' => $offer->funding_end_date,
+                ];  
+                Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));  
                 return redirect()->route('dashboard')->with('success', 'Investment Has Been Completed');
             }    
         } catch (Exception $error) {

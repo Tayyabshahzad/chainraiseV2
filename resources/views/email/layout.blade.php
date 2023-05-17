@@ -10,7 +10,10 @@
     <meta name="x-apple-disable-message-reformatting">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    @section('custom_css')
+    @show
     <style type="text/css">
+       
         @media screen {
             @font-face {
                 font-family: 'Fira Sans';
@@ -241,8 +244,8 @@
                             <tr>
                                 <td align="left" style="vertical-align: top; padding: 0 10px;" valign="top"> <span
                                         class="preheader"
-                                        style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Template
-                                        created by Designmodo.com</span>
+                                        style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
+                                        Chainraise - Invest in blockchain companies, tech startups, real estate and more.</span>
                                     <table border="0" cellpadding="0" cellspacing="0"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                         width="100%">

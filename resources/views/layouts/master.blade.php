@@ -356,7 +356,7 @@
                     <div class="modal-footer flex-column text-center ">
                         <div class="signup-section text-center">Already have account? <a href="#"
                                 data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sign-in-popup"
-                                style="color: #4b1dff;"> Sign In</a>.</div>
+                                style="color: #4b1dff;" > Sign In</a>.</div>
                     </div>
                 </div>
             </div>

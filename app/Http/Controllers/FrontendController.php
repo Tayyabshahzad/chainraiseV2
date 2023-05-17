@@ -9,7 +9,7 @@ class FrontendController extends Controller
 {
 
     public function layout_email(){
-        return view('email.verify_email');
+        return view('email.transaction.create');
     }
     public function index()
     {   
@@ -25,6 +25,16 @@ class FrontendController extends Controller
         return view('frontEnd.offer.detail',compact('offer'));
     }
 
+
+    public function detail_v2($slug)
+    {   
+       
+        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail')->where('slug',$slug)->first();
+        return view('frontEnd.offer.detailv2',compact('offer'));
+    }
+
+
+    
     public function socialLogin()
     {
        

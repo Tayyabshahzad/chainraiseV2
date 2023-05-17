@@ -46,9 +46,12 @@
                         </div>
                     </a>
                     <div class="row">
-                        <div class="col-lg-12 mt-3">
+                        <div class="col-lg-6 mt-3">
                                 <a  href="{{ route('offer.details',$offer->slug) }}" target="_blank" class="btn-sm btn btn-primary lernbtn" style="text-transform:uppercase;width:100%;border-radius: 0;background:#4B1DFF;border-color:#4B1DFF"> Learn More </a>
                         </div>
+                        <div class="col-lg-6 mt-3">
+                            <a  href="{{ route('offer.details.v2',$offer->slug) }}" target="_blank" class="btn-sm btn btn-primary lernbtn" style="text-transform:uppercase;width:100%;border-radius: 0;background:#4B1DFF;border-color:#4B1DFF"> Learn V2 </a>
+                    </div>
                     </div>
                 </div>
             @endforeach 
