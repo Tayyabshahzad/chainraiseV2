@@ -12,6 +12,7 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 /*
+//Updated Routes
 |--------------------------------------------------------------------------
 | Web Routes // new // eew tayyab makeinvest
 |--------------------------------------------------------------------------
