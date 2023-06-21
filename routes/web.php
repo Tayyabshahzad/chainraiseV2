@@ -135,9 +135,9 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     //Front Listing Page
     /// Added new route
     Route::post('esign-template-save', ['as' => 'esign.template.save','uses' => 'UserController@templateSave']);
-   
+     
 
-});
+}); 
 
 Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\User'], function () {
     Route::post('basic/details/update', ['as' => 'basic.details.update','uses' => 'UserController@basicDetailUpdate']);

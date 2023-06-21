@@ -1,4 +1,4 @@
-@extends('layouts.masterV2')
+@extends('layouts.master')
 @section('custom_css')
     <style>
         .hero-section {

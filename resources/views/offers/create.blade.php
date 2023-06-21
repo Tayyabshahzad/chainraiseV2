@@ -807,6 +807,7 @@
                             $("#create_offer_form select").prop("disabled", true);
                             $("#issuer_account").prop("disabled", false);
                         }else{
+                            toastr.warning(result.message, "Warning");
                             $("#create_offer_form input").prop("disabled", false);
                             $("#create_offer_form select").prop("disabled", false);
                             $('#submit_offer').prop('disabled',false);

@@ -29,12 +29,17 @@ use App\Repositories\Interfaces\RegCFRepositoryInterface;
 
 class OfferController extends Controller
 {
+    private $baseUrl;
+    private $authUrl;  
     private $RegCFRepository;
     private $offerRepository;
     public function __construct(RegCFRepositoryInterface $RegCFRepository, OfferRepositoryInterface $offerRepository)
     {
         $this->RegCFRepository = $RegCFRepository;
         $this->offerRepository = $offerRepository;
+        $environment = config('app.env'); 
+        $this->baseUrl = config('credentials.api.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment); 
     }
     public function active_index()
     { 
@@ -97,8 +102,8 @@ class OfferController extends Controller
     }
     public function save(Request $request)
     {
-        $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token'; 
-        $fortress_base_url = 'https://api.fortressapi.com/api/trust/v1/'; 
+        
+        
         $request->validate([
             'issuer' => 'required',
             'offer_name' => 'required',
@@ -111,40 +116,51 @@ class OfferController extends Controller
             //'max_invesment'=>'required'
         ]); 
         //dd($request);
+        $user = User::find($request->issuer); 
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post($production_auth, [
-            'grant_type' => 'password',
-            'username'   => 'Portal@chainraise.io',
-            'password'   => '?dm3JeXgkgQNA?ue8sHI',
-            'audience'   => 'https://fortressapi.com/api',
-            'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
-        ]);
+        ])->post($this->authUrl['url'], [
+            'grant_type' => $this->authUrl['grant_type'],
+            'username'   => $this->authUrl['username'],
+            'password'   => $this->authUrl['password'],
+            'audience'   => $this->authUrl['audience'],
+            'client_id'  => $this->authUrl['client_id'],
+        ]); 
         $token_json =  json_decode((string) $get_token->getBody(), true);
         //dd($token_json);
         if($get_token->failed()){ 
-            return redirect()->back()->with('error','Internal Server Error');
-        }
-
-        $user = User::find($request->issuer);
-        
+            return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json.']');
+        }  
         if($user->check_kyc == true ){ 
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
             withHeaders(['Content-Type' => 'application/json'])->
-            get($fortress_base_url.'personal-identities/'.$user->fortress_personal_identity);
+            get($this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity);
             $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
             if($upgrade_existing_l0->failed()){ 
-                return redirect()->back()->with('error','Internal Server Error');
+                return redirect()->back()->with('error','Internal Server Error'.$json_upgrade_existing_l0);
             }else{
-                if($json_upgrade_existing_l0['kycLevel'] == 'L0'){ 
-                    return redirect()->back()->with('error','KYC Level Must Be Greater Then L0');
+                if($json_upgrade_existing_l0['kycLevel'] == null ||  $json_upgrade_existing_l0['kycLevel'] == ''){ 
+                    return redirect()->back()->with('error','KYC Level Atlest L0');
                 }
             }
         }
-        
-      
-        try{
+        try{   
+        // Checking custodial-accounts
+            $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->baseUrl.'/api/trust/v1/custodial-accounts', [
+                'type' => 'personal',
+                'personalIdentityId' => $user->fortress_personal_identity,
+            ]);
+            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
+            if($custodial_account->failed()){ 
+                return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
+            }
             
+        }catch(Exception $custodial_account_error){
+            return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
+        }
+        try{   
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
             $offer->issuer_id =  $request->issuer;
@@ -177,32 +193,17 @@ class OfferController extends Controller
                     $investmentStep->title = $setup;
                     $investmentStep->priority = $priority;
                     $investmentStep->save();
-                }
-
-                
-                if($user->check_kyc == true ){ 
-                    // Creating Custodial Accounts
-                    $user = User::find($request->issuer);
-                    $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
-                        'Content-Type' => 'application/json',
-                    ])->post($fortress_base_url.'custodial-accounts', [
-                        'type' => 'personal',
-                        'personalIdentityId' => $user->fortress_personal_identity,
-                    ]);
-                    $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
-                    if($custodial_account->failed()){
-                    DB::rollBack();
-                    }else{
-                        $custodial = new Custodial;
-                        $custodial->user_id = $request->issuer;
-                        $custodial->offer_id = $offer->id;
-                        $custodial->custodial_id = $json_custodial_account['id'];
-                        $custodial->ownerIdentityId = $json_custodial_account['ownerIdentityId'];
-                        $custodial->accountStatus = $json_custodial_account['accountStatus'];
-                        $custodial->accountType = $json_custodial_account['accountType'];
-                        $custodial->accountNumber = $json_custodial_account['accountNumber'];
-                        $custodial->save();
-                    }
+                } 
+                if($user->check_kyc == true ){     
+                    $custodial = new Custodial;
+                    $custodial->user_id = $request->issuer;
+                    $custodial->offer_id = $offer->id;
+                    $custodial->custodial_id = $json_custodial_account['id'];
+                    $custodial->ownerIdentityId = $json_custodial_account['ownerIdentityId'];
+                    $custodial->accountStatus = $json_custodial_account['accountStatus'];
+                    $custodial->accountType = $json_custodial_account['accountType'];
+                    $custodial->accountNumber = $json_custodial_account['accountNumber'];
+                    $custodial->save();
                 }
 
                 if($request->hasFile('offer_image')) {
@@ -343,8 +344,7 @@ class OfferController extends Controller
                                $offerContact->address = $request->offer_address;
                                $offerContact->phone = $request->phone; 
                                $offerContact->contact_us = $request->contact_us; 
-                               if($offerContact->save()){
-                               }
+                               
                         }
 
                     }
@@ -733,8 +733,8 @@ class OfferController extends Controller
                 $check_level = $kyc->kyc_level;
                 if($check_level == 'L0'){
                     return response([
-                        'status'=>false,
-                        'message'=>'KYC Status Must Be Greater Then LO'
+                        'status'=>true,
+                        'message'=>'You May Create Offer But Please Try to update KYC Status and get Atlest L2'
                     ]);
                 }
             }else{

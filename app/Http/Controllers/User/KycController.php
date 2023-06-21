@@ -181,8 +181,8 @@ class KycController extends Controller
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
             // creating container for business 
-            if($user->identity_container_id == null){   
-                //dump('identity_container_id is null');
+          
+            if($user->identity_container_id == null){    
                  try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -250,8 +250,9 @@ class KycController extends Controller
                 } 
                 // Business  Indentity
             }   
-            //dump('Business is calling');
+            
             if($user->business_id == null){  
+                //dump('Business is calling if null'); 
                 try{ 
                     $business_identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -340,8 +341,9 @@ class KycController extends Controller
                     ]);
                 }
             }   
+            //dump('end Business API');
         }  
-
+      
         ///// dump('End KYC');
         if($user->user_type  == 'entity'){
             $id =  $user->business_id;
@@ -353,16 +355,16 @@ class KycController extends Controller
         } 
 
         if($user->user_type  == 'entity'){
-            //dump('Doc Upload');
+            
             try{  
                 $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
                 if(env('APP_ENV') == 'sandbox'){
                     $path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
                 }else{
                     $path =  $mediaCollection?->getFullUrl();
-                } 
-                $document_path = fopen($path, 'r');   
-                $url = $endPoint;
+                }  
+                $document_path = fopen($path, 'r');    
+                $url = $endPoint; 
                 $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
                 attach('DocumentFront', $document_path)->
                 attach('DocumentBack', $document_path)->
@@ -420,6 +422,7 @@ class KycController extends Controller
                     ]); 
                 } 
             }catch(Exception $upload_document_error){ 
+                
                 $errors[] = 'Error While uploading Documents';
                 $errors[] = $upload_document_error;
                 return response([ 
