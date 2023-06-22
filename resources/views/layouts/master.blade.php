@@ -11,13 +11,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-            
+
+        
         .hero-section {
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url('{{ asset('assets/v3-images/detail-bg.png') }}');
         }
-    </style>    
-</head> 
-<body> 
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -104,7 +105,7 @@
         </div>
     </nav>
     @section('content')
-    @show 
+    @show
 
     <div class="container-fluid">
         <div class="row py-4 px-lg-5 px-3" style="background-color: #DBDBDB;">
