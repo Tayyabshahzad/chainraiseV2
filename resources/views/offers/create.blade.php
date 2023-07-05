@@ -263,6 +263,20 @@
                                                     </a>
                                                     <!--end::Link-->
                                                 </li>
+                                                <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
+                                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2"
+                                                        id="kt_stats_widget_16_tab_link_4" data-bs-toggle="pill"
+                                                        href="#kt_stats_widget_16_tab_4" aria-selected="false"
+                                                        tabindex="-1" role="tab" style="width:140px;">
+                                                        <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
+                                                            SLIDER IMAGES
+                                                        </span>
+                                                        <span
+                                                            class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-primary"></span>
+                                                        <!--end::Bullet-->
+                                                    </a>
+                                                    <!--end::Link-->
+                                                </li>
 
                                             </ul>
                                             <!--end::Nav-->
@@ -376,6 +390,20 @@
 
                                                                 </div>
                                                             </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="kt_stats_widget_16_tab_4" role="tabpanel"
+                                                    aria-labelledby="#kt_stats_widget_16_tab_link_3">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-left mt-4" style="text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <label for=""> Add Multiple Images</label>
+                                                                    <input type="file" class="form-control" name="slider_images[]" multiple>
+                                                                </div>
+                                                            </div> 
 
                                                         </div>
                                                     </div>

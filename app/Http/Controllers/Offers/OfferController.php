@@ -40,6 +40,7 @@ class OfferController extends Controller
         $environment = config('app.env'); 
         $this->baseUrl = config('credentials.api.' . $environment); 
         $this->authUrl = config('credentials.auth0.' . $environment); 
+       // dd( $this->baseUrl, $this->authUrl);
     }
     public function active_index()
     { 
@@ -58,8 +59,16 @@ class OfferController extends Controller
 
     public function edit($id)
     {
+        
         $offer = Offer::with('contactInfo','access','user','display','investmentRestrictions','access','callToAction','offerDetail','offerDetail.offerTiles','offerVideos','contactInfo')->find($id);
+      
+        $slider_images = DB::table('media')
+                ->where('model_type', Offer::class)
+                ->where('model_id', $offer->id)
+                ->where('collection_name', 'offer_slider_images')
+                ->get();
          
+
         $issuers = User::role('issuer')->get(); 
         $photos = $offer->getMedia('offer_detail_images');
         $tiles = OfferDetailTab::where('offer_id',$id)->first();
@@ -69,7 +78,7 @@ class OfferController extends Controller
            $tiles = null;
         }
        
-        return view('offers.edit',compact('offer','issuers','photos','tiles'));
+        return view('offers.edit',compact('offer','issuers','photos','tiles','slider_images'));
     }
     public function create()
     {
@@ -102,7 +111,7 @@ class OfferController extends Controller
     }
     public function save(Request $request)
     {
-        
+         
         
         $request->validate([
             'issuer' => 'required',
@@ -154,6 +163,7 @@ class OfferController extends Controller
             ]);
             $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
             if($custodial_account->failed()){ 
+               // dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }
             
@@ -179,6 +189,13 @@ class OfferController extends Controller
             $offer->funding_end_date =   $request->funding_end_date;
             $offer->status =              'active' ;
             if($offer->save()) {
+                if($request->hasFile('slider_images')) { 
+                    $offer->addMultipleMediaFromRequest(['slider_images'])
+                    ->each(function ($fileAdder) {
+                        $fileAdder->toMediaCollection('offer_slider_images');
+                    });
+                } 
+                 
                 $priority = 0;
                 foreach($request->investment_setups as $setup ){
                     if ($setup == 'E-Sign Document') {
@@ -399,6 +416,9 @@ class OfferController extends Controller
                             $fileAdder->toMediaCollection('offer_detail_images');
                         });
                     } 
+                   
+
+                     
                     $data = [
                         'offer_id' => $offer->id,
                         'url_educational_materials' => 'url_educational_materials',
@@ -415,14 +435,14 @@ class OfferController extends Controller
             }
             
         }catch(Exception $error){
-            dd($error);
-            return redirect()->back()->with('error','Error while creating offer');
+           // dd($error);
+            return redirect()->back()->with('error','Error while creating offer'.$error);
         }
     }
 
     public function update(Request $request)
     {
-      
+       
         
         $request->validate([
             'issuer' => 'required',
@@ -462,6 +482,12 @@ class OfferController extends Controller
                 $offer->clearMediaCollection('banner_image');
                 $offer->addMediaFromRequest('banner_image')->toMediaCollection('banner_image');
             }
+            if($request->hasFile('slider_images')) { 
+                $offer->addMultipleMediaFromRequest(['slider_images'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('offer_slider_images');
+                });
+            } 
             $invesment_restriction = InvestmentRestrication::find($request->investment_restrication_id);
             $invesment_restriction->min_invesment = $request->min_invesment;
             $invesment_restriction->max_invesment = $request->max_invesment;

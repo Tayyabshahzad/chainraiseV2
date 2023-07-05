@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Models\Accreditation;
+use Illuminate\Support\Facades\DB;
+
 class FrontendController extends Controller
 {
 
@@ -22,7 +24,13 @@ class FrontendController extends Controller
     {   
        
         $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail')->where('slug',$slug)->first();
-        return view('frontEnd.offer.detail',compact('offer'));
+        $slider_images = DB::table('media')
+        ->where('model_type', Offer::class)
+        ->where('model_id', $offer->id)
+        ->where('collection_name', 'offer_slider_images')
+        ->get();
+ 
+        return view('frontEnd.offer.detail',compact('offer','slider_images'));
     }
 
 
