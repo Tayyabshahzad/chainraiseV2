@@ -11,13 +11,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-            
         .hero-section {
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url('{{ asset('assets/v3-images/detail-bg.png') }}');
         }
-    </style>    
-</head> 
-<body> 
+    </style>
+</head>
+
+<body>
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -31,13 +31,14 @@
             <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             LEARN
                         </a>
                         <ul class="dropdown-menu p-3">
                             <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/inestorsicon.png') }}">
+                                    class="text-dark"><span class="menu-text mb-3"><img
+                                            src="{{ asset('assets/v3-images/inestorsicon.png') }}">
                                         <div class="pe-lg-3"><b>Investors</b><br><span
                                                 style="font-weight: 400;font-size: 12px;">Information
                                                 for
@@ -47,7 +48,8 @@
                                 </a>
                             </li>
                             <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/faqsicon2.png') }}">
+                                    class="text-dark"><span class="menu-text mb-3"><img
+                                            src="{{ asset('assets/v3-images/faqsicon2.png') }}">
                                         <div class="pe-lg-3"><b>Businesses</b><br><span
                                                 style="font-weight: 400;font-size: 12px;">Information for
                                                 Information for businesses including FAQs</span></div>
@@ -66,52 +68,55 @@
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
                     <button type="button" class="btn text-white me-3 px-4 rounded-pill"
                         style="background-color:#43C3FE;">INVEST</button>
-                    @if (!Auth::user()) 
+                    @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-in-popup">Login</a>
+                            data-bs-target="#sign-in-popup">Login</a>
 
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-up-popup">Sign Up
+                            data-bs-target="#sign-up-popup">Sign Up
                         </a>
                     @endif
-                   
+
                     <div class="avator-logo me-3 d-lg-block d-none ">
                         @if (Auth::user())
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('assets/v3-images/avatar-user.png') }}" width="45" height="45" class="rounded-circle"
-                                        alt="avatar-img">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class=" bi bi-person dropdown-item text-dark" href="investment.html">
-                                            Portfolio</a>
-                                    </li>
-                                    <li><a class=" dropdown-item bi bi-files text-dark" href="#"> My Documents</a></li>
-                                    <li><a class=" bi bi-person dropdown-item text-dark" href="account.html"> My
-                                            Account</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class=" bi bi-power dropdown-item text-dark" href="#"> logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{ asset('assets/v3-images/avatar-user.png') }}" width="45"
+                                            height="45" class="rounded-circle" alt="avatar-img">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class=" bi bi-person dropdown-item text-dark" href="investment.html">
+                                                Portfolio</a>
+                                        </li>
+                                        <li><a class=" dropdown-item bi bi-files text-dark" href="#"> My
+                                                Documents</a></li>
+                                        <li><a class=" bi bi-person dropdown-item text-dark" href="account.html"> My
+                                                Account</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class=" bi bi-power dropdown-item text-dark" href="#"> logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         @endif
                     </div>
-                    
+
                 </ul>
             </div>
         </div>
     </nav>
     @section('content')
-    @show 
+    @show
 
     <div class="container-fluid">
         <div class="row py-4 px-lg-5 px-3" style="background-color: #DBDBDB;">
             <div class="col-12 text-center p-0">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset="" class="img-fluid mb-3">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset=""
+                    class="img-fluid mb-3">
                 <p class="fw-semibold">Copyright@ 2022 ChainRaise LLC | All rights reserved.</p>
                 <div class="mb-3">
                     <!-- Linkedin -->
@@ -186,12 +191,14 @@
     </div>
     <!-- Header End -->
 
-     <!-- Sign in Popop Start -->
-     <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel" aria-hidden="true">
+    <!-- Sign in Popop Start -->
+    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content py-lg-3">
                 <div class="modal-header m-auto pt-4 pb-0 border-0">
-                    <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Chain Rasied Logo" width="250" height="50" />
+                    <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Chain Rasied Logo"
+                        width="250" height="50" />
                 </div>
                 <div class="modal-body">
                     <h5 style="color: #000000; text-align: center; font-weight: 600;">Sign in to your account</h5>
@@ -205,7 +212,7 @@
                             </div>
                             <div class="col-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-facebook  border border-dark   py-2 px-3"></i>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -220,12 +227,12 @@
                         <div class="d-flex flex-column text-center">
                             <form>
                                 <div class="my-3">
-                                    <input type="email" class="form-control rounded-pill border-dark" id="email1"
-                                        placeholder="Your email address...">
+                                    <input type="email" class="form-control rounded-pill border-dark"
+                                        id="email1" placeholder="Your email address...">
                                 </div>
                                 <div class="my-3 ">
-                                    <input type="password" class="form-control rounded-pill border-dark" id="password1"
-                                        placeholder="Your password...">
+                                    <input type="password" class="form-control rounded-pill border-dark"
+                                        id="password1" placeholder="Your password...">
                                 </div>
                                 <div class="row">
                                     <div class="col-5 d-flex align-items-center">
@@ -250,11 +257,13 @@
         </div>
     </div>
     <!-- Sign in Popop End -->
-    <div class="modal fade" id="sign-up-popup" tabindex="-1" aria-labelledby="sign-up-popupLabel" aria-hidden="true">
+    <div class="modal fade" id="sign-up-popup" tabindex="-1" aria-labelledby="sign-up-popupLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content py-lg-3">
                 <div class="modal-header m-auto pt-4 pb-0 border-0">
-                    <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Chain Rasied Logo" width="250" height="50" />
+                    <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Chain Rasied Logo"
+                        width="250" height="50" />
                 </div>
                 <div class="modal-body">
                     <h5 style="color: #000000; text-align: center;">Sign up to your account</h5>
@@ -262,7 +271,8 @@
                         <div class="col-12">
                             <button type="button"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-apple pe-5" style=" position: absolute;
+                                    class="bi bi-apple pe-5"
+                                    style=" position: absolute;
                                 left: 15px;"></i>
                                 Sign up with
                                 Apple
@@ -271,7 +281,8 @@
                         <div class="col-12">
                             <button type="button"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-google pe-5" style=" position: absolute;
+                                    class="bi bi-google pe-5"
+                                    style=" position: absolute;
                                 left: 15px;"></i>
                                 Sign up with
                                 Google
@@ -281,7 +292,8 @@
                         <div class="col-12">
                             <button type="button"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-envelope-fill pe-5" style=" position: absolute;
+                                    class="bi bi-envelope-fill pe-5"
+                                    style=" position: absolute;
                                 left: 15px;"></i> Sign
                                 up with
                                 Email
@@ -291,14 +303,16 @@
                         <div class="col-12">
                             <button type="button"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-apple pe-5" style=" position: absolute;
+                                    class="bi bi-apple pe-5"
+                                    style=" position: absolute;
                                 left: 15px;"></i>
                                 Sign up with
 
                             </button>
                         </div>
                         <div class="col-12 mt-4">
-                            By signing up I agree to ChainRaise's <a href="#" style="color: #43C3FE;">Terms of Service
+                            By signing up I agree to ChainRaise's <a href="#" style="color: #43C3FE;">Terms of
+                                Service
                             </a> and <a href="#" style="color: #43C3FE;">Privacy Policy
                             </a>.
                         </div>
@@ -314,9 +328,57 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+
+    <script>
+        @if(Session::has('expire'))
+            @php
+                $message = session::get('expire');
+            @endphp
+                  toastr.error('{{ $message }}', "Error");
+        @endif
+    </script>
+    @php
+        session()->forget('expire');
+        session()->forget('success');
+    @endphp
+    @endif
+
+    @if ($errors->any())
+        <script>
+            var notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+            });
+            @foreach ($errors->all() as $error)
+                notyf.error('{{ $error }}');
+            @endforeach
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            var notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+            });
+            notyf.error('{{ session('error') }}');
+        </script>
+    @endif
+
+
+
+
 </body>
 
 </html>
