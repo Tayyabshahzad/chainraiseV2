@@ -977,7 +977,7 @@ class UserController extends Controller
                 ]
             );
             
-            $user->profile_status = false;
+            $user->profile_status = true;
             $user->save(); 
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
