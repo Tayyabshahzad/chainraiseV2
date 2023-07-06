@@ -47,7 +47,7 @@
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid px-lg-5 pe-0">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.pngd') }}" alt="Logo">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
