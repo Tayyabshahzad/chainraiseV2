@@ -220,7 +220,7 @@ class UserController extends Controller
     }
     public function save(Request $request)
     {
-        
+       
         $request->validate([
             'email' => 'required|unique:users',
             'first_name' => 'required',
@@ -293,6 +293,7 @@ class UserController extends Controller
              Session::put('success','Your Investment Has Been Completed'); 
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){ 
+            dd($error);
             DB::rollBack();
             Session::put('error','Error While Creating ');  
             return redirect()->back()->with('error','Error while creating investor user');

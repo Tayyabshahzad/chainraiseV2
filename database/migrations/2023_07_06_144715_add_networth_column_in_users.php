@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('net_worth')->nullable();
             $table->string('annual_income')->nullable();
-            $table->boolean('are_you_accredited');
-            $table->boolean('afford_loss');
-            $table->boolean('understand_securities');
-            $table->boolean('investment_advice');
-            $table->boolean('agree_policy');
+            $table->boolean('are_you_accredited')->default(false);
+            $table->boolean('afford_loss')->default(false);;
+            $table->boolean('understand_securities')->default(false);;
+            $table->boolean('investment_advice')->default(false);;
+            $table->boolean('agree_policy')->default(false);;
         });
     }
 

@@ -23,25 +23,24 @@
                             I am investing as an:
                         </label>
                         <div class="form-check form-check-inline mb-lg-3">
-                            <input class="form-check-input" type="radio" name="account_type" id="Individual"   value="individual">
+                            <input class="form-check-input" type="radio" name="account_type" id="Individual"   value="individual" checked> 
                             <label class="form-check-label" for="Individual">
                                 Individual
                             </label>
                         </div>
                         <div class="form-check form-check-inline mb-lg-3">
-                            <input class="form-check-input" type="radio" name="account_type" id="Entity" value="entity"
-                                checked>
+                            <input class="form-check-input" type="radio" name="account_type" id="Entity" value="entity" >
                             <label class="form-check-label" for="Entity">
                                 Entity
                             </label>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-3 d-none entity_name_container">
                             <div class="col-lg-3">
                                 <label for="entity_name" class="form-label">
                                     Entity Name:</label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="entity_name" name="entity_name" required>
+                                <input type="text" class="form-control" id="entity_name" name="entity_name"  >
                                 <div class="invalid-feedback">
                                     Please Enter Entity Name
                                 </div>
@@ -233,6 +232,20 @@
 @section('page_js')
 
     <script>
+         $(document).ready(function() {
+            $('#Entity').click(function(){
+                 $('.entity_name_container').removeClass('d-none');
+                 $('#entity_name').attr('required', 'required');
+            });
+
+            $('#Individual').click(function(){
+                $('.entity_name_container').addClass('d-none');
+                $('#entity_name').removeAttr('required',)
+            });
+
+            
+         });
+
         $(document).ready(function() {
             $('#update_profile').validate({
                 rules: {
