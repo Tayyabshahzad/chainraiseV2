@@ -950,37 +950,38 @@ class UserController extends Controller
     } 
     public function basicDetailUpdate(Request $request){ 
          
-        $user = Auth::user();
+        $user = Auth::user(); 
         try{  
-            $user->name = $request->first_name;    
             $user->user_type = $request->account_type;    
-            $user->accreditation_id = $request->accreditation;  
-            if($request->electronic_delivery  == 'true'){
-                $agree_consent_electronic = true;
-            }else{
-                $agree_consent_electronic =false;
-            }
-            $user->agree_consent_electronic = $agree_consent_electronic;   
+            $user->name = $request->legal_name; 
+            
+           // $user->country = $request->legal_name; 
+           // $user->address = $request->legal_name; 
+            $user->net_worth = $request->net_worth; 
+            $user->annual_income = $request->annual_income; 
+             
+            $user->are_you_accredited = $request->has('are_you_accredited') ? true : false;
+            $user->agree_consent_electronic = $request->has('electronic_delivery') ? true : false;   
+            $user->afford_loss =$request->has('afford_loss') ? true : false;   
+            $user->understand_securities =$request->has('understand_securities') ? true : false;   
+            $user->investment_advice = $request->has('investment_advice') ? true : false;   
+            $user->agree_policy =$request->has('agree_policy') ? true : false;   
+           
             $user->save(); 
+          
             UserDetail::updateOrCreate(
                 ['user_id' => $user->id],
                 [
-                 'last_name' => $request->last_name,
+                 'last_name' => '',
                  'entity_name'=>  $request->entity_name,
                 ]
             );
             
-            $user->profile_status = true;
+            $user->profile_status = false;
             $user->save(); 
-            return response([
-                'status'=>true,
-                'message'=>'Data Updated Successfully'
-            ]); 
+            return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
-            return response([
-                'status'=>false,
-                'message'=>'Error While Updating Data'
-            ]); 
+            return redirect()->back()->with('error','There is some error while updating profile'); 
         }
        
         

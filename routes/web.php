@@ -43,8 +43,7 @@ Route::get('redirect-user/{email}/{password}', [UserController::class, 'redirect
 Route::get('login-social', [FrontendController::class, 'socialLogin'])->name('login.social');
 Route::get('otp', [GeneralController::class, 'otp'])->name('otp'); 
 Route::get('login/google', [App\Http\Controllers\SocialiteController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']); 
-Route::get('login/google', [App\Http\Controllers\SocialiteController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);  
 Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']); 
 Route::get('login/facebook', [App\Http\Controllers\SocialiteController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController::class, 'handleFacebookCallback']);
@@ -61,6 +60,8 @@ Route::middleware('check.profile.complete')->group(function () {
     Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
     Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
     Route::get('/', [FrontendController::class, 'index'])->name('index'); 
+    Route::get('/offers/sort/{order?}',[FrontendController::class,'sort'])->name('offers.sort');
+
 });
 
 

@@ -2,26 +2,52 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Invest in Startups, Real Estate, More Online | ChainRaise</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-v3.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+ 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+
+
+
+
+
+
+    <title> Chain Rasied Portal | @yield('title') </title>
     <style>
         .hero-section {
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url('{{ asset('assets/v3-images/detail-bg.png') }}');
         }
     </style>
+    @section('page_head')
+    @show
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container">
+        <div class="container-fluid px-lg-5 pe-0">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.pngd') }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,8 +91,10 @@
                     </li>
                     <a class="nav-link me-3 fw-semibold" href="#">RAISE CAPITAL</a>
                 </ul>
+
+
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <button type="button" class="btn text-white me-3 px-4 rounded-pill"
+                    <button type="button" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
                         style="background-color:#43C3FE;">INVEST</button>
                     @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
@@ -86,18 +114,29 @@
                                         <img src="{{ asset('assets/v3-images/avatar-user.png') }}" width="45"
                                             height="45" class="rounded-circle" alt="avatar-img">
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <li><a class=" bi bi-person dropdown-item text-dark" href="investment.html">
                                                 Portfolio</a>
                                         </li>
                                         <li><a class=" dropdown-item bi bi-files text-dark" href="#"> My
                                                 Documents</a></li>
-                                        <li><a class=" bi bi-person dropdown-item text-dark" href="account.html"> My
+                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank" href="{{  route('user.account') }}"> My
                                                 Account</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class=" bi bi-power dropdown-item text-dark" href="#"> logout</a>
+                                        <li>
+                                            <a class="bi bi-power dropdown-item text-dark"
+                                                href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                                Sign Out
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -109,6 +148,10 @@
             </div>
         </div>
     </nav>
+
+
+
+
     @section('content')
     @show
 
@@ -189,6 +232,158 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.show_password').change(function() {
+                if ($(this).is(':checked')) {
+                    $('.user_password').prop('type', 'text');
+                } else {
+                    $('.user_password').prop('type', 'password');
+                }
+            });
+
+            $('.show_login_password').change(function() {
+                if ($(this).is(':checked')) {
+                    $('.user_login_password').prop('type', 'text');
+                } else {
+                    $('.user_login_password').prop('type', 'password');
+                }
+            });
+
+            $('.account_type').click(function() {
+                $('.account_type_wrapper_row').hide('slow');
+
+                $('.row_individual').removeClass('d-none');
+                $(window).scrollTop(0);
+                if ($(this).val() == 'individual') {
+                    $('.type-label').html('Individual')
+                    $('.show_when_type_entity').addClass('d-none');
+                } else {
+                    $('.type-label').html('Entity')
+                    $('.show_when_type_entity').removeClass('d-none');
+                }
+            });
+
+            $('.goto-account_type').click(function() {
+                $('.account_type_wrapper_row').show('slow');
+                $('input[name=account_type]').prop('checked', false);
+                $('.row_individual').addClass('d-none');
+            });
+
+            $('.goto-accreditation').click(function() {
+                $('.row_individual').addClass('d-none');
+                $('.row_accreditation').removeClass('d-none');
+            });
+
+            $('.backto_account_type').click(function() {
+                $('.row_individual').removeClass('d-none');
+                $('.row_accreditation').addClass('d-none');
+            });
+
+
+            $('.goto-final').click(function(event) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#update_profile').submit(function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+
+                    var value = formData.get('account_type');
+                    console.log(value)
+                    $.ajax({
+                        url: "{{ route('user.basic.details.update') }}",
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            if (response.status == true) {
+                                $('.row_accreditation').addClass('d-none')
+                                $('.row_final').removeClass('d-none');
+                                toastr.success(response.message, "Success");
+                            } else {
+                                toastr.error(response.message, "Error");
+                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('#loginForm').validate({
+                rules: {
+                    password: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    password: {
+                        required: "Please enter your password",
+                        minlength: "Username must be at least 3 characters long"
+                    },
+                    email: {
+                        required: "Please enter your email",
+                        email: "Please enter a valid email address"
+                    }
+                },
+                submitHandler: function(form) {
+                    var formData = $('#loginForm').serialize();
+                    $('.error_message').text('');
+                    $('.success_message').text('');
+                    $('.submit_button').prop('disabled', true);
+                    $('.submit_button').text('Loading ...');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('login') }}",
+                        data: formData,
+                        success: function(response) {
+                            console.log(response)
+                            $('.success_message').text(
+                                'Login Success Page Reloading  ....');
+                            setTimeout(function() {
+                                // location.reload();
+                                window.location = response.route;
+                            }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+
+                            var errorMessage = JSON.parse(xhr.responseText);
+
+                            $('.error_message').text(errorMessage.message);
+
+                            setTimeout(function() {
+                                $('.submit_button').prop('disabled', false);
+                            }, 100);
+                            // $('.submit_button').prop('disabled ',false); 
+
+                            $('.submit_button').text('Sign In');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
     <!-- Header End -->
 
     <!-- Sign in Popop Start -->
@@ -204,14 +399,20 @@
                     <h5 style="color: #000000; text-align: center; font-weight: 600;">Sign in to your account</h5>
                     <div class="container py-3 px-5 ">
                         <div class="row justify-content-center">
-                            <div class="col-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-apple  border border-dark   py-2 px-3"></i>
+                            <div class="col-2 d-flex align-items-center justify-content-center ">
+                                <a href="" class="text-dark  ">
+                                    <i class="bi bi-apple  border border-dark py-2 px-3  "></i>
+                                </a>
                             </div>
                             <div class="col-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-google  border border-dark   py-2 px-3"></i>
+                                <a href="{{ route('login.google') }}" class="text-dark">
+                                    <i class="bi bi-google  border border-dark py-2 px-3"></i>
+                                </a>
                             </div>
                             <div class="col-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-facebook  border border-dark   py-2 px-3"></i>
+                                <a href="{{ route('login.facebook') }}" class="text-dark">
+                                    <i class="bi bi-facebook  border border-dark   py-2 px-3"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -225,36 +426,62 @@
                             </div>
                         </div>
                         <div class="d-flex flex-column text-center">
-                            <form>
+                            <label class="text-danger error error_message"></label>
+                            <label class="text-success success success_message"></label>
+                            <form id="loginForm">
                                 <div class="my-3">
-                                    <input type="email" class="form-control rounded-pill border-dark"
-                                        id="email1" placeholder="Your email address...">
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="Your email address..." name="email">
+                                    @error('email')
+                                        <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
+                                    @enderror
                                 </div>
                                 <div class="my-3 ">
-                                    <input type="password" class="form-control rounded-pill border-dark"
-                                        id="password1" placeholder="Your password...">
+                                    <input type="password" class="form-control user_login_password" id="password"
+                                        placeholder="Your password..." name="password">
                                 </div>
                                 <div class="row">
                                     <div class="col-5 d-flex align-items-center">
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <input type="checkbox" class="form-check-input  ">
                                             <label class="form-check-label" for="exampleCheck1"
-                                                style="padding: 0px; font-size: 14px; font-weight: 500;">Remember
-                                                me</label>
+                                                style="padding: 0px; font-size: 14px; font-weight: 500;"> Remember Me
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
-                                    <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill"
-                                        type="button">SIGN IN</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                                    <div class="col-5 d-flex align-items-right text-right">
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input show_login_password">
+                                            <label class="form-check-label" for="exampleCheck1"
+                                                style="padding: 0px; font-size: 14px; font-weight: 500;"> Show Password
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-7 d-flex align-items-center justify-content-end m-0 p-0">
+                                        <div class="form-group ">
+                                            <button type="button" class="btn btn-link" href="#"
+                                                data-bs-dismiss="modal" data-bs-toggle="modal"
+                                                data-bs-target="#reset-popup"
+                                                style="font-size: 14px; font-weight: 500;"> Forgot your
+                                                password?</button>
+                                        </div>
+                                    </div> --}}
 
+
+
+
+                                </div>
+                        </div>
+                        <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
+                            <button class="btn btn-primary submit_button" type="submit">Sign in</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
     <!-- Sign in Popop End -->
     <div class="modal fade" id="sign-up-popup" tabindex="-1" aria-labelledby="sign-up-popupLabel"
@@ -269,17 +496,17 @@
                     <h5 style="color: #000000; text-align: center;">Sign up to your account</h5>
                     <div class="row gy-3 p-3 text-center">
                         <div class="col-12">
-                            <button type="button"
+                            <a href="#"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-apple pe-5"
                                     style=" position: absolute;
                                 left: 15px;"></i>
                                 Sign up with
                                 Apple
-                            </button>
+                            </a>
                         </div>
                         <div class="col-12">
-                            <button type="button"
+                            <a href="{{ route('login.google') }}"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-google pe-5"
                                     style=" position: absolute;
@@ -287,33 +514,36 @@
                                 Sign up with
                                 Google
 
-                            </button>
+                            </a>
                         </div>
+                        <div class="col-12">
+                            <a href="{{ route('login.facebook') }}"
+                                class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
+                                    class="bi bi-facebook pe-5"
+                                    style=" position: absolute;
+                                left: 15px;"></i>
+                                Sign up with Facebook
+
+                            </a>
+                        </div>
+
                         <div class="col-12">
                             <button type="button"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-envelope-fill pe-5"
                                     style=" position: absolute;
                                 left: 15px;"></i> Sign
-                                up with
-                                Email
+                                up with Email
 
                             </button>
                         </div>
-                        <div class="col-12">
-                            <button type="button"
-                                class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-apple pe-5"
-                                    style=" position: absolute;
-                                left: 15px;"></i>
-                                Sign up with
 
-                            </button>
-                        </div>
                         <div class="col-12 mt-4">
-                            By signing up I agree to ChainRaise's <a href="#" style="color: #43C3FE;">Terms of
+                            By signing up I agree to ChainRaise's <br><a href="#" style="color: #43C3FE;">Terms
+                                of
                                 Service
-                            </a> and <a href="#" style="color: #43C3FE;">Privacy Policy
+                            </a> and <a href="{{ route('privacy.policy') }}"
+                                target="_blank"style="color: #43C3FE;">Privacy Policy
                             </a>.
                         </div>
                     </div>
@@ -328,55 +558,52 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+
+    @section('page_js')
+    @show
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
 
-    <script>
-        @if(Session::has('expire'))
-            @php
-                $message = session::get('expire');
-            @endphp
-                  toastr.error('{{ $message }}', "Error");
-        @endif
-    </script>
-    @php
-        session()->forget('expire');
-        session()->forget('success');
-    @endphp
+
+    @if (Session::has('expire'))
+        @php
+            $message = session::get('expire');
+        @endphp
+        <script>
+            toastr.error('{{ $message }}', "Error");
+        </script>
+        @php
+            session()->forget('expire');
+            session()->forget('success');
+        @endphp
     @endif
+
+
 
     @if ($errors->any())
         <script>
-            var notyf = new Notyf({
-                position: {
-                    x: 'right',
-                    y: 'top',
-                },
-            });
             @foreach ($errors->all() as $error)
-                notyf.error('{{ $error }}');
+                toastr["error"]('{{ $error }}')
             @endforeach
         </script>
     @endif
 
-    @if (session('error'))
-        <script>
-            var notyf = new Notyf({
-                position: {
-                    x: 'right',
-                    y: 'top',
-                },
-            });
-            notyf.error('{{ session('error') }}');
-        </script>
-    @endif
 
 
+    <script>
+        $(document).ready(function() {
+            @if (session()->has('success'))
+                toastr["success"]('{{ session('success') }}')
+            @endif
+
+            @if (session()->has('error'))
+                toastr["error"]('{{ session('error') }}')
+            @endif
+
+        });
+    </script>
 
 
 </body>

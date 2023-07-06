@@ -32,8 +32,7 @@ class User extends Authenticatable  implements MustVerifyEmail , HasMedia
         'user_type',
         'status',
         'cc'
-    ];
-
+    ]; 
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,6 +50,7 @@ class User extends Authenticatable  implements MustVerifyEmail , HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'are_you_accredited' => 'boolean',
     ];
 
     public function userDetail()

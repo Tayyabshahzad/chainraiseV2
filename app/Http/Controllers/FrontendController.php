@@ -16,14 +16,16 @@ class FrontendController extends Controller
     public function index()
     {   
        
-        $offers = Offer::get();
+        $offers = Offer::orderBy('id', 'desc')->get();
         return view('frontEnd.offer.index',compact('offers'));
     }
 
     public function detail($slug)
     {   
        
-        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail')->where('slug',$slug)->first();
+        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail')->
+      
+        where('slug',$slug)->first();
         $slider_images = DB::table('media')
         ->where('model_type', Offer::class)
         ->where('model_id', $offer->id)
@@ -75,6 +77,16 @@ class FrontendController extends Controller
         return view('frontEnd.businesses');
     }
 
-    
+public function sort($order)
+{
+     
+    if($order == 'default'){
+       $offers =  Offer::orderBy('id', 'desc')->get();  
+    }else{
+        $offers =  Offer::orderBy('name', $order)->get();  
+    }
+   
+    return view('frontEnd.offer.index',compact('offers'));
+}
     
 }
