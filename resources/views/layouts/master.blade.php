@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
- 
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
@@ -26,7 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
+
 
 
 
@@ -121,7 +121,8 @@
                                         </li>
                                         <li><a class=" dropdown-item bi bi-files text-dark" href="#"> My
                                                 Documents</a></li>
-                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank" href="{{  route('user.account') }}"> My
+                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank"
+                                                href="{{ route('user.account') }}"> My
                                                 Account</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -178,56 +179,69 @@
                                 class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Privacy
                                 Policy</button>
                         </div>
-                        <div class="col-lg-2 col-4"><button type="button"
-                                class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Terms
-                                of Use</button></div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row p-lg-5 mx-lg-5 p-2">
-                <div class="col-12 text-dark fw-normal">
-                    <p> This website, which we refer to as the “Site,” is used by two different companies: </p>
-                    <p> ChainRaise Portal LLC and ChainRaise Fund LLC. </p>
-                    <p> ChainRaise Fund LLC offers investments under Rule 506(c) issued by the
-                        Securities and Exchange Commission (SEC). These investments are offered to accredited
-                        investors
-                        only.</p>
-                    <p>ChainRaise Portal LLC is a “funding portal” as defined in section 3(a)(80) of the Securities
-                        Exchange Act of 1934. Here, you can review investment opportunities of companies offering
-                        securities
-                        under section 4(a)(6) of the Securities Act of 1933, also known as Regulation Crowdfunding
-                        or
-                        Reg
-                        CF. These investments are offered to everyone, not just to accredited investors.</p>
+                <div class="container py-3 px-5 ">
+                    <div class="row justify-content-around">
+                        <div class="col-3 d-flex align-items-center justify-content-center py-2 ">
+                            --------
+                        </div>
+                        <div class="col-5  d-flex align-items-center justify-content-center py-2 ">
+                            <p style="color: #000000; text-align: center; padding: 0px; margin:0px;">Continue with
+                            </p>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center py-2 ">
+                            --------
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <label class="error error_message"></label>
+                        <label class="success success_message"></label>
 
-                    <p>By using this Site,
-                        you are subject to our Terms of Use and our Privacy Policy. Please read these carefully
-                        before
-                        using
-                        the Site.</p>
-                    <p>Although our website offers investors the opportunity to invest in a variety of companies,
-                        we do not make recommendations regarding the appropriateness of a particular investment
-                        opportunity
-                        for any particular investor. We are not investment advisers. Investors must make their own
-                        investment decisions, either alone or with their personal advisors. </p>
-                    <p>You should view all of the
-                        investment opportunities on our website as risky. You should consider investing only if you
-                        can
-                        afford to lose your entire investment. </p>
-                    <p> We provide financial projections for some of the investment
-                        opportunities listed on the Site. All such financial projections are only estimates based on
-                        current
-                        conditions and current assumptions. The actual result of any investment is likely to be
-                        different
-                        than the original projection, often by a large amount. </p>
-                    <p>Neither the Securities and Exchange
-                        Commission nor any state agency has reviewed the investment opportunities listed on the
-                        Site.
-                    </p>
-                    <p>Thankyou for using the Site. If you have questions, please contact us at info@chainraise.io
-                    </p>
+                        <form id="loginForm">
+                            <div class="my-3">
+                                <input type="email" class="form-control" id="email"
+                                    placeholder="Your email address..." name="email">
+                                @error('email')
+                                    <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
+                                @enderror
+                            </div>
+                            <div class="my-3 ">
+                                <input type="password" class="form-control user_login_password" id="password"
+                                    placeholder="Your password..." name="password">
+                            </div>
+                            <div class="row">
+
+                                <div class="col-5 d-flex align-items-center">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input show_login_password">
+                                        <label class="form-check-label" for="exampleCheck1"
+                                            style="padding: 0px; font-size: 14px; font-weight: 500;"> Show Password
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center justify-content-end m-0 p-0">
+                                    <div class="form-group ">
+                                        <button type="button" class="btn btn-link" href="#"
+                                            data-bs-dismiss="modal" data-bs-toggle="modal"
+                                            data-bs-target="#reset-popup" style="font-size: 14px; font-weight: 500;">
+                                            Forgot your
+                                            password?</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
+                                <button class="btn btn-primary submit_button" type="submit">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer flex-column text-center ">
+                    <div class="signup-section text-center">Not a member yet? <a href="#"
+                            data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sign-up-popup"
+                            style="color: #4b1dff;"> Sign
+                            Up</a>.</div>
                 </div>
             </div>
         </div>
