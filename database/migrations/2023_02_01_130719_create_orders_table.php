@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('currency');
             $table->string('type');
             $table->string('payment_method');
-            $table->enum('e_sign',['completed','incomplete']);
-            $table->enum('status',['completed','pending','processing']);
+            $table->text('e_sign')->nullable();
+            $table->text('status')->nullable();
             $table->timestamps();
         });
     }

@@ -30,14 +30,18 @@ class MakeInvestmentController extends Controller
 
     // New Updated Code
 
-    protected $productionAuth;
-    protected $fortressBaseUrl;
+     
 
+
+    private $baseUrl;
+    private $authUrl;
     public function __construct()
-    {
-        $this->productionAuth = 'https://fortress-prod.us.auth0.com/oauth/token';
-        $this->fortressBaseUrl = 'https://api.fortressapi.com/api/trust/v1/';
-    }
+    { 
+        $environment = config('app.env'); 
+        $this->baseUrl = config('credentials.api.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment); 
+    } 
+
 
     public function make()
     {
@@ -54,8 +58,8 @@ class MakeInvestmentController extends Controller
     }
     public function submitInvestment(Request $request)
     {
-        
-        //dump($request->investment_amount);dd(1);
+       
+       
        $request->validate([
          	'offer_id' => 'required',
           	'investment_amount' => 'integer',
@@ -70,9 +74,11 @@ class MakeInvestmentController extends Controller
         if (Auth::user()->user_type  == null   ){ 
             return redirect()->back()->with('error', 'Selected User Type is not defined');
         }  
+       
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';
         $investment_amount = $request->investment_amount;
-        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);        
+        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);
+           
         $investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
         $user = User::where('id', Auth::user()->id)->first();
         $fortress_personal_identity = Auth::user()->fortress_personal_identity;
@@ -81,12 +87,12 @@ class MakeInvestmentController extends Controller
         try {
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post($production_auth, [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true);
             if ($get_token->failed()) {       
@@ -95,16 +101,19 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) { 
             return redirect()->back()->with('error', 'Internal Server Error [Token]'.$error);
         } 
+       
         try {
-            $url_widget =  $this->fortressBaseUrl . "external-accounts/financial/widget-url/" . $fortress_personal_identity;
+            $url_widget = $this->baseUrl."/api/trust/v1/external-accounts/financial/widget-url/".$fortress_personal_identity;  
             $widget = Http::withToken($token_json['access_token'])->get($url_widget);
-            $json_widget =  json_decode((string) $widget->getBody(), true);
-            if ($widget->failed()) { 
-                return redirect()->back()->with('error', 'Internal Server Error [Widget]'.$json_widget);
+            $json_widget =  json_decode((string) $widget->getBody(), true);  
+            if ($widget->failed()) {   
+                return redirect()->back()->with('error', 'Internal Server Error [Widget]');
             }
-        } catch (Exception $error) { 
+           
+        } catch (Exception $error) {    
             return redirect()->back()->with('error', 'Internal Server Error [Widget]'.$error);
         }
+       
         $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
         $json_e_sign_templates = json_decode((string) $e_sign->getBody(), true);        
         if ($e_sign->failed()) { 
@@ -114,7 +123,7 @@ class MakeInvestmentController extends Controller
 
 
 
-        $url_member = $this->fortressBaseUrl . "financial-institutions/sandbox/members/" . $fortress_personal_identity;
+        $url_member = $this->baseUrl . "/financial-institutions/sandbox/members/" . $fortress_personal_identity;
         $member = Http::withToken($token_json['access_token'])->get($url_member);
         $json_member =  json_decode((string) $member->getBody(), true);
 
@@ -139,7 +148,7 @@ class MakeInvestmentController extends Controller
         }
 
         $get_guid = MemberGuid::where('offer_id', $request->offer_id)->where('user_id', Auth::user()->id)->first();
-        $connect_guid_url =  $this->fortressBaseUrl . "financial-institutions/members/";
+        $connect_guid_url =  $this->baseUrl . "/financial-institutions/members/";
         $connect_guid = Http::withToken($token_json['access_token'])->post(
             $connect_guid_url,
             [
@@ -150,7 +159,7 @@ class MakeInvestmentController extends Controller
         $json_connect_guid =  json_decode((string) $connect_guid->getBody(), true);
         if ($connect_guid->failed()) {
             if ($connect_guid->status() == 409) {
-                $url_account_id =  $this->fortressBaseUrl . "financial-institutions/accounts/" . $fortress_personal_identity . "/" . $get_guid->memberGuid;
+                $url_account_id =  $this->baseUrl . "/financial-institutions/accounts/" . $fortress_personal_identity . "/" . $get_guid->memberGuid;
                 $account_id = Http::withToken($token_json['access_token'])->get($url_account_id);
                 $json_account_id =  json_decode((string) $account_id->getBody(), true);
                 $account_db =  AccountGUID::updateOrCreate(
@@ -159,7 +168,7 @@ class MakeInvestmentController extends Controller
                 );
             }
         } else {
-            $url_account_id =  $this->fortressBaseUrl . "financial-institutions/accounts/" . $fortress_personal_identity . "/" . $get_guid->memberGuid;
+            $url_account_id =  $this->baseUrl . "/financial-institutions/accounts/" . $fortress_personal_identity . "/" . $get_guid->memberGuid;
             $account_id = Http::withToken($token_json['access_token'])->get($url_account_id);
             $json_account_id =  json_decode((string) $account_id->getBody(), true);
             $account_db =  AccountGUID::updateOrCreate(
@@ -168,7 +177,7 @@ class MakeInvestmentController extends Controller
             );
         }
 
-        $url_external_acc =  $this->fortressBaseUrl . "external-accounts/financial";
+        $url_external_acc =  $this->baseUrl . "/external-accounts/financial";
         $external_acc = Http::withToken($token_json['access_token'])->post(
             $url_external_acc,
             [
@@ -289,20 +298,22 @@ class MakeInvestmentController extends Controller
     public function kyc_checking(Request $request)
     {
 
-        try {
+        try { 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post($this->productionAuth, [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
             ]);
             $response_json =  json_decode((string) $response->getBody(), true);
+          
             if ($response->successful()) {
-                $upgrade_existing_l0 = Http::withToken($response_json['access_token'])->withHeaders(['Content-Type' => 'application/json'])->get($this->fortressBaseUrl . 'personal-identities/' . Auth::user()->fortress_personal_identity);
-                $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
+                $url = $this->baseUrl . "/api/trust/v1/personal-identities/" . Auth::user()->fortress_personal_identity;
+                $upgrade_existing_l0 = Http::withToken($response_json['access_token'])->withHeaders(['Content-Type' => 'application/json'])->get($url);
+                $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true); 
                 if ($upgrade_existing_l0->successful()) {
                     //dd($upgrade_existing_l0->status());
                     return response([
@@ -310,13 +321,14 @@ class MakeInvestmentController extends Controller
                         'data' => $json_upgrade_existing_l0,
                     ]);
                 }
-            } else {
+            } else { 
                 return response([
                     'status' => false,
                     'message' => ucfirst($response_json['error']),
                 ]);
             }
         } catch (Exception $error) {
+           // dd($error);
             return response([
                 'status' => false,
                 'message' => 'Internal Server Error',
@@ -325,31 +337,146 @@ class MakeInvestmentController extends Controller
     }
     public function save(Request $request)
     { 
+       
         $request->validate([
             'offer_id' => 'required',
-            'account_type'=>'required',
-            'investment_limit'=>'required',
-            'bypass_account_setup'=>'required', 
+            //'account_type'=>'required',
+            //'investment_limit'=>'required',
+            //'bypass_account_setup'=>'required', 
             'user_guid' => 'required',
-            'templates' => 'required',
+            //'templates' => 'required',
             'investment_amount' => 'required',
         ]);
-        if($request->investment_limit == 'yes'){
-            $request->validate([
-                'total_amount_invested_crowdfunding_offerings' => 'required', 
-            ]);
-        }elseif($request->investment_limit == 'no'){
-            $request->validate([
-                'net_worth_greater_than_60000' => 'required', 
-                'new_investment_amount' => 'required', 
-            ]);
-        }
-      
-        $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
-        if (!$custodial_account) { 
-            return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
+         
+        $offer = Offer::with('user')->findOrFail($request->offer_id);  
+        $template_id = $offer->offerEsing->template_id;  
+        try{
+            $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
+            $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+            if(!$e_sign->successful()){
+                return redirect()->back()->with('error','Error While Fetching E-Sign Document  Step-1');
+            } 
+        }catch(Exception $esign_error){
+            return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
+        } 
+        try{  
+            $signature_name    = $offer->user->name;
+            $signature_email   = $offer->user->email;
+            $signature_mobile  = $offer->user->phone;
+            $signature_company = $offer->name;
+            $logo =  $offer->getFirstMediaUrl('offer_image', 'thumb');
+            $esign_url = "https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+            $esign_request = Http::withHeaders(['Content-Type' => 'application/json'])
+            ->post($esign_url, [
+                "template_id" => $template_id,
+                "title" =>$json_e_sign['data']['template_name'],
+                "metadata" => "ID0001",
+                "locale" => "en",
+                "test" => "no",
+                "custom_webhook_url" => "https://sublimeservices.org/",
+                "signers" => [
+                    [
+                        "name" => $signature_name,
+                        "email" => $signature_email,
+                        "mobile" => $signature_mobile,
+                        "company_name" => $signature_company,
+                        "signing_order" => "1",
+                        "auto_sign" => "no",
+                        "signature_request_delivery_method" => "email",
+                        "signed_document_delivery_method" => "email",
+                        "required_identification_methods" => [
+                            "email",
+                            "sms"
+                        ],
+                        "redirect_url" => "https://your-website.com/aftersign",
+                        "embedded_redirect_iframe_only" => "no"
+                    ],
+                    [
+                        "name" => Auth::user()->name,
+                        "email" => Auth::user()->email,
+                        "mobile" => Auth::user()->phone,
+                        "company_name" => "Issuer Company",
+                        "signing_order" => "1",
+                        "auto_sign" => "no",
+                        "signature_request_delivery_method" => "email",
+                        "signed_document_delivery_method" => "email",
+                        "required_identification_methods" => [
+                            "email",
+                            "sms"
+                        ],
+                        "redirect_url" => "https://your-website.com/aftersign",
+                        "embedded_redirect_iframe_only" => "no"
+                    ]
+                ],
+                "placeholder_fields" => [
+                    [
+                        "api_key" => "interest_rate",
+                        "value" => "3.2%"
+                    ],
+                    [
+                        "api_key" => "floor-plan",
+                        "document_elements" => [
+                            [
+                                "type" => "image",
+                                "image_base64" => "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
+                            ]
+                        ]
+                    ]
+                ],
+                "signer_fields" => [
+                    [
+                        "signer_field_id" => "preferred_term",
+                        "default_value" => "15 years"
+                    ]
+                ],
+                "emails" => [
+                    "signature_request_subject" => "Your document is ready to sign",
+                    "signature_request_text" => "Hi __FULL_NAME__, \\n\\n To review and sign the contract please press the button below \\n\\n Kind Regards",
+                    "final_contract_subject" => "Your document is signed",
+                    "final_contract_text" => "Hi __FULL_NAME__, \\n\\n Your document is signed.\\n\\nKind Regards", 
+                    "reply_to" => "support@sublinmesolition.com"
+                ],
+                "custom_branding" => [
+                    "company_name" => "WhiteLabel LLC",
+                    "logo_url" => $logo
+                ]
+            ]); 
+            $json_esign_request= json_decode((string) $esign_request->getBody(), true); 
+           
+            if($esign_request->successful()){
+                $esign_contract_status = $json_esign_request['data']['contract']['status'];
+            }
+            if ($esign_request->failed()) { 
+                if($esign_request->status() == 402){
+                    $esign_payment_error =  $json_esign_request['data']['error_message'];
+                    $esign_contract_status =  'Not Completed';
+                }else{
+                    $esign_payment_error = '';
+                    return redirect()->back()->with('error', 'Internal Server Error E-sign');
+                }    
+            }
+        }catch(Exception $esign_request_error){ 
+            return redirect()->back()->with("error","Error While Requesting E-Sign Documents");
         }
        
+        //  dd($json_esign_request['data']['contract']['status']);
+        
+        // if($request->investment_limit == 'yes'){
+        //     $request->validate([
+        //         'total_amount_invested_crowdfunding_offerings' => 'required', 
+        //     ]);
+        // }elseif($request->investment_limit == 'no'){
+        //     $request->validate([
+        //         'net_worth_greater_than_60000' => 'required', 
+        //         'new_investment_amount' => 'required', 
+        //     ]);
+        // }
+      
+        $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
+        if (!$custodial_account) {  
+            return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
+        }
+      
         $member_id = explode(',', $request->user_guid);
         $filteredArray = array_filter($member_id, function ($value) {
             return $value !== '';
@@ -358,28 +485,30 @@ class MakeInvestmentController extends Controller
         foreach ($filteredArray as $value) {
             $member_id = $value;
         }
+       
         $identityId = Auth::user()->fortress_personal_identity;
         $offer = Offer::with('user')->findOrFail($request->offer_id); 
 
         
-        try { 
+        try {  
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post('https://fortress-prod.us.auth0.com/oauth/token', [
-                'grant_type' => 'password',
-                'username'   => 'Portal@chainraise.io',
-                'password'   => '?dm3JeXgkgQNA?ue8sHI',
-                'audience'   => 'https://fortressapi.com/api',
-                'client_id'  => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true);
             // dd($token_json['access_token']);
         } catch (Exception $error) { 
-            return redirect()->back()->with('error','Internal Server Error [Step 2]-'.$error);
+            return redirect()->back()->with('error','Internal Server Error Token [Step 2]-'.$error);
         }
        
         try {
-            $member_identity_url = $this->fortressBaseUrl . "financial-institutions/members";
+            
+            $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
             $member_identity = Http::withToken($token_json['access_token'])->post(
                 $member_identity_url,
                 [
@@ -388,13 +517,15 @@ class MakeInvestmentController extends Controller
                 ]
             ); 
             $member_identity =  json_decode((string) $member_identity->getBody(), true);  
-        } catch (Exception $error) { 
-            return redirect()->back()->with('error','Internal Server Error [Step 3]-'.$error);
+        } catch (Exception $error) {  
+            return redirect()->back()->with('error','Internal Server Error financial-institutions [Step 3]-'.$error);
         }
+       
         //Retrieve any bank accounts that are connected
       
         try {
-            $accounts_url =  $this->fortressBaseUrl . "financial-institutions/accounts/" . $identityId . '/' . $member_id;
+           
+            $accounts_url =  $this->baseUrl . "/api/trust/v1/financial-institutions/accounts/" . $identityId . '/' . $member_id;
             $accounts = Http::withToken($token_json['access_token'])->get($accounts_url);
             $accounts_Json =  json_decode((string) $accounts->getBody(), true);  
             if ($accounts->failed()) {
@@ -410,15 +541,16 @@ class MakeInvestmentController extends Controller
                 //  }
                 $accountGuid = $account['accountGuid'];
             }
-        } catch (Exception $error) {
-            //  dd($error); 
-            return redirect()->back()->with('error','Internal Server Error [Step 4]-'.$error);
+        } catch (Exception $error) {  
+            return redirect()->back()->with('error','Internal Server Error institutions- accounts [Step 4]-'.$error);
         }
+      
+       
         //Now that you have the accountGuid, you will follow up with one last call to create a persistent object referencing the linked bank.
         if (Auth::user()->external_account == null) { 
             try {
                 $acc_user = User::find(Auth::user()->id);
-                $externalAccountsURL =  $this->fortressBaseUrl . "external-accounts/financial";
+                $externalAccountsURL =  $this->baseUrl . "/api/trust/v1/external-accounts/financial";
                 $externalAccounts = Http::withToken($token_json['access_token'])->post(
                     $externalAccountsURL,
                     [
@@ -430,15 +562,17 @@ class MakeInvestmentController extends Controller
                 $externalAccountId = $externalAccountJson['id']; 
                 $acc_user->external_account = $externalAccountId;
                 $acc_user->save();
-            } catch (Exception $error) { 
+            } catch (Exception $error) {  
                 return redirect()->back()->with('error','Error While Making Payment [Step 5]-'.$error);
             }
         } else {
             $externalAccountId = Auth::user()->external_account;
-        }
+        } 
+       
+         
         try {
             DB::beginTransaction(); 
-            $payment_url =  $this->fortressBaseUrl . 'payments';
+            $payment_url =  $this->baseUrl.'/api/trust/v1/payments'; 
             $data = [
                 'source' => [
                     'externalAccountId' => $externalAccountId,
@@ -450,25 +584,28 @@ class MakeInvestmentController extends Controller
                 'comment' => 'Offering Payment',
                 'funds' => $request->investment_amount,
             ];
+          
             $payment = Http::withToken($token_json['access_token'])
             ->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ])->post($payment_url,$data);
-            $json_response_ach =  json_decode((string) $payment->getBody(), true);   
-            if ($payment->failed()) {
-                return redirect()->back()->with('error', 'Internal Server Error  [Step 6]'.$json_response_ach);
-            }
+            $json_response_payment =  json_decode((string) $payment->getBody(), true);   
+            if ($payment->failed()) {  
+                return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
+            } 
+             
             if($payment->successful()){
+               
                 $order = new Order();
                 $order->offer_id = $offer->id;
                 $order->investor_id = Auth::user()->id;
                 $order->total = $request->investment_amount; 
-                $order->currency = "USD"; 
-                $order->type = 'ACH';
-                $order->payment_method = 'wire';
-                $order->e_sign = 'incomplete';
-                $order->status = 'pending';
+                $order->currency = $json_response_payment['currency']; 
+                $order->type = $json_response_payment['type']; 
+                $order->payment_method = '--';
+                $order->e_sign = $esign_contract_status;
+                $order->status = $json_response_payment['status']; 
                 $order->save(); 
                 $db_transaction = new Transaction;
                 $db_transaction->order_id = $order->id;
@@ -476,20 +613,19 @@ class MakeInvestmentController extends Controller
                 $db_transaction->investor_id = Auth::user()->id;
                 $db_transaction->funds = $request->investment_amount;
                 $db_transaction->kyc_status = '---';
-                $db_transaction->status = 'will-set'; 
-                $db_transaction->type = "ACH";
-                $db_transaction->payment_method = 'wire';
-                $db_transaction->e_sign = 'incomplete'; 
-                $db_transaction->transaction_id = $json_response_ach->id;
-                $db_transaction->source_identityId = $json_response_ach->source->identityId;
-                $db_transaction->source_externalAccountId = $json_response_ach->source->externalAccountId;
-                $db_transaction->destination_identityId = $json_response_ach->destination->identityId;
-                $db_transaction->destination_custodialAccountId = $json_response_ach->destination->custodialAccountId;
-                $db_transaction->comment = $json_response_ach->comment;
-                $db_transaction->funds = $json_response_ach->funds;
-                $db_transaction->currency = $json_response_ach->currency; 
-                $db_transaction->save();
-                DB::commit();
+                $db_transaction->status =$json_response_payment['status']; 
+                $db_transaction->type =  $json_response_payment['type']; 
+                $db_transaction->payment_method = '--';
+                $db_transaction->e_sign =  $esign_contract_status;
+                $db_transaction->transaction_id = $json_response_payment['id']; 
+                $db_transaction->source_identityId = $json_response_payment['source']['identityId'];
+                $db_transaction->source_externalAccountId = $json_response_payment['source']['externalAccountId'];
+                $db_transaction->destination_identityId = $json_response_payment['destination']['identityId'];
+                $db_transaction->destination_custodialAccountId = $json_response_payment['destination']['custodialAccountId'];
+                $db_transaction->comment = $json_response_payment['comment'];
+                $db_transaction->funds = $json_response_payment['funds'];
+                $db_transaction->currency = $json_response_payment['currency']; 
+                $db_transaction->save();  
                 $transaction_details = [
                     'investor'=> Auth::user()->name,
                     'investment_amount' => $request->investment_amount,
@@ -501,14 +637,20 @@ class MakeInvestmentController extends Controller
                     'offer_name' =>  $offer->name,
                     'trnx_total_raised' => 0,
                     'trnx_last_cancel_date' => $offer->funding_end_date,
-                ];  
-                Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));  
-                return redirect()->route('dashboard')->with('success', 'Investment Has Been Completed');
+                ];   
+               // Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));    
+                DB::commit(); 
+                return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
             }    
-        } catch (Exception $error) {
+             
+        } catch (Exception $error) {    
             DB::rollBack();   
-            return redirect()->back()->with('error', 'Internal Server Error [Step 7]'.$error);
+            return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
         }
+        
+       
+ 
+
              
             
         

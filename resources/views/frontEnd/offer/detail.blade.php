@@ -56,18 +56,35 @@
                         <h6 class="sky-blue fw-normal">$20,000,000</h6>
                     </div>
                 </div>
-                <div class="row px-5">
-                    <div class="col-9">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-text">$</div>
-                            <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="">
+                <form action="{{ route('invest.submit') }}" method="get" id="investForm">
+                    @csrf
+                    <input type="hidden" name="offer_id" value="{{ $offer->id }}"> 
+                    <div class="row px-5">
+                        <div class="col-9">
+                            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-text">$</div>  
+                                <input type="number" class="form-control" name="investment_amount" required
+                                        placeholder="{{ number_format($offer->investmentRestrictions->min_invesment) }}" 
+                                        min="{{ $offer->investmentRestrictions->min_invesment }}" 
+                                        max="{{ $offer->investmentRestrictions->max_invesment }}"/>
+                            </div>
                         </div>
+
+                        <div class="col-3">
+                            <div class="">
+                                @if (Auth::user())
+                                    <button type="submit" class="btn btn-outline-info text-white">INVEST</button>
+                                @else
+                                    <button class="btn btn-primary" disabled type="button" title=""> Login to Invest </button>
+                                @endif
+                            </div> 
+                        </div>
+
+
+                       
                     </div>
-                    <div class="col-3">
-                        <button type="submit" class="btn btn-outline-info text-white">INVEST</button>
-                    </div>
-                </div>
+                </form>
                 <div class="row px-5">
                     <div class="col-12 text-center pt-5">
                         <a href="#detail"><i class="bi bi-arrow-down-circle fs-3 sky-blue"></i></a>

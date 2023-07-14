@@ -51,6 +51,7 @@ Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController:
 
 
 Route::middleware('check.profile.complete')->group(function () {
+    Route::get('/', [FrontendController::class, 'index'])->name('index'); 
     Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details'); 
     Route::get('offer/v2/{id}', [FrontendController::class, 'detail_v2'])->name('offer.details.v2'); 
     Route::get('faq', [FrontendController::class, 'faq'])->name('faq');
@@ -58,8 +59,7 @@ Route::middleware('check.profile.complete')->group(function () {
     Route::get('investors', [FrontendController::class, 'investors'])->name('investors');
     Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses'); 
     Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
-    Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
-    Route::get('/', [FrontendController::class, 'index'])->name('index'); 
+    Route::get('contact', [FrontendController::class, 'contact'])->name('contact'); 
     Route::get('/offers/sort/{order?}',[FrontendController::class,'sort'])->name('offers.sort');
 
 });
@@ -67,6 +67,11 @@ Route::middleware('check.profile.complete')->group(function () {
 
 Route::middleware(['check.profile.complete','verified','auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('account', [FrontendController::class, 'my_account'])->name('my.account');
+    Route::post('account/update', [FrontendController::class, 'my_account_update'])->name('my.account.update');
+    Route::get('documents', [FrontendController::class, 'my_documents'])->name('my.documents');
+    Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('my.portfolio'); 
+
 }); 
 Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Investor'], function () {
     Route::get('/dashboard', ['as' => 'make','uses' => 'InvestorController@dashbaord']);
@@ -192,6 +197,7 @@ Route::group(['as'=> 'folder.','prefix'=>'folder','middleware' => ['auth','verif
 
 Route::group(['as'=> 'transaction.','prefix'=>'transaction','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Transaction'], function () {
     Route::get('transaction', ['as' => 'index','uses' => 'TransactionController@index']);
+    Route::get('transaction/delete', ['as' => 'delete','uses' => 'TransactionController@delete']);
 });
 
 Route::group(['as'=> 'engagments.','prefix'=>'engagments','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Engagment'], function () {

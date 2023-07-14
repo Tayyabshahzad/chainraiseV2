@@ -65,7 +65,7 @@
                                     <!--begin::Title-->
                                     <div class="card-title d-flex flex-column">
                                         <!--begin::Amount-->
-                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">13</span>
+                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2"> {{ $users }} </span>
                                         <!--end::Amount-->
                                         <!--begin::Subtitle-->
                                         <hr>
@@ -81,7 +81,7 @@
                                     <!--begin::Title-->
                                     <div class="card-title d-flex flex-column">
                                         <!--begin::Amount-->
-                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">10</span>
+                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">{{ $investors }}</span>
                                         <!--end::Amount-->
                                         <!--begin::Subtitle-->
                                         <hr>
@@ -96,7 +96,7 @@
                                     <!--begin::Title-->
                                     <div class="card-title d-flex flex-column">
                                         <!--begin::Amount-->
-                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">50,0000 <small class="text-dark"> USD </small> </span>
+                                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2"> {{ $raised_amount }} <small class="text-dark"> USD </small> </span>
                                         <!--end::Amount-->
                                         <!--begin::Subtitle-->
                                         <hr>

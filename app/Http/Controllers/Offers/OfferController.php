@@ -44,8 +44,9 @@ class OfferController extends Controller
     }
     public function active_index()
     { 
+        
         $issuers = User::role('issuer')->get();
-        $offers = Offer::where('status','active')->orderBy('id','desc')->get();
+        $offers = Offer::orderBy('id','desc')->get();
         return view('offers.active_index',compact('issuers','offers'));
     }
 
@@ -117,6 +118,7 @@ class OfferController extends Controller
             'issuer' => 'required',
             'offer_name' => 'required',
             'slug'=>'required|unique:offers,slug',
+            'status'=>'required',
             //'short_description' => 'required',
             //'security_type' => 'required',
            // 'symbol' => 'required',
@@ -124,7 +126,7 @@ class OfferController extends Controller
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
         ]); 
-        //dd($request);
+      
         $user = User::find($request->issuer); 
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -136,7 +138,7 @@ class OfferController extends Controller
             'client_id'  => $this->authUrl['client_id'],
         ]); 
         $token_json =  json_decode((string) $get_token->getBody(), true);
-        //dd($token_json);
+         
         if($get_token->failed()){ 
             return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json.']');
         }  
@@ -152,7 +154,7 @@ class OfferController extends Controller
                     return redirect()->back()->with('error','KYC Level Atlest L0');
                 }
             }
-        }
+        } 
         try{   
         // Checking custodial-accounts
             $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
@@ -163,13 +165,15 @@ class OfferController extends Controller
             ]);
             $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
             if($custodial_account->failed()){ 
+                dd('error',$json_custodial_account);
                // dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }
-            
-        }catch(Exception $custodial_account_error){
+           
+        }catch(Exception $custodial_account_error){ 
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
+        
         try{   
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
@@ -187,7 +191,7 @@ class OfferController extends Controller
             $offer->total_valuation =     $request->total_valuation;
             $offer->commencement_date =   $request->commencement_date;
             $offer->funding_end_date =   $request->funding_end_date;
-            $offer->status =              'active' ;
+            $offer->status =               $request->status;
             if($offer->save()) {
                 if($request->hasFile('slider_images')) { 
                     $offer->addMultipleMediaFromRequest(['slider_images'])

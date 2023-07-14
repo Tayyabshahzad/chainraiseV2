@@ -2075,6 +2075,7 @@
                             listItem +=
 
                                 `  <div class="col-lg-6 mb-10">
+                                    <input type="text" class="selected_folder_id"  value="`+folder_id+`"/>
                             <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
                                 <!--begin::Avatar-->
                                 <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3"> ` + value

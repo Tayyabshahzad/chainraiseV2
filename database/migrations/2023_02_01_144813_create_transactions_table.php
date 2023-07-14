@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('payment_method');
             $table->string('transaction_id');
-            $table->enum('e_sign',['completed','incomplete']);
+            $table->text('e_sign')->nullable();
             $table->string('source_identityId');
             $table->string('source_externalAccountId');
             $table->string('destination_identityId');

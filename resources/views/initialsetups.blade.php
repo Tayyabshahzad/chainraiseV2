@@ -132,7 +132,7 @@
                                 <label class="form-check-label fs-5" for="flexSwitchCheckDefault">
                                     Are you an accredited investor?
                                 </label>
-                                <input class="form-check-input fs-5" type="checkbox" id="flexSwitchCheckDefault" name="are_you_accredited" checked required  >
+                                <input class="form-check-input fs-5" type="checkbox" id="flexSwitchCheckDefault" name="are_you_accredited"   required  >
                                 <div class="invalid-feedback">Check Toogle Button</div>
                             </div>
 

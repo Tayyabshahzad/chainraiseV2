@@ -60,9 +60,11 @@
             <div class=" row gx-5 pb-5">
                 <h1 class="my-5 text-white">Coming Soon</h1>
                 <div class="col-lg-4 mb-5  text-center">
-                    <a href="details.html" target="_blank">
-                        <img src="{{ asset('assets/v3-images/img1.png') }}" alt="" class="img-fluid" srcset="">
+                    @foreach ($offer_coming_soon as $coming_soon)
+                    <a href="#" >
+                        <img src="{{ $coming_soon->getFirstMediaUrl('banner_image', 'thumb') }}" alt="" class="img-fluid" srcset="">
                     </a>
+                    @endforeach
                 </div>
             </div>
 

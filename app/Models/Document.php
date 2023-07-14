@@ -9,4 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Document extends Model  implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+    function folder(){
+        return $this->belongsTo(Folder::class);
+    }
 }

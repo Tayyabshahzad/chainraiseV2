@@ -6,7 +6,7 @@
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-v3.css') }}">
@@ -26,12 +26,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
-
-
-
-
-
 
     <title> Chain Rasied Portal | @yield('title') </title>
     <style>
@@ -47,7 +41,7 @@
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid px-lg-5 pe-0">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo">
+                {{-- <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo"> --}}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -94,8 +88,8 @@
 
 
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <button type="button" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
-                        style="background-color:#43C3FE;">INVEST</button>
+                    <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
+                        style="background-color:#43C3FE;">INVEST</a>
                     @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#sign-in-popup">Login</a>
@@ -116,12 +110,11 @@
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li><a class=" bi bi-person dropdown-item text-dark" href="investment.html">
-                                                Portfolio</a>
+                                        <li><a class=" bi bi-person dropdown-item text-dark" href="{{  route('my.portfolio') }}">    Portfolio</a>
                                         </li>
-                                        <li><a class=" dropdown-item bi bi-files text-dark" href="#"> My
+                                        <li><a class=" dropdown-item bi bi-files text-dark" href="{{ route('my.documents') }}"> My
                                                 Documents</a></li>
-                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank" href="{{  route('user.account') }}"> My
+                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank" href="{{  route('my.account') }}"> My
                                                 Account</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -385,6 +378,7 @@
 
 
     <!-- Header End -->
+ 
 
     <!-- Sign in Popop Start -->
     <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel"
@@ -399,19 +393,15 @@
                     <h5 style="color: #000000; text-align: center; font-weight: 600;">Sign in to your account</h5>
                     <div class="container py-3 px-5 ">
                         <div class="row justify-content-center">
-                            <div class="col-2 d-flex align-items-center justify-content-center ">
-                                <a href="" class="text-dark  ">
-                                    <i class="bi bi-apple  border border-dark py-2 px-3  "></i>
-                                </a>
-                            </div>
+                            
                             <div class="col-2 d-flex align-items-center justify-content-center">
                                 <a href="{{ route('login.google') }}" class="text-dark">
-                                    <i class="bi bi-google  border border-dark py-2 px-3"></i>
+                                    <i class="bi bi-google  border border-dark rounded-circle py-2 px-3"></i>
                                 </a>
                             </div>
                             <div class="col-2 d-flex align-items-center justify-content-center">
                                 <a href="{{ route('login.facebook') }}" class="text-dark">
-                                    <i class="bi bi-facebook  border border-dark   py-2 px-3"></i>
+                                    <i class="bi bi-facebook  border border-dark rounded-circle py-2 px-3"></i>
                                 </a>
                             </div>
                         </div>
@@ -425,19 +415,21 @@
                                     with</p>
                             </div>
                         </div>
+
+                        
                         <div class="d-flex flex-column text-center">
                             <label class="text-danger error error_message"></label>
                             <label class="text-success success success_message"></label>
                             <form id="loginForm">
                                 <div class="my-3">
-                                    <input type="email" class="form-control" id="email"
+                                    <input type="email" class="form-control rounded-pill border-dark" id="email"
                                         placeholder="Your email address..." name="email">
                                     @error('email')
                                         <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
                                     @enderror
                                 </div>
                                 <div class="my-3 ">
-                                    <input type="password" class="form-control user_login_password" id="password"
+                                    <input type="password" class="form-control user_login_password rounded-pill border-dark" id="password"
                                         placeholder="Your password..." name="password">
                                 </div>
                                 <div class="row">
@@ -473,7 +465,7 @@
                                 </div>
                         </div>
                         <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
-                            <button class="btn btn-primary submit_button" type="submit">Sign in</button>
+                            <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill" type="submit">Sign in</button>
                         </div>
                         </form>
                     </div>
@@ -495,16 +487,7 @@
                 <div class="modal-body">
                     <h5 style="color: #000000; text-align: center;">Sign up to your account</h5>
                     <div class="row gy-3 p-3 text-center">
-                        <div class="col-12">
-                            <a href="#"
-                                class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
-                                    class="bi bi-apple pe-5"
-                                    style=" position: absolute;
-                                left: 15px;"></i>
-                                Sign up with
-                                Apple
-                            </a>
-                        </div>
+                         
                         <div class="col-12">
                             <a href="{{ route('login.google') }}"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
@@ -532,8 +515,7 @@
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-envelope-fill pe-5"
                                     style=" position: absolute;
-                                left: 15px;"></i> Sign
-                                up with Email
+                                left: 15px;"></i> Sign up with Email
 
                             </button>
                         </div>
@@ -559,14 +541,11 @@
     </div>
 
 
-    @section('page_js')
-    @show
+  
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-    </script>
-
-
+    </script> 
     @if (Session::has('expire'))
         @php
             $message = session::get('expire');
@@ -604,8 +583,8 @@
 
         });
     </script>
-
-
+  @section('page_js')
+  @show
 </body>
 
 </html>
