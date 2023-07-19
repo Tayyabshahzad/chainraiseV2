@@ -89,7 +89,7 @@
                     <input type="hidden" name="calltoaction_button_id" value="{{ $offer->callToAction->id }}">
                     <input type="hidden" name="access_id" value="{{ $offer->access->id }}">
                     <input type="hidden" name="display_id" value="{{ $offer->display->id }}">
-                    <input type="hidden" name="contact_id" value="{{ $offer->contactInfo->id }}">
+                    <input type="hidden" name="contact_id" @if($offer->contactInfo) value="{{ $offer->contactInfo->id }}" @endif>
 
                     <div class="row">
                         @include('offers.particles.left-bar-edit')
@@ -457,11 +457,11 @@
                                                                     <label class="required fs-6 fw-semibold mb-2"> Address
                                                                     </label>
                                                                     <p id="address_label">
-                                                                        {{ $offer->contactInfo->address }} </p>
+                                                                        @if($offer->contactInfo){{ $offer->contactInfo->address }} @endif</p>
                                                                 </div>
                                                                 <div class="col-lg-4 mb-4">
                                                                     <input type="text" class="form-control"
-                                                                        value="{{ $offer->contactInfo->address }}"
+                                                                    @if($offer->contactInfo) value="{{ $offer->contactInfo->address }}" @endif
                                                                         placeholder="Full Address (map and address will be hidden if blank)"
                                                                         name="offer_address" id="offer_address">
                                                                 </div>
@@ -477,12 +477,12 @@
                                                                     <label class="required fs-6 fw-semibold mb-2">
                                                                         Phone
                                                                     </label>
-                                                                    <p id="phone_label"> {{ $offer->contactInfo->phone }}
+                                                                    <p id="phone_label"> @if($offer->contactInfo) {{ $offer->contactInfo->phone }} @endif
                                                                     </p>
                                                                 </div>
                                                                 <div class="col-lg-4 mb-4">
                                                                     <input type="text" class="form-control "
-                                                                        value="{{ $offer->contactInfo->phone }}"
+                                                                    @if($offer->contactInfo) value="{{ $offer->contactInfo->phone }}" @endif
                                                                         placeholder="Phone # or Contact info"id="offer_phone"
                                                                         name="phone">
                                                                 </div>
@@ -512,7 +512,7 @@
                                                                             <label class="required fs-6 fw-semibold mb-2">
                                                                                 Contact Us
                                                                             </label>
-                                                                            <textarea type="text" class="form-control" placeholder="Type your message here." name="contact_us">{{ $offer->contactInfo->contact_us }}</textarea>
+                                                                            <textarea type="text" class="form-control" placeholder="Type your message here." name="contact_us"> @if($offer->contactInfo) {{ $offer->contactInfo->contact_us }} @endif</textarea>
                                                                         </div>
 
                                                                     </div>
