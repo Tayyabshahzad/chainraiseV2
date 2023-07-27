@@ -53,7 +53,7 @@ class KycController extends Controller
         $request->validate([
             'id' => 'required',
         ]);  
-     
+       
         $errors = []; 
         $user = User::with('userDetail')->find($request->id); 
         if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
@@ -83,7 +83,12 @@ class KycController extends Controller
             ]);
         }
         // Token Request
+<<<<<<< HEAD
  
+=======
+
+        
+>>>>>>> parent of 0d490bf (ss)
        
         try {
             $get_token = Http::withHeaders([
@@ -95,8 +100,13 @@ class KycController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]);
+<<<<<<< HEAD
             $token_json =  json_decode((string) $get_token->getBody(), true);   
             if ($get_token->failed()) {  
+=======
+            $token_json =  json_decode((string) $get_token->getBody(), true);  
+            if ($get_token->failed()) {
+>>>>>>> parent of 0d490bf (ss)
                 $errors[] = 'Error While Creating Token';
                 return response([
                     'status' => $get_token->status(),
@@ -182,8 +192,8 @@ class KycController extends Controller
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
             // creating container for business   
-            if($user->identity_container_id == null){     
-                try{  
+            if($user->identity_container_id == null){    
+                 try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($this->baseUrl.'/api/trust/v1/identity-containers', [
