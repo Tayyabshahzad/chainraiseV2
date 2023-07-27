@@ -422,7 +422,7 @@
                                                             <div class="video_column col-lg-4 mt-4 mb-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-12 text-center">
-                                                                        <iframe width="250" height="250" src="{{  $video->url }}"></iframe>
+                                                                        <iframe width="250" height="250" src="{{$video->url}}"></iframe>
                                                                     </div>
                                                                     <div class="col-lg-12 text-center">
                                                                         <p>{{  $video->description }}</p>
