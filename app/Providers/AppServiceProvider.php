@@ -28,10 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-	if (env('APP_ENV_URL') === 'production') {
-        \URL::forceScheme('https');
-    	}
         $accreditations = Accreditation::get();
         view()->share('accreditations', $accreditations);
     }

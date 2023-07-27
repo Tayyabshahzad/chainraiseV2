@@ -165,7 +165,7 @@ class OfferController extends Controller
             ]);
             $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
             if($custodial_account->failed()){ 
-           //     dd('error',$json_custodial_account);
+                dd('error',$json_custodial_account);
                // dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }

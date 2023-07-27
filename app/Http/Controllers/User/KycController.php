@@ -28,26 +28,26 @@ class KycController extends Controller
         $this->authUrl = config('credentials.auth0.' . $environment); 
         $this->authUrl = config('credentials.auth0.' . $environment); 
     } 
-    public function updateKycCheck($id){ 
-        //dd($this->baseUrl . 'your-endpoint');
-        $user = User::find($id);  
-        if($user->check_kyc == true){
-            $kyc = false;
-        }elseif($user->check_kyc == false){
-            $kyc = true;
-        } 
-        $user->check_kyc = $kyc;
-        $user->save();
-        if($user->check_kyc == true){
-            $data = 'Enabled';
-        }else{
-            $data = 'Disabled';
+        public function updateKycCheck($id){ 
+            //dd($this->baseUrl . 'your-endpoint');
+            $user = User::find($id);  
+            if($user->check_kyc == true){
+                $kyc = false;
+            }elseif($user->check_kyc == false){
+                $kyc = true;
+            } 
+            $user->check_kyc = $kyc;
+            $user->save();
+            if($user->check_kyc == true){
+                $data = 'Enabled';
+            }else{
+                $data = 'Disabled';
+            }
+            return response([
+                'data'=>$data,
+                'status'=>true
+            ]);
         }
-        return response([
-            'data'=>$data,
-            'status'=>true
-        ]);
-    }
     public function checkKyc(Request $request)
     {
        
@@ -95,15 +95,9 @@ class KycController extends Controller
                 'password'   => $this->authUrl['password'],
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
-            ]);
-<<<<<<< HEAD
-            $token_json =  json_decode((string) $get_token->getBody(), true);   
-            if ($get_token->failed()) {  
-=======
-            $token_json =  json_decode((string) $get_token->getBody(), true);  
-           
-            if ($get_token->failed()) {
->>>>>>> parent of 0d490bf (ss)
+            ]); 
+            $token_json =  json_decode((string) $get_token->getBody(), true);    
+            if ($get_token->failed()) { 
                 $errors[] = 'Error While Creating Token';
                 return response([
                     'status' => $get_token->status(),
@@ -122,8 +116,7 @@ class KycController extends Controller
        
 
         $date_of_birth = $user->userDetail->dob;  
-        if($user->user_type  == 'individual'){  
-                
+        if($user->user_type  == 'individual'){   
             if($user->fortress_id == null){    
                 try{ 
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
@@ -184,15 +177,12 @@ class KycController extends Controller
                         'step'=>'individual step 1 Exception',
                     ]);
                 } 
-            }
-             
+            } 
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
             //dump('entity calling');
             // creating container for business   
-            if($user->identity_container_id == null){    
-                 try{  
-            if($user->identity_container_id == null){    
+            if($user->identity_container_id == null){      
                  try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -215,8 +205,7 @@ class KycController extends Controller
                     ]);
                     $json_identity_containers =  json_decode((string) $identity_containers->getBody(), true);      
                     $status = $identity_containers->status();  
-        //	dd( $json_identity_containers);           
-	 if($status == 400){
+                    if($status == 400){
                         $errors[] = $json_identity_containers['title'];
                         $errors[] = $json_identity_containers['errors'];
                         return response([
@@ -257,13 +246,10 @@ class KycController extends Controller
                             'success'  => false,
                             'step'=>'entity step 1 exception',
                         ]);
-                }  
-                // Business  Indentity
+                }   
             }    
 
-            if($user->business_id == null){  
-                //dump('Business is calling if null'); 
-                //dump('Business is calling if null'); 
+            if($user->business_id == null){   
                 try{ 
                     $business_identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -289,12 +275,7 @@ class KycController extends Controller
                         'naicsDescription' => $user->userDetail->naics_description,  
                         'beneficialOwners'=>[
                             $user->fortress_personal_identity,
-                        ],
-                        
-                       
-                        ],
-                        
-                       
+                        ], 
                     ]);
                     $json_business_identity_containers =  json_decode((string) $business_identity_containers->getBody(), true);    
                     $status = $business_identity_containers->status();
@@ -467,7 +448,6 @@ class KycController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]);
-//dd($this->authUrl);
             $token_json =  json_decode((string) $get_token->getBody(), true); 
             if($get_token->failed()) {  
                 return response([
@@ -512,7 +492,7 @@ class KycController extends Controller
         }else{
             $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         }  
-//dd($url_check_kyc);
+
         try {  
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
             withHeaders(['Content-Type' => 'application/json'])->
@@ -537,15 +517,14 @@ class KycController extends Controller
                         ]
                 );       
             }
-  //          Mail::to($user->email)->send(new UPDATEKYC($user)); 
+            Mail::to($user->email)->send(new UPDATEKYC($user)); 
             return response([
                 'status' => $upgrade_existing_l0->status(),
                 'data'=> $json_upgrade_existing_l0,
             ]); 
             
         }catch(Exception $error){ 
-dd($error);           
- return response([
+            return response([
                 'status' => false,
                 'error'=>$error,
             ]);
