@@ -26,6 +26,7 @@ class KycController extends Controller
         $environment   = config('app.env'); 
         $this->baseUrl = config('credentials.api.' . $environment); 
         $this->authUrl = config('credentials.auth0.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment); 
     } 
     public function updateKycCheck($id){ 
         //dd($this->baseUrl . 'your-endpoint');
@@ -65,6 +66,7 @@ class KycController extends Controller
             ]);
         } 
        
+       
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
         if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
@@ -82,13 +84,7 @@ class KycController extends Controller
                 'errors' => $errors,
             ]);
         }
-        // Token Request
-<<<<<<< HEAD
- 
-=======
-
-        
->>>>>>> parent of 0d490bf (ss)
+        // Token Request 
        
         try {
             $get_token = Http::withHeaders([
@@ -105,6 +101,7 @@ class KycController extends Controller
             if ($get_token->failed()) {  
 =======
             $token_json =  json_decode((string) $get_token->getBody(), true);  
+           
             if ($get_token->failed()) {
 >>>>>>> parent of 0d490bf (ss)
                 $errors[] = 'Error While Creating Token';
@@ -191,7 +188,10 @@ class KycController extends Controller
              
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
+            //dump('entity calling');
             // creating container for business   
+            if($user->identity_container_id == null){    
+                 try{  
             if($user->identity_container_id == null){    
                  try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
@@ -263,6 +263,7 @@ class KycController extends Controller
 
             if($user->business_id == null){  
                 //dump('Business is calling if null'); 
+                //dump('Business is calling if null'); 
                 try{ 
                     $business_identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -291,6 +292,9 @@ class KycController extends Controller
                         ],
                         
                        
+                        ],
+                        
+                       
                     ]);
                     $json_business_identity_containers =  json_decode((string) $business_identity_containers->getBody(), true);    
                     $status = $business_identity_containers->status();
@@ -315,6 +319,31 @@ class KycController extends Controller
                         ]);
                     }  
                         
+
+                        if(!$business_identity_containers->successful()){
+                            if($status == 400){
+                                $errors[] = $json_business_identity_containers['errors'];
+                                $errors[] = $json_business_identity_containers['title'];
+                                return response([
+                                    'status' => $status,
+                                    'success'  => false,
+                                    'errors' => $json_business_identity_containers['errors'],
+                                    'step'=>'entity business 1 not successfull',
+                                ]);   
+                            } 
+                            if($status == 409){ 
+                                $errors[] = $json_business_identity_containers['errors'];
+                                $errors[] = $json_business_identity_containers['title'];
+                                return response([
+                                    'status' => $status,
+                                    'success'  => false,
+                                    'errors' => $errors,
+                                ]);   
+                            }
+                        }else{
+                            $user->business_id =  $json_business_identity_containers['id']; 
+                            $user->save();
+                        }  
 
                         if(!$business_identity_containers->successful()){
                             if($status == 400){
