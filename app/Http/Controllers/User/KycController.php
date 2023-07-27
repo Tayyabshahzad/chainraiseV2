@@ -25,16 +25,7 @@ class KycController extends Controller
     { 
         $environment   = config('app.env'); 
         $this->baseUrl = config('credentials.api.' . $environment); 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $this->authUrl = config('credentials.auth0.' . $environment);  
-=======
-        $this->authUrl = config('credentials.auth0.' . $environment);
-//dd( $this->baseUrl); 
->>>>>>> 6b463e0b4797b72b250c40687fdd5b690022f008
-=======
         $this->authUrl = config('credentials.auth0.' . $environment); 
->>>>>>> parent of 0d490bf (ss)
     } 
     public function updateKycCheck($id){ 
         //dd($this->baseUrl . 'your-endpoint');
@@ -62,16 +53,7 @@ class KycController extends Controller
         $request->validate([
             'id' => 'required',
         ]);  
-<<<<<<< HEAD
-<<<<<<< HEAD
      
-=======
-       
-//dd($this->authUrl);
->>>>>>> 6b463e0b4797b72b250c40687fdd5b690022f008
-=======
-       
->>>>>>> parent of 0d490bf (ss)
         $errors = []; 
         $user = User::with('userDetail')->find($request->id); 
         if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
@@ -101,8 +83,7 @@ class KycController extends Controller
             ]);
         }
         // Token Request
-
-        
+ 
        
         try {
             $get_token = Http::withHeaders([
@@ -114,16 +95,8 @@ class KycController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]);
-            $token_json =  json_decode((string) $get_token->getBody(), true);  
-<<<<<<< HEAD
-           
-<<<<<<< HEAD
-=======
->>>>>>> parent of 0d490bf (ss)
-            if ($get_token->failed()) {
-=======
- if ($get_token->failed()) {
->>>>>>> 6b463e0b4797b72b250c40687fdd5b690022f008
+            $token_json =  json_decode((string) $get_token->getBody(), true);   
+            if ($get_token->failed()) {  
                 $errors[] = 'Error While Creating Token';
                 return response([
                     'status' => $get_token->status(),
@@ -209,19 +182,8 @@ class KycController extends Controller
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
             // creating container for business   
-<<<<<<< HEAD
-<<<<<<< HEAD
             if($user->identity_container_id == null){     
                 try{  
-=======
-//dd(1111);           
- if($user->identity_container_id == null){    
-                 try{  
->>>>>>> 6b463e0b4797b72b250c40687fdd5b690022f008
-=======
-            if($user->identity_container_id == null){    
-                 try{  
->>>>>>> parent of 0d490bf (ss)
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($this->baseUrl.'/api/trust/v1/identity-containers', [
