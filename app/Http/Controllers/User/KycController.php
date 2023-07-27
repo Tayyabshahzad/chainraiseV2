@@ -25,7 +25,8 @@ class KycController extends Controller
     { 
         $environment   = config('app.env'); 
         $this->baseUrl = config('credentials.api.' . $environment); 
-        $this->authUrl = config('credentials.auth0.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment);
+//dd( $this->baseUrl); 
     } 
     public function updateKycCheck($id){ 
         //dd($this->baseUrl . 'your-endpoint');
@@ -54,6 +55,7 @@ class KycController extends Controller
             'id' => 'required',
         ]);  
        
+//dd($this->authUrl);
         $errors = []; 
         $user = User::with('userDetail')->find($request->id); 
         if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
@@ -97,7 +99,8 @@ class KycController extends Controller
                 'client_id'  => $this->authUrl['client_id'],
             ]);
             $token_json =  json_decode((string) $get_token->getBody(), true);  
-            if ($get_token->failed()) {
+           
+ if ($get_token->failed()) {
                 $errors[] = 'Error While Creating Token';
                 return response([
                     'status' => $get_token->status(),
@@ -183,7 +186,8 @@ class KycController extends Controller
         }elseif($user->user_type  == 'entity'){   
             //dump('entity calling');
             // creating container for business   
-            if($user->identity_container_id == null){    
+//dd(1111);           
+ if($user->identity_container_id == null){    
                  try{  
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
@@ -206,7 +210,8 @@ class KycController extends Controller
                     ]);
                     $json_identity_containers =  json_decode((string) $identity_containers->getBody(), true);      
                     $status = $identity_containers->status();  
-                    if($status == 400){
+        //	dd( $json_identity_containers);           
+	 if($status == 400){
                         $errors[] = $json_identity_containers['title'];
                         $errors[] = $json_identity_containers['errors'];
                         return response([
@@ -428,6 +433,7 @@ class KycController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]);
+//dd($this->authUrl);
             $token_json =  json_decode((string) $get_token->getBody(), true); 
             if($get_token->failed()) {  
                 return response([
@@ -472,7 +478,7 @@ class KycController extends Controller
         }else{
             $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         }  
-
+//dd($url_check_kyc);
         try {  
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
             withHeaders(['Content-Type' => 'application/json'])->
@@ -497,14 +503,15 @@ class KycController extends Controller
                         ]
                 );       
             }
-            Mail::to($user->email)->send(new UPDATEKYC($user)); 
+  //          Mail::to($user->email)->send(new UPDATEKYC($user)); 
             return response([
                 'status' => $upgrade_existing_l0->status(),
                 'data'=> $json_upgrade_existing_l0,
             ]); 
             
         }catch(Exception $error){ 
-            return response([
+dd($error);           
+ return response([
                 'status' => false,
                 'error'=>$error,
             ]);
