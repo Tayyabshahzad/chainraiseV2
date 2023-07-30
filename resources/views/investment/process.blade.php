@@ -266,7 +266,7 @@
                                     </div>
                                     <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                                         <div id="load_widget"></div>
-                                            <input type="" name="user_guid" id="user_guid" required>
+                                            <input type="hidden" name="user_guid" id="user_guid" required>
                                             <script src="https://atrium.mx.com/connect.js"></script>
                                             <script>
                                                 var arr = [];
@@ -352,8 +352,7 @@
 @endsection
 @section('page_js')
     <script>
-        $('body').on('click', '.check_kyc', function(event) {
-
+        $('body').on('click', '.check_kyc', function(event) { 
             event.preventDefault();
             $('.spinner').removeClass('d-none');
             $('.check_kyc').addClass('d-none');
@@ -384,9 +383,7 @@
                         if (response.status == 409) {
                             toastr.error(response.data.title, "Error");
                             $('.kyc_submit_button').removeClass('d-none');
-                            $('.check_kyc').removeClass('d-none');
-
-
+                            $('.check_kyc').removeClass('d-none'); 
                         }
                         if (response.status == 200) {
                             $('.check_kyc').html('  KYC has been successfully checked');

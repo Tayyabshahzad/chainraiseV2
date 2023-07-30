@@ -112,8 +112,7 @@ class OfferController extends Controller
     }
     public function save(Request $request)
     {
-         
-        
+          
         $request->validate([
             'issuer' => 'required',
             'offer_name' => 'required',
@@ -125,8 +124,7 @@ class OfferController extends Controller
             'size' => 'required',
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
-        ]); 
-      
+        ]);  
         $user = User::find($request->issuer); 
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -137,18 +135,17 @@ class OfferController extends Controller
             'audience'   => $this->authUrl['audience'],
             'client_id'  => $this->authUrl['client_id'],
         ]); 
-        $token_json =  json_decode((string) $get_token->getBody(), true);
-         
+        $token_json =  json_decode((string) $get_token->getBody(), true);  
         if($get_token->failed()){ 
             return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json.']');
         }  
-        if($user->check_kyc == true ){ 
+        if($user->check_kyc == true ){  
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
             withHeaders(['Content-Type' => 'application/json'])->
             get($this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity);
-            $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
-            if($upgrade_existing_l0->failed()){ 
-                return redirect()->back()->with('error','Internal Server Error'.$json_upgrade_existing_l0);
+            $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true); 
+            if($upgrade_existing_l0->failed()){   
+                return redirect()->back()->with('error','Internal Server Error'.$json_upgrade_existing_l0['title']);
             }else{
                 if($json_upgrade_existing_l0['kycLevel'] == null ||  $json_upgrade_existing_l0['kycLevel'] == ''){ 
                     return redirect()->back()->with('error','KYC Level Atlest L0');
@@ -164,8 +161,7 @@ class OfferController extends Controller
                 'personalIdentityId' => $user->fortress_personal_identity,
             ]);
             $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
-            if($custodial_account->failed()){ 
-                dd('error',$json_custodial_account);
+            if($custodial_account->failed()){  
                // dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }
@@ -173,7 +169,7 @@ class OfferController extends Controller
         }catch(Exception $custodial_account_error){ 
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
-        
+      
         try{   
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
@@ -198,8 +194,7 @@ class OfferController extends Controller
                     ->each(function ($fileAdder) {
                         $fileAdder->toMediaCollection('offer_slider_images');
                     });
-                } 
-                 
+                }  
                 $priority = 0;
                 foreach($request->investment_setups as $setup ){
                     if ($setup == 'E-Sign Document') {
@@ -208,12 +203,12 @@ class OfferController extends Controller
                         $offer_esign_template->template_id = $request->e_sign_template;
                         $offer_esign_template->save();
                     }
-                    $priority ++;
-                    $investmentStep = new InvestmentStep;
-                    $investmentStep->offer_id = $offer->id;
-                    $investmentStep->title = $setup;
-                    $investmentStep->priority = $priority;
-                    $investmentStep->save();
+                        $priority ++;
+                        $investmentStep = new InvestmentStep;
+                        $investmentStep->offer_id = $offer->id;
+                        $investmentStep->title = $setup;
+                        $investmentStep->priority = $priority;
+                        $investmentStep->save();
                 } 
                 if($user->check_kyc == true ){     
                     $custodial = new Custodial;
@@ -243,17 +238,16 @@ class OfferController extends Controller
                     $invesment_restriction->max_invesment = $request->max_invesment;
                 }else{
                     $invesment_restriction->max_invesment = 0;
-                }
-
+                } 
                 if($request->allow_fractional_shares == 'on'){  
                     $allow_fractional_shares = true;
-                } else{ 
+                }else{ 
                     $allow_fractional_shares = true;
                 };
                 $invesment_restriction->allow_fractional_shares = $allow_fractional_shares;
                 if($request->require_investing_units == 'on'){  
                     $require_investing_units = true;
-                } else{ 
+                }else{ 
                     $require_investing_units = true;
                 };
                 $invesment_restriction->require_investing_units = $require_investing_units;
@@ -263,8 +257,7 @@ class OfferController extends Controller
                     $call_to_action->offer_id = $offer->id;
                     $call_to_action->review_documents = $request->review_documents;
                     $call_to_action->invest_button_text = $request->invest_button_text;
-                    $call_to_action->contact_us_button_text = $request->contact_us_button_text;
-                   
+                    $call_to_action->contact_us_button_text = $request->contact_us_button_text; 
                     if($request->send_notification_when_clicked == 'on'){  
                         $send_notification_when_clicked = true;
                     } else{ 
@@ -317,8 +310,7 @@ class OfferController extends Controller
                         }else{
                             $allow_editing =false;
                         }
-                        $access->allow_editing = $allow_editing;
-                       
+                        $access->allow_editing = $allow_editing; 
                         if($access->save()){
                                $offer_display = new Display;
                                $offer_display->offer_id = $offer->id;
@@ -366,8 +358,7 @@ class OfferController extends Controller
                                $offerContact->phone = $request->phone; 
                                $offerContact->contact_us = $request->contact_us; 
                                
-                        }
-
+                        } 
                     }
                     if($request->has('src')){
                        for($i=0;$i<count($request->src);$i++){
@@ -380,8 +371,7 @@ class OfferController extends Controller
                             $offer_videos->save(); 
                        }
                     }
-                    if($request->has('summary_title')){
-                        
+                    if($request->has('summary_title')){ 
                         for($j=0;$j<count($request->summary_title);$j++){
                             $offer_detail_tab = new OfferDetailTab();
                             $offer_detail_tab->offer_id = $offer->id;
@@ -401,8 +391,7 @@ class OfferController extends Controller
                             ->each(function ($fileAdder) use ($offer_detail_tab) {
                                 $fileAdder->toMediaCollection('offer_tiles', 'public');
                             });   
-                    }
-            
+                    } 
                     if($request->has('text_title')){ 
                         for($l=0;$l<count($request->text_title);$l++){
                             $offer_detail_tab = new OfferDetailTab();
@@ -419,19 +408,14 @@ class OfferController extends Controller
                         ->each(function ($fileAdder) {
                             $fileAdder->toMediaCollection('offer_detail_images');
                         });
-                    } 
-                   
-
-                     
+                    }  
                     $data = [
                         'offer_id' => $offer->id,
                         'url_educational_materials' => 'url_educational_materials',
                         'url_issuer_form_c' => 'url_issuer_form_c',
                         'status' => 'active',
                     ]; 
-                    $this->RegCFRepository->storeRegCF($data);
-                    
-
+                    $this->RegCFRepository->storeRegCF($data); 
                 }
                 // Investor FLow  
                 DB::commit();

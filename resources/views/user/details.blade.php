@@ -520,12 +520,16 @@
                                     @if ($user->hasRole('issuer'))
                                         <div class="form-group row mb-10">
                                             <div class="col-lg-6">
-                                                <label>State/Region of Legal Formation <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" name="legal_formation"
-                                                    placeholder="State/Region of Legal Formation*"
-                                                    @if ($user->userDetail) value="{{ $user->userDetail->legal_formation }}" @endif
-                                                    required>
+                                                <label>State/Region of Legal Formation <span class="text-danger">*</span> </label>
+                                                <select name="legal_formation" id="" class="form-control legal_formation" required>
+                                                        <option value="ccorp"> CCORP </option>
+                                                        <option value="llc">  LLC </option>
+                                                        <option value="partnership">  PARTNERSHIP </option>
+                                                        <option value="nonprofit">  NON PROFIT </option>
+                                                        <option value="scorp"> SCORP </option>
+                                                        <option value="soleprop">  SOLEPROP </option>
+                                                        <option value="other"> Other </option> 
+                                                </select> 
                                             </div>
 
                                             <div class="col-lg-6">
@@ -2325,6 +2329,10 @@
 
         @if ($user->identityVerification)
             $('.doc_type').val('{{ $user->identityVerification->doc_type }}')
+        @endif
+
+        @if ($user->userDetail) 
+           $('.legal_formation').val('{{ $user->userDetail->legal_formation }}') 
         @endif
 
         $('body').on('click', '.update_aml_status', function() {

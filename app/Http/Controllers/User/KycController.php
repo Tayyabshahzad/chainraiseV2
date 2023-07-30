@@ -25,8 +25,8 @@ class KycController extends Controller
     { 
         $environment   = config('app.env'); 
         $this->baseUrl = config('credentials.api.' . $environment); 
-        $this->authUrl = config('credentials.auth0.' . $environment); 
-        $this->authUrl = config('credentials.auth0.' . $environment); 
+        $this->authUrl = config('credentials.auth0.' . $environment);  
+         
     } 
         public function updateKycCheck($id){ 
             //dd($this->baseUrl . 'your-endpoint');

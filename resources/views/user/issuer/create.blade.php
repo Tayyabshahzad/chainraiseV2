@@ -188,8 +188,17 @@
                             </div>
                             <div class="form-group row mb-10">
                                 <div class="col-lg-4">
-                                    <label>State/Region of Legal Formation<span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="legal_formation" value="{{ old('legal_formation') }}" placeholder="State/Region of Legal Formation*" required>
+                                    <label>State/Region of Legal Formation <span class="text-danger">*</span> </label>
+                                    <select name="legal_formation" id="" class="form-control legal_formation" required>
+                                            <option value="ccorp"> CCORP </option>
+                                            <option value="llc">  LLC </option>
+                                            <option value="partnership">  PARTNERSHIP </option>
+                                            <option value="nonprofit">  NON PROFIT </option>
+                                            <option value="scorp"> SCORP </option>
+                                            <option value="soleprop">  SOLEPROP </option>
+                                            <option value="other"> Other </option> 
+                                    </select> 
+                                      
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Date of Incorporation <span class="text-danger">*</span> </label>

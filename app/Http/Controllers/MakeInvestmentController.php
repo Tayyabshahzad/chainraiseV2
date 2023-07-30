@@ -67,12 +67,16 @@ class MakeInvestmentController extends Controller
         if(Auth::user()->status  == 'inactive'){
             return redirect()->back()->with('error', 'Your account has been locked, Please Contact System Administrator');
         }
-        if (Auth::user()->kyc  == null || Auth::user()->kyc->kyc_level== null ){ 
-            return redirect()->back()->with('error', 'Please Run KYC Check First');
-        }  
+        // if (Auth::user()->kyc  == null || Auth::user()->kyc->kyc_level== null ){ 
+        //     return redirect()->back()->with('error', 'Please Run KYC Check First');
+        // }  
         
         if (Auth::user()->user_type  == null   ){ 
             return redirect()->back()->with('error', 'Selected User Type is not defined');
+        }  
+        
+        if (Auth::user()->hasRole('issuer')){ 
+            return redirect()->back()->with('error', 'Only User With Role Investor Can Invest');
         }  
        
         $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';
@@ -83,7 +87,8 @@ class MakeInvestmentController extends Controller
         $user = User::where('id', Auth::user()->id)->first();
         $fortress_personal_identity = Auth::user()->fortress_personal_identity;
         $fortress_id = Auth::user()->fortress_id; 
-        $user = Auth::user();       
+        $user = Auth::user();  
+            
         try {
             $get_token = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -105,7 +110,7 @@ class MakeInvestmentController extends Controller
         try {
             $url_widget = $this->baseUrl."/api/trust/v1/external-accounts/financial/widget-url/".$fortress_personal_identity;  
             $widget = Http::withToken($token_json['access_token'])->get($url_widget);
-            $json_widget =  json_decode((string) $widget->getBody(), true);  
+            $json_widget =  json_decode((string) $widget->getBody(), true);   
             if ($widget->failed()) {   
                 return redirect()->back()->with('error', 'Internal Server Error [Widget]');
             }
@@ -113,12 +118,14 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) {    
             return redirect()->back()->with('error', 'Internal Server Error [Widget]'.$error);
         }
-       
+        
         $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
         $json_e_sign_templates = json_decode((string) $e_sign->getBody(), true);        
         if ($e_sign->failed()) { 
             return redirect()->back()->with('error', 'Internal Server Error [e sign]'.$json_e_sign_templates);
         }
+
+      
         return view('investment.process', compact('investmentSteps', 'user', 'offer', 'investment_amount', 'json_widget', 'json_e_sign_templates'));
 
 
@@ -308,8 +315,7 @@ class MakeInvestmentController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]);
-            $response_json =  json_decode((string) $response->getBody(), true);
-          
+            $response_json =  json_decode((string) $response->getBody(), true); 
             if ($response->successful()) {
                 $url = $this->baseUrl . "/api/trust/v1/personal-identities/" . Auth::user()->fortress_personal_identity;
                 $upgrade_existing_l0 = Http::withToken($response_json['access_token'])->withHeaders(['Content-Type' => 'application/json'])->get($url);
