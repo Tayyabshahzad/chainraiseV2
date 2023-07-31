@@ -60,7 +60,7 @@
                     @csrf
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}"> 
                     <div class="row px-5">
-                        <div class="col-9">
+                        <div class="col-12">
                             <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                             <div class="input-group">
                                 <div class="input-group-text">$</div>  
@@ -71,12 +71,14 @@
                             </div>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-12 text-center mt-3">
                             <div class="">
                                 @if (Auth::user())
                                     <button type="submit" class="btn btn-outline-info text-white">INVEST</button>
                                 @else
+                                   <small>
                                     <button class="btn btn-primary" disabled type="button" title=""> Login to Invest </button>
+                                   </small>
                                 @endif
                             </div> 
                         </div>
