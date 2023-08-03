@@ -479,7 +479,8 @@ class MakeInvestmentController extends Controller
         // }
       
         $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
-        if (!$custodial_account) {  
+//dd($request->offer_id,$custodial_account);       
+ if (!$custodial_account) {  
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
       

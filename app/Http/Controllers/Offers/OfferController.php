@@ -160,9 +160,10 @@ class OfferController extends Controller
                 'type' => 'personal',
                 'personalIdentityId' => $user->fortress_personal_identity,
             ]);
-            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
-            if($custodial_account->failed()){  
-               // dd($custodial_account,$json_custodial_account);
+           $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
+          // dd($json_custodial_account,$user);
+	 if($custodial_account->failed()){  
+        //        dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }
            
@@ -209,7 +210,8 @@ class OfferController extends Controller
                         $investmentStep->title = $setup;
                         $investmentStep->priority = $priority;
                         $investmentStep->save();
-                } 
+                }
+	
                 if($user->check_kyc == true ){     
                     $custodial = new Custodial;
                     $custodial->user_id = $request->issuer;
