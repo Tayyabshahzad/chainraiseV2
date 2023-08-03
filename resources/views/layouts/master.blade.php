@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-v3.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -26,7 +27,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <title> Chain Rasied Portal | @yield('title') </title>
     <style>
         .hero-section {
@@ -40,7 +40,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid px-lg-5 pe-0">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

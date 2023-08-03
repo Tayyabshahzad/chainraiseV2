@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('page_head')
     <link rel="stylesheet" href="{{ asset('assets/css/style-setup.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
         .error {
             padding-top: 0.3em !important;
@@ -106,9 +107,9 @@
                                 <label for="inputPassword6" class="col-form-label fs-5 fw-normal "> What is your net
                                     worth?</label>
                             </div>
-                            <div class="col-lg-6">
-                                <input type="number" class="border-0 border-bottom lh-lg" name="net_worth"
-                                    placeholder="Enter manually" required>
+                            <div class="col-lg-6"> 
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false">
+
                                 <div class="invalid-feedback">
                                     Please Add Your Net Worth
                                 </div>
@@ -120,8 +121,8 @@
                                     income?</label>
                             </div>
                             <div class="col-lg-6">
-                                <input type="number" class="border-0 border-bottom lh-lg" name="annual_income"
-                                    placeholder="Enter manually" required>
+                                
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false"> 
                                 <div class="invalid-feedback">
                                     Please Add Annual Income
                                 </div>
@@ -132,7 +133,7 @@
                                 <label class="form-check-label fs-5" for="flexSwitchCheckDefault">
                                     Are you an accredited investor?
                                 </label>
-                                <input class="form-check-input fs-5" type="checkbox" id="flexSwitchCheckDefault" name="are_you_accredited"   required  >
+                                <input class="form-check-input fs-5" type="checkbox" id="flexSwitchCheckDefault" name="are_you_accredited"    >
                                 <div class="invalid-feedback">Check Toogle Button</div>
                             </div>
 
@@ -302,4 +303,13 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+          $('.myNumberField').inputmask();
+        });
+    </script>
+        
+        
+        
+        
 @endsection

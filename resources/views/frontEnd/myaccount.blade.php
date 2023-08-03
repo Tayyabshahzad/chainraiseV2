@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('page_head')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<!-- Add SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
 @endsection
 @section('title', 'Home')
 @section('content')
@@ -12,21 +17,24 @@
                         data-bs-target="#info" type="button" role="tab" aria-controls="pills-home"
                         aria-selected="true">Info</button>
                 </li>
-                {{-- <li class="nav-item px-lg-5 border-bottom" role="presentation">
-                    <button class="nav-link bg-transparent text-muted fs-5" id="pills-profile-tab" data-bs-toggle="pill"
-                        data-bs-target="#bank" type="button" role="tab" aria-controls="pills-profile"
-                        aria-selected="false">Bank</button>
-                </li> --}}
+               
             </ul>
             <div class="tab-content py-3" id="pills-tabContent">
                 <div class="tab-pane fade show active p-2" id="info" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="kyc_level_area">
+                        @if($user->fortress_id == null)
+                            <h4 class="text-center text-danger"> YOUR KYC  PROCESS NOT YET COMPLETED</h4>
+                        @else
+                            <h4 class="text-center text-success"> YOUR KYC  LEVEL IS {{ strtoupper ($user->kyc->kyc_level) }} </h4>
+                        @endif
+                    </div> 
                     <h4>Investor Information</h4>
                     <h5 class="text-muted fw-normal">To invest online, the law requires that we collect some info</h5>
-                    <form class="row g-3 needs-validation" novalidate method="post" action="{{ route('my.account.update') }}">
+                    <form class="row g-3 needs-validation" id="profile_update_form"   method="post" action="{{ route('my.account.update') }}">
                         @csrf
                         <div class="col-md-12 ">
                             <div class="row mt-3">
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <label for="validationCustom01" class="form-label"><span
                                             class="text-danger fs-4">*</span> Legal Name:</label>
                                 </div>
@@ -36,26 +44,55 @@
                                     <div class="invalid-feedback">
                                         Please Enter Legal Name
                                     </div>
-                                </div>
-                            </div>
+                                </div> 
+                            </div> 
                         </div>
                         <div class="col-md-12 ">
                             <div class="row mt-3">
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
+                                    <label for="validationCustom01" class="form-label"><span
+                                            class="text-danger fs-4">*</span> Last Name:</label>
+                                </div>
+                                <div class="col-lg-6">  
+                                    <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Last Name" name="last_name" 
+                                    @if ($user->userDetail) value="{{ $user->userDetail->last_name }}" @endif required />    
+                                     
+                                </div>
+                            </div> 
+                        </div> 
+                        <div class="col-md-12 ">
+                            <div class="row mt-3">
+                                <div class="col-lg-3">
                                     <label for="validationCustom02" class="form-label"><span
-                                            class="text-danger fs-4">*</span> Country:</label>
+                                            class="text-danger fs-4">*</span> Nationality:</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="validationCustom02"  name="country" value="@if($user->identityVerification) {{  $user->identityVerification->nationality  }} @endif" required>
-                                    <div class="invalid-feedback">
-                                        Please Enter Country Name
-                                    </div>
+                                    <select class="form-select nationality" required data-control="select2"
+                                    name="nationality" data-placeholder="Select an option"
+                                    data-live-search="true">
+                                        @include('user.country')
+                                    </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                         <div class="col-md-12 ">
                             <div class="row mt-3">
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
+                                    <label for="validationCustom02" class="form-label"><span   class="text-danger fs-4">*</span> Country of Residence:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select class="form-select country_residence" required data-control="select2"
+                                        name="country_residence" data-placeholder="Select an option"
+                                        data-live-search="true">
+                                        @include('user.country')
+                                </select>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-md-12 ">
+                            <div class="row mt-3">
+                                <div class="col-lg-3">
                                     <label for="validationCustom03" class="form-label"><span
                                             class="text-danger fs-4">*</span> Address:</label>
                                 </div>
@@ -69,7 +106,7 @@
                             </div>
                         </div>
                         <div class="row g-lg-3 gy-2 mb-3">
-                            <div class="col-2 d-lg-block d-none">
+                            <div class="col-3 d-lg-block d-none">
                             </div>
                             <div class="col-lg-2">
                                 <label for="">City</label>
@@ -78,13 +115,13 @@
                             </div>
                             <div class="col-lg-2">
                                 <label for="">State</label>
-                                <input type="text" class="form-control" name="state" required
+                                <input type="text" class="form-control state" name="state" required
                                     value="{{ $user->userDetail->state }}">
                             </div>
                             <div class="col-lg-2">
                                 <label for="">Zip Code</label>
-                                <input type="text" class="form-control" name="zip" required
-                                    value="{{ $user->userDetail->zip }}">
+                                <input type="text" class="form-control zipCode" name="zip" required
+                                    value="{{ $user->userDetail->zip }}" min="5" max="5">
                             </div>
                         </div>
                         <div class="row g-lg-3 mb-3 mt-lg-4">
@@ -92,9 +129,8 @@
                                 <label for="inputPassword6" class="col-form-label fs-5 fw-normal">What is your net
                                     worth?</label>
                             </div>
-                            <div class="col-lg-8">
-                                <input type="number" class="border-0 border-bottom" name="net_worth" required
-                                    placeholder="Enter manually" value="{{ $user->net_worth }}">
+                            <div class="col-lg-8"> 
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->net_worth }}"> 
                             </div>
                         </div>
                         <div class="row g-lg-3 mb-3">
@@ -103,8 +139,7 @@
                                     income?</label>
                             </div>
                             <div class="col-lg-8">
-                                <input type="number" class="border-0 border-bottom" name="annual_income" required
-                                    placeholder="Enter manually" value="{{ $user->annual_income }}">
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->annual_income }}"> 
                             </div>
                         </div>
                         <div class="row g-lg-3 align-items-center mb-3 mt-lg-4 mx-3">
@@ -113,7 +148,7 @@
                                     Are you an accredited investor? <span class="text-danger fs-4">*</span>
                                 </label>
                                 <input class="form-check-input fs-5" type="checkbox" id="flexSwitchCheckDefault" name="are_you_accredited"
-                                    @if ($user->are_you_accredited) checked @endif required>
+                                    @if ($user->are_you_accredited) checked @endif  >
                                 <div class="invalid-feedback">Check Toogle Button</div>
                             </div>
                             <p>An accredited investor is defined by U.S. federal law:</p>
@@ -134,15 +169,37 @@
                                     value="{{ $user->userDetail->dob }}" required>
                                 <div class="invalid-feedback">Please Select Birthday </div>
                             </div>
-                        </div>
+                        </div> 
+                        <div class="row g-lg-3 align-items-center mb-3 mt-lg-4">
+                            <div class="col-lg-2">
+                                <label for="inputPassword6" class="col-form-label"><span
+                                        class="text-danger fs-4">*</span> Phone Number:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                   <div class="col-lg-4"> 
+                                    <select class="form-control cc" name="cc" required
+                                    data-control="select2">
+                                    @include('user.partials.cc')
+                                    </select>
+                                   </div>
+                                   <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="phone" required
+                                    id="phone_number" value="{{ $user->phone }}" />
+                                    <code>-999-999-9999</code>  
+                                   </div>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
-                                <label for="ssn-number" class="col-form-label"><span class="text-danger fs-4">*</span>
+                                 
+                                <label for="ssn-number"  class=" col-form-label"><span class="text-danger fs-4">*</span>
                                     SSN:</label>
                             </div>
                             <div class="col-lg-6">   
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="primary_contact_social_security" style=" border-top-right-radius: 0;  border-bottom-right-radius: 0;"
+                                    <input   class="form-control" name="primary_contact_social_security" style=" border-top-right-radius: 0;  border-bottom-right-radius: 0;"
                                         @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null)
                                             type="password"
                                             value="999-99-9999" readonly
@@ -166,11 +223,64 @@
                                 </div>
                                 
                             </div>
+                        </div> 
+                        <div class="row g-lg-3 align-items-center mb-3">
+                            <div class="col-lg-2">
+                                <label for="ssn-number" class="col-form-label"><span class="text-danger fs-4">*</span>
+                                    Document Type:</label> 
+                            </div>
+                            <div class="col-lg-6">    
+                                    <select class="form-select doc_type" data-control="select2"
+                                        data-placeholder="Select Document Type" required name="doc_type">
+                                        @if ($user->hasRole('issuer'))
+                                            <option value="other">Other</option>
+                                            <option value="proofOfAddress">Proof Of Address</option>
+                                            <option value="proofOfCompanyFormation"> Proof Of Company Formation
+                                            </option>
+                                        @else
+                                            <option value="license">License</option>
+                                            <option value="identificationCard"> Identification Card </option>
+                                            <option value="passport"> Passport </option>
+                                        @endif
+                                    </select>
+                                   
+                            </div>
+                        </div> 
+
+                        <div class="col-lg-12">
+                            <div class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
+                                <div class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
+                                    <div class="col-lg-12 mb-5">
+                                        <a href="{{ $user->getFirstMediaUrl('kyc_document_collection', 'thumb') }}"
+                                            download title="Download Document File">
+                                            <i class="la la-download"></i>
+                                        </a>
+                                    </div>
+                                    <button type="button"  class="kyc_document_upload_btn btn btn-sm btn-dark-primary btn-square mb-1">
+                                        <i class="fa fa-upload"></i>
+                                        Upload Document
+                                    </button>
+                                    <input type="file" name="kyc_document"
+                                    class="new_profile_photo  d-none change_photo"
+                                    data-type="project_logo">
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="row g-lg-3 align-items-center mb-3">
+                            <div class="col-lg-2">
+                                    &nbsp;&nbsp; &nbsp; 
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Run KYC</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-check form-switch"> 
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="kyc_run">
+                                  </div>
+                            </div>
+                             
+                        </div> 
                         <div class="col-12">
-                            <button class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold"
-                                type="submit">Save & Continue</button>
+                            <button class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold"   type="submit">Save & Continue</button>  
                         </div>
                     </form>
 
@@ -188,9 +298,6 @@
     ></script>
 
     <script>
-          
-
-
         const passwordInput = document.getElementById("primary_contact_social_security");
         const toggleButton = document.getElementById("show_ssn_field"); 
         if (toggleButton ) {
@@ -211,6 +318,124 @@
         }  
         $('#phone_number').mask('-999-999-9999');
         $('#ein_number').mask('99-9999999');
+        
+        $('#primary_contact_social_security').on('focus', function() {
+            const passwordInput = document.getElementById("primary_contact_social_security");
+            const toggleButton = document.getElementById("show_ssn_field"); 
+            if (passwordInput.type === "password") {
+                        passwordInput.type = "text";
+                        passwordInput.value = "";
+                        passwordInput.removeAttribute('readonly');
+                        $('#primary_contact_social_security').attr('required', true); 
+                        $('#primary_contact_social_security').mask('999-99-9999');
+                    }else{
+                        passwordInput.removeAttribute('readonly');
+                        passwordInput.type = "text";
+                        passwordInput.value = "";
+                        $('#primary_contact_social_security').mask('999-99-9999');
+            } 
+        });
        
+    </script> 
+    <script>
+        $(document).ready(function() {
+            $('.myNumberField').inputmask();
+        });
+    </script> 
+    
+    <script>
+        $(document).ready(function () {
+            $('#profile_update_form').submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission 
+                // Get the form data
+                var formData = $(this).serialize(); 
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response) 
+                        $('.kyc_level_area').load(' .kyc_level_area');
+                        if (response.success == false) { 
+                            if (response.status == 400) {
+                                if (response.errors && response.errors.length > 0) {
+                                    // Check for specific validation errors
+                                    if (response.errors[1] && response.errors[1].Phone) {
+                                        // Display validation error for Phone field
+                                        console.log(response.errors[1].Phone[0]);
+                                        toastr.error(response.errors[1].Phone[0],
+                                            "Validation Error");
+                                    } else {
+                                        // Display other validation errors
+                                        jQuery.each(response.errors, function(index, item) {
+                                            if (typeof item === 'object') {
+                                                jQuery.each(item, function(key,
+                                                    value) {
+                                                    console.log(key + ": " +
+                                                        value);
+                                                    toastr.error(value,
+                                                        "Validation Error"
+                                                        );
+                                                });
+                                            }
+                                        });
+                                    }
+                                } else {
+                                    // Display generic error message
+                                    console.log(response.errors[0]);
+                                    toastr.error(response.errors[0], "Error");
+                                }
+                            } 
+                            if (typeof response.errors !== 'undefined' && response
+                                .errors !== null) {
+                                jQuery.each(response.errors, function(index, item) {
+                                    toastr.error(item, "Error");
+                                });
+                            }
+                            }
+                            if (response.status == true) {
+                                toastr.success('Verification Has Been Completed', "Success"); 
+                            }
+                            if (response.status == 200) {
+                                toastr.success('Verification Has Been Completed', "Success"); 
+                            }
+                    },
+                    error: function (xhr) {
+                        console.log('erros')
+                        // Handle validation errors from the server
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+                        $.each(errors, function (key, value) {
+                            errorMessage += '<p class="text-danger">' + value[0] + '</p>';
+                        });
+                        $('#responseMessage').html(errorMessage);
+                    },
+                });
+            });
+        });
+
+        $(document).ready(function() {
+        // Apply the masking to the state field
+            $('.zipCode').mask('00000');
+            $('#primary_contact_social_security').mask('***-**-****');
+             
+            @if ($user->identityVerification)
+                $('.country_residence').val('{{ $user->identityVerification->country_residence }}')
+            @endif
+            @if ($user->identityVerification)
+                $('.nationality').val('{{ $user->identityVerification->nationality }}')
+            @endif
+
+
+            
+        });
+        $('.kyc_document_upload_btn').click(function() {
+            var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
+            imgBtnWrapper.find('.change_photo').click();
+        });
     </script>
+
+  
 @endsection
