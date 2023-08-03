@@ -42,7 +42,7 @@
                         <!--end::Item-->
                     </ul>
 
-                   
+
                     <!--end::Breadcrumb-->
                 </div>
                 <!--end::Page title-->
@@ -99,9 +99,14 @@
                             <div class="d-flex flex-column m-lg-8">
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
-                                    <span class="text-gray-900 text-hover-primary fs-2 fw-bold"> {{ $user->name }} |  @if ($user->userDetail)  {{ $user->userDetail->last_name }}     @endif
-                                        <br/>
-                                        <small class="text-warning">{{ $user->email }} </small>  - <small class="text-info">  {{ ucfirst($user->roles()->pluck('name')->implode(' ')) }} </small> - <small class="text-success" style="font-size: 13px"> [ {{ $user->user_type }} ]</small>
+                                    <span class="text-gray-900 text-hover-primary fs-2 fw-bold"> {{ $user->name }} |
+                                        @if ($user->userDetail)
+                                            {{ $user->userDetail->last_name }}
+                                        @endif
+                                        <br />
+                                        <small class="text-warning">{{ $user->email }} </small> - <small class="text-info">
+                                            {{ ucfirst($user->roles()->pluck('name')->implode(' ')) }} </small> - <small
+                                            class="text-success" style="font-size: 13px"> [ {{ $user->user_type }} ]</small>
                                     </span>
                                 </div>
                                 <!--end::Name-->
@@ -313,7 +318,7 @@
                                         <div class="col-lg-12 mb-3">
                                             <h3>
                                                 CONTACT INFORMATION
-                                            </h3> 
+                                            </h3>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-10">
@@ -322,7 +327,7 @@
                                                         <label>First Name: <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control"
                                                             placeholder="First Name*" required name="first_name"
-                                                            value="{{ $user->name }}"  />
+                                                            value="{{ $user->name }}" />
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <label>Middle Name: <span class="text-danger"></span></label>
@@ -361,7 +366,7 @@
                                                                 <input type="text" class="form-control" name="phone"
                                                                     id="phone_number" value="{{ $user->phone }}" />
                                                             </div>
-                                                            <code>-999-999-9999</code>  
+                                                            <code>-999-999-9999</code>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -418,8 +423,8 @@
                                                     <!--end::Remove-->
                                                 </div>
                                             </div>
-                                        </div>  
-                                    </div> 
+                                        </div>
+                                    </div>
                                     <div class="form-group row mb-10">
                                         @if ($user->user_type == 'entity')
                                             <div class="col-lg-12 mb-3">
@@ -478,9 +483,9 @@
                                             <h6>
                                                 Address
                                             </h6>
-                                        </div> 
+                                        </div>
 
-                                        {{-- End Issuer Details --}} 
+                                        {{-- End Issuer Details --}}
                                         <div class="col-lg-6">
                                             <label>Address <span class="text-danger">*</span> </label>
                                             <input type="text" class="form-control" name="address"
@@ -494,7 +499,7 @@
                                                 @if ($user->userDetail) value="{{ $user->userDetail->suit }}" @endif
                                                 placeholder="Suit / Unit">
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="form-group row mb-10">
                                         <div class="col-lg-4">
                                             <label>City <span class="text-danger">*</span> </label>
@@ -512,24 +517,27 @@
 
                                         <div class="col-lg-4">
                                             <label>Zip / Postal Code <span class="text-danger">*</span> </label>
-                                            <input type="number" placeholder="12345" class="form-control" name="zip" id="zip_code" min="5"  
+                                            <input type="number" placeholder="12345" class="form-control"
+                                                name="zip" id="zip_code" min="5"
                                                 @if ($user->userDetail) value="{{ $user->userDetail->zip }}" @endif
                                                 placeholder="Zip / Postal Code (12345) " required>
                                         </div>
-                                    </div> 
+                                    </div>
                                     @if ($user->hasRole('issuer'))
                                         <div class="form-group row mb-10">
                                             <div class="col-lg-6">
-                                                <label>State/Region of Legal Formation <span class="text-danger">*</span> </label>
-                                                <select name="legal_formation" id="" class="form-control legal_formation" required>
-                                                        <option value="ccorp"> CCORP </option>
-                                                        <option value="llc">  LLC </option>
-                                                        <option value="partnership">  PARTNERSHIP </option>
-                                                        <option value="nonprofit">  NON PROFIT </option>
-                                                        <option value="scorp"> SCORP </option>
-                                                        <option value="soleprop">  SOLEPROP </option>
-                                                        <option value="other"> Other </option> 
-                                                </select> 
+                                                <label>State/Region of Legal Formation <span class="text-danger">*</span>
+                                                </label>
+                                                <select name="legal_formation" id=""
+                                                    class="form-control legal_formation" required>
+                                                    <option value="ccorp"> CCORP </option>
+                                                    <option value="llc"> LLC </option>
+                                                    <option value="partnership"> PARTNERSHIP </option>
+                                                    <option value="nonprofit"> NON PROFIT </option>
+                                                    <option value="scorp"> SCORP </option>
+                                                    <option value="soleprop"> SOLEPROP </option>
+                                                    <option value="other"> Other </option>
+                                                </select>
                                             </div>
 
                                             <div class="col-lg-6">
@@ -540,8 +548,8 @@
                                                     required>
                                             </div>
                                         </div>
-                                    @endif 
-                                    
+                                    @endif
+
                                     <div class="row">
                                         @if ($user->hasRole('investor'))
                                             <div class="col-lg-12 text-center ">
@@ -555,8 +563,8 @@
                                                         Electronic Delivery</span>
                                                 </label>
                                             </div>
-                                        @endif 
-                                    </div> 
+                                        @endif
+                                    </div>
                                     <div class="card-title mt-6 mb-3">
                                         <h2>Identity Verification</h2>
                                     </div>
@@ -567,17 +575,15 @@
                                                     Primary Contact Social Security # <small>(US Investors Only)</small>
                                                     <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <input  class="form-control"
-                                                    placeholder="Primary Contact Social Security"   
-                                                    name="primary_contact_social_security" 
-                                                    @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null)
-                                                    type="password"
+                                                    <input class="form-control"
+                                                        placeholder="Primary Contact Social Security"
+                                                        name="primary_contact_social_security"
+                                                        @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null) type="password"
                                                     value="999-99-9999" readonly
                                                     @else
                                                     required
-                                                    type="text"
-                                                    @endif  
-                                                    id="primary_contact_social_security"   />
+                                                    type="text" @endif
+                                                        id="primary_contact_social_security" />
                                                     <div class="input-group-append">
                                                         <button class="btn btn-secondary  no-radius" id="show_ssn_field"
                                                             type="button">x</button>
@@ -608,23 +614,22 @@
                                         @else
                                             <div class="form-group mb-10 col-lg-6">
                                                 <label> Social Security # <small>(US Investors Only)</small>
-                                                <div class="input-group">
-                                                    <input  class="form-control"
-                                                        placeholder="Primary Contact Social Security"   
-                                                        name="primary_contact_social_security" 
-                                                        @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null)
-                                                        type="password"
+                                                    <div class="input-group">
+                                                        <input class="form-control"
+                                                            placeholder="Primary Contact Social Security"
+                                                            name="primary_contact_social_security"
+                                                            @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null) type="password"
                                                         value="999-99-9999" readonly
                                                         @else
                                                         required
-                                                        type="text"
-                                                        @endif  
-                                                        id="primary_contact_social_security"   />
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-secondary  no-radius"
-                                                            id="show_ssn_field" type="button" title="Add/Update SSN">x</button>
+                                                        type="text" @endif
+                                                            id="primary_contact_social_security" />
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-secondary  no-radius"
+                                                                id="show_ssn_field" type="button"
+                                                                title="Add/Update SSN">x</button>
+                                                        </div>
                                                     </div>
-                                                </div>  
                                             </div>
                                         @endif
                                         <div class="row">
@@ -691,7 +696,7 @@
 
                                                                     @endif
                                                                 @else
-                                                                    @if ($user->identity_container_id == null || $user->business_id == null  )
+                                                                    @if ($user->identity_container_id == null || $user->business_id == null)
                                                                         <button type="button" style="width: 100%"
                                                                             class="btn btn-sm no-radius -square btn-dark check_kyc"
                                                                             data-id="{{ $user->id }}">
@@ -731,8 +736,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                    </div> 
+                                        </div>
+                                    </div>
                                     <div class="form-group row mb-10">
                                         <div class="col-lg-3">
                                             <label>Nationality <span class="text-danger">*</span></label>
@@ -768,8 +773,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
-                                            <div  class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
+                                        <div
+                                            class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
+                                            <div
+                                                class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
                                                 <div class="col-lg-12 mb-5">
                                                     <a href="{{ $user->getFirstMediaUrl('kyc_document_collection', 'thumb') }}"
                                                         download title="Download Document File">
@@ -784,9 +791,9 @@
                                                 <input type="file" name="kyc_document"
                                                     class="new_profile_photo  d-none change_photo"
                                                     data-type="project_logo">
-                                            </div>  
-                                        </div> 
-                                    </div>  
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
@@ -804,7 +811,7 @@
                 </div>
                 <!--end:::Accounts Tab pane-->
                 <!--end:::Accounts Tab pane-->
-                
+
                 <!--begin:::Profile Tab pane-->
                 <div class="tab-pane fade" id="kt_profile_tab" role="tabpanel">
                     <!--begin::Card-->
@@ -963,12 +970,12 @@
                                                 </select>
                                             </div>
 
-                                          
+
                                         </div>
 
                                     </div>
                                 @endif
-                                
+
                                 {{-- Issuer Details  --}}
                                 @if ($user->hasRole('issuer'))
                                     <div class="card-body">
@@ -1033,7 +1040,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif  
+                                @endif
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -1041,7 +1048,7 @@
                                             <input type="password" name="password" class="form-control">
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-lg-12 text-center">
@@ -1904,7 +1911,7 @@
 @section('page_js')
 
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script></script> 
+    <script></script>
     <script>
         $('.information_fields').hide();
         $.ajaxSetup({
@@ -2079,7 +2086,7 @@
                             listItem +=
 
                                 `  <div class="col-lg-6 mb-10">
-                                    <input type="text" class="selected_folder_id"  value="`+folder_id+`"/>
+                                    <input type="text" class="selected_folder_id"  value="` + folder_id + `"/>
                             <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
                                 <!--begin::Avatar-->
                                 <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3"> ` + value
@@ -2163,32 +2170,36 @@
                         success: function(response) {
                             $('.kyc_wrapper').load(' .kyc_wrapper');
 
-                            if (response.success == false) {
-
+                            if (response.success == false) { 
                                 if (response.status == 400) {
-    if (response.errors && response.errors.length > 0) {
-        // Check for specific validation errors
-        if (response.errors[1] && response.errors[1].Phone) {
-            // Display validation error for Phone field
-            console.log(response.errors[1].Phone[0]);
-            toastr.error(response.errors[1].Phone[0], "Validation Error");
-        } else {
-            // Display other validation errors
-            jQuery.each(response.errors, function(index, item) {
-                if (typeof item === 'object') {
-                    jQuery.each(item, function(key, value) {
-                        console.log(key + ": " + value);
-                        toastr.error(value, "Validation Error");
-                    });
-                }
-            });
-        }
-    } else {
-        // Display generic error message
-        console.log(response.errors[0]);
-        toastr.error(response.errors[0], "Error");
-    }
-}
+                                    if (response.errors && response.errors.length > 0) {
+                                        // Check for specific validation errors
+                                        if (response.errors[1] && response.errors[1].Phone) {
+                                            // Display validation error for Phone field
+                                            console.log(response.errors[1].Phone[0]);
+                                            toastr.error(response.errors[1].Phone[0],
+                                                "Validation Error");
+                                        } else {
+                                            // Display other validation errors
+                                            jQuery.each(response.errors, function(index, item) {
+                                                if (typeof item === 'object') {
+                                                    jQuery.each(item, function(key,
+                                                        value) {
+                                                        console.log(key + ": " +
+                                                            value);
+                                                        toastr.error(value,
+                                                            "Validation Error"
+                                                            );
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        // Display generic error message
+                                        console.log(response.errors[0]);
+                                        toastr.error(response.errors[0], "Error");
+                                    }
+                                }
 
 
 
@@ -2265,12 +2276,12 @@
                     //$('.update_document_wrapper').load(' .update_document_wrapper');
                     if (response.status == 201) {
                         toastr.success('Document Has Been Updated', "Success");
-                    } else { 
+                    } else {
                         console.log(response);
                         jQuery.each(response.errors, function(index, item) {
                             toastr.error(item, "Error");
                         });
-                       // toastr.error(response.message, "Error");
+                        // toastr.error(response.message, "Error");
                     }
                 }
             });
@@ -2299,7 +2310,7 @@
         const toggleButton = document.getElementById("show_ssn_field");
 
         if (toggleButton && passwordInput) {
-            toggleButton.addEventListener("click", () => { 
+            toggleButton.addEventListener("click", () => {
                 if (passwordInput.type === "password") {
                     passwordInput.type = "text";
                     passwordInput.value = "";
@@ -2309,7 +2320,7 @@
                         "mask": "999-99-9999"
                     }).mask("#primary_contact_social_security");
 
-                }  
+                }
             });
         }
 
@@ -2331,8 +2342,8 @@
             $('.doc_type').val('{{ $user->identityVerification->doc_type }}')
         @endif
 
-        @if ($user->userDetail) 
-           $('.legal_formation').val('{{ $user->userDetail->legal_formation }}') 
+        @if ($user->userDetail)
+            $('.legal_formation').val('{{ $user->userDetail->legal_formation }}')
         @endif
 
         $('body').on('click', '.update_aml_status', function() {
@@ -2356,13 +2367,13 @@
 
         Inputmask({
             "mask": "-999-999-9999"
-        }).mask("#phone_number"); 
+        }).mask("#phone_number");
 
         Inputmask({
             "mask": "99-9999999"
         }).mask("#ein_number");
         Inputmask({
-                        "mask": "***-**-****"
+            "mask": "***-**-****"
         }).mask("#primary_contact_social_security");
     </script>
 @endsection

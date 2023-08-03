@@ -58,8 +58,7 @@ class MakeInvestmentController extends Controller
     }
     public function submitInvestment(Request $request)
     {
-       
-       
+        
        $request->validate([
          	'offer_id' => 'required',
           	'investment_amount' => 'integer',
@@ -77,59 +76,17 @@ class MakeInvestmentController extends Controller
         
         if (Auth::user()->hasRole('issuer')){ 
             return redirect()->back()->with('error', 'Only User With Role Investor Can Invest');
-        }  
-       
-        $production_auth = 'https://fortress-prod.us.auth0.com/oauth/token';
+        }   
         $investment_amount = $request->investment_amount;
-        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);
-           
+        $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id); 
         $investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
         $user = User::where('id', Auth::user()->id)->first();
-        $fortress_personal_identity = Auth::user()->fortress_personal_identity;
-        $fortress_id = Auth::user()->fortress_id; 
-        $user = Auth::user();  
-            
-        try {
-            $get_token = Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($this->authUrl['url'], [
-                'grant_type' => $this->authUrl['grant_type'],
-                'username'   => $this->authUrl['username'],
-                'password'   => $this->authUrl['password'],
-                'audience'   => $this->authUrl['audience'],
-                'client_id'  => $this->authUrl['client_id'],
-            ]);
-            $token_json =  json_decode((string) $get_token->getBody(), true);
-            if ($get_token->failed()) {       
-                return redirect()->back()->with('error', 'Internal Server Error [Token]'.$token_json);
-            }
-        } catch (Exception $error) { 
-            return redirect()->back()->with('error', 'Internal Server Error [Token]'.$error);
-        } 
-       
-        try {
-            $url_widget = $this->baseUrl."/api/trust/v1/external-accounts/financial/widget-url/".$fortress_personal_identity;  
-            $widget = Http::withToken($token_json['access_token'])->get($url_widget);
-            $json_widget =  json_decode((string) $widget->getBody(), true);   
-            if ($widget->failed()) {   
-                return redirect()->back()->with('error', 'Internal Server Error [Widget]');
-            }
-           
-        } catch (Exception $error) {    
-            return redirect()->back()->with('error', 'Internal Server Error [Widget]'.$error);
-        }
-        
-        $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
-        $json_e_sign_templates = json_decode((string) $e_sign->getBody(), true);        
-        if ($e_sign->failed()) { 
-            return redirect()->back()->with('error', 'Internal Server Error [e sign]'.$json_e_sign_templates);
-        }
-
       
-        return view('investment.process', compact('investmentSteps', 'user', 'offer', 'investment_amount', 'json_widget', 'json_e_sign_templates'));
+        
+        return view('investment.process', compact('investmentSteps', 'user', 'offer', 'investment_amount'));
 
 
-
+        dd(1);
         $url_member = $this->baseUrl . "/financial-institutions/sandbox/members/" . $fortress_personal_identity;
         $member = Http::withToken($token_json['access_token'])->get($url_member);
         $json_member =  json_decode((string) $member->getBody(), true);
@@ -346,14 +303,14 @@ class MakeInvestmentController extends Controller
        
         $request->validate([
             'offer_id' => 'required',
+            'payment_type'=> 'required',
             //'account_type'=>'required',
             //'investment_limit'=>'required',
             //'bypass_account_setup'=>'required', 
             'user_guid' => 'required',
             //'templates' => 'required',
             'investment_amount' => 'required',
-        ]);
-         
+        ]); 
         $offer = Offer::with('user')->findOrFail($request->offer_id);  
         $template_id = $offer->offerEsing->template_id;  
         try{
@@ -364,7 +321,7 @@ class MakeInvestmentController extends Controller
             } 
         }catch(Exception $esign_error){
             return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
-        } 
+        }  
         try{  
             $signature_name    = $offer->user->name;
             $signature_email   = $offer->user->email;
@@ -482,7 +439,7 @@ class MakeInvestmentController extends Controller
         if (!$custodial_account) {  
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
-      
+       
         $member_id = explode(',', $request->user_guid);
         $filteredArray = array_filter($member_id, function ($value) {
             return $value !== '';
@@ -490,8 +447,7 @@ class MakeInvestmentController extends Controller
         $member_id = '';
         foreach ($filteredArray as $value) {
             $member_id = $value;
-        }
-       
+        } 
         $identityId = Auth::user()->fortress_personal_identity;
         $offer = Offer::with('user')->findOrFail($request->offer_id); 
 
@@ -509,11 +465,10 @@ class MakeInvestmentController extends Controller
             $token_json =  json_decode((string) $get_token->getBody(), true);
             // dd($token_json['access_token']);
         } catch (Exception $error) { 
-            return redirect()->back()->with('error','Internal Server Error Token [Step 2]-'.$error);
+            return redirect()->back()->with('error','Internal Server Error For Token -'.$error);
         }
        
-        try {
-            
+        try { 
             $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
             $member_identity = Http::withToken($token_json['access_token'])->post(
                 $member_identity_url,
@@ -524,13 +479,12 @@ class MakeInvestmentController extends Controller
             ); 
             $member_identity =  json_decode((string) $member_identity->getBody(), true);  
         } catch (Exception $error) {  
-            return redirect()->back()->with('error','Internal Server Error financial-institutions [Step 3]-'.$error);
+            return redirect()->back()->with('error','Internal Server Error financial-institutions -'.$error);
         }
        
         //Retrieve any bank accounts that are connected
       
-        try {
-           
+        try { 
             $accounts_url =  $this->baseUrl . "/api/trust/v1/financial-institutions/accounts/" . $identityId . '/' . $member_id;
             $accounts = Http::withToken($token_json['access_token'])->get($accounts_url);
             $accounts_Json =  json_decode((string) $accounts->getBody(), true);  
@@ -679,4 +633,82 @@ class MakeInvestmentController extends Controller
             'data' => $json_e_sign
         ]);
     }
+
+    public function getWidgetUrl(Request $request)
+    {
+
+
+        // $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
+        // $json_e_sign_templates = json_decode((string) $e_sign->getBody(), true);        
+        // if ($e_sign->failed()) { 
+        //     return redirect()->back()->with('error', 'Internal Server Error [e sign]'.$json_e_sign_templates);
+        // }
+
+
+        try {
+            $get_token = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
+            ]); 
+            $token_json =  json_decode((string) $get_token->getBody(), true);    
+            if ($get_token->failed()) { 
+                $errors[] = 'Error While Creating Token';
+                return response([
+                    'status' => $get_token->status(),
+                    'success' => false,
+                    'errors' => $errors[] = 'Error',
+
+                ]);
+            }
+        }catch(Exception $token_error){
+            $errors[] = 'Error While Creating Token';
+            $errors[] = $token_error; 
+            return response([
+                'success'  => false,
+                'errors' => $errors,
+            ]);
+        } 
+        $fortress_personal_identity = Auth::user()->fortress_personal_identity;  
+        try {
+            $url_widget = $this->baseUrl."/api/trust/v1/external-accounts/financial/widget-url/".$fortress_personal_identity;  
+            $widget = Http::withToken($token_json['access_token'])->get($url_widget);
+            $json_widget =  json_decode((string) $widget->getBody(), true);   
+            if ($widget->failed()) {   
+                $errors[] = 'Error While Creating Widget Url'; 
+                return response([
+                    'success'  => false,
+                    'errors' => $errors,
+                    'url'=> null
+                ]);
+            } 
+            if ($widget->successful()) { 
+                $errors = 'URL has been generated'; 
+                return response([
+                    'success'  => true,
+                    'errors' => $errors,
+                    'url'=> $json_widget['widgetUrl']
+                ]);
+
+            }
+           
+        } catch (Exception $error) {    
+            $errors[] = 'Error While Creating Widget Url';
+            $errors[] = $error; 
+            return response([
+                'success'  => false,
+                'errors' => $errors,
+                'url'=> null
+            ]);
+        }
+
+
+    }
+
+
+    
 }

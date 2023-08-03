@@ -32,7 +32,7 @@ class SocialiteController extends Controller
                 $user->password  =  Hash::make('Google@123');
                 $user->phone = '0000-000-00';
                 $user->agree_consent_electronic = false;
-                $user->status = 'inactive';
+                $user->status = 'active';
                 $user->is_primary = 'yes';
                 $user->social_id = $google_data->id;
                 $user->social_type = 'google';

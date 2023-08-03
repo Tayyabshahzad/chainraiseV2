@@ -70,7 +70,8 @@ Route::middleware(['check.profile.complete','verified','auth'])->group(function 
     Route::get('account', [FrontendController::class, 'my_account'])->name('my.account');
     Route::post('account/update', [FrontendController::class, 'my_account_update'])->name('my.account.update');
     Route::get('documents', [FrontendController::class, 'my_documents'])->name('my.documents');
-    Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('my.portfolio'); 
+    Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('my.portfolio');
+    Route::post('verify_identity', [FrontendController::class, 'verify_identity'])->name('investment.verify_identity'); 
 
 }); 
 Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Investor'], function () {
@@ -94,7 +95,8 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
     Route::get('payment-method', ['as' => 'payment.method','uses' => 'MakeInvestmentController@payment_method']);
     Route::get('connect-bank', ['as' => 'connect.bank','uses' => 'MakeInvestmentController@connect_bank']);
     Route::get('sign-subscription', ['as' => 'sign.subscription','uses' => 'MakeInvestmentController@sign_subscription']);
-    Route::post('get.template', ['as' => 'get.template','uses' => 'MakeInvestmentController@getTemplate']);
+    Route::post('get/template', ['as' => 'get.template','uses' => 'MakeInvestmentController@getTemplate']);
+    Route::get('get/widget/url', ['as' => 'get.widget.url','uses' => 'MakeInvestmentController@getWidgetUrl']);
 });
 Route::get('login', function () {  return view('auth.login');});
 Route::get('login-test', function () { return view('auth.login_test');});

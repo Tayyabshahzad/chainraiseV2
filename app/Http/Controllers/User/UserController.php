@@ -107,7 +107,7 @@ class UserController extends Controller
             $user->status = 'active';
         }
         $user->save();
-        Mail::to($user)->send(new UserStatusUpdate($user));
+        //Mail::to($user)->send(new UserStatusUpdate($user));
         return response([
             'status' => true,
             'message' => 'Status Updated to '.$user->status
