@@ -28,62 +28,62 @@ class KycController extends Controller
         $this->authUrl = config('credentials.auth0.' . $environment);  
          
     } 
-        public function updateKycCheck($id){ 
-            //dd($this->baseUrl . 'your-endpoint');
-            $user = User::find($id);  
-            if($user->check_kyc == true){
-                $kyc = false;
-            }elseif($user->check_kyc == false){
-                $kyc = true;
-            } 
-            $user->check_kyc = $kyc;
-            $user->save();
-            if($user->check_kyc == true){
-                $data = 'Enabled';
-            }else{
-                $data = 'Disabled';
-            }
-            return response([
-                'data'=>$data,
-                'status'=>true
-            ]);
+    public function updateKycCheck($id){ 
+        //dd($this->baseUrl . 'your-endpoint');
+        $user = User::find($id);  
+        if($user->check_kyc == true){
+            $kyc = false;
+        }elseif($user->check_kyc == false){
+            $kyc = true;
+        } 
+        $user->check_kyc = $kyc;
+        $user->save();
+        if($user->check_kyc == true){
+            $data = 'Enabled';
+        }else{
+            $data = 'Disabled';
         }
+        return response([
+            'data'=>$data,
+            'status'=>true
+        ]);
+    }
     public function checkKyc(Request $request)
     {
        
-        $request->validate([
-            'id' => 'required',
-        ]);  
+        // $request->validate([
+        //     'id' => 'required',
+        // ]);  
        
-        $errors = []; 
-        $user = User::with('userDetail')->find($request->id); 
-        if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
-            $errors[] = 'Please complete user profile first';
-            return response([
-                'status' => 'document',
-                'success' => false,
-                'errors' => $errors,
-            ]);
-        } 
+        // $errors = []; 
+        // $user = User::with('userDetail')->find($request->id); 
+        // if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
+        //     $errors[] = 'Please complete user profile first';
+        //     return response([
+        //         'status' => 'document',
+        //         'success' => false,
+        //         'errors' => $errors,
+        //     ]);
+        // } 
        
        
-        $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
-        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
-            $errors[] = 'Please Upload Document First';
-            return response([
-                'status' => 'document',
-                'success' => false,
-                'errors' => $errors,
-            ]);
-        }
-        if ($user->user_type == null) {
-            $errors[] = 'Please Update Settings Selected User Type is not Defined';
-            return response([
-                'status' => 'document',
-                'success' => false,
-                'errors' => $errors,
-            ]);
-        }
+        // $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
+        // if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+        //     $errors[] = 'Please Upload Document First';
+        //     return response([
+        //         'status' => 'document',
+        //         'success' => false,
+        //         'errors' => $errors,
+        //     ]);
+        // }
+        // if ($user->user_type == null) {
+        //     $errors[] = 'Please Update Settings Selected User Type is not Defined';
+        //     return response([
+        //         'status' => 'document',
+        //         'success' => false,
+        //         'errors' => $errors,
+        //     ]);
+        // }
         // Token Request 
        
         try {
@@ -112,7 +112,7 @@ class KycController extends Controller
                     'errors' => $errors,
                 ]);
         } 
-       
+       dd($token_json);
         $date_of_birth = $user->userDetail->dob;  
         if($user->user_type  == 'individual'){   
             if($user->fortress_id == null){    
