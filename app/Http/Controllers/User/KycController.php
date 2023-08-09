@@ -111,7 +111,8 @@ class KycController extends Controller
                     'success'  => false,
                     'errors' => $errors,
                 ]);
-        }   
+        } 
+       
         $date_of_birth = $user->userDetail->dob;  
         if($user->user_type  == 'individual'){   
             if($user->fortress_id == null){    

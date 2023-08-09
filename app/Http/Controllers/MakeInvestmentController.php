@@ -300,14 +300,14 @@ class MakeInvestmentController extends Controller
     }
     public function save(Request $request)
     { 
-       
+
         $request->validate([
             'offer_id' => 'required',
-            'payment_type'=> 'required',
+            'payment_type'=> 'required|in:wire,bank',
+            'user_guid' => 'required_if:payment_type,bank',
             //'account_type'=>'required',
             //'investment_limit'=>'required',
             //'bypass_account_setup'=>'required', 
-            'user_guid' => 'required',
             //'templates' => 'required',
             'investment_amount' => 'required',
         ]); 
@@ -439,18 +439,21 @@ class MakeInvestmentController extends Controller
         if (!$custodial_account) {  
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
-       
-        $member_id = explode(',', $request->user_guid);
-        $filteredArray = array_filter($member_id, function ($value) {
-            return $value !== '';
-        });
-        $member_id = '';
-        foreach ($filteredArray as $value) {
-            $member_id = $value;
-        } 
+        
+        if($request->payment_type == 'bank'){
+            $member_id = explode(',', $request->user_guid);
+            $filteredArray = array_filter($member_id, function ($value) {
+                return $value !== '';
+            });
+            $member_id = '';
+            foreach ($filteredArray as $value) {
+                $member_id = $value;
+            }
+        }
+
         $identityId = Auth::user()->fortress_personal_identity;
         $offer = Offer::with('user')->findOrFail($request->offer_id); 
-
+        
         
         try {  
             $get_token = Http::withHeaders([
@@ -467,67 +470,71 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) { 
             return redirect()->back()->with('error','Internal Server Error For Token -'.$error);
         }
-       
-        try { 
-            $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
-            $member_identity = Http::withToken($token_json['access_token'])->post(
-                $member_identity_url,
-                [
-                    'identityId' => $identityId,//Identity object pertaining to the end user
-                    'memberGuid' => $member_id, //member_guid returned from successful bank linking in
-                ]
-            ); 
-            $member_identity =  json_decode((string) $member_identity->getBody(), true);  
-        } catch (Exception $error) {  
-            return redirect()->back()->with('error','Internal Server Error financial-institutions -'.$error);
+        if($request->payment_type == 'bank'){
+            try { 
+                $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
+                $member_identity = Http::withToken($token_json['access_token'])->post(
+                    $member_identity_url,
+                    [
+                        'identityId' => $identityId,//Identity object pertaining to the end user
+                        'memberGuid' => $member_id, //member_guid returned from successful bank linking in
+                    ]
+                ); 
+                $member_identity =  json_decode((string) $member_identity->getBody(), true);  
+            } catch (Exception $error) {  
+                return redirect()->back()->with('error','Internal Server Error financial-institutions -'.$error);
+            }
         }
        
         //Retrieve any bank accounts that are connected
-      
-        try { 
-            $accounts_url =  $this->baseUrl . "/api/trust/v1/financial-institutions/accounts/" . $identityId . '/' . $member_id;
-            $accounts = Http::withToken($token_json['access_token'])->get($accounts_url);
-            $accounts_Json =  json_decode((string) $accounts->getBody(), true);  
-            if ($accounts->failed()) {
-                $status = $accounts->status();
-                Session::put('error', $accounts['title']);
-                return redirect()->back();
+        if($request->payment_type == 'bank'){
+            try { 
+                $accounts_url =  $this->baseUrl . "/api/trust/v1/financial-institutions/accounts/" . $identityId . '/' . $member_id;
+                $accounts = Http::withToken($token_json['access_token'])->get($accounts_url);
+                $accounts_Json =  json_decode((string) $accounts->getBody(), true);  
+                if ($accounts->failed()) {
+                    $status = $accounts->status();
+                    Session::put('error', $accounts['title']);
+                    return redirect()->back();
+                }
+                $accountGuid  = ''; 
+                //dd($accounts_Json);
+                foreach ($accounts_Json as $account) {
+                    //if($account['accountType'] == 'CHECKING'){
+                    //  $accountGuid = $account['accountGuid'];
+                    //  }
+                    $accountGuid = $account['accountGuid'];
+                }
+            } catch (Exception $error) {  
+                return redirect()->back()->with('error','Internal Server Error institutions- accounts [Step 4]-'.$error);
             }
-            $accountGuid  = ''; 
-            //dd($accounts_Json);
-            foreach ($accounts_Json as $account) {
-                //if($account['accountType'] == 'CHECKING'){
-                //  $accountGuid = $account['accountGuid'];
-                //  }
-                $accountGuid = $account['accountGuid'];
-            }
-        } catch (Exception $error) {  
-            return redirect()->back()->with('error','Internal Server Error institutions- accounts [Step 4]-'.$error);
         }
       
        
         //Now that you have the accountGuid, you will follow up with one last call to create a persistent object referencing the linked bank.
-        if (Auth::user()->external_account == null) { 
-            try {
-                $acc_user = User::find(Auth::user()->id);
-                $externalAccountsURL =  $this->baseUrl . "/api/trust/v1/external-accounts/financial";
-                $externalAccounts = Http::withToken($token_json['access_token'])->post(
-                    $externalAccountsURL,
-                    [
-                        'identityId' => $identityId,
-                        'financialAccountId' => $accountGuid,
-                    ]
-                );
-                $externalAccountJson =  json_decode((string) $externalAccounts->getBody(), true);
-                $externalAccountId = $externalAccountJson['id']; 
-                $acc_user->external_account = $externalAccountId;
-                $acc_user->save();
-            } catch (Exception $error) {  
-                return redirect()->back()->with('error','Error While Making Payment [Step 5]-'.$error);
-            }
-        } else {
-            $externalAccountId = Auth::user()->external_account;
-        } 
+        if($request->payment_type == 'bank'){
+            if (Auth::user()->external_account == null) { 
+                try {
+                    $acc_user = User::find(Auth::user()->id);
+                    $externalAccountsURL =  $this->baseUrl . "/api/trust/v1/external-accounts/financial";
+                    $externalAccounts = Http::withToken($token_json['access_token'])->post(
+                        $externalAccountsURL,
+                        [
+                            'identityId' => $identityId,
+                            'financialAccountId' => $accountGuid,
+                        ]
+                    );
+                    $externalAccountJson =  json_decode((string) $externalAccounts->getBody(), true);
+                    $externalAccountId = $externalAccountJson['id']; 
+                    $acc_user->external_account = $externalAccountId;
+                    $acc_user->save();
+                } catch (Exception $error) {  
+                    return redirect()->back()->with('error','Error While Making Payment [Step 5]-'.$error);
+                }
+            } else {
+                $externalAccountId = Auth::user()->external_account;
+            } 
+        }
        
          
         try {
@@ -708,6 +715,100 @@ class MakeInvestmentController extends Controller
 
 
     }
+
+    public function getWire(Request $request)
+    {
+       
+        $request->validate([
+            'offer_id' => 'required', 
+        ]);  
+
+        $offer = Offer::find($request->offer_id); 
+        if(!$offer){ 
+            $errors[] = 'Error While Getting Offer Data'; 
+            return response([
+                'status' => 404,
+                'success' => false,
+                'errors' => $errors
+
+            ]);
+        } 
+        if($offer->custodialAccount){
+            $custodialAccountId = $offer->custodialAccount->custodial_id;
+        }else{
+            $errors[] = 'Error While Custodial Account Information'; 
+            return response([
+                'status' => 404,
+                'success' => false,
+                'errors' => $errors
+
+            ]);
+        }
+        try {
+            $get_token = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
+            ]); 
+            $token_json =  json_decode((string) $get_token->getBody(), true);    
+            if ($get_token->failed()) { 
+                $errors[] = 'Error While Creating Token';
+                return response([
+                    'status' => $get_token->status(),
+                    'success' => false,
+                    'errors' => $errors[] = 'Error',
+
+                ]);
+            }
+        }catch(Exception $token_error){
+            $errors[] = 'Error While Creating Token';
+            $errors[] = $token_error; 
+            return response([
+                'success'  => false,
+                'errors' => $errors,
+            ]);
+        } 
+         
+     //  dd($custodialAccountId);
+        $url = $this->baseUrl."/api/trust/v1/custodial-accounts/".$custodialAccountId."/fiat-deposit-instructions/usd"; 
+       
+        try { 
+            $widget = Http::withToken($token_json['access_token'])->get($url);
+            $json_widget =  json_decode((string) $widget->getBody(), true);    
+            if ($widget->failed()) {   
+                $errors[] = 'Error While Fetching Wire Data'; 
+                return response([
+                    'success'  => false,
+                    'errors' => $errors,
+                    'data'=> null
+                ]);
+            } 
+            if ($widget->successful()) { 
+                $errors = 'Data Has been Fetched';  
+                return response([
+                    'success'  => true,
+                    'errors' => $errors,
+                    'data'=> $json_widget
+                ]);
+
+            } 
+        } catch (Exception $error) {    
+            $errors[] = 'Error While Fetching Wire Data';
+            $errors[] = $error; 
+            return response([
+                'success'  => false,
+                'errors' => $errors,
+                'data'=> null
+            ]);
+        }
+
+
+    }
+
 
 
     

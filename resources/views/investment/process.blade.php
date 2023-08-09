@@ -114,51 +114,39 @@
                             cx="20" cy="12" r="3" />
                         </svg>
                     </div>
-                    <div class="my-5  bank_wrapper d-none">
+                    <div class="my-5  bank_wrapper ">
                         <h4 class="fw-bolder">Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
                                 <button class="nav-link active bg-transparent text-muted " id="pills-home-tab"
                                     data-bs-toggle="pill" data-bs-target="#investment" type="button" role="tab"
-                                    aria-controls="pills-home" aria-selected="true">U.S. Bank</button>
+                                    aria-controls="pills-home" aria-selected="true"> ACH</button>
                             </li>
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
                                 <button class="nav-link bg-transparent text-muted " id="pills-profile-tab"
-                                    data-bs-toggle="pill" data-bs-target="#pending" type="button" role="tab"
-                                    aria-controls="pills-profile" aria-selected="false">Card</button>
+                                    data-bs-toggle="pill" data-bs-target="#investment_wire" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">Wire Transfer</button>
                             </li>
-                            <li class="nav-item px-lg-5 border-bottom" role="presentation">
-                                <button class="nav-link bg-transparent text-muted " id="pills-profile-tab"
-                                    data-bs-toggle="pill" data-bs-target="#date" type="button" role="tab"
-                                    aria-controls="pills-profile" aria-selected="false">Wire</button>
-                            </li>
+                           
                         </ul>
                         <div class="tab-content py-3" id="pills-tabContent">
                             <div class="tab-pane fade show active p-2" id="investment" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
-                                <p>Pay using a United States bank account:</p>  
+                                <p>Pay using a ACH:</p>  
                                 <button type="button"
                                 data-bs-toggle="modal"data-bs-target="#payment_widget" class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill payment_widget_button">
-                                    Select Bank Account
-                                </button> 
-                                 
-                            </div>
-
-                            <div class="tab-pane fade p-2" id="pending" role="tabpanel"
-                                aria-labelledby="pills-profile-tab">
-                                <p>Pay using a United States bank account:</p>
-                                <button type="button" class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill">
-                                    Select United States bank
-                                </button>
-
-                            </div>
-                            <div class="tab-pane fade p-2" id="date" role="tabpanel"
-                                aria-labelledby="pills-profile-tab">
-                                <p>Pay using a United States bank account:</p>
-                                <button type="button" class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill">
-                                    Select Bank Account
-                                </button>
+                                    Select ACH Bank Account
+                                </button>  
                             </div> 
+                            <div class="tab-pane fade p-2" id="investment_wire" role="tabpanel"
+                                aria-labelledby="pills-profile-tab">
+                                <p>Pay using a Wire Transfer:</p>
+                                <button type="button"
+                                data-bs-toggle="modal" data-bs-target="#payment_wire" class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill payment_wire_button">
+                                    Select ACH Bank Account
+                                </button>   
+                            </div>
+ 
                         </div>
                         <div class="my-5">
                             <h4 class="fw-bolder">Terms
@@ -246,7 +234,7 @@
                             </div>
                         </div>
                         <input type="hidden" class="user_guid" name="user_guid">
-                        <input type="hidden" class="payment_type" name="payment_type" required>
+                        <input type="" class="payment_type" name="payment_type" required>
                         <div class="d-grid gap-2">
                             <button type="submit" disabled class="confirm_investment_button btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill">
                                 Confirm Investment
@@ -552,10 +540,7 @@
                 </div> 
             </div>
         </div> 
-
-
-    
-
+ 
 
         <div class="modal fade" id="payment_widget" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog mw-650px">
@@ -581,6 +566,33 @@
                 <!--end::Modal content-->
             </div>
         </div>
+        <div class="modal fade" id="payment_wire" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog mw-650px">
+                <!--begin::Modal content-->
+                <div class="modal-content">
+                    <!--begin::Modal header--> 
+                    <div class="modal-body scroll-y mx-5 mx-xl-18 pt-5 pb-15">
+                        <div class="text-center loader_image">
+                            <img src="{{ asset('assets/media/spinner.svg') }}" alt="" >
+                        </div> 
+                        <div class="row" id="account_details">    
+                        </div> 
+                        <div class="tab-pane fade show active p-2 text-center"> 
+                            <button type="button" data-bs-dismiss="modal" disabled 
+                             class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill continue_investment_button ">
+                                Continue Investment
+                            </button>  
+                        </div>
+                         
+                    </div>
+                    <!--end::Modal body-->
+                </div>
+                <!--end::Modal content-->
+            </div>
+        </div>
+
+
+
     </div>
 
     <!-- Button trigger modal -->
@@ -760,6 +772,99 @@ crossorigin="anonymous"
                     },
                     error: function (xhr) {
                         console.log('erros') 
+                    },
+                });
+            });  
+            $('.payment_wire_button').click(function (event) { 
+                $('#account_details').html('');
+                event.preventDefault(); // Prevent the default form submission 
+                $('.payment_widget').attr('disabled', true); 
+                $('#user_guid').val('');  
+                $('#user_guid').attr('required', false);  
+                var offer_id = "{{ $offer->id }}";
+                $.ajax({
+                    url: "{{ route('invest.get.wire') }}",
+                    type: 'GET', 
+                    dataType: 'json',
+                    data:{
+                        offer_id : offer_id
+                    },
+                    success: function (response) { 
+                        if (response.success == true) { 
+                            $('.payment_type').val('wire');
+                            $('#account_details').append(`
+                                <div class="col-lg-12" style="margin-bottom:10px;margin-top:3em">
+                                        <div class="row">
+                                                <div class="col-lg-6">
+                                                    <h6> ACCOUNT NUMBER </h6>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <h6> `+response.data.wire.accountNumber+` </h6>
+                                                   
+                                                </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <h6> ROUTING NUMBER </h6>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h6> `+response.data.wire.routingNumber+` </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <h6> SWIFT CODE </h6>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h6> `+response.data.wire.swiftCode+` </h6>
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                                <div class="col-lg-12 mb-10">
+                                    <div class="row" style="border:1px solid #ccc;padding:15px;margin-bottom:10px;margin-top:3em">
+                                            <div class="col-lg-12 text-center" >
+                                                <h6> ACCOUNT HOLDER </h6>
+                                            </div>
+                                            <div class="col-lg-12 text-center">
+                                               <p>
+                                                `+response.data.wire.receiverName+`
+                                               </p>
+                                               <p>
+                                                `+response.data.wire.receiverAddress.street1+`
+                                               </p>
+                                            </div>
+                                    </div> 
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row" style="border:1px solid #ccc;padding:15px;margin-bottom:10px">
+                                            <div class="col-lg-12 text-center" >
+                                                <h6> BANK DETAILS </h6>
+                                            </div>
+                                            <div class="col-lg-12 text-center">
+                                               <p>
+                                                    `+response.data.wire.receiverBankName+`
+                                               </p>
+                                               <p>
+                                                `+response.data.wire.receiverBankAddress.street1+` <br/>
+                                                `+response.data.wire.receiverBankAddress.city+` 
+                                                `+response.data.wire.receiverBankAddress.state+` 
+                                                `+response.data.wire.receiverBankAddress.postalCode+` 
+                                               </p>
+                                            </div>
+                                    </div> 
+                                </div>
+                            `);
+                            toastr.success(response.errors, "Success"); 
+                            $('.loader_image').remove();  
+                            $('.continue_investment_button').attr('disabled', false);  
+                            $('.confirm_investment_button').attr('disabled', false);
+                        }else{
+                            toastr.error(response.errors[0], "Error"); 
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('error') 
                     },
                 });
             });  
