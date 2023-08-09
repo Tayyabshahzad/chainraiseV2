@@ -13,15 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class PaymentStatusUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $newStatus;
+    public $paymentData;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($newStatus)
+    public function __construct(array $paymentData)
     {
-        $this->newStatus = $newStatus;
+        $this->paymentData = $paymentData;
     }
 
     /**
