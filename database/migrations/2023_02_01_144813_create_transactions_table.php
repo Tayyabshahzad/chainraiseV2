@@ -26,13 +26,13 @@ return new class extends Migration
             $table->string('status');
             $table->string('type');
             $table->string('payment_method');
-            $table->string('transaction_id');
+            $table->string('transaction_id')->nullable();
             $table->text('e_sign')->nullable();
             $table->string('source_identityId');
-            $table->string('source_externalAccountId');
+            $table->string('source_externalAccountId')->nullable();
             $table->string('destination_identityId');
             $table->string('destination_custodialAccountId');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->string('currency');
             $table->timestamps();
         });
