@@ -17,4 +17,8 @@ class Custodial extends Model
         'accountType',
         'accountNumber'
     ];
+
+    public function offer(){
+        return $this->belongsTo(Offer::class);
+    }
 }

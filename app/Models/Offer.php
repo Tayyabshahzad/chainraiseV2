@@ -70,6 +70,11 @@ class Offer extends Model  implements HasMedia
         return $this->hasOne(OfferEsignTemplate::class);
     }
 
+    public function custodialAccount()
+    {
+        return $this->hasOne(Custodial::class);
+    }
+
   
 
 }

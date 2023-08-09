@@ -9,6 +9,7 @@ use App\Http\Controllers\MakeInvestmentController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 /*
@@ -26,6 +27,8 @@ use Laravel\Socialite\Facades\Socialite;
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
 });
+
+Route::get('webhook/endpoint', [WebhookController::class, 'handle']); 
  
 Route::get('email-layout', [FrontendController::class, 'layout_email']);
 Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
@@ -97,6 +100,7 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
     Route::get('sign-subscription', ['as' => 'sign.subscription','uses' => 'MakeInvestmentController@sign_subscription']);
     Route::post('get/template', ['as' => 'get.template','uses' => 'MakeInvestmentController@getTemplate']);
     Route::get('get/widget/url', ['as' => 'get.widget.url','uses' => 'MakeInvestmentController@getWidgetUrl']);
+    Route::get('get/wire', ['as' => 'get.wire','uses' => 'MakeInvestmentController@getWire']);
 });
 Route::get('login', function () {  return view('auth.login');});
 Route::get('login-test', function () { return view('auth.login_test');});
