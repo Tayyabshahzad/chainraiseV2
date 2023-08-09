@@ -303,8 +303,8 @@ class MakeInvestmentController extends Controller
 
         $request->validate([
             'offer_id' => 'required',
-            'payment_type'=> 'required|in:wire,bank',
-            'user_guid' => 'required_if:payment_type,bank',
+            'payment_type'=> 'required|in:wire,ach',
+            'user_guid' => 'required_if:payment_type,ach',
             //'account_type'=>'required',
             //'investment_limit'=>'required',
             //'bypass_account_setup'=>'required', 
@@ -440,7 +440,7 @@ class MakeInvestmentController extends Controller
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
         
-        if($request->payment_type == 'bank'){
+        if($request->payment_type == 'ach'){
             $member_id = explode(',', $request->user_guid);
             $filteredArray = array_filter($member_id, function ($value) {
                 return $value !== '';
@@ -470,7 +470,7 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) { 
             return redirect()->back()->with('error','Internal Server Error For Token -'.$error);
         }
-        if($request->payment_type == 'bank'){
+        if($request->payment_type == 'ach'){
             try { 
                 $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
                 $member_identity = Http::withToken($token_json['access_token'])->post(
@@ -487,7 +487,7 @@ class MakeInvestmentController extends Controller
         }
        
         //Retrieve any bank accounts that are connected
-        if($request->payment_type == 'bank'){
+        if($request->payment_type == 'ach'){
             try { 
                 $accounts_url =  $this->baseUrl . "/api/trust/v1/financial-institutions/accounts/" . $identityId . '/' . $member_id;
                 $accounts = Http::withToken($token_json['access_token'])->get($accounts_url);
@@ -512,7 +512,7 @@ class MakeInvestmentController extends Controller
       
        
         //Now that you have the accountGuid, you will follow up with one last call to create a persistent object referencing the linked bank.
-        if($request->payment_type == 'bank'){
+        if($request->payment_type == 'ach'){
             if (Auth::user()->external_account == null) { 
                 try {
                     $acc_user = User::find(Auth::user()->id);
@@ -536,88 +536,130 @@ class MakeInvestmentController extends Controller
             } 
         }
        
-         
-        try {
-            DB::beginTransaction(); 
-            $payment_url =  $this->baseUrl.'/api/trust/v1/payments'; 
-            $data = [
-                'source' => [
-                    'externalAccountId' => $externalAccountId,
-                ],
-                'destination' => [
-                    'custodialAccountId' => $custodial_account->custodial_id,
-                ],
-                "useIsa" => false,
-                'comment' => 'Offering Payment',
-                'funds' => $request->investment_amount,
-            ];
-          
-            $payment = Http::withToken($token_json['access_token'])
-            ->withHeaders([
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ])->post($payment_url,$data);
-            $json_response_payment =  json_decode((string) $payment->getBody(), true);   
-            if ($payment->failed()) {  
-                return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
-            } 
-             
-            if($payment->successful()){
-               
-                $order = new Order();
-                $order->offer_id = $offer->id;
-                $order->investor_id = Auth::user()->id;
-                $order->total = $request->investment_amount; 
-                $order->currency = $json_response_payment['currency']; 
-                $order->type = $json_response_payment['type']; 
-                $order->payment_method = '--';
-                $order->e_sign = $esign_contract_status;
-                $order->status = $json_response_payment['status']; 
-                $order->save(); 
-                $db_transaction = new Transaction;
-                $db_transaction->order_id = $order->id;
-                $db_transaction->offer_id = $offer->id;
-                $db_transaction->investor_id = Auth::user()->id;
-                $db_transaction->funds = $request->investment_amount;
-                $db_transaction->kyc_status = '---';
-                $db_transaction->status =$json_response_payment['status']; 
-                $db_transaction->type =  $json_response_payment['type']; 
-                $db_transaction->payment_method = '--';
-                $db_transaction->e_sign =  $esign_contract_status;
-                $db_transaction->transaction_id = $json_response_payment['id']; 
-                $db_transaction->source_identityId = $json_response_payment['source']['identityId'];
-                $db_transaction->source_externalAccountId = $json_response_payment['source']['externalAccountId'];
-                $db_transaction->destination_identityId = $json_response_payment['destination']['identityId'];
-                $db_transaction->destination_custodialAccountId = $json_response_payment['destination']['custodialAccountId'];
-                $db_transaction->comment = $json_response_payment['comment'];
-                $db_transaction->funds = $json_response_payment['funds'];
-                $db_transaction->currency = $json_response_payment['currency']; 
-                $db_transaction->save();  
-                $transaction_details = [
-                    'investor'=> Auth::user()->name,
-                    'investment_amount' => $request->investment_amount,
-                    'type_of_security' => 'Common Shares',
-                    'share_price' => 123,
-                    'share_count' => 0,
-                    'share_sold_date' =>Carbon::now()->format('D-m-Y'),
-                    'total_raised' => $offer->base_currency . $offer->size,
-                    'offer_name' =>  $offer->name,
-                    'trnx_total_raised' => 0,
-                    'trnx_last_cancel_date' => $offer->funding_end_date,
-                ];   
-               // Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));    
-                DB::commit(); 
-                return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
-            }    
-             
-        } catch (Exception $error) {    
-            DB::rollBack();   
-            return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
-        }
         
+        
+            try {
+                DB::beginTransaction(); 
+                if($request->payment_type == 'ach'){  
+                    $payment_url =  $this->baseUrl.'/api/trust/v1/payments'; 
+                    $data = [
+                        'source' => [
+                            'externalAccountId' => $externalAccountId,
+                        ],
+                        'destination' => [
+                            'custodialAccountId' => $custodial_account->custodial_id,
+                        ],
+                        "useIsa" => false,
+                        'comment' => 'Offering Payment',
+                        'funds' => $request->investment_amount,
+                    ]; 
+                    $payment = Http::withToken($token_json['access_token'])
+                    ->withHeaders([
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                    ])->post($payment_url,$data);
+                    $json_response_payment =  json_decode((string) $payment->getBody(), true);   
+                    if ($payment->failed()) {  
+                        return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
+                    } 
+                
+                    if($payment->successful()){ 
+                        $order = new Order();
+                        $order->offer_id = $offer->id;
+                        $order->investor_id = Auth::user()->id;
+                        $order->total = $request->investment_amount; 
+                        $order->currency = $json_response_payment['currency']; 
+                        $order->type = $json_response_payment['type']; 
+                        $order->payment_method = '--';
+                        $order->e_sign = $esign_contract_status;
+                        $order->status = $json_response_payment['status']; 
+                        $order->save(); 
+                        $db_transaction = new Transaction;
+                        $db_transaction->order_id = $order->id;
+                        $db_transaction->offer_id = $offer->id;
+                        $db_transaction->investor_id = Auth::user()->id;
+                        $db_transaction->funds = $request->investment_amount;
+                        $db_transaction->kyc_status = '---';
+                        $db_transaction->status =$json_response_payment['status']; 
+                        $db_transaction->type =  $json_response_payment['type']; 
+                        $db_transaction->payment_method = '--';
+                        $db_transaction->e_sign =  $esign_contract_status;
+                        $db_transaction->transaction_id = $json_response_payment['id']; 
+                        $db_transaction->source_identityId = $json_response_payment['source']['identityId'];
+                        $db_transaction->source_externalAccountId = $json_response_payment['source']['externalAccountId'];
+                        $db_transaction->destination_identityId = $json_response_payment['destination']['identityId'];
+                        $db_transaction->destination_custodialAccountId = $json_response_payment['destination']['custodialAccountId'];
+                        $db_transaction->comment = $json_response_payment['comment'];
+                        $db_transaction->funds = $json_response_payment['funds'];
+                        $db_transaction->currency = $json_response_payment['currency']; 
+                        $db_transaction->save();  
+                        $transaction_details = [
+                            'investor'=> Auth::user()->name,
+                            'investment_amount' => $request->investment_amount,
+                            'type_of_security' => 'Common Shares',
+                            'share_price' => 123,
+                            'share_count' => 0,
+                            'share_sold_date' =>Carbon::now()->format('D-m-Y'),
+                            'total_raised' => $offer->base_currency . $offer->size,
+                            'offer_name' =>  $offer->name,
+                            'trnx_total_raised' => 0,
+                            'trnx_last_cancel_date' => $offer->funding_end_date,
+                        ];   
+                        // Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));   
+                    }
+                }elseif($request->payment_type == 'wire'){
+                       
+                        $order = new Order();
+                        $order->offer_id = $offer->id;
+                        $order->investor_id = Auth::user()->id;
+                        $order->total = $request->investment_amount; 
+                        $order->currency = 'usd'; 
+                        $order->type = 'wire'; 
+                        $order->payment_method = 'wire';
+                        $order->e_sign = $esign_contract_status;
+                        $order->status = 'pending'; 
+                        $order->save(); 
+                        $db_transaction = new Transaction;
+                        $db_transaction->order_id = $order->id;
+                        $db_transaction->offer_id = $offer->id;
+                        $db_transaction->investor_id = Auth::user()->id;
+                        $db_transaction->funds = $request->investment_amount;
+                        $db_transaction->kyc_status = '---';
+                        $db_transaction->status = 'pending'; 
+                        $db_transaction->type =  'wire'; 
+                        $db_transaction->payment_method = 'wire';
+                        $db_transaction->e_sign =  $esign_contract_status;
+                        $db_transaction->transaction_id = null; 
+                        $db_transaction->source_identityId = $identityId;
+                        $db_transaction->source_externalAccountId =null;
+                        $db_transaction->destination_identityId = $offer->user->fortress_personal_identity;
+                        $db_transaction->destination_custodialAccountId = $custodial_account->custodial_id;
+                        $db_transaction->comment = null; 
+                        $db_transaction->currency = 'usd';
+                        $db_transaction->save();   
+                        $transaction_details = [
+                            'investor'=> Auth::user()->name,
+                            'investment_amount' => $request->investment_amount,
+                            'type_of_security' => 'Common Shares',
+                            'share_price' => 123,
+                            'share_count' => 0,
+                            'share_sold_date' =>Carbon::now()->format('D-m-Y'),
+                            'total_raised' => $offer->base_currency . $offer->size,
+                            'offer_name' =>  $offer->name,
+                            'trnx_total_raised' => 0,
+                            'trnx_last_cancel_date' => $offer->funding_end_date,
+                        ];    
+                    }
+                    DB::commit();
+                    return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');     
+                
+            } catch (Exception $error) {    
+                DB::rollBack();    
+                return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
+            }
+        
+            
        
- 
-
              
             
         

@@ -114,7 +114,7 @@
                             cx="20" cy="12" r="3" />
                         </svg>
                     </div>
-                    <div class="my-5  bank_wrapper ">
+                    <div class="my-5  bank_wrapper d-none">
                         <h4 class="fw-bolder">Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                         <input type="hidden" class="user_guid" name="user_guid">
-                        <input type="" class="payment_type" name="payment_type" required>
+                        <input type="hidden" class="payment_type" name="payment_type" required>
                         <div class="d-grid gap-2">
                             <button type="submit" disabled class="confirm_investment_button btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill">
                                 Confirm Investment
@@ -743,7 +743,7 @@ crossorigin="anonymous"
                     dataType: 'json',
                     success: function (response) { 
                         if (response.success == true) { 
-                            $('.payment_type').val('bank');
+                            $('.payment_type').val('ach');
                             console.log(response)
                             var arr = [];
                             $('.loader_image').remove();

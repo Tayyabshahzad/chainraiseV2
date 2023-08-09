@@ -585,6 +585,22 @@
     </script>
   @section('page_js')
   @show
+
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+    });
+
+    const channel = pusher.subscribe('webhook-channel');
+    channel.bind('webhook-event', function(data) {
+        console.log('Webhook event received:', data);
+        // Update the UI or perform other actions
+    });
+</script>
+
+
+
 </body>
 
 </html>
