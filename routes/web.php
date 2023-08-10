@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
 });
 
 Route::get('webhook/endpoint', [WebhookController::class, 'handle']); 
+Route::get('webhook/esignatures', [WebhookController::class, 'esignatures']); 
  
 Route::get('email-layout', [FrontendController::class, 'layout_email']);
 Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
@@ -209,6 +210,14 @@ Route::group(['as'=> 'transaction.','prefix'=>'transaction','middleware' => ['au
 Route::group(['as'=> 'engagments.','prefix'=>'engagments','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Engagment'], function () {
     Route::get('', ['as' => 'index','uses' => 'EngagmentController@index']);
 });
+
+Route::group(['as'=> 'esignature.','prefix'=>'esignature','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers'], function () {
+    Route::get('preview/document', ['as' => 'preview.document','uses' => 'ESignController@previewDocument']);
+});
+
+
+ 
+
 
 // Latest Changes
 

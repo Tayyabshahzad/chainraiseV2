@@ -21,4 +21,17 @@ class WebhookController extends Controller
     // ایک جواب واپس کریں
 
     }
+
+    public function esignatures(Request $request)
+    {
+         // ویب ہک ڈیٹا کو پروسیس کریں
+        $data = $request->all(); 
+        Log::info('ویب ہک ڈیٹا:', $data);
+
+     
+
+    }
+
+
+    
 }

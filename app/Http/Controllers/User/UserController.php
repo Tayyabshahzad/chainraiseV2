@@ -9,6 +9,7 @@ use App\Models\Offer;
 use App\Models\Folder;
 use App\Mail\WelcomeEmail;
 use App\Models\UserDetail;
+use App\Models\MyEDocument;
 use App\Mail\InvesterUpdate;
 use App\Models\TrustSetting;
 use Illuminate\Http\Request;
@@ -118,15 +119,17 @@ class UserController extends Controller
 
     public function details($id)
     {
-
+       
         $id = $id;
         $user = User::with('userDetail','identityVerification','trustSetting','invesmentProfie','accreditation')->find($id);
         $accreditations = Accreditation::get();
         $offers = Offer::get();
         $childs = User::with('userDetail','identityVerification','trustSetting','invesmentProfie')->where('parent_id',$id)->get();
         $folders = Folder::where('user_id',$id)->get();
+        $e_documents =  MyEDocument::where('investor_id',$id)->
+                                     orWhere('issuer_id',$id)->get(); 
         $investors = User::role('investor')->get();
-        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors'));
+        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents'));
     }
     public function getChilds(Request $request){
 
@@ -826,7 +829,9 @@ class UserController extends Controller
     }
     public function template()
     {
-        $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
+        $token = "149f90a2-3f95-4a61-9622-e2eede29f3fe";
+        $prod_token = "3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+        $e_sign = Http::get('https://esignatures.io/api/templates?token='.$token);
         $json_e_sign = json_decode((string) $e_sign->getBody(), true);
         if($e_sign->successful()){
             return response([
