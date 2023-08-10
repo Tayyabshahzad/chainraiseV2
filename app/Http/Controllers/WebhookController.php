@@ -17,7 +17,7 @@ class WebhookController extends Controller
 
         // پشر چینل میں ایونٹ براڈکاسٹ کریں
         $pusher->trigger('webhook-channel', 'webhook-event', $data);
-        return response()->json(['message' => 'ویب ہک وصول کیا گیا اور پروسیس ہوا'])
+        return response()->json(['message' => 'ویب ہک وصول کیا گیا اور پروسیس ہوا']);
     // ایک جواب واپس کریں
 
     }
