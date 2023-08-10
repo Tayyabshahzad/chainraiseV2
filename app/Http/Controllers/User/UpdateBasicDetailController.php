@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Exports\UsersExport;
+use App\Models\MyEDocument;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -77,115 +78,111 @@ class UpdateBasicDetailController extends Controller
     public function eDocument(Request $request)
     {
         
+        
         $request->validate([  
             'user_ids' => 'required',
             'template'=>'required',
             'offer' => 'required',
             'issuer' => 'required',     
         ]);
+      
         $issuer = User::find($request->issuer);
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
-        $url = "https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
-       
+        $e_signature_url = "https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+        
         try{
-            foreach($users as $user){
+            
+            foreach($users as $user){ 
                 $user = User::find($user); 
-                    $curl = curl_init();
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS =>'{
-                    "template_id":"'.$request->template.'",
-                    "title":"Loan Agreement - Saver package",
-                    "metadata":"ID0001",
-                    "locale":"en",
-                    "test":"no",
-                    "custom_webhook_url":"https://google.com",
-                    "signers":[
-                        {
-                            "name":"'.$user->name.'",
-                            "email":"'.$user->email.'",
-                            "mobile":"'.$user->phone.'",
-                            "company_name":"Investor Company",
-                        "signing_order":"1",
-                        "auto_sign":"no",
-                        "signature_request_delivery_method":"email",
-                        "signed_document_delivery_method":"email",
-                        "required_identification_methods":[
-                            "email",
-                            "sms"
-                        ],
-                            "redirect_url":"https://your-website.com/aftersign",
-                            "embedded_redirect_iframe_only":"no"
-                        },
-                        {
-                            "name":"'.$issuer->name.'",
-                            "email":"'.$issuer->email.'",
-                            "mobile":"'.$issuer->phone.'",
-                            "company_name":"Issuer Company",
-                            "signing_order":"1",
-                            "auto_sign":"no",
-                            "signature_request_delivery_method":"email",
-                            "signed_document_delivery_method":"email",
-                            "required_identification_methods":[
+                $e_document = new MyEDocument;
+                $e_document->investor_id = $user->id;
+                $e_document->offer_id = $request->offer;
+                $e_document->issuer_id = $request->issuer;
+                $e_document->template_name = $request->selectedOptionHtml;
+                $e_document->template_id = $request->template;
+                $e_document->save();    
+                $send_template = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post($e_signature_url, [
+                    "template_id" => $request->template,
+                    "title" => "Loan Agreement - Saver package",
+                    "metadata" => "ID0001",
+                    "locale" => "en",
+                    "test" => "no",
+                    "custom_webhook_url" => "https://google.com",
+                    "signers" => [
+                        [
+                            "name" => $user->name,
+                            "email" => $user->email,
+                            "mobile" => $user->phone,
+                            "company_name" => "Investor Company",
+                            "signing_order" => "1",
+                            "auto_sign" => "no",
+                            "signature_request_delivery_method" => "email",
+                            "signed_document_delivery_method" => "email",
+                            "required_identification_methods" => [
                                 "email",
                                 "sms"
                             ],
-                        "redirect_url":"https://your-website.com/aftersign",
-                        "embedded_redirect_iframe_only":"no"
-                        }
+                            "redirect_url" => "https://your-website.com/aftersign",
+                            "embedded_redirect_iframe_only" => "no"
+                        ],
+                        [
+                            "name" => $issuer->name,
+                            "email" => $issuer->email,
+                            "mobile" => $issuer->phone,
+                            "company_name" => "Issuer Company",
+                            "signing_order" => "1",
+                            "auto_sign" => "no",
+                            "signature_request_delivery_method" => "email",
+                            "signed_document_delivery_method" => "email",
+                            "required_identification_methods" => [
+                                "email",
+                                "sms"
+                            ],
+                            "redirect_url" => "https://your-website.com/aftersign",
+                            "embedded_redirect_iframe_only" => "no"
+                        ]
                     ],
-                    "placeholder_fields":[
-                        {
-                            "api_key":"interest_rate",
-                            "value":"3.2%"
-                        },
-                        {
-                            "api_key":"floor-plan",
-                            "document_elements":[
-                                {
-                                "type":"image",
-                                "image_base64":"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
-                                }
+                    "placeholder_fields" => [
+                        [
+                            "api_key" => "interest_rate",
+                            "value" => "3.2%"
+                        ],
+                        [
+                            "api_key" => "floor-plan",
+                            "document_elements" => [
+                                [
+                                    "type" => "image",
+                                    "image_base64" => "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
+                                ]
                             ]
-                        }
+                        ]
                     ],
-                    "signer_fields":[
-                        {
-                            "signer_field_id":"preferred_term",
-                            "default_value":"15 years"
-                        }
+                    "signer_fields" => [
+                        [
+                            "signer_field_id" => "preferred_term",
+                            "default_value" => "15 years"
+                        ]
                     ],
-                    "emails":{
-                        "signature_request_subject":"Your document is ready to sign",
-                        "signature_request_text":"Hi __FULL_NAME__, \\n\\n To review and sign the contract please press the button below \\n\\n Kind Regards",
-                        "final_contract_subject":"Your document is signed",
-                        "final_contract_text":"Hi __FULL_NAME__, \\n\\n Your document is signed.\\n\\nKind Regards",
-                        "cc_email_addresses":[
+                    "emails" => [
+                        "signature_request_subject" => "Your document is ready to sign",
+                        "signature_request_text" => "Hi __FULL_NAME__, \n\n To review and sign the contract please press the button below \n\n Kind Regards",
+                        "final_contract_subject" => "Your document is signed",
+                        "final_contract_text" => "Hi __FULL_NAME__, \n\n Your document is signed.\n\nKind Regards",
+                        "cc_email_addresses" => [
                             "tom@email.com",
                             "francis@email.com"
                         ],
-                        "reply_to":"support@customdomain.com"
-                    },
-                    "custom_branding":{
-                        "company_name":"WhiteLabel LLC",
-                        "logo_url":"https://online-logo-store.com/yourclient-logo.png"
-                    }
-                }',
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json'
-                ),
-                )); 
-                $response = curl_exec($curl);
-                curl_close($curl); 
-                
+                        "reply_to" => "support@customdomain.com"
+                    ],
+                    "custom_branding" => [
+                        "company_name" => "WhiteLabel LLC",
+                        "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
+                    ]
+                ]);
+                $json_template = json_decode((string) $send_template->getBody(), true);    
             }
             return response([
                 'status'=>true,

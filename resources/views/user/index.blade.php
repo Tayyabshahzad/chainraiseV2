@@ -200,19 +200,21 @@
                                              <th class="ps-9 fw-bold"> 
                                                 KYC Level
                                              </th> 
-                                              
                                              <th class="ps-9 fw-bold"> 
-                                               Last Seen
-                                             </th> 
+                                                Consent Electronic Delivery
+                                               </th> 
+                                             
                                              <th class="ps-9 fw-bold"> 
                                                Date
                                               </th> 
                                               <th class="ps-9 fw-bold"> 
-                                                Action
-                                               </th> 
-                                               <th class="ps-9 fw-bold"> 
                                                 Status
                                                </th> 
+                                              <th class="ps-9 fw-bold"> 
+                                                Action
+                                               </th> 
+                                               
+                                               
                                     </tr>
                                     @foreach($users as $user)
                                     <tr class="odd @if($user->status == 'inactive') bg-light-danger @endif"  >
@@ -245,12 +247,21 @@
                                          <th class="ps-9"> 
                                             @if($user->kyc) {{ $user->kyc->kyc_level}} @else -- @endif
                                          </th> 
+                                         <th class="text-center"> 
+                                           
+                                            @if($user->agree_consent_electronic == 1) 
+                                                Yes
+                                            @else
+                                                No
+                                            @endif      
+                                      </th> 
                                          
-                                         <th class="ps-9"> 
-                                        -
-                                         </th> 
+                                        
                                          <th class="ps-9"> 
                                             {{ $user->created_at->diffforhumans()}}
+                                          </th> 
+                                          <th class=" "> 
+                                            {{ $user->status}}  
                                           </th> 
                                           <th class="ps-9"> 
                                             <a href="#" class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm me-3 deleteUser"
@@ -262,10 +273,8 @@
                                             @endif
                                            </th> 
 
-                                           <th class=" "> 
-                                            {{ $user->status}}  
-                                          </th> 
-                                          <th class=" " colspan="9"> 
+                                           
+                                          {{-- <th class=" " colspan="9"> 
                                                @if( $user->status != 'active') 
                                                 <button class="btn btn-sm btn-square btn-light-danger updateStatus" data-id="{{ $user->id }}" type="button" > <i class="fa fa-check"></i> </button>
                                                @else
@@ -275,7 +284,8 @@
                                                class="img img-thumbnail d-none loader_img"
                                                style="width: 40px;" alt="">
                                               
-                                          </th> 
+                                          </th>  --}}
+                                         
                                         
                                 </tr>
                                     @endforeach
@@ -575,7 +585,11 @@
                 }
             });
         });
-
+        $('#e_signature_templates').change(function () {
+            var selectedOption = $(this).find('option:selected');
+            var selectedHtml = selectedOption.html(); 
+            $('#selectedOptionHtml').val(selectedHtml);
+        });
 
 
         

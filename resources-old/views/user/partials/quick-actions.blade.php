@@ -322,6 +322,7 @@
                              <div class="card-body">
                                 <div class="row mt-4">
                                     <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required=""> 
+                                    <input type=" " id="selectedOptionHtml" name="selectedOptionHtml" value="">
                                     <div class="form-group col-lg-6 mb-5">
                                         <label for=""> Select Template </label>
                                         <select class="form-select form-select-solid mt-4" name="template" required></select> 

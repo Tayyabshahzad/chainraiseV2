@@ -1407,20 +1407,10 @@
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                                     <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                                fill="currentColor"></rect>
-                                            <path
-                                                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                fill="currentColor"></path>
-                                        </svg>
+                                        Documents
                                     </span>
                                     <!--end::Svg Icon-->
-                                    <input type="text" data-kt-filemanager-table-filter="search"
-                                        class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Files &amp; Folders">
+                                     
                                 </div>
                                 <!--end::Search-->
                             </div>
@@ -1428,12 +1418,7 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
-                                    <!--begin::Export-->
-                                    <div class="me-3">
-                                        {{--                                        <label for="" class="form-label">Default input style</label> --}}
-                                        <input class="form-control" type="date" placeholder=""
-                                            id="kt_datepicker_1" />
-                                    </div>
+                                    <!--begin::Export--> 
 
                                     <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                         data-bs-target="#modal-addFolder">
@@ -1498,184 +1483,57 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body">
-                            <!--begin::Table header-->
-
-                            <!--end::Table header-->
-                            <!--begin::Table-->
+                        <div class="card-body"> 
                             <div id="kt_file_manager_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                 <div class="table-responsive">
-                                    <div class="dataTables_scroll">
-                                        <div class="dataTables_scrollHead"
-                                            style="overflow: hidden; position: relative; border: 0px; width: 100%;">
-                                            <div class="dataTables_scrollHeadInner"
-                                                style="box-sizing: content-box; width: 1194.5px; padding-right: 5px;">
-                                                <table data-kt-filemanager-table="folders"
-                                                    class="table align-middle fs-6 gy-5"
-                                                    style="margin-left: 0px; width: 1194.5px;">
-                                                    <thead>
-                                                        <!--begin::Table row-->
-                                                        <tr
-                                                            class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                                            <th class="w-10px pe-2 sorting_disabled" rowspan="1"
-                                                                colspan="1" style="width: 29.8906px;">
-                                                                <div
-                                                                    class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        data-kt-check="true"
-                                                                        data-kt-check-target="#kt_file_manager_list .form-check-input"
-                                                                        value="1">
-                                                                </div>
-                                                            </th>
-                                                            <th class="min-w-250px sorting_disabled" rowspan="1"
-                                                                colspan="1" style="width: 527.734px;">Name
-                                                            </th>
-                                                            <th class="min-w-10px sorting_disabled" rowspan="1"
-                                                                colspan="1" style="width: 119.234px;">Size
-                                                            </th>
-                                                            <th class="min-w-125px sorting_disabled" rowspan="1"
-                                                                colspan="1" style="width: 317.969px;">Last Modified
-                                                            </th>
-
-                                                            <!--end::Table row-->
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="dataTables_scrollBody table"
-                                            style="position: relative; overflow: auto; max-height: 700px; width: 100%;">
-                                            <table id="kt_file_manager_list" data-kt-filemanager-table="folders"
-                                                class="table align-middle fs-6 gy-5" style="width: 100%;">
-                                                <thead>
-                                                    <!--begin::Table row-->
-                                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0"
-                                                        style="height: 0px;">
-                                                        <th class="w-10px pe-2 sorting_disabled" rowspan="1"
-                                                            colspan="1"
-                                                            style="width: 29.8906px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                            <div class="dataTables_sizing"
-                                                                style="height: 0px; overflow: hidden;">
-                                                                <div
-                                                                    class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        data-kt-check="true"
-                                                                        data-kt-check-target="#kt_file_manager_list .form-check-input"
-                                                                        value="1">
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                        <th class="min-w-250px sorting_disabled" rowspan="1"
-                                                            colspan="1"
-                                                            style="width: 527.734px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                            <div class="dataTables_sizing"
-                                                                style="height: 0px; overflow: hidden;">Name
-                                                            </div>
-                                                        </th>
-                                                        <th class="min-w-10px sorting_disabled" rowspan="1"
-                                                            colspan="1"
-                                                            style="width: 119.234px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                            <div class="dataTables_sizing"
-                                                                style="height: 0px; overflow: hidden;">Size
-                                                            </div>
-                                                        </th>
-                                                        <th class="min-w-125px sorting_disabled" rowspan="1"
-                                                            colspan="1"
-                                                            style="width: 317.969px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                            <div class="dataTables_sizing"
-                                                                style="height: 0px; overflow: hidden;">Last Modified
-                                                            </div>
-                                                        </th>
-                                                        <th class="w-125px sorting_disabled" rowspan="1"
-                                                            colspan="1"
-                                                            style="width: 124.922px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                            <div class="dataTables_sizing"
-                                                                style="height: 0px; overflow: hidden;"></div>
-                                                        </th>
-                                                    </tr>
-                                                    <!--end::Table row-->
-                                                </thead>
-                                                <!--begin::Table head-->
-
-                                                <!--end::Table head-->
-                                                <!--begin::Table body-->
-                                                <tbody class="fw-semibold text-gray-600">
-
-                                                    @foreach ($folders as $folder)
-                                                        <tr class="odd">
-                                                            <!--begin::Checkbox-->
-                                                            <td>
-                                                                <div
-                                                                    class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        value="1">
-                                                                </div>
-                                                            </td>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Name=-->
-                                                            <td data-order="account">
-                                                                <div class="d-flex align-items-center">
-                                                                    <!--begin::Svg Icon | path: icons/duotune/files/fil012.svg-->
-                                                                    <span
-                                                                        class="svg-icon svg-icon-2x svg-icon-primary me-4">
-                                                                        <svg width="24" height="24"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path opacity="0.3"
-                                                                                d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z"
-                                                                                fill="currentColor"></path>
-                                                                            <path
-                                                                                d="M9.2 3H3C2.4 3 2 3.4 2 4V19C2 19.6 2.4 20 3 20H21C21.6 20 22 19.6 22 19V7C22 6.4 21.6 6 21 6H12L10.4 3.60001C10.2 3.20001 9.7 3 9.2 3Z"
-                                                                                fill="currentColor"></path>
-                                                                        </svg>
-                                                                    </span>
-                                                                    <!--end::Svg Icon-->
-                                                                    <a href="#"
-                                                                        class="text-gray-800 text-hover-primary ">
-                                                                        {{ $folder->name }} </a>
-                                                                    &nbsp;&nbsp;
-                                                                    <i class="la la-plus uploadFIle"
-                                                                        title="Add Document" data-bs-toggle="modal"
-                                                                        data-id="{{ $folder->id }}"
-                                                                        data-bs-target="#modal-addFile"> </i>
-                                                                    &nbsp;&nbsp;
-                                                                    <i class="la la-eye viewDocuments text-primary"
-                                                                        title="View Document" data-bs-toggle="modal"
-                                                                        data-id="{{ $folder->id }}"
-                                                                        data-bs-target="#modal-viewDocument"> </i>
-
-                                                                </div>
-                                                            </td>
-                                                            <!--end::Name=-->
-                                                            <!--begin::Size-->
-                                                            <td>
-                                                                0
-                                                            </td>
-                                                            <!--end::Size-->
-                                                            <!--begin::Last modified-->
-                                                            <td data-order="Invalid date">
-                                                                {{ $folder->updated_at->diffForHumans() }}
-                                                            </td>
-                                                            <!--end::Last modified-->
-                                                            <!--begin::Actions-->
-
-                                                            <!--end::Actions-->
-                                                        </tr>
-                                                    @endforeach
-
-
-                                                </tbody>
-                                                <!--end::Table body-->
-                                            </table>
-                                        </div>
+                                    <div class="dataTables_scroll"> 
+                                       
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div
-                                        class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
-                                    </div>
-                                    <div
-                                        class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
-                                    </div>
+                                <div class="row"> 
+                                    @foreach ($e_documents as $e_document)
+                                        <div class="col-lg-6 mb-10"> 
+                                            <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" > 
+                                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">  
+                                                    {{  $e_document->template_name }} </a> 
+                                                <div class="mb-9">
+                                                    <!--begin::Badge-->
+                                                    <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
+                                                    <!--begin::Badge-->
+                                                </div>
+                                                <div class="d-flex flex-wrap flex-center"> 
+                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
+                                                        <div class="fs-4 fw-bold text-gray-700">
+                                                            <i class="text-danger la la-trash"></i>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;"> 
+                                                    <div class="fs-4 fw-bold text-gray-700 view_template" 
+                                                    data-user_id="{{   $e_document->investor_id  }}"
+                                                    data-template_id="{{   $e_document->template_id  }}"
+                                                    data-bs-toggle="modal" data-bs-target="#modal_view_e_sign">
+                                                        <i class="text-warning la la-eye"></i>
+                                                    </div>
+                                                    </div> 
+                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
+                                                        <div class="fs-4 fw-bold text-gray-700">
+                                                            <i class="text-info la la-download"></i>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <p class='text-center text-bold'>
+                                                     <h4>
+                                                        From : {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
+                                                     </h4>
+                                                     <h4>
+                                                          {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
+                                                     </h4>
+                                                        
+                                                </p> 
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                             <!--end::Table-->
@@ -1701,8 +1559,7 @@
                     </div>
                     <!--end::Card-->
                 </div>
-                <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel">
-
+                <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel"> 
                     <div class="col-lg-3 ">
                         <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-200px mb-5 mb-xl-10"
                             style="background-color: #F1416C;background-image:url({{ asset('assets/media/patterns/vector-1.png') }})">
@@ -2304,6 +2161,34 @@
             });
         });
 
+
+        $('body').on('click', '.view_template', function() {
+            var user_id = $(this).data('user_id');
+            var template_id = $(this).data('template_id');
+             
+            $.ajax({
+                url: "{{ route('esignature.preview.document') }}",
+                method: 'GET',
+                data: {
+                    user_id: user_id,
+                    template_id: template_id
+                },
+                success: function(response) {
+                    if (response.status == true) {
+                        toastr.success('Data has been fetched', "Success");
+                        console.log(response)
+                        $('#eSignaturesIOIframe').attr('src',response.url);
+                        
+                    } else {
+                        
+                        toastr.error(response.message, "Error");
+                    }   
+                }
+            });
+        });
+
+
+        
 
 
         const passwordInput = document.getElementById("primary_contact_social_security");

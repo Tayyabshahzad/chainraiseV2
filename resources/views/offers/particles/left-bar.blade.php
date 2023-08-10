@@ -44,13 +44,10 @@
                             <select  name="offer_tags" aria-label="Offer Tags (filters assets in marketplace)"
                                      data-control="select2" data-placeholder="Offer Tags (filters assets in marketplace)"
                                      class="form-select form-select-lg"  id="offer_tags">
-                                <option value="Reg D 506 B"> Reg D 506 B </option>
-                                <option value="Reg D 506 C"> Reg D 506 C </option>
-                                <option value="Reg D CF"> Reg D CF </option>
-                                <option value="Reg D A, Tier 1"> Reg D A, Tier 1 </option>
-                                <option value="Reg D A, Tier 2"> Reg D A, Tier 2 </option>
-                                <option value="Reg S"> Reg S </option>
-                                <option value="Other"> Other </option> 
+                                <option value="Reg CF"> Reg CF </option>
+                                <option value="Reg A"> Reg A </option>
+                                <option value="Reg D (506a)"> Reg D (506a) </option>
+                                <option value=" Reg D (506b)">  Reg D (506b) </option> 
                             </select>
                         </div>
                     </div>
@@ -99,7 +96,7 @@
                         </select>
                     </div>
                     <div class="col-lg-12">
-                        <input type="number" class="form-control" name="size"  id="offer_size" value="10000000" required>
+                        <input type="number" class="form-control" name="size"  id="offer_size"  placeholder="Enter Amount" required>
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">

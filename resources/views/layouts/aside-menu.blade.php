@@ -143,7 +143,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title"> Active </span>
+                                <span class="menu-title"> Manage  </span>
                             </a>
 
                             <a class="menu-link" href="{{ route('offers.policy') }}">
