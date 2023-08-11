@@ -146,7 +146,7 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     Route::get('kyc/check/update/{id}', ['as' => 'update.kyc.check','uses' => 'KycController@updateKycCheck']);
 
     //Front Listing Page
-    /// Added new route
+    /// Added new routedd
     Route::post('esign-template-save', ['as' => 'esign.template.save','uses' => 'UserController@templateSave']);
      
 
