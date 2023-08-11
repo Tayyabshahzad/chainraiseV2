@@ -828,8 +828,8 @@ class UserController extends Controller
     }
     public function template()
     {
-        $token = "149f90a2-3f95-4a61-9622-e2eede29f3fe";
-        $prod_token = "3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+        $token = env('ESIGN_TOKEN');
+        //$prod_token = "3137a61a-7db9-41f9-b2bd-39a8d7918fb5"; 
         $e_sign = Http::get('https://esignatures.io/api/templates?token='.$token);
         $json_e_sign = json_decode((string) $e_sign->getBody(), true);
         if($e_sign->successful()){
