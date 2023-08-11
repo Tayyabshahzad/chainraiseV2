@@ -96,7 +96,8 @@ class UpdateBasicDetailController extends Controller
             
             foreach($users as $user){ 
                 $user = User::find($user);  
-                if($user){  
+               
+ if($user){  
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
@@ -185,7 +186,8 @@ class UpdateBasicDetailController extends Controller
                         $e_document->template_id = $request->template;
                         $e_document->status = 'pending';
                         $e_document->contract_id = $json_template['data']['contract']['id']; 
-                        $e_document->save();    
+                        $e_document->save();
+			dd($e_document);    
                     } 
                 }else{
                     return response([
