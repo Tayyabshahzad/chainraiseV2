@@ -117,10 +117,10 @@ class UpdateBasicDetailController extends Controller
                         "custom_webhook_url" => "https://google.com",
                         "signers" => [
                             [
-                                "name" => $user->name,
+                                "name" => $user->name ."?".$uniqueNumber,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
-                                "company_name" =>'-',
+                                "company_name" =>$uniqueNumber,
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -132,7 +132,7 @@ class UpdateBasicDetailController extends Controller
                                 "embedded_redirect_iframe_only" => "no"
                             ],
                             [
-                                "name" => $issuer->name,
+                                "name" => $issuer->name ."?".$uniqueNumber,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
                                 "company_name" =>$uniqueNumber,
@@ -181,7 +181,7 @@ class UpdateBasicDetailController extends Controller
                             "reply_to" => "support@investchainraise.io"
                         ],
                         "custom_branding" => [
-                            "company_name" => $uniqueNumber,
+                            "company_name" => "WhiteLabel LLC",
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
