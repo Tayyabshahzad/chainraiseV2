@@ -182,7 +182,7 @@ class UpdateBasicDetailController extends Controller
                         $e_document->issuer_id = $request->issuer;
                         $e_document->template_name = $request->selectedOptionHtml;
                         $e_document->template_id = $request->template;
-                        $e_document->status = 'pending';
+                        $e_document->status = $json_template['status']; 
                         $e_document->contract_id = $json_template['data']['contract']['id']; 
                         $e_document->save();    
                     }else{
