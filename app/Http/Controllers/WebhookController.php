@@ -34,51 +34,47 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
-       
+        
+        try {
+            // Get the raw content of the request
+            $rawContent = $request->getContent(); 
+            // Find the position where the JSON data starts
+            $jsonStartPos = strrpos($rawContent, '{'); 
+            // Extract the JSON data
+            $jsonData = substr($rawContent, $jsonStartPos);
 
-        $rawContent = $request->getContent();
+            // Parse the JSON data
+            $data = json_decode($jsonData, true);
 
-    // Find the position where the JSON data starts
-    $jsonStartPos = strrpos($rawContent, '{');
+            // Log the parsed JSON data
+            Log::info('Webhook JSON Data:', $data);
 
-    // Extract the JSON data
-    $jsonData = substr($rawContent, $jsonStartPos);
+            // Extract relevant information
+            if (isset($data['status'])) {
+                $status = $data['status'];
+            } else {
+                Log::error("'status' key is missing in JSON data");
+                // Handle the error gracefully
+            }
 
-    // Parse the JSON data
-    $data = json_decode($jsonData, true);
+            if (isset($data['data']['contract']['id'])) {
+                $contractId = $data['data']['contract']['id'];
+            } else {
+                Log::error("'contract' or 'id' key is missing in JSON data");
+                // Handle the error gracefully
+            }
 
+            // ... Process other relevant data ...
 
-    $status = $data['status'];
-    $contractId = $data['data']['contract']['id'];
-
-    // Log the parsed JSON data
-    Log::info('Webhook JSON Data:', $data);
-
-    Log::info('Webhook status:', $status);
-    Log::info('Webhook contractId:', $contractId);
-
-    // Now you can access the data as an array
-   
-
-
-     //   $data = json_decode($request->getContent(), true);
-
-        // // Extract the relevant information
-        // $status = $data['status'];
-        // $userName = $data['data']['signer']['name'];
-        // $email = $data['data']['signer']['email'];
-         // Log::info('Data: ' . $request);
-        // // Log the extracted information
-        // Log::info('Status: ' . $status);
-        // Log::info('User Name: ' . $userName);
-        // Log::info('Email: ' . $email);
-        // $findUser = User::where('email',$email)->first();
-        // if($findUser){
-        //     $document = MyEDocument::where('investor_id',$findUser->id)->first();
-        // } 
-     
-
+            // Return a response
+           // return response()->json(['message' => 'Webhook received successfully']);
+        } catch (\Exception $e) {
+            Log::error('Error processing webhook:', ['message' => $e->getMessage()]);
+           // return response()->json(['message' => 'Error processing webhook'], 500);
+        }
     }
+     
+ 
 
 
     
