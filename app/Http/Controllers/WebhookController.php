@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Pusher\Pusher;
 use App\Events\PaymentStatusUpdated;
+use App\Models\MyEDocument;
 use App\Models\User;
 
 class WebhookController extends Controller
@@ -45,10 +46,10 @@ class WebhookController extends Controller
         Log::info('Status: ' . $status);
         Log::info('User Name: ' . $userName);
         Log::info('Email: ' . $email);
-        // $findUser = User::where('email',$email)->first();
-        // if($findUser){
-            
-        // } 
+        $findUser = User::where('email',$email)->first();
+        if($findUser){
+            $document = MyEDocument::where('investor_id',$findUser->id)->first();
+        } 
      
 
     }

@@ -95,101 +95,111 @@ class UpdateBasicDetailController extends Controller
         try{
             
             foreach($users as $user){ 
-                $user = User::find($user); 
-                $e_document = new MyEDocument;
-                $e_document->investor_id = $user->id;
-                $e_document->offer_id = $request->offer;
-                $e_document->issuer_id = $request->issuer;
-                $e_document->template_name = $request->selectedOptionHtml;
-                $e_document->template_id = $request->template;
-                $e_document->status = 'pending'; 
-                $e_document->save();    
-                $send_template = Http::withHeaders([
-                    'Content-Type' => 'application/json',
-                ])->post($e_signature_url, [
-                    "template_id" => $request->template,
-                    "title" => "Loan Agreement - Saver package",
-                    "metadata" => "ID0001",
-                    "locale" => "en",
-                    "test" => "no",
-                    "custom_webhook_url" => "https://google.com",
-                    "signers" => [
-                        [
-                            "name" => $user->name,
-                            "email" => $user->email,
-                            "mobile" => $user->phone,
-                            "company_name" => "Investor Company",
-                            "signing_order" => "1",
-                            "auto_sign" => "no",
-                            "signature_request_delivery_method" => "email",
-                            "signed_document_delivery_method" => "email",
-                            "required_identification_methods" => [
-                                "email" 
+                $user = User::find($user);  
+                if($user){  
+                    $send_template = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                    ])->post($e_signature_url, [
+                        "template_id" => $request->template,
+                        "title" => "Loan Agreement - Saver package",
+                        "metadata" => "ID0001",
+                        "locale" => "en",
+                        "test" => "no",
+                        "custom_webhook_url" => "https://google.com",
+                        "signers" => [
+                            [
+                                "name" => $user->name,
+                                "email" => $user->email,
+                                "mobile" => $user->phone,
+                                "company_name" => "Investor Company",
+                                "signing_order" => "1",
+                                "auto_sign" => "no",
+                                "signature_request_delivery_method" => "email",
+                                "signed_document_delivery_method" => "email",
+                                "required_identification_methods" => [
+                                    "email" 
+                                ],
+                                "redirect_url" => "https://google.com",
+                                "embedded_redirect_iframe_only" => "no"
                             ],
-                            "redirect_url" => "https://google.com",
-                            "embedded_redirect_iframe_only" => "no"
+                            [
+                                "name" => $issuer->name,
+                                "email" => $issuer->email,
+                                "mobile" => $issuer->phone,
+                                "company_name" => "Issuer Company",
+                                "signing_order" => "1",
+                                "auto_sign" => "no",
+                                "signature_request_delivery_method" => "email",
+                                "signed_document_delivery_method" => "email",
+                                "required_identification_methods" => [
+                                    "email"
+                                ],
+                                "redirect_url" => "https://google.com",
+                                "embedded_redirect_iframe_only" => "no"
+                            ]
                         ],
-                        [
-                            "name" => $issuer->name,
-                            "email" => $issuer->email,
-                            "mobile" => $issuer->phone,
-                            "company_name" => "Issuer Company",
-                            "signing_order" => "1",
-                            "auto_sign" => "no",
-                            "signature_request_delivery_method" => "email",
-                            "signed_document_delivery_method" => "email",
-                            "required_identification_methods" => [
-                                "email"
+                        "placeholder_fields" => [
+                            [
+                                "api_key" => "interest_rate",
+                                "value" => "3.2%"
                             ],
-                            "redirect_url" => "https://google.com",
-                            "embedded_redirect_iframe_only" => "no"
-                        ]
-                    ],
-                    "placeholder_fields" => [
-                        [
-                            "api_key" => "interest_rate",
-                            "value" => "3.2%"
-                        ],
-                        [
-                            "api_key" => "floor-plan",
-                            "document_elements" => [
-                                [
-                                    "type" => "image",
-                                    "image_base64" => "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
+                            [
+                                "api_key" => "floor-plan",
+                                "document_elements" => [
+                                    [
+                                        "type" => "image",
+                                        "image_base64" => "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4v5ThPwAG7wKklwQ/bwAAAABJRU5ErkJggg=="
+                                    ]
                                 ]
                             ]
-                        ]
-                    ],
-                    "signer_fields" => [
-                        [
-                            "signer_field_id" => "preferred_term",
-                            "default_value" => "15 years"
-                        ]
-                    ],
-                    "emails" => [
-                        "signature_request_subject" => "Your document is ready to sign",
-                        "signature_request_text" => "Hi __FULL_NAME__, \n\n To review and sign the contract please press the button below \n\n Kind Regards",
-                        "final_contract_subject" => "Your document is signed",
-                        "final_contract_text" => "Hi __FULL_NAME__, \n\n Your document is signed.\n\nKind Regards",
-                        "cc_email_addresses" => [
-                            "tom@email.com",
-                            "francis@email.com"
                         ],
-                        "reply_to" => "support@investchainraise.io"
-                    ],
-                    "custom_branding" => [
-                        "company_name" => "WhiteLabel LLC",
-                        "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
-                    ]
-                ]);
-                $json_template = json_decode((string) $send_template->getBody(), true);   
-
+                        "signer_fields" => [
+                            [
+                                "signer_field_id" => "preferred_term",
+                                "default_value" => "15 years"
+                            ]
+                        ],
+                        "emails" => [
+                            "signature_request_subject" => "Your document is ready to sign",
+                            "signature_request_text" => "Hi __FULL_NAME__, \n\n To review and sign the contract please press the button below \n\n Kind Regards",
+                            "final_contract_subject" => "Your document is signed",
+                            "final_contract_text" => "Hi __FULL_NAME__, \n\n Your document is signed.\n\nKind Regards",
+                            "cc_email_addresses" => [
+                                "tom@email.com",
+                                "francis@email.com"
+                            ],
+                            "reply_to" => "support@investchainraise.io"
+                        ],
+                        "custom_branding" => [
+                            "company_name" => "WhiteLabel LLC",
+                            "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
+                        ]
+                    ]);
+                    if($send_template->successful()){
+                        $json_template = json_decode((string) $send_template->getBody(), true);    
+                        $e_document = new MyEDocument;
+                        $e_document->investor_id = $user->id;
+                        $e_document->offer_id = $request->offer;
+                        $e_document->issuer_id = $request->issuer;
+                        $e_document->template_name = $request->selectedOptionHtml;
+                        $e_document->template_id = $request->template;
+                        $e_document->status = 'pending';
+                        $e_document->contract_id = $json_template['data']['contract']['id']; 
+                        $e_document->save();    
+                    } 
+                }else{
+                    return response([
+                        'status'=>false,
+                        'message'=>'Error while sending request'
+                    ]);
+                }
             }
             return response([
                 'status'=>true,
                 'message'=>'E-Sign Request has been sent'
             ]);
         }catch(Exception $error){
+            
             return response([
                 'status'=>false,
                 'message'=>'Error while sending request'
