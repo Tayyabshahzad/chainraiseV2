@@ -95,8 +95,7 @@ class UpdateBasicDetailController extends Controller
             
             foreach($users as $user){ 
                 $user = User::find($user);   
-                if($user){   
-                   // dump($request);
+                if($user){    
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
@@ -175,10 +174,7 @@ class UpdateBasicDetailController extends Controller
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
-                    $json_template = json_decode((string) $send_template->getBody(), true); 
-                   // dd(111);
-                    dd($send_template); 
-                    //  
+                    $json_template = json_decode((string) $send_template->getBody(), true);  
                     if($send_template->successful()){ 
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
