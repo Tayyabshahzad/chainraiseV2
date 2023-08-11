@@ -143,12 +143,10 @@ class UpdateBasicDetailController extends Controller
                         "placeholder_fields" => [
                             [
                                 "api_key" => "interest_rate",
-                                "value" => "3.2%",
-                                "unique_key"=>$uniqueNumber
+                                "value" => "3.2%", 
                             ],
                             [
-                                "api_key" => "floor-plan",
-                                "unique_key"=>$uniqueNumber,
+                                "api_key" => "floor-plan", 
                                 "document_elements" => [
                                     [
                                         "type" => "image",

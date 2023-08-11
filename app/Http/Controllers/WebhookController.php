@@ -34,6 +34,8 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
+        Log::info('All Data:', $request);
+
         try {
             // Get the raw content of the request
             $rawContent = $request->getContent();
@@ -56,7 +58,7 @@ class WebhookController extends Controller
             
             $user = User::where('email',$email)->first();
             $document = MyEDocument::where('investor_id',$user->id)->first();
-            
+
 
 
             // ... Process the JSON data ...
