@@ -906,27 +906,27 @@
 
     <div class="modal fade" id="modal_view_e_sign" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5> 
-            </div> 
-            <div class="modal-body">
-                <div class="card card-custom"> 
-                    <div class="card-body row">
-                     
-                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                        <script src="https://cdncf.esignatures.io/staticassets/iframeResizer.4.2.10.min.js"></script>
-                        <iframe
-                            src=""
-                            id="eSignaturesIOIframe" 
-                            style="width: 100%;min-width: 100%;height:300px">
-                        </iframe>
-                    </div> 
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5> 
+                </div> 
+                <div class="modal-body">
+                    <div class="card card-custom"> 
+                        <div class="card-body row">
+                        
+                            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                            <script src="https://cdncf.esignatures.io/staticassets/iframeResizer.4.2.10.min.js"></script>
+                            <iframe
+                                src=""
+                                id="eSignaturesIOIframe" 
+                                style="width: 100%;min-width: 100%;height:300px">
+                            </iframe>
+                        </div> 
+                    </div>
                 </div>
+                
+                
             </div>
-            
-            
         </div>
     </div>
-</div>

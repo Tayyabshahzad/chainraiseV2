@@ -14,10 +14,9 @@ class ESignController extends Controller
             'user_id' => 'required', 
             'template_id'=>'required'
         ]);
-        $token = "149f90a2-3f95-4a61-9622-e2eede29f3fe";
+        $token = env('ESIGN_TOKEN');
         $user = User::find($request->user_id);
-        $url = "https://esignatures.io/api/contracts?token=".$token;
-        
+        $url = "https://esignatures.io/api/contracts?token=".$token; 
         try{    
 
             $response = Http::withHeaders([
@@ -29,7 +28,7 @@ class ESignController extends Controller
                         "name" => $user->name,
                         "email" => $user->email,
                         "signature_request_delivery_method" => "embedded"
-                    ]
+                    ],
                 ]
             ]); 
             $json_template = json_decode((string) $response->getBody(), true); 

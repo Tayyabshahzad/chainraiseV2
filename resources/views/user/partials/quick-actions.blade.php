@@ -341,7 +341,7 @@
                                         <label for=""> Issuer </label>
                                         <select class="form-select form-select-solid mt-4" name="issuer" required>
                                             @foreach($issuers as $issuer)
-                                                <option value="{{ $issuer->id}}"> {{ $issuer->name }}  </option>
+                                                <option value="{{ $issuer->id}}"> {{ $issuer->name }} - {{ $issuer->email }}   </option>
                                             @endforeach
                                         </select> 
                                     </div> 

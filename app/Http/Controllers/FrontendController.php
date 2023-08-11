@@ -8,6 +8,7 @@ use App\Models\Accreditation;
 use App\Models\Folder;
 use App\Models\IdentityVerification;
 use App\Models\KYC;
+use App\Models\MyEDocument;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\UserDetail;
@@ -354,10 +355,12 @@ class FrontendController extends Controller
     }
 
     public function my_documents(){
+        
         $user = Auth::user();
-        $folders = Folder::where('user_id',$user->id)->withCount('documents')->get(); 
+       // $folders = Folder::where('user_id',$user->id)->withCount('documents')->get(); 
+        $e_documents =  MyEDocument::where('investor_id',$user->id)->get();
         $offers = Offer::get();
-        return view('frontEnd.mydocuments',compact('user','folders','offers'));
+        return view('frontEnd.mydocuments',compact('user','e_documents','offers'));
     }
 
     public function portfolio(){

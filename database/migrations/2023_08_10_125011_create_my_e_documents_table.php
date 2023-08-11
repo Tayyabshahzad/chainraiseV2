@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('issuer_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('template_name')->nullable(); 
             $table->string('template_id')->nullable(); 
+            $table->string('status'); 
             $table->timestamps();
         });
     }

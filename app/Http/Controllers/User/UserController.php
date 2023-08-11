@@ -126,8 +126,7 @@ class UserController extends Controller
         $offers = Offer::get();
         $childs = User::with('userDetail','identityVerification','trustSetting','invesmentProfie')->where('parent_id',$id)->get();
         $folders = Folder::where('user_id',$id)->get();
-        $e_documents =  MyEDocument::where('investor_id',$id)->
-                                     orWhere('issuer_id',$id)->get(); 
+        $e_documents =  MyEDocument::where('investor_id',$id)->get(); 
         $investors = User::role('investor')->get();
         return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents'));
     }
