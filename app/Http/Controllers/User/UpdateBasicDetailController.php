@@ -148,6 +148,7 @@ class UpdateBasicDetailController extends Controller
                             ],
                             [
                                 "api_key" => "floor-plan",
+                                "unique_key"=>$uniqueNumber,
                                 "document_elements" => [
                                     [
                                         "type" => "image",
