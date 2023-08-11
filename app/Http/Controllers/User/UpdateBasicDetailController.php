@@ -95,9 +95,8 @@ class UpdateBasicDetailController extends Controller
         try{
             
             foreach($users as $user){ 
-                $user = User::find($user);  
-               
- if($user){  
+                $user = User::find($user);   
+                if($user){  
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
