@@ -117,10 +117,10 @@ class UpdateBasicDetailController extends Controller
                         "custom_webhook_url" => "https://google.com",
                         "signers" => [
                             [
-                                "name" => $user->name ."?".$uniqueNumber,
+                                "name" => $user->name."?=".$uniqueNumber,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
-                                "company_name" =>$uniqueNumber,
+                                "company_name" =>"-",
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -128,14 +128,14 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email" 
                                 ],
-                                "redirect_url" => "https://google.com",
+                                "redirect_url" => "https://google.com?=".$uniqueNumber,
                                 "embedded_redirect_iframe_only" => "no"
                             ],
                             [
-                                "name" => $issuer->name ."?".$uniqueNumber,
+                                "name" => $issuer->name."?=".$uniqueNumber,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
-                                "company_name" =>$uniqueNumber,
+                                "company_name" =>$entity_name,
                                
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
@@ -144,7 +144,7 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email"
                                 ],
-                                "redirect_url" => "https://google.com",
+                                "redirect_url" => "https://google.com?=".$uniqueNumber,
                                 "embedded_redirect_iframe_only" => "no"
                             ]
                         ],
