@@ -110,7 +110,7 @@ class UpdateBasicDetailController extends Controller
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
                         "template_id" => $request->template,
-                        "title" => $request->selectedOptionHtml,
+                        "title" => $uniqueNumber,
                         "metadata" => "ID0001",
                         "locale" => "en",
                         "test" => "no",
@@ -135,8 +135,7 @@ class UpdateBasicDetailController extends Controller
                                 "name" => $issuer->name,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
-                                "company_name" =>$uniqueNumber,
-                                "custom_field" => "tayyab2",
+                                "company_name" =>$uniqueNumber, 
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
