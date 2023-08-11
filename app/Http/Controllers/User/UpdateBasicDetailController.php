@@ -97,6 +97,7 @@ class UpdateBasicDetailController extends Controller
             foreach($users as $user){ 
                 $user = User::find($user);   
                 if($user){  
+                    dd($user);
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
@@ -199,7 +200,7 @@ class UpdateBasicDetailController extends Controller
                     ]);
                 }
             }
-            dd($e_document);
+            
             return response([
                 'status'=>true,
                 'message'=>'E-Sign Request has been sent'
