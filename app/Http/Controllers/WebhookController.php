@@ -34,10 +34,17 @@ class WebhookController extends Controller
     public function esignatures(Request $request)
     {
        
-        $data = $request->all(); 
-         
-        
-        Log::info('ویب ہک ڈیٹا:', $data);
+        $data = json_decode($request->getContent(), true);
+
+        // Extract the relevant information
+        $status = $data['status'];
+        $userName = $data['data']['signer']['name'];
+        $email = $data['data']['signer']['email'];
+    
+        // Log the extracted information
+        Log::info('Status: ' . $status);
+        Log::info('User Name: ' . $userName);
+        Log::info('Email: ' . $email);
         // $findUser = User::where('email',$email)->first();
         // if($findUser){
             
