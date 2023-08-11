@@ -88,11 +88,18 @@ class UpdateBasicDetailController extends Controller
         ]);
       
         $issuer = User::find($request->issuer);
+        if($issuer->userDetail){
+            $entity_name =   $issuer->userDetail->entity_name; 
+        }else{
+            $entity_name = '-';
+        }  
+        
+      
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
-        $token = env('ESIGN_TOKEN');
-
+        $token = env('ESIGN_TOKEN'); 
         $e_signature_url = "https://esignatures.io/api/contracts?token=".$token; 
+        
         try{
             
             foreach($users as $user){ 
@@ -103,7 +110,7 @@ class UpdateBasicDetailController extends Controller
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
                         "template_id" => $request->template,
-                        "title" => "Loan Agreement - Saver package",
+                        "title" => $request->selectedOptionHtml,
                         "metadata" => "ID0001",
                         "locale" => "en",
                         "test" => "no",
@@ -113,7 +120,8 @@ class UpdateBasicDetailController extends Controller
                                 "name" => $user->name,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
-                                "company_name" => "Investor Company",
+                                "company_name" => "-",
+                                "custom_field" => "tayyab1",
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -128,7 +136,8 @@ class UpdateBasicDetailController extends Controller
                                 "name" => $issuer->name,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
-                                "company_name" => "Issuer Company",
+                                "company_name" => $entity_name,
+                                "custom_field" => "tayyab2",
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -173,7 +182,7 @@ class UpdateBasicDetailController extends Controller
                             "reply_to" => "support@investchainraise.io"
                         ],
                         "custom_branding" => [
-                            "company_name" => "WhiteLabel LLC",
+                            "company_name" => "WhiteLabel LLC []",
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
