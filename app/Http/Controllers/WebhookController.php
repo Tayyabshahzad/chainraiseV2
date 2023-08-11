@@ -34,7 +34,7 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
-        Log::info('All Data:', $request->getContent());
+        
 
         try {
             // Get the raw content of the request
