@@ -89,7 +89,8 @@ class UpdateBasicDetailController extends Controller
         $issuer = User::find($request->issuer);
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
-        $e_signature_url = "https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+        $token = env('ESIGN_TOKEN');
+        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token;
         
         try{
             
@@ -101,6 +102,7 @@ class UpdateBasicDetailController extends Controller
                 $e_document->issuer_id = $request->issuer;
                 $e_document->template_name = $request->selectedOptionHtml;
                 $e_document->template_id = $request->template;
+                $e_document->status = 'pending'; 
                 $e_document->save();    
                 $send_template = Http::withHeaders([
                     'Content-Type' => 'application/json',
@@ -122,10 +124,9 @@ class UpdateBasicDetailController extends Controller
                             "signature_request_delivery_method" => "email",
                             "signed_document_delivery_method" => "email",
                             "required_identification_methods" => [
-                                "email",
-                                "sms"
+                                "email" 
                             ],
-                            "redirect_url" => "https://your-website.com/aftersign",
+                            "redirect_url" => "https://google.com",
                             "embedded_redirect_iframe_only" => "no"
                         ],
                         [
@@ -138,10 +139,9 @@ class UpdateBasicDetailController extends Controller
                             "signature_request_delivery_method" => "email",
                             "signed_document_delivery_method" => "email",
                             "required_identification_methods" => [
-                                "email",
-                                "sms"
+                                "email"
                             ],
-                            "redirect_url" => "https://your-website.com/aftersign",
+                            "redirect_url" => "https://google.com",
                             "embedded_redirect_iframe_only" => "no"
                         ]
                     ],
@@ -175,14 +175,15 @@ class UpdateBasicDetailController extends Controller
                             "tom@email.com",
                             "francis@email.com"
                         ],
-                        "reply_to" => "support@customdomain.com"
+                        "reply_to" => "support@investchainraise.io"
                     ],
                     "custom_branding" => [
                         "company_name" => "WhiteLabel LLC",
                         "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                     ]
                 ]);
-                $json_template = json_decode((string) $send_template->getBody(), true);    
+                $json_template = json_decode((string) $send_template->getBody(), true);   
+
             }
             return response([
                 'status'=>true,

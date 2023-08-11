@@ -5,13 +5,22 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Pusher\Pusher;
 use App\Events\PaymentStatusUpdated;
+use App\Models\User;
+
 class WebhookController extends Controller
 {
     public function handle(Request $request, Pusher $pusher)
     {
          // ویب ہک ڈیٹا کو پروسیس کریں
         $data = $request->all();
+        $status = "";
+        $email = "";
+        $findUser = User::where('email',$email)->first();
+        if($findUser){
 
+        } 
+
+        
         // وصول شدہ ڈیٹا کو لاگ کریں
         Log::info('ویب ہک ڈیٹا:', $data);
 
@@ -24,10 +33,15 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
-         // ویب ہک ڈیٹا کو پروسیس کریں
+       
         $data = $request->all(); 
-        Log::info('ویب ہک ڈیٹا:', $data);
-
+        $status = $data['status'];
+        $email = $data['data']['signer']['email'];
+        Log::info('ویب ہک ڈیٹا:', $status,$email);
+        // $findUser = User::where('email',$email)->first();
+        // if($findUser){
+            
+        // } 
      
 
     }
