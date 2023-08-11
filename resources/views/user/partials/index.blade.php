@@ -920,7 +920,7 @@
                         <iframe
                             src=""
                             id="eSignaturesIOIframe" 
-                            style="width: 100%;min-width: 100%;height:100%">
+                            style="width: 100%;min-width: 100%;height:300px">
                         </iframe>
                     </div> 
                 </div>

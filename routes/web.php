@@ -29,8 +29,8 @@ Route::group(['middleware' => ['auth','verified']], function () {
 });
 
 Route::get('webhook/endpoint', [WebhookController::class, 'handle']); 
-Route::any('webhook/esignatures', [WebhookController::class, 'esignatures']); 
- //
+
+ //https://chain-clone.test/webhook/esignatures
 Route::get('email-layout', [FrontendController::class, 'layout_email']);
 Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
 Route::get('mailTrap', [TestController::class, 'mailTrap'])->name('mailTrap');
