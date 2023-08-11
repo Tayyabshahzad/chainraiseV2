@@ -90,8 +90,7 @@ class UpdateBasicDetailController extends Controller
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
         $token = env('ESIGN_TOKEN');
-        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token;
-        
+        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token; 
         try{
             
             foreach($users as $user){ 
@@ -175,7 +174,8 @@ class UpdateBasicDetailController extends Controller
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
-                    $json_template = json_decode((string) $send_template->getBody(), true);    
+                    $json_template = json_decode((string) $send_template->getBody(), true); 
+                    dd($json_template);   
                     if($send_template->successful()){ 
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
