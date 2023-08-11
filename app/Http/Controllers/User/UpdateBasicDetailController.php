@@ -175,8 +175,8 @@ class UpdateBasicDetailController extends Controller
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
-                    if($send_template->successful()){
-                        $json_template = json_decode((string) $send_template->getBody(), true);    
+                    $json_template = json_decode((string) $send_template->getBody(), true);    
+                    if($send_template->successful()){ 
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
                         $e_document->offer_id = $request->offer;
@@ -186,6 +186,11 @@ class UpdateBasicDetailController extends Controller
                         $e_document->status = 'pending';
                         $e_document->contract_id = $json_template['data']['contract']['id']; 
                         $e_document->save();    
+                    }else{
+                        return response([
+                            'status'=>false,
+                            'message'=>$json_template,
+                        ]);
                     } 
                 }else{
                     return response([
