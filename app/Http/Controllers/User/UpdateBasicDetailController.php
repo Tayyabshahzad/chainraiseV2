@@ -16,6 +16,7 @@ use App\Exports\UsersExport;
 use App\Models\MyEDocument;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 
 
 
@@ -90,11 +91,13 @@ class UpdateBasicDetailController extends Controller
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
         $token = env('ESIGN_TOKEN');
+
         $e_signature_url = "https://esignatures.io/api/contracts?token=".$token; 
         try{
             
             foreach($users as $user){ 
-                $user = User::find($user);   
+                $user = User::find($user);
+                $uniqueNumber = Str::uuid()->toString(); 
                 if($user){    
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
@@ -140,7 +143,8 @@ class UpdateBasicDetailController extends Controller
                         "placeholder_fields" => [
                             [
                                 "api_key" => "interest_rate",
-                                "value" => "3.2%"
+                                "value" => "3.2%",
+                                "unique_key"=>$uniqueNumber
                             ],
                             [
                                 "api_key" => "floor-plan",

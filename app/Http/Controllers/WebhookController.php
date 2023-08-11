@@ -53,7 +53,12 @@ class WebhookController extends Controller
                 $signerEmail = $data['data']['contract']['signers'][0]['email'] ?? 'Unknown Signer Email';
                 Log::info('Contract Signed by Signer Email:', ['email' => $signerEmail]);
             }
-    
+            
+            $user = User::where('email',$email)->first();
+            $document = MyEDocument::where('investor_id',$user->id)->first();
+            
+
+
             // ... Process the JSON data ...
     
             // Return a response
