@@ -35,7 +35,7 @@ class WebhookController extends Controller
     public function esignatures(Request $request)
     {
        
-        $data = json_decode($request->getContent(), true);
+     //   $data = json_decode($request->getContent(), true);
 
         // // Extract the relevant information
         // $status = $data['status'];
