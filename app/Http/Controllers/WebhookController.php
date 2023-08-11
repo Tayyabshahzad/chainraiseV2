@@ -34,7 +34,7 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
-        Log::info('All Data:', $request);
+        Log::info('All Data:', $request->getContent());
 
         try {
             // Get the raw content of the request
@@ -56,8 +56,8 @@ class WebhookController extends Controller
                 Log::info('Contract Signed by Signer Email:', ['email' => $signerEmail]);
             }
             
-            $user = User::where('email',$email)->first();
-            $document = MyEDocument::where('investor_id',$user->id)->first();
+            //$user = User::where('email',$email)->first();
+           // $document = MyEDocument::where('investor_id',$user->id)->first();
 
 
 
