@@ -33,27 +33,27 @@ class WebhookController extends Controller
     }
 
     public function esignatures(Request $request)
-    {
-       
-        
-     //   $data = json_decode($request->getContent(), true);
+{
+    try {
+        // Get the raw content of the request
+        $rawContent = $request->getContent();
 
-        // // Extract the relevant information
-        // $status = $data['status'];
-        // $userName = $data['data']['signer']['name'];
-        // $email = $data['data']['signer']['email'];
-          Log::info('Data: ' . $request);
-        // // Log the extracted information
-        // Log::info('Status: ' . $status);
-        // Log::info('User Name: ' . $userName);
-        // Log::info('Email: ' . $email);
-        // $findUser = User::where('email',$email)->first();
-        // if($findUser){
-        //     $document = MyEDocument::where('investor_id',$findUser->id)->first();
-        // } 
-     
+        // Parse the JSON data
+        $data = json_decode($rawContent, true);
 
+        // Log the parsed JSON data
+        Log::info('Webhook JSON Data:', $data);
+
+        // ... Process the JSON data ...
+
+        // Return a response
+       // return response()->json(['message' => 'Webhook received successfully']);
+    } catch (\Exception $e) {
+        Log::error('Error processing webhook:', ['message' => $e->getMessage()]);
+        //return response()->json(['message' => 'Error processing webhook'], 500);
     }
+}
+
 
 
     
