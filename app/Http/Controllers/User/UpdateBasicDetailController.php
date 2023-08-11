@@ -175,7 +175,8 @@ class UpdateBasicDetailController extends Controller
                         ]
                     ]);
                     $json_template = json_decode((string) $send_template->getBody(), true); 
-                    dd($json_template);   
+                    dd($json_template); 
+                    //  
                     if($send_template->successful()){ 
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
