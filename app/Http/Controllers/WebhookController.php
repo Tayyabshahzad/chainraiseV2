@@ -35,9 +35,9 @@ class WebhookController extends Controller
     {
        
         $data = $request->all(); 
-        $data =  json_decode((string) $data, true);
         
-        Log::info('ویب ہک ڈیٹا:', $data);
+        
+        Log::info('ویب ہک ڈیٹا:', $data['status']);
         // $findUser = User::where('email',$email)->first();
         // if($findUser){
             
