@@ -41,7 +41,7 @@ class WebhookController extends Controller
         // $status = $data['status'];
         // $userName = $data['data']['signer']['name'];
         // $email = $data['data']['signer']['email'];
-          Log::info('Data: ' . $request->all());
+          Log::info('Data: ' . $request);
         // // Log the extracted information
         // Log::info('Status: ' . $status);
         // Log::info('User Name: ' . $userName);
