@@ -199,6 +199,7 @@ class UpdateBasicDetailController extends Controller
                     ]);
                 }
             }
+            dd($e_document);
             return response([
                 'status'=>true,
                 'message'=>'E-Sign Request has been sent'
