@@ -35,13 +35,39 @@ class WebhookController extends Controller
     public function esignatures(Request $request)
     {
        
+
+        $rawContent = $request->getContent();
+
+    // Find the position where the JSON data starts
+    $jsonStartPos = strrpos($rawContent, '{');
+
+    // Extract the JSON data
+    $jsonData = substr($rawContent, $jsonStartPos);
+
+    // Parse the JSON data
+    $data = json_decode($jsonData, true);
+
+
+    $status = $data['status'];
+    $contractId = $data['data']['contract']['id'];
+
+    // Log the parsed JSON data
+    Log::info('Webhook JSON Data:', $data);
+
+    Log::info('Webhook status:', $status);
+    Log::info('Webhook contractId:', $contractId);
+
+    // Now you can access the data as an array
+   
+
+
      //   $data = json_decode($request->getContent(), true);
 
         // // Extract the relevant information
         // $status = $data['status'];
         // $userName = $data['data']['signer']['name'];
         // $email = $data['data']['signer']['email'];
-          Log::info('Data: ' . $request);
+         // Log::info('Data: ' . $request);
         // // Log the extracted information
         // Log::info('Status: ' . $status);
         // Log::info('User Name: ' . $userName);
