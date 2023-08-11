@@ -117,7 +117,7 @@ class UpdateBasicDetailController extends Controller
                         "custom_webhook_url" => "https://google.com",
                         "signers" => [
                             [
-                                "name" => $user->name."?=".$uniqueNumber,
+                                "name" => $user->name."-".$uniqueNumber,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
                                 "company_name" =>"-",
@@ -128,11 +128,11 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email" 
                                 ],
-                                "redirect_url" => "https://google.com?=".$uniqueNumber,
+                                "redirect_url" => "https://google.com-".$uniqueNumber,
                                 "embedded_redirect_iframe_only" => "no"
                             ],
                             [
-                                "name" => $issuer->name."?=".$uniqueNumber,
+                                "name" => $issuer->name."-".$uniqueNumber,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
                                 "company_name" =>$entity_name,
@@ -144,7 +144,7 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email"
                                 ],
-                                "redirect_url" => "https://google.com?=".$uniqueNumber,
+                                "redirect_url" => "https://google.com-".$uniqueNumber,
                                 "embedded_redirect_iframe_only" => "no"
                             ]
                         ],
