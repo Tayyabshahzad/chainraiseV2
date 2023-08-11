@@ -110,7 +110,7 @@ class UpdateBasicDetailController extends Controller
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
                         "template_id" => $request->template,
-                        "title" => $uniqueNumber,
+                        "title" => $request->selectedOptionHtml,
                         "metadata" => "ID0001",
                         "locale" => "en",
                         "test" => "no",
@@ -120,7 +120,7 @@ class UpdateBasicDetailController extends Controller
                                 "name" => $user->name,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
-                                "company_name" =>$uniqueNumber,
+                                "company_name" =>'-',
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -135,7 +135,8 @@ class UpdateBasicDetailController extends Controller
                                 "name" => $issuer->name,
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
-                                "company_name" =>$uniqueNumber, 
+                                "company_name" =>$uniqueNumber,
+                               
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -180,7 +181,7 @@ class UpdateBasicDetailController extends Controller
                             "reply_to" => "support@investchainraise.io"
                         ],
                         "custom_branding" => [
-                            "company_name" => "WhiteLabel LLC []",
+                            "company_name" => $uniqueNumber,
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
