@@ -34,7 +34,8 @@ class WebhookController extends Controller
 
     public function esignatures(Request $request)
     {
-        dd($request);
+         
+        Log::info('ویب ہک ڈیٹا:', $request);
     }
      
  
