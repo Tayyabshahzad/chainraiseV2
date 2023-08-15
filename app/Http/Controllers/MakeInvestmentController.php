@@ -300,7 +300,7 @@ class MakeInvestmentController extends Controller
     }
     public function save(Request $request)
     { 
-
+        //dd($request);
         $request->validate([
             'offer_id' => 'required',
             'payment_type'=> 'required|in:wire,ach',
@@ -313,6 +313,14 @@ class MakeInvestmentController extends Controller
         ]); 
         $offer = Offer::with('user')->findOrFail($request->offer_id);  
         $template_id = $offer->offerEsing->template_id;  
+
+        if ($request->has('past_12_months_investment')) {
+            $past12MonthsInvestment = true;
+        } else {
+            $past12MonthsInvestment = false;
+        }
+
+
         try{
             $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
@@ -567,6 +575,7 @@ class MakeInvestmentController extends Controller
                     if($payment->successful()){ 
                         $order = new Order();
                         $order->offer_id = $offer->id;
+                        $order->past12MonthsInvestment = $past12MonthsInvestment;
                         $order->investor_id = Auth::user()->id;
                         $order->total = $request->investment_amount; 
                         $order->currency = $json_response_payment['currency']; 
@@ -612,6 +621,7 @@ class MakeInvestmentController extends Controller
                        
                         $order = new Order();
                         $order->offer_id = $offer->id;
+                        $order->past12MonthsInvestment = $past12MonthsInvestment;
                         $order->investor_id = Auth::user()->id;
                         $order->total = $request->investment_amount; 
                         $order->currency = 'usd'; 

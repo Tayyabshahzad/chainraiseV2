@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" id="validationCustom03"
-                                        value="{{ $user->userDetail->address }}" required name="address">
+                                        value="@if($user->userDetail){{ $user->userDetail->address }}"@endif required name="address">
                                     <div class="invalid-feedback">
                                         Please Enter Address
                                     </div>
@@ -111,17 +111,17 @@
                             <div class="col-lg-2">
                                 <label for="">City</label>
                                 <input type="text" class="form-control" name="city" required
-                                    value="{{ $user->userDetail->city }}">
+                                    value="@if($user->userDetail) {{ $user->userDetail->city }}" @endif>
                             </div>
                             <div class="col-lg-2">
                                 <label for="">State</label>
                                 <input type="text" class="form-control state" name="state" required
-                                    value="{{ $user->userDetail->state }}">
+                                    value="@if($user->userDetail) {{ $user->userDetail->state }}" @endif>
                             </div>
                             <div class="col-lg-2">
                                 <label for="">Zip Code</label>
                                 <input type="text" class="form-control zipCode" name="zip" required
-                                    value="{{ $user->userDetail->zip }}" min="5" max="5">
+                                    value="@if($user->userDetail) {{ $user->userDetail->zip }}" @endif min="5" max="5">
                             </div>
                         </div>
                         <div class="row g-lg-3 mb-3 mt-lg-4">
@@ -166,7 +166,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <input type="date" class="form-control" name="dob" placeholder="MM/DD/YYYY"
-                                    value="{{ $user->userDetail->dob }}" required>
+                                    value="@if($user->userDetail){{ $user->userDetail->dob }}@endif" required>
                                 <div class="invalid-feedback">Please Select Birthday </div>
                             </div>
                         </div> 

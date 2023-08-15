@@ -213,6 +213,9 @@ Route::group(['as'=> 'engagments.','prefix'=>'engagments','middleware' => ['auth
 
 Route::group(['as'=> 'esignature.','prefix'=>'esignature','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers'], function () {
     Route::get('preview/document', ['as' => 'preview.document','uses' => 'ESignController@previewDocument']);
+    Route::get('preview/document/invester/flow/{user_id}/{template_id}', ['as' => 'preview.document.invester.flow','uses' => 'ESignController@previewDocumentInvesterFlow']);
+
+    
 });
 
 

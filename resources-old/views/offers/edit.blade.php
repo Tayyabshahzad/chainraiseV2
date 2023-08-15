@@ -84,7 +84,7 @@
                 <form action="{{ route('offers.update') }}" enctype="multipart/form-data" method="post"> @csrf
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <input type="hidden" name="investment_restrication_id"
-                        value="{{ $offer->investmentRestrictions->id }}">
+                    value="@if($offer->investmentRestrictions) {{ $offer->investmentRestrictions->id }} @endif">
                     <input type="hidden" name="calltoaction_button_id" value="{{ $offer->callToAction->id }}">
                     <input type="hidden" name="calltoaction_button_id" value="{{ $offer->callToAction->id }}">
                     <input type="hidden" name="access_id" value="{{ $offer->access->id }}">

@@ -37,8 +37,9 @@ class FrontendController extends Controller
     }
     public function index()
     {   
-       
+        
         $offers = Offer::orderBy('id', 'desc')->where('status','active')->get();
+        
         $offer_coming_soon = Offer::orderBy('id', 'desc')->where('status','coming-soon')->get();
         return view('frontEnd.offer.index',compact('offers','offer_coming_soon'));
     }
@@ -110,12 +111,13 @@ class FrontendController extends Controller
     }
         
     public function my_account(){
+         
         $user = Auth::user();
         return view('frontEnd.myaccount',compact('user'));
     }
 
     public function my_account_update(Request $request){
-        $user = Auth::user(); 
+        $user = Auth::user();  
         try{   
             $user->name = $request->legal_name;   
             $user->net_worth = $request->net_worth; 
@@ -365,7 +367,7 @@ class FrontendController extends Controller
 
     public function portfolio(){
         $user = Auth::user();
-        $lastInsertedRecord = Transaction::latest()->first();
+        $lastInsertedRecord = Transaction::latest()->where('investor_id',$user->id)->first();
         if($lastInsertedRecord){
             $lastInsertedDate = $lastInsertedRecord->created_at;
         }else{

@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('annual_income')->nullable();
             $table->boolean('are_you_accredited')->default(false);
             $table->boolean('afford_loss')->default(false);;
-            $table->boolean('understand_securities')->default(false);;
-            $table->boolean('investment_advice')->default(false);;
+            $table->boolean('understand_securities')->default(false);
+            $table->boolean('investment_advice')->default(false);
+            $table->text('investment_limit')->nullable();
             $table->boolean('agree_policy')->default(false);;
         });
     }

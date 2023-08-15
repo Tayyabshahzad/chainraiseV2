@@ -83,8 +83,11 @@ class OfferController extends Controller
     }
     public function create()
     {
+
+        
+        $token = env('ESIGN_TOKEN');
         try{
-            $e_sign = Http::get('https://esignatures.io/api/templates?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
+            $e_sign = Http::get('https://esignatures.io/api/templates?token='.$token);
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
             if(!$e_sign->successful()){
                 Session::put('error','Esignatures Error');  

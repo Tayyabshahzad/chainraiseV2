@@ -953,13 +953,11 @@ class UserController extends Controller
         //echo $response;
 
     } 
-    public function basicDetailUpdate(Request $request){ 
-         
+    public function basicDetailUpdate(Request $request){  
         $user = Auth::user(); 
         try{  
             $user->user_type = $request->account_type;    
-            $user->name = $request->legal_name; 
-            
+            $user->name = $request->legal_name;  
            // $user->country = $request->legal_name; 
            // $user->address = $request->legal_name; 
             $user->net_worth = $request->net_worth; 
@@ -970,10 +968,25 @@ class UserController extends Controller
             $user->afford_loss =$request->has('afford_loss') ? true : false;   
             $user->understand_securities =$request->has('understand_securities') ? true : false;   
             $user->investment_advice = $request->has('investment_advice') ? true : false;   
-            $user->agree_policy =$request->has('agree_policy') ? true : false;   
-           
-            $user->save(); 
-          
+            $user->agree_policy =$request->has('agree_policy') ? true : false;    
+            $user->save();  
+            $annualIncome = (int) str_replace(',', '', $user->net_worth);
+            $netWorth = (int) str_replace(',', '', $user->annual_income);    
+            if($user->are_you_accredited == true){
+                if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
+                    $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
+                    $investmentLimit =    $accreditedInvestment;
+                } 
+            }else{
+                
+                if (($annualIncome < 124000) || ($netWorth < 124000)) {
+                    $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
+                    $investmentLimit =  $nonAccreditedInvestment;
+                }
+            }
+        
+            $user->investment_limit = $investmentLimit;
+            $user->save();  
             UserDetail::updateOrCreate(
                 ['user_id' => $user->id],
                 [
@@ -986,6 +999,7 @@ class UserController extends Controller
             $user->save(); 
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
+            //dd($error);
             return redirect()->back()->with('error','There is some error while updating profile'); 
         }
        

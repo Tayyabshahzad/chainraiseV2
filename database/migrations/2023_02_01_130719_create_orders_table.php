@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('offer_id');
             $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade');
+            $table->boolean('past12MonthsInvestment'); 
             $table->unsignedBigInteger('investor_id');
             $table->foreign('investor_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('total');

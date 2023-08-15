@@ -226,13 +226,13 @@
                             <div class="col-lg-12 mt-3 text-center">
                                 <input type="number" class="form-control" id="min_invesment" 
                                 name="min_invesment" style="font-size:12px!important" 
-                                value="{{ $offer->investmentRestrictions->min_invesment }}"
+                                value="@if($offer->investmentRestrictions) {{ $offer->investmentRestrictions->min_invesment }}@endif"
                                 placeholder="Minimum investme nt (USD) *">
                             </div>
                             <div class="col-lg-12 mt-3 mb-3 text-center">
                                 <input type="number" class="form-control"  
                                 id="max_invesment" name="max_invesment" 
-                                value="{{ $offer->investmentRestrictions->max_invesment }}"
+                                value="@if($offer->investmentRestrictions) {{ $offer->investmentRestrictions->max_invesment }}@endif"
                                 style="font-size:12px!important" placeholder="Maximum investment (USD) *">
                             </div>
                             <div class="col-lg-12 mb-3">
@@ -244,11 +244,10 @@
                                         <label class="form-check form-check-custom "> 
                                             <input class="form-check-input h-11px w-11px" 
                                             type="checkbox" 
-                                            
-                                            @if($offer->investmentRestrictions->allow_fractional_shares == 1)
-                                            
-                                            checked
-
+                                            @if($offer->investmentRestrictions)
+                                                @if($offer->investmentRestrictions->allow_fractional_shares == 1) 
+                                                    checked 
+                                                @endif
                                             @endif
                                              
                                             name="allow_fractional_shares"> 
@@ -266,8 +265,10 @@
                                         <label class="form-check form-check-custom "> 
                                             <input class="form-check-input h-13px w-13px" 
                                             type="checkbox" 
-                                            @if($offer->investmentRestrictions->require_investing_units)
-                                               checked
+                                            @if($offer->investmentRestrictions)
+                                                @if($offer->investmentRestrictions->require_investing_units)
+                                                checked
+                                                @endif
                                             @endif
                                             name="require_investing_units"> 
                                         </label> 

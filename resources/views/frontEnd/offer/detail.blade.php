@@ -65,9 +65,10 @@
                             <div class="input-group">
                                 <div class="input-group-text">$</div>  
                                 <input type="number" class="form-control" name="investment_amount" required
-                                        placeholder="{{ number_format($offer->investmentRestrictions->min_invesment) }}" 
-                                        min="{{ $offer->investmentRestrictions->min_invesment }}" 
-                                        max="{{ $offer->investmentRestrictions->max_invesment }}"/>
+                                        placeholder="@if($offer->investmentRestrictions)
+                                            {{ number_format($offer->investmentRestrictions->min_invesment) }}"@endif 
+                                            @if($offer->investmentRestrictions) min="{{ $offer->investmentRestrictions->min_invesment }}" @endif
+                                            @if($offer->investmentRestrictions) max="{{ $offer->investmentRestrictions->max_invesment }}" @endif />
                             </div>
                         </div>
 

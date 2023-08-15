@@ -84,11 +84,11 @@
                 <form action="{{ route('offers.update') }}" enctype="multipart/form-data" method="post"> @csrf
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <input type="hidden" name="investment_restrication_id"
-                        value="{{ $offer->investmentRestrictions->id }}">
-                    <input type="hidden" name="calltoaction_button_id" value="{{ $offer->callToAction->id }}">
-                    <input type="hidden" name="calltoaction_button_id" value="{{ $offer->callToAction->id }}">
-                    <input type="hidden" name="access_id" value="{{ $offer->access->id }}">
-                    <input type="hidden" name="display_id" value="{{ $offer->display->id }}">
+                        value="@if($offer->investmentRestrictions){{ $offer->investmentRestrictions->id }} @endif">
+                    <input type="hidden" name="calltoaction_button_id" value="@if($offer->callToAction) {{ $offer->callToAction->id }} @endif">
+                    <input type="hidden" name="calltoaction_button_id" value="@if($offer->callToAction) {{ $offer->callToAction->id }} @endif">
+                    <input type="hidden" name="access_id" value="@if($offer->access) {{ $offer->access->id }} @endif">
+                    <input type="hidden" name="display_id" value="@if($offer->display) {{ $offer->display->id }} @endif">
                     <input type="hidden" name="contact_id" @if($offer->contactInfo) value="{{ $offer->contactInfo->id }}" @endif>
 
                     <div class="row">
