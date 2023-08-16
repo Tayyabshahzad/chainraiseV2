@@ -66,7 +66,8 @@ class KycController extends Controller
             ]);
         }  
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
-        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+//dd($decodedSsn);     
+   if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
             return response([
                 'status' => 'document',
@@ -389,7 +390,7 @@ class KycController extends Controller
             get($url_check_kyc);
             $json_check_user_kyc_level = json_decode((string) $check_user_kyc_level->getBody(), true);  
             $status =  $check_user_kyc_level->status();  
-            //dump($json_check_user_kyc_level,$status);
+           // dump($json_check_user_kyc_level,$status);
             //dump(count($json_check_user_kyc_level['documents']));
             if(count($json_check_user_kyc_level['documents'])>0){
                 $docStatus = $json_check_user_kyc_level['documents'][0]['documentCheckStatus'];
@@ -418,7 +419,7 @@ class KycController extends Controller
          
 
         }catch(Exception $check_kyc_error){
-            
+ //	dd($check_kyc_error);           
             return response([ 
                 'success'  => false,
                 'data'   => $check_kyc_error,
@@ -494,7 +495,7 @@ class KycController extends Controller
             withHeaders(['Content-Type' => 'application/json'])->
             get($url_check_kyc);
             $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);   
-            
+           //dd($json_upgrade_existing_10); 
             if ($upgrade_existing_l0->failed()) {
                 return response([
                     'status' => $upgrade_existing_l0->status(),
@@ -513,14 +514,15 @@ class KycController extends Controller
                         ]
                 );       
             }
-            Mail::to($user->email)->send(new UPDATEKYC($user)); 
+           // Mail::to($user->email)->send(new UPDATEKYC($user)); 
             return response([
                 'status' => $upgrade_existing_l0->status(),
                 'data'=> $json_upgrade_existing_l0,
             ]); 
             
         }catch(Exception $error){ 
-            return response([
+dd($error);            
+return response([
                 'status' => false,
                 'error'=>$error,
             ]);
