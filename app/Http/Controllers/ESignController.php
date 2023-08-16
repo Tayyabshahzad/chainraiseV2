@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MyEDocument;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class ESignController extends Controller
@@ -14,6 +16,7 @@ class ESignController extends Controller
             'user_id' => 'required', 
             'template_id'=>'required'
         ]);
+         
         $token = env('ESIGN_TOKEN');
         $user = User::find($request->user_id);
         $url = "https://esignatures.io/api/contracts?token=".$token; 
@@ -33,7 +36,10 @@ class ESignController extends Controller
             ]); 
             $json_template = json_decode((string) $response->getBody(), true); 
            // dd($json_template);
-            if($response->successful()){
+            if($response->successful()){ 
+                $doc = MyEDocument::where('template_id',$request->template_id)->first(); 
+                $doc->status = 'open';
+                $doc->save(); 
                 return response([
                     'status'=>true,
                     'url'=>$json_template['data']['contract']['signers'][0]['sign_page_url']
@@ -59,7 +65,7 @@ class ESignController extends Controller
         $token = env('ESIGN_TOKEN');
         $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token='.$token);
         $json_e_sign = json_decode((string) $e_sign->getBody(), true);
-        dd($json_e_sign);
+     
         return response([
             'status' => true,
             'data' => $json_e_sign
@@ -104,5 +110,19 @@ class ESignController extends Controller
         }
           
         
+    }
+
+    public function check_esing_status(Request $request){
+        $user = Auth::user();
+        $doc = MyEDocument::where('offer_id',$request->offer_id)->where('investor_id',$user->id)->first(); 
+        if($doc->status == 'queued'){
+            return response([
+                'status'=>false, 
+            ]);    
+        }else{
+            return response([
+                'status'=>true, 
+            ]);    
+        }
     }
 }

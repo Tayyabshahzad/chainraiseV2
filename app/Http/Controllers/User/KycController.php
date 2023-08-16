@@ -64,9 +64,7 @@ class KycController extends Controller
                 'success' => false,
                 'errors' => $errors,
             ]);
-        } 
-       
-       
+        }  
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);         
         if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';

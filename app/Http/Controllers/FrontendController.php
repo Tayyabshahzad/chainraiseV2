@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Validator;
 class FrontendController extends Controller
 {
 
@@ -381,8 +381,30 @@ class FrontendController extends Controller
 
 
     public function verify_identity(Request $request){
-        $user = Auth::user(); 
-        
+     
+        $validator = Validator::make($request->all(), [
+            'legal_name' => 'required',
+            'last_name' => 'required',
+            'nationality' => 'required',
+            'country_residence' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'dob' => 'required',
+            'cc' => 'required',
+            'phone' => 'required', 
+            'doc_type' => $request->input('nationality') !== 'US' ? 'required' : 'nullable',
+            'primary_contact_social_security' => $request->input('nationality') === 'US' ? 'required' : 'nullable', 
+        ]); 
+        if ($validator->fails()) { 
+            return response([ 
+                'validation'=>false,
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
+        $user = Auth::user();   
         try{   
             $user->name = $request->legal_name;    
             $user->phone = $request->phone;  
@@ -418,7 +440,6 @@ class FrontendController extends Controller
                 'errors' => "There is some error while updating account - ['.$error.']",
             ]);
         } 
-      
        
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);
         $date_of_birth = $user->userDetail->dob;
@@ -452,15 +473,12 @@ class FrontendController extends Controller
 
         if($user->fortress_id == null){  
             try{ 
-                $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
-                    'Content-Type' => 'application/json',
-                ])->post($this->baseUrl.'/api/trust/v1/identity-containers', [
+                $identity_data = [
                     'firstName' => $user->name,
                     'middleName' => $user->userDetail->middle_name,
                     'lastName' => $user->userDetail->last_name,
                     'phone' =>  $user->cc.$user->phone,
-                    'email' => $user->email,
-                    'ssn' => $decodedSsn,
+                    'email' => $user->email, 
                     'upgradeKYC' => false,
                     "dateOfBirth" => $date_of_birth,
                     'address' => [
@@ -470,7 +488,13 @@ class FrontendController extends Controller
                         'state' => $user->userDetail->state,
                         'country' => $user->identityVerification->nationality,
                     ] 
-                ]);
+                ];
+                if($request->nationality == 'US'){
+                    $identity_data['ssn'] = $decodedSsn;
+                }
+                $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post($this->baseUrl.'/api/trust/v1/identity-containers',  $identity_data );
                 $json_identity_containers =  json_decode((string) $identity_containers->getBody(), true);     
                 if ($identity_containers->failed()) { 
                     $status = $identity_containers->status(); 
@@ -509,12 +533,98 @@ class FrontendController extends Controller
                     'success'  => false,
                     'step'=>'individual step 1 Exception',
                 ]);
-            } 
+            }  
+
+            // Uploading documents 
+            if($request->nationality != 'US'){
+                if($user->user_type  == 'entity'){
+                    $id =  $user->business_id;
+                    $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
+                }  else{
+                    $id =  $user->fortress_personal_identity; 
+                   //base URL https://api.fortressapi.com/api/trust/v1/
+                    $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
+                }  
+                try{  
+                    $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
+                    if(env('APP_ENV') == 'sandbox'){
+                        $path = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                    }else{
+                        $path =  $mediaCollection->getFullUrl();
+                    }  
+                    $document_path = fopen($path, 'r');    
+                    $upload_document = Http::attach('DocumentType', $request->doc_type)->
+                    attach('DocumentFront', $document_path)->
+                    attach('DocumentBack', $document_path)->
+                    withToken($token_json['access_token'])->
+                    post($endPoint); 
+                    $json_upload_document =  json_decode((string) $upload_document->getBody(), true); 
+                    $status = $upload_document->status(); 
+                    if($status == 400){ 
+                        foreach($json_upload_document['errors'] as $error) {
+                            if(is_array($error)) {
+                                $errors[] = 'Try to change document type';
+                                $errors[] = $error[0];
+                                $errors[] = $json_upload_document['title'];
+                            }
+                        }
+                       
+                        $errors[] = 'Error While Uploading '.$user->user_type.' documents';
+                        $errors[] = $json_upload_document['errors'];
+                        $errors[] = $json_upload_document['title'];  
+                        return response([
+                            'status' => $upload_document->status(),
+                            'success'  => false,
+                            'errors' => $errors,
+                        ]);
+                    }
+                    if ($upload_document->failed()) { 
+                        $status = $upload_document->status();
+                        if($status == 400){   
+                            $errors[] = $json_upload_document['errors'];
+                            $errors[] = $json_upload_document['title'];  
+                            $errors[] = 'Personal Identity Has Been Created But Error While Uploding Documents';
+                            return response([
+                                'status' => $upload_document->status(),
+                                'success'  => false,
+                                'errors' => $errors,
+                            ]);
+                        }
+                        $errors[] = 'Error While uploading Documents'; 
+                        return response([
+                            'status' => $upload_document->status(),
+                            'data'   => $json_upload_document,
+                            'errors' => $errors,
+                            'success'  => false,
+                        ]); 
+                    }
+                    if($upload_document->requestTimeout()){
+                        $errors[] = 'Request Time OUT';
+                        return response([
+                            'status' => $upload_document->status(),
+                            'data'   => $json_upload_document,
+                            'errors' => $errors,
+                            'success'  => false,
+                        ]); 
+                    } 
+                }catch(Exception $upload_document_error){ 
+                    $errors[] = 'Error While uploading Documents';
+                    $errors[] = $upload_document_error; 
+                    return response([ 
+                        'data'   => $upload_document_error,
+                        'success'  => false,
+                        'errors' => $errors,
+                    ]);
+                }   
+            }
+
+           
+              // Get the latest status  
             if($user->user_type  == 'entity'){
                 $url_check_kyc = $this->baseUrl.'/api/compliance/v1/business-identities/'.$user->business_id ;
             }else{
                 $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
-            }  
+            }   
             try {  
                 $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
                 withHeaders(['Content-Type' => 'application/json'])->
@@ -554,6 +664,7 @@ class FrontendController extends Controller
                     'error'=>$error,
                 ]);
             }
+            
 
         }else{ 
             if($user->user_type  == 'entity'){
@@ -606,14 +717,7 @@ class FrontendController extends Controller
             }
         }  
             
-            
-
-        
-       
-        
-       
-         
-         
+             
 
     }
 

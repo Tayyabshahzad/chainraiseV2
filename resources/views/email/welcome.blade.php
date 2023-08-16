@@ -301,9 +301,9 @@
                                                                                                 <tr>
                                                                                                     <td style="vertical-align: top; padding: 10px;"
                                                                                                         valign="top">
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="https://investchainraise.io/"
                                                                                                             style="text-decoration: none;">
-                                                                                                            <img src="{{ asset('assets/email_images/logo-white.png')}}"
+                                                                                                            <img src="https://investchainraise.io/assets/v3-images/chainrasied-logo.png"
                                                                                                                 width="130"
                                                                                                                 height="22"
                                                                                                                 alt=""

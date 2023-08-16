@@ -439,41 +439,7 @@
                 }
             });
         });
-        $('body').on('submit','#send_email_form',function(event){
-        
-            if ($('.summernote').summernote('isEmpty')) {
-                    toastr.error('Required fileds are missing', "Error");
-                   return false;
-            }
-            event.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            
-            var form = $('#send_email_form')[0];
-            var data = new FormData(form);
-            $('#sendEmailBtn').prop('disabled',true);
-            $('#sendEmailBtn').html('Loading ...');
-            $.ajax({
-                type: "POST",
-                enctype: 'multipart/form-data',
-                url: "{{ route('user.info.invite.email') }}",
-                data: data,
-                processData: false,
-                contentType: false,
-                cache: false,
-                timeout: 800000,
-                success: function(result) {
-                    if(result.status==true){ 
-                        $('.dismiss').click();
-                        toastr.success(result.message, "Success");
-                    }
-                }
-            });
-
-        });
+         
         $(document).ready(function() {
             $('.summernote').summernote({
                 placeholder: 'Please Enter Your Content Here  ....',

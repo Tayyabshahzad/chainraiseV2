@@ -115,7 +115,7 @@
                             <circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" />
                         </svg>
                     </div>
-                    <div class="my-5  bank_wrapper ">
+                    <div class="my-5  bank_wrapper   ">
                         <h4 class="fw-bolder">4. Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
@@ -198,17 +198,24 @@
                             </div>
                         </div>
 
-
+                        
                         <div class="border px-5 py-3  bg-light mb-3">
-                            <input type="checkbox" name="" id="validationCustom05" required>
+                            <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05" required 
+                            @if($offer->eDocument->status == 'queued')
+                            disabled
+                            @endif
+                           >
                             I have read and agree to the e-sign disclosure
-                            <a href="#" class=" text-gray-700 view_template" data-user_id="{{ Auth::user()->id }}"
+                            <a target="_blank" href="{{ route('my.documents') }}"> View Document </a>
+
+                            {{-- <a href="#" class=" text-gray-700 view_template" data-user_id="{{ Auth::user()->id }}"
                                 data-template_id="@if($offer->offerEsing){{ $offer->offerEsing->template_id }}"@endif data-bs-toggle="modal"
                                 data-bs-target="#modal_view_e_sign">
                                 (Review Document)
-                            </a>
-
-
+                            </a> --}}
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a class="check_esing_status" href="#"> <i class="fa fa-refresh"></i> </a>
+                           
                             <div class="invalid-feedback">
                                 Please Check
                             </div>
@@ -298,13 +305,7 @@
 
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
+        </div>  
         <div class="modal fade" id="kyc_data_modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <!--begin::Modal content-->
@@ -555,9 +556,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
+        </div> 
         <div class="modal fade" id="payment_widget" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog mw-650px">
                 <!--begin::Modal content-->
@@ -607,8 +606,7 @@
                 <!--end::Modal content-->
             </div>
         </div>
-
-
+ 
 
     </div>
 
@@ -682,6 +680,11 @@
                         console.log(response)
                         $('.submit_button').attr('disabled', false);
                         if (response.success == false) {
+                            if (response.validation == false) {
+                                $.each(response.errors, function(key, value) { 
+                                     toastr.error(value);
+                                 });
+                            }
                             if (response.status == 400) {
                                 if (response.errors && response.errors.length > 0) {
                                     // Check for specific validation errors
@@ -901,9 +904,7 @@
         $('.kyc_document_upload_btn').click(function() {
             var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
             imgBtnWrapper.find('.change_photo').click();
-        });
-        
-
+        }); 
         $(document).ready(function() {
             $('.past_12_months_investment_check_button').on('change', function() {
                 if ($(this).is(':checked')) {
@@ -914,11 +915,7 @@
                     $('.show_investment_limit').attr('required',false)
                 }
             });
-        });
-
-
-
-
+        });  
         $('body').on('click', '.view_template', function() {
             var user_id = $(this).data('user_id');
             var template_id = $(this).data('template_id');
@@ -943,7 +940,27 @@
                 }
             });
         });
-
+        $('body').on('click', '.check_esing_status', function() { 
+            offer_id = "{{ $offer->id }}";
+            $.ajax({
+                
+                url: "{{ route('esignature.check.esing.status') }}",
+                method: 'GET', 
+                data:{
+                    offer_id : offer_id
+                },
+                success: function(response) {
+                    if (response.status == true) {
+                        $('.esing_check').prop('disabled', false);  
+                        toastr.success('Thanks for signing the document', "Success");
+                    } else { 
+                        $('.esing_check').prop('disabled', true);
+                        toastr.error('You have not signed your document', "Error");
+                    }
+                }
+            });
+        });
+        
         
     </script>
 
@@ -981,6 +998,21 @@
             });
         });
     </script>
+     
+     <script>
+        $(document).ready(function() {
+            
+            $('#make_investment_form').submit(function(e) {
+            // Check if the checkbox is checked
+            var isChecked = $('.esing_check').is(':checked'); 
+            if (!isChecked) {
+                e.preventDefault(); // Prevent form submission
+                alert('Please check the agreement checkbox.'); // Show error message
+            }
+        });
+        });
+    </script>
+    
 
 
 @endsection

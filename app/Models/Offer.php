@@ -75,6 +75,11 @@ class Offer extends Model  implements HasMedia
         return $this->hasOne(Custodial::class);
     }
 
+    public function eDocument()
+    {
+        return $this->hasOne(MyEDocument::class);
+    }
+
   
 
 }

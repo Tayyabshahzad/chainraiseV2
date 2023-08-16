@@ -90,9 +90,7 @@ class UserController extends Controller
                   whereHas('roles',function($query){
                         $query->where('name', '!=', 'admin');
                   })->get();
-          $issuers = User::role('issuer')->orderby('id','DESC')->get();
-               
-
+          $issuers = User::role('issuer')->orderby('id','DESC')->get();  
         return view('user.index',compact('users','offers','issuers'));
     }
 
@@ -114,8 +112,6 @@ class UserController extends Controller
             'message' => 'Status Updated to '.$user->status
         ]);
     }
-
-    
 
     public function details($id)
     {
@@ -286,16 +282,13 @@ class UserController extends Controller
                 $user->assignRole('investor');
             }elseif($request->account_type == 'issuer') {
                 $user->assignRole('issuer');
-            }
-
-             
-             //event(new Registered($user));
-             //Mail::to($user)->send(new WelcomeEmail($user));
-             DB::commit();
-             Session::put('success','Your Investment Has Been Completed'); 
+            } 
+             event(new Registered($user));
+             Mail::to($user)->send(new WelcomeEmail($user));
+             DB::commit(); 
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){ 
-            dd($error);
+           
             DB::rollBack();
             Session::put('error','Error While Creating ');  
             return redirect()->back()->with('error','Error while creating investor user');
@@ -307,6 +300,7 @@ class UserController extends Controller
     }
     public function issuerSave(Request $request)
     { 
+        
         $request->validate([
             'email' => 'required',
             'first_name' => 'required',
@@ -972,19 +966,21 @@ class UserController extends Controller
             $user->save();  
             $annualIncome = (int) str_replace(',', '', $user->net_worth);
             $netWorth = (int) str_replace(',', '', $user->annual_income);    
+            
             if($user->are_you_accredited == true){
+           
                 if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
                     $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
                     $investmentLimit =    $accreditedInvestment;
                 } 
             }else{
-                
-                if (($annualIncome < 124000) || ($netWorth < 124000)) {
+              //  dump($annualIncome,$netWorth);
+                if (($annualIncome < 124000) || ($netWorth < 124000)) { 
                     $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
                     $investmentLimit =  $nonAccreditedInvestment;
                 }
-            }
-        
+               // dd($investmentLimit);
+            } 
             $user->investment_limit = $investmentLimit;
             $user->save();  
             UserDetail::updateOrCreate(
@@ -999,7 +995,7 @@ class UserController extends Controller
             $user->save(); 
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
-            //dd($error);
+            
             return redirect()->back()->with('error','There is some error while updating profile'); 
         }
        

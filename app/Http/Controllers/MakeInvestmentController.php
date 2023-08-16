@@ -319,24 +319,26 @@ class MakeInvestmentController extends Controller
         } else {
             $past12MonthsInvestment = false;
         }
-
-
+        $token = env('ESIGN_TOKEN'); 
         try{
-            $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5');
+            $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token='.$token);
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+          
             if(!$e_sign->successful()){
                 return redirect()->back()->with('error','Error While Fetching E-Sign Document  Step-1');
             } 
         }catch(Exception $esign_error){
+          //  dd($esign_error);
             return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
         }  
+       
         try{  
             $signature_name    = $offer->user->name;
             $signature_email   = $offer->user->email;
             $signature_mobile  = $offer->user->phone;
             $signature_company = $offer->name;
             $logo =  $offer->getFirstMediaUrl('offer_image', 'thumb');
-            $esign_url = "https://esignatures.io/api/contracts?token=3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
+            $esign_url = "https://esignatures.io/api/contracts?token=".$token;
             $esign_request = Http::withHeaders(['Content-Type' => 'application/json'])
             ->post($esign_url, [
                 "template_id" => $template_id,
@@ -418,6 +420,7 @@ class MakeInvestmentController extends Controller
                 $esign_contract_status = $json_esign_request['data']['contract']['status'];
             }
             if ($esign_request->failed()) { 
+              
                 if($esign_request->status() == 402){
                     $esign_payment_error =  $json_esign_request['data']['error_message'];
                     $esign_contract_status =  'Not Completed';
@@ -427,6 +430,7 @@ class MakeInvestmentController extends Controller
                 }    
             }
         }catch(Exception $esign_request_error){ 
+            
             return redirect()->back()->with("error","Error While Requesting E-Sign Documents");
         }
        

@@ -23,9 +23,7 @@ use Illuminate\Support\Str;
 class UpdateBasicDetailController extends Controller
 {
     public function updateDocument(Request $request)
-    {
-       
-        
+    { 
         $request->validate([
             //'document' => 'required',
             'name' => 'required',
@@ -77,29 +75,23 @@ class UpdateBasicDetailController extends Controller
 
     
     public function eDocument(Request $request)
-    {
-        
-        
+    { 
         $request->validate([  
             'user_ids' => 'required',
             'template'=>'required',
             'offer' => 'required',
             'issuer' => 'required',     
-        ]);
-      
+        ]); 
         $issuer = User::find($request->issuer);
         if($issuer->userDetail){
             $entity_name =   $issuer->userDetail->entity_name; 
         }else{
             $entity_name = '-';
-        }  
-        
-      
+        }    
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
         $token = env('ESIGN_TOKEN'); 
-        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token; 
-        
+        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token;  
         try{
             
             foreach($users as $user){ 
@@ -111,13 +103,13 @@ class UpdateBasicDetailController extends Controller
                     ])->post($e_signature_url, [
                         "template_id" => $request->template,
                         "title" => $request->selectedOptionHtml,
-                        "metadata" => "ID0001",
+                        "metadata" => "9333",
                         "locale" => "en",
                         "test" => "no",
                         "custom_webhook_url" => "https://google.com",
                         "signers" => [
                             [
-                                "name" => $user->name."-".$uniqueNumber,
+                                "name" => $user->name,
                                 "email" => $user->email,
                                 "mobile" => $user->phone,
                                 "company_name" =>"-",
@@ -128,7 +120,7 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email" 
                                 ],
-                                "redirect_url" => "https://google.com-".$uniqueNumber,
+                                "redirect_url" => "https://google.com-",
                                 "embedded_redirect_iframe_only" => "no"
                             ],
                             [
@@ -136,7 +128,6 @@ class UpdateBasicDetailController extends Controller
                                 "email" => $issuer->email,
                                 "mobile" => $issuer->phone,
                                 "company_name" =>$entity_name,
-                               
                                 "signing_order" => "1",
                                 "auto_sign" => "no",
                                 "signature_request_delivery_method" => "email",
@@ -144,7 +135,7 @@ class UpdateBasicDetailController extends Controller
                                 "required_identification_methods" => [
                                     "email"
                                 ],
-                                "redirect_url" => "https://google.com-".$uniqueNumber,
+                                "redirect_url" => "https://google.com-",
                                 "embedded_redirect_iframe_only" => "no"
                             ]
                         ],
@@ -186,6 +177,7 @@ class UpdateBasicDetailController extends Controller
                         ]
                     ]);
                     $json_template = json_decode((string) $send_template->getBody(), true);  
+                 
                     if($send_template->successful()){ 
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
@@ -236,7 +228,7 @@ class UpdateBasicDetailController extends Controller
             'content' => 'required',
             'user_ids' => 'required',
         ]);
-        $users = explode(',', $request->user_ids);
+        $users = explode(',', $request->user_ids); 
         $user_count = count($users);
         foreach($users as $user){
             $user = User::find($user);
