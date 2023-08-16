@@ -201,8 +201,10 @@
                         
                         <div class="border px-5 py-3  bg-light mb-3">
                             <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05" required 
-                            @if($offer->eDocument->status == 'queued')
-                            disabled
+                            @if($offer->eDocument)
+                                @if($offer->eDocument->status == 'queued')
+                                    disabled
+                                 @endif
                             @endif
                            >
                             I have read and agree to the e-sign disclosure
