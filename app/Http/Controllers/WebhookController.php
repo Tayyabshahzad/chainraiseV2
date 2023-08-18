@@ -12,24 +12,8 @@ class WebhookController extends Controller
 {
     public function handle(Request $request, Pusher $pusher)
     {
-         // ویب ہک ڈیٹا کو پروسیس کریں
-        $data = $request->all();
-        $status = "";
-        $email = "";
-        $findUser = User::where('email',$email)->first();
-        if($findUser){
-
-        } 
-
-        
-        // وصول شدہ ڈیٹا کو لاگ کریں
-        Log::info('ویب ہک ڈیٹا:', $data);
-
-        // پشر چینل میں ایونٹ براڈکاسٹ کریں
-        $pusher->trigger('webhook-channel', 'webhook-event', $data);
-        return response()->json(['message' => 'ویب ہک وصول کیا گیا اور پروسیس ہوا']);
-    // ایک جواب واپس کریں
-
+        $rawContent = $request->getContent(); 
+        Log::info('Fotrest Data:',  $rawContent);
     }
 
     public function esignatures(Request $request)
@@ -38,11 +22,9 @@ class WebhookController extends Controller
 
         try {
             // Get the raw content of the request
-            $rawContent = $request->getContent();
-    
+            $rawContent = $request->getContent(); 
             // Parse the JSON data
-            $data = json_decode($rawContent, true);
-    
+            $data = json_decode($rawContent, true); 
             // Extract and log the common "status" field
             $status = isset($data['status']) ? $data['status'] : 'Unknown Status';
             Log::info('Webhook Status:', ['status' => $status]);
@@ -69,6 +51,10 @@ class WebhookController extends Controller
             Log::error('Error processing webhook:', ['message' => $e->getMessage()]);
            // return response()->json(['message' => 'Error processing webhook'], 500);
         }
+    }
+
+    public function importUsers(){
+        dd(1);
     }
     
 

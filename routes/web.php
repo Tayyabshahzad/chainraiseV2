@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
 });
 
+Route::get('importUsers', [WebhookController::class, 'importUsers']); 
+
+
 Route::get('webhook/endpoint', [WebhookController::class, 'handle']); 
 
  //https://chain-clone.test/webhook/esignatures
