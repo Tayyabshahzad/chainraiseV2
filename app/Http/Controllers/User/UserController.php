@@ -300,6 +300,7 @@ class UserController extends Controller
     }
     public function issuerSave(Request $request)
     { 
+        dd(1);
         
         $request->validate([
             'email' => 'required',
@@ -351,7 +352,7 @@ class UserController extends Controller
         }
     }
     public function issuerAccountUpdate(Request $request)
-    {   
+    {    
         
         $request->validate([
             //Users Table

@@ -5,8 +5,8 @@ return [
         'production' => [
             'url' => 'https://fortress-prod.us.auth0.com/oauth/token',
             'grant_type' => 'password',
-            'username' => 'Portal@chainraise.io',
-            'password' => '?dm3JeXgkgQNA?ue8sHI',
+            'username' => 'info@chainraise.io',
+            'password' => 'F$95%5h$FMTDu#3YUZBSzk',
             'audience' => 'https://fortressapi.com/api',
             'client_id' => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
         ],

@@ -50,14 +50,15 @@ class KycController extends Controller
     }
     public function checkKyc(Request $request)
     {
-       
+        
+         
+ 
         $request->validate([
             'id' => 'required',
-        ]);  
-       
+        ]);   
         $errors = []; 
         $user = User::with('userDetail')->find($request->id); 
-        if($user->profile_status == 0 || $user->identityVerification->primary_contact_social_security == null){
+        if($user->profile_status == 0 ){
             $errors[] = 'Please complete user profile first';
             return response([
                 'status' => 'document',
@@ -95,7 +96,9 @@ class KycController extends Controller
                 'audience'   => $this->authUrl['audience'],
                 'client_id'  => $this->authUrl['client_id'],
             ]); 
+           
             $token_json =  json_decode((string) $get_token->getBody(), true);    
+
             if ($get_token->failed()) { 
                 $errors[] = 'Error While Creating Token';
                 return response([
@@ -460,8 +463,7 @@ class KycController extends Controller
             ]);
         } 
          
-
-        
+       
         $request->validate([
             'id' => 'required',
         ]);
@@ -481,9 +483,7 @@ class KycController extends Controller
                 ]);
             } 
         }  
-
-        
-        
+ 
         if($user->user_type  == 'entity'){
             $url_check_kyc = $this->baseUrl.'/api/compliance/v1/business-identities/'.$user->business_id ;
         }else{
@@ -520,14 +520,12 @@ class KycController extends Controller
                 'data'=> $json_upgrade_existing_l0,
             ]); 
             
-        }catch(Exception $error){ 
-dd($error);            
-return response([
-                'status' => false,
-                'error'=>$error,
-            ]);
-        }
-
+        }catch(Exception $error){             
+            return response([
+                            'status' => false,
+                            'error'=>$error,
+                        ]);
+                    } 
     }
     public function re_run_kyc_2(Request $request)
     {
@@ -624,7 +622,7 @@ return response([
             'client_id'  => $this->authUrl['client_id'],
         ]);
         $token_json =  json_decode((string) $get_token->getBody(), true);   
-        
+      
         try{ 
           
             $mediaCollection = $user->getFirstMedia('kyc_document_collection');  
