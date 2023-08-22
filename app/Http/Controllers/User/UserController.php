@@ -292,7 +292,7 @@ class UserController extends Controller
 
             DB::rollBack();
             Session::put('error','Error While Creating ');
-            return redirect()->back()->with('error','Error while creating investor user');
+            return redirect()->back()->with('error','Error while creating investor user'.$error);
         }
     }
     public function issuer()
