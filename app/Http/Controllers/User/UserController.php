@@ -90,18 +90,18 @@ class UserController extends Controller
                   whereHas('roles',function($query){
                         $query->where('name', '!=', 'admin');
                   })->get();
-          $issuers = User::role('issuer')->orderby('id','DESC')->get();  
+          $issuers = User::role('issuer')->orderby('id','DESC')->get();
         return view('user.index',compact('users','offers','issuers'));
     }
 
     public function UpdateStatus(Request $request)
     {
         $request->validate([
-            'id' => 'required', 
+            'id' => 'required',
         ]);
         $user = User::find($request->id);
         if ($user->status == 'active') {
-            $user->status = 'inactive'; 
+            $user->status = 'inactive';
         }elseif($user->status == 'inactive'){
             $user->status = 'active';
         }
@@ -115,16 +115,17 @@ class UserController extends Controller
 
     public function details($id)
     {
-       
+
         $id = $id;
         $user = User::with('userDetail','identityVerification','trustSetting','invesmentProfie','accreditation')->find($id);
         $accreditations = Accreditation::get();
         $offers = Offer::get();
         $childs = User::with('userDetail','identityVerification','trustSetting','invesmentProfie')->where('parent_id',$id)->get();
         $folders = Folder::where('user_id',$id)->get();
-        $e_documents =  MyEDocument::where('investor_id',$id)->get(); 
+        $e_documents =  MyEDocument::where('investor_id',$id)->get();
         $investors = User::role('investor')->get();
-        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents'));
+        $issuers = User::role('issuer')->get();
+        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents','issuers'));
     }
     public function getChilds(Request $request){
 
@@ -194,7 +195,7 @@ class UserController extends Controller
     {
         $request->validate([
             'id' => 'required',
-        ]); 
+        ]);
         try {
             $user = User::find($request->id);
             Mail::to($user)->send(new InvestorAccountDelete($user));
@@ -204,7 +205,7 @@ class UserController extends Controller
                     'message' => 'User has been deleted successfully'
                 ]);
             }
-          
+
         } catch (Exception $error) {
             return response([
                 'status' => false,
@@ -218,7 +219,7 @@ class UserController extends Controller
     }
     public function save(Request $request)
     {
-       
+
         $request->validate([
             'email' => 'required|unique:users',
             'first_name' => 'required',
@@ -232,7 +233,7 @@ class UserController extends Controller
             //'suit' => 'required',
             'city' => 'required',
             'state' => 'required',
-            'zip_code' => 'required|min:5|max:5', 
+            'zip_code' => 'required|min:5|max:5',
             'account_type' => 'required|in:investor,issuer',
             //'agree_consent_electronic' => 'required',
             //'password' => 'required',
@@ -243,7 +244,7 @@ class UserController extends Controller
         }else{
             $agree_consent_electronic =false;
         }
-        
+
         DB::beginTransaction();
         try{
             $user = new User;
@@ -282,15 +283,15 @@ class UserController extends Controller
                 $user->assignRole('investor');
             }elseif($request->account_type == 'issuer') {
                 $user->assignRole('issuer');
-            } 
+            }
              event(new Registered($user));
              Mail::to($user)->send(new WelcomeEmail($user));
-             DB::commit(); 
+             DB::commit();
              return redirect()->route('user.index')->with('success','New investor user has been created');
-        }catch(Exception $error){ 
-           
+        }catch(Exception $error){
+
             DB::rollBack();
-            Session::put('error','Error While Creating ');  
+            Session::put('error','Error While Creating ');
             return redirect()->back()->with('error','Error while creating investor user');
         }
     }
@@ -299,8 +300,9 @@ class UserController extends Controller
         return view('user.issuer.create');
     }
     public function issuerSave(Request $request)
-    { 
-        
+    {
+        dd(1);
+
         $request->validate([
             'email' => 'required',
             'first_name' => 'required',
@@ -313,7 +315,7 @@ class UserController extends Controller
             'address' => 'required',
             //'suit' => 'required',
             'city' => 'required',
-            'state' => 'required', 
+            'state' => 'required',
             'zip_code' => 'required|min:5|max:5',
             'agree_consent_electronic' => 'required',
             //'password' => 'required',
@@ -351,8 +353,8 @@ class UserController extends Controller
         }
     }
     public function issuerAccountUpdate(Request $request)
-    {   
-        
+    {
+
         $request->validate([
             //Users Table
             'id' => 'required',
@@ -378,16 +380,16 @@ class UserController extends Controller
             //'tax_entity_type'=>'required',
             //'tax_identification'=>'required',
             'nationality' => 'required',
-            'country_residence' => 'required', 
+            'country_residence' => 'required',
             //Trust Settings
             //'bypass_account_setup' => 'required',
             //'bypass_kyc_checkup' => 'required',
             //'bypass_accreditation_checks' => 'required',
             //'bypass_document_restrictions' => 'required',
            // 'view_all_invite_offers' => 'required',
-            //'allow_manual_ach_bank_input' => 'required', 
+            //'allow_manual_ach_bank_input' => 'required',
         ]);
-    
+
         $user = User::find($request->id);
         if($user->roles->first()->name == 'issuer'){
             $user->profile_status = true;
@@ -421,12 +423,12 @@ class UserController extends Controller
              'date_incorporation'=>$request->date_incorporation,
              'state'=> $request->state,'zip'=> $request->zip,'entity_name'=>$request->entity_name
             ]
-        );  
-        if($request->primary_contact_social_security == '999-99-9999'){   
-            $ssn = $user->identityVerification->primary_contact_social_security; 
-        }else{  
-            $ssn = Crypt::encryptString($request->primary_contact_social_security); 
-        }  
+        );
+        if($request->primary_contact_social_security == '999-99-9999'){
+            $ssn = $user->identityVerification->primary_contact_social_security;
+        }else{
+            $ssn = Crypt::encryptString($request->primary_contact_social_security);
+        }
         $identityVerification = IdentityVerification::updateOrCreate(
             ['user_id' => $request->id],
             [
@@ -437,7 +439,7 @@ class UserController extends Controller
              'doc_type' => $request->doc_type,
              'country_residence' => $request->country_residence
             ]
-        ); 
+        );
         // $userDetails = UserDetail::where('user_id',$request->id)->first();
         // $userDetails->middle_name = $request->middle_name;
         // $userDetails->last_name = $request->last_name;
@@ -499,7 +501,7 @@ class UserController extends Controller
                 $trustSetting->disclosures = true;
             }else{
                 $trustSetting->disclosures = false;
-            } 
+            }
             $trustSetting->save();
 
         }else{
@@ -547,7 +549,7 @@ class UserController extends Controller
                 $trustSetting->disclosures = true;
             }else{
                 $trustSetting->disclosures = false;
-            } 
+            }
 
 
 
@@ -559,7 +561,7 @@ class UserController extends Controller
     }
     public function invesmentUpdate(Request $request)
     {
-      
+
         $request->validate([
             'id' => 'required',
             'type'=>'required',
@@ -568,7 +570,7 @@ class UserController extends Controller
            $user = User::find($request->id);
            $user->password  =  Hash::make($request->password);
            $user->save();
-        }  
+        }
         if($request->type == 'investor'){
             $request->validate([
                 'net_worth' => 'required',
@@ -823,7 +825,7 @@ class UserController extends Controller
     public function template()
     {
         $token = env('ESIGN_TOKEN');
-        //$prod_token = "3137a61a-7db9-41f9-b2bd-39a8d7918fb5"; 
+        //$prod_token = "3137a61a-7db9-41f9-b2bd-39a8d7918fb5";
         $e_sign = Http::get('https://esignatures.io/api/templates?token='.$token);
         $json_e_sign = json_decode((string) $e_sign->getBody(), true);
         if($e_sign->successful()){
@@ -946,43 +948,43 @@ class UserController extends Controller
         }
         //echo $response;
 
-    } 
-    public function basicDetailUpdate(Request $request){  
-        $user = Auth::user(); 
-        try{  
-            $user->user_type = $request->account_type;    
-            $user->name = $request->legal_name;  
-           // $user->country = $request->legal_name; 
-           // $user->address = $request->legal_name; 
-            $user->net_worth = $request->net_worth; 
-            $user->annual_income = $request->annual_income; 
-             
+    }
+    public function basicDetailUpdate(Request $request){
+        $user = Auth::user();
+        try{
+            $user->user_type = $request->account_type;
+            $user->name = $request->legal_name;
+           // $user->country = $request->legal_name;
+           // $user->address = $request->legal_name;
+            $user->net_worth = $request->net_worth;
+            $user->annual_income = $request->annual_income;
+
             $user->are_you_accredited = $request->has('are_you_accredited') ? true : false;
-            $user->agree_consent_electronic = $request->has('electronic_delivery') ? true : false;   
-            $user->afford_loss =$request->has('afford_loss') ? true : false;   
-            $user->understand_securities =$request->has('understand_securities') ? true : false;   
-            $user->investment_advice = $request->has('investment_advice') ? true : false;   
-            $user->agree_policy =$request->has('agree_policy') ? true : false;    
-            $user->save();  
+            $user->agree_consent_electronic = $request->has('electronic_delivery') ? true : false;
+            $user->afford_loss =$request->has('afford_loss') ? true : false;
+            $user->understand_securities =$request->has('understand_securities') ? true : false;
+            $user->investment_advice = $request->has('investment_advice') ? true : false;
+            $user->agree_policy =$request->has('agree_policy') ? true : false;
+            $user->save();
             $annualIncome = (int) str_replace(',', '', $user->net_worth);
-            $netWorth = (int) str_replace(',', '', $user->annual_income);    
-            
+            $netWorth = (int) str_replace(',', '', $user->annual_income);
+
             if($user->are_you_accredited == true){
-           
+
                 if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
                     $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
                     $investmentLimit =    $accreditedInvestment;
-                } 
+                }
             }else{
               //  dump($annualIncome,$netWorth);
-                if (($annualIncome < 124000) || ($netWorth < 124000)) { 
+                if (($annualIncome < 124000) || ($netWorth < 124000)) {
                     $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
                     $investmentLimit =  $nonAccreditedInvestment;
                 }
                // dd($investmentLimit);
-            } 
+            }
             $user->investment_limit = $investmentLimit;
-            $user->save();  
+            $user->save();
             UserDetail::updateOrCreate(
                 ['user_id' => $user->id],
                 [
@@ -990,15 +992,46 @@ class UserController extends Controller
                  'entity_name'=>  $request->entity_name,
                 ]
             );
-            
+
             $user->profile_status = true;
-            $user->save(); 
+            $user->save();
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
-            
-            return redirect()->back()->with('error','There is some error while updating profile'); 
+
+            return redirect()->back()->with('error','There is some error while updating profile');
         }
-       
-        
+
+    }
+
+    public function uploadDocument(Request $request){
+
+        $request->validate([
+            'template_name' => 'required',
+            'investor_id' => 'required',
+            'offer' => 'required',
+            'issuer_id' => 'required',
+            'document'=>'required'
+        ]);
+        if($request->hasFile('document')) {
+            $e_document = new MyEDocument;
+            $e_document->investor_id = $request->investor_id;
+            $e_document->offer_id = $request->offer;
+            $e_document->issuer_id = $request->issuer_id;
+            $e_document->template_name = $request->template_name;
+            $e_document->template_id = null;
+            $e_document->status = 'send';
+            $e_document->source = 'manual';
+            $e_document->contract_id = 123;
+            $e_document->save();
+
+
+            if($request->has('document')){
+
+                $e_document->addMediaFromRequest('document')->toMediaCollection('e_documents');
+            }
+
+        }
+        return redirect()->back()->with('success','Document Uploaded');
+
     }
 }

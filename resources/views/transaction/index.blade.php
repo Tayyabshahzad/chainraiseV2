@@ -30,7 +30,7 @@
                         </span>
                         <h3 class="card-label"> Transactions</h3>
                     </div>
-                   
+
                 </div>
                 <div class="card-body">
                     <!--begin: Datatables-->
@@ -46,16 +46,16 @@
                                 <th>Status</th>
                                 <th>Type</th>
                                 <th>Payment Method</th>
-                                <th>E-Sign</th> 
+                                <th>E-Sign</th>
                                 <th> Action </th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             @foreach($transactions as $transaction)
                             <tr>
                                  <td> {{ $loop->iteration }} </td>
-                                 <td> {{ $transaction->user->name }} </td>
+                                 <td> {{ $transaction->user->name }} {{ $transaction->user->userDetail->last_name }} </td>
                                  <td> {{ $transaction->offer->name }} </td>
                                  <td> {{ $transaction->funds }} </td>
                                  <td> {{ $transaction->created_at }} </td>
@@ -63,13 +63,13 @@
                                  <td> {{ $transaction->status }} </td>
                                  <td> {{ $transaction->type }} </td>
                                  <td> {{ $transaction->payment_method }} </td>
-                                 <td> {{ $transaction->e_sign }} </td> 
-                                 <td>   
+                                 <td> {{ $transaction->e_sign }} </td>
+                                 <td>
                                     <i class="fa fa-edit"></i>
-                                </td> 
+                                </td>
                             </tr>
                             @endforeach
-                    
+
                         </tbody>
                     </table>
                     <!--end: Datatable-->
@@ -78,9 +78,9 @@
 
         </div>
         <!--end::Container-->
- 
+
     </div>
- 
+
 
 <!-- Modal-->
 @include('organizations.partials.index')
@@ -91,16 +91,16 @@
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    
+
     <script>
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-         
+
          $("#organizations-table").on("click", ".editOrganization", function(e) {
-             
+
             var id = $(this).data('id');
             var name = $(this).data('name');
             var category = $(this).data('category');
@@ -136,8 +136,8 @@
                             } else {
                                 toastr.error(response.message, "error");
                             }
-                            
-                            
+
+
                         }
                     });
                 }

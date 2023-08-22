@@ -667,28 +667,25 @@
         </div>
         <!--end::Modal dialog-->
     </div>
+
+
     <div class="modal fade" id="modal-addFolder" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="staticBackdrop" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Add Folder </h5>
-                    {{--                
-                <label class="form-check form-switch form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1">
-                    <span class="form-check-label fw-semibold text-muted">Upload a Folder</span>
-                </label> --}}
+                    <h5 class="modal-title" id="exampleModalLabel"> Add Document </h5>
                 </div>
-                <form class="form" method="post" action="{{ route('folder.create') }}">
+                <form class="form" method="post" action="{{ route('user.upload.documents') }}" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="card card-custom">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="" class="required"> Folder Name </label>
-                                    <input type="text" class="form-control" placeholder="Folder Name"
-                                        name="name" required>
-                                    <input type="hidden" value="{{ $id }}" name="user_id" required>
+                                    <label for="" class="required"> Document Title </label>
+                                    <input type="text" class="form-control" placeholder="Document Title"
+                                        name="template_name" required>
+                                    <input type="hidden" value="{{ $id }}" name="investor_id" required>
                                 </div>
                                 <div class="row mt-4">
                                     <div class="form-group col-lg-6 mb-5">
@@ -702,58 +699,21 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label for=""> Sort Order </label>
+                                        <label for=""> Issuer </label>
                                         <select class="form-select form-select-solid" data-control="select2"
-                                            data-hide-search="true" data-placeholder="Sort Order" name="sort"
+                                            data-hide-search="true" data-placeholder="Issuer" name="issuer_id"
                                             required>
-                                            <option value="" disabled selected> Sorting </option>
-                                            <option value="manual"> Manual </option>
-                                            <option value="a-z"> A-Z </option>
-                                            <option value="z-a"> Z-A </option>
-                                            <option value="date-uploaded"> Date Uploaded </option>
-                                            <option value="date-uploaded-desc"> Date Uploaded (desc)</option>
+                                            <option value="" disabled selected> Issuer </option>
+                                            @foreach ($issuers as $issuer)
+                                                <option value="{{ $issuer->id }}"> {{ $issuer->name }} </option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="mb-15 fv-row">
-                                    <!--begin::Wrapper-->
-                                    <div class="d-flex flex-stack">
-                                        <!--begin::Label-->
-                                        <div class="fw-semibold">
-                                            <button class="btn btn-sm" type="button">
-                                                <span class="svg-icon svg-icon-2">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect opacity="0.5" x="11" y="18"
-                                                            width="12" height="2" rx="1"
-                                                            transform="rotate(-90 11 18)" fill="currentColor"></rect>
-                                                        <rect x="6" y="11" width="12"
-                                                            height="2" rx="1" fill="currentColor"></rect>
-                                                    </svg>
-                                                </span> ADD A RESTRICTION
-                                            </button>
-                                        </div>
-                                        <!--end::Label-->
-                                        <!--begin::Checkboxes-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Checkbox-->
-                                            <label class="form-check form-check-custom form-check-solid me-10">
-                                                <input class="form-check-input h-20px w-20px" type="checkbox"
-                                                    name="communication[]" value="email">
-                                                <span class="form-check-label fw-semibold">Allow Download </span>
-                                            </label>
-                                            <!--end::Checkbox-->
-                                            <!--begin::Checkbox-->
-                                            <label class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input h-20px w-20px" type="checkbox"
-                                                    name="communication[]" value="phone">
-                                                <span class="form-check-label fw-semibold">Show All Pages</span>
-                                            </label>
-                                            <!--end::Checkbox-->
-                                        </div>
-                                        <!--end::Checkboxes-->
+
+                                    <div class="form-group col-lg-12">
+                                        <label for=""> Select File </label>
+                                        <input type="file" name="document" required>
                                     </div>
-                                    <!--end::Wrapper-->
                                 </div>
                             </div>
                             <!--end::Form-->
@@ -775,7 +735,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Add Document </h5>
-                    {{--                
+                    {{--
             <label class="form-check form-switch form-check-custom form-check-solid">
                 <input class="form-check-input" type="checkbox" value="1">
                 <span class="form-check-label fw-semibold text-muted">Upload a Folder</span>
@@ -841,13 +801,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> View Document </h5>
-                    
+
                 </div>
                 <div class="modal-body">
-                    <div class="row" id="all_documents"> 
-                    </div> 
+                    <div class="row" id="all_documents">
+                    </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -856,7 +816,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> E Sign </h5> 
+                    <h5 class="modal-title" id="exampleModalLabel"> E Sign </h5>
                 </div>
                 <form class="form" method="post" action="{{ route('user.esign.template.save') }}">
                     <div class="modal-body">
@@ -876,7 +836,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                               
+
                                 <div class="form-group col-lg-6">
                                     <label for="" class="required"> Investors </label>
                                     <select class="form-select form-select-solid" name="investor">
@@ -888,9 +848,9 @@
                                 <div class="form-group col-lg-6">
                                     <label for="" class=""> Investment Amount </label>
                                     <input type="text" name="investment_amount"  placeholder="Investment Amount (if applicable)" class="form-control">
-                                </div> 
+                                </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -909,24 +869,24 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5> 
-                </div> 
+                    <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5>
+                </div>
                 <div class="modal-body">
-                    <div class="card card-custom"> 
+                    <div class="card card-custom">
                         <div class="card-body row">
-                        
+
                             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                             <script src="https://cdncf.esignatures.io/staticassets/iframeResizer.4.2.10.min.js"></script>
                             <iframe
                                 src=""
-                                id="eSignaturesIOIframe" 
+                                id="eSignaturesIOIframe"
                                 style="width: 100%;min-width: 100%;height:300px">
                             </iframe>
-                        </div> 
+                        </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>

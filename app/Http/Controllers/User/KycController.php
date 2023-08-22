@@ -51,6 +51,7 @@ class KycController extends Controller
     public function checkKyc(Request $request)
     {
         
+<<<<<<< HEAD
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post($this->authUrl['url'], [
@@ -87,6 +88,10 @@ class KycController extends Controller
 
         
         
+=======
+         
+ 
+>>>>>>> 8f5b76b349a886ed019e591ef245cece7d91b457
         $request->validate([
             'id' => 'required',
         ]);   

@@ -1410,7 +1410,7 @@
                                         Documents
                                     </span>
                                     <!--end::Svg Icon-->
-                                     
+
                                 </div>
                                 <!--end::Search-->
                             </div>
@@ -1418,8 +1418,7 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
-                                    <!--begin::Export--> 
-
+                                    <!--begin::Export-->
                                     <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                         data-bs-target="#modal-addFolder">
                                         <!--begin::Svg Icon | path: icons/duotune/files/fil013.svg-->
@@ -1436,7 +1435,7 @@
                                                     fill="currentColor"></path>
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->New Folder
+                                        <!--end::Svg Icon-->Upload Document
                                     </button>
                                     <!--end::Export-->
 
@@ -1483,43 +1482,51 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body"> 
+                        <div class="card-body">
                             <div id="kt_file_manager_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                 <div class="table-responsive">
-                                    <div class="dataTables_scroll"> 
-                                       
+                                    <div class="dataTables_scroll">
+
                                     </div>
                                 </div>
-                                <div class="row"> 
+                                <div class="row">
                                     @foreach ($e_documents as $e_document)
-                                        <div class="col-lg-6 mb-10"> 
-                                            <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" > 
-                                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">  
-                                                    {{  $e_document->template_name }} </a> 
+                                        <div class="col-lg-6 mb-10">
+                                            <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
+                                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
+                                                    {{  $e_document->template_name }} </a>
                                                 <div class="mb-9">
                                                     <!--begin::Badge-->
                                                     <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
                                                     <!--begin::Badge-->
                                                 </div>
-                                                <div class="d-flex flex-wrap flex-center"> 
+                                                <div class="d-flex flex-wrap flex-center">
                                                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
                                                         <div class="fs-4 fw-bold text-gray-700">
                                                             <i class="text-danger la la-trash"></i>
                                                         </div>
-                                                    </div> 
-                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;"> 
-                                                    <div class="fs-4 fw-bold text-gray-700 view_template" 
-                                                    data-user_id="{{   $e_document->investor_id  }}"
-                                                    data-template_id="{{   $e_document->template_id  }}"
-                                                    data-bs-toggle="modal" data-bs-target="#modal_view_e_sign">
-                                                        <i class="text-warning la la-eye"></i>
                                                     </div>
-                                                    </div> 
+                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
+                                                        @if( $e_document->source  != 'manual')
+                                                             <div class="fs-4 fw-bold text-gray-700 @if( $e_document->source  != 'manual') view_template @endif"
+                                                            data-user_id="{{   $e_document->investor_id  }}"
+                                                            data-template_id="{{   $e_document->template_id  }}"
+                                                            data-bs-toggle="modal" @if( $e_document->source  != 'manual')  data-bs-target="#modal_view_e_sign" @endif>
+                                                                <i class="text-warning la la-eye"></i>
+                                                            </div>
+                                                        @else
+                                                            <a  href="{{ $e_document->getFirstMediaUrl('e_documents', 'thumb') }}" target="_blank" class="fs-4 fw-bold text-gray-700 " >
+                                                                <i class="text-warning la la-eye"></i>
+                                                            </div>
+                                                        @endif
+
+
+                                                    </div>
                                                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
                                                         <div class="fs-4 fw-bold text-gray-700">
                                                             <i class="text-info la la-download"></i>
                                                         </div>
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                                 <p class='text-center text-bold'>
                                                      <h4>
@@ -1528,12 +1535,12 @@
                                                      <h4>
                                                           {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
                                                      </h4>
-                                                        
-                                                </p> 
+
+                                                </p>
                                             </div>
                                         </div>
                                     @endforeach
-                                    
+
                                 </div>
                             </div>
                             <!--end::Table-->
@@ -1559,7 +1566,7 @@
                     </div>
                     <!--end::Card-->
                 </div>
-                <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel"> 
+                <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel">
                     <div class="col-lg-3 ">
                         <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-200px mb-5 mb-xl-10"
                             style="background-color: #F1416C;background-image:url({{ asset('assets/media/patterns/vector-1.png') }})">
@@ -2027,7 +2034,7 @@
                         success: function(response) {
                             $('.kyc_wrapper').load(' .kyc_wrapper');
 
-                            if (response.success == false) { 
+                            if (response.success == false) {
                                 if (response.status == 400) {
                                     if (response.errors && response.errors.length > 0) {
                                         // Check for specific validation errors
@@ -2119,7 +2126,7 @@
         $('body').on('click', '.update_document', function() {
             var id = $(this).data('id');
             //$('.loader_img_for_update_document').removeClass('d-none');
-            //$('.update_document').addClass('d-none'); 
+            //$('.update_document').addClass('d-none');
             $.ajax({
                 url: "{{ route('user.kyc.document.update') }}",
                 method: 'POST',
@@ -2165,7 +2172,7 @@
         $('body').on('click', '.view_template', function() {
             var user_id = $(this).data('user_id');
             var template_id = $(this).data('template_id');
-             
+
             $.ajax({
                 url: "{{ route('esignature.preview.document') }}",
                 method: 'GET',
@@ -2178,17 +2185,17 @@
                         toastr.success('Data has been fetched', "Success");
                         console.log(response)
                         $('#eSignaturesIOIframe').attr('src',response.url);
-                        
+
                     } else {
-                        
+
                         toastr.error(response.message, "Error");
-                    }   
+                    }
                 }
             });
         });
 
 
-        
+
 
 
         const passwordInput = document.getElementById("primary_contact_social_security");

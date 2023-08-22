@@ -25,17 +25,17 @@ use Laravel\Socialite\Facades\Socialite;
 */
 //----
 Route::group(['middleware' => ['auth','verified']], function () {
-    Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup'); 
+    Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup');
 });
 
-Route::get('importUsers', [WebhookController::class, 'importUsers']); 
+Route::get('importUsers', [WebhookController::class, 'importUsers']);
 
 
-Route::get('webhook/endpoint', [WebhookController::class, 'handle']); 
+Route::get('webhook/endpoint', [WebhookController::class, 'handle']);
 
  //https://chain-clone.test/webhook/esignatures
 Route::get('email-layout', [FrontendController::class, 'layout_email']);
-Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');  
+Route::get('ki', [TestController::class, 'mailTrap'])->name('king2');
 Route::get('mailTrap', [TestController::class, 'mailTrap'])->name('mailTrap');
 Route::get('message', [TestController::class, 'message'])->name('messss');
 Route::post('message-sent', [TestController::class, 'message_send']);
@@ -45,28 +45,28 @@ Route::get('upload-doc', [TestController::class, 'upload_doc']);
 Route::get('dummer', [UserController::class, 'dummy'])->name('dummer');
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('error.logs');
 Route::get('custom_login/{email}/{password}', [UserController::class, 'custom_login']);
-Route::get('redirect-user/{email}/{password}', [UserController::class, 'redirection']); 
+Route::get('redirect-user/{email}/{password}', [UserController::class, 'redirection']);
 
 Route::get('login-social', [FrontendController::class, 'socialLogin'])->name('login.social');
-Route::get('otp', [GeneralController::class, 'otp'])->name('otp'); 
+Route::get('otp', [GeneralController::class, 'otp'])->name('otp');
 Route::get('login/google', [App\Http\Controllers\SocialiteController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);  
-Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']); 
+Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);
+Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::class, 'handleGoogleCallback']);
 Route::get('login/facebook', [App\Http\Controllers\SocialiteController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController::class, 'handleFacebookCallback']);
 
 
 
 Route::middleware('check.profile.complete')->group(function () {
-    Route::get('/', [FrontendController::class, 'index'])->name('index'); 
-    Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details'); 
-    Route::get('offer/v2/{id}', [FrontendController::class, 'detail_v2'])->name('offer.details.v2'); 
+    Route::get('/', [FrontendController::class, 'index'])->name('index');
+    Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details');
+    Route::get('offer/v2/{id}', [FrontendController::class, 'detail_v2'])->name('offer.details.v2');
     Route::get('faq', [FrontendController::class, 'faq'])->name('faq');
-    Route::get('privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy.policy'); 
+    Route::get('privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy.policy');
     Route::get('investors', [FrontendController::class, 'investors'])->name('investors');
-    Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses'); 
+    Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses');
     Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
-    Route::get('contact', [FrontendController::class, 'contact'])->name('contact'); 
+    Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
     Route::get('/offers/sort/{order?}',[FrontendController::class,'sort'])->name('offers.sort');
 
 });
@@ -78,9 +78,9 @@ Route::middleware(['check.profile.complete','verified','auth'])->group(function 
     Route::post('account/update', [FrontendController::class, 'my_account_update'])->name('my.account.update');
     Route::get('documents', [FrontendController::class, 'my_documents'])->name('my.documents');
     Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('my.portfolio');
-    Route::post('verify_identity', [FrontendController::class, 'verify_identity'])->name('investment.verify_identity'); 
+    Route::post('verify_identity', [FrontendController::class, 'verify_identity'])->name('investment.verify_identity');
 
-}); 
+});
 Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Investor'], function () {
     Route::get('/dashboard', ['as' => 'make','uses' => 'InvestorController@dashbaord']);
 });
@@ -94,7 +94,7 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
     Route::get('step/four', ['as' => 'step.four','uses' => 'MakeInvestmentController@step_four']);
     Route::get('step/five', ['as' => 'step.five','uses' => 'MakeInvestmentController@step_five']);
     Route::get('step/six/e/template', ['as' => 'step.six.e.template','uses' => 'MakeInvestmentController@e_template']);
-    Route::post('save', ['as' => 'save','uses' => 'MakeInvestmentController@save']); 
+    Route::post('save', ['as' => 'save','uses' => 'MakeInvestmentController@save']);
     Route::get('details/{id}', ['as' => 'detail','uses' => 'MakeInvestmentController@detail']);
     Route::post('submit-kyc', ['as' => 'kyc.submit','uses' => 'MakeInvestmentController@kycSubmit']);
     Route::get('verify-identity', ['as' => 'verify.identity','uses' => 'MakeInvestmentController@verify_identity']);
@@ -123,7 +123,7 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     Route::get('details/{id}', ['as' => 'details','uses' => 'UserController@details']);
     Route::post('accountUpdate', ['as' => 'issuer.account.update','uses' => 'UserController@issuerAccountUpdate']);
     Route::post('update/status', ['as' => 'status.update','uses' => 'UserController@UpdateStatus']);
-    
+    Route::post('upload/document', ['as' => 'upload.documents','uses' => 'UserController@uploadDocument']);
     Route::get('investor/create', ['as' => 'investor.create','uses' => 'UserController@investor']);
     Route::get('issuer/create', ['as' => 'issuer.create','uses' => 'UserController@issuer']);
     Route::post('investor/save', ['as' => 'save','uses' => 'UserController@save']);
@@ -151,9 +151,9 @@ Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified
     //Front Listing Page
     /// Added new routedd
     Route::post('esign-template-save', ['as' => 'esign.template.save','uses' => 'UserController@templateSave']);
-     
 
-}); 
+
+});
 
 Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers\User'], function () {
     Route::post('basic/details/update', ['as' => 'basic.details.update','uses' => 'UserController@basicDetailUpdate']);
@@ -218,12 +218,12 @@ Route::group(['as'=> 'esignature.','prefix'=>'esignature','middleware' => ['auth
     Route::get('preview/document', ['as' => 'preview.document','uses' => 'ESignController@previewDocument']);
     Route::get('preview/document/invester/flow/{user_id}/{template_id}', ['as' => 'preview.document.invester.flow','uses' => 'ESignController@previewDocumentInvesterFlow']);
     Route::get('check/esing/status', ['as' => 'check.esing.status','uses' => 'ESignController@check_esing_status']);
-   
-    
+
+
 });
 
 
- 
+
 
 
 // Latest Changes
