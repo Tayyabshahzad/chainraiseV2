@@ -289,7 +289,7 @@ class UserController extends Controller
              DB::commit();
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){
-
+            dd($error);
             DB::rollBack();
             Session::put('error','Error While Creating ');
             return redirect()->back()->with('error','Error while creating investor user'.$error);
