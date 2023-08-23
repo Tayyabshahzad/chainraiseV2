@@ -58,15 +58,15 @@
                 </div>
                 <form action="{{ route('invest.submit') }}" method="get" id="investForm">
                     @csrf
-                    <input type="hidden" name="offer_id" value="{{ $offer->id }}"> 
+                    <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <div class="row px-5">
                         <div class="col-12">
                             <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                             <div class="input-group">
-                                <div class="input-group-text">$</div>  
+                                <div class="input-group-text">$</div>
                                 <input type="number" class="form-control" name="investment_amount" required
                                         placeholder="@if($offer->investmentRestrictions)
-                                            {{ number_format($offer->investmentRestrictions->min_invesment) }}"@endif 
+                                            {{ number_format($offer->investmentRestrictions->min_invesment) }}"@endif
                                             @if($offer->investmentRestrictions) min="{{ $offer->investmentRestrictions->min_invesment }}" @endif
                                             @if($offer->investmentRestrictions) max="{{ $offer->investmentRestrictions->max_invesment }}" @endif />
                             </div>
@@ -81,11 +81,11 @@
                                     <button class="btn btn-primary" disabled type="button" title=""> Login to Invest </button>
                                    </small>
                                 @endif
-                            </div> 
+                            </div>
                         </div>
 
 
-                       
+
                     </div>
                 </form>
                 <div class="row px-5">
@@ -119,6 +119,14 @@
                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                     aria-selected="true">Overview</button>
             </li>
+            @if($offer->offerVideos->count()>0)
+            <li class="nav-item me-lg-3" role="presentation">
+                <button class="nav-link text-white" id="pills-videos-tab" data-bs-toggle="pill"
+                    data-bs-target="#deal-video" type="button" role="tab" aria-controls="pills-videos"
+                    aria-selected="false">Videos</button>
+            </li>
+            @endif
+
             <li class="nav-item me-lg-3" role="presentation">
                 <button class="nav-link text-white" id="pills-profile-tab" data-bs-toggle="pill"
                     data-bs-target="#deal-terms" type="button" role="tab" aria-controls="pills-profile"
@@ -180,7 +188,7 @@
                         @endif
                     @endforeach
                 </p>
-                
+
                 <div class="row">
                     <div class="col">
                         <h2 class="fs-2 fw-bolder my-5">Company Deck
@@ -216,11 +224,11 @@
                                     data-bs-slide-to="12" aria-label="Slide 13"></button>
                             </div>
                             <div class="carousel-inner">
-                                @foreach($slider_images as $slider_image) 
+                                @foreach($slider_images as $slider_image)
                                     <div class="carousel-item @if($loop->first) active @endif">
                                         <img src="{{ asset('storage/'.$slider_image->id.'/'.$slider_image->file_name)}}" class="d-block w-100" alt="...">
                                     </div>
-                                @endforeach 
+                                @endforeach
                             </div>
                             <button class="carousel-control-prev" type="button"
                                 data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -236,9 +244,25 @@
                         <!-- <img src="images/desktop.png" class="img-fluid" alt="" srcset=""> -->
                     </div>
                 </div>
-             
-                
+
+
             </div>
+            @if($offer->offerVideos->count()>0)
+            <div class="tab-pane fade p-2" id="deal-video" role="tabpanel" aria-labelledby="pills-videos-tab">
+                <h3 class="fw-bolder" style="margin-top:20px"> Offer Videos </h3>
+                <br/>
+                <div class="row " >
+                    @foreach ($offer->offerVideos as $video )
+                        <div class="col-lg-4">
+                                <iframe src="{{ $video->url }}" frameborder="0" width="350" height="350"></iframe>
+                                <br/>
+                                <p> {{ $video->description }} </p>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+            @endif
             <div class="tab-pane fade p-2" id="deal-terms" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="fw-bolder">Deal Terms</h3>
                 <h6 class="fw-bolder">DelNorte</h6>
