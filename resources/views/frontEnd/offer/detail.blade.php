@@ -259,38 +259,7 @@
                 <h3 class="fw-bolder" style="margin-top:20px"> Offer Documents </h3>
                 <br/>
                 <div class="row " >
-                    @foreach ($offer->eDocuments as $eDocument )
-                        <div class="col-lg-6 mb-10" style="margin-bottom:10px">
-                            <div class="card w-50">
-                                <div class="card-body">
-                                  <h5 class="card-title">{{  $eDocument->template_name }}</h5>
-                                  <p class="card-text text-center">
-                                        @if( $eDocument->source  != 'manual')
-                                            <div class="fs-4 fw-bold text-gray-700 @if( $eDocument->source  != 'manual') view_template @endif"
-                                                data-user_id="{{   $eDocument->investor_id  }}"
-                                                data-template_id="{{   $eDocument->template_id  }}"
-                                                data-bs-toggle="modal" @if( $eDocument->source  != 'manual')  data-bs-target="#modal_view_e_sign" @endif>
-                                                    <i class="text-warning la la-eye"></i>
-                                            </div>
-                                        @else
-                                            <a  href="{{ $eDocument->getFirstMediaUrl('e_documents', 'thumb') }}" target="_blank" class="fs-4 fw-bold text-gray-700 " >
-                                                <i class="text-warning la la-eye"></i>
-                                            </a>
-                                        @endif
-                                  </p>
-                                  <p class='text-center text-bold'>
-                                    <h4>
-                                        From : {{ $eDocument->issuer->name }} <small>( {{ $eDocument->issuer->email }})</small>
-                                    </h4>
-                                    <h4>
-                                        {{ $eDocument->invester->name }} <small>( {{ $eDocument->invester->email }})</small>
-                                    </h4>
 
-                                </p>
-                                </div>
-                              </div>
-                        </div>
-                    @endforeach
 
                 </div>
             </div>
