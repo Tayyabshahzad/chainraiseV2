@@ -47,7 +47,7 @@ class FrontendController extends Controller
     public function detail($slug)
     {
 
-        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail','offerVideos')->
+        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail','offerVideos','eDocuments')->
         where('slug',$slug)->first();
         $slider_images = DB::table('media')
         ->where('model_type', Offer::class)

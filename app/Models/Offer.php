@@ -80,6 +80,11 @@ class Offer extends Model  implements HasMedia
         return $this->hasOne(MyEDocument::class);
     }
 
-  
+    public function eDocuments()
+    {
+        return $this->hasMany(MyEDocument::class);
+    }
+
+
 
 }

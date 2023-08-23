@@ -127,17 +127,13 @@
             </li>
             @endif
 
-            <li class="nav-item me-lg-3" role="presentation">
-                <button class="nav-link text-white" id="pills-profile-tab" data-bs-toggle="pill"
-                    data-bs-target="#deal-terms" type="button" role="tab" aria-controls="pills-profile"
-                    aria-selected="false">Deal Terms</button>
-            </li>
+
             <li class="nav-item me-lg-3" role="presentation">
                 <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
-                    data-bs-target="#rewards" type="button" role="tab" aria-controls="pills-contact"
-                    aria-selected="false">Rewards</button>
+                    data-bs-target="#document" type="button" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Documents</button>
             </li>
-            <li class="nav-item me-lg-3" role="presentation">
+            {{-- <li class="nav-item me-lg-3" role="presentation">
                 <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
                     data-bs-target="#updates" type="button" role="tab" aria-controls="pills-contact"
                     aria-selected="false">Updates</button>
@@ -145,19 +141,14 @@
             <li class="nav-item me-lg-3" role="presentation">
                 <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#q&a"
                     type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Q & A</button>
-            </li>
+            </li> --}}
         </ul>
         <div class="tab-content px-lg-5 px-3 py-3" id="pills-tabContent">
             <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <p class="fs-5 fw-semibold">
                     @foreach ($offer->offerDetail as $offerDetail)
                         @if ($offerDetail->input == 'summary')
-                            <div class="col-lg-6 mt-4">
-                                <h5>{{ $offerDetail->heading }}</h5>
-                            </div>
-                            <div class="col-lg-6 mt-4">
-                                <h5>{{ $offerDetail->sub_heading }}</h6>
-                            </div>
+
                             <div class="col-lg-11 mt-4">
                                 {!! $offerDetail->description !!}
                             </div>
@@ -263,46 +254,47 @@
                 </div>
             </div>
             @endif
-            <div class="tab-pane fade p-2" id="deal-terms" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <h3 class="fw-bolder">Deal Terms</h3>
-                <h6 class="fw-bolder">DelNorte</h6>
-                <div class="border-start  border-5  border-info my-5 ps-4">
-                    <span class="fw-bolder fs-5 mb-5">Overview </span>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Price Per Share</p>
-                        <p class="fw-bolder fs-6 mb-0">$18.50</p>
-                    </div>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Deadline</p>
-                        <p class="fw-bolder fs-6 mb-0">May 19, 2023</p>
-                    </div>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Valuation </p>
-                        <p class="fw-bolder fs-6 mb-0">$125.06M</p>
-                    </div>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Funding Goal </p>
-                        <p class="fw-bolder fs-6 mb-0">$15k - $5M </p>
-                    </div>
-                </div>
-                <div class="border-start border-info  border-5 my-5 ps-4">
-                    <span class="fw-bolder fs-5 mb-5">Breakdown </span>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Minimum Investment </p>
-                        <p class="fw-bolder fs-6 mb-0">$499.50</p>
-                    </div>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Maximum Investment </p>
-                        <p class="fw-bolder fs-6 mb-0">$4,999,976.50</p>
-                    </div>
-                    <div>
-                        <p class="fw-normal fs-6 mb-0">Minimum Number of Shares Offered</p>
-                        <p class="fw-bolder fs-6 mb-0"> 810 </p>
-                    </div>
+            <div class="tab-pane fade p-2" id="document" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                <h3 class="fw-bolder" style="margin-top:20px"> Offer Documents </h3>
+                <br/>
+                <div class="row " >
+                    @foreach ($offer->eDocuments as $eDocument )
+                        <div class="col-lg-6 mb-10" style="margin-bottom:10px">
+                            <div class="card w-50">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{  $eDocument->template_name }}</h5>
+                                  <p class="card-text text-center">
+                                        @if( $eDocument->source  != 'manual')
+                                            <div class="fs-4 fw-bold text-gray-700 @if( $eDocument->source  != 'manual') view_template @endif"
+                                                data-user_id="{{   $eDocument->investor_id  }}"
+                                                data-template_id="{{   $eDocument->template_id  }}"
+                                                data-bs-toggle="modal" @if( $eDocument->source  != 'manual')  data-bs-target="#modal_view_e_sign" @endif>
+                                                    <i class="text-warning la la-eye"></i>
+                                            </div>
+                                        @else
+                                            <a  href="{{ $eDocument->getFirstMediaUrl('e_documents', 'thumb') }}" target="_blank" class="fs-4 fw-bold text-gray-700 " >
+                                                <i class="text-warning la la-eye"></i>
+                                            </a>
+                                        @endif
+                                  </p>
+                                  <p class='text-center text-bold'>
+                                    <h4>
+                                        From : {{ $eDocument->issuer->name }} <small>( {{ $eDocument->issuer->email }})</small>
+                                    </h4>
+                                    <h4>
+                                        {{ $eDocument->invester->name }} <small>( {{ $eDocument->invester->email }})</small>
+                                    </h4>
+
+                                </p>
+                                </div>
+                              </div>
+                        </div>
+                    @endforeach
 
                 </div>
             </div>
-            <div class="tab-pane fade p-2" id="rewards" role="tabpanel" aria-labelledby="pills-contact-tab">
+            {{-- <div class="tab-pane fade p-2" id="rewards" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <h3 class="fw-bolder">Rewards</h3>
                 <p>Multiple investments in an offering cannot be combined to qualify for a larger campaign perk. Get
                     rewarded for investing more.
@@ -490,7 +482,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
