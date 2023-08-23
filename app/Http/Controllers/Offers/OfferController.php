@@ -446,8 +446,8 @@ class OfferController extends Controller
             'size' => 'required',
             'offer_id' => 'required',
             'investment_restrication_id' => 'required',
-            //'min_invesment'=>'required',
-            //'max_invesment'=>'required'
+            'min_invesment'=>'required',
+            'max_invesment'=>'required'
         ]);
         $offer = Offer::find($request->offer_id);
         $offer->issuer_id = $request->issuer;
