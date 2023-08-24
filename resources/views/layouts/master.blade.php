@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    
+
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-v3.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
- 
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
@@ -28,11 +28,7 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title> Chain Rasied Portal | @yield('title') </title>
-    <style>
-        .hero-section {
-            background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url('{{ asset('assets/v3-images/detail-bg.png') }}');
-        }
-    </style>
+
     @section('page_head')
     @show
 </head>
@@ -366,7 +362,7 @@
                             setTimeout(function() {
                                 $('.submit_button').prop('disabled', false);
                             }, 100);
-                            // $('.submit_button').prop('disabled ',false); 
+                            // $('.submit_button').prop('disabled ',false);
 
                             $('.submit_button').text('Sign In');
                         }
@@ -378,7 +374,7 @@
 
 
     <!-- Header End -->
- 
+
 
     <!-- Sign in Popop Start -->
     <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel"
@@ -393,7 +389,7 @@
                     <h5 style="color: #000000; text-align: center; font-weight: 600;">Sign in to your account</h5>
                     <div class="container py-3 px-5 ">
                         <div class="row justify-content-center">
-                            
+
                             <div class="col-2 d-flex align-items-center justify-content-center">
                                 <a href="{{ route('login.google') }}" class="text-dark">
                                     <i class="bi bi-google  border border-dark rounded-circle py-2 px-3"></i>
@@ -416,7 +412,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="d-flex flex-column text-center">
                             <label class="text-danger error error_message"></label>
                             <label class="text-success success success_message"></label>
@@ -487,7 +483,7 @@
                 <div class="modal-body">
                     <h5 style="color: #000000; text-align: center;">Sign up to your account</h5>
                     <div class="row gy-3 p-3 text-center">
-                         
+
                         <div class="col-12">
                             <a href="{{ route('login.google') }}"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
@@ -541,11 +537,11 @@
     </div>
 
 
-  
+
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-    </script> 
+    </script>
     @if (Session::has('expire'))
         @php
             $message = session::get('expire');

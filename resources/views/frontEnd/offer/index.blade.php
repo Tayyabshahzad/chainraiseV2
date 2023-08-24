@@ -35,10 +35,10 @@
                 @foreach ($offers as $offer)
                     <div class="col-lg-4 mb-3 text-center offerItem">
                         <a href="{{ route('offer.details', $offer->slug) }}">
-                           
+
                             <img src="{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}" alt=""
                                 class="img-fluid" srcset="">
-                       
+
                         <div class="row text-white p-3">
                             <div class="col-6 text-start">
                                 <h6> {{ $offer->name }} </h6>
@@ -86,7 +86,7 @@
             sortOffers('default');
         });
 
-        
+
 
         function sortOffers(order) {
             $.ajax({

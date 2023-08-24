@@ -116,46 +116,47 @@
                 </div>
             </div>
         </div>
-        <div class="row mb-5"> 
+        <div class="row mb-5">
             @foreach ($e_documents as $e_document)
-                <div class="col-lg-6 mb-10 text-center" > 
-                    <div class="d-flex flex-center flex-column py-2" style="border:1px solid #000" > 
-                        <a href="#" class="fs-3 text-gray-400 text-hover-primary  mb-3 text-center">  
-                            {{  $e_document->template_name }} </a> 
+                <div class="col-lg-4 mb-10 text-center" >
+                    <div class="  " style="border:1px solid #000" >
+                        <a href="#" class="text-gray-400 text-hover-primary  mb-3 text-center">
+                            {{  $e_document->template_name }}
+                        </a>
                         <div class="mb-9">
                             <!--begin::Badge-->
-                            <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
+                            <div class="badge   badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
                             <!--begin::Badge-->
                         </div>
-                        <div class=" text-center mb-30" style="margin-bottom: 30px"> 
-                            <button class="btn btn-sm btn-info fs-4 fw-bold text-gray-700 view_template" 
+                        <div class=" text-center  " >
+                            <button class="btn btn-sm btn-info  fw-bold  view_template"
                             data-user_id="{{   $e_document->investor_id  }}"
                             data-template_id="{{   $e_document->template_id  }}"
                             data-bs-toggle="modal" data-bs-target="#modal_view_e_sign">
                             <i class="la la-eye"></i>
-                            </button> 
+                            </button>
 
-                            <button class="btn btn-sm btn-primary fs-4 fw-bold text-gray-700 view_template" 
+                            <button class="btn btn-sm btn-primary  fw-bold  view_template"
                             data-user_id="{{   $e_document->investor_id  }}"
                             data-template_id="{{   $e_document->template_id  }}" >
                             <i class="la la-download"></i>
-                            </button> 
+                            </button>
                         </div>
 
-                        <div class=" text-center"> 
+                        <div class=" text-center">
                             <p style="padding: 2px">
                                 From <br/>
                                  {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
                             </p>
                             <p style="padding: 2px">
                                 Status : {{ $e_document->status }}
-                            </p> 
+                            </p>
                         </div>
-                       
+
                     </div>
                 </div>
-            @endforeach 
- 
+            @endforeach
+
 
             <div class="col-12 " style="margin-top:5%">
                 <p>
@@ -201,7 +202,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Add Document </h5>
-                    {{--                
+                    {{--
         <label class="form-check form-switch form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" value="1">
             <span class="form-check-label fw-semibold text-muted">Upload a Folder</span>
@@ -264,24 +265,24 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5> 
-                </div> 
+                    <h5 class="modal-title" id="exampleModalLabel"> Document Preview </h5>
+                </div>
                 <div class="modal-body" style="height:900px">
-                    <div class="card card-custom"> 
+                    <div class="card card-custom">
                         <div class="card-body row">
-                        
+
                             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                             <script src="https://cdncf.esignatures.io/staticassets/iframeResizer.4.2.10.min.js"></script>
                             <iframe
                                 src=""
-                                id="eSignaturesIOIframe" 
+                                id="eSignaturesIOIframe"
                                 style="width: 100%;height:850px">
                             </iframe>
-                        </div> 
+                        </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>
@@ -316,7 +317,7 @@
                             console.log(value)
                             listItem +=
 
-                                `  <div class="col-lg-3 mb-10"> 
+                                `  <div class="col-lg-3 mb-10">
                                         <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
                                             <!--begin::Avatar-->
                                             <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3 text-center"> ` +
@@ -367,7 +368,7 @@
         $('body').on('click', '.view_template', function() {
             var user_id = $(this).data('user_id');
             var template_id = $(this).data('template_id');
-             
+
             $.ajax({
                 url: "{{ route('esignature.preview.document') }}",
                 method: 'GET',
@@ -380,11 +381,11 @@
                         toastr.success('Data has been fetched', "Success");
                         console.log(response)
                         $('#eSignaturesIOIframe').attr('src',response.url);
-                        
+
                     } else {
-                        
+
                         toastr.error(response.message, "Error");
-                    }   
+                    }
                 }
             });
         });

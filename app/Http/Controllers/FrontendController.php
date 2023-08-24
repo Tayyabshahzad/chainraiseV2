@@ -47,14 +47,37 @@ class FrontendController extends Controller
     public function detail($slug)
     {
 
-        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail','offerVideos','eDocuments')->
+        $offer = Offer::with('user','user.userDetail','investmentRestrictions','offerDetail','offerVideos','eDocuments','offerEsing')->
         where('slug',$slug)->first();
         $slider_images = DB::table('media')
         ->where('model_type', Offer::class)
         ->where('model_id', $offer->id)
         ->where('collection_name', 'offer_slider_images')
         ->get();
-        return view('frontEnd.offer.detail',compact('offer','slider_images'));
+        //Getting Template Name
+        $token = env('ESIGN_TOKEN');
+        try{
+            $template = Http::get('https://esignatures.io/api/templates/'.$offer->offerEsing->template_id.'?token='.$token);
+            $json_e_sign = json_decode((string) $template->getBody(), true);
+            if($template->successful()){
+
+               $temp_name = $json_e_sign['data']['template_name'];
+               $created_at = $json_e_sign['data']['created_at'];
+
+            }else{
+                $temp_name = 'Not Found';
+                $created_at = 'Not Found';
+            }
+        }catch(Exception $error){
+            $temp_name = 'Not Found';
+            $created_at = 'Not Found';
+        }
+
+
+
+
+
+        return view('frontEnd.offer.detail',compact('offer','slider_images','temp_name','created_at'));
     }
 
 
