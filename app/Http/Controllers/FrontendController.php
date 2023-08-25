@@ -124,13 +124,13 @@ class FrontendController extends Controller
 
     public function sort($order)
     {
-
+        $offer_coming_soon = Offer::orderBy('id', 'desc')->where('status','coming-soon')->get();
         if($order == 'default'){
-        $offers =  Offer::orderBy('id', 'desc')->get();
+            $offers =  Offer::orderBy('id', 'desc')->get();
         }else{
             $offers =  Offer::orderBy('name', $order)->get();
         }
-        return view('frontEnd.offer.index',compact('offers'));
+        return view('frontEnd.offer.index',compact('offers','offer_coming_soon'));
     }
 
     public function my_account(){

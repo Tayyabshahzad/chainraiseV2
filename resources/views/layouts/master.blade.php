@@ -79,14 +79,14 @@
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
                     <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
                         style="background-color:#43C3FE;">Upgrading To Serve You Better</a>
-                    @if (!Auth::user())
+                    {{-- @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#sign-in-popup">Login</a>
 
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#sign-up-popup">Sign Up
                         </a>
-                    @endif
+                    @endif --}}
 
                     <div class="avator-logo me-3 d-lg-block d-none ">
                         @if (Auth::user())
