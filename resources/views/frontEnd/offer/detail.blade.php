@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', {{ $offer->name }})
+@section('title', "{{ $offer->name }}" )
 @section('page_head')
     <style>
         .hero-section-offer-2 {
