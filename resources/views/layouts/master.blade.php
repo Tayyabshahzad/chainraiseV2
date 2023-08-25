@@ -22,16 +22,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     @section('page_head')
     @show
 </head>

@@ -18,14 +18,14 @@
         .black-font{
             color:#000;
         }
-        
+
     </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 @endsection
-@section('title', 'Home')
+@section('title', 'Contact Us')
 @section('content')
- 
-   
+
+
 <div class="container-fluid header-sec  py-4">
   <div class="row ">
       <div class="col-lg-12 text-center pt-lg-4">
@@ -128,7 +128,7 @@
 
 
                   <lord-icon src="https://cdn.lordicon.com/sdhhsgeg.json" trigger="hover"
-                      colors="primary:#4030e8,secondary:#3080e8" 
+                      colors="primary:#4030e8,secondary:#3080e8"
                       style="width:100px;height:100px">
                   </lord-icon>
                   <p> info@chainraise.io</p>

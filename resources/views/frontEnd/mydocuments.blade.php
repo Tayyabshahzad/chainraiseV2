@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('page_head')
 @endsection
-@section('title', 'Home')
+@section('title', 'My Documents')
 @section('content')
 
     <div class="container">

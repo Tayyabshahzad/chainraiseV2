@@ -18,10 +18,10 @@
         .black-font{
             color:#000;
         }
-        
+
     </style>
 @endsection
-@section('title', 'Home')
+@section('title', "FAQ's")
 @section('content')
 <div class="container-fluid header-sec  py-3">
     <div class="row ">
@@ -353,6 +353,6 @@
       </div>
     </div>
   </div>
-    
+
 
 @endsection

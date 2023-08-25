@@ -7,7 +7,7 @@
         }
     </style>
 @endsection
-@section('title','Home')
+@section('title','Login')
 @section('content')
     <div class="container-fluid header-sec py-3">
         <div class="row ">
@@ -34,7 +34,7 @@
                         @error('email')
                             <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
                         @enderror
-                       
+
                     </div>
 
                     <div class="form-group mt-4" style="color:#fff">
@@ -47,22 +47,22 @@
                             <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn-sm btn btn-primary lernbtn mt-4" 
+                    <button type="submit" class="btn-sm btn btn-primary lernbtn mt-4"
                     style="padding:5px 5px;text-transform:uppercase;width:100%;border-radius: 0;background:#4B1DFF;border-color:#4B1DFF">
                         Login
                     </button>
                 </form>
                 <div class="row">
                     <div class="col-lg-6">
-                        
-                        {{-- <a href="{{ route('login.facebook') }}" class="btn-sm btn btn-primary lernbtn mt-4" 
+
+                        {{-- <a href="{{ route('login.facebook') }}" class="btn-sm btn btn-primary lernbtn mt-4"
                         style="padding:5px 5px;text-transform:uppercase;width:100%;border-radius:0;
                         background:#ffffff;border-color:#4B1DFF;color:#000">
                            <i class="fab fa-facebook-f"></i>
                         </a> --}}
                     </div>
                     <div class="col-lg-6">
-                        <a href="{{ route('login.google') }}" class="btn-sm btn btn-primary lernbtn mt-4" 
+                        <a href="{{ route('login.google') }}" class="btn-sm btn btn-primary lernbtn mt-4"
                         style="padding:5px 5px;text-transform:uppercase;width:100%;border-radius:0;
                         background:#ffffff;border-color:#4B1DFF;color:#000">
                            <i class="fab fa-google"></i>
@@ -76,7 +76,7 @@
     </div>
     <div class="container-fluid bfs">
         <div class="container">
-         
+
         </div>
-    </div> 
+    </div>
 @endsection

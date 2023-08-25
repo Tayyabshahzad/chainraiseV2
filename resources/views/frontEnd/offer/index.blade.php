@@ -7,7 +7,7 @@
         }
     </style>
 @endsection
-@section('title', 'Home')
+@section('title', 'Manage Offers')
 @section('content')
     <div
         style="background: url('{{ asset('assets/v3-images/bg-img.png') }}'); background-position: top; background-size: cover;">

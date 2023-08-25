@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 
 @endsection
-@section('title', 'Home')
+@section('title', 'My Account')
 @section('content')
 
     <div class="container p-lg-5 mt-lg-3">
@@ -17,7 +17,7 @@
                         data-bs-target="#info" type="button" role="tab" aria-controls="pills-home"
                         aria-selected="true">Info</button>
                 </li>
-               
+
             </ul>
             <div class="tab-content py-3" id="pills-tabContent">
                 <div class="tab-pane fade show active p-2" id="info" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -27,7 +27,7 @@
                         @else
                             <h4 class="text-center text-success"> YOUR KYC  LEVEL IS {{ strtoupper ($user->kyc->kyc_level) }} </h4>
                         @endif
-                    </div> 
+                    </div>
                     <h4>Investor Information</h4>
                     <h5 class="text-muted fw-normal">To invest online, the law requires that we collect some info</h5>
                     <form class="row g-3 needs-validation" id="profile_update_form"   method="post" action="{{ route('my.account.update') }}">
@@ -44,8 +44,8 @@
                                     <div class="invalid-feedback">
                                         Please Enter Legal Name
                                     </div>
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12 ">
                             <div class="row mt-3">
@@ -53,14 +53,14 @@
                                     <label for="validationCustom01" class="form-label"><span
                                             class="text-danger fs-4">*</span> Last Name:</label>
                                 </div>
-                                <div class="col-lg-6">  
+                                <div class="col-lg-6">
                                     <input type="text" class="form-control" id="validationCustom01"
-                                    placeholder="Last Name" name="last_name" 
-                                    @if ($user->userDetail) value="{{ $user->userDetail->last_name }}" @endif required />    
-                                     
+                                    placeholder="Last Name" name="last_name"
+                                    @if ($user->userDetail) value="{{ $user->userDetail->last_name }}" @endif required />
+
                                 </div>
-                            </div> 
-                        </div> 
+                            </div>
+                        </div>
                         <div class="col-md-12 ">
                             <div class="row mt-3">
                                 <div class="col-lg-3">
@@ -75,7 +75,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-12 ">
                             <div class="row mt-3">
                                 <div class="col-lg-3">
@@ -89,7 +89,7 @@
                                 </select>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-12 ">
                             <div class="row mt-3">
                                 <div class="col-lg-3">
@@ -129,8 +129,8 @@
                                 <label for="inputPassword6" class="col-form-label fs-5 fw-normal">What is your net
                                     worth?</label>
                             </div>
-                            <div class="col-lg-8"> 
-                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->net_worth }}"> 
+                            <div class="col-lg-8">
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->net_worth }}">
                             </div>
                         </div>
                         <div class="row g-lg-3 mb-3">
@@ -139,7 +139,7 @@
                                     income?</label>
                             </div>
                             <div class="col-lg-8">
-                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->annual_income }}"> 
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false" value="{{ $user->annual_income }}">
                             </div>
                         </div>
                         <div class="row g-lg-3 align-items-center mb-3 mt-lg-4 mx-3">
@@ -169,7 +169,7 @@
                                     value="@if($user->userDetail){{ $user->userDetail->dob }}@endif" required>
                                 <div class="invalid-feedback">Please Select Birthday </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="row g-lg-3 align-items-center mb-3 mt-lg-4">
                             <div class="col-lg-2">
                                 <label for="inputPassword6" class="col-form-label"><span
@@ -177,7 +177,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="row">
-                                   <div class="col-lg-4"> 
+                                   <div class="col-lg-4">
                                     <select class="form-control cc" name="cc" required
                                     data-control="select2">
                                     @include('user.partials.cc')
@@ -186,29 +186,29 @@
                                    <div class="col-lg-8">
                                     <input type="text" class="form-control" name="phone" required
                                     id="phone_number" value="{{ $user->phone }}" />
-                                    <code>-999-999-9999</code>  
+                                    <code>-999-999-9999</code>
                                    </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
-                                 
+
                                 <label for="ssn-number"  class=" col-form-label"><span class="text-danger fs-4">*</span>
                                     SSN:</label>
                             </div>
-                            <div class="col-lg-6">   
+                            <div class="col-lg-6">
                                 <div class="input-group">
                                     <input   class="form-control" name="primary_contact_social_security" style=" border-top-right-radius: 0;  border-bottom-right-radius: 0;"
                                         @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null)
                                             type="password"
                                             value="999-99-9999" readonly
                                         @else
-                                            required 
+                                            required
                                             type="text"
                                         @endif
                                         id="primary_contact_social_security">
-                                    
+
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary no-radius" id="show_ssn_field"
                                         style="
@@ -221,15 +221,15 @@
                                         type="button">x</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                        </div> 
+                        </div>
                         <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
                                 <label for="ssn-number" class="col-form-label"><span class="text-danger fs-4">*</span>
-                                    Document Type:</label> 
+                                    Document Type:</label>
                             </div>
-                            <div class="col-lg-6">    
+                            <div class="col-lg-6">
                                     <select class="form-select doc_type" data-control="select2"
                                         data-placeholder="Select Document Type" required name="doc_type">
                                         @if ($user->hasRole('issuer'))
@@ -243,9 +243,9 @@
                                             <option value="passport"> Passport </option>
                                         @endif
                                     </select>
-                                   
+
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="col-lg-12">
                             <div class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
@@ -269,18 +269,18 @@
 
                         <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
-                                    &nbsp;&nbsp; &nbsp; 
+                                    &nbsp;&nbsp; &nbsp;
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Run KYC</label>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-check form-switch"> 
+                                <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="kyc_run">
                                   </div>
                             </div>
-                             
-                        </div> 
+
+                        </div>
                         <div class="col-12">
-                            <button class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold"   type="submit">Save & Continue</button>  
+                            <button class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold"   type="submit">Save & Continue</button>
                         </div>
                     </form>
 
@@ -292,63 +292,63 @@
 @endsection
 @section('page_js')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" 
-            integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+            integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA="
             crossorigin="anonymous"
     ></script>
 
     <script>
         const passwordInput = document.getElementById("primary_contact_social_security");
-        const toggleButton = document.getElementById("show_ssn_field"); 
+        const toggleButton = document.getElementById("show_ssn_field");
         if (toggleButton ) {
-            toggleButton.addEventListener("click", () => { 
+            toggleButton.addEventListener("click", () => {
                 if (passwordInput.type === "password") {
                     passwordInput.type = "text";
                     passwordInput.value = "";
                     passwordInput.removeAttribute('readonly');
-                    $('#primary_contact_social_security').attr('required', true); 
+                    $('#primary_contact_social_security').attr('required', true);
                     $('#primary_contact_social_security').mask('999-99-9999');
                 }else{
                     passwordInput.removeAttribute('readonly');
                     passwordInput.type = "text";
                     passwordInput.value = "";
                     $('#primary_contact_social_security').mask('999-99-9999');
-                } 
+                }
             });
-        }  
+        }
         $('#phone_number').mask('-999-999-9999');
         $('#ein_number').mask('99-9999999');
-        
+
         $('#primary_contact_social_security').on('focus', function() {
             const passwordInput = document.getElementById("primary_contact_social_security");
-            const toggleButton = document.getElementById("show_ssn_field"); 
+            const toggleButton = document.getElementById("show_ssn_field");
             if (passwordInput.type === "password") {
                         passwordInput.type = "text";
                         passwordInput.value = "";
                         passwordInput.removeAttribute('readonly');
-                        $('#primary_contact_social_security').attr('required', true); 
+                        $('#primary_contact_social_security').attr('required', true);
                         $('#primary_contact_social_security').mask('999-99-9999');
                     }else{
                         passwordInput.removeAttribute('readonly');
                         passwordInput.type = "text";
                         passwordInput.value = "";
                         $('#primary_contact_social_security').mask('999-99-9999');
-            } 
+            }
         });
-       
-    </script> 
+
+    </script>
     <script>
         $(document).ready(function() {
             $('.myNumberField').inputmask();
         });
-    </script> 
-    
+    </script>
+
     <script>
         $(document).ready(function () {
             $('#profile_update_form').submit(function (event) {
-                event.preventDefault(); // Prevent the default form submission 
+                event.preventDefault(); // Prevent the default form submission
                 // Get the form data
-                var formData = $(this).serialize(); 
+                var formData = $(this).serialize();
                 // Send an AJAX POST request to the server
                 $.ajax({
                     url: $(this).attr('action'),
@@ -356,9 +356,9 @@
                     data: formData,
                     dataType: 'json',
                     success: function (response) {
-                        console.log(response) 
+                        console.log(response)
                         $('.kyc_level_area').load(' .kyc_level_area');
-                        if (response.success == false) { 
+                        if (response.success == false) {
                             if (response.status == 400) {
                                 if (response.errors && response.errors.length > 0) {
                                     // Check for specific validation errors
@@ -387,7 +387,7 @@
                                     console.log(response.errors[0]);
                                     toastr.error(response.errors[0], "Error");
                                 }
-                            } 
+                            }
                             if (typeof response.errors !== 'undefined' && response
                                 .errors !== null) {
                                 jQuery.each(response.errors, function(index, item) {
@@ -396,10 +396,10 @@
                             }
                             }
                             if (response.status == true) {
-                                toastr.success('Verification Has Been Completed', "Success"); 
+                                toastr.success('Verification Has Been Completed', "Success");
                             }
                             if (response.status == 200) {
-                                toastr.success('Verification Has Been Completed', "Success"); 
+                                toastr.success('Verification Has Been Completed', "Success");
                             }
                     },
                     error: function (xhr) {
@@ -420,7 +420,7 @@
         // Apply the masking to the state field
             $('.zipCode').mask('00000');
             $('#primary_contact_social_security').mask('***-**-****');
-             
+
             @if ($user->identityVerification)
                 $('.country_residence').val('{{ $user->identityVerification->country_residence }}')
             @endif
@@ -429,7 +429,7 @@
             @endif
 
 
-            
+
         });
         $('.kyc_document_upload_btn').click(function() {
             var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
@@ -437,5 +437,5 @@
         });
     </script>
 
-  
+
 @endsection

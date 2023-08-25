@@ -15,10 +15,10 @@
         p{
             color:#fff
         }
-        
+
     </style>
 @endsection
-@section('title', 'Home')
+@section('title', 'Privacy Policy')
 @section('content')
     <div class="container-fluid header-sec py-3">
         <div class="row ">
@@ -35,7 +35,7 @@
                     <h3>
                         Privacy Policy
                     </h3>
-                        <p> 
+                        <p>
                         This Privacy Policy specifies the personal information that we ask you to provide and how we treat
                         this information. This Privacy Policy is part of our Terms of Use, and all the terms and conditions
                         set forth in the Terms of Use also apply to this Privacy Policy. Capitalized terms that are not
@@ -47,7 +47,7 @@
                         </p>
                         <h4>
                             Your Consent
-                        </h4>   
+                        </h4>
                         <p>
                         You will be deemed to have consented to the terms of this Privacy Policy by using the Site in any
                         way, even just browsing. We may also ask you to indicate your consent more formally by checking a
@@ -56,7 +56,7 @@
                         <h4>
                          Changes to Privacy Policy
                         </h4>
-                        <p>     
+                        <p>
                         We might change this Privacy Policy from time to time. If you have consented merely by using the
                         Site, then we will not necessarily notify you of the changes. If you have consented more formally,
                         as described above, then the changes will not become effective until we have asked you for, and
@@ -64,7 +64,7 @@
                         </p>
                         <h4>
                             Personal Information We Collect
-                        </h4>      
+                        </h4>
                         <p> We collect a variety of personal information to operate the Site and provide the Service, including:
                         </p>
                         <ul>
@@ -103,10 +103,10 @@
                             </li> <li>
                                 Your IP address.
                             </li>
-                           
+
 
                         </ul>
-                        
+
                         <h4>
                             How We Use Your Personal Information
                         </h4>
@@ -139,7 +139,7 @@
                         We do not provide any third party with any of your personal information except in these situations:
                        </p>
                        <ul>
-                            
+
                         <li>We use third parties to perform services for the Site, such as hosting services, electronic
                         signature providers, electronic payment service providers, and services that verify the
                         qualification of investors. Each of these third parties will need some of your personal and/or
@@ -152,19 +152,19 @@
                         to see your name (but not any other personal information) and any other information you voluntarily
                         provide to be seen.</li>
                        </ul>
-                       
-                        
-                       
-                       
-                       
-                    
-                    
-                        
-                       
 
-                         
 
-                       
+
+
+
+
+
+
+
+
+
+
+
                     </p>
                 </div>
             </div>

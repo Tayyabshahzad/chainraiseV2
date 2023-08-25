@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('page_head')
 @endsection
-@section('title', 'Home')
+@section('title', 'My Portfolio')
 @section('content')
     <div class="container p-lg-5 mt-lg-3 p-3">
         <div id="detail">
