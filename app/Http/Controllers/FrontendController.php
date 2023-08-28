@@ -55,29 +55,30 @@ class FrontendController extends Controller
         ->where('collection_name', 'offer_slider_images')
         ->get();
         //Getting Template Name
-        $token = env('ESIGN_TOKEN');
-        try{
-            $template = Http::get('https://esignatures.io/api/templates/'.$offer->offerEsing->template_id.'?token='.$token);
-            $json_e_sign = json_decode((string) $template->getBody(), true);
-            if($template->successful()){
+        // $token = env('ESIGN_TOKEN');
+        // try{
+        //     $template = Http::get('https://esignatures.io/api/templates/'.$offer->offerEsing->template_id.'?token='.$token);
+        //     $json_e_sign = json_decode((string) $template->getBody(), true);
+        //     if($template->successful()){
 
-               $temp_name = $json_e_sign['data']['template_name'];
-               $created_at = $json_e_sign['data']['created_at'];
+        //        $temp_name = $json_e_sign['data']['template_name'];
+        //        $created_at = $json_e_sign['data']['created_at'];
 
-            }else{
-                $temp_name = 'Not Found';
-                $created_at = 'Not Found';
-            }
-        }catch(Exception $error){
-            $temp_name = 'Not Found';
-            $created_at = 'Not Found';
-        }
+        //     }else{
+        //         $temp_name = 'Not Found';
+        //         $created_at = 'Not Found';
+        //     }
+        // }catch(Exception $error){
+        //     $temp_name = 'Not Found';
+        //     $created_at = 'Not Found';
+        // }
+        $temp_name = 'Not Found';
+        $created_at = 'Not Found';
+
+        $manual_offer_documents = $offer->getMedia('manual_offer_documents');
 
 
-
-
-
-        return view('frontEnd.offer.detail',compact('offer','slider_images','temp_name','created_at'));
+        return view('frontEnd.offer.detail',compact('offer','slider_images','temp_name','created_at','manual_offer_documents'));
     }
 
 

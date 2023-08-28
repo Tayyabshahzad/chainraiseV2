@@ -288,6 +288,21 @@
                                                     <!--end::Link-->
                                                 </li>
 
+                                                 <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
+                                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2"
+                                                        id="kt_stats_widget_16_tab_link_5" data-bs-toggle="pill"
+                                                        href="#kt_stats_widget_16_tab_5" aria-selected="false"
+                                                        tabindex="-1" role="tab" style="width:140px;">
+                                                        <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
+                                                            Documents
+                                                        </span>
+                                                        <span
+                                                            class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-primary"></span>
+                                                        <!--end::Bullet-->
+                                                    </a>
+                                                    <!--end::Link-->
+                                                </li>
+
                                             </ul>
                                             <!--end::Nav-->
                                             <!--begin::Tab Content-->
@@ -310,7 +325,7 @@
                                                             class="feture_video_url" value="{{  $offer->feature_video }}">
                                                         </div>
                                                         <div class="row mt-8">
-                                                            
+
                                                             @foreach ($offer->offerDetail as $offerDetail)
                                                                 @if ($offerDetail->input == 'summary')
                                                                     <input type="hidden" name="summary_id[]"
@@ -327,7 +342,7 @@
                                                                             value="{{ $offerDetail->sub_heading }}">
                                                                     </div>
                                                                     <div class="col-lg-11 mt-4">
-                                                                        <textarea type="text" name="summary_sub_description[]" 
+                                                                        <textarea type="text" name="summary_sub_description[]"
                                                                         class="summernote form-control">{{ $offerDetail->description }}</textarea>
                                                                     </div>
                                                                     <div class="col-lg-1 mt-4">
@@ -359,11 +374,11 @@
                                                                         <textarea type="text" name="text_description[]" class="summernote form-control">{{ $offerDetail->description }}</textarea>
                                                                     </div>
                                                                 @elseif($offerDetail->input == 'tiles')
-                                                                        <input type="hidden" name="offer_detail_id_for_tiles" value="{{  $offerDetail->id }}"> 
-                                                                        @foreach ($offerDetail->getMedia('offer_tiles') as $tileImage) 
+                                                                        <input type="hidden" name="offer_detail_id_for_tiles" value="{{  $offerDetail->id }}">
+                                                                        @foreach ($offerDetail->getMedia('offer_tiles') as $tileImage)
                                                                             <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper"
-                                                                                style="">  
-                                                                                <div class="tiles_box text-center">    
+                                                                                style="">
+                                                                                <div class="tiles_box text-center">
                                                                                     <img src="{{$tileImage->getUrl() }}"
                                                                                         alt=""
                                                                                         class="mb-5 img img-thumbnail"
@@ -380,7 +395,7 @@
                                                                                 </div>
 
                                                                             </div>
-                                                                        @endforeach 
+                                                                        @endforeach
                                                                 @endif
                                                             @endforeach
                                                         </div>
@@ -389,9 +404,9 @@
                                                                 <div class="col-lg-4 p-10">
                                                                     <img src="{{ $photos->original_url }} "
                                                                         class="img img-thumbnail w-100 h-100"
-                                                                        alt=""> 
+                                                                        alt="">
                                                                         <hr>
-                                                                        <input type="file"  class="form-control"  
+                                                                        <input type="file"  class="form-control"
                                                                         title="Change This Image ?"
                                                                         name="photo_old[{{ $photos->id }}]">
                                                                     <button
@@ -417,7 +432,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row video_wrapper mt-5">
-                                                        
+
                                                         @foreach ($offer->offerVideos as $video)
                                                             <div class="video_column col-lg-4 mt-4 mb-4">
                                                                 <div class="row">
@@ -432,20 +447,20 @@
                                                                         <input type="hidden" value="{{  $video->visible }}" name="visible[{{  $video->id }}]" required="">
                                                                     </div>
                                                                     <div class="col-lg-12 text-center">
-                                                                        <button class="btn btn-sm delete_video" 
+                                                                        <button class="btn btn-sm delete_video"
                                                                         data-id="{{  $video->id }}"
-                                                                         type="button"> 
+                                                                         type="button">
                                                                             <i class="text-danger fa fa-trash"></i>
                                                                         </button>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         @endforeach
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_stats_widget_16_tab_3" role="tabpanel"
-                                                    aria-labelledby="#kt_stats_widget_16_tab_link_3">
+                                                    aria-labelledby="#kt_stats_widget_16_tab_4">
                                                     <div class="row">
                                                         <div class="col-lg-12 text-left mt-4" style="text-align: left">
                                                             <div class="row">
@@ -527,7 +542,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_stats_widget_16_tab_4" role="tabpanel"
-                                                aria-labelledby="#kt_stats_widget_16_tab_link_3">
+                                                    aria-labelledby="#kt_stats_widget_16_tab_link_3">
                                                     <div class="row">
                                                         <div class="col-lg-12 text-left mt-4" style="text-align: left">
                                                             <div class="row">
@@ -537,19 +552,56 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                            
+
                                                                 <hr>
-                                                                @foreach($slider_images as $slider_image) 
+                                                                @foreach($slider_images as $slider_image)
                                                                     <div class="col-lg-4">
-                                                                        <img src="{{ asset('storage/'.$slider_image->id.'/'.$slider_image->file_name)   }}" alt="" class="img img-thumbnail" width="100">
+                                                                        <img src="{{ $slider_image->getUrl() }}" alt="" class="img img-thumbnail" width="200">
                                                                     </div>
                                                                 @endforeach
-                                                                
-                                                            </div> 
+
+                                                            </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="tab-pane fade" id="kt_stats_widget_16_tab_5" role="tabpanel"
+                                                aria-labelledby="#kt_stats_widget_16_tab_link_3">
+                                                <div class="row">
+                                                    <div class="col-lg-12 text-left mt-4" style="text-align: left">
+                                                        <h3>
+                                                            Upload Manual Documents
+                                                        </h3>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <label for="">  Upload Documents</label>
+                                                                <input type="file" class="form-control" name="manual_offer_documents[]" multiple>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <hr>
+                                                            @foreach($manual_offer_documents as $manual_offer_document)
+                                                                <div class="col-lg-4 mb-10">
+                                                                    @if($manual_offer_document->type == "image")
+                                                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                                                            <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
+                                                                        </a>
+                                                                    @elseif($manual_offer_document->type == "pdf")
+                                                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                                                            <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90">
+                                                                        </a>
+                                                                    @endif
+                                                                </div>
+                                                            @endforeach
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             </div>
                                             <!--end::Tab Content-->
@@ -636,13 +688,13 @@
                 <div class="appended_summary_box row section_` + no +
                 `">
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="summary_title_new[]" value="Summary" required > 
+                        <input type="text" class="form-control" name="summary_title_new[]" value="Summary" required >
                     </div>
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="summary_sub_title_new[]" placeholder="Sub-title" required > 
+                        <input type="text" class="form-control" name="summary_sub_title_new[]" placeholder="Sub-title" required >
                     </div>
                     <div class="col-lg-11 mt-3 mb-4">
-                        <textarea  class="form-control" cols="30" rows="10" name="summary_sub_description_new[]" id="textarea_` + no + `" required ></textarea> 
+                        <textarea  class="form-control" cols="30" rows="10" name="summary_sub_description_new[]" id="textarea_` + no + `" required ></textarea>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button type="button" class="btn btn-sm btn-danger delete_section" data-id="` + no + `"> <i class='fa fa-times'></i> </button>
@@ -659,19 +711,19 @@
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                         <div class="tiles_box">
                             <label class="required"> Tiles Image </label>
-                            <input type="file" class="form-control" name="tiles_source_new[]" required> 
+                            <input type="file" class="form-control" name="tiles_source_new[]" required>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                          <div class="tiles_box">
                             <label class="required"> Tiles Image </label>
-                            <input type="file" class="form-control" name="tiles_source_new[]" required> 
+                            <input type="file" class="form-control" name="tiles_source_new[]" required>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                          <div class="tiles_box">
                             <label class="required"> Tiles Image </label>
-                            <input type="file" class="form-control" name="tiles_source_new[]" required> 
+                            <input type="file" class="form-control" name="tiles_source_new[]" required>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6">
@@ -686,13 +738,13 @@
                 <div class="appended_text_box no++;row section_` + no +
                 `">
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="text_title_new[]" value="Title" required > 
+                        <input type="text" class="form-control" name="text_title_new[]" value="Title" required >
                     </div>
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="text_sub_title_new[]" placeholder="Sub-title" required > 
+                        <input type="text" class="form-control" name="text_sub_title_new[]" placeholder="Sub-title" required >
                     </div>
                     <div class="col-lg-11 mt-3 mb-4">
-                        <textarea class="form-control" cols="30" rows="10" name="text_description_new[]" required id="textarea_` + no + `" ></textarea> 
+                        <textarea class="form-control" cols="30" rows="10" name="text_description_new[]" required id="textarea_` + no + `" ></textarea>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button type="button" class="btn btn-sm btn-danger delete_section_text" data-id="` + no + `"> <i class='fa fa-times'></i> </button>
@@ -708,7 +760,7 @@
                 <div class="row  appended_images_box section_` + no + `">
                     <div class="col-lg-11 mt-3 mb-4">
                         <label class="required"> Image </label>
-                        <input type="file" class="form-control" name="image_new[]" value="Title"  required> 
+                        <input type="file" class="form-control" name="image_new[]" value="Title"  required>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4 pt-5">
                         <button type="button" class="btn btn-sm btn-danger delete_section_images" data-id="` + no + `"> <i class='fa fa-times'></i> </button>
@@ -772,11 +824,11 @@
                                 <input type="hidden"  value="` + access + `"       name="access_new[]" required />
                             </div>
                             <div class="col-lg-12 text-center">
-                                <button class='btn btn-sm delete_video_wrapper' type="button"> 
+                                <button class='btn btn-sm delete_video_wrapper' type="button">
                                     <i class='text-danger fa fa-trash'></i>
                                 </button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 `);
                 $('.modalCloseBtn').click();
@@ -809,7 +861,7 @@
             // }
             // if(max_invesment == ''){
             //     toastr.error("Max Invesment filed is Required", "Success");
-            // }  
+            // }
         });
 
         $('#investment_steps').on('click', '.investment_step_button_row i', function() {
@@ -847,7 +899,7 @@
             $('.investment_step_button_row').append(`
                 <div class="col-lg-12  text-center button_row_wrapper">
                     <div class="overflow-auto pb-1">
-                        <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white"> 
+                        <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
                             <span class="col-lg-10 text-left"> ` + content + ` </span>
                             <span class="col-lg-2"> <i class="la la-times"></i>  </span>
                         </div>
@@ -964,7 +1016,7 @@
             $('.feture_video_url').val(videourl);
         });
 
-        
+
     </script>
 
 

@@ -35,7 +35,7 @@
                                 <!-- 16:9 aspect ratio -->
                                 <div class="ratio ratio-16x9">
                                     <iframe class="embed-responsive-item" src="{{ $offer->feature_video }}" id="video"
-                                        allowscriptaccess="always" allow="autoplay"></iframe>
+                                        allowscriptaccess="always"  ></iframe>
                                 </div>
                             </div>
                         </div>
@@ -241,23 +241,20 @@
                 <h3 class="fw-bolder" style="margin-top:20px"> Offer Documents </h3>
                 <br />
                 <div class="row ">
-
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-3  text-center">
-                            <a href="offering3.html" target="_blank">
-
-                                <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" style="width: 10%" class="img-fluid" srcset="">
-                            </a>
-                            <div class="row text-white p-3">
-                                <div class="col-12 text-start text-info text-center">
-                                    <h6>  {{ $temp_name }} </h6>
+                            @foreach($manual_offer_documents as $manual_offer_document)
+                                <div class="col-lg-4 mb-3  text-center">
+                                    @if($manual_offer_document->type == "image")
+                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                            <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
+                                        </a>
+                                    @elseif($manual_offer_document->type == "pdf")
+                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                            <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90">
+                                        </a>
+                                    @endif
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
-
-                            </div>
-                        </div>
+                            @endforeach
                     </div>
                 </div>
             </div>

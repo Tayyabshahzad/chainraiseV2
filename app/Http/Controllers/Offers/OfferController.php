@@ -62,14 +62,8 @@ class OfferController extends Controller
     {
 
         $offer = Offer::with('contactInfo','access','user','display','investmentRestrictions','access','callToAction','offerDetail','offerDetail.offerTiles','offerVideos','contactInfo')->find($id);
-
-        $slider_images = DB::table('media')
-                ->where('model_type', Offer::class)
-                ->where('model_id', $offer->id)
-                ->where('collection_name', 'offer_slider_images')
-                ->get();
-
-
+        $slider_images = $offer->getMedia('offer_slider_images');
+        $manual_offer_documents = $offer->getMedia('manual_offer_documents');
         $issuers = User::role('issuer')->get();
         $photos = $offer->getMedia('offer_detail_images');
         $tiles = OfferDetailTab::where('offer_id',$id)->first();
@@ -79,7 +73,7 @@ class OfferController extends Controller
            $tiles = null;
         }
 
-        return view('offers.edit',compact('offer','issuers','photos','tiles','slider_images'));
+        return view('offers.edit',compact('offer','issuers','photos','tiles','slider_images','manual_offer_documents'));
     }
     public function create()
     {
@@ -481,6 +475,15 @@ class OfferController extends Controller
                     $fileAdder->toMediaCollection('offer_slider_images');
                 });
             }
+
+            if($request->hasFile('manual_offer_documents')) {
+                $offer->addMultipleMediaFromRequest(['manual_offer_documents'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('manual_offer_documents');
+                });
+            }
+
+
             $invesment_restriction = InvestmentRestrication::find($request->investment_restrication_id);
             $invesment_restriction->min_invesment = $request->min_invesment;
             $invesment_restriction->max_invesment = $request->max_invesment;
