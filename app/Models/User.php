@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory; 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,7 +13,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable  implements MustVerifyEmail , HasMedia 
+class User extends Authenticatable  implements MustVerifyEmail , HasMedia
 {
 
     use HasApiTokens, HasFactory, Notifiable, HasRoles,InteractsWithMedia;
@@ -31,8 +31,9 @@ class User extends Authenticatable  implements MustVerifyEmail , HasMedia
         'agree_consent_electronic',
         'user_type',
         'status',
+        'email_verified_at',
         'cc'
-    ]; 
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *

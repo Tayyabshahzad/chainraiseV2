@@ -101,28 +101,28 @@ class WebhookController extends Controller
         ]);
 
         $token_json =  json_decode((string) $get_token->getBody(), true);
-        dump( $this->authUrl);
+        //dump( $this->authUrl);
         // $check_user_kyc_level = Http::withToken($token_json['access_token'])->
         // withHeaders(['Content-Type' => 'application/json'])->
         // get($this->baseUrl."/api/compliance/v1/identities?PageSize=90");
         // $check_user_kyc_level_kson =  json_decode((string) $check_user_kyc_level->getBody(), true);
 
 
-         $check_user_kyc_level = Http::withToken($token_json['access_token'])->
-        withHeaders(['Content-Type' => 'application/json'])->
-        get($this->baseUrl."/api/trust/v1/transactions?PageSize=140");
-        $check_user_kyc_level_kson =  json_decode((string) $check_user_kyc_level->getBody(), true);
-
-
-
-
-        // $check_user_kyc_level = Http::withToken($token_json['access_token'])->
+        //  $check_user_kyc_level = Http::withToken($token_json['access_token'])->
         // withHeaders(['Content-Type' => 'application/json'])->
-        // get($this->baseUrl."/api/trust/v1/transactions?identityId=157dfec5-f38d-4155-ba68-84e5d5727ca6");
+        // get($this->baseUrl."/api/trust/v1/transactions?PageSize=140");
         // $check_user_kyc_level_kson =  json_decode((string) $check_user_kyc_level->getBody(), true);
 
 
-        // dd($check_user_kyc_level_kson);
+
+
+        $check_user_kyc_level = Http::withToken($token_json['access_token'])->
+        withHeaders(['Content-Type' => 'application/json'])->
+        get($this->baseUrl."/api/trust/v1/transactions?identityId=ddfba7da-8e56-4636-9d3e-acbb5b33c27f");
+        $check_user_kyc_level_kson =  json_decode((string) $check_user_kyc_level->getBody(), true);
+
+
+        dd($check_user_kyc_level_kson);
 
 
 //         $check_user_kyc_level = Http::withToken($token_json['access_token'])->

@@ -77,16 +77,16 @@
 
 
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
-                        style="background-color:#43C3FE;">Upgrading To Serve You Better</a>
-                    {{-- @if (!Auth::user())
+                    {{-- <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
+                        style="background-color:#43C3FE;">Upgrading To Serve You Better</a> --}}
+                    @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#sign-in-popup">Login</a>
 
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#sign-up-popup">Sign Up
                         </a>
-                    @endif --}}
+                    @endif
 
                     <div class="avator-logo me-3 d-lg-block d-none ">
                         @if (Auth::user())
@@ -489,7 +489,7 @@
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="{{ route('login.facebook') }}"
+                            <a href="#"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-facebook pe-5"
                                     style=" position: absolute;
@@ -501,13 +501,35 @@
 
                         <div class="col-12">
                             <button type="button"
-                                class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
+                                class="show_email_login btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-envelope-fill pe-5"
                                     style=" position: absolute;
                                 left: 15px;"></i> Sign up with Email
-
                             </button>
                         </div>
+
+                        <div class="col-12 d-none email_login_form">
+                            <form enctype="multipart/form-data" class="form-group" action="{{ route('register') }}" method="post">
+                                @csrf
+                                <div class="from-group" style="margin-bottom: 10px">
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="text" name="name" placeholder="Enter Your Name" required/>
+                                </div>
+                                <div class="from-group" style="margin-bottom: 10px">
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="email" name="email" placeholder="Enter Email" required/>
+                                </div>
+                                <div class="from-group " style="margin-bottom: 10px">
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="password" name="password" placeholder="Enter Password" required/>
+                                </div>
+                                <div class="from-group " style="margin-bottom: 10px">
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="password" name="password_confirmation" placeholder="Enter Password" required/>
+                                </div>
+                                <div class="from-group">
+                                  <button type="submit" name="submit" class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> Register </button>
+                                </div>
+                            </form>
+                        </div>
+
+
 
                         <div class="col-12 mt-4">
                             By signing up I agree to ChainRaise's <br><a href="#" style="color: #43C3FE;">Terms
@@ -535,6 +557,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
+
     @if (Session::has('expire'))
         @php
             $message = session::get('expire');
@@ -577,6 +600,9 @@
 
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
+    $('.show_email_login').click(function(){
+        $('.email_login_form').removeClass('d-none')
+    });
     const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
         cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
     });
