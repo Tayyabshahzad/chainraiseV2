@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MyEDocument;
+use App\Models\OfferEsignTemplate;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class ESignController extends Controller
             $json_template = json_decode((string) $response->getBody(), true);
 
             if($response->successful()){
-                $doc = MyEDocument::where('template_id',$request->template_id)->first();
+                // OfferEsignTemplate
+                $doc = OfferEsignTemplate::where('template_id',$request->template_id)->first();
                 dd($doc);
                 $doc->status = 'open';
                 $doc->save();
