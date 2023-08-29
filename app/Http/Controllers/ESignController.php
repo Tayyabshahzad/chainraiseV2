@@ -40,9 +40,8 @@ class ESignController extends Controller
             if($response->successful()){
                 // OfferEsignTemplate
                 $doc = OfferEsignTemplate::where('template_id',$request->template_id)->first();
-                dd($doc);
-                $doc->status = 'open';
-                $doc->save();
+                //$doc->status = 'open';
+                //$doc->save();
                 return response([
                     'status'=>true,
                     'url'=>$json_template['data']['contract']['signers'][0]['sign_page_url']
