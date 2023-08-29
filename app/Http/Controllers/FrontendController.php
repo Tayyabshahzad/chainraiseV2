@@ -385,6 +385,7 @@ class FrontendController extends Controller
         $user = Auth::user();
        // $folders = Folder::where('user_id',$user->id)->withCount('documents')->get();
         $e_documents =  MyEDocument::where('investor_id',$user->id)->get();
+        $offer_documents =  MyEDocument::where('investor_id',$user->id)->get();
         $offers = Offer::get();
         return view('frontEnd.mydocuments',compact('user','e_documents','offers'));
     }

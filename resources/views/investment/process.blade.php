@@ -46,8 +46,8 @@
                     </div>
                     <p>You are investing as Myself / individual change</p>
                     <div class="my-5">
-                        <h4 class="fw-bolder">2. Investor Limits</h4> 
-                        <p>Your Investment Limit Is <span id="investment_limit_label"> {{ Auth::user()->investment_limit }} </span> </p> 
+                        <h4 class="fw-bolder">2. Investor Limits</h4>
+                        <p>Your Investment Limit Is <span id="investment_limit_label"> {{ Auth::user()->investment_limit }} </span> </p>
                         <input type="hidden" name="investment_limit"  class="current_investment_limit" value="{{ Auth::user()->investment_limit }}" required>
                         <input type="hidden"   class="total_investment_limit" value="{{ Auth::user()->investment_limit }}" required>
                         <p class="text-muted">Have you made an investments in equity crowdfunding (REG CF) on any platform
@@ -152,7 +152,7 @@
                         <div class="my-5">
                             <h4 class="fw-bolder">5. Terms
                             </h4>
-                             
+
 
                         </div>
                         <div class="border px-5 py-3  bg-light mb-3">
@@ -198,26 +198,24 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="border px-5 py-3  bg-light mb-3">
-                            <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05" required 
+                            <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05" required
                             @if($offer->eDocument)
                                 @if($offer->eDocument->status == 'queued')
                                     disabled
                                  @endif
-                            @endif
-                           >
+                            @endif>
                             I have read and agree to the e-sign disclosure
-                            <a target="_blank" href="{{ route('my.documents') }}"> View Document </a>
 
-                            {{-- <a href="#" class=" text-gray-700 view_template" data-user_id="{{ Auth::user()->id }}"
+                            <a href="#" class=" text-gray-700 view_template" data-user_id="{{ Auth::user()->id }}"
                                 data-template_id="@if($offer->offerEsing){{ $offer->offerEsing->template_id }}"@endif data-bs-toggle="modal"
                                 data-bs-target="#modal_view_e_sign">
                                 (Review Document)
-                            </a> --}}
+                            </a>
                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                             <a class="check_esing_status" href="#"> <i class="fa fa-refresh"></i> </a>
-                           
+
                             <div class="invalid-feedback">
                                 Please Check
                             </div>
@@ -307,7 +305,7 @@
 
                 </div>
             </div>
-        </div>  
+        </div>
         <div class="modal fade" id="kyc_data_modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <!--begin::Modal content-->
@@ -477,7 +475,7 @@
                                                 @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null) type="password"
                                                     value="999-99-9999" readonly
                                                 @else
-                                                      
+
                                                     type="text" @endif
                                                 id="primary_contact_social_security">
 
@@ -522,7 +520,7 @@
 
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-lg-12 mt-3">
                                     <div
                                         class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
@@ -558,7 +556,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="modal fade" id="payment_widget" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog mw-650px">
                 <!--begin::Modal content-->
@@ -608,7 +606,7 @@
                 <!--end::Modal content-->
             </div>
         </div>
- 
+
 
     </div>
 
@@ -669,7 +667,7 @@
     <script>
         $(document).ready(function() {
             $('#profile_update_form').submit(function(event) {
-                event.preventDefault(); // Prevent the default form submission 
+                event.preventDefault(); // Prevent the default form submission
                 $('.submit_button').attr('disabled', true);
                 var formData = $(this).serialize();
                 // Send an AJAX POST request to the server
@@ -683,7 +681,7 @@
                         $('.submit_button').attr('disabled', false);
                         if (response.success == false) {
                             if (response.validation == false) {
-                                $.each(response.errors, function(key, value) { 
+                                $.each(response.errors, function(key, value) {
                                      toastr.error(value);
                                  });
                             }
@@ -750,7 +748,7 @@
                 });
             });
             $('.payment_widget_button').click(function(event) {
-                event.preventDefault(); // Prevent the default form submission 
+                event.preventDefault(); // Prevent the default form submission
                 $('.payment_widget').attr('disabled', true);
                 $('#user_guid').val('');
                 $('#user_guid').attr('required', true);
@@ -797,7 +795,7 @@
             });
             $('.payment_wire_button').click(function(event) {
                 $('#account_details').html('');
-                event.preventDefault(); // Prevent the default form submission 
+                event.preventDefault(); // Prevent the default form submission
                 $('.payment_widget').attr('disabled', true);
                 $('#user_guid').val('');
                 $('#user_guid').attr('required', false);
@@ -820,9 +818,9 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <h6> ` + response.data.wire.accountNumber + ` </h6>
-                                                   
+
                                                 </div>
-                                        </div> 
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <h6> ROUTING NUMBER </h6>
@@ -840,7 +838,7 @@
                                             </div>
                                         </div>
                                 </div>
-                                
+
                                 <div class="col-lg-12 mb-10">
                                     <div class="row" style="border:1px solid #ccc;padding:15px;margin-bottom:10px;margin-top:3em">
                                             <div class="col-lg-12 text-center" >
@@ -854,7 +852,7 @@
                                                 ` + response.data.wire.receiverAddress.street1 + `
                                                </p>
                                             </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="row" style="border:1px solid #ccc;padding:15px;margin-bottom:10px">
@@ -867,12 +865,12 @@
                                                </p>
                                                <p>
                                                 ` + response.data.wire.receiverBankAddress.street1 + ` <br/>
-                                                ` + response.data.wire.receiverBankAddress.city + ` 
-                                                ` + response.data.wire.receiverBankAddress.state + ` 
-                                                ` + response.data.wire.receiverBankAddress.postalCode + ` 
+                                                ` + response.data.wire.receiverBankAddress.city + `
+                                                ` + response.data.wire.receiverBankAddress.state + `
+                                                ` + response.data.wire.receiverBankAddress.postalCode + `
                                                </p>
                                             </div>
-                                    </div> 
+                                    </div>
                                 </div>
                             `);
                             toastr.success(response.errors, "Success");
@@ -906,7 +904,7 @@
         $('.kyc_document_upload_btn').click(function() {
             var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
             imgBtnWrapper.find('.change_photo').click();
-        }); 
+        });
         $(document).ready(function() {
             $('.past_12_months_investment_check_button').on('change', function() {
                 if ($(this).is(':checked')) {
@@ -917,7 +915,7 @@
                     $('.show_investment_limit').attr('required',false)
                 }
             });
-        });  
+        });
         $('body').on('click', '.view_template', function() {
             var user_id = $(this).data('user_id');
             var template_id = $(this).data('template_id');
@@ -942,47 +940,47 @@
                 }
             });
         });
-        $('body').on('click', '.check_esing_status', function() { 
+        $('body').on('click', '.check_esing_status', function() {
             offer_id = "{{ $offer->id }}";
             $.ajax({
-                
+
                 url: "{{ route('esignature.check.esing.status') }}",
-                method: 'GET', 
+                method: 'GET',
                 data:{
                     offer_id : offer_id
                 },
                 success: function(response) {
                     if (response.status == true) {
-                        $('.esing_check').prop('disabled', false);  
+                        $('.esing_check').prop('disabled', false);
                         toastr.success('Thanks for signing the document', "Success");
-                    } else { 
+                    } else {
                         $('.esing_check').prop('disabled', true);
                         toastr.error('You have not signed your document', "Error");
                     }
                 }
             });
         });
-        
-        
+
+
     </script>
 
     <script>
         $(document).ready(function() {
-             
-            
+
+
             // Get references to the input fields
             const $current_investment_limit = $('.current_investment_limit');
-            const $update_investment_limits = $('.update_investment_limits'); 
-            const $total_investment_limit = $('.total_investment_limit').val(); 
+            const $update_investment_limits = $('.update_investment_limits');
+            const $total_investment_limit = $('.total_investment_limit').val();
             // Add an input event listener to input1 using jQuery
-            
+
             $update_investment_limits.on('input', function() {
-                $result  = (parseFloat($total_investment_limit) - parseFloat($update_investment_limits.val())); 
+                $result  = (parseFloat($total_investment_limit) - parseFloat($update_investment_limits.val()));
                 $current_investment_limit.val($result)
                 $('#investment_limit_label').html($result)
             });
 
-            
+
 
             $('.nationality').on('change', function() {
                 $val = $(this).val();
@@ -994,19 +992,19 @@
                         $('.ssn_number_container').addClass('d-none')
                         $('.document_upload_container').removeClass('d-none')
                         $('#primary_contact_social_security').attr('required',false)
-                        
+
                 }
                 $('.run_process_button').removeClass('d-none')
             });
         });
     </script>
-     
+
      <script>
         $(document).ready(function() {
-            
+
             $('#make_investment_form').submit(function(e) {
             // Check if the checkbox is checked
-            var isChecked = $('.esing_check').is(':checked'); 
+            var isChecked = $('.esing_check').is(':checked');
             if (!isChecked) {
                 e.preventDefault(); // Prevent form submission
                 alert('Please check the agreement checkbox.'); // Show error message
@@ -1014,7 +1012,7 @@
         });
         });
     </script>
-    
+
 
 
 @endsection
