@@ -38,6 +38,7 @@ class ESignController extends Controller
 
             if($response->successful()){
                 $doc = MyEDocument::where('template_id',$request->template_id)->first();
+                dd($doc);
                 $doc->status = 'open';
                 $doc->save();
                 return response([
@@ -47,7 +48,6 @@ class ESignController extends Controller
             }
 
         }catch(Exception $error){
-            dd($error);
             return response([
                 'status'=>false,
                 'url'=>null,
