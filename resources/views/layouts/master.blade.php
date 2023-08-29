@@ -389,7 +389,7 @@
                                 </a>
                             </div>
                             <div class="col-2 d-flex align-items-center justify-content-center">
-                                <a href="{{ route('login.facebook') }}" class="text-dark">
+                                <a href="#" class="text-dark">
                                     <i class="bi bi-facebook  border border-dark rounded-circle py-2 px-3"></i>
                                 </a>
                             </div>

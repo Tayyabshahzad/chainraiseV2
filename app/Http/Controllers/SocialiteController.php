@@ -42,7 +42,7 @@ class SocialiteController extends Controller
             }
             Auth::login($user);
             //event(new Registered($user));
-            return redirect()->route('dashboard');
+            return redirect()->route('index');
         }
 
     }
@@ -80,7 +80,7 @@ class SocialiteController extends Controller
             }
             Auth::login($user);
          event(new Registered($user));
-            return redirect()->route('dashboard');
+            return redirect()->route('index');
         }
 
     }

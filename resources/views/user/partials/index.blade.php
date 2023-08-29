@@ -676,7 +676,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Add Document </h5>
                 </div>
-                <form class="form" method="post" action="{{ route('user.upload.documents') }}" enctype="multipart/form-data">
+                <form class="form" method="post" action="{{ route('user.upload.documents') }}"
+                    enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="card card-custom">
                             @csrf
@@ -825,7 +826,8 @@
                             <div class="card-body row">
                                 <div class="form-group col-lg-6 mb-5">
                                     <label for="" class="required"> Select Template </label>
-                                    <select class="form-select form-select-solid" id="templates" name="template" required>
+                                    <select class="form-select form-select-solid" id="templates" name="template"
+                                        required>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-6 mb-5">
@@ -847,7 +849,8 @@
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="" class=""> Investment Amount </label>
-                                    <input type="text" name="investment_amount"  placeholder="Investment Amount (if applicable)" class="form-control">
+                                    <input type="text" name="investment_amount"
+                                        placeholder="Investment Amount (if applicable)" class="form-control">
                                 </div>
                             </div>
 
@@ -865,7 +868,7 @@
     </div>
 
     <div class="modal fade" id="modal_view_e_sign" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdrop" aria-hidden="true">
+        aria-labelledby="staticBackdrop" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -877,9 +880,7 @@
 
                             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                             <script src="https://cdncf.esignatures.io/staticassets/iframeResizer.4.2.10.min.js"></script>
-                            <iframe
-                                src=""
-                                id="eSignaturesIOIframe"
+                            <iframe src="" id="eSignaturesIOIframe"
                                 style="width: 100%;min-width: 100%;height:300px">
                             </iframe>
                         </div>

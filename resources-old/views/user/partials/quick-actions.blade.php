@@ -160,36 +160,36 @@
                 </button>
             </div>
             <!--begin::Modal header-->
-           
 
-            <div class="modal-body scroll-y  "> 
-                
+
+            <div class="modal-body scroll-y  ">
+
                 <form class="form" method="post"   id="send_email_form" >
                     @csrf
-                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required=""> 
-                    <div class="modal-body"> 
-                        <div class="card-body"> 
+                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required="">
+                    <div class="modal-body">
+                        <div class="card-body">
                             <div class="form-group row">
                                  <div class="col-lg-4">
                                     <input type="text" name="subject" class="form-control" required placeholder="Subject" value="Chain Raise Invite">
                                  </div>
                                  <div class="col-lg-4">
-                                    <input type="text" name="from_name" class="form-control" required placeholder="From Name" value="{{ Auth::user()->name }}"> 
+                                    <input type="text" name="from_name" class="form-control" required placeholder="From Name" value="{{ Auth::user()->name }}">
                                  </div>
                                  <div class="col-lg-4">
                                     <input type="email" name="from_email" class="form-control" required placeholder="From Email" value="{{ Auth::user()->email }}">
                                  </div>
-                            </div> 
-    
+                            </div>
+
                             <div class="form-group row">
                                 <div class="col-lg-12 mt-5">
                                    <textarea type="text" name="content" class="form-control summernote" required placeholder="Details"></textarea>
                                 </div>
-                                
-                                
-                           </div> 
+
+
+                           </div>
                         </div>
-                         
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark btn-sm font-weight-bold no-radius" id="sendEmailBtn">
@@ -219,9 +219,9 @@
                 </button>
             </div>
             <!--begin::Modal header-->
-           
 
-            <div class="modal-body scroll-y  "> 
+
+            <div class="modal-body scroll-y  ">
                 <form class="form" method="post" enctype="multipart/form-data" id="upload_document_form" >
                     <div class="modal-body">
                         <div class="card card-custom">
@@ -230,8 +230,8 @@
                                 <div class="form-group">
                                     <label for="" class="required"> Folder Name </label>
                                     <input type="text" class="form-control" placeholder="Folder Name" name="name" required="">
-                                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required=""> 
-                                    
+                                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required="">
+
                                 </div>
                                 <div class="form-group mt-4">
                                     <label for="" class="required"> Upload File  <hr>
@@ -244,7 +244,7 @@
                                             @foreach($offers as $offer)
                                                 <option value="{{ $offer->id}}"> {{ $offer->name }}  </option>
                                             @endforeach
-                                        </select> 
+                                        </select>
                                     </div>
                                     <div class="form-group col-lg-6 mt-4">
                                         <label for=""> Sort Order </label>
@@ -254,13 +254,13 @@
                                             <option value="z-a"> Z-A </option>
                                             <option value="date_asc"> Date Uploaded </option>
                                             <option value="date_desc">  Date Uploaded (desc)</option>
-                                        </select> 
+                                        </select>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="mb-15 fv-row">
                                     <!--begin::Wrapper-->
-                                    <div class="d-flex flex-stack"> 
+                                    <div class="d-flex flex-stack">
                                         <div class="d-flex align-items-center">
                                             <!--begin::Checkbox-->
                                             <label class="form-check form-check-custom form-check-solid me-10">
@@ -314,18 +314,18 @@
                 </button>
             </div>
             <!--begin::Modal header-->
-            <div class="modal-body scroll-y  "> 
-                <form class="form" method="post" action="" enctype="multipart/form-data" id="upload_e_sign_document_form"> 
+            <div class="modal-body scroll-y  ">
+                <form class="form" method="post" action="" enctype="multipart/form-data" id="upload_e_sign_document_form">
                     <div class="modal-body">
                         <div class="card card-custom">
                            @csrf
                              <div class="card-body">
                                 <div class="row mt-4">
-                                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required=""> 
+                                    <input type="hidden" name="user_ids" id="user_ids" class="user_ids" required="">
                                     <input type=" " id="selectedOptionHtml" name="selectedOptionHtml" value="">
                                     <div class="form-group col-lg-6 mb-5">
                                         <label for=""> Select Template </label>
-                                        <select class="form-select form-select-solid mt-4" name="template" required></select> 
+                                        <select class="form-select form-select-solid mt-4" name="template" required></select>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label for=""> Offer </label>
@@ -333,18 +333,18 @@
                                             @foreach($offers as $offer)
                                                 <option value="{{ $offer->id}}"> {{ $offer->name }}  </option>
                                             @endforeach
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="row mt-4"> 
+                                <div class="row mt-4">
                                     <div class="form-group col-lg-12 mb-5">
                                         <label for=""> Issuer </label>
                                         <select class="form-select form-select-solid mt-4" name="issuer" required>
                                             @foreach($issuers as $issuer)
                                                 <option value="{{ $issuer->id}}"> {{ $issuer->name }}  </option>
                                             @endforeach
-                                        </select> 
-                                    </div> 
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -361,5 +361,5 @@
     <!--end::Modal dialog-->
 </div>
 
- 
+
 

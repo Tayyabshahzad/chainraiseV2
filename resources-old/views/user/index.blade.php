@@ -5,7 +5,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 @section('page_content')
-    
+
 <div class="d-flex flex-column flex-column-fluid">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -38,8 +38,8 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 <!--begin::Filter menu-->
-                
-              
+
+
             </div>
             <!--end::Actions-->
         </div>
@@ -56,17 +56,17 @@
                         <span class="text-muted mt-1 fw-semibold fs-7">Over {{  $users->count() }} members</span>
                     </h3>
 
-                    
+
                     <div class="card-toolbar ">
                         <span data-href="{{ route('user.info.csv') }}" id="export" class="btn no-radius btn-sm btn-dark btn-sm" onclick ="exportTasks (event.target);">Export Excel</span>
                         &nbsp;&nbsp;
-                        
+
                         <div class="card-toolbar d-none show_on_multi_check">
                             <!--begin::Menu-->
-                            <button class="btn btn-dark btn-sm no-radius btn-active-color-primary justify-content-end" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true"> 
-                                ENGAGE SELECTED 
+                            <button class="btn btn-dark btn-sm no-radius btn-active-color-primary justify-content-end" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">
+                                ENGAGE SELECTED
                             </button>
-                            
+
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px" data-kt-menu="true" style="">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
@@ -87,20 +87,20 @@
                                              Update Trust Settings
                                         </a>
                                         </div>
-                                        
+
                                     </div>
                                     <!--end::Menu sub-->
                                 </div> --}}
-                                
-                              
+
+
                                 <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
                                     <!--begin::Menu item-->
-                                    <a href="#" class="menu-link px-3" id="action-send-email"  data-bs-toggle="modal" 
+                                    <a href="#" class="menu-link px-3" id="action-send-email"  data-bs-toggle="modal"
                                     data-bs-target="#modal-quick-action-account-email-invite">
                                         <span class="menu-title"> Email </span>
-                                         
+
                                     </a>
-                                    
+
                                 </div>
                                 <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
                                     <!--begin::Menu item-->
@@ -113,7 +113,7 @@
                                     <div class="menu-sub menu-sub-dropdown w-185px py-4">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                        <a href="#" id="action-upload-document" class="menu-link px-3" data-bs-toggle="modal" 
+                                        <a href="#" id="action-upload-document" class="menu-link px-3" data-bs-toggle="modal"
                                         data-bs-target="#modal-quick-action-upload-document" >
                                              Upload Document
                                         </a>
@@ -123,15 +123,15 @@
                                                  E Sign Document
                                             </a>
                                         </div>
-                                        
+
                                     </div>
                                     <!--end::Menu sub-->
                                 </div>
-                                
-                                
+
+
                             </div>
                             <!--begin::Menu 2-->
-                            
+
                             <!--end::Menu 2-->
                             <!--end::Menu-->
                         </div>
@@ -173,53 +173,53 @@
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body py-3">
-                    <div class="flex-lg-row-fluid"> 
+                    <div class="flex-lg-row-fluid">
                         <div class="card">
-                            
+
                             <div class="card-body p-0">
                                 <!--begin::Table-->
-                                <div id="kt_inbox_listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="table-responsive"><table class="table table-hover table-row-dashed fs-6 gy-5 my-0 dataTable no-footer" id="kt_inbox_listing"> 
-                                    <tbody> 
+                                <div id="kt_inbox_listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="table-responsive"><table class="table table-hover table-row-dashed fs-6 gy-5 my-0 dataTable no-footer" id="kt_inbox_listing">
+                                    <tbody>
                                     <tr class="odd">
-                                            <td class="ps-9"> 
+                                            <td class="ps-9">
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-4 me-lg-7">
                                                     <input class="form-check-input multi_select" type="checkbox" data-kt-check="true"   data-kt-check-target="#kt_inbox_listing .form-check-input" value="1">
-                                                </div> 
-                                            </td> 
-                                            <th class="ps-9 fw-bold"> 
+                                                </div>
+                                            </td>
+                                            <th class="ps-9 fw-bold">
                                                Photo
-                                            </th> 
+                                            </th>
 
-                                            <th class="ps-9 fw-bold"> 
+                                            <th class="ps-9 fw-bold">
                                                 Full Name
-                                            </th> 
-                                            
-                                             <th class="ps-9 fw-bold"> 
+                                            </th>
+
+                                             <th class="ps-9 fw-bold">
                                                 Account Type
-                                             </th> 
-                                             <th class="ps-9 fw-bold"> 
+                                             </th>
+                                             <th class="ps-9 fw-bold">
                                                 KYC Level
-                                             </th> 
-                                              
-                                             <th class="ps-9 fw-bold"> 
+                                             </th>
+
+                                             <th class="ps-9 fw-bold">
                                                Last Seen
-                                             </th> 
-                                             <th class="ps-9 fw-bold"> 
+                                             </th>
+                                             <th class="ps-9 fw-bold">
                                                Date
-                                              </th> 
-                                              <th class="ps-9 fw-bold"> 
+                                              </th>
+                                              <th class="ps-9 fw-bold">
                                                 Action
-                                               </th> 
+                                               </th>
                                     </tr>
                                     @foreach($users as $user)
                                     <tr class="odd">
-                                        <td class="ps-9"> 
+                                        <td class="ps-9">
                                             <div class="form-check form-check-sm form-check-custom form-check-solid mt-3">
                                                 <input class="form-check-input multi_select" name="user_check" type="checkbox" value="{{ $user->id }}">
                                             </div>
-                                        </td> 
+                                        </td>
 
-                                        <th class="ps-9"> 
+                                        <th class="ps-9">
                                             <span class="symbol-label bg-light">
                                                 @if($user->getFirstMediaUrl('profile_photo', 'thumb'))
                                                     @php $photo_path = $user->getFirstMediaUrl('profile_photo', 'thumb')@endphp
@@ -228,28 +228,28 @@
                                                 @endif
                                                 <img src="{{ $photo_path }}" class="h-75 align-self-end" alt="" style="width: 40px">
                                             </span>
-                                        </th> 
-                                        <th class="ps-9"> 
-                                            <a href="{{ route('user.details',$user->id)}}" class="text-dark  text-hover-primary d-block mb-1 fs-6"> 
+                                        </th>
+                                        <th class="ps-9">
+                                            <a href="{{ route('user.details',$user->id)}}" class="text-dark  text-hover-primary d-block mb-1 fs-6">
                                                 {{ $user->name}}
                                                 @if($user->userDetail) {{ $user->userDetail->middle_name }} @endif
-                                            </a> 
-                                         </th> 
-                                         
-                                         <th class="ps-9"> 
+                                            </a>
+                                         </th>
+
+                                         <th class="ps-9">
                                             <a href="#" class="text-dark  text-hover-primary d-block mb-1 fs-6"> {{ ucfirst($user->roles->pluck('name')->implode(' '))  }} </a>
-                                         </th> 
-                                         <th class="ps-9"> 
+                                         </th>
+                                         <th class="ps-9">
                                             @if($user->kyc) {{ $user->kyc->kyc_level}} @else -- @endif
-                                         </th> 
-                                         
-                                         <th class="ps-9"> 
+                                         </th>
+
+                                         <th class="ps-9">
                                         -
-                                         </th> 
-                                         <th class="ps-9"> 
+                                         </th>
+                                         <th class="ps-9">
                                             {{ $user->created_at->diffforhumans()}}
-                                          </th> 
-                                          <th class="ps-9"> 
+                                          </th>
+                                          <th class="ps-9">
                                             <a href="#" class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm me-3 deleteUser"
                                              @if(Auth::user()->id ==  $user->id ) disabled @endif
                                              data-id="{{  $user->id  }}" >
@@ -257,16 +257,16 @@
                                             </a>
                                             @if($user->roles->pluck('name')->implode(' ') == 'issuer')
                                                 <a href="#" class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm me-3" title="Update KYC/AML Status" >
-                                                    <input type="checkbox" 
+                                                    <input type="checkbox"
                                                     @if($user->check_kyc == true) @checked(true)  @else @checked(false) @endif
-                                                    class="update_aml_status" data-id="{{  $user->id }}">  
+                                                    class="update_aml_status" data-id="{{  $user->id }}">
                                                 </a>
                                             @endif
-                                           </th> 
+                                           </th>
                                 </tr>
                                     @endforeach
 
-                                  
+
                                     </tbody>
                                     <!--end::Table body-->
                                 </table>
@@ -278,7 +278,7 @@
                         <!--end::Card-->
                     </div>
                     <!--begin::Table container-->
-                    
+
                     <!--end::Table container-->
                 </div>
                 <!--begin::Body-->
@@ -314,7 +314,7 @@
                         url: "{{ route('user.delete')}}",
                         method: "POST",
                         data: {
-                            id: id, 
+                            id: id,
                         },
                         success: function(result) {
                             if(result.status == true){
@@ -325,7 +325,7 @@
                             }
                         }
                     });
-                     
+
                 }
 
 
@@ -334,8 +334,8 @@
             });
 
         });
-       
-        
+
+
      </script>
 
      <script>
@@ -362,7 +362,7 @@
                 method: "POST",
                 data: $('#update_setting_form').serialize(),
                 success: function(result) {
-                    
+
                 }
             });
        });
@@ -386,11 +386,11 @@
                 cache: false,
                 timeout: 800000,
                 success: function(result) {
-                    
+
                 }
             });
        });
-       
+
        $('body').on('click','#action-upload-document',function(event){
             $('#user_ids').val(checked_values);
        })
@@ -400,7 +400,7 @@
        })
 
        $('body').on('click','.e_sign', function() {
-            var id = 1; 
+            var id = 1;
             $.ajax({
                 url: "{{ route('user.esign.template') }}",
                 method: 'GET',
@@ -416,7 +416,7 @@
             });
         });
         $('body').on('submit','#send_email_form',function(event){
-        
+            alert(1);
             if ($('.summernote').summernote('isEmpty')) {
                     toastr.error('Required fileds are missing', "Error");
                    return false;
@@ -427,7 +427,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
+
             var form = $('#send_email_form')[0];
             var data = new FormData(form);
             $('#sendEmailBtn').prop('disabled',true);
@@ -442,7 +442,7 @@
                 cache: false,
                 timeout: 800000,
                 success: function(result) {
-                    if(result.status==true){ 
+                    if(result.status==true){
                         $('.dismiss').click();
                         toastr.success(result.message, "Success");
                     }
@@ -456,7 +456,7 @@
                 tabsize: 2,
                 height: 130
             });
-            
+
         });
 
         $('body').on('submit','#send_email_form',function(event){
@@ -484,7 +484,7 @@
                 cache: false,
                 timeout: 800000,
                 success: function(result) {
-                    if(result.status==true){ 
+                    if(result.status==true){
                         $('.dismiss').click();
                         toastr.success(result.message, "Success");
                     }
@@ -518,7 +518,7 @@
                     if(result.status == true){
                         $('.dismiss').click();
                         toastr.success(result.message, "Success");
-                        
+
                     }else{
                         toastr.error(result.message, "Error");
                     }
@@ -527,7 +527,7 @@
                     $('#document_upload_btn').prop('disabled',false);
                     $('#document_upload_btn').html('Upload Document');
                     toastr.error(result.message, "Error");
-                   
+
                 }
             });
         });
@@ -537,7 +537,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }); 
+            });
             var form = $('#upload_e_sign_document_form')[0];
             var data = new FormData(form);
             $('#e_document_upload_btn').prop('disabled',true);
@@ -557,7 +557,7 @@
                     if(result.status == true){
                         $('.dismiss').click();
                         toastr.success(result.message, "Success");
-                        
+
                     }else{
                         toastr.error(result.message, "Error");
                     }
@@ -566,11 +566,11 @@
                     $('#document_upload_btn').prop('disabled',false);
                     $('#document_upload_btn').html('Upload Document');
                     toastr.error(result.message, "Error");
-                   
+
                 }
             });
         });
-        
+
 
     </script>
     <script>
@@ -584,31 +584,31 @@
             $('.summernote').summernote('reset');
             $('#sendEmailBtn').prop('disabled',false);
             $('#sendEmailBtn').html('Send Email');
-            
+
         });
 
-        $('body').on('click','.update_aml_status', function(){ 
+        $('body').on('click','.update_aml_status', function(){
             var userId = $(this).data('id');
             var url = "{{ route('user.update.kyc.check', ['id' => ':userId']) }}";
-            url = url.replace(':userId', userId); 
+            url = url.replace(':userId', userId);
             $.ajax({
                 url: url,
-                method: 'GET', 
+                method: 'GET',
                 success: function(response) {
-                     if(response.status == true){ 
+                     if(response.status == true){
                         toastr.success('KYC / AML Status Has Been Updated',  "Success");
                         if(response.data == 'Disabled'){
                             $('.update_aml_status').prop('checked',false);
                         } else{
                             $('.update_aml_status').prop('checked',true);
                         }
-                       
-                        
+
+
                      }
                 }
             });
         });
-        
+
     </script>
 
 @endsection

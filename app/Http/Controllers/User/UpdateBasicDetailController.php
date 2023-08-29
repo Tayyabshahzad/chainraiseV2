@@ -17,13 +17,13 @@ use App\Models\MyEDocument;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Password;
 
 class UpdateBasicDetailController extends Controller
 {
     public function updateDocument(Request $request)
-    { 
+    {
         $request->validate([
             //'document' => 'required',
             'name' => 'required',
@@ -34,10 +34,10 @@ class UpdateBasicDetailController extends Controller
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
         if($request->has('document')) {
-            $fileName = time().'.'.$request->document->extension();   
+            $fileName = time().'.'.$request->document->extension();
             $request->document->move(public_path('uploads'), $fileName);
         }
-        $path = "https://beta.chainraise.info/manage/uploads/".$fileName; 
+        $path = "https://beta.chainraise.info/manage/uploads/".$fileName;
         try{
             DB::beginTransaction();
             foreach($users as $user){
@@ -54,7 +54,7 @@ class UpdateBasicDetailController extends Controller
                     $document->user_id =  $user->id;
                     $document->folder_id =  $folder->id;
                     $document->offer_id =  $request->offer;
-                    $document->description =  $request->description; 
+                    $document->description =  $request->description;
                     $document->save();
                     $document->addMediaFromUrl($path)->toMediaCollection('documents');
                 }
@@ -73,31 +73,31 @@ class UpdateBasicDetailController extends Controller
         }
     }
 
-    
+
     public function eDocument(Request $request)
-    { 
-        $request->validate([  
+    {
+        $request->validate([
             'user_ids' => 'required',
             'template'=>'required',
             'offer' => 'required',
-            'issuer' => 'required',     
-        ]); 
+            'issuer' => 'required',
+        ]);
         $issuer = User::find($request->issuer);
         if($issuer->userDetail){
-            $entity_name =   $issuer->userDetail->entity_name; 
+            $entity_name =   $issuer->userDetail->entity_name;
         }else{
             $entity_name = '-';
-        }    
+        }
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
-        $token = env('ESIGN_TOKEN'); 
-        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token;  
+        $token = env('ESIGN_TOKEN');
+        $e_signature_url = "https://esignatures.io/api/contracts?token=".$token;
         try{
-            
-            foreach($users as $user){ 
+
+            foreach($users as $user){
                 $user = User::find($user);
-                $uniqueNumber = Str::uuid()->toString(); 
-                if($user){    
+                $uniqueNumber = Str::uuid()->toString();
+                if($user){
                     $send_template = Http::withHeaders([
                         'Content-Type' => 'application/json',
                     ])->post($e_signature_url, [
@@ -118,7 +118,7 @@ class UpdateBasicDetailController extends Controller
                                 "signature_request_delivery_method" => "email",
                                 "signed_document_delivery_method" => "email",
                                 "required_identification_methods" => [
-                                    "email" 
+                                    "email"
                                 ],
                                 "redirect_url" => "https://google.com-",
                                 "embedded_redirect_iframe_only" => "no"
@@ -142,10 +142,10 @@ class UpdateBasicDetailController extends Controller
                         "placeholder_fields" => [
                             [
                                 "api_key" => "interest_rate",
-                                "value" => "3.2%", 
+                                "value" => "3.2%",
                             ],
                             [
-                                "api_key" => "floor-plan", 
+                                "api_key" => "floor-plan",
                                 "document_elements" => [
                                     [
                                         "type" => "image",
@@ -176,24 +176,24 @@ class UpdateBasicDetailController extends Controller
                             "logo_url" => "https://online-logo-store.com/yourclient-logo.png"
                         ]
                     ]);
-                    $json_template = json_decode((string) $send_template->getBody(), true);  
-                 
-                    if($send_template->successful()){ 
+                    $json_template = json_decode((string) $send_template->getBody(), true);
+
+                    if($send_template->successful()){
                         $e_document = new MyEDocument;
                         $e_document->investor_id = $user->id;
                         $e_document->offer_id = $request->offer;
                         $e_document->issuer_id = $request->issuer;
                         $e_document->template_name = $request->selectedOptionHtml;
                         $e_document->template_id = $request->template;
-                        $e_document->status = $json_template['status']; 
-                        $e_document->contract_id = $json_template['data']['contract']['id']; 
-                        $e_document->save();    
+                        $e_document->status = $json_template['status'];
+                        $e_document->contract_id = $json_template['data']['contract']['id'];
+                        $e_document->save();
                     }else{
                         return response([
                             'status'=>false,
                             'message'=>$json_template,
                         ]);
-                    } 
+                    }
                 }else{
                     return response([
                         'status'=>false,
@@ -201,25 +201,25 @@ class UpdateBasicDetailController extends Controller
                     ]);
                 }
             }
-            
+
             return response([
                 'status'=>true,
                 'message'=>'E-Sign Request has been sent'
             ]);
         }catch(Exception $error){
-            
+
             return response([
                 'status'=>false,
                 'message'=>'Error while sending request'
             ]);
         }
-       
-        
+
+
 
     }
 
     public function inviteEmail(Request $request){
-      
+
         $request->validate([
             //'document' => 'required',
             'subject' => 'required',
@@ -228,23 +228,32 @@ class UpdateBasicDetailController extends Controller
             'content' => 'required',
             'user_ids' => 'required',
         ]);
-        $users = explode(',', $request->user_ids); 
+        $users = explode(',', $request->user_ids);
         $user_count = count($users);
+        $resetPassword = $request->has('reset_password');
+        $emailContent = $request->content;
         foreach($users as $user){
-            $user = User::find($user);
-            Mail::to($user)->send(new SendInvite($request->content,$request->from_email,$request->from_email));
+            $userInstance = User::find($user);
+            if ($resetPassword) {
+                $token = Password::getRepository()->create($userInstance);
+                $resetLink = URL::signedRoute('password.reset', ['token' => $token, 'email' => $userInstance->email]);
+                $emailContentWithResetLink = $emailContent . "\n\nPassword Reset Link: $resetLink";
+            } else {
+                $emailContentWithResetLink = $emailContent;
+            }
+            Mail::to($userInstance)->send(new SendInvite($emailContentWithResetLink, $request->from_email, $request->from_email));
         }
         return response([
             'status'=>true,
             'message'=>'Invitation Emails Has Been Sent'
         ]);
-       
+
     }
 
-    public function export() 
+    public function export()
     {
-          
+
        return Excel::download(new UsersExport, 'users.xlsx');
-        
+
     }
 }
