@@ -134,7 +134,8 @@ class OfferController extends Controller
         ]);
         $token_json =  json_decode((string) $get_token->getBody(), true);
         if($get_token->failed()){
-            return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json.']');
+            //dd($token_json);
+            return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json['error'].']');
         }
         if($user->check_kyc == true ){
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->

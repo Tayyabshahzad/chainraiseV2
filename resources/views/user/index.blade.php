@@ -121,13 +121,13 @@
                                         <!--begin::Menu sub-->
                                         <div class="menu-sub menu-sub-dropdown w-185px py-4">
                                             <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
+                                            {{-- <div class="menu-item px-3">
                                                 <a href="#" id="action-upload-document" class="menu-link px-3"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modal-quick-action-upload-document">
                                                     Upload Document
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                             <div class="menu-item px-3">
                                                 <a href="#" id="action-upload-e-document"
                                                     class="e_sign menu-link px-3" data-bs-toggle="modal"
