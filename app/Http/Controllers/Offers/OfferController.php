@@ -133,7 +133,8 @@ class OfferController extends Controller
             'client_id'  => $this->authUrl['client_id'],
         ]);
         $token_json =  json_decode((string) $get_token->getBody(), true);
-        if($get_token->failed()){
+dd($token_json);        
+if($get_token->failed()){
             return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json.']');
         }
         if($user->check_kyc == true ){
