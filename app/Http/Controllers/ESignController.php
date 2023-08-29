@@ -47,6 +47,7 @@ class ESignController extends Controller
             }
 
         }catch(Exception $error){
+            dd($error);
             return response([
                 'status'=>false,
                 'url'=>null,
