@@ -35,7 +35,7 @@ class ESignController extends Controller
                 ]
             ]);
             $json_template = json_decode((string) $response->getBody(), true);
-            dd($json_template);
+
             if($response->successful()){
                 $doc = MyEDocument::where('template_id',$request->template_id)->first();
                 $doc->status = 'open';
