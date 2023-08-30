@@ -12,6 +12,10 @@
             align-items: end;
             justify-content: center;
         }
+        #myModal iframe {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 @endsection
 
