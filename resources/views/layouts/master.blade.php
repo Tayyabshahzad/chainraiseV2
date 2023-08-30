@@ -20,7 +20,26 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title> ChainRaise Portal | @yield('title') </title>
 
+    <style>
+        /* Default font size */
+        body {
+          font-size: 18px!important;
+        }
 
+        /* Increase font size for larger screens */
+        @media (min-width: 768px) {
+          body {
+            font-size: 18px;
+          }
+        }
+
+        /* Increase font size further for even larger screens */
+        @media (min-width: 1200px) {
+          body {
+            font-size: 20px;
+          }
+        }
+      </style>
 
     @section('page_head')
     @show
