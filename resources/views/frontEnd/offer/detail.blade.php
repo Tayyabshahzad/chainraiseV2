@@ -3,7 +3,7 @@
 @section('page_head')
     <style>
         .hero-section-offer-2 {
-            height: 100vh !important;
+            height: 100% !important;
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}");
             background-position: center;
             background-repeat: no-repeat;
@@ -18,7 +18,7 @@
 @section('content')
     <!-- Hero Section Start -->
     <section class="container-fluid hero-section-offer-2">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-top:10%!important">
             <div class="col-12 text-center">
                 <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}" data-bs-target="#myModal"
                     class="btn btn-outline-light rounded-circle"
