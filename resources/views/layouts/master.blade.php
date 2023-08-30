@@ -23,22 +23,20 @@
     <style>
         /* Default font size */
         body {
-          font-size: 18px!important;
-        }
+      font-size: 16px;
+    }
 
-        /* Increase font size for larger screens */
-        @media (min-width: 768px) {
-          body {
-            font-size: 18px;
-          }
-        }
+    @media (max-width: 767px) {
+      body {
+        font-size: 16px;
+      }
+    }
 
-        /* Increase font size further for even larger screens */
-        @media (min-width: 1200px) {
-          body {
-            font-size: 20px;
-          }
-        }
+    @media (max-width: 576px) {
+      body {
+        font-size: 16px;
+      }
+    }
       </style>
 
     @section('page_head')

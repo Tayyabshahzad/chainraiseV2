@@ -16,6 +16,20 @@
             width: 100%;
             height: 100%;
         }
+    .modal-dialog {
+      max-width: 100%;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 80%;
+      height: 80%;
+    }
+
     </style>
 @endsection
 
@@ -247,7 +261,7 @@
                 <div class="row ">
                     <div class="row gx-5">
                             @foreach($manual_offer_documents as $manual_offer_document)
-                                <div class="col-lg-4 mb-3  text-center">
+                                <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-center">
                                     @if($manual_offer_document->type == "image")
                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
                                             <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
