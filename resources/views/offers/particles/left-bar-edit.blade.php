@@ -158,59 +158,132 @@
                         </div>
                         <div class="row collapse p-5" id="investment_steps">
                             <div class="col-lg-12 pt-3 mb-3 text-center">
-                                <button type="button" class="btn-sm btn btn-lg btn-dark me-3"
+                                {{-- <button type="button" class="btn-sm btn btn-lg btn-dark me-3"
                                 id="add_new_investment_step" style="width: 100%;border-radius:0"
                                 data-bs-toggle="modal" data-bs-target="#modal_investment_setup">
+                                    Add An Investment Setup
+                                </button> --}}
+                                <button type="button" class="btn-sm btn btn-lg btn-dark me-3"  id="" style="width: 100%;border-radius:0" >
                                     Add An Investment Setup
                                 </button>
                             </div>
                             <div class="col-lg-12">
                                 <div class="row investment_step_button_row">
-                                    <div class="col-lg-12  text-center button_row_wrapper">
-                                        <div class="overflow-auto pb-1">
-                                            <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
-                                               <span class="col-lg-10 text-left"> Select Account Type  </span>
-                                                <span class="col-lg-2"> <i class="la la-times"></i>  </span>
+
+                                    <table class="table">
+                                        @foreach ($offer->investmentSteps as  $steps)
+                                            @if($steps->title == 'Income Verification (Reg CF)')
+                                                <tr>
+                                                    <th style="text-align: left">
+                                                        {{ $steps->title }}
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                       <b> Educational Materials</b>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="" name="url_educational_materials[]" value="https://www.google.com" class="mt-3 form-control no-radius"
+                                                        style="height:33px;font-size:13px" required>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        Issuer Form C
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="" name="url_issuer_form_c[]"
+                                                    value="https://www.google.com" class="mt-3 form-control no-radius"
+                                                    style="height:33px;font-size:13px" required>
+                                                    </th>
+                                                </tr>
+                                                <input type="hidden" name="investment_setups[]" value="Educational Materials">
+                                            @elseif($steps->title == 'Payment Method')
+                                                <tr>
+                                                    <th style="text-align: left">
+                                                        <b>Payment Method</b>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="checkbox" name="investment_setups_payment_method[]" value="ach" checked />    ACH
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="checkbox" name="investment_setups_payment_method[]" value="wired" checked/> Wired
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="checkbox" name="investment_setups_payment_method[]" value="credit-debit-card" checked /> Credit/Debit Card
+                                                    </th>
+                                                </tr>
+                                                <input type="hidden" name="investment_setups[]" value="Payment Method">
+                                            @elseif($steps->title == 'E-Sign Document')
+                                                <tr>
+                                                    <th style="text-align: left">
+                                                        <b>E-Sign Document</b>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <select class="form-control" name="e_sign_template"  style="height:42px;font-size:13px">
+                                                            @foreach ($templates as $template)
+                                                                <option value="{{ $template['template_id'] }}">
+                                                                    {{ $template['template_name'] }} </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </th>
+                                                </tr>
+
+                                            <input type="hidden" name="investment_setups[]" value="E-Sign Document">
+                                            @endif
+                                        @endforeach
+
+
+
+
+
+
+                                    </table>
+
+
+
+
+
+
+
+
+                                    {{-- @foreach ($offer->investmentSteps as  $steps)
+
+                                        @if($steps->title == 'E-Sign Document')
+                                            <small class="text-left" style="text-align:left">
+                                                <label class="required"> Select Template </label>
+                                                <select class="form-control" name="e_sign_template" style="height:42px;font-size:13px">
+                                                        @foreach($templates as $template)
+                                                            <option value="{{ $template['template_id'] }}"> {{  $template['template_name'] }} </option>
+                                                        @endforeach
+                                                </select>
+                                            </small>
+                                        @else
+                                            <div class="col-lg-12  text-center button_row_wrapper">
+                                                <div class="overflow-auto pb-1">
+                                                    <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
+                                                    <span class="col-lg-10 text-left"> {{ $steps->title }}  </span>
+                                                        <span class="col-lg-2"> <i class="la la-times"></i>  </span>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="investment_setup[]" value="Select Account Type">
                                             </div>
-                                        </div>
-                                        <input type="hidden" name="investment_setup[]" value="Select Account Type">
-                                    </div>
-                                    <div class="col-lg-12  text-center button_row_wrapper">
-                                        <div class="overflow-auto pb-1">
-                                            <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
-                                               <span class="col-lg-10 text-left"> Complete Account Form   </span>
-                                                <span class="col-lg-2"> <i class="la la-times"></i>  </span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="investment_setup[]" value="Complete Account Form">
-                                    </div>
-                                    <div class="col-lg-12  text-center button_row_wrapper">
-                                        <div class="overflow-auto pb-1">
-                                            <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
-                                               <span class="col-lg-10 text-left"> Accreditation  </span>
-                                                <span class="col-lg-2"> <i class="la la-times"></i>  </span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="investment_setup[]" value="Accreditation">
-                                    </div>
-                                    <div class="col-lg-12  text-center button_row_wrapper">
-                                        <div class="overflow-auto pb-1">
-                                            <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
-                                               <span class="col-lg-10 text-left">  E-Sign Document  </span>
-                                                <span class="col-lg-2"> <i class="la la-times"></i>  </span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="investment_setup[]" value="E-Sign Document">
-                                    </div>
-                                    <div class="col-lg-12  text-center button_row_wrapper">
-                                        <div class="overflow-auto pb-1">
-                                            <div  class="row d-flex align-items-center border border-dashed border-gray-300 rounded p-3 bg-white">
-                                               <span class="col-lg-10 text-left">  Payment Method  </span>
-                                                <span class="col-lg-2"> <i class="la la-times"></i>  </span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="investment_setup[]" value="Payment Method">
-                                    </div>
+                                        @endif
+
+                                    @endforeach --}}
+
                                 </div>
                             </div>
 

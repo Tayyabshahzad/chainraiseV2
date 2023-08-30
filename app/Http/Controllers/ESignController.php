@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MyEDocument;
 use App\Models\OfferEsignTemplate;
 use App\Models\User;
+use App\Models\Offer;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,12 @@ class ESignController extends Controller
     public function previewDocument(Request $request){
         $request->validate([
             'user_id' => 'required',
-            'template_id'=>'required'
+            'template_id'=>'required',
+            'offer_id'=>'required',
         ]);
-
+        $offer = Offer::find($request->offer_id);
+        $slug = $offer->slug;
+        $redirect_url = route('offer.details',$slug);
         $token = env('ESIGN_TOKEN');
         $user = User::find($request->user_id);
         $url = "https://esignatures.io/api/contracts?token=".$token;
@@ -31,7 +35,9 @@ class ESignController extends Controller
                     [
                         "name" => $user->name,
                         "email" => $user->email,
-                        "signature_request_delivery_method" => "embedded"
+                        "redirect_url"=> $redirect_url,
+                        "signature_request_delivery_method" => "embedded",
+                        "embedded_redirect_iframe_only" => "no",
                     ],
                 ]
             ]);

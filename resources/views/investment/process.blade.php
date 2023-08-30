@@ -919,13 +919,14 @@
         $('body').on('click', '.view_template', function() {
             var user_id = $(this).data('user_id');
             var template_id = $(this).data('template_id');
-
+            var offer_id = "{{ $offer->id }}";
             $.ajax({
                 url: "{{ route('esignature.preview.document') }}",
                 method: 'GET',
                 data: {
-                    user_id: user_id,
-                    template_id: template_id
+                    user_id: user_id, // Invester id
+                    template_id: template_id,
+                    offer_id:offer_id
                 },
                 success: function(response) {
                     if (response.status == true) {

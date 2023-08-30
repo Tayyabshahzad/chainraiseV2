@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Account Users')
+@section('title', 'Manage Offers')
 @section('page_name', 'Listings')
 @section('page_head')
 
@@ -30,8 +30,8 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">Active Offers</li>
-                       
-                         
+
+
                         <!--end::Item-->
                     </ul>
                     <!--end::Breadcrumb-->
@@ -56,15 +56,15 @@
                     @endhasrole
                     @foreach ($offers as $offer)
                         <div class="col-xl-4 col-lg-4">
-                           
+
                             <div class="card card-xl-stretch mb-xl-8 no-radius">
                                 <div class="card-body p-0">
-                                  
+
                                     <div class="px-9 pt-7 card-rounded h-275px w-100"
-                                        @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null) 
+                                        @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null)
                                             style="background-image: url('{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}');background-size:100%"
                                         @else
-                                            style="background-image: url('')" 
+                                            style="background-image: url('')"
                                         @endif
                                         >
                                         <div class="d-flex text-center flex-column text-white pt-8">
@@ -139,7 +139,7 @@
                                                 <!--end::Title-->
                                                 <!--begin::Label-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fw-bold">{{ $offer->size }} {{ $offer->base_currency }}</div> 
+                                                    <div class="fw-bold">{{ $offer->size }} {{ $offer->base_currency }}</div>
                                                 </div>
                                                 <!--end::Label-->
                                             </div>
@@ -181,7 +181,7 @@
 
                                                 </div>
                                                 <!--end::Label-->
-                                            </div> 
+                                            </div>
                                             <!--end::Description-->
                                         </div>
                                         <div class="d-flex align-items-center mb-6">
@@ -204,19 +204,19 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
-                                            </div> 
+                                            </div>
                                             <div class="d-flex align-items-center flex-wrap w-100">
                                                 <!--begin::Title-->
                                                 <div class="mb-1 pe-3 flex-grow-1">
                                                     <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">
                                                         Last Updated
                                                     </a>
-                                                </div> 
+                                                </div>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fw-bold"> {{ $offer->updated_at->diffForHumans() }} </div> 
-                                                </div> 
-                                            </div>  
-                                            
+                                                    <div class="fw-bold"> {{ $offer->updated_at->diffForHumans() }} </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="d-flex align-items-center mb-6">
                                             <!--begin::Symbol-->
@@ -232,19 +232,19 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
-                                            </div> 
+                                            </div>
                                             <div class="d-flex align-items-center flex-wrap w-100">
                                                 <!--begin::Title-->
                                                 <div class="mb-1 pe-3 flex-grow-1">
                                                     <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">
                                                         KYC/AML Status
                                                     </a>
-                                                </div> 
+                                                </div>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fw-bold"> @if($offer->user->check_kyc == false) <span class="text-danger">Pending</span>  @else <span class="text-success">Approved</span> @endif </div> 
-                                                </div> 
-                                            </div>   
-                                            
+                                                    <div class="fw-bold"> @if($offer->user->check_kyc == false) <span class="text-danger">Pending</span>  @else <span class="text-success">Approved</span> @endif </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -262,19 +262,19 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
-                                            </div> 
+                                            </div>
                                             <div class="d-flex align-items-center flex-wrap w-100">
                                                 <!--begin::Title-->
                                                 <div class="mb-1 pe-3 flex-grow-1">
                                                     <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">
                                                          Status
                                                     </a>
-                                                </div> 
+                                                </div>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fw-bold"> {{  ucfirst($offer->status)  }}     </div> 
-                                                </div> 
-                                            </div>   
-                                            
+                                                    <div class="fw-bold"> {{  ucfirst($offer->status)  }}     </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -297,7 +297,7 @@
                                                 </div>
                                             </div>
                                         @endhasrole
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +317,7 @@
     <script></script>
     <script>
         $('.deleteOffer').click(function() {
-            var id = $(this).data('id'); 
+            var id = $(this).data('id');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -335,7 +335,7 @@
                         url: "{{ route('offers.delete') }}",
                         method: "POST",
                         data: {
-                            id: id, 
+                            id: id,
                         },
                         success: function(result) {
                             if(result.status == true){
@@ -352,7 +352,7 @@
 
         });
 
-       
+
     </script>
 
 

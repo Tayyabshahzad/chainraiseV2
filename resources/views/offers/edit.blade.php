@@ -94,7 +94,6 @@
                     <div class="row">
                         @include('offers.particles.left-bar-edit')
                         <div class="col-lg-9">
-
                             <div class="card-body mb-3">
                                 <div class="position-relative">
 

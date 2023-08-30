@@ -67,13 +67,32 @@ class OfferController extends Controller
         $issuers = User::role('issuer')->get();
         $photos = $offer->getMedia('offer_detail_images');
         $tiles = OfferDetailTab::where('offer_id',$id)->first();
+        $templates = OfferEsignTemplate::get();
+
+        $token = env('ESIGN_TOKEN');
+        try{
+            $e_sign = Http::get('https://esignatures.io/api/templates?token='.$token);
+            $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+            if(!$e_sign->successful()){
+                Session::put('error','Esignatures Error');
+                return redirect()->back();
+            }
+            $templates = $json_e_sign['data'];
+            $issuers = User::role('issuer')->get();
+
+        }catch(Exception $error){
+            return $error;
+        }
+
+
+
         if($tiles){
             $tiles ->getMedia('offer_tiles');
         }else{
            $tiles = null;
         }
 
-        return view('offers.edit',compact('offer','issuers','photos','tiles','slider_images','manual_offer_documents'));
+        return view('offers.edit',compact('offer','issuers','photos','tiles','slider_images','manual_offer_documents','templates'));
     }
     public function create()
     {
@@ -90,6 +109,7 @@ class OfferController extends Controller
             $templates = $json_e_sign['data'];
             $issuers = User::role('issuer')->get();
             return view('offers.create',compact('issuers','templates'));
+
         }catch(Exception $error){
             return $error;
         }
@@ -665,6 +685,15 @@ class OfferController extends Controller
                      $offer_videos->save();
                 }
              }
+
+             foreach($request->investment_setups as $setup ){
+                if ($setup == 'E-Sign Document') {
+                    $offer_esign_template = OfferEsignTemplate::where('offer_id',$offer->id)->first();
+                    $offer_esign_template->offer_id = $offer->id;
+                    $offer_esign_template->template_id = $request->e_sign_template;
+                    $offer_esign_template->save();
+                }
+            }
 
 
 
