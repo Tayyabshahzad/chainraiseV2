@@ -77,28 +77,6 @@ a.nav-link {
     justify-content: center;
 }
 
-.hero-section-offer-4 {
-    height: 100vh !important;
-    background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url(../images/offering4/bg.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-}
-
-.hero-section-offer-5 {
-    height: 100vh !important;
-    background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url(../images/offering5/bg.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-}
-
 .btn-outline-secondary {
     --bs-btn-color: #000000 !important;
     --bs-btn-border-color: !important;
@@ -160,10 +138,6 @@ a.nav-link {
     .c-logo,
     .b-logo {
         width: 80% !important;
-    }
-
-    .hero-section {
-        height: 65vh !important;
     }
 
     .white-logo {
