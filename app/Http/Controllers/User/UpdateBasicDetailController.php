@@ -191,7 +191,7 @@ class UpdateBasicDetailController extends Controller
                     }else{
                         return response([
                             'status'=>false,
-                            'message'=>$json_template,
+                            'message'=>$json_template['data']['error_message'],
                         ]);
                     }
                 }else{
