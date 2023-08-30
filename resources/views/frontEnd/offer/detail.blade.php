@@ -34,7 +34,7 @@
                                 </button>
                                 <!-- 16:9 aspect ratio -->
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="  embed-responsive-item" src="{{ $offer->feature_video }}" id="video"
+                                    <iframe class="  embed-responsive-item" style="width: 100%; height: 50vh" src="{{ $offer->feature_video }}" id="video"
                                         allowscriptaccess="always"  allowfullscreen ></iframe>
                                 </div>
                             </div>
