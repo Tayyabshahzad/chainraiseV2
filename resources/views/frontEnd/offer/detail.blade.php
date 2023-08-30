@@ -27,15 +27,15 @@
                 </button>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-body text-end">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                                 <!-- 16:9 aspect ratio -->
-                                <div class="ratio ratio-16x9">
-                                    <iframe class="embed-responsive-item" src="{{ $offer->feature_video }}" id="video"
-                                        allowscriptaccess="always"  ></iframe>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="  embed-responsive-item" src="{{ $offer->feature_video }}" id="video"
+                                        allowscriptaccess="always"  allowfullscreen ></iframe>
                                 </div>
                             </div>
                         </div>
