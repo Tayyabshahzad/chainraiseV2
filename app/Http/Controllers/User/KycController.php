@@ -62,8 +62,6 @@ class KycController extends Controller
         ]);
 
         $token_json =  json_decode((string) $get_token->getBody(), true);
-
-
         // $check_user_kyc_level = Http::withToken($token_json['access_token'])->
         // withHeaders(['Content-Type' => 'application/json'])->
         // get($this->baseUrl."/api/trust/v1/business-identities/0dc8dcdd-778f-4e87-a47d-9888aac8d184");

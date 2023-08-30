@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'auth0' => [ 
+    'auth0' => [
         'production' => [
             'url' => 'https://fortress-prod.us.auth0.com/oauth/token',
             'grant_type' => 'password',
             'username' => 'info@chainraise.io',
-            'password' => 'F$95%5h$FMTDu#3YUZBSzk',
+            'password' => 'r6cIlEF62r7)gE;yN2,Le',
             'audience' => 'https://fortressapi.com/api',
             'client_id' => 'cNjCgEyfVDyBSxCixDEyYesohVwdNICH',
         ],
-        'sandbox' => [ 
+        'sandbox' => [
             'url' => 'https://fortress-sandbox.us.auth0.com/oauth/token',
             'grant_type' => 'password',
             'username' => 'tayyabshahzad@sublimesolutions.org',
@@ -25,6 +25,5 @@ return [
     ],
 ];
 
- 
- 
- 
+
+
