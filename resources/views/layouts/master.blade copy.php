@@ -3,67 +3,75 @@
 
 <head>
 
-
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/style-v4.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style-v4.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+    integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title> ChainRaise Portal | @yield('title') </title>
+
+    <style>
+        /* Default font size */
+
+      </style>
+
     @section('page_head')
     @show
 </head>
 
-
 <body>
-    <!-- Header Start -->
     <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid px-lg-5 pe-0">
-            <a class="navbar-brand" href="{{ route('index') }}">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo" class="logo-mob">
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo">
             </a>
-            <div>
-                <button type="button" class="navbar-toggler btn text-white px-3 py-2 fs-6 border-0 rounded-pill"
-                    style="background-color:#43C3FE;">INVEST
-                </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             LEARN
                         </a>
                         <ul class="dropdown-menu p-3">
-                            <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/inestorsicon.png') }}">
-                                        <div class="pe-lg-3"><b>Investors</b><br><span
-                                                style="font-weight: 400;font-size: 12px;">Information
-                                                for
-                                                Investors including FAQs</span>
+                            <li>
+                                <a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"  class="text-dark"><span class="menu-text mb-3">
+                                    <img
+                                            src="{{ asset('assets/v3-images/inestorsicon.png') }}">
+                                        <div class="pe-lg-3"><b>Investors</b><br>
+                                            <span style="font-weight: 400;font-size: 12px;">Information  for   Investors including FAQs</span>
                                         </div>
                                     </span>
                                 </a>
                             </li>
-                            <li><a href="https://chainraise.io/businesses/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/faqsicon2.png') }}">
+                            <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
+                                    class="text-dark"><span class="menu-text mb-3"><img
+                                            src="{{ asset('assets/v3-images/faqsicon2.png') }}">
                                         <div class="pe-lg-3"><b>Businesses</b><br><span
                                                 style="font-weight: 400;font-size: 12px;">Information for
                                                 Information for businesses including FAQs</span></div>
                                     </span></a></li>
-                            <li><a href="https://chainraise.io/blockchain/" target="_blank" rel="noopener noreferrer"
+                            <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
                                     class="text-dark"><span class="menu-text mb-3"><img
                                             src="{{ asset('assets/v3-images/blockchainicon2.png') }}">
                                         <div class="pe-lg-3"><b>Blockchain</b><br><span
@@ -74,18 +82,20 @@
                     </li>
                     <a class="nav-link me-3 fw-semibold" href="#">RAISE CAPITAL</a>
                 </ul>
+
+
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <button type="button" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
-                        style="background-color:#43C3FE;">INVEST</button>
-
+                    {{-- <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
+                        style="background-color:#43C3FE;">Upgrading To Serve You Better</a> --}}
                     @if (!Auth::user())
-                    <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-in-popup">Login</a>
+                        <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
+                            data-bs-target="#sign-in-popup">Login</a>
 
-                    <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-up-popup">Sign Up
-                    </a>
+                        <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
+                            data-bs-target="#sign-up-popup">Sign Up
+                        </a>
                     @endif
+
                     <div class="avator-logo me-3 d-lg-block d-none ">
                         @if (Auth::user())
                             <ul class="navbar-nav">
@@ -124,20 +134,22 @@
                         @endif
                     </div>
 
-
                 </ul>
             </div>
         </div>
     </nav>
+
+
+
+
     @section('content')
     @show
-
-
 
     <div class="container-fluid">
         <div class="row py-4 px-lg-5 px-3" style="background-color: #DBDBDB;">
             <div class="col-12 text-center p-0">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset="" class="img-fluid mb-3">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset=""
+                    class="img-fluid mb-3">
                 <p class="fw-semibold">Copyright@ 2022 ChainRaise LLC | All rights reserved.</p>
                 <div class="mb-3">
                     <!-- Linkedin -->
@@ -210,10 +222,9 @@
             </div>
         </div>
     </div>
-    <!-- Header End -->
 
-    <!-- Sign in Popop Start -->
-    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel" aria-hidden="true">
+    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content py-lg-3">
                 <div class="modal-header m-auto pt-4 pb-0 border-0">
@@ -246,21 +257,22 @@
                                     with</p>
                             </div>
                         </div>
-                        <form id="loginForm">
-                            <div class="d-flex flex-column text-center">
-                                <label class="text-danger error error_message"></label>
-                                <label class="text-success success success_message"></label>
+
+
+                        <div class="d-flex flex-column text-center">
+                            <label class="text-danger error error_message"></label>
+                            <label class="text-success success success_message"></label>
+                            <form id="loginForm">
                                 <div class="my-3">
-                                    <input type="email" class="form-control rounded-pill border-dark"
-                                        id="email" placeholder="Your email address..." name="email">
+                                    <input type="email" class="form-control rounded-pill border-dark" id="email"
+                                        placeholder="Your email address..." name="email">
                                     @error('email')
                                         <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
                                     @enderror
                                 </div>
                                 <div class="my-3 ">
-                                    <input type="password"
-                                        class="form-control user_login_password rounded-pill border-dark"
-                                        id="password" placeholder="Your password..." name="password">
+                                    <input type="password" class="form-control user_login_password rounded-pill border-dark" id="password"
+                                        placeholder="Your password..." name="password">
                                 </div>
                                 <div class="row">
                                     <div class="col-5 d-flex align-items-center">
@@ -280,20 +292,23 @@
                                         </div>
                                     </div>
                                     {{-- <div class="col-7 d-flex align-items-center justify-content-end m-0 p-0">
-                                            <div class="form-group ">
-                                                <button type="button" class="btn btn-link" href="#" data-bs-dismiss="modal"
-                                                    data-bs-toggle="modal" data-bs-target="#reset-popup"
-                                                    style="font-size: 14px; font-weight: 500;"> Forgot your
-                                                    password?</button>
-                                            </div>
-                                        </div> --}}
+                                        <div class="form-group ">
+                                            <button type="button" class="btn btn-link" href="#"
+                                                data-bs-dismiss="modal" data-bs-toggle="modal"
+                                                data-bs-target="#reset-popup"
+                                                style="font-size: 14px; font-weight: 500;"> Forgot your
+                                                password?</button>
+                                        </div>
+                                    </div> --}}
+
+
+
+
                                 </div>
-                            </div>
-                            <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
-                                <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill"
-                                    type="submit">Sign
-                                    in</button>
-                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
+                            <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill" type="submit">Sign in</button>
+                        </div>
                         </form>
                     </div>
                 </div>
@@ -301,7 +316,8 @@
             </div>
         </div>
     </div>
-    <!-- Sign UP Popop Start -->
+    </div>
+    <!-- Sign in Popop End -->
     <div class="modal fade" id="sign-up-popup" tabindex="-1" aria-labelledby="sign-up-popupLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -338,44 +354,30 @@
 
                         <div class="col-12">
                             <button type="button"
-                                class="show_email_login btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold">
-                                <i class="bi bi-envelope-fill pe-5"
+                                class="show_email_login btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
+                                    class="bi bi-envelope-fill pe-5"
                                     style=" position: absolute;
-                                left: 15px;"></i> Sign
-                                up with Email
+                                left: 15px;"></i> Sign up with Email
                             </button>
                         </div>
 
                         <div class="col-12 d-none email_login_form">
-                            <label class="text-danger error error_message"></label>
-                            <form enctype="multipart/form-data" class="form-group" action="{{ route('register') }}"
-                                method="post">
+                            <form enctype="multipart/form-data" class="form-group" action="{{ route('register') }}" method="post">
                                 @csrf
                                 <div class="from-group" style="margin-bottom: 10px">
-                                    <input
-                                        class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"
-                                        type="text" name="name" placeholder="Enter Your Name" required />
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="text" name="name" placeholder="Enter Your Name" required/>
                                 </div>
                                 <div class="from-group" style="margin-bottom: 10px">
-                                    <input
-                                        class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"
-                                        type="email" name="email" placeholder="Enter Email" required />
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="email" name="email" placeholder="Enter Email" required/>
                                 </div>
                                 <div class="from-group " style="margin-bottom: 10px">
-                                    <input
-                                        class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"
-                                        type="password" name="password" placeholder="Enter Password" required />
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="password" name="password" placeholder="Enter Password" required/>
                                 </div>
                                 <div class="from-group " style="margin-bottom: 10px">
-                                    <input
-                                        class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"
-                                        type="password" name="password_confirmation" placeholder="Enter Password"
-                                        required />
+                                    <input class="form-control btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold" type="password" name="password_confirmation" placeholder="Enter Password" required/>
                                 </div>
                                 <div class="from-group">
-                                    <button type="submit" name="submit"
-                                        class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold">
-                                        Register </button>
+                                  <button type="submit" name="submit" class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> Register </button>
                                 </div>
                             </form>
                         </div>
@@ -386,8 +388,8 @@
                             By signing up I agree to ChainRaise's <br><a href="#" style="color: #43C3FE;">Terms
                                 of
                                 Service
-                            </a> and <a href="{{ route('privacy.policy') }}" target="_blank"
-                                style="color: #43C3FE;">Privacy Policy
+                            </a> and <a href="{{ route('privacy.policy') }}"
+                                target="_blank"style="color: #43C3FE;">Privacy Policy
                             </a>.
                         </div>
                     </div>
@@ -401,25 +403,13 @@
             </div>
         </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-
-    @section('page_js')
-    @show
 
 
     <script>
@@ -555,8 +545,9 @@
                             }, 2000);
                         },
                         error: function(xhr, status, error) {
+
                             var errorMessage = JSON.parse(xhr.responseText);
-                            $(".error_message").css("display", "");
+
                             $('.error_message').text(errorMessage.message);
 
                             setTimeout(function() {
@@ -631,6 +622,7 @@
         // Update the UI or perform other actions
     });
 </script>
+
 
 
 </body>

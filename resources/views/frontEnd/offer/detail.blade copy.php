@@ -1,58 +1,59 @@
 @extends('layouts.master')
-@section('title',   $offer->name  )
+@section('title', "{{ $offer->name }}" )
 @section('page_head')
     <style>
-        .hero-section{
+        .hero-section-offer-2 {
             height: 100% !important;
-
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}");
-
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: end;
+            justify-content: center;
         }
         #myModal iframe {
             width: 100%;
             height: 100%;
         }
-        .video_modal {
-        max-width: 100%;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-        .video_modal_content {
-        width: 80%;
-        height: 80%;
-        }
+    .modal-dialog {
+      max-width: 100%;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 80%;
+      height: 80%;
+    }
 
     </style>
 @endsection
 
 @section('content')
     <!-- Hero Section Start -->
-
-    <!-- Hero Section Start -->
-    <section class="container-fluid hero-section">
-        <div class="row justify-content-center">
+    <section class="container-fluid hero-section-offer-2">
+        <div class="row justify-content-center" style="margin-top:10%!important">
             <div class="col-12 text-center">
-                <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
-                    data-bs-target="#myModal" class="btn btn-outline-light rounded-circle"
+                <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}" data-bs-target="#myModal"
+                    class="btn btn-outline-light rounded-circle"
                     style=" border: 2px solid RGBA(67, 195, 254, 1); padding: 16px 25px;"><span
                         class="bi bi-play-fill fs-2"></span>
                 </button>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered video_modal" role="document">
-                        <div class="modal-content video_modal_content">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
                             <div class="modal-body text-end">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                                 <!-- 16:9 aspect ratio -->
-                                <div class="ratio ratio-16x9">
-                                    <iframe class="embed-responsive-item"
-                                        src="{{ $offer->feature_video }}"
-                                        id="video" allowscriptaccess="always" allow="autoplay"></iframe>
-
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="  embed-responsive-item" style="width: 100%; height: 50vh" src="{{ $offer->feature_video }}" id="video"
+                                        allowscriptaccess="always"  allowfullscreen ></iframe>
                                 </div>
                             </div>
                         </div>
@@ -60,18 +61,19 @@
                 </div>
             </div>
             <div class="col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"   style="width: 25%!important" class="p-3 white-logo" alt="...">
-                <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="p-3 img-fluid" alt="...">
+                <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }}</p>
             </div>
             <div class="col-lg-6">
                 <div class="row mb-4">
                     <div class="col-4 text-center">
                         <h6 class="text-white fw-normal">Securities Type</h6>
-                        <h6 class="sky-blue fw-normal">Preferred Stock</h6>
+                        <h6 class="sky-blue fw-normal">Crowdfund Safe</h6>
                     </div>
                     <div class="col-4 text-center">
                         <h6 class="text-white fw-normal">Min. Investment</h6>
-                        <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
+                        <h6 class="sky-blue fw-normal"> ${{ number_format($offer->investmentRestrictions->min_invesment) }}
+                        </h6>
                     </div>
                     <div class="col-4 text-center fw-normal">
                         <h6 class="text-white fw-normal">Valuation</h6>
@@ -79,27 +81,27 @@
                     </div>
                 </div>
                 <form action="{{ route('invest.submit') }}" method="get" id="investForm">
-                <div class="row px-5">
-                         @csrf
+                    <div class="row px-5">
+                        @csrf
                         <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                    <div class="col-9">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-text">$</div>
-                            <input type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }} @endif"
-                            required >
+                        <div class="col-9">
+                            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-text">$</div>
+                                <input type="text" class="form-control text-left" name="investment_amount" required
+                                    placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }}" @endif
+                        id="autoSizingInputGroup"
+                                    placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-outline-info text-white"
+                                @if (Auth::user()) type="submit"  @else  disabled type="button" title="Login To Invest" @endif>INVEST</button>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <button type="submit"
-                        @if (Auth::user()) type="submit"  @else  disabled type="button" title="Login To Invest" @endif
-                        class="btn btn-outline-info text-white">INVEST</button>
-                    </div>
-                </div>
                 </form>
                 <div class="row px-5">
-                    <div class="col-12 text-center pt-5">
+                    <div class="col-12 text-center mt-5">
                         <a href="#detail"><i class="bi bi-arrow-down-circle fs-3 sky-blue"></i></a>
                         <p class="text-white fs-5 fw-semibold">Scroll Down for Details</p>
                     </div>
@@ -112,9 +114,9 @@
     <!-- Hero Section End -->
     <!-- Faq Section Start -->
     <div class="container-fluid">
-        <div class="row align-items-center justify-content-center p-lg-5 p-4">
+        <div class="row align-items-center justify-content-center px-lg-5 p-4">
             <div class="col-6">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" style="width: 10%!important" class="img-fluid b-logo" alt="...">
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="img-fluid " alt="...">
             </div>
             <div class="col-6 text-end">
                 <!-- <img src="images/social icon.png" class="img-fluid" alt="..."> -->
@@ -146,7 +148,7 @@
             @endif
             <li class="nav-item me-lg-3" role="presentation">
                 <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
-                    data-bs-target="#documents" type="button" role="tab" aria-controls="pills-document"
+                    data-bs-target="#document" type="button" role="tab" aria-controls="pills-document"
                     aria-selected="false">Documents</button>
             </li>
         </ul>
@@ -238,8 +240,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade p-2" id="deal-video" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <h3 class="fw-bolder">Videos</h3>
+            <div class="tab-pane fade p-2" id="deal-video" role="tabpanel" aria-labelledby="pills-deal-video">
+                <h3 class="fw-bolder" style="margin-top:20px"> Offer Videos </h3>
                 <br />
                 <div class="row">
                     @foreach ($offer->offerVideos as $video)
@@ -252,13 +254,13 @@
                     @endforeach
                 </div>
             </div>
-            <div class="tab-pane fade p-2" id="documents" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <h3 class="fw-bolder">Documents</h3>
-                <br>
+            <div class="tab-pane fade p-2" id="document" role="tabpanel" aria-labelledby="pills-document">
+                <h3 class="fw-bolder" style="margin-top:20px"> Offer Documents </h3>
+                <br />
                 <div class="row ">
                     <div class="row gx-5">
                             @foreach($manual_offer_documents as $manual_offer_document)
-                                <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-center" style="margin-bottom:6%!important">
+                                <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-center">
                                     @if($manual_offer_document->type == "image")
                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
                                             <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
@@ -273,11 +275,12 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+        </script>
     </div>
-
-
-
 
 @endsection
