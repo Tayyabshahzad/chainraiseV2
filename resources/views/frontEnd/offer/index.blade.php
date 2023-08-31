@@ -29,16 +29,16 @@
                 </ul>
             </div>
         </div>
-        <div class="row gx-5">
+        <div class="row gx-5" id="offerContainer">
             @foreach ($offers as $offer)
                 <div class="col-lg-4 mb-3  text-center offerItem">
                     <a href="{{ route('offer.details', $offer->slug) }}" target="_blank">
                         <img src="{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}" class=" img-fluid rounded" srcset="">
                     <div class="row text-white p-3">
-                        <div class="col-6 text-start">
+                        <div class="col-8 text-start">
                             <h6>  {{ $offer->name }} </h6>
                         </div>
-                        <div class="col-6 text-end">
+                        <div class="col-4 text-end">
                             <h6>  {{ $offer->offer_type }} </h6>
                         </div>
                         <div class="col-12">
@@ -75,6 +75,7 @@
 @section('page_js')
     <script>
         $('#sortAscending').click(function() {
+
             sortOffers('asc');
         });
 
@@ -86,13 +87,13 @@
         });
 
         function sortOffers(order) {
+
             $.ajax({
                 url: "{{ route('offers.sort', ['order' => '']) }}" + '/' + order,
                 type: 'GET',
                 success: function(data) {
                     var sortedOffers = $(data).find('.offerItem'); // Extract only the sorted offer items
-                    $('#offerContainer').html(
-                    sortedOffers); // Replace the existing offer items with the sorted ones
+                    $('#offerContainer').html(sortedOffers); // Replace the existing offer items with the sorted ones
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseText); // Handle any errors if necessary
