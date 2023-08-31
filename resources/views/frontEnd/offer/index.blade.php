@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('page_head')
+ <link rel="stylesheet" href="{{ asset('assets/css/listing_page_style.css') }}">
     <style>
         .lernbtn:hover {
             background: #fff !important;
