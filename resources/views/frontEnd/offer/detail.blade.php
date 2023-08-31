@@ -66,7 +66,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="row mb-4">
-                    <div class="col-lg-2  text-center">
+                    <div class="col-lg-2 text-center">
                         <h6 class="text-white fw-normal">Offer Type</h6>
                         <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->offer_type) }} </h6>
                     </div>
@@ -128,7 +128,7 @@
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center p-lg-5 p-4">
             <div class="col-6">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"  class="img-fluid b-logo" alt="...">
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" style="width: 15%!important" class="img-fluid b-logo" alt="...">
             </div>
             <div class="col-6 text-end">
                 <!-- <img src="images/social icon.png" class="img-fluid" alt="..."> -->
