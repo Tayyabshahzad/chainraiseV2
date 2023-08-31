@@ -61,7 +61,7 @@ class MakeInvestmentController extends Controller
 
        $request->validate([
          	'offer_id' => 'required',
-          	'investment_amount' => 'integer',
+          	'investment_amount' => 'integer|required',
         ]);
         if(Auth::user()->status  == 'inactive'){
             return redirect()->back()->with('error', 'Your account has been locked, Please Contact System Administrator');

@@ -100,7 +100,7 @@
                         <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                         <div class="input-group">
                             <div class="input-group-text">$</div>
-                            <input type="text" class="form-control" id="autoSizingInputGroup"
+                            <input type="text" class="form-control" id="autoSizingInputGroup" name="investment_amount"
                             placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }} @endif"
                             required >
                         </div>

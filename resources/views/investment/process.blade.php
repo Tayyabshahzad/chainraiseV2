@@ -35,6 +35,7 @@
                 <form action="{{ route('invest.save') }}" method="post" enctype="multipart/form-data"
                     id="make_investment_form">
                     @csrf
+
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <h4 class="fw-bolder">1. Investment amount</h4>
                     <p class="text-muted">Payments are processed immediately.</p>
