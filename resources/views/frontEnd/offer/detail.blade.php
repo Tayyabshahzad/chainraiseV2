@@ -4,13 +4,14 @@
     <style>
         .hero-section{
             height: 100% !important;
-
             background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
 
         }
         #myModal iframe {
             width: 100%;
-            height: 100%;
+            height: 80%;
         }
         .video_modal {
         max-width: 100%;
@@ -34,7 +35,7 @@
     <!-- Hero Section Start -->
     <section class="container-fluid hero-section">
         <div class="row justify-content-center">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center" style="margin-top: 5%;">
                 <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
                     data-bs-target="#myModal" class="btn btn-outline-light rounded-circle"
                     style=" border: 2px solid RGBA(67, 195, 254, 1); padding: 16px 25px;"><span
@@ -51,7 +52,7 @@
                                 <div class="ratio ratio-16x9">
                                     <iframe class="embed-responsive-item"
                                         src="{{ $offer->feature_video }}"
-                                        id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                                        id="video" allowscriptaccess="always" ></iframe>
 
                                 </div>
                             </div>
