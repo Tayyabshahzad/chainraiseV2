@@ -55,7 +55,7 @@ Route::get('login/google/callback', [App\Http\Controllers\SocialiteController::c
 Route::get('login/facebook', [App\Http\Controllers\SocialiteController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController::class, 'handleFacebookCallback']);
 
-
+////
 
 Route::middleware('check.profile.complete')->group(function () {
     Route::get('/', [FrontendController::class, 'index'])->name('index');
