@@ -9,7 +9,7 @@
             background-repeat: no-repeat;
 
         }
-        #myModal iframe {
+        /* #myModal iframe {
             width: 100%;
             height: 80%;
         }
@@ -24,7 +24,7 @@
         .video_modal_content {
         width: 80%;
         height: 80%;
-        }
+        } */
 
     </style>
 @endsection

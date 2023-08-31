@@ -23,7 +23,9 @@
 
 <body>
     <!-- Header Start -->
-    <nav class="navbar navbar-expand-lg bg-white">
+
+
+    <nav class="navbar navbar-expand-lg bg-white " style="padding-left:1%!important;padding-right:1%!important;">
         <div class="container-fluid px-lg-5 pe-0">
             <a class="navbar-brand" href="{{ route('index') }}">
                 <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo" class="logo-mob">
@@ -38,7 +40,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse text-left" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
