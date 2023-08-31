@@ -39,7 +39,7 @@
                             <h6>  {{ $offer->name }} </h6>
                         </div>
                         <div class="col-6 text-end">
-                            <h6>Reg cf offering</h6>
+                            <h6>  {{ $offer->offer_type }} </h6>
                         </div>
                         <div class="col-12">
                             <hr>

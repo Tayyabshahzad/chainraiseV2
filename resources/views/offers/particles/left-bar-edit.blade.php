@@ -51,13 +51,14 @@
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
-                        <select name="security_type" aria-label="Security Type (Optional)"
-                                data-control="select2" data-placeholder="Security Type (Optional)"
-                                class="form-select form-select-lg"  id="security_type">
-                                <option value="equity"> Equity </option>
-                                <option value="debt"> Debt </option>
-                                <option value="cash"> Cash </option>
-                            </select>
+                        <select name="security_type" aria-label="Security Type (Optional)" data-control="select2"
+                        data-placeholder="Security Type (Optional)" class="form-select form-select-lg"
+                            id="security_type">
+                            <option value="" selected disabled> Security Type (Optional) </option>
+                            <option value="common stock"> Common Stock </option>
+                            <option value="safe"> Safe </option>
+                            <option value="crowdfund safe"> Crowdfund Safe </option>
+                        </select>
                     </div>
                     <div class="col-lg-12 d-none">
                         <input type="text" class="form-control"  name="symbol"  id="symbol" placeholder="Offer Symbol *" value="{{ $offer->symbol}}">

@@ -80,9 +80,9 @@
                             data-placeholder="Security Type (Optional)" class="form-select form-select-lg"
                             id="security_type">
                             <option value="" selected disabled> Security Type (Optional) </option>
-                            <option value="equity"> Equity </option>
-                            <option value="debt"> Debt </option>
-                            <option value="cash"> Cash </option>
+                            <option value="common stock"> Common Stock </option>
+                            <option value="safe"> Safe </option>
+                            <option value="crowdfund safe"> Crowdfund Safe </option>
                         </select>
                     </div>
                     <div class="col-lg-12 d-none">
