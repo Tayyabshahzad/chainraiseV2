@@ -890,6 +890,8 @@
         $('.video_wrapper').on('click', '.delete_video_wrapper', function() {
             $(this).closest('.video_column').remove();
         });
+        $('.offer_type').val('{{ $offer->offer_tags }}')
+
     </script>
 
     <script>

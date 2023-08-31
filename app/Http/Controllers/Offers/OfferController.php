@@ -138,10 +138,12 @@ class OfferController extends Controller
             //'short_description' => 'required',
             //'security_type' => 'required',
            // 'symbol' => 'required',
+            'offer_type'=>'required',
             'size' => 'required',
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
         ]);
+
         $user = User::find($request->issuer);
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -194,6 +196,7 @@ class OfferController extends Controller
         try{
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
+            $offer->offer_type  = $request->offer_type;
             $offer->issuer_id =  $request->issuer;
             $offer->name =              $request->offer_name;
             $offer->slug =            Str::slug($request->offer_name, '-');
@@ -454,20 +457,23 @@ class OfferController extends Controller
     {
 
 
+
         $request->validate([
             'issuer' => 'required',
             'offer_name' => 'required',
             //'short_description' => 'required',
             //'security_type' => 'required',
-           // 'symbol' => 'required',
+             'offer_type' => 'required',
             'size' => 'required',
             'offer_id' => 'required',
             'investment_restrication_id' => 'required',
             'min_invesment'=>'required',
             'max_invesment'=>'required'
         ]);
+
         $offer = Offer::find($request->offer_id);
         $offer->issuer_id = $request->issuer;
+        $offer->offer_type  = $request->offer_type;
         $offer->name =  $request->offer_name;
         $offer->feature_video  = $request->feature_video_url;
         $offer->short_description =  $request->short_description;

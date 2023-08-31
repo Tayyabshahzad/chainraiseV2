@@ -49,9 +49,9 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="col-lg-12">
-                            <select name="offer_tags" aria-label="Offer Tags (filters assets in marketplace)"
+                            <select name="offer_type" aria-label="Offer Tags (filters assets in marketplace)"
                                 data-control="select2" data-placeholder="Offer Tags (filters assets in marketplace)"
-                                class="form-select form-select-lg" id="offer_tags">
+                                class="form-select form-select-lg offer_type" id="offer_tags">
                                 <option value="Reg CF"> Reg CF </option>
                                 <option value="Reg A"> Reg A </option>
                                 <option value="Reg D (506a)"> Reg D (506a) </option>

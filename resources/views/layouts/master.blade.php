@@ -50,7 +50,8 @@
                         </a>
                         <ul class="dropdown-menu p-3">
                             <li><a href="https://chainraise.io/investors/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/inestorsicon.png') }}">
+                                    class="text-dark"><span class="menu-text mb-3"><img
+                                            src="{{ asset('assets/v3-images/inestorsicon.png') }}">
                                         <div class="pe-lg-3"><b>Investors</b><br><span
                                                 style="font-weight: 400;font-size: 12px;">Information
                                                 for
@@ -60,7 +61,8 @@
                                 </a>
                             </li>
                             <li><a href="https://chainraise.io/businesses/" target="_blank" rel="noopener noreferrer"
-                                    class="text-dark"><span class="menu-text mb-3"><img src="{{ asset('assets/v3-images/faqsicon2.png') }}">
+                                    class="text-dark"><span class="menu-text mb-3"><img
+                                            src="{{ asset('assets/v3-images/faqsicon2.png') }}">
                                         <div class="pe-lg-3"><b>Businesses</b><br><span
                                                 style="font-weight: 400;font-size: 12px;">Information for
                                                 Information for businesses including FAQs</span></div>
@@ -81,12 +83,12 @@
                         style="background-color:#43C3FE;">INVEST</button>
 
                     @if (!Auth::user())
-                    <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-in-popup">Login</a>
+                        <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
+                            data-bs-target="#sign-in-popup">Login</a>
 
-                    <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#sign-up-popup">Sign Up
-                    </a>
+                        <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
+                            data-bs-target="#sign-up-popup">Sign Up
+                        </a>
                     @endif
                     <div class="avator-logo me-3 d-lg-block d-none ">
                         @if (Auth::user())
@@ -99,11 +101,14 @@
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li><a class=" bi bi-person dropdown-item text-dark" href="{{  route('my.portfolio') }}">    Portfolio</a>
+                                        <li><a class=" bi bi-person dropdown-item text-dark"
+                                                href="{{ route('my.portfolio') }}"> Portfolio</a>
                                         </li>
-                                        <li><a class=" dropdown-item bi bi-files text-dark" href="{{ route('my.documents') }}"> My
+                                        <li><a class=" dropdown-item bi bi-files text-dark"
+                                                href="{{ route('my.documents') }}"> My
                                                 Documents</a></li>
-                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank" href="{{  route('my.account') }}"> My
+                                        <li><a class=" bi bi-person dropdown-item text-dark" target="_blank"
+                                                href="{{ route('my.account') }}"> My
                                                 Account</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -139,7 +144,8 @@
     <div class="container-fluid">
         <div class="row py-4 px-lg-5 px-3" style="background-color: #DBDBDB;">
             <div class="col-12 text-center p-0">
-                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset="" class="img-fluid mb-3">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="" srcset=""
+                    class="img-fluid mb-3">
                 <p class="fw-semibold">Copyright@ 2022 ChainRaise LLC | All rights reserved.</p>
                 <div class="mb-3">
                     <!-- Linkedin -->
@@ -215,7 +221,8 @@
     <!-- Header End -->
 
     <!-- Sign in Popop Start -->
-    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel" aria-hidden="true">
+    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popupLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content py-lg-3">
                 <div class="modal-header m-auto pt-4 pb-0 border-0">
@@ -405,8 +412,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -618,21 +625,21 @@
         });
     </script>
 
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script>
-    $('.show_email_login').click(function(){
-        $('.email_login_form').removeClass('d-none')
-    });
-    const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-        cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
-    });
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        $('.show_email_login').click(function() {
+            $('.email_login_form').removeClass('d-none')
+        });
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+        });
 
-    const channel = pusher.subscribe('webhook-channel');
-    channel.bind('webhook-event', function(data) {
-        console.log('Webhook event received:', data);
-        // Update the UI or perform other actions
-    });
-</script>
+        const channel = pusher.subscribe('webhook-channel');
+        channel.bind('webhook-event', function(data) {
+            console.log('Webhook event received:', data);
+            // Update the UI or perform other actions
+        });
+    </script>
 
 
 </body>

@@ -64,20 +64,33 @@
                 <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"   style="width: 25%!important" class="p-3 white-logo" alt="...">
                 <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="row mb-4">
-                    <div class="col-4 text-center">
-                        <h6 class="text-white fw-normal">Securities Type</h6>
-                        <h6 class="sky-blue fw-normal">Preferred Stock</h6>
+                    <div class="col-lg-2 text-center">
+                        <h6 class="text-white fw-normal">Offer Type</h6>
+                        <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->offer_type) }} </h6>
                     </div>
-                    <div class="col-4 text-center">
+
+                    <div class="col-2 text-center">
+                        <h6 class="text-white fw-normal">Offer Amount</h6>
+                        <h6 class="sky-blue fw-normal">  ${{ number_format($offer->size) }} </h6>
+                    </div>
+
+                    <div class="col-2 text-center">
+                        <h6 class="text-white fw-normal">Securities Type </h6>
+                        <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->security_type) }} </h6>
+                    </div>
+
+                    <div class="col-2 text-center fw-normal">
+                        <h6 class="text-white fw-normal">Valuation</h6>
+                        <h6 class="sky-blue fw-normal">${{ number_format( $offer->total_valuation) }}</h6>
+                    </div>
+
+                    <div class="col-2 text-center">
                         <h6 class="text-white fw-normal">Min. Investment</h6>
                         <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
                     </div>
-                    <div class="col-4 text-center fw-normal">
-                        <h6 class="text-white fw-normal">Valuation</h6>
-                        <h6 class="sky-blue fw-normal">${{ number_format($offer->size) }}</h6>
-                    </div>
+
                 </div>
                 <form action="{{ route('invest.submit') }}" method="get" id="investForm">
                 <div class="row px-5">

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style1-v3.css') }}">
     <style>
         ::placeholder {
-            color: #70FF00 !important;
+
             opacity: 1;
             /* Firefox */
         }
@@ -39,7 +39,7 @@
                     <h4 class="fw-bolder">1. Investment amount</h4>
                     <p class="text-muted">Payments are processed immediately.</p>
                     <input type="number" class="form-control rounded-pill py-2 px-4 mb-3" value="{{ $investment_amount }}"
-                        placeholder="$500 (Click to change amount)" id="validationCustom02" name="investment_amount"
+                        placeholder="$500 (Click to change amount)"  style="color:#333!important" id="validationCustom02" name="investment_amount"
                         required>
                     <div class="invalid-feedback">
                         Please Enter Investment amount
@@ -243,12 +243,12 @@
                         you invest, you're betting the company will be
                         worth more than $30M eventually.</p>
                 </div>
-                <div class="border text-center p-5 mb-4" style=" border-radius: 40px;">
+                {{-- <div class="border text-center p-5 mb-4" style=" border-radius: 40px;">
                     <h6>Contracts</h6>
                     <p>Contracts will be available when your
                         reservation is ready to convert into an
                         investment</p>
-                </div>
+                </div> --}}
                 <div class="mb-3">
                     <h4 class="fw-bolder  mb-3">FAQ & Help
                     </h4>
@@ -270,13 +270,22 @@
                     <h4 class="fw-bolder  mb-3">Documents
                     </h4>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf"></i> Form CRS.pdf</li>
-                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf"></i> Skybound Form 253g2.pdf</li>
-                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf"></i> Disclosures & Disclaimers.pdf
-                        </li>
-                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf"></i> Additional Risk
-                            Disclosures.pdf</li>
-                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf"></i> Subscription Agreement</li>
+
+                        @foreach($manual_offer_documents as $manual_offer_document)
+                                <li class="list-group-item">
+                                    @if($manual_offer_document->type == "image")
+                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                            <i class="bi bi-file-earmark-image"></i> {{ $manual_offer_document->name }}
+                                        </a>
+                                    @elseif($manual_offer_document->type == "pdf")
+                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                            <i class="bi bi-file-earmark-pdf"></i> {{ $manual_offer_document->name }}
+                                        </a>
+                                    @endif
+                                </li>
+                        @endforeach
+
+
                     </ul>
 
                 </div>
