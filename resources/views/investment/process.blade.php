@@ -116,7 +116,7 @@
                             <circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" />
                         </svg>
                     </div>
-                    <div class="my-5  bank_wrapper   ">
+                    <div class="my-5  bank_wrapper  d-none ">
                         <h4 class="fw-bolder">4. Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
