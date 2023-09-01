@@ -86,7 +86,7 @@
                         <h6 class="sky-blue fw-normal">${{ number_format( $offer->total_valuation) }}</h6>
                     </div>
 
-                    <div class="col-lg-2  col-6 text-center">
+                    <div class="col-lg-2  col-12 text-center">
                         <h6 class="text-white fw-normal">Min. Investment</h6>
                         <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
                     </div>
