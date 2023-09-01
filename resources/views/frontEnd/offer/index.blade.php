@@ -32,7 +32,7 @@
         <div class="row gx-5" id="offerContainer">
             @foreach ($offers as $offer)
                 <div class="col-lg-4 mb-3  text-center offerItem">
-                    <a href="{{ route('offer.details', $offer->slug) }}" target="_blank">
+                    <a href="{{ route('offer.details', $offer->slug) }}" >
                         <img src="{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}" class=" img-fluid rounded" srcset="">
                     <div class="row text-white p-3">
                         <div class="col-8 text-start">

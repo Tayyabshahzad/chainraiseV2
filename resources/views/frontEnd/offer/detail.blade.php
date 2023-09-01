@@ -71,22 +71,22 @@
                         <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->offer_type) }} </h6>
                     </div>
 
-                    <div class="col-2 text-center">
+                    <div class="col-lg-2 text-center">
                         <h6 class="text-white fw-normal">Offer Amount</h6>
                         <h6 class="sky-blue fw-normal">  ${{ number_format($offer->size) }} </h6>
                     </div>
 
-                    <div class="col-2 text-center">
+                    <div class="col-lg-2  text-center">
                         <h6 class="text-white fw-normal">Securities Type </h6>
                         <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->security_type) }} </h6>
                     </div>
 
-                    <div class="col-2 text-center fw-normal">
+                    <div class="col-lg-2  text-center fw-normal">
                         <h6 class="text-white fw-normal">Valuation</h6>
                         <h6 class="sky-blue fw-normal">${{ number_format( $offer->total_valuation) }}</h6>
                     </div>
 
-                    <div class="col-2 text-center">
+                    <div class="col-lg-2  2 col-sm-12 text-center">
                         <h6 class="text-white fw-normal">Min. Investment</h6>
                         <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
                     </div>
