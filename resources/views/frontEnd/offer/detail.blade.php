@@ -97,7 +97,7 @@
                 <div class="row px-5">
                          @csrf
                         <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                    <div class="col-9">
+                    <div class="col-9 px-0">
                         <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                         <div class="input-group">
                             <div class="input-group-text">$</div>
@@ -128,10 +128,14 @@
     <!-- Faq Section Start -->
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center p-lg-5 p-4">
-            <div class="col-6">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="offer_logo_image img-fluid b-logo" alt="...">
+            <div class="col-lg-6 col-12 text-center ">
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="img-responsive offer_logo_image img-fluid b-logo" alt="...">
+                <br>
+                <strong> {{ $offer->name }} </strong>
             </div>
-            <div class="col-6 text-end">
+
+
+            <div class="col-lg-6 col-12 text-center">
                 <!-- <img src="images/social icon.png" class="img-fluid" alt="..."> -->
                 <!-- Linkedin -->
                 <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
@@ -198,6 +202,7 @@
                         </div>
                     @endif
                 @endforeach
+                @if($slider_images->count()>0)
                 <div class="row">
                     <div class="col">
                         <h2 class="fs-2 fw-bolder my-5">Company Deck    </h2>
@@ -252,6 +257,7 @@
                         <!-- <img src="images/desktop.png" class="img-fluid" alt="" srcset=""> -->
                     </div>
                 </div>
+                @endif
             </div>
             <div class="tab-pane fade p-2" id="deal-video" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="fw-bolder">Videos</h3>
