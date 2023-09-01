@@ -26,6 +26,7 @@
         height: 80%;
         } */
 
+
     </style>
 @endsection
 
@@ -128,7 +129,7 @@
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center p-lg-5 p-4">
             <div class="col-6">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" style="width: 15%!important" class="img-fluid b-logo" alt="...">
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="offer_logo_image img-fluid b-logo" alt="...">
             </div>
             <div class="col-6 text-end">
                 <!-- <img src="images/social icon.png" class="img-fluid" alt="..."> -->

@@ -4,6 +4,10 @@ body {
     font-family: 'Poppins', sans-serif !important;
 }
 
+img.offer_logo_image.img-fluid.b-logo {
+    width: 13%!important;
+}
+
 hr {
     color: #43C3FE !important;
     border-width: 3px !important;
@@ -346,7 +350,16 @@ a.nav-link {
 
 }
 
+
+
+
+
 @media only screen and (max-width: 768px) and (min-width: 0px) {
+
+    img.offer_logo_image.img-fluid.b-logo {
+        width: 40%!important;
+    }
+
 
     .c-logo,
     .b-logo {
