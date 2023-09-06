@@ -91,8 +91,23 @@ Route::get('patch-webhook', function(){
             ]
         ]);
         if($identity_containers->successful()){
-         return "ok";
+            $webhook_conf = Http::withToken($token_json['access_token'])->withHeaders([
+                'Content-Type' => 'application/json',
+            ])->get($baseUrl.'/api/organization/v1/current-organization/webhook-config');
+            if($webhook_conf->successful()){
+                $json_identity_containers =  json_decode((string) $webhook_conf->getBody(), true);
+               dd($json_identity_containers);
+            }
         }
+
+
+
+
+
+
+
+
+
 
 
 
