@@ -28,7 +28,7 @@
 @section('title', 'Home')
 @section('content')
     <div class="container  p-lg-5 mt-lg-3 p-3">
-        <h1 class="fw-bolder mb-5"><i class="bi bi-circle-fill pe-3" style="color:#43C3FE;"></i>Invest in YOGURT LCC
+        <h1 class="fw-bolder mb-5"><i class="bi bi-circle-fill pe-3" style="color:#43C3FE;"></i>Invest in {{ $offer->name }}
         </h1>
         <div class="row">
             <div class="col-lg-8">
@@ -238,11 +238,10 @@
                 <div class="border text-center p-5 mb-4" style="border-radius: 40px;">
                     <h6>Deal Terms</h6>
                     <h6>Future Equity</h6>
-                    <a href="">$30M valuation cap</a>
-                    <p class="mt-3">A Future Equity Agreement (SAFE) gives you
-                        the right to future shares in the company. If
-                        you invest, you're betting the company will be
-                        worth more than $30M eventually.</p>
+                    <a href="">${{ number_format( $offer->total_valuation) }} valuation cap</a>
+                    <p class="mt-3">
+                        {{ $offer->terms }}.
+                    </p>
                 </div>
                 {{-- <div class="border text-center p-5 mb-4" style=" border-radius: 40px;">
                     <h6>Contracts</h6>
@@ -251,21 +250,26 @@
                         investment</p>
                 </div> --}}
                 <div class="mb-3">
-                    <h4 class="fw-bolder  mb-3">FAQ & Help
-                    </h4>
-                    <p>When will my reservation convert to an
-                        investment?</p>
-                    <p>Can I cancel my reservation?</p>
-                    <p>When will I be charged?</p>
-                    <p>What if I want to edit my reservation
-                        amount?</p>
-                    <p>Do I have to fund my reservation now?</p>
+                    <h4 class="fw-bolder  mb-3">FAQ & Help  </h4>
+                    @if($offer->faqs)
+                        <ul>
+                            @foreach ($offer->faqs as $faq)
+                                <li>
+                                    {{ $faq->question }}
+                                    <ul>
+                                        <li>  {{ $faq->answer }} </li>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
                 </div>
                 <div class="mb-3">
                     <h4 class="fw-bolder mb-3">Need help?
                     </h4>
-                    <p class="mb-0 pb-0">Call us: <a href="tel:(347)-934-6876">(347)-934-6876</a></p>
-                    <p>Email: <a href="mailt0:investors@thecapitalr.co">investors@thecapitalr.co</a> </p>
+
+                    <p>Email: <a href="mailt0:info@chainraise.io">info@chainraise.io</a> </p>
                 </div>
                 <div class="mb-3">
                     <h4 class="fw-bolder  mb-3">Documents

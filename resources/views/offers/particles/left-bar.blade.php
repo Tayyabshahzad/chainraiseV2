@@ -47,6 +47,11 @@
                         <input type="text" class="form-control" name="short_description" id="short_description"
                             placeholder="Short Description (Optional)">
                     </div>
+
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" name="terms"  id="terms" placeholder="Offer Terms">
+                    </div>
+
                     <div class="col-lg-12">
                         <div class="col-lg-12">
                             <select name="offer_type" aria-label="Offer Tags (filters assets in marketplace)"

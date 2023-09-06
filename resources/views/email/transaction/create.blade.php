@@ -4,7 +4,7 @@
         Transaction Created
     </strong>
 @endsection
-@section('custom_css')  
+@section('custom_css')
     <style>
         .table{
             padding: 40px;
@@ -24,10 +24,10 @@
         <th colspan="2">
             TRANSACTION DETAILS
         </th>
-    </tr>      
+    </tr>
     <tr>
         <td>
-            Investor Name: 
+            Investor Name:
         </td>
         <td>
             {{  $data['investor'] }}
@@ -89,15 +89,15 @@
     </tr>
 </table>
     <p style=" background:#fff; padding:20px;">
-        Currently    {{  $data['offer_name'] }}  has raised   {{  $data['trnx_total_raised'] }}   in completed investments. <br />
+        Currently    {{  $data['offer_name'] }}  has raised   {{  $data['size'] }}   in completed investments. <br />
 
         Please note that you may cancel your investment up to 48 hours before the end date of the campaign,
-        <b style="color:rgb(161, 16, 16)"> {{  $data['trnx_last_cancel_date'] }}</b> . <br>
+        <b style="color:rgb(161, 16, 16)"> {{  $data['funding_end_date'] }}</b> . <br>
 
         Transcation Link ..
         <br>
         Thank you! <br>
-        The {{  env('APP_NAME') }} Team 
+        The {{  env('APP_NAME') }} Team
     </p>
-    
+
 @endsection

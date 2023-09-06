@@ -271,7 +271,7 @@
                                                                     width="600" valign="top" bgcolor="#1B1B1B">
                                                                     <!--[if gte mso 9]>
             <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:547px;">
-                <v:fill type="frame" src="{{ asset('assets/email_images/header-7-image-2.jpg')}}" color="#1B1B1B"></v:fill>
+                <v:fill type="frame" src="{{ asset('assets/email_images/header-7-image-2.jpg') }}" color="#1B1B1B"></v:fill>
                 <v:textbox inset="26px,29px,26px,26px">
                     <div>
             <![endif]-->
@@ -329,16 +329,16 @@
                                                                                                         style="vertical-align: top; padding: 9px 10px 10px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1; text-align: center;"
                                                                                                         align="center"
                                                                                                         valign="top">
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="#"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Rise</a>
                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="#"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">FAQ</a>
                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="{{ route('index') }}"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Offerings</a>
                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="http://example.com"
+                                                                                                        <a href="#"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Learn</a>
                                                                                                     </td>
                                                                                                 </tr>
@@ -381,32 +381,25 @@
                                                                                                                 style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                                                                                                 width="100%">
                                                                                                                 <tbody>
-                                                                                                                    <tr>
-                                                                                                                        <td style="padding: 0 7px; vertical-align: top;"
-                                                                                                                            valign="top">
-                                                                                                                            <img class="pc-header-cta-icon"
-                                                                                                                                src="{{ asset('assets/email_images/icon-postcards-square-blue.png')}}"
-                                                                                                                                width="72"
-                                                                                                                                height="72"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; display: block; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff;">
-                                                                                                                        </td>
-                                                                                                                    </tr>
+
                                                                                                                     <tr>
                                                                                                                         <td class="pc-header-cta-title pc-fb-font"
                                                                                                                             valign="top"
                                                                                                                             style="vertical-align: top; padding: 14px 7px 0 7px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; line-height: 1.42; letter-spacing: -0.4px; color: #ffffff;">
-                                                                                                                           Thanks For Sign Up
+                                                                                                                            Thanks
+                                                                                                                            For
+                                                                                                                            Sign
+                                                                                                                            Up
                                                                                                                         </td>
                                                                                                                     </tr>
-                                                                                                                    
+
                                                                                                                     <tr>
                                                                                                                         <td valign="top"
                                                                                                                             style="vertical-align: top; height: 35px; line-height: 35px; font-size: 35px;">
                                                                                                                             &nbsp;
                                                                                                                         </td>
                                                                                                                     </tr>
-                                                                                                                    
+
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </td>
@@ -420,7 +413,7 @@
                             <![endif]-->
                                                                                         <div class="pc-header-cta-col"
                                                                                             style="display: inline-block; width: 100%; vertical-align: top; max-width: 214px;">
-                                                                                          
+
                                                                                         </div>
                                                                                         <!--[if (gte mso 9)|(IE)]>
                             </td></tr></table>
@@ -444,13 +437,13 @@
                                                     </table>
                                                     <!-- END MODULE: Header 7 -->
                                                     <!-- START MODULE: Feature 1 -->
-                                                  
+
                                                     <!-- END MODULE: Feature 1 -->
                                                     <!-- START MODULE: Content 4 -->
-                                                  
+
                                                     <!-- END MODULE: Content 4 -->
                                                     <!-- START MODULE: Call to action 18 -->
-                                                    
+
                                                     <!-- END MODULE: Call to action 18 -->
                                                     <!-- START MODULE: Footer 8 -->
                                                     <table border="0" cellpadding="0" cellspacing="0"
@@ -459,239 +452,27 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="pc-footer-box-s1"
-                                                                    style="vertical-align: top; padding: 21px 20px 14px; background-color: #ffffff;"
+                                                                    style="vertical-align: top; text-align:justify;  padding: 51px 40px 44px; background-color: #ffffff;"
                                                                     valign="top" bgcolor="#ffffff">
-                                                                    <table border="0" cellpadding="0"
-                                                                        cellspacing="0"
-                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                        width="100%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td class="pc-footer-row-s1"
-                                                                                    style="vertical-align: top; font-size: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;"
-                                                                                    valign="top">
-                                                                                     
-                                                                                    <div class="pc-footer-row-col"
-                                                                                        style="display: inline-block; width: 100%; max-width: 280px; vertical-align: top;">
-                                                                                        <table border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td style="vertical-align: top; padding: 20px;"
-                                                                                                        valign="top">
-                                                                                                        <table
-                                                                                                            class="pc-footer-text-s1"
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; line-height: 1.33; letter-spacing: -0.2px; color: #1B1B1B;"
-                                                                                                                        valign="top">
-                                                                                                                        Follow
-                                                                                                                        Us.
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; padding: 11px 0 0; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.43; letter-spacing: -0.2px; color: #9B9B9B;"
-                                                                                                                        valign="top">
-                                                                                                                        We
-                                                                                                                        are
-                                                                                                                        always
-                                                                                                                        looking
-                                                                                                                        for
-                                                                                                                        new
-                                                                                                                        exciting
-                                                                                                                        projects
-                                                                                                                        and
-                                                                                                                        collaborations.
-                                                                                                                        Feel
-                                                                                                                        free
-                                                                                                                        to
-                                                                                                                        contact
-                                                                                                                        us.
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <table
-                                                                                                            class="pc-spacing pc-m-footer-h-57"
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="vertical-align: top; height: 57px; line-height: 57px; font-size: 57px;"
-                                                                                                                        valign="top">
-                                                                                                                        &nbsp;
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <table
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="vertical-align: top; line-height: 1.3; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 19px;"
-                                                                                                                        valign="top">
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png')}}"
-                                                                                                                                width="20"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png')}}"
-                                                                                                                                width="21"
-                                                                                                                                height="18"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png')}}"
-                                                                                                                                width="21"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png')}}"
-                                                                                                                                width="20"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <!--[if (gte mso 9)|(IE)]>
-                        </td>
-                        <td width="280" style="width:280px;" valign="top">
-                        <![endif]-->
-                                                                                    <div class="pc-footer-row-col"
-                                                                                        style="display: inline-block; width: 100%; max-width: 280px; vertical-align: top;">
-                                                                                        <table border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td style="vertical-align: top; padding: 20px;"
-                                                                                                        valign="top">
-                                                                                                        <table
-                                                                                                            class="pc-footer-text-s1"
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; line-height: 1.33; letter-spacing: -0.2px; color: #1B1B1B;"
-                                                                                                                        valign="top">
-                                                                                                                        Contact
-                                                                                                                        us.
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; padding: 11px 0 0; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.43; letter-spacing: -0.2px; color: #9B9B9B;"
-                                                                                                                        valign="top">
-                                                                                                                        <a
-                                                                                                                            style="text-decoration: none; cursor: text; color: #9B9B9B;">King
-                                                                                                                            street,
-                                                                                                                            2901
-                                                                                                                            Marmara
-                                                                                                                            road,
-                                                                                                                            Newyork,
-                                                                                                                            WA
-                                                                                                                            98122-1090</a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <table
-                                                                                                            class="pc-spacing pc-m-footer-h-46"
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="vertical-align: top; height: 46px; line-height: 46px; font-size: 46px;"
-                                                                                                                        valign="top">
-                                                                                                                        &nbsp;
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <table
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; line-height: 1.33; letter-spacing: -0.2px;"
-                                                                                                                        valign="top">
-                                                                                                                        <a href="tel:749-977-3440"
-                                                                                                                            style="text-decoration: none; color: #1B1B1B;">749-977-3440</a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="pc-fb-font"
-                                                                                                                        style="vertical-align: top; padding: 9px 0 0; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 500; line-height: 1.7;"
-                                                                                                                        valign="top">
-                                                                                                                        <a href="mailto:bo.grady@nathen.biz"
-                                                                                                                            style="text-decoration: none; color: #1595E7;"> info@chainraise.io </a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <!--[if (gte mso 9)|(IE)]>
-                        </td></tr></table>
-                        <![endif]-->
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                    <h4>
+                                                                        Hi {{ $data['name'] }} ,
+                                                                    </h4>
+                                                                    <p>We are excited to have you onboard at <b><a href="{{ route('index') }}"> ChainRaise </a> </b>! We are the only investment crowdfunding platform focused on helping innovative businessess and startups raise capital . You can get started ny exploring our <a href="">Verify Email</a>  of investment opportunities to see if there are any issuers you would like to support with your investment.
+                                                                    <br/><br/>
+
+                                                                    If you need information on how to use the site or about crowdfunction regulations check out the FAQs page and Knowlegde Center to get Started.
+                                                                    <br/><br/>
+                                                                    Remember, any person who promotes an issuer's offering for compensation, whetjer past or prospective, or who is a founder or an employee of an issuer that engages in promotional activities on behaif of the issuers throught Test Company, must clearlu disclose an all communications the receipt of the compensation, and that he or she is engaginf in promotional activities on behalf of the issuer.
+                                                                    <br/><br/>
+                                                                    ChainRaise is compensated by charging issuers a fee based on a percentage of the amount being raised.
+                                                                    <br/><br/>
+                                                                    Please contact us if you have any questions.
+                                                                    <br/><br/>
+                                                                    <a href=""> Verify Email </a>
+                                                                    <br/><br/>
+                                                                    Thank you,
+                                                                    The ChainRaise Team
+                                                                    </p>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

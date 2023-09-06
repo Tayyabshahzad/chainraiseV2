@@ -301,7 +301,7 @@ class UserController extends Controller
     }
     public function issuerSave(Request $request)
     {
-        dd(1);
+
 
         $request->validate([
             'email' => 'required',
@@ -355,6 +355,9 @@ class UserController extends Controller
     public function issuerAccountUpdate(Request $request)
     {
 
+
+
+
         $request->validate([
             //Users Table
             'id' => 'required',
@@ -397,6 +400,12 @@ class UserController extends Controller
         $user->name = $request->first_name;
         $user->phone = $request->phone;
         $user->cc = $request->cc;
+        if($request->has('account_status')){
+            if($user->status == 'inactive'){
+                $user->status = 'active';
+                Mail::to($user)->send(new UserStatusUpdate($user));
+            }
+        }
         $user->save();
         if($request->has('profile_avatar')){
             $user->clearMediaCollection('profile_photo');
@@ -555,6 +564,7 @@ class UserController extends Controller
 
         }
         $trustSetting->save();
+
 
         return redirect()->back()->with('success','Profile has been updated');
 

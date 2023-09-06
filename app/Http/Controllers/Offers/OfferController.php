@@ -16,6 +16,7 @@ use App\Models\CallToAction;
 use App\Models\OfferContact;
 use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
+use App\Models\OfferFAQ;
 use App\Models\OfferDetailTab;
 use Illuminate\Support\Carbon;
 use App\Models\OfferEsignTemplate;
@@ -129,7 +130,9 @@ class OfferController extends Controller
     }
     public function save(Request $request)
     {
-         // dd(1);
+
+        //dd(111);
+
         $request->validate([
             'issuer' => 'required',
             'offer_name' => 'required',
@@ -197,6 +200,7 @@ class OfferController extends Controller
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
             $offer->offer_type  = $request->offer_type;
+            $offer->terms = $request->terms;
             $offer->issuer_id =  $request->issuer;
             $offer->name =              $request->offer_name;
             $offer->slug =            Str::slug($request->offer_name, '-');
@@ -434,6 +438,20 @@ class OfferController extends Controller
                             $fileAdder->toMediaCollection('offer_detail_images');
                         });
                     }
+
+                    if($request->has('question')){
+
+                        $question = $request->input('question');
+                        $answers = $request->input('answer');
+                        foreach ($question as $key => $question) {
+                            OfferFAQ::create([
+                                'offer_id' => $offer->id,
+                                'question' => $question,
+                                'answer' => $answers[$key],
+                            ]);
+                        }
+
+                    }
                     $data = [
                         'offer_id' => $offer->id,
                         'url_educational_materials' => 'url_educational_materials',
@@ -473,6 +491,7 @@ class OfferController extends Controller
 
         $offer = Offer::find($request->offer_id);
         $offer->issuer_id = $request->issuer;
+        $offer->terms = $request->terms;
         $offer->offer_type  = $request->offer_type;
         $offer->name =  $request->offer_name;
         $offer->feature_video  = $request->feature_video_url;
@@ -700,7 +719,35 @@ class OfferController extends Controller
                     $offer_esign_template->save();
                 }
             }
+            if($request->has('new_question')){
 
+                $question = $request->input('new_question');
+                $answers = $request->input('new_answer');
+                foreach ($question as $key => $question) {
+                    OfferFAQ::create([
+                        'offer_id' => $offer->id,
+                        'question' => $question,
+                        'answer' => $answers[$key],
+                    ]);
+                }
+
+            }
+            if($request->has('question')){
+
+                $question = $request->input('question');
+                $answers = $request->input('answer');
+                $faqIds = $request->input('faq_id');
+                foreach ($faqIds as $key => $faqId) {
+                    $faq = OfferFAQ::find($faqId);
+                    if ($faq) {
+                        $faq->update([
+                            'question' => $question[$key],
+                            'answer' => $answers[$key],
+                        ]);
+                    }
+                }
+
+            }
 
 
 
@@ -829,6 +876,29 @@ class OfferController extends Controller
             'id' => 'required',
         ]);
         dd(1);
+    }
+
+    public function deleteFaq(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        try{
+            $offer_faq = OfferFAQ::find($request->id);
+            if($offer_faq->delete()) {
+                return response([
+                    'status'=>true,
+                    'message'=> 'Offer has been deleted successfully'
+                ]);
+            }
+        }catch(Exception $error){
+            return response([
+                'status'=>false,
+                'message'=> 'Error while deleting Offer'
+            ]);
+        }
+
+
     }
 
 }

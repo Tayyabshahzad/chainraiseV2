@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TransactionCancelled;
 use File;
 use CURLFile;
 use Exception;
@@ -45,6 +46,7 @@ class MakeInvestmentController extends Controller
 
     public function make()
     {
+
         $user = User::with('userDetail', 'identityVerification')->find(Auth::user()->id);
         return view('investment.make', compact('user'));
     }
@@ -59,12 +61,13 @@ class MakeInvestmentController extends Controller
     public function submitInvestment(Request $request)
     {
 
+
        $request->validate([
          	'offer_id' => 'required',
           	'investment_amount' => 'integer|required',
         ]);
         if(Auth::user()->status  == 'inactive'){
-            return redirect()->back()->with('error', 'Your account has been locked, Please Contact System Administrator');
+            return redirect()->back()->with('error', 'Your account has been inactive, Please Contact System Administrator');
         }
         // if (Auth::user()->kyc  == null || Auth::user()->kyc->kyc_level== null ){
         //     return redirect()->back()->with('error', 'Please Run KYC Check First');
@@ -300,7 +303,10 @@ class MakeInvestmentController extends Controller
     }
     public function save(Request $request)
     {
-        //dd($request);
+
+
+
+
         $request->validate([
             'offer_id' => 'required',
             'payment_type'=> 'required|in:wire,ach',
@@ -311,7 +317,11 @@ class MakeInvestmentController extends Controller
             //'templates' => 'required',
             'investment_amount' => 'required',
         ]);
+
         $offer = Offer::with('user')->findOrFail($request->offer_id);
+        $user = Auth::user();
+
+
         $template_id = $offer->offerEsing->template_id;
 
         if ($request->has('past_12_months_investment')) {
@@ -434,6 +444,7 @@ class MakeInvestmentController extends Controller
             return redirect()->back()->with("error","Error While Requesting E-Sign Documents");
         }
 
+
         //  dd($json_esign_request['data']['contract']['status']);
 
         // if($request->investment_limit == 'yes'){
@@ -449,7 +460,8 @@ class MakeInvestmentController extends Controller
 
         $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
 //dd($request->offer_id,$custodial_account);
- if (!$custodial_account) {
+
+        if (!$custodial_account) {
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
 
@@ -463,10 +475,7 @@ class MakeInvestmentController extends Controller
                 $member_id = $value;
             }
         }
-
         $identityId = Auth::user()->fortress_personal_identity;
-        $offer = Offer::with('user')->findOrFail($request->offer_id);
-
 
         try {
             $get_token = Http::withHeaders([
@@ -483,6 +492,7 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) {
             return redirect()->back()->with('error','Internal Server Error For Token -'.$error);
         }
+
         if($request->payment_type == 'ach'){
             try {
                 $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
@@ -499,6 +509,7 @@ class MakeInvestmentController extends Controller
             }
         }
 
+
         //Retrieve any bank accounts that are connected
         if($request->payment_type == 'ach'){
             try {
@@ -508,7 +519,7 @@ class MakeInvestmentController extends Controller
                 if ($accounts->failed()) {
                     $status = $accounts->status();
                     Session::put('error', $accounts['title']);
-                    return redirect()->back();
+                    return redirect()->back()->with('error','Financial Institutions error');
                 }
                 $accountGuid  = '';
                 //dd($accounts_Json);
@@ -572,6 +583,7 @@ class MakeInvestmentController extends Controller
                         'Accept' => 'application/json',
                     ])->post($payment_url,$data);
                     $json_response_payment =  json_decode((string) $payment->getBody(), true);
+
                     if ($payment->failed()) {
                         return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
                     }
@@ -611,18 +623,22 @@ class MakeInvestmentController extends Controller
                             'investor'=> Auth::user()->name,
                             'investment_amount' => $request->investment_amount,
                             'type_of_security' => 'Common Shares',
-                            'share_price' => 123,
-                            'share_count' => 0,
+                            'share_price' => $offer->name,
+                            'size' => $offer->size,
+                            'funding_end_date'=>$offer->funding_end_date,
+                            'share_count' => $offer->price_per_unit,
                             'share_sold_date' =>Carbon::now()->format('D-m-Y'),
                             'total_raised' => $offer->base_currency . $offer->size,
                             'offer_name' =>  $offer->name,
                             'trnx_total_raised' => 0,
                             'trnx_last_cancel_date' => $offer->funding_end_date,
                         ];
-                        // Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
-                    }
-                }elseif($request->payment_type == 'wire'){
 
+                    //Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
+                    }
+
+                }elseif($request->payment_type == 'wire'){
+                   // dd('wiew');
                         $order = new Order();
                         $order->offer_id = $offer->id;
                         $order->past12MonthsInvestment = $past12MonthsInvestment;
@@ -656,8 +672,10 @@ class MakeInvestmentController extends Controller
                             'investor'=> Auth::user()->name,
                             'investment_amount' => $request->investment_amount,
                             'type_of_security' => 'Common Shares',
-                            'share_price' => 123,
-                            'share_count' => 0,
+                            'share_price' => $offer->name,
+                            'size' => $offer->size,
+                            'funding_end_date'=>$offer->funding_end_date,
+                            'share_count' => $offer->price_per_unit,
                             'share_sold_date' =>Carbon::now()->format('D-m-Y'),
                             'total_raised' => $offer->base_currency . $offer->size,
                             'offer_name' =>  $offer->name,
@@ -665,11 +683,18 @@ class MakeInvestmentController extends Controller
                             'trnx_last_cancel_date' => $offer->funding_end_date,
                         ];
                     }
+
                     DB::commit();
+                    //dd(1111);
+                    Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
+                    //dd(1111);
                     return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
 
             } catch (Exception $error) {
-                DB::rollBack();
+                    DB::rollBack();
+                    $user = Auth::user();
+                    Mail::to(Auth::user()->email)->send(new TransactionCancelled($user,$offer));
+                   // dd($error);
                 return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
             }
 

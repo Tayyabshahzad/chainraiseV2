@@ -37,6 +37,9 @@
                         <input type="text" class="form-control" name="short_description" value="{{ $offer->short_description }}" id="short_description" placeholder="Short Description (Optional)">
                     </div>
                     <div class="col-lg-12">
+                        <input type="text" class="form-control" name="terms" value="{{ $offer->terms }}" id="terms" placeholder="Offer Terms">
+                    </div>
+                    <div class="col-lg-12">
                         <div class="col-lg-12">
                             <select name="offer_type"   aria-label="Offer Tags (filters assets in marketplace)"
                                 data-control="select2" data-placeholder="Offer Tags (filters assets in marketplace)"

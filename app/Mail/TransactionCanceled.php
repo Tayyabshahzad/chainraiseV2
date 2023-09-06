@@ -19,12 +19,14 @@ class TransactionCreated extends Mailable
      * @return void
      */
     public $data;
-    public function __construct($data)
+    public $offer;
+    public function __construct($data,$offer)
     {
         $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@invest.chainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);
         $this->data = $data;
+        $this->offer = $offer;
     }
 
     /**

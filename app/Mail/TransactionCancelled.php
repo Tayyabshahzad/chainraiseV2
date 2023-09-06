@@ -8,9 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
-class WelcomeEmail extends Mailable
+class TransactionCancelled extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,25 +18,16 @@ class WelcomeEmail extends Mailable
      *
      * @return void
      */
-    public $data = [];
-
-    public function __construct($data)
+    public $data;
+    public $offer;
+    public function __construct($data,$offer)
     {
         $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@invest.chainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);
         $this->data = $data;
+        $this->offer = $offer;
     }
-
-    /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
-
-
-
-
 
     /**
      * Get the message envelope.
@@ -46,11 +36,9 @@ class WelcomeEmail extends Mailable
      */
     public function envelope()
     {
-
         return new Envelope(
-            subject: 'Chainraise - Transaction Canceled',
-            from: new Address('noreply@chainraise.io','CEO ChainRaise'),
-
+            subject: 'Chainraise - Transaction Cancelled',
+            from: 'noreply@invest.chainraise.io',
         );
     }
 
@@ -62,7 +50,7 @@ class WelcomeEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.welcome',
+            view: 'email.transaction.canceled',
         );
     }
 

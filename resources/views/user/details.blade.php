@@ -794,6 +794,22 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <div class="row">
+
+                                            <div class="col-lg-12 text-center ">
+                                                <label class="form-check form-check-custom form-check-solid">
+                                                    <input class="form-check-input h-15px w-15px" type="checkbox"   name="account_status"
+                                                        @if ($user->status != 'inactive') checked @endif >
+                                                    <span class="form-check-label fw-semibold"> Account Status </span>
+                                                </label>
+                                            </div>
+                                    </div>
+
+
+
+
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">

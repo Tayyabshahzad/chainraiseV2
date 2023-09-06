@@ -23,6 +23,10 @@ use Laravel\Socialite\Facades\Socialite;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('emails', function(){
+    return view('email.transaction.canceled');
+});
+
 //----
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('setup', [InitialSetupController::class, 'index'])->name('user.setup');
@@ -180,6 +184,7 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('list', ['as' => 'list','uses' => 'OfferController@list']);
     Route::post('save', ['as' => 'save','uses' => 'OfferController@save']);
     Route::post('delete', ['as' => 'delete','uses' => 'OfferController@delete']);
+    Route::post('delete/faq', ['as' => 'delete.faq','uses' => 'OfferController@deleteFaq']);
     Route::get('tile/delete', ['as' => 'tile.delete','uses' => 'OfferController@deleteTile']);
     Route::get('video/delete', ['as' => 'video.delete','uses' => 'OfferController@deleteVideo']);
     Route::get('edit/{id}', ['as' => 'edit','uses' => 'OfferController@edit']);

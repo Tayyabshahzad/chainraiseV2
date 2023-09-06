@@ -10,8 +10,6 @@
     <meta name="x-apple-disable-message-reformatting">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    @section('custom_css')
-    @show
     <style type="text/css">
         @media screen {
             @font-face {
@@ -243,9 +241,8 @@
                             <tr>
                                 <td align="left" style="vertical-align: top; padding: 0 10px;" valign="top"> <span
                                         class="preheader"
-                                        style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
-                                        Chainraise - Invest in blockchain companies, tech startups, real estate and
-                                        more.</span>
+                                        style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Template
+                                        created by Designmodo.com</span>
                                     <table border="0" cellpadding="0" cellspacing="0"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                         width="100%">
@@ -262,6 +259,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
+                                                    <!-- START MODULE: Header 7 -->
                                                     <table border="0" cellpadding="0" cellspacing="0"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                                         width="100%">
@@ -271,6 +269,12 @@
                                                                     background="images/header-7-image-2.jpg'"
                                                                     style="vertical-align: top; background-color: #1B1B1B; background-image: url('images/header-7-image-2.jpg'); background-position: top center; background-size: cover; width: 600px"
                                                                     width="600" valign="top" bgcolor="#1B1B1B">
+                                                                    <!--[if gte mso 9]>
+            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:547px;">
+                <v:fill type="frame" src="{{ asset('assets/email_images/header-7-image-2.jpg') }}" color="#1B1B1B"></v:fill>
+                <v:textbox inset="26px,29px,26px,26px">
+                    <div>
+            <![endif]-->
                                                                     <div class="pc-header-box-in"
                                                                         style="padding: 29px 26px 26px;">
                                                                         <table border="0" cellpadding="0"
@@ -281,6 +285,11 @@
                                                                                 <tr>
                                                                                     <td style="vertical-align: top"
                                                                                         valign="top">
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="248" valign="top">
+                            <![endif]-->
                                                                                         <table class="pc-header-logo-s1"
                                                                                             align="left"
                                                                                             border="0"
@@ -292,9 +301,9 @@
                                                                                                 <tr>
                                                                                                     <td style="vertical-align: top; padding: 10px;"
                                                                                                         valign="top">
-                                                                                                        <a href="{{ env('APP_URL') }}"
+                                                                                                        <a href="https://investchainraise.io/"
                                                                                                             style="text-decoration: none;">
-                                                                                                            <img src="https://investchainraise.io/media/logo/logo.webp"
+                                                                                                            <img src="https://investchainraise.io/assets/v3-images/chainrasied-logo.png"
                                                                                                                 width="130"
                                                                                                                 height="22"
                                                                                                                 alt=""
@@ -304,6 +313,10 @@
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            <td width="300" valign="top" align="right" style="text-align:right;">
+                            <![endif]-->
                                                                                         <table class="pc-header-nav-s1"
                                                                                             align="right"
                                                                                             border="0"
@@ -316,22 +329,24 @@
                                                                                                         style="vertical-align: top; padding: 9px 10px 10px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1; text-align: center;"
                                                                                                         align="center"
                                                                                                         valign="top">
+                                                                                                        <a href="#"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Rise</a>
+                                                                                                        <span>&nbsp;&nbsp;</span>
+                                                                                                        <a href="#"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">FAQ</a>
+                                                                                                        <span>&nbsp;&nbsp;</span>
                                                                                                         <a href="{{ route('index') }}"
                                                                                                             style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Offerings</a>
                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="{{ route('privacy.policy') }}"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Privacy
-                                                                                                            Policy</a>
-                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="{{ route('contact') }}"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Contact</a>
-                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                        <a href="{{ route('faq') }}"
-                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">FAQ</a>
+                                                                                                        <a href="#"
+                                                                                                            style="text-decoration: none; font-size: 14px; font-weight: 500; color: #ffffff;">Learn</a>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            </td></tr></table>
+                            <![endif]-->
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -343,6 +358,11 @@
                                                                                     <td class="pc-header-cta-s4"
                                                                                         style="vertical-align: top; font-size: 0;"
                                                                                         valign="top">
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            <table width="334" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="50%" valign="top">
+                            <![endif]-->
                                                                                         <div class="pc-header-cta-col"
                                                                                             style="display: inline-block; width: 100%; max-width: 334px; vertical-align: top;">
                                                                                             <table border="0"
@@ -366,8 +386,7 @@
                                                                                                                         <td class="pc-header-cta-title pc-fb-font"
                                                                                                                             valign="top"
                                                                                                                             style="vertical-align: top; padding: 14px 7px 0 7px; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; line-height: 1.42; letter-spacing: -0.4px; color: #ffffff;">
-                                                                                                                            @section('email_title')
-                                                                                                                            @show
+                                                                                                                            Transaction Canceled
                                                                                                                         </td>
                                                                                                                     </tr>
 
@@ -385,118 +404,60 @@
                                                                                                 </tbody>
                                                                                             </table>
                                                                                         </div>
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            <td width="214" valign="top">
+                            <![endif]-->
                                                                                         <div class="pc-header-cta-col"
                                                                                             style="display: inline-block; width: 100%; vertical-align: top; max-width: 214px;">
+
                                                                                         </div>
+                                                                                        <!--[if (gte mso 9)|(IE)]>
+                            </td></tr></table>
+                            <![endif]-->
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                    <!--[if gte mso 9]>
+            </div>
+            <p style="margin:0;mso-hide:all">
+                <o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p>
+            </p>
+            </v:textbox>
+            </v:rect>
+            <![endif]-->
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    @section('email_content')
-                                                    @show
+                                                    <!-- END MODULE: Header 7 -->
+                                                    <!-- START MODULE: Feature 1 -->
+
+                                                    <!-- END MODULE: Feature 1 -->
+                                                    <!-- START MODULE: Content 4 -->
+
+                                                    <!-- END MODULE: Content 4 -->
+                                                    <!-- START MODULE: Call to action 18 -->
+
+                                                    <!-- END MODULE: Call to action 18 -->
+                                                    <!-- START MODULE: Footer 8 -->
                                                     <table border="0" cellpadding="0" cellspacing="0"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                                         width="100%">
                                                         <tbody>
                                                             <tr>
                                                                 <td class="pc-footer-box-s1"
-                                                                    style="vertical-align: top; padding: 21px 20px 14px; background-color: #ffffff;"
+                                                                    style="vertical-align: top; text-align:justify;  padding: 51px 40px 44px; background-color: #ffffff;"
                                                                     valign="top" bgcolor="#ffffff">
-                                                                    <table border="0" cellpadding="0"
-                                                                        cellspacing="0"
-                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                        width="100%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td class="pc-footer-row-s1"
-                                                                                    style="vertical-align: top; font-size: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;"
-                                                                                    valign="top">
+                                                                    <h4>
+                                                                        Hi  {{ $data['name'] }} ,
+                                                                    </h4>
+                                                                    <p>
+                                                                       <b class="text-danger" style="color:rgb(223, 86, 86)"> Your transaction for the offer "{{ $offer['name'] }}", has been canceled.</b>
 
-                                                                                    <div class="pc-footer-row-col"
-                                                                                        style="display: inline-block; width: 100%; max-width: 280px; vertical-align: top;">
-                                                                                        <table border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td style="vertical-align: top; padding: 20px;"
-                                                                                                        valign="top">
-                                                                                                        <table
-                                                                                                            class="pc-spacing pc-m-footer-h-57"
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <table
-                                                                                                            border="0"
-                                                                                                            cellpadding="0"
-                                                                                                            cellspacing="0"
-                                                                                                            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
-                                                                                                            width="100%">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="vertical-align: top; line-height: 1.3; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 19px;"
-                                                                                                                        valign="top">
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png') }}"
-                                                                                                                                width="20"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png') }}"
-                                                                                                                                width="21"
-                                                                                                                                height="18"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png') }}"
-                                                                                                                                width="21"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                        <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png') }}"
-                                                                                                                                width="20"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                    </p>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -521,10 +482,8 @@
                         </tbody>
                     </table>
                     <!--[if (gte mso 9)|(IE)]>
-                                                </td>
-                                            </tr>
-                                    </table>
-                                    <![endif]-->
+      </td></tr></table>
+      <![endif]-->
                 </td>
             </tr>
         </tbody>

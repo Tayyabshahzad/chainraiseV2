@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -39,6 +42,9 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed'],
         ]);
+        $user = User::find(1);
+
+        //Mail::to('junjuiag@gmail.com')->send(new WelcomeEmail());
 
         $user = User::create([
             'name' => $request->name,
@@ -51,6 +57,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $user->assignRole('investor');
+        Mail::to($user->email)->send(new WelcomeEmail($user));
         event(new Registered($user));
         //return redirect()->route('dashboard');
         Auth::login($user);

@@ -278,6 +278,21 @@
                                                     <!--end::Link-->
                                                 </li>
 
+                                                <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
+                                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2"
+                                                        id="kt_stats_widget_16_tab_link_4" data-bs-toggle="pill"
+                                                        href="#kt_stats_widget_16_tab_5" aria-selected="false"
+                                                        tabindex="-1" role="tab" style="width:140px;">
+                                                        <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
+                                                            Faq's
+                                                        </span>
+                                                        <span
+                                                            class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-primary"></span>
+                                                        <!--end::Bullet-->
+                                                    </a>
+                                                    <!--end::Link-->
+                                                </li>
+
                                             </ul>
                                             <!--end::Nav-->
                                             <!--begin::Tab Content-->
@@ -403,9 +418,36 @@
                                                                     <label for=""> Add Multiple Images</label>
                                                                     <input type="file" class="form-control" name="slider_images[]" multiple>
                                                                 </div>
-                                                            </div> 
+                                                            </div>
 
                                                         </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab-pane fade" id="kt_stats_widget_16_tab_5" role="tabpanel"
+                                                    aria-labelledby="#kt_stats_widget_16_tab_link_3">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-left mt-4">
+                                                            <h2> Add FAQ's</h2>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-left mt-4" style="text-align: left">
+                                                                <div class="row" id="faq-container">
+                                                                    <div class="faq-item">
+                                                                        <div class="col-lg-12 mb-4">
+                                                                            <input type="text" class="col-lg-6 form-control question" placeholder="Question" name="question[]">
+                                                                        </div>
+                                                                        <div class="col-lg-12 mb-4">
+                                                                            <input type="text" class="col-lg-6 form-control answer" placeholder="Answer" name="answer[]">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 mb-4">
+                                                                    <button type="button" id="add-faq"class="btn btn-sm btn-info"> Add Faq </button>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
@@ -813,7 +855,7 @@
     </script>
 
     <script>
-        
+
         $('#issuer_account').on('change', function() {
             $.ajaxSetup({
                 headers: {
@@ -844,16 +886,16 @@
             });
 
         });
-        
+
     </script>
 
     <script type="text/javascript">
         $(document).ready(function(){
             $('body').on('change','#issuer_account',function(event){
-                    event.preventDefault(); 
+                    event.preventDefault();
                     $.ajax({
                         url: "{{ route('invest.step.six.e.template') }}",
-                        method: 'GET', 
+                        method: 'GET',
                         dataType: 'JSON',
                         contentType: false,
                         cache: false,
@@ -867,14 +909,14 @@
                                     });
                             }
                         },
-                        
+
                     });
                 });
 
             });
-    </script> 
+    </script>
     <script>
-       
+
         $(document).ready(function() {
             $('#offer_name').on('keyup', function() {
                 var str = $('#offer_name').val();
@@ -887,10 +929,33 @@
                 str = str.replace(/[^a-z0-9 -]/g, '')
                 .replace(/\s+/g, '-')
                 .replace(/-+/g, '-')
-                .replace(/^-+|-+$/g, ''); 
+                .replace(/^-+|-+$/g, '');
                  $('#offer_slug').val(str);
             });
         });
     </script>
+
+<script>
+    // Function to add a new FAQ item
+    function addFaqItem() {
+        const faqItem = `
+            <div class="faq-item">
+                <div class="col-lg-12 mb-4">
+                    <input type="text" class="col-lg-6 form-control question" placeholder="Question" name="question[]" >
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <input type="text" class="col-lg-6 form-control answer" placeholder="Answer" name="answer[]">
+                </div>
+
+            </div>
+        `;
+        $("#faq-container").append(faqItem);
+    }
+
+    // Event handler for the "Add FAQ" button
+    $("#add-faq").on("click", function () {
+        addFaqItem();
+    });
+</script>
 
 @endsection

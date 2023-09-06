@@ -80,7 +80,7 @@ class KycController extends Controller
        //   {{fortress_base_url}}/api/trust/v1/business-identities/{{businessidentityId}} Return Offer Detail
 
         // $json_identity_containers =  json_decode((string) $check_user_kyc_level->getBody(), true);
-        // dd($json_identity_containers);
+        // dd($token_json);
 
 
 
