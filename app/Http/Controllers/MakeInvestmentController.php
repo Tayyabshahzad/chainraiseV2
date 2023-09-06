@@ -762,12 +762,14 @@ class MakeInvestmentController extends Controller
                 'errors' => $errors,
             ]);
         }
+
         $fortress_personal_identity = Auth::user()->fortress_personal_identity;
         try {
             $url_widget = $this->baseUrl."/api/trust/v1/external-accounts/financial/widget-url/".$fortress_personal_identity;
             $widget = Http::withToken($token_json['access_token'])->get($url_widget);
             $json_widget =  json_decode((string) $widget->getBody(), true);
             if ($widget->failed()) {
+		//dd($url_widget,1,$json_widget);
                 $errors[] = 'Error While Creating Widget Url';
                 return response([
                     'success'  => false,
@@ -788,6 +790,7 @@ class MakeInvestmentController extends Controller
         } catch (Exception $error) {
             $errors[] = 'Error While Creating Widget Url';
             $errors[] = $error;
+	//dd(2,$error);
             return response([
                 'success'  => false,
                 'errors' => $errors,
