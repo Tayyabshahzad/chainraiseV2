@@ -23,6 +23,7 @@ use Laravel\Socialite\Facades\Socialite;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/////
 Route::get('emails', function(){
     return view('email.transaction.canceled');
 });
