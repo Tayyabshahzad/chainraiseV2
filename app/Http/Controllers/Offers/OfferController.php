@@ -146,7 +146,7 @@ class OfferController extends Controller
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
         ]);
-
+	//dd(1);
         $user = User::find($request->issuer);
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -177,6 +177,7 @@ class OfferController extends Controller
             }
         }
 
+
         try{
         // Checking custodial-accounts
             $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
@@ -195,7 +196,7 @@ class OfferController extends Controller
         }catch(Exception $custodial_account_error){
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
-
+	//dd(111);
         try{
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
@@ -466,7 +467,7 @@ class OfferController extends Controller
             }
 
         }catch(Exception $error){
-           // dd($error);
+          //  dd($error);
             return redirect()->back()->with('error','Error while creating offer'.$error);
         }
     }
