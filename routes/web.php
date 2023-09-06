@@ -12,6 +12,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Http;
 /*
 //Updated Routes
 |--------------------------------------------------------------------------
@@ -27,6 +28,81 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('emails', function(){
     return view('email.transaction.canceled');
 });
+
+
+Route::get('patch-webhook', function(){
+        $webhook_URL   = env('WebURL');
+        $environment   = config('app.env');
+        $baseUrl = config('credentials.api.' . $environment);
+        $authUrl = config('credentials.auth0.' . $environment);
+        $get_token = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post($authUrl['url'], [
+            'grant_type' => $authUrl['grant_type'],
+            'username'   => $authUrl['username'],
+            'password'   => $authUrl['password'],
+            'audience'   => $authUrl['audience'],
+            'client_id'  => $authUrl['client_id'],
+        ]);
+
+        $token_json =  json_decode((string) $get_token->getBody(), true);
+        dump('Token',$token_json,$environment,$baseUrl);
+        // $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
+        //     'Content-Type' => 'application/json',
+        // ])->patch($baseUrl.'/api/organization/v1/current-organization/webhook-config', [
+        //     "url" => "https://webhook.site/bd4cc78c-23bf-495d-a6be-6f5c98c16085",
+        //     "enabled" => true,
+        //     "sharedSecret" => "A1B2C312",
+        //     "webhookTypes" => [
+        //         "payment",
+        //         "transaction",
+        //         "nft",
+        //         "kyc",
+        //         "document",
+        //         "custodialAccount",
+        //         "externalAccount",
+        //         "identity",
+        //         "asset",
+        //         "wallet"
+        //     ]
+        // ]);
+        // You can access the response data like this:
+       // $responseData = $identity_containers->json();
+
+
+
+        $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
+            'Content-Type' => 'application/json',
+        ])->patch($baseUrl.'/api/organization/v1/current-organization/webhook-config', [
+            "url" => $webhook_URL,
+            "enabled" => true,
+            "sharedSecret" => "A1B2C312",
+            "webhookTypes" => [
+                "payment",
+                "transaction",
+                "nft",
+                "kyc",
+                "document",
+                "custodialAccount",
+                "externalAccount",
+                "identity",
+                "asset",
+                "wallet"
+            ]
+        ]);
+        if($identity_containers->successful()){
+         return "ok";
+        }
+
+
+
+
+
+
+
+
+});
+
 
 //----
 Route::group(['middleware' => ['auth','verified']], function () {
