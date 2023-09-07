@@ -31,9 +31,46 @@ class WebhookController extends Controller
     }
 
 
+
+
     public function handle(Request $request)
     {
+        // Get the JSON data from the request
+        $data = $request->json()->all();
+
+        // Check if the data has the expected structure
+        if (isset($data['action']) && isset($data['changes'])) {
+            // Log the webhook data
+            Log::info('Webhook data received', ['data' => $data]);
+
+            // You can access the fields like this:
+            $organizationId = $data['organizationId'];
+            $action = $data['action'];
+            $changes = $data['changes'];
+
+            // For example, if you want to access the "kyc-level" change:
+            if (isset($changes['kyc-level'])) {
+                $kycLevel = $changes['kyc-level'];
+                // Log the kyc-level change
+                Log::info('kyc-level change', ['kyc-level' => $kycLevel]);
+            }
+
+            // Return a response to the webhook provider, if needed
+            return response()->json(['message' => 'Webhook received successfully']);
+        } else {
+            // Log an error if the data is invalid
+            Log::error('Invalid webhook data', ['data' => $data]);
+            return response()->json(['error' => 'Invalid webhook data'], 400);
+        }
+    }
+
+
+
+
+    public function handle111(Request $request)
+    {
         // Parse the JSON data from the request
+
         $data = json_decode($request->getContent());
 
         // Check if the data has the expected structure

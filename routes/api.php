@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('webhook/esignatures', [WebhookController::class, 'esignatures']); 
-
+Route::any('webhook/esignatures', [WebhookController::class, 'esignatures']);
+Route::post('webhook/endpoint', [WebhookController::class, 'handle']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
