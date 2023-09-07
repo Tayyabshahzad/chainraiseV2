@@ -127,7 +127,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
 Route::get('importUsers', [WebhookController::class, 'importUsers']);
 
 
-Route::get('webhook/endpoint', [WebhookController::class, 'handle']);
+Route::post('webhook/endpoint', [WebhookController::class, 'handle']);
 
  //https://chain-clone.test/webhook/esignatures
 Route::get('email-layout', [FrontendController::class, 'layout_email']);
