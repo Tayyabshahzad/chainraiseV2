@@ -30,14 +30,36 @@ class WebhookController extends Controller
 	//dd($this->authUrl);
     }
 
-    public function handle(Request $request, Pusher $pusher)
-    {
-         // ویب ہک ڈیٹا کو پروسیس کریں
-        $data = $request->all();
-        Log::info('ویب ہک ڈیٹا:', $data);
-        return response()->json(['message' => 'ویب ہک وصول کیا گیا اور پروسیس ہوا']);
-    // ایک جواب واپس کریں
 
+    public function handle(Request $request)
+    {
+        // Parse the JSON data from the request
+        $data = json_decode($request->getContent());
+
+        // Check if the data has the expected structure
+        if (isset($data->action) && isset($data->changes)) {
+            // Log the webhook data
+            Log::info('Webhook received', ['data' => $data]);
+
+            // You can access the fields like this:
+            $organizationId = $data->organizationId;
+            $action = $data->action;
+            $changes = $data->changes;
+
+            // For example, if you want to access the "kyc-level" change:
+            if (isset($changes->{'kyc-level'})) {
+                $kycLevel = $changes->{'kyc-level'};
+                // Log the kyc-level change
+                Log::info('kyc-level change', ['kyc-level' => $kycLevel]);
+            }
+
+            // Return a response to the webhook provider, if needed
+            return response()->json(['message' => 'Webhook received successfully']);
+        } else {
+            // Log an error if the data is invalid
+            Log::error('Invalid webhook data', ['data' => $data]);
+            return response()->json(['error' => 'Invalid webhook data'], 400);
+        }
     }
 
     public function esignatures(Request $request)
