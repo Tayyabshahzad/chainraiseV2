@@ -35,25 +35,51 @@ class WebhookController extends Controller
 
     public function handle(Request $request)
     {
+
+
+        // // Tran Fail
+
+        // { "organizationId": "0a67a991-1797-4de3-a55a-70c0816b7418", "action": "payment-transaction-processing-finished", "id": "ba4b4962-340d-4f45-95b3-b81dd7343f45", "resourceId": "6d5b062e-fe9c-4909-8a9f-11755f3058bf", "resourceType": "Transaction", "createdAtUtc": "2022-12-08T14:20:42.1833098+00:00", "changes": { "payment-id": "19ebc0d8-0369-4604-b7b0-0d97989f58c1", "transaction-details": "Error occurred while executing transaction", "transaction-status": "Failed" } }
+
+        // // Tran Success
+
+        // { "organizationId": "0a67a991-1797-4de3-a55a-70c0816b7418", "action": "payment-transaction-processing-finished", "id": "b54113b0-013a-44df-bf35-545f62d49876", "resourceId": "302b11ad-3a45-4322-b791-9025bd76f4d0", "resourceType": "Transaction", "createdAtUtc": "2022-12-21T14:37:48.5788525+00:00", "changes": { "payment-id": "4908d215-08aa-4ede-a47b-4179c6a8d23f", "transaction-details": null, "transaction-status": "Completed" } }
+
+        // //Successful completion of internal payment between custodial accounts
+
+        // { "organizationId": "0a67a991-1797-4de3-a55a-70c0816b7418", "action": "payment-transaction-processing-finished", "id": "703ed69a-5732-4fb7-add8-9cb2feae1a52", "resourceId": "888a413b-46ce-40c3-a0e6-41f6e3666a8c", "resourceType": "Transaction", "createdAtUtc": "2022-12-09T10:33:24.2364551+00:00", "changes": { "payment-id": "c283f93f-68d8-4412-b340-b2ffcd288187", "transaction-details": null, "transaction-status": "Completed" }
+
+        // //ACH deposit, when limit is exceeded
+
+        // { "organizationId": "a8b4fc9e-4803-47c6-9671-f0a386c095c9", "action": "payment-transaction-processing-finished", "id": "c627c873-318b-4ca3-acfa-3f8498fb3db2", "resourceId": "f50104e3-5bed-49c7-964c-cf3c3fcd4a0d", "resourceType": "Transaction", "createdAtUtc": "2022-12-21T11:28:00.7236592+00:00", "changes": { "payment-id": "c6c5a0d2-5c06-4a3b-9535-bdd8210dd222", "transaction-details": "Error occurred while executing transaction", "transaction-status": "Failed" } }
+
+
+
+
         // Get the JSON data from the request
         $data = $request->json()->all();
-
         // Check if the data has the expected structure
         if (isset($data['action']) && isset($data['changes'])) {
             // Log the webhook data
             Log::info('Webhook data received', ['data' => $data]);
-
             // You can access the fields like this:
             $organizationId = $data['organizationId'];
+            $resourceId = $data['resourceId'];
             $action = $data['action'];
             $changes = $data['changes'];
-
-            // For example, if you want to access the "kyc-level" change:
-            if (isset($changes['kyc-level'])) {
-                $kycLevel = $changes['kyc-level'];
-                // Log the kyc-level change
-                Log::info('kyc-level change', ['kyc-level' => $kycLevel]);
+            $user = User::where('fortress_personal_identity',$resourceId)->first();
+            if($user){
+                if (isset($changes['kyc-level'])) {
+                    $kycLevel = $changes['kyc-level'];
+                    dd($kycLevel);
+                    Log::info('kyc-level change', ['kyc-level' => $kycLevel]);
+                }
+            }else{
+                Log::info('Invalid Data');
             }
+            dd($resourceId);
+            // For example, if you want to access the "kyc-level" change:
+
 
             // Return a response to the webhook provider, if needed
             return response()->json(['message' => 'Webhook received successfully']);
