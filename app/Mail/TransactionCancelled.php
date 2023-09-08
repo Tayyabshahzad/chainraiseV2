@@ -22,7 +22,7 @@ class TransactionCancelled extends Mailable
     public $offer;
     public function __construct($data,$offer)
     {
-        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@invest.chainraise.io');
+        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@investchainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);
         $this->data = $data;
@@ -38,7 +38,7 @@ class TransactionCancelled extends Mailable
     {
         return new Envelope(
             subject: 'Chainraise - Transaction Cancelled',
-            from: 'noreply@invest.chainraise.io',
+            from: 'noreply@investchainraise.io',
         );
     }
 

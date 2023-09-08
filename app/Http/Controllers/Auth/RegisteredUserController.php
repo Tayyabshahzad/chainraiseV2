@@ -7,6 +7,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $user->assignRole('investor');
-        Mail::to($user->email)->send(new WelcomeEmail($user));
+        try{
+            Mail::to($user->email)->send(new WelcomeEmail($user));
+        }catch(Exception $e){
+
+        }
+
         event(new Registered($user));
         //return redirect()->route('dashboard');
         Auth::login($user);

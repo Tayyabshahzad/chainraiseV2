@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\UPDATEKYC;
+use Illuminate\Support\Facades\Mail;
 class FrontendController extends Controller
 {
 
@@ -301,7 +303,7 @@ class FrontendController extends Controller
                                     ]
                         );
                     }
-                    //Mail::to($user->email)->send(new UPDATEKYC($user));
+                    Mail::to($user->email)->send(new UPDATEKYC($user));
                     return response([
                         'status' => $upgrade_existing_l0->status(),
                         'success' => true,
@@ -350,7 +352,7 @@ class FrontendController extends Controller
                         );
 
                     }
-                    //Mail::to($user->email)->send(new UPDATEKYC($user));
+                    Mail::to($user->email)->send(new UPDATEKYC($user));
 
                     return response([
                         'status' => $upgrade_existing_l0->status(),
@@ -458,7 +460,9 @@ class FrontendController extends Controller
                     'dob' => $request->dob,
                 ]);
             $user->save();
+
         }catch(Exception $error){
+
             return response([
                 'status' => false,
                 'success' => false,
@@ -675,7 +679,7 @@ class FrontendController extends Controller
                                 ]
                     );
                 }
-                //Mail::to($user->email)->send(new UPDATEKYC($user));
+                Mail::to($user->email)->send(new UPDATEKYC($user));
                 return response([
                     'status' => $upgrade_existing_l0->status(),
                     'success' => true,
@@ -725,7 +729,7 @@ class FrontendController extends Controller
                     );
 
                 }
-                //Mail::to($user->email)->send(new UPDATEKYC($user));
+                Mail::to($user->email)->send(new UPDATEKYC($user));
 
                 return response([
                     'status' => $upgrade_existing_l0->status(),

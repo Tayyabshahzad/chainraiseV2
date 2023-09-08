@@ -33,7 +33,7 @@ class UploadDocument extends Mailable
     {
         return new Envelope(
             subject: 'Documents Uploaded',
-            from: new Address('noreply@chainraise.io','CEO ChainRaise'),
+            from: new Address('noreply@investchainraise.io','CEO ChainRaise'),
         );
     }
 
