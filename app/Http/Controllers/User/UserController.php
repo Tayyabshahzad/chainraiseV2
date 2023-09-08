@@ -1044,4 +1044,29 @@ class UserController extends Controller
         return redirect()->back()->with('success','Document Uploaded');
 
     }
+
+
+
+    public function updateUserStatus($id){
+        $user = User::find($id);
+
+        if($user->status == 'active'){
+            $k = 'active';
+        }elseif($user->check_kyc == false){
+            $kyc = true;
+        }
+        $user->status = 'active';
+        $user->save();
+        try{
+            Mail::to($user)->send(new UserStatusUpdate($user));
+        }catch(Exception $err){
+            dd($err);
+        }
+
+        $data = 'Enabled';
+        return response([
+            'data'=>$data,
+            'status'=>true
+        ]);
+    }
 }

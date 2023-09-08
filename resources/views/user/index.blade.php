@@ -315,16 +315,17 @@
                                                                     @if (Auth::user()->id == $user->id) disabled @endif
                                                                     data-id="{{ $user->id }}"> <i
                                                                         class="la la-trash fs-3 text-danger"></i> </a>
-                                                                @if ($user->roles->pluck('name')->implode(' ') == 'issuer')
+
                                                                     <a href="#"
                                                                         class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm me-3"
-                                                                        title="Update KYC/AML Status">
+                                                                        title="Profile Status">
                                                                         <input type="checkbox"
-                                                                            @if ($user->check_kyc == true) @checked(true)  @else @checked(false) @endif
-                                                                            class="update_aml_status"
-                                                                            data-id="{{ $user->id }}">
+                                                                            @if ($user->status == 'active') checked disabled (true)  @else @checked(false) @endif
+                                                                            class="update_user_profile_status" value="active"
+                                                                            data-id="{{ $user->id }}"
+                                                                            data-status="{{ $user->status }}">
                                                                     </a>
-                                                                @endif
+
                                                             </th>
 
 
@@ -664,20 +665,20 @@
 
         });
 
-        $('body').on('click', '.update_aml_status', function() {
+        $('body').on('click', '.update_user_profile_status', function() {
             var userId = $(this).data('id');
-            var url = "{{ route('user.update.kyc.check', ['id' => ':userId']) }}";
+            var url = "{{ route('user.update.user.status', ['id' => ':userId']) }}";
             url = url.replace(':userId', userId);
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(response) {
                     if (response.status == true) {
-                        toastr.success('KYC / AML Status Has Been Updated', "Success");
+                        toastr.success('User Status Has Been Updated', "Success");
                         if (response.data == 'Disabled') {
-                            $('.update_aml_status').prop('checked', false);
+                            $('.update_user_profile_status').prop('checked', false);
                         } else {
-                            $('.update_aml_status').prop('checked', true);
+                            $('.update_user_profile_status').prop('checked', true);
                         }
 
 

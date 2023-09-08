@@ -48,8 +48,8 @@ class WelcomeEmail extends Mailable
     {
 
         return new Envelope(
-            subject: 'Chainraise - Transaction Canceled',
-            from: new Address('noreply@chainraise.io','CEO ChainRaise'),
+            subject: 'Chainraise - Welcome',
+            from: new Address('noreply@investchainraise.io','CEO ChainRaise'),
 
         );
     }

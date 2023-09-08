@@ -21,7 +21,7 @@ class TransactionCreated extends Mailable
     public $data;
     public function __construct($data)
     {
-        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@invest.chainraise.io');
+        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@investchainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);
         $this->data = $data;
@@ -36,7 +36,7 @@ class TransactionCreated extends Mailable
     {
         return new Envelope(
             subject: 'Chainraise - Transaction Approved',
-            from: 'noreply@invest.chainraise.io',
+            from: 'noreply@investchainraise.io',
         );
     }
     /**

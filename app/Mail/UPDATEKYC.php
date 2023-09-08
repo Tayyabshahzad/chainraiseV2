@@ -33,7 +33,7 @@ class UPDATEKYC extends Mailable
     {
         return new Envelope(
             subject: 'KYC Status Updated',
-            from: 'noreply@invest.chainraise.io',
+            from: 'noreply@investchainraise.io',
         );
     }
 
