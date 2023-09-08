@@ -1,7 +1,9 @@
 <?php
 
+
 namespace App\Mail;
 
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -35,8 +37,9 @@ class UserStatusUpdate extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Chainraise - KYC Status Update',
-            from: 'noreply@investchainraise.io',
+            subject: 'Chainraise - Account Approved',
+            from: new Address('noreply@investchainraise.io','CEO ChainRaise'),
+
         );
     }
 

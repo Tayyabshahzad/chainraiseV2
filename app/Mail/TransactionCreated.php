@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class TransactionCreated extends Mailable
 {
@@ -36,7 +37,7 @@ class TransactionCreated extends Mailable
     {
         return new Envelope(
             subject: 'Chainraise - Transaction Created',
-            from: 'noreply@investchainraise.io',
+            from: new Address('noreply@investchainraise.io','CEO ChainRaise'),
         );
     }
     /**
