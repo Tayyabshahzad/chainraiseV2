@@ -23,7 +23,7 @@ class UserStatusUpdate extends Mailable
     public $data;
     public function __construct($data)
     {
-        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@investchainraise.io');
+        $fromAddress = env('MAIL_FROM_ADDRESS', 'portal@chainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);
         $this->data = $data;
@@ -38,7 +38,7 @@ class UserStatusUpdate extends Mailable
     {
         return new Envelope(
             subject: 'Chainraise - Account Approved',
-            from: new Address('noreply@investchainraise.io','CEO ChainRaise'),
+            from: new Address( env('MAIL_FROM_ADDRESS', 'portal@chainraise.io'),'CEO ChainRaise'),
 
         );
     }
