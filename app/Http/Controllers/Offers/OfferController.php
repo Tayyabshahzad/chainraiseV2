@@ -16,6 +16,7 @@ use App\Models\CallToAction;
 use App\Models\OfferContact;
 use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
+use App\Models\Media;
 use App\Models\OfferFAQ;
 use App\Models\OfferDetailTab;
 use Illuminate\Support\Carbon;
@@ -816,6 +817,47 @@ class OfferController extends Controller
             return response([
                 'status'=>false,
                 'message'=> 'Error while deleting Video'
+            ]);
+        }
+
+    }
+
+    public function updateDocument(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+        ]);
+
+        $media = Media::find($request->id);
+        $media->name  =  $request->name;
+        $media->save();
+
+        return response([
+            'status'=>true,
+            'message'=> 'Document title has been updated successfully'
+        ]);
+
+
+
+    }
+
+    public function deleteDocument(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+        ]);
+        try{
+            $doc = DB::table('media')->where('id',$request->id)->delete();
+
+            return response([
+                'status'=>true,
+                'message'=> 'Document has been deleted successfully'
+            ]);
+        }catch(Exception $error){
+            return response([
+                'status'=>false,
+                'message'=> 'Error while deleting Document'
             ]);
         }
 

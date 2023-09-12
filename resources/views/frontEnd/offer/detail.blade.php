@@ -282,13 +282,15 @@
                                 <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-center" style="margin-bottom:6%!important">
                                     @if($manual_offer_document->type == "image")
                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                            <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
+                                            <img src="{{ $manual_offer_document->getUrl() }}" alt=""  height="250" width="250">
                                         </a>
                                     @elseif($manual_offer_document->type == "pdf")
                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
                                             <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90">
                                         </a>
                                     @endif
+                                    <br><br>
+                                    <h3>  {{ Str::ucfirst($manual_offer_document->name )}} </h3>
                                 </div>
                             @endforeach
                     </div>

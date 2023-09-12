@@ -9,7 +9,6 @@ use App\Models\Folder;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Exports\UsersExport;
@@ -19,7 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Password;
-
+use App\Events\EmailSent;
 class UpdateBasicDetailController extends Controller
 {
     public function updateDocument(Request $request)
@@ -228,6 +227,7 @@ class UpdateBasicDetailController extends Controller
             'content' => 'required',
             'user_ids' => 'required',
         ]);
+
         $users = explode(',', $request->user_ids);
         $user_count = count($users);
         $resetPassword = $request->has('reset_password');
@@ -242,6 +242,7 @@ class UpdateBasicDetailController extends Controller
                 $emailContentWithResetLink = $emailContent;
             }
             Mail::to($userInstance)->send(new SendInvite($emailContentWithResetLink, $request->from_email, $request->from_email));
+
         }
         return response([
             'status'=>true,
