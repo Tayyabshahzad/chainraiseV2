@@ -567,10 +567,17 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <hr>
+                                                                <hr><hr>
                                                                 @foreach($slider_images as $slider_image)
-                                                                    <div class="col-lg-4">
-                                                                        <img src="{{ $slider_image->getUrl() }}" alt="" class="img img-thumbnail" width="200">
+                                                                    <div class="col-lg-4 text-center" style="margin-bottom: 15px">
+                                                                        <img src="{{ $slider_image->getUrl() }}" alt="" class="img img-thumbnail"
+                                                                        style="width:200px!important;height:200px"
+                                                                        width="200" height="200">
+
+                                                                        <hr/>
+                                                                        <button type="button" class="btn btn-sm btn-danger">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </button>
                                                                     </div>
                                                                 @endforeach
 
@@ -596,16 +603,33 @@
                                                         <div class="row">
                                                             <hr>
                                                             @foreach($manual_offer_documents as $manual_offer_document)
-                                                                <div class="col-lg-4 mb-10">
+
+
+                                                                <div class="col-lg-4 mb-10 mt-10">
                                                                     @if($manual_offer_document->type == "image")
                                                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                                                            <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250">
+                                                                            <img src="{{ $manual_offer_document->getUrl() }}" alt="" width="250"
+                                                                            style="width:200px!important;height:200px">
                                                                         </a>
                                                                     @elseif($manual_offer_document->type == "pdf")
                                                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                                                            <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90">
+                                                                            <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90"
+                                                                             style="width:200px!important;height:200px">
                                                                         </a>
                                                                     @endif
+
+                                                                    <div class="row mt-10">
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text"  class="form-control docName" name="document_name"
+                                                                            value="{{ $manual_offer_document->name }}" >
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <button type="button" data-id="{{ $manual_offer_document->id }}"
+                                                                            class="btn btn-sm btn-info updateDocumentName"> Update </button>
+                                                                            <i class="btn btn-sm btn-danger fa fa-trash deleteDocument" data-id="{{ $manual_offer_document->id }}"></i>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             @endforeach
                                                         </div>
@@ -1105,6 +1129,63 @@
                 }
             });
         });
+
+
+        $('.updateDocumentName').click(function(){
+            var id = $(this).data('id');
+            var name =  $('.docName').val();
+            $.ajax({
+                    url: "{{ route('offers.document.update') }}",
+                    method: "GET",
+                    data: {
+                        id: id,
+                        name: name,
+                    },
+                    success: function(result) {
+                        if (result.status == true) {
+                            toastr.success(result.message, "Success");
+
+                        } else {
+                            toastr.error(result.message, "Error");
+                        }
+                    }
+            });
+        });
+
+        $('.deleteDocument').click(function(){
+            var id = $(this).data('id');
+            Swal.fire({
+                title: "Are you sure to delete this document?",
+                text: "This action can't undo are you sure to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes Delete"
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "{{ route('offers.document.delete') }}",
+                        method: "GET",
+                        data: {
+                            id: id,
+                        },
+                        success: function(result) {
+                            if (result.status == true) {
+                                toastr.success(result.message, "Success");
+                                location.reload();
+                            } else {
+                                toastr.error(result.message, "Error");
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+
+
+
+
+
         $('.add_feature_video_btn').click(function() {
             var videourl = $('.video_url').val();
             $('.feture_video_url').val(videourl);

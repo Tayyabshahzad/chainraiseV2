@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         PaymentStatusUpdated::class => [
             HandlePaymentStatusUpdate::class,
         ],
+        EmailSent::class => [
+            LogEmailSent::class,
+        ],
     ];
 
     /**

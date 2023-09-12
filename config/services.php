@@ -20,19 +20,19 @@ return [
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
         'scheme' => 'https',
     ],
-    
+
     'google' => [
         'client_id' => '267275484890-dabde5ler61qd3lpa4k2t7ft2e0fga3d.apps.googleusercontent.com',
         'client_secret' => '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',
         'redirect' => env('APP_URL').'/login/google/callback',
-    ], 
+    ],
 
     'facebook' => [
         'client_id' => '1600777097062911',
         'client_secret' => '110fa51eadb59f8993d82c30a03a62cf',
         'redirect' => env('APP_URL').'/login/facebook/callback',
-    ], 
- 
+    ],
+
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
@@ -42,6 +42,10 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'sendgrid' => [
+        'api_key' => env('SENDGRID_API_KEY'),
     ],
 
 ];
