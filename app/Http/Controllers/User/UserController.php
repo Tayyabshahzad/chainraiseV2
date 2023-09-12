@@ -1057,6 +1057,7 @@ class UserController extends Controller
         }
         $user->status = 'active';
         $user->save();
+
         try{
             Mail::to($user)->send(new UserStatusUpdate($user));
         }catch(Exception $err){
