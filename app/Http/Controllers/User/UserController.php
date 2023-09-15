@@ -222,7 +222,8 @@ class UserController extends Controller
             }
 
         } catch (Exception $error) {
-            return response([
+//dd($error);           
+ return response([
                 'status' => false,
                 'message' => 'Error while deleting user'
             ]);
