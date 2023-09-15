@@ -449,7 +449,7 @@
                                                                                                                 <tr>
                                                                                                                     <td style="vertical-align: top; line-height: 1.3; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 19px;"
                                                                                                                         valign="top">
-                                                                                                                        <a href="http://example.com"
+                                                                                                                        <a href="https://www.facebook.com/chainraise.io"
                                                                                                                             style="text-decoration: none;">
                                                                                                                             <img src="{{ asset('assets/email_images/facebook-gray.png') }}"
                                                                                                                                 width="20"
@@ -458,7 +458,7 @@
                                                                                                                                 style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
                                                                                                                         </a>
                                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
+                                                                                                                        <a href="https://twitter.com/chainraise_io"
                                                                                                                             style="text-decoration: none;">
                                                                                                                             <img src="{{ asset('assets/email_images/twitter-gray.png') }}"
                                                                                                                                 width="21"
@@ -467,7 +467,7 @@
                                                                                                                                 style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
                                                                                                                         </a>
                                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
+                                                                                                                        <a href="https://www.instagram.com/chainraise.io"
                                                                                                                             style="text-decoration: none;">
                                                                                                                             <img src="{{ asset('assets/email_images/instagram-gray.png') }}"
                                                                                                                                 width="21"
@@ -476,14 +476,7 @@
                                                                                                                                 style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
                                                                                                                         </a>
                                                                                                                         <span>&nbsp;&nbsp;</span>
-                                                                                                                        <a href="http://example.com"
-                                                                                                                            style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png') }}"
-                                                                                                                                width="20"
-                                                                                                                                height="20"
-                                                                                                                                alt=""
-                                                                                                                                style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; font-size: 14px; color: #151515;">
-                                                                                                                        </a>
+
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                             </tbody>

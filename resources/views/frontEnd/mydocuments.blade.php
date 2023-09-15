@@ -158,21 +158,7 @@
             @endforeach
 
 
-            <div class="col-12 " style="margin-top:5%">
-                <p>
-                    Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings. This
-                    fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in other
-                    ways. Issuers may pay additional fees for specified services ChainRaise provides, including
-                    reimbursement of any expenses ChainRaise incurs on their behalf. ChainRaise discloses its
-                    compensation for each offering in which an issuer invests. If an issuer pays ChainRaise in whole or
-                    in part with its own issuing securities, these securities will always be the same class offered to
-                    investors on the ChainRaise Portal.
 
-                    ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
-                    For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of privately
-                    held securities. Every secondary transaction is unique, and fees will differ per transaction.
-                </p>
-            </div>
         </div>
     </div>
 

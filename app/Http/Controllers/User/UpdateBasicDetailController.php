@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Mail\SendInvite;
 use App\Models\Document;
+use App\Models\EmailLog;
 use App\Models\Folder;
 use App\Models\User;
 use Exception;
@@ -242,7 +243,15 @@ class UpdateBasicDetailController extends Controller
                 $emailContentWithResetLink = $emailContent;
             }
             Mail::to($userInstance)->send(new SendInvite($emailContentWithResetLink, $request->from_email, $request->from_email));
-
+            $data = $request->content;
+            $emailRecord = new EmailLog;
+            $emailRecord->type = 'invite';
+            $emailRecord->status = 'send';
+            $emailRecord->to = $userInstance->email;
+            $emailRecord->from = env('MAIL_FROM_ADDRESS');
+            $emailRecord->subject = 'invite';
+            $emailRecord->body = $data;
+            $emailRecord->save();
         }
         return response([
             'status'=>true,

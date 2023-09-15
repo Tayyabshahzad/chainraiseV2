@@ -22,6 +22,7 @@ class TransactionCancelled extends Mailable
     public $offer;
     public function __construct($data,$offer)
     {
+
         $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@investchainraise.io');
         $fromName = env('MAIL_FROM_NAME', 'Chainraise');
         $this->from($fromAddress, $fromName);

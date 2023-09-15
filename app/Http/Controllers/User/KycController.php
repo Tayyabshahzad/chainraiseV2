@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\EmailLog;
 use Exception;
 use Carbon\Carbon;
 use App\Models\KYC;
@@ -438,6 +439,17 @@ class KycController extends Controller
                     ['kyc_level' => $json_check_user_kyc_level['kycLevel'],'doc_status'=>$docStatus]
                 );
                 Mail::to($user->email)->send(new UPDATEKYC($user));
+                $data = "<span> Dear  $user->name  <br/>
+                YOUR KYC STATUS HAS BEEN UPDATED , YOUR CURRENT KYC STATUS IS: <span style='color:rgb(243, 50, 50)'>
+                $user->kyc->kyc_level)  </span>";
+                $emailRecord = new EmailLog;
+                $emailRecord->type = 'kyc-update';
+                $emailRecord->status = 'send';
+                $emailRecord->to = $user->email;
+                $emailRecord->from = env('MAIL_FROM_ADDRESS');
+                $emailRecord->subject = 'Kyc Status Update';
+                $emailRecord->body = $data;
+                $emailRecord->save();
                 return response([
                     'status' => $check_user_kyc_level->status(),
                     'success'  => true,

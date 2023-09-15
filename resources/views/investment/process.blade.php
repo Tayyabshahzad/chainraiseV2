@@ -73,9 +73,11 @@
                             used
                             for any purpose beyond executing your investment.</p>
 
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#kyc_data_modal"
+
+                        <button type="button"
+                            @if(Auth::user()->fortress_id == null) data-bs-toggle="modal" data-bs-target="#kyc_data_modal"  @else  disabled  @endif
                             class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill show_user_detail_form">
-                            Verify My Identity
+                            Verify My Identity   @if(Auth::user()->fortress_id != null) <small> (Your KYC Is Completed) </small>  @endif
                         </button>
 
                         <svg class="spinner d-none" width="24" height="24" viewBox="0 0 24 24"
@@ -116,7 +118,7 @@
                             <circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" />
                         </svg>
                     </div>
-                    <div class="my-5  bank_wrapper  d-none ">
+                    <div class="my-5  bank_wrapper  @if(Auth::user()->fortress_id == null) d-none @endif ">
                         <h4 class="fw-bolder">4. Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
@@ -145,7 +147,7 @@
                                 <p>Pay using a Wire Transfer:</p>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#payment_wire"
                                     class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill payment_wire_button">
-                                    Select ACH Bank Account
+                                    Select Wire Transfer
                                 </button>
                             </div>
 
@@ -475,7 +477,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 ssn_number_container d-none ">
+                            <div class="col-md-12 ssn_number_container
+                            @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality != 'US') d-none @endif">
                                 <div class="row mt-3">
                                     <div class="col-lg-3">
                                         <label for="ssn-number" class=" col-form-label"><span
@@ -509,7 +512,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-none document_upload_container">
+                            <div class="document_upload_container
+                            @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality == 'US')  d-none @endif">
                                 <div class="col-md-12  " >
                                     <div class="row mt-3">
                                         <div class="col-lg-3">
@@ -535,9 +539,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 mt-3">
-                                    <div
-                                        class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
+                                <div class="col-lg-12 mt-3 ">
+                                    <div class="notice bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
                                         <div
                                             class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
                                             <div class="col-lg-12 mb-5">
@@ -559,9 +562,8 @@
                             </div>
 
 
-                            <div class="col-12 text-center run_process_button mb-3 d-none">
-                                <button
-                                    class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold submit_button"
+                            <div class="col-12 text-center run_process_button mb-3   ">
+                                <button  class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold submit_button"
                                     type="submit"> Run KYC </button>
                             </div>
                         </form>
@@ -981,28 +983,22 @@
 
     <script>
         $(document).ready(function() {
-
-
             // Get references to the input fields
             const $current_investment_limit = $('.current_investment_limit');
             const $update_investment_limits = $('.update_investment_limits');
             const $total_investment_limit = $('.total_investment_limit').val();
             // Add an input event listener to input1 using jQuery
-
             $update_investment_limits.on('input', function() {
                 $result  = (parseFloat($total_investment_limit) - parseFloat($update_investment_limits.val()));
                 $current_investment_limit.val($result)
                 $('#investment_limit_label').html($result)
             });
-
-
-
             $('.nationality').on('change', function() {
                 $val = $(this).val();
                 if($val == 'US'){
                         $('.ssn_number_container').removeClass('d-none')
                         $('.document_upload_container').addClass('d-none')
-                        $()
+
                 }else{
                         $('.ssn_number_container').addClass('d-none')
                         $('.document_upload_container').removeClass('d-none')
@@ -1016,7 +1012,6 @@
 
      <script>
         $(document).ready(function() {
-
             $('#make_investment_form').submit(function(e) {
             // Check if the checkbox is checked
             var isChecked = $('.esing_check').is(':checked');

@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style-v4.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -31,9 +30,9 @@
                 <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo" class="logo-mob">
             </a>
             <div>
-                <button type="button" class="navbar-toggler btn text-white px-3 py-2 fs-6 border-0 rounded-pill"
+                <a href="{{ route('index') }}" class="navbar-toggler btn text-white px-3 py-2 fs-6 border-0 rounded-pill"
                     style="background-color:#43C3FE;">INVEST
-                </button>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -76,11 +75,11 @@
                                     </span></a></li>
                         </ul>
                     </li>
-                    <a class="nav-link me-3 fw-semibold" href="#">RAISE CAPITAL</a>
+                    <a class="nav-link me-3 fw-semibold" href="https://chainraise.io/rc/" target="_blank" >RAISE CAPITAL</a>
                 </ul>
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <button type="button" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
-                        style="background-color:#43C3FE;">INVEST</button>
+                    <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
+                        style="background-color:#43C3FE;">INVEST</a>
 
                     @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
@@ -96,8 +95,14 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{ asset('assets/v3-images/avatar-user.png') }}" width="45"
-                                            height="45" class="rounded-circle" alt="avatar-img">
+                                        @if(Auth::user()->getFirstMediaUrl('user_profile_photo_collection', 'thumb'))
+                                            <img src="{{ Auth::user()->getFirstMediaUrl('user_profile_photo_collection', 'thumb') }}"
+                                             width="45"    height="45" class="rounded-circle" alt="avatar-img">
+                                        @else
+                                            <img src="{{ asset('assets/v3-images/avatar-user.png') }}"
+                                            width="45"    height="45" class="rounded-circle" alt="avatar-img">
+                                        @endif
+
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -149,24 +154,38 @@
                 <p class="fw-semibold">Copyright@ 2022 ChainRaise LLC | All rights reserved.</p>
                 <div class="mb-3">
                     <!-- Linkedin -->
-                    <i class="bi bi-linkedin me-4"></i>
-                    <!-- Twitter -->
-                    <i class="bi bi-instagram me-4"></i>
-                    <!-- Instagram -->
-                    <i class="bi bi-twitter me-4"></i>
+                    <a target="_blank" href="https://www.linkedin.com/company/chainraise-io/">
+                        <i class="bi bi-linkedin me-4"></i>
+                    </a>
+                    <a target="_blank" href="https://www.instagram.com/chainraise.io">
+                        <i class="bi bi-instagram me-4"></i>
+                    </a>
+                    <a target="_blank" href="https://www.facebook.com/chainraise.io">
+                        <i class="bi bi-facebook me-4"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/chainraise_io">
+                        <i class="bi bi-twitter me-4"></i>
+                    </a>
+
+
+
                 </div>
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-2 col-4"><button type="button"
+                        <div class="col-lg-2 col-4">
+                                <a target="_blank" href="https://chainraise.io/wp-content/uploads/2022/09/NEW-Educational-Materials-ChainRaise-Portal-LLC-9_28_22.docx.pdf "
                                 class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Educational
-                                Materials</button></div>
-                        <div class="col-lg-2 col-4"><button type="button"
-                                class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Privacy
-                                Policy</button>
+                                Materials</a>
                         </div>
-                        <div class="col-lg-2 col-4"><button type="button"
+                        <div class="col-lg-2 col-4">
+                            <a  target="_blank" href="https://chainraise.io/wp-content/uploads/2022/05/Privacy-Policy-ChainRaise-LLC-2.pdf"
+                                class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Privacy
+                                Policy</a>
+                        </div>
+                        <div class="col-lg-2 col-4">
+                            <a target="_blank" href="https://chainraiseio.wpengine.com/wp-content/uploads/2022/05/Terms-of-Use-ChainRaise.pdf"
                                 class="btn btn-link text-dark text-decoration-none fw-semibold px-0">Terms
-                                of Use</button></div>
+                                of Use</a></div>
                     </div>
                 </div>
             </div>
@@ -214,6 +233,23 @@
                     </p>
                     <p>Thankyou for using the Site. If you have questions, please contact us at info@chainraise.io
                     </p>
+
+                    <hr>
+                    <p>
+                        Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings. This
+                        fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in other
+                        ways. Issuers may pay additional fees for specified services ChainRaise provides, including
+                        reimbursement of any expenses ChainRaise incurs on their behalf. ChainRaise discloses its
+                        compensation for each offering in which an issuer invests. If an issuer pays ChainRaise in whole or
+                        in part with its own issuing securities, these securities will always be the same class offered to
+                        investors on the ChainRaise Portal.
+
+                        ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
+                        For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of privately
+                        held securities. Every secondary transaction is unique, and fees will differ per transaction.
+                    </p>
+
+
                 </div>
             </div>
         </div>
@@ -288,14 +324,14 @@
                                             </label>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-7 d-flex align-items-center justify-content-end m-0 p-0">
+                                    <div class="col-7 d-flex align-items-left m-0 p-0">
                                             <div class="form-group ">
-                                                <button type="button" class="btn btn-link" href="#" data-bs-dismiss="modal"
+                                                <button type="button" class="btn btn-link"    data-bs-dismiss="modal"
                                                     data-bs-toggle="modal" data-bs-target="#reset-popup"
                                                     style="font-size: 14px; font-weight: 500;"> Forgot your
                                                     password?</button>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
@@ -410,6 +446,48 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <div class="modal fade" id="reset-popup" tabindex="-1" aria-labelledby="reset-popup"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content py-lg-3">
+            <div class="modal-header m-auto pt-4 pb-0 border-0">
+                <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Chain Rasied Logo"
+                    width="250" height="50" />
+            </div>
+            <div class="modal-body">
+                <h5 style="color: #000000; text-align: center; font-weight: 600;">Reset Password</h5>
+                <div class="container-fluid">
+                    <form id="resetPasswordFrom" method="post"  >
+                        @csrf
+                        <div class="d-flex flex-column text-center">
+                            <label class="text-danger error error_message"></label>
+                            <label class="text-success success success_message"></label>
+                            <div class="my-3">
+                                <input type="email" class="form-control rounded-pill border-dark" required
+                                    id="email" placeholder="Your email address..." name="email">
+                                @error('email')
+                                    <span class="text-danger " style="font-size:13px"> {{ $message }} </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
+                            <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill"  type="submit">Send Reset Password Link</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
@@ -579,6 +657,57 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+            $('#resetPasswordFrom').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Please enter your email",
+                        email: "Please enter a valid email address"
+                    }
+                },
+                submitHandler: function(form) {
+                    var formData = $('#resetPasswordFrom').serialize();
+                    $('.error_message').text('');
+                    $('.success_message').text('');
+                    $('.submit_button').prop('disabled', true);
+                    $('.submit_button').text('Loading ...');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('password.email') }}",
+                        data: formData,
+                        success: function(response) {
+                            console.log(response)
+                            $('.success_message').text(  'Reset Password Link Sent To Your Email (Page Reloading .....)');
+                            setTimeout(function() {
+                                // location.reload();
+                                window.location = response.route;
+                            }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                            var errorMessage = JSON.parse(xhr.responseText);
+                            $(".error_message").css("display", "");
+                            $('.error_message').text(errorMessage.message);
+                            // $('.submit_button').prop('disabled ',false);
+                           // $('.submit_button').text('Sign In');
+                        }
+                    });
+                }
+            });
+        });
+
+
     </script>
 
 

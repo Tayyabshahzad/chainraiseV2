@@ -30,6 +30,8 @@ Route::get('emails', function(){
 });
 
 
+
+
 Route::get('patch-webhook', function(){
         $webhook_URL   = env('WebURL');
         $environment   = config('app.env');
@@ -125,8 +127,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
 });
 
 Route::get('importUsers', [WebhookController::class, 'importUsers']);
-
-
 Route::post('webhook/endpoint', [WebhookController::class, 'handle']);
 
  //https://chain-clone.test/webhook/esignatures
@@ -215,6 +215,7 @@ Route::group(['as'=> 'payment.','prefix'=>'users','middleware' => ['auth','verif
 });
 Route::group(['as'=> 'user.','prefix'=>'users','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\User'], function () {
     Route::get('index', ['as' => 'index','uses' => 'UserController@index']);
+    Route::get('email/logs', ['as' => 'email.log','uses' => 'UserController@emailLogs']);
     Route::get('get-childs', ['as' => 'childs','uses' => 'UserController@getChilds']);
     Route::get('details/{id}', ['as' => 'details','uses' => 'UserController@details']);
     Route::post('accountUpdate', ['as' => 'issuer.account.update','uses' => 'UserController@issuerAccountUpdate']);

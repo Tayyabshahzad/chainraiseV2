@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TransactionCancelled;
+use App\Models\EmailLog;
 use File;
 use CURLFile;
 use Exception;
@@ -342,6 +343,7 @@ class MakeInvestmentController extends Controller
             return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
         }
 
+
         try{
             $signature_name    = $offer->user->name;
             $signature_email   = $offer->user->email;
@@ -445,6 +447,7 @@ class MakeInvestmentController extends Controller
         }
 
 
+
         //  dd($json_esign_request['data']['contract']['status']);
 
         // if($request->investment_limit == 'yes'){
@@ -464,6 +467,7 @@ class MakeInvestmentController extends Controller
         if (!$custodial_account) {
             return redirect()->back()->with('error','Custodial Account Id Not Found for Selected Offer [Step 1]');
         }
+
 
         if($request->payment_type == 'ach'){
             $member_id = explode(',', $request->user_guid);
@@ -637,7 +641,7 @@ class MakeInvestmentController extends Controller
                     //Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
                     }
 
-                }elseif($request->payment_type == 'wire'){
+                    }elseif($request->payment_type == 'wire'){
                    // dd('wiew');
                         $order = new Order();
                         $order->offer_id = $offer->id;
@@ -682,19 +686,20 @@ class MakeInvestmentController extends Controller
                             'trnx_total_raised' => 0,
                             'trnx_last_cancel_date' => $offer->funding_end_date,
                         ];
-                    }
+                }
+                DB::commit();
+                //dd(1111);
+                Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
 
-                    DB::commit();
-                    //dd(1111);
-                    Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
-                    //dd(1111);
-                    return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
+
+
+                return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
 
             } catch (Exception $error) {
                     DB::rollBack();
                     $user = Auth::user();
                     Mail::to(Auth::user()->email)->send(new TransactionCancelled($user,$offer));
-                   // dd($error);
+
                 return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
             }
 

@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('email_logs', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->string('status');
             $table->string('to');
-            $table->string('subject');
-            $table->text('body');
+            $table->string('from');
+            $table->text('subject');
+            $table->longText('body');
             $table->timestamps();
-
         });
     }
 

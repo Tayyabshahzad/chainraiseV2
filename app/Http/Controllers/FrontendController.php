@@ -137,7 +137,6 @@ class FrontendController extends Controller
     }
 
     public function my_account(){
-
         $user = Auth::user();
         return view('frontEnd.myaccount',compact('user'));
     }
@@ -145,12 +144,42 @@ class FrontendController extends Controller
     public function my_account_update(Request $request){
         $user = Auth::user();
         try{
+
             $user->name = $request->legal_name;
             $user->net_worth = $request->net_worth;
             $user->annual_income = $request->annual_income;
             $user->are_you_accredited = $request->has('are_you_accredited') ? true : false;
             $user->phone = $request->phone;
             $user->cc = $request->cc;
+            $user->save();
+            $annualIncome = (int) str_replace(',', '', $user->net_worth);
+            $netWorth = (int) str_replace(',', '', $user->annual_income);
+            if($user->are_you_accredited == true){
+
+                if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
+                    $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
+                    $investmentLimit =    $accreditedInvestment;
+                }else{
+                    return response([
+                        'status' => false,
+                        'success' => false,
+                        'errors' => "If you are a Accredited Member then your Annual Income & Networth must be greater then or equals to ".number_format(124000),
+                    ]);
+                }
+            }else{
+                if (($annualIncome < 124000) || ($netWorth < 124000)) {
+                    $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
+                    $investmentLimit =  $nonAccreditedInvestment;
+                }else{
+                    return response([
+                        'status' => false,
+                        'success' => false,
+                        'errors' => "If you are not a Accredited Member then your Annual Income & Networth must be less then ".number_format(124000),
+                    ]);
+                }
+            }
+            $user->investment_limit = $investmentLimit;
+            $user->save();
             if($request->primary_contact_social_security == '999-99-9999'){
                 $ssn = $user->identityVerification->primary_contact_social_security;
             }else{
@@ -175,6 +204,9 @@ class FrontendController extends Controller
                     'dob' => $request->dob,
                 ]);
             $user->save();
+            if($request->hasFile('user_profile_photo')) {
+                $user->addMediaFromRequest('user_profile_photo')->toMediaCollection('user_profile_photo_collection');
+            }
         }catch(Exception $error){
             return response([
                 'status' => false,
@@ -460,7 +492,6 @@ class FrontendController extends Controller
                     'dob' => $request->dob,
                 ]);
             $user->save();
-
         }catch(Exception $error){
 
             return response([
@@ -469,6 +500,7 @@ class FrontendController extends Controller
                 'errors' => "There is some error while updating account - ['.$error.']",
             ]);
         }
+
 
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);
         $date_of_birth = $user->userDetail->dob;
@@ -532,6 +564,7 @@ class FrontendController extends Controller
                     }
                     if($status == 400){
                         $errors = $json_identity_containers['errors'];
+
                         return response([
                             'status' => $identity_containers->status(),
                             'success'  => false,
@@ -539,6 +572,7 @@ class FrontendController extends Controller
                             'step'=>'individual step 1',
                         ]);
                     }
+
                     return response([
                         'status' => $identity_containers->status(),
                         'success'  => false,
@@ -555,6 +589,7 @@ class FrontendController extends Controller
                     }
                 }
             }catch(Exception $identity_containers_error){
+
                 $errors[] = 'Error While Creating Identity Containers';
                 $errors[] = $identity_containers_error;
                 return response([
@@ -601,6 +636,7 @@ class FrontendController extends Controller
                         $errors[] = 'Error While Uploading '.$user->user_type.' documents';
                         $errors[] = $json_upload_document['errors'];
                         $errors[] = $json_upload_document['title'];
+
                         return response([
                             'status' => $upload_document->status(),
                             'success'  => false,
@@ -613,6 +649,7 @@ class FrontendController extends Controller
                             $errors[] = $json_upload_document['errors'];
                             $errors[] = $json_upload_document['title'];
                             $errors[] = 'Personal Identity Has Been Created But Error While Uploding Documents';
+
                             return response([
                                 'status' => $upload_document->status(),
                                 'success'  => false,
@@ -620,6 +657,7 @@ class FrontendController extends Controller
                             ]);
                         }
                         $errors[] = 'Error While uploading Documents';
+
                         return response([
                             'status' => $upload_document->status(),
                             'data'   => $json_upload_document,
@@ -629,6 +667,7 @@ class FrontendController extends Controller
                     }
                     if($upload_document->requestTimeout()){
                         $errors[] = 'Request Time OUT';
+
                         return response([
                             'status' => $upload_document->status(),
                             'data'   => $json_upload_document,
@@ -639,6 +678,7 @@ class FrontendController extends Controller
                 }catch(Exception $upload_document_error){
                     $errors[] = 'Error While uploading Documents';
                     $errors[] = $upload_document_error;
+
                     return response([
                         'data'   => $upload_document_error,
                         'success'  => false,
@@ -661,6 +701,7 @@ class FrontendController extends Controller
                 $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
                 if ($upgrade_existing_l0->failed()) {
                     $errors[] = $upgrade_existing_l0['title'];
+
                     return response([
                         'status' => $upgrade_existing_l0->status(),
                         'success' => false,
@@ -680,6 +721,7 @@ class FrontendController extends Controller
                     );
                 }
                 Mail::to($user->email)->send(new UPDATEKYC($user));
+
                 return response([
                     'status' => $upgrade_existing_l0->status(),
                     'success' => true,
@@ -687,6 +729,7 @@ class FrontendController extends Controller
                 ]);
 
             }catch(Exception $error){
+
                 return response([
                     'status' => false,
                     'success' => false,
@@ -708,6 +751,7 @@ class FrontendController extends Controller
                 $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
                 if ($upgrade_existing_l0->failed()) {
                     $errors[] = $upgrade_existing_l0['title'];
+
                     return response([
                         'status' => $upgrade_existing_l0->status(),
                         'success' => false,
@@ -738,6 +782,7 @@ class FrontendController extends Controller
                 ]);
 
             }catch(Exception $error){
+
                 return response([
                     'status' => false,
                     'success' => false,

@@ -24,7 +24,7 @@
                             I am investing as an:
                         </label>
                         <div class="form-check form-check-inline mb-lg-3">
-                            <input class="form-check-input" type="radio" name="account_type" id="Individual"   value="individual" checked> 
+                            <input class="form-check-input" type="radio" name="account_type" id="Individual"   value="individual" checked>
                             <label class="form-check-label" for="Individual">
                                 Individual
                             </label>
@@ -107,8 +107,9 @@
                                 <label for="inputPassword6" class="col-form-label fs-5 fw-normal "> What is your net
                                     worth?</label>
                             </div>
-                            <div class="col-lg-6"> 
-                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false">
+                            <div class="col-lg-6">
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="net_worth"
+                                    placeholder="Your Net Worth" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false"  value="{{ old('net_worth') }}">
 
                                 <div class="invalid-feedback">
                                     Please Add Your Net Worth
@@ -121,8 +122,9 @@
                                     income?</label>
                             </div>
                             <div class="col-lg-6">
-                                
-                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"   placeholder="Enter manually" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false"> 
+
+                                <input type="text"  class="border-0 border-bottom lh-lg myNumberField" name="annual_income"
+                                     placeholder="Add Annual Income" required data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'rightAlign': false"  value="{{ old('annual_income') }}">
                                 <div class="invalid-feedback">
                                     Please Add Annual Income
                                 </div>
@@ -244,7 +246,7 @@
                 $('#entity_name').removeAttr('required',)
             });
 
-            
+
          });
 
         $(document).ready(function() {
@@ -308,8 +310,8 @@
           $('.myNumberField').inputmask();
         });
     </script>
-        
-        
-        
-        
+
+
+
+
 @endsection

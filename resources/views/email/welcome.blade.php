@@ -457,8 +457,15 @@
                                                                     <h4>
                                                                         Hi {{ $data['name'] }} ,
                                                                     </h4>
-                                                                    <p>We are excited to have you onboard at <b><a href="{{ route('index') }}"> ChainRaise </a> </b>! We are the only investment crowdfunding platform focused on helping innovative businessess and startups raise capital . You can get started ny exploring our <a href="">Verify Email</a>  of investment opportunities to see if there are any issuers you would like to support with your investment.
-                                                                    <br/><br/>
+                                                                    <p>
+                                                                        We are excited to have you onboard at <b> <a href="{{ route('index') }}"> ChainRaise </a> </b>! We are an investment crowdfunding platform focused on helping innovative businesses and startups raise capital . You can get started by exploring our <a href="{{ route('index') }}"> Marketplace </a> of investment opportunities to see if there are any issuers you would like to support with your investment.
+                                                                    <br/>
+                                                                        Please  <a href=""> Verify Your Email</a>  to Start Investing
+                                                                    <br/>
+
+
+                                                                    If you need information on how to use the site or about crowdfunction regulations check out the <a href="" target="_blank">FAQs</a> page and <a href=""> Knowledge Center </a>  to get Started.
+
 
                                                                     If you need information on how to use the site or about crowdfunction regulations check out the FAQs page and Knowlegde Center to get Started.
                                                                     <br/><br/>

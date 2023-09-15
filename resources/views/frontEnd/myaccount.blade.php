@@ -23,15 +23,31 @@
                 <div class="tab-pane fade show active p-2" id="info" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="kyc_level_area">
                         @if($user->fortress_id == null)
-                            <h4 class="text-center text-danger"> YOUR KYC  PROCESS NOT YET COMPLETED</h4>
+                            <h4 class="text-center text-danger">Dear {{ Auth::user()->name }}, YOUR KYC  PROCESS NOT YET COMPLETED</h4>
                         @else
-                            <h4 class="text-center text-success"> YOUR KYC  LEVEL IS {{ strtoupper ($user->kyc->kyc_level) }} </h4>
+                            <h4 class="text-center text-success">Dear {{ Auth::user()->name }}, YOUR KYC  LEVEL IS {{ strtoupper ($user->kyc->kyc_level) }} </h4>
                         @endif
                     </div>
                     <h4>Investor Information</h4>
                     <h5 class="text-muted fw-normal">To invest online, the law requires that we collect some info</h5>
-                    <form class="row g-3 needs-validation" id="profile_update_form"   method="post" action="{{ route('my.account.update') }}">
+                    <form class="row g-3 needs-validation" id="profile_update_form" enctype="multipart/form-data"  method="post"
+                    action="{{ route('my.account.update') }}">
                         @csrf
+
+                        <div class="col-md-12 ">
+                            <div class="row mt-3">
+                                <div class="col-lg-3">
+                                    <label for="validationCustom01" class="form-label">  Email Address</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" disabled class="form-control  "
+                                        value="{{ $user->email }}" >
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-md-12 ">
                             <div class="row mt-3">
                                 <div class="col-lg-3">
@@ -170,6 +186,7 @@
                                 <div class="invalid-feedback">Please Select Birthday </div>
                             </div>
                         </div>
+
                         <div class="row g-lg-3 align-items-center mb-3 mt-lg-4">
                             <div class="col-lg-2">
                                 <label for="inputPassword6" class="col-form-label"><span
@@ -191,9 +208,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-lg-3 align-items-center mb-3">
+                        <div class="row g-lg-3 align-items-center mb-3 ssn_number_container
+                            @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality != 'US') d-none @endif">
                             <div class="col-lg-2">
-
                                 <label for="ssn-number"  class=" col-form-label"><span class="text-danger fs-4">*</span>
                                     SSN:</label>
                             </div>
@@ -208,7 +225,6 @@
                                             type="text"
                                         @endif
                                         id="primary_contact_social_security">
-
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary no-radius" id="show_ssn_field"
                                         style="
@@ -224,7 +240,7 @@
 
                             </div>
                         </div>
-                        <div class="row g-lg-3 align-items-center mb-3">
+                        <div class="row g-lg-3 align-items-center mb-3 d-none">
                             <div class="col-lg-2">
                                 <label for="ssn-number" class="col-form-label"><span class="text-danger fs-4">*</span>
                                     Document Type:</label>
@@ -247,8 +263,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
-                            <div class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
+                        <div class="col-lg-12 document_upload_container  @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality == 'US')  d-none @endif">
+                            <div class="notice bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
                                 <div class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
                                     <div class="col-lg-12 mb-5">
                                         <a href="{{ $user->getFirstMediaUrl('kyc_document_collection', 'thumb') }}"
@@ -266,10 +282,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row g-lg-3 align-items-center mb-3">
+                            <div class="col-lg-2">
+                                <label for="ssn-number" class="col-form-label">
+                                    Profile Photo:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                    <input type="file" name="user_profile_photo"  class="form-control">
+                            </div>
+                        </div>
 
                         <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
-                                    &nbsp;&nbsp; &nbsp;
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Run KYC</label>
                             </div>
                             <div class="col-lg-6">
@@ -356,9 +380,11 @@
                     data: formData,
                     dataType: 'json',
                     success: function (response) {
-                        console.log(response)
+
                         $('.kyc_level_area').load(' .kyc_level_area');
                         if (response.success == false) {
+
+                            toastr.error(response.errors, "Error");
                             if (response.status == 400) {
                                 if (response.errors && response.errors.length > 0) {
                                     // Check for specific validation errors
@@ -388,19 +414,23 @@
                                     toastr.error(response.errors[0], "Error");
                                 }
                             }
-                            if (typeof response.errors !== 'undefined' && response
-                                .errors !== null) {
+
+                            if (typeof response.errors !== 'undefined' && response .errors !== null) {
                                 jQuery.each(response.errors, function(index, item) {
                                     toastr.error(item, "Error");
                                 });
                             }
-                            }
-                            if (response.status == true) {
-                                toastr.success('Verification Has Been Completed', "Success");
-                            }
-                            if (response.status == 200) {
-                                toastr.success('Verification Has Been Completed', "Success");
-                            }
+                            toastr.error(response.errors, "Error");
+                        }
+                        if (response.status == true) {
+                            toastr.success('Verification Has Been Completed', "Success");
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        }
+                        if (response.status == 200) {
+                            toastr.success('Verification Has Been Completed', "Success");
+                        }
                     },
                     error: function (xhr) {
                         console.log('erros')
@@ -435,6 +465,21 @@
             var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
             imgBtnWrapper.find('.change_photo').click();
         });
+        $('.nationality').on('change', function() {
+                $val = $(this).val();
+                if($val == 'US'){
+                        $('.ssn_number_container').removeClass('d-none')
+                        $('.document_upload_container').addClass('d-none')
+
+                }else{
+                        $('.ssn_number_container').addClass('d-none')
+                        $('.document_upload_container').removeClass('d-none')
+                        $('#primary_contact_social_security').attr('required',false)
+
+                }
+                $('.run_process_button').removeClass('d-none')
+        });
+
     </script>
 
 

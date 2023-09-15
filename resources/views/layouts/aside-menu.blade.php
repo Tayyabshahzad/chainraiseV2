@@ -351,6 +351,32 @@
                 </div>
 
 
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ route('user.email.log') }}"  >
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+                            <span class="svg-icon svg-icon-2">
+
+                                <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
+                                        <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1"/>
+                                        <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1"/>
+                                    </g>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Email Logs</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+
+
+
+
             </div>
             <!--end::Menu-->
         </div>

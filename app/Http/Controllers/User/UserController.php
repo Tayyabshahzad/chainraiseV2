@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\EmailLog;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
@@ -199,6 +200,20 @@ class UserController extends Controller
         try {
             $user = User::find($request->id);
             Mail::to($user)->send(new InvestorAccountDelete($user));
+            $data ="<p>
+            Dear  $user->name ,
+           Your Account Has Been Deleted
+            <br>
+
+            </p>";
+            $emailRecord = new EmailLog;
+            $emailRecord->type = 'account delete';
+            $emailRecord->status = 'send';
+            $emailRecord->to = $user->email;
+            $emailRecord->from = env('MAIL_FROM_ADDRESS');
+            $emailRecord->subject = 'Account deleted';
+            $emailRecord->body = $data;
+            $emailRecord->save();
             if ($user->delete()) {
                 return response([
                     'status' => true,
@@ -286,6 +301,32 @@ class UserController extends Controller
             }
              event(new Registered($user));
              Mail::to($user)->send(new WelcomeEmail($user));
+             $data = " <h4>  Hi  $user->name , </h4>
+                <p> We are excited to have you onboard at <b>
+                <a href=''> ChainRaise </a>
+                </b>! We are the only investment crowdfunding platform focused on helping innovative businessess and startups raise capital . You can get started ny exploring our <a href=''>Verify Email</a>  of investment opportunities to see if there are any issuers you would like to support with your investment.
+                <br/><br/>
+                If you need information on how to use the site or about crowdfunction regulations check out the FAQs page and Knowlegde Center to get Started.
+                <br/><br/>
+               Remember, any person who promotes an issuer's offering for compensation, whetjer past or prospective, or who is a founder or an employee of an issuer that engages in promotional activities on behaif of the issuers throught Test Company, must clearlu disclose an all communications the receipt of the compensation, and that he or she is engaginf in promotional activities on behalf of the issuer.
+               <br/><br/>
+               ChainRaise is compensated by charging issuers a fee based on a percentage of the amount being raised.
+               <br/><br/>
+               Please contact us if you have any questions.
+               <br/><br/>
+               <a href=''> Verify Email </a>
+                <br/><br/>
+                Thank you,
+                The ChainRaise Team";
+                Mail::to($user->email)->send(new WelcomeEmail($user));
+                $emailRecord = new EmailLog;
+                $emailRecord->type = 'user created';
+                $emailRecord->status = 'send';
+                $emailRecord->to = $user->email;
+                $emailRecord->from = env('MAIL_FROM_ADDRESS');
+                $emailRecord->subject = 'New User Created';
+                $emailRecord->body = $data;
+                $emailRecord->save();
              DB::commit();
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){
@@ -355,9 +396,6 @@ class UserController extends Controller
     public function issuerAccountUpdate(Request $request)
     {
 
-
-
-
         $request->validate([
             //Users Table
             'id' => 'required',
@@ -404,8 +442,23 @@ class UserController extends Controller
             if($user->status == 'inactive'){
                 $user->status = 'active';
                 Mail::to($user)->send(new UserStatusUpdate($user));
+                $data = " <p> Dear  $user->name ,
+                We have reviewed your account and you can now login to Chainraise to browse investment opportunities. Thank you
+                <br>
+                Your Current Status is : $user->status
+                <small>  If you would like to opt out of receiving marketing materials please <a href=''>click here</a>  </small>
+                 </p>";
+                $emailRecord = new EmailLog;
+                $emailRecord->type = 'status-update';
+                $emailRecord->status = 'send';
+                $emailRecord->to = $user->email;
+                $emailRecord->from = env('MAIL_FROM_ADDRESS');
+                $emailRecord->subject = 'Account Status Update';
+                $emailRecord->body = $data;
+                $emailRecord->save();
             }
         }
+
         $user->save();
         if($request->has('profile_avatar')){
             $user->clearMediaCollection('profile_photo');
@@ -980,19 +1033,23 @@ class UserController extends Controller
             $netWorth = (int) str_replace(',', '', $user->annual_income);
 
             if($user->are_you_accredited == true){
-
                 if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
                     $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
                     $investmentLimit =    $accreditedInvestment;
+                }else{
+                    return redirect()->back()->with('error','If you are a Accredited Member then your Annual Income & Networth must be greater then or equals to '.number_format(124000));
                 }
             }else{
               //  dump($annualIncome,$netWorth);
                 if (($annualIncome < 124000) || ($netWorth < 124000)) {
                     $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
                     $investmentLimit =  $nonAccreditedInvestment;
+                }else{
+                    return redirect()->back()->with('error','If you are not a Accredited Member then your Annual Income & Networth must be less then '. number_format(124000));
                 }
                // dd($investmentLimit);
             }
+
             $user->investment_limit = $investmentLimit;
             $user->save();
             UserDetail::updateOrCreate(
@@ -1007,7 +1064,7 @@ class UserController extends Controller
             $user->save();
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
-
+            dd($error);
             return redirect()->back()->with('error','There is some error while updating profile');
         }
 
@@ -1060,8 +1117,25 @@ class UserController extends Controller
 
         try{
             Mail::to($user)->send(new UserStatusUpdate($user));
+            $data ="<p>
+            Dear  $user->name ,
+            We've reviewed your account and you can now login to Chainraise to browse investment opportunities. Thank you
+            <br>
+            Your Status is $user->status
+            <small>
+                If you would like to opt out of receiving marketing materials please <a href=''>click here</a>
+            </small>
+            </p>";
+            $emailRecord = new EmailLog;
+            $emailRecord->type = 'user status update';
+            $emailRecord->status = 'send';
+            $emailRecord->to = $user->email;
+            $emailRecord->from = env('MAIL_FROM_ADDRESS');
+            $emailRecord->subject = 'User Status Update';
+            $emailRecord->body = $data;
+            $emailRecord->save();
         }catch(Exception $err){
-            dd($err);
+
         }
 
         $data = 'Enabled';
@@ -1069,5 +1143,11 @@ class UserController extends Controller
             'data'=>$data,
             'status'=>true
         ]);
+    }
+
+    public function emailLogs(){
+
+        $emails = EmailLog::get();
+        return view('user.emaillog',compact('emails'));
     }
 }
