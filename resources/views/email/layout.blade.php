@@ -451,7 +451,7 @@
                                                                                                                         valign="top">
                                                                                                                         <a href="https://www.facebook.com/chainraise.io"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png') }}"
+                                                                                                                            <img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-512.png"
                                                                                                                                 width="20"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -460,7 +460,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="https://twitter.com/chainraise_io"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png') }}"
+                                                                                                                            <img src="https://img.freepik.com/premium-vector/new-logo-twitter-2023-vector-elon-musk_982229-557.jpg"
                                                                                                                                 width="21"
                                                                                                                                 height="18"
                                                                                                                                 alt=""
@@ -469,7 +469,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="https://www.instagram.com/chainraise.io"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png') }}"
+                                                                                                                            <img src="https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_640.jpg"
                                                                                                                                 width="21"
                                                                                                                                 height="20"
                                                                                                                                 alt=""

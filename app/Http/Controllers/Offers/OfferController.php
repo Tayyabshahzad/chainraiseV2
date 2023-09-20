@@ -14,6 +14,7 @@ use App\Models\OfferVideos;
 use Illuminate\Support\Str;
 use App\Models\CallToAction;
 use App\Models\OfferContact;
+use App\Models\RegCF;
 use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
 use App\Models\Media;
@@ -132,7 +133,7 @@ class OfferController extends Controller
     public function save(Request $request)
     {
 
-        //dd(111);
+
 
         $request->validate([
             'issuer' => 'required',
@@ -147,6 +148,20 @@ class OfferController extends Controller
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
         ]);
+
+        $token = env('ESIGN_TOKEN');
+        try{
+            $e_sign = Http::get('https://esignatures.io/api/templates/' . $request->e_sign_template . '?token='.$token);
+            $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+            if(!$e_sign->successful()){
+                return redirect()->back()->with('error','Error While Fetching E template');
+            }
+        }catch(Exception $esign_error){
+            return redirect()->back()->with("error","Server Error while fetching template");
+        }
+
+
+
 	//dd(1);
         $user = User::find($request->issuer);
         $get_token = Http::withHeaders([
@@ -163,6 +178,7 @@ class OfferController extends Controller
             //dd($token_json);
             return redirect()->back()->with('error','Internal Server Error While Creating Token ['.$token_json['error'].']');
         }
+
 
         if($user->check_kyc == true ){
             $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->
@@ -197,7 +213,7 @@ class OfferController extends Controller
         }catch(Exception $custodial_account_error){
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
-	//dd(111);
+
         try{
             $offer = new Offer;
             $offer->feature_video  = $request->feature_video_url;
@@ -230,6 +246,7 @@ class OfferController extends Controller
                     if ($setup == 'E-Sign Document') {
                         $offer_esign_template = new OfferEsignTemplate;
                         $offer_esign_template->offer_id = $offer->id;
+                        $offer_esign_template->template_name = $json_e_sign['data']['template_name'];
                         $offer_esign_template->template_id = $request->e_sign_template;
                         $offer_esign_template->save();
                     }
@@ -456,19 +473,21 @@ class OfferController extends Controller
                     }
                     $data = [
                         'offer_id' => $offer->id,
-                        'url_educational_materials' => 'url_educational_materials',
-                        'url_issuer_form_c' => 'url_issuer_form_c',
+                        'url_educational_materials' => $request['url_educational_materials'][0],
+                        'url_issuer_form_c' => $request['url_issuer_form_c'][0],
                         'status' => 'active',
                     ];
+                    $regCf = RegCF::where()->first();
                     $this->RegCFRepository->storeRegCF($data);
                 }
+
                 // Investor FLow
                 DB::commit();
                 return redirect()->route('offers.active.index')->with('success','Offer has been created successfully');
             }
 
         }catch(Exception $error){
-          //  dd($error);
+
             return redirect()->back()->with('error','Error while creating offer'.$error);
         }
     }
@@ -751,7 +770,12 @@ class OfferController extends Controller
 
             }
 
-
+            $regCf = RegCF::where('offer_id',$offer->id)->first();
+            if($regCf){
+                $regCf->url_educational_materials =  $request['url_educational_materials'][0];
+                $regCf->url_issuer_form_c =  $request['url_issuer_form_c'][0];
+                $regCf->save();
+            }
 
         }
 

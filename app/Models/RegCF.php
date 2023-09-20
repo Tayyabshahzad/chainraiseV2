@@ -14,4 +14,11 @@ class RegCF extends Model
         'url_issuer_form_c',
         'status',
     ];
+
+    public function offer()
+    {
+        return $this->belongsTo(Offer::class);
+    }
+
+
 }

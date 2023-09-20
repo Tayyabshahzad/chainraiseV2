@@ -6,16 +6,10 @@
 
     <div class="container">
         <div class="row my-5">
-            <div class="col-lg-4">
-                <h4>Documents</h4>
-            </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <input class="form-control" type="text" placeholder="Search">
-                    </div>
-                    <div class="col-lg-3">
-                        <input class="form-control" type="date" id="floatingInput" placeholder="Search">
+                    <div class="col-lg-6">
+
                     </div>
                     <div class="col-lg-3">
                         <div class="d-grid gap-2">
@@ -117,6 +111,11 @@
             </div>
         </div>
         <div class="row mb-5">
+            <div class="col-lg-12 " style="margin-top: 25px;margin-bottom: 14px">
+                <h4>Documents</h4>
+                <hr>
+            </div>
+            @if($e_documents->count()>0)
             @foreach ($e_documents as $e_document)
                 <div class="col-lg-4 mb-10 text-center" >
                     <div class="  " style="border:1px solid #000" >
@@ -156,9 +155,58 @@
                     </div>
                 </div>
             @endforeach
+            @else
+                <p class="text-danger"> No Documents Found </p>
+            @endif
 
 
+            <div class="col-lg-12 " style="margin-top: 25px;margin-bottom: 14px">
+                <h4>E Sign Documents</h4>
+                <hr>
+            </div>
+            @if($e_sign_documents->count()>0)
+            @foreach ($e_sign_documents as $e_document)
+                <div class="col-lg-4 mb-10 text-center" >
+                    <div class="  " style="border:1px solid #000" >
+                        <a href="#" class="text-gray-400 text-hover-primary  mb-3 text-center">
+                            {{  $e_document->template_name }}
+                        </a>
+                        <div class="mb-9">
+                            <!--begin::Badge-->
+                            <div class="badge   badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
+                            <!--begin::Badge-->
+                        </div>
+                        <div class=" text-center  " >
+                            <button class="btn btn-sm btn-info  fw-bold  view_template"
+                            data-user_id="{{   $e_document->investor_id  }}"
+                            data-template_id="{{   $e_document->template_id  }}"
+                            data-bs-toggle="modal" data-bs-target="#modal_view_e_sign">
+                            <i class="la la-eye"></i>
+                            </button>
 
+                            <button class="btn btn-sm btn-primary  fw-bold  view_template"
+                            data-user_id="{{   $e_document->investor_id  }}"
+                            data-template_id="{{   $e_document->template_id  }}" >
+                            <i class="la la-download"></i>
+                            </button>
+                        </div>
+
+                        <div class=" text-center">
+                            <p style="padding: 2px">
+                                From <br/>
+                                 {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
+                            </p>
+                            <p style="padding: 2px">
+                                Status : {{ $e_document->status }}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+            @else
+                <p class="text-danger"> No Documents Found </p>
+            @endif
         </div>
     </div>
 

@@ -90,6 +90,12 @@ class Offer extends Model  implements HasMedia
         return $this->hasMany(OfferFAQ::class);
     }
 
+    public function regcf()
+    {
+        return $this->hasOne(RegCF::class);
+    }
+
+
 
 
 }

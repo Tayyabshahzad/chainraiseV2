@@ -10,6 +10,7 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\Esign;
 use App\Models\Order;
 use GuzzleHttp\Client;
 use App\Models\Custodial;
@@ -305,9 +306,6 @@ class MakeInvestmentController extends Controller
     public function save(Request $request)
     {
 
-
-
-
         $request->validate([
             'offer_id' => 'required',
             'payment_type'=> 'required|in:wire,ach',
@@ -318,12 +316,10 @@ class MakeInvestmentController extends Controller
             //'templates' => 'required',
             'investment_amount' => 'required',
         ]);
-
         $offer = Offer::with('user')->findOrFail($request->offer_id);
         $user = Auth::user();
-
-
         $template_id = $offer->offerEsing->template_id;
+        $template_name =  $offer->offerEsing->template_name;
 
         if ($request->has('past_12_months_investment')) {
             $past12MonthsInvestment = true;
@@ -342,8 +338,6 @@ class MakeInvestmentController extends Controller
           //  dd($esign_error);
             return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
         }
-
-
         try{
             $signature_name    = $offer->user->name;
             $signature_email   = $offer->user->email;
@@ -566,31 +560,31 @@ class MakeInvestmentController extends Controller
 
 
 
-            try {
-                DB::beginTransaction();
-                if($request->payment_type == 'ach'){
-                    $payment_url =  $this->baseUrl.'/api/trust/v1/payments';
-                    $data = [
-                        'source' => [
-                            'externalAccountId' => $externalAccountId,
-                        ],
-                        'destination' => [
-                            'custodialAccountId' => $custodial_account->custodial_id,
-                        ],
-                        "useIsa" => false,
-                        'comment' => 'Offering Payment',
-                        'funds' => $request->investment_amount,
-                    ];
-                    $payment = Http::withToken($token_json['access_token'])
-                    ->withHeaders([
-                        'Content-Type' => 'application/json',
-                        'Accept' => 'application/json',
-                    ])->post($payment_url,$data);
-                    $json_response_payment =  json_decode((string) $payment->getBody(), true);
+        try {
+            DB::beginTransaction();
+            if($request->payment_type == 'ach'){
+                $payment_url =  $this->baseUrl.'/api/trust/v1/payments';
+                $data = [
+                    'source' => [
+                        'externalAccountId' => $externalAccountId,
+                    ],
+                    'destination' => [
+                        'custodialAccountId' => $custodial_account->custodial_id,
+                    ],
+                    "useIsa" => false,
+                    'comment' => 'Offering Payment',
+                    'funds' => $request->investment_amount,
+                ];
+                $payment = Http::withToken($token_json['access_token'])
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ])->post($payment_url,$data);
+                $json_response_payment =  json_decode((string) $payment->getBody(), true);
 
-                    if ($payment->failed()) {
-                        return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
-                    }
+                if ($payment->failed()) {
+                    return redirect()->back()->with('error', 'Internal Server Error  on payments [Step 6] '.$json_response_payment['title']);
+                }
 
                     if($payment->successful()){
                         $order = new Order();
@@ -641,67 +635,76 @@ class MakeInvestmentController extends Controller
                     //Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
                     }
 
-                    }elseif($request->payment_type == 'wire'){
-                   // dd('wiew');
-                        $order = new Order();
-                        $order->offer_id = $offer->id;
-                        $order->past12MonthsInvestment = $past12MonthsInvestment;
-                        $order->investor_id = Auth::user()->id;
-                        $order->total = $request->investment_amount;
-                        $order->currency = 'usd';
-                        $order->type = 'wire';
-                        $order->payment_method = 'wire';
-                        $order->e_sign = $esign_contract_status;
-                        $order->status = 'pending';
-                        $order->save();
-                        $db_transaction = new Transaction;
-                        $db_transaction->order_id = $order->id;
-                        $db_transaction->offer_id = $offer->id;
-                        $db_transaction->investor_id = Auth::user()->id;
-                        $db_transaction->funds = $request->investment_amount;
-                        $db_transaction->kyc_status = '---';
-                        $db_transaction->status = 'pending';
-                        $db_transaction->type =  'wire';
-                        $db_transaction->payment_method = 'wire';
-                        $db_transaction->e_sign =  $esign_contract_status;
-                        $db_transaction->transaction_id = null;
-                        $db_transaction->source_identityId = $identityId;
-                        $db_transaction->source_externalAccountId =null;
-                        $db_transaction->destination_identityId = $offer->user->fortress_personal_identity;
-                        $db_transaction->destination_custodialAccountId = $custodial_account->custodial_id;
-                        $db_transaction->comment = null;
-                        $db_transaction->currency = 'usd';
-                        $db_transaction->save();
-                        $transaction_details = [
-                            'investor'=> Auth::user()->name,
-                            'investment_amount' => $request->investment_amount,
-                            'type_of_security' => 'Common Shares',
-                            'share_price' => $offer->name,
-                            'size' => $offer->size,
-                            'funding_end_date'=>$offer->funding_end_date,
-                            'share_count' => $offer->price_per_unit,
-                            'share_sold_date' =>Carbon::now()->format('D-m-Y'),
-                            'total_raised' => $offer->base_currency . $offer->size,
-                            'offer_name' =>  $offer->name,
-                            'trnx_total_raised' => 0,
-                            'trnx_last_cancel_date' => $offer->funding_end_date,
-                        ];
-                }
-                DB::commit();
-                //dd(1111);
-                Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
-
-
-
-                return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
-
-            } catch (Exception $error) {
-                    DB::rollBack();
-                    $user = Auth::user();
-                    Mail::to(Auth::user()->email)->send(new TransactionCancelled($user,$offer));
-
-                return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
+                }elseif($request->payment_type == 'wire'){
+                // dd('wiew');
+                    $order = new Order();
+                    $order->offer_id = $offer->id;
+                    $order->past12MonthsInvestment = $past12MonthsInvestment;
+                    $order->investor_id = Auth::user()->id;
+                    $order->total = $request->investment_amount;
+                    $order->currency = 'usd';
+                    $order->type = 'wire';
+                    $order->payment_method = 'wire';
+                    $order->e_sign = $esign_contract_status;
+                    $order->status = 'pending';
+                    $order->save();
+                    $db_transaction = new Transaction;
+                    $db_transaction->order_id = $order->id;
+                    $db_transaction->offer_id = $offer->id;
+                    $db_transaction->investor_id = Auth::user()->id;
+                    $db_transaction->funds = $request->investment_amount;
+                    $db_transaction->kyc_status = '---';
+                    $db_transaction->status = 'pending';
+                    $db_transaction->type =  'wire';
+                    $db_transaction->payment_method = 'wire';
+                    $db_transaction->e_sign =  $esign_contract_status;
+                    $db_transaction->transaction_id = null;
+                    $db_transaction->source_identityId = $identityId;
+                    $db_transaction->source_externalAccountId =null;
+                    $db_transaction->destination_identityId = $offer->user->fortress_personal_identity;
+                    $db_transaction->destination_custodialAccountId = $custodial_account->custodial_id;
+                    $db_transaction->comment = null;
+                    $db_transaction->currency = 'usd';
+                    $db_transaction->save();
+                    $transaction_details = [
+                        'investor'=> Auth::user()->name,
+                        'investment_amount' => $request->investment_amount,
+                        'type_of_security' => 'Common Shares',
+                        'share_price' => $offer->name,
+                        'size' => $offer->size,
+                        'funding_end_date'=>$offer->funding_end_date,
+                        'share_count' => $offer->price_per_unit,
+                        'share_sold_date' =>Carbon::now()->format('D-m-Y'),
+                        'total_raised' => $offer->base_currency . $offer->size,
+                        'offer_name' =>  $offer->name,
+                        'trnx_total_raised' => 0,
+                        'trnx_last_cancel_date' => $offer->funding_end_date,
+                    ];
             }
+            DB::commit();
+            //dd(1111);
+            Mail::to(Auth::user()->email)->send(new TransactionCreated($transaction_details));
+            $esign = new Esign();
+            $esign->offer_id = $offer->id;
+            $esign->issuer_id =   $offer->user->id;
+            $esign->invester_id =  Auth::user()->id;
+            $esign->template_id = $template_id;
+            $esign->template_name = $template_name;
+            $esign->status = 'send';
+            $esign->save();
+
+
+
+
+            return redirect()->route('my.portfolio')->with('success', 'Investment Has Been Completed [".$esign_payment_error"]');
+
+        } catch (Exception $error) {
+                DB::rollBack();
+                $user = Auth::user();
+                Mail::to(Auth::user()->email)->send(new TransactionCancelled($user,$offer));
+
+            return redirect()->back()->with('error', 'Internal Server Error on roll back [Step 7]'.$error);
+        }
 
 
 

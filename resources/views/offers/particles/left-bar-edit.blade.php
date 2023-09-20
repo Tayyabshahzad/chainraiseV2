@@ -184,6 +184,7 @@
                                                        <b> Educational Materials</b>
                                                     </th>
                                                 </tr>
+
                                                 <tr>
                                                     <th  style="text-align: left">
                                                         <input type="" name="url_educational_materials[]" value="https://www.google.com" class="mt-3 form-control no-radius"
@@ -241,8 +242,35 @@
                                                         </select>
                                                     </th>
                                                 </tr>
+                                                <input type="hidden" name="investment_setups[]" value="E-Sign Document">
+                                            @elseif($steps->title == 'Educational Materials')
+                                                <tr>
 
-                                            <input type="hidden" name="investment_setups[]" value="E-Sign Document">
+                                                    <th  style="text-align: left">
+                                                        Educational Materials
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="" name="url_educational_materials[]"
+                                                        value="{{ $offer->regcf->url_educational_materials }}" class="mt-3 form-control no-radius"
+                                                        style="height:33px;font-size:13px" required>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        Issuer Form C
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th  style="text-align: left">
+                                                        <input type="" name="url_issuer_form_c[]"
+                                                        value="{{ $offer->regcf->url_issuer_form_c }}" class="mt-3 form-control no-radius"
+                                                    style="height:33px;font-size:13px" required>
+                                                    </th>
+                                                </tr>
+                                                <input type="hidden" name="investment_setups[]" value="Educational Materials">
                                             @endif
                                         @endforeach
 

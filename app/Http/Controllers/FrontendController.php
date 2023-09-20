@@ -12,6 +12,7 @@ use App\Models\MyEDocument;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\UserDetail;
+use App\Models\Esign;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -421,7 +422,8 @@ class FrontendController extends Controller
         $e_documents =  MyEDocument::where('investor_id',$user->id)->get();
         $offer_documents =  MyEDocument::where('investor_id',$user->id)->get();
         $offers = Offer::get();
-        return view('frontEnd.mydocuments',compact('user','e_documents','offers'));
+        $e_sign_documents = Esign ::where('invester_id',$user->id)->get();
+        return view('frontEnd.mydocuments',compact('user','e_documents','offers','e_sign_documents'));
     }
 
     public function portfolio(){

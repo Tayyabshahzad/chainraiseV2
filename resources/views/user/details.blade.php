@@ -1420,14 +1420,7 @@
                         <div class="card-header pt-8">
                             <div class="card-title">
                                 <!--begin::Search-->
-                                <div class="d-flex align-items-center position-relative my-1">
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                        Documents
-                                    </span>
-                                    <!--end::Svg Icon-->
 
-                                </div>
                                 <!--end::Search-->
                             </div>
                             <!--begin::Card toolbar-->
@@ -1506,6 +1499,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="d-flex align-items-center position-relative my-1">
+                                        <h3> Documents </h3>
+                                    </div>
                                     @foreach ($e_documents as $e_document)
                                         <div class="col-lg-6 mb-10">
                                             <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
@@ -1556,6 +1552,41 @@
                                             </div>
                                         </div>
                                     @endforeach
+
+                                    <div class="d-flex align-items-center position-relative my-1">
+                                        <h3> E-Sign Documents </h3>
+                                    </div>
+                                    @foreach ($e_sign_documents as $e_document)
+                                    <div class="col-lg-6 mb-10">
+                                        <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
+                                            <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
+                                                {{  $e_document->template_name }} </a>
+                                            <div class="mb-9">
+                                                <!--begin::Badge-->
+                                                <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
+                                                <!--begin::Badge-->
+                                            </div>
+                                            <div class="d-flex flex-wrap flex-center">
+
+
+                                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
+                                                    <div class="fs-4 fw-bold text-gray-700">
+                                                        <i class="text-info la la-download"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class='text-center text-bold'>
+                                                 <h4>
+                                                    From : {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
+                                                 </h4>
+                                                 <h4>
+                                                      {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
+                                                 </h4>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
 
                                 </div>
                             </div>

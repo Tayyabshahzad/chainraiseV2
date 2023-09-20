@@ -475,7 +475,7 @@
                             </div>
                         </div>
                         <div class="d-grid gap-2 col-12 mt-3 mb-2 mx-auto">
-                            <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill"  type="submit">Send Reset Password Link</button>
+                            <button class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill resetButton"    type="submit">Send Reset Password Link</button>
                         </div>
                     </form>
                 </div>
@@ -673,11 +673,12 @@
                     }
                 },
                 submitHandler: function(form) {
+
                     var formData = $('#resetPasswordFrom').serialize();
                     $('.error_message').text('');
                     $('.success_message').text('');
-                    $('.submit_button').prop('disabled', true);
-                    $('.submit_button').text('Loading ...');
+                    $('.resetButton').prop('disabled', true);
+                    $('.resetButton').text('Loading ...');
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -691,8 +692,8 @@
                             console.log(response)
                             $('.success_message').text(  'Reset Password Link Sent To Your Email (Page Reloading .....)');
                             setTimeout(function() {
-                                // location.reload();
-                                window.location = response.route;
+                                location.reload();
+                               // window.location = response.route;
                             }, 2000);
                         },
                         error: function(xhr, status, error) {

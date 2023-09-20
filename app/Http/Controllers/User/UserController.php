@@ -12,6 +12,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\UserDetail;
 use App\Models\MyEDocument;
 use App\Mail\InvesterUpdate;
+use App\Models\Esign;
 use App\Models\TrustSetting;
 use Illuminate\Http\Request;
 use App\Models\Accreditation;
@@ -124,9 +125,10 @@ class UserController extends Controller
         $childs = User::with('userDetail','identityVerification','trustSetting','invesmentProfie')->where('parent_id',$id)->get();
         $folders = Folder::where('user_id',$id)->get();
         $e_documents =  MyEDocument::where('investor_id',$id)->get();
+        $e_sign_documents = Esign ::where('issuer_id',$id)->get();
         $investors = User::role('investor')->get();
         $issuers = User::role('issuer')->get();
-        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents','issuers'));
+        return view('user.details',compact('user','accreditations','offers','childs','id','folders','investors','e_documents','issuers','e_sign_documents'));
     }
     public function getChilds(Request $request){
 
@@ -222,7 +224,7 @@ class UserController extends Controller
             }
 
         } catch (Exception $error) {
-//dd($error);           
+//dd($error);
  return response([
                 'status' => false,
                 'message' => 'Error while deleting user'

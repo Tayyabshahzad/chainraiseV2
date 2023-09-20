@@ -229,6 +229,7 @@
                                                     Educational Materials
                                                 </th>
                                             </tr>
+
                                             <tr>
                                                 <th  style="text-align: left">
                                                     <input type="" name="url_educational_materials[]" value="https://www.google.com" class="mt-3 form-control no-radius"

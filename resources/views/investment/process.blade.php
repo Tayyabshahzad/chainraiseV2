@@ -161,8 +161,9 @@
                         </div>
                         <div class="border px-5 py-3  bg-light mb-3">
                             <input type="checkbox" name="" id="validationCustom04" required>
-                            By checking this box, I, the investor, acknowledge that I have reviewed the Issuer's <a href="https://www.sec.gov/Archives/edgar/data/1986758/000198675823000002/formc.pdf">Form C and
-                            Disclosure Materials</a>, as well as the <a href="https://chainraise.io/wp-content/uploads/2022/09/NEW-Educational-Materials-ChainRaise-Portal-LLC-9_28_22.docx.pdf" target="_blank"> educational materials</a> provided on the Portal, understood
+                            By checking this box, I, the investor, acknowledge that I have reviewed the Issuer's
+                            <a href="{{  $offer->regcf->url_issuer_form_c }}" target="_blank">Form C and    Disclosure Materials</a>, as well as the
+                            <a href="{{  $offer->regcf->url_educational_materials }}" target="_blank"> educational materials</a> provided on the Portal, understood
                             the risks that come with investing in issuing companies on the Portal, and acknowledge that my
                             entire investment may be lost and I will be financially and psychologically fine if it is. I
                             understand that the decision whether to consult a professional advisor regarding my investment
@@ -187,7 +188,7 @@
                             <input type="checkbox" name="" id="validationCustom06" required>
                             By checking this box, I, the investor, acknowledge that the securities are subject to transfer
                             restrictions and that I have reviewed and understood these transfer restrictions as provided in
-                            the Portal's <a href="https://chainraise.io/wp-content/uploads/2022/09/NEW-Educational-Materials-ChainRaise-Portal-LLC-9_28_22.docx.pdf" target="_blank"> educational materials </a>.
+                            the Portal's <a href="{{  $offer->regcf->url_educational_materials }}" target="_blank"> educational materials </a>.
                             <div class="invalid-feedback">
                                 Please Check
                             </div>
@@ -347,6 +348,10 @@
                         <form class="row g-3 needs-validation" id="profile_update_form" method="post"
                             action="{{ route('investment.verify_identity') }}">
                             @csrf
+
+                            <div class="text-center d-none kyc_loader_image" style="position: absolute;top:20%">
+                                <img src="{{ asset('assets/media/spinner.svg') }}" alt="">
+                            </div>
                             <div class="col-md-12 ">
                                 <div class="row mt-3">
                                     <div class="col-lg-3">
@@ -686,6 +691,7 @@
             $('#profile_update_form').submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 $('.submit_button').attr('disabled', true);
+                $('.kyc_loader_image').removeClass('d-none');
                 var formData = $(this).serialize();
                 // Send an AJAX POST request to the server
                 $.ajax({
@@ -696,6 +702,7 @@
                     success: function(response) {
                         console.log(response)
                         $('.submit_button').attr('disabled', false);
+                        $('.kyc_loader_image').addClass('d-none');
                         if (response.success == false) {
                             if (response.validation == false) {
                                 $.each(response.errors, function(key, value) {
