@@ -78,8 +78,8 @@
                     <a class="nav-link me-3 fw-semibold" href="https://chainraise.io/rc/" target="_blank" >RAISE CAPITAL</a>
                 </ul>
                 <ul class="navbar-nav  mb-2 mb-lg-0 align-items-lg-center">
-                    <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
-                        style="background-color:#43C3FE;">INVEST</a>
+                    {{-- <a href="{{ route('index') }}" class="btn text-white me-3 px-4 rounded-pill d-none d-lg-block"
+                        style="background-color:#43C3FE;">INVEST</a> --}}
 
                     @if (!Auth::user())
                         <a href="#" class="nav-link me-3 fw-semibold" data-bs-toggle="modal"
@@ -275,11 +275,11 @@
                                     <i class="bi bi-google  border border-dark rounded-circle py-2 px-3"></i>
                                 </a>
                             </div>
-                            <div class="col-2 d-flex align-items-center justify-content-center">
+                            {{-- <div class="col-2 d-flex align-items-center justify-content-center">
                                 <a href="#" class="text-dark">
                                     <i class="bi bi-facebook  border border-dark rounded-circle py-2 px-3"></i>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -370,7 +370,7 @@
 
                             </a>
                         </div>
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <a href="#"
                                 class="btn btn-outline-dark pe-5 btn-custom position-relative fw-semibold"> <i
                                     class="bi bi-facebook pe-5"
@@ -379,7 +379,7 @@
                                 Sign up with Facebook
 
                             </a>
-                        </div>
+                        </div> --}}
 
                         <div class="col-12">
                             <button type="button"
