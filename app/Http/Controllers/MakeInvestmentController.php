@@ -330,12 +330,16 @@ class MakeInvestmentController extends Controller
         try{
             $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token='.$token);
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+<<<<<<< HEAD
 	//dd($json_e_sign);
+=======
+           // dd($json_e_sign);
+>>>>>>> 1e9f339b808c8b6052e91b0b0c798e7830e28a0c
             if(!$e_sign->successful()){
                 return redirect()->back()->with('error','Error While Fetching E-Sign Document  Step-1');
             }
         }catch(Exception $esign_error){
-          //  dd($esign_error);
+          // dd($esign_error);
             return redirect()->back()->with("error","Server Error While Fetching E-Sign Document Step-1");
         }
         try{

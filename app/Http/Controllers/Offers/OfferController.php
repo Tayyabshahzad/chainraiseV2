@@ -732,7 +732,7 @@ class OfferController extends Controller
                 }
              }
 
-             foreach($request->investment_setups as $setup ){
+            foreach($request->investment_setups as $setup ){
                 if ($setup == 'E-Sign Document') {
                     $offer_esign_template = OfferEsignTemplate::where('offer_id',$offer->id)->first();
                     $offer_esign_template->offer_id = $offer->id;

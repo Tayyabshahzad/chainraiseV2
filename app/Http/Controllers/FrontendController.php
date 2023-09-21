@@ -149,36 +149,36 @@ class FrontendController extends Controller
             $user->name = $request->legal_name;
             $user->net_worth = $request->net_worth;
             $user->annual_income = $request->annual_income;
-            $user->are_you_accredited = $request->has('are_you_accredited') ? true : false;
+
             $user->phone = $request->phone;
             $user->cc = $request->cc;
             $user->save();
+
+            $are_you_accredited = $request->has('are_you_accredited') ? true : false;
+
+
             $annualIncome = (int) str_replace(',', '', $user->net_worth);
             $netWorth = (int) str_replace(',', '', $user->annual_income);
-            if($user->are_you_accredited == true){
+            if($are_you_accredited == true){
 
                 if (($annualIncome >= 124000) && ($netWorth >= 124000)) {
                     $accreditedInvestment = min(124000, 0.1 * max($annualIncome, $netWorth));
                     $investmentLimit =    $accreditedInvestment;
                 }else{
-                    return response([
-                        'status' => false,
-                        'success' => false,
-                        'errors' => "If you are a Accredited Member then your Annual Income & Networth must be greater then or equals to ".number_format(124000),
-                    ]);
+                    return redirect()->back()->
+                            with("error","If you are a Accredited Member then your Annual Income & Networth must be greater then or equals to  (124000)");
+
                 }
             }else{
                 if (($annualIncome < 124000) || ($netWorth < 124000)) {
                     $nonAccreditedInvestment = max(2500, 0.05 * max($annualIncome, $netWorth));
                     $investmentLimit =  $nonAccreditedInvestment;
                 }else{
-                    return response([
-                        'status' => false,
-                        'success' => false,
-                        'errors' => "If you are not a Accredited Member then your Annual Income & Networth must be less then ".number_format(124000),
-                    ]);
+                    return redirect()->back()->
+                    with("error","If you are not a Accredited Member then your Annual Income & Networth must be less then 124000");
                 }
             }
+            $user->are_you_accredited = $request->has('are_you_accredited') ? true : false;
             $user->investment_limit = $investmentLimit;
             $user->save();
             if($request->primary_contact_social_security == '999-99-9999'){
@@ -209,11 +209,8 @@ class FrontendController extends Controller
                 $user->addMediaFromRequest('user_profile_photo')->toMediaCollection('user_profile_photo_collection');
             }
         }catch(Exception $error){
-            return response([
-                'status' => false,
-                'success' => false,
-                'errors' => "There is some error while updating account - ['.$error.']",
-            ]);
+            return redirect()->back()->
+            with("error","There is some error while updating account ".$error);
         }
 
         if($request->has('kyc_run')){
@@ -401,11 +398,8 @@ class FrontendController extends Controller
                 }
             }
         }else{
-            return response([
-                'status' => true,
-                'success' => true,
-                'errors' => "Profile Updated",
-            ]);
+            return redirect()->back()->
+            with("success","Profile Updated");
         }
 
 
