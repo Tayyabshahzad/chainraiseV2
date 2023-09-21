@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 class SocialiteController extends Controller
 {
@@ -39,6 +41,7 @@ class SocialiteController extends Controller
                 $user->save();
                 $user->addMediaFromUrl($google_data->avatar)->toMediaCollection('profile_photo');
                 $user->assignRole('investor');
+                Mail::to($user->email)->send(new WelcomeEmail($user));
             }
             Auth::login($user);
             //event(new Registered($user));
@@ -77,6 +80,7 @@ class SocialiteController extends Controller
                 $user->save();
                 $user->addMediaFromUrl($faceBook->avatar)->toMediaCollection('profile_photo');
                 $user->assignRole('investor');
+                Mail::to($user->email)->send(new WelcomeEmail($user));
             }
             Auth::login($user);
          event(new Registered($user));
