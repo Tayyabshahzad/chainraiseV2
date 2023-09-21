@@ -30,9 +30,7 @@
                 <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo" class="logo-mob">
             </a>
             <div>
-                <a href="{{ route('index') }}" class="navbar-toggler btn text-white px-3 py-2 fs-6 border-0 rounded-pill"
-                    style="background-color:#43C3FE;">INVEST
-                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +87,7 @@
                             data-bs-target="#sign-up-popup">Sign Up
                         </a>
                     @endif
-                    <div class="avator-logo me-3 d-lg-block d-none ">
+                    <div class="avator-logo me-3 d-lg-block  ">
                         @if (Auth::user())
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">

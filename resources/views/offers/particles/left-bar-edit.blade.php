@@ -181,13 +181,13 @@
                                                 </tr>
                                                 <tr>
                                                     <th  style="text-align: left">
-                                                       <b> Educational Materials</b>
+                                                       <b> Educational Materials </b>
                                                     </th>
                                                 </tr>
 
                                                 <tr>
                                                     <th  style="text-align: left">
-                                                        <input type="" name="url_educational_materials[]" value="https://www.google.com" class="mt-3 form-control no-radius"
+                                                        <input type="" name="url_educational_materials[]" value="{{ $offer->regcf->url_educational_materials }}" class="mt-3 form-control no-radius"
                                                         style="height:33px;font-size:13px" required>
                                                     </th>
                                                 </tr>
@@ -199,7 +199,7 @@
                                                 <tr>
                                                     <th  style="text-align: left">
                                                         <input type="" name="url_issuer_form_c[]"
-                                                    value="https://www.google.com" class="mt-3 form-control no-radius"
+                                                    value="{{ $offer->regcf->url_educational_materials }}" class="mt-3 form-control no-radius"
                                                     style="height:33px;font-size:13px" required>
                                                     </th>
                                                 </tr>
@@ -236,7 +236,7 @@
                                                     <th  style="text-align: left">
                                                         <select class="form-control" name="e_sign_template"  style="height:42px;font-size:13px">
                                                             @foreach ($templates as $template)
-                                                                <option value="{{ $template['template_id'] }}">
+                                                                <option @if($offer->offerEsing->template_id == $template['template_id'] ) selected @endif value="{{ $template['template_id'] }}">
                                                                     {{ $template['template_name'] }} </option>
                                                             @endforeach
                                                         </select>
@@ -266,7 +266,7 @@
                                                 <tr>
                                                     <th  style="text-align: left">
                                                         <input type="" name="url_issuer_form_c[]"
-                                                        value="{{ $offer->regcf->url_issuer_form_c }}" class="mt-3 form-control no-radius"
+                                                        value="{{ $offer->regcf->url_educational_materials }}" class="mt-3 form-control no-radius"
                                                     style="height:33px;font-size:13px" required>
                                                     </th>
                                                 </tr>

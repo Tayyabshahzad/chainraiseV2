@@ -374,75 +374,9 @@
                 // Get the form data
                 var formData = $(this).serialize();
                 // Send an AJAX POST request to the server
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    success: function (response) {
 
-                        $('.kyc_level_area').load(' .kyc_level_area');
-                        if (response.success == false) {
+                $(this).unbind('submit').submit();
 
-                            toastr.error(response.errors, "Error");
-                            if (response.status == 400) {
-                                if (response.errors && response.errors.length > 0) {
-                                    // Check for specific validation errors
-                                    if (response.errors[1] && response.errors[1].Phone) {
-                                        // Display validation error for Phone field
-                                        console.log(response.errors[1].Phone[0]);
-                                        toastr.error(response.errors[1].Phone[0],
-                                            "Validation Error");
-                                    } else {
-                                        // Display other validation errors
-                                        jQuery.each(response.errors, function(index, item) {
-                                            if (typeof item === 'object') {
-                                                jQuery.each(item, function(key,
-                                                    value) {
-                                                    console.log(key + ": " +
-                                                        value);
-                                                    toastr.error(value,
-                                                        "Validation Error"
-                                                        );
-                                                });
-                                            }
-                                        });
-                                    }
-                                } else {
-                                    // Display generic error message
-                                    console.log(response.errors[0]);
-                                    toastr.error(response.errors[0], "Error");
-                                }
-                            }
-
-                            if (typeof response.errors !== 'undefined' && response .errors !== null) {
-                                jQuery.each(response.errors, function(index, item) {
-                                    toastr.error(item, "Error");
-                                });
-                            }
-                            toastr.error(response.errors, "Error");
-                        }
-                        if (response.status == true) {
-                            toastr.success('Verification Has Been Completed', "Success");
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        }
-                        if (response.status == 200) {
-                            toastr.success('Verification Has Been Completed', "Success");
-                        }
-                    },
-                    error: function (xhr) {
-                        console.log('erros')
-                        // Handle validation errors from the server
-                        var errors = xhr.responseJSON.errors;
-                        var errorMessage = '';
-                        $.each(errors, function (key, value) {
-                            errorMessage += '<p class="text-danger">' + value[0] + '</p>';
-                        });
-                        $('#responseMessage').html(errorMessage);
-                    },
-                });
             });
         });
 
