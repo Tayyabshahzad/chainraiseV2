@@ -477,7 +477,7 @@ class OfferController extends Controller
                         'url_issuer_form_c' => $request['url_issuer_form_c'][0],
                         'status' => 'active',
                     ];
-                    $regCf = RegCF::where()->first();
+                  //  $regCf = RegCF::where()->first();
                     $this->RegCFRepository->storeRegCF($data);
                 }
 
