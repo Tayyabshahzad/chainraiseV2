@@ -22,11 +22,9 @@
             <div class="tab-content py-3" id="pills-tabContent">
                 <div class="tab-pane fade show active p-2" id="info" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="kyc_level_area">
-                        @if($user->fortress_id == null)
-                            <h4 class="text-center text-danger">Dear {{ Auth::user()->name }}, YOUR KYC  PROCESS NOT YET COMPLETED</h4>
-                        @else
-                            <h4 class="text-center text-success">Dear {{ Auth::user()->name }}, YOUR KYC  LEVEL IS {{ strtoupper ($user->kyc->kyc_level) }} </h4>
-                        @endif
+
+                            <h4 class="text-center text-info">Hi,  {{ ucfirst(Auth::user()->name) }} </h4>
+
                     </div>
                     <h4>Investor Information</h4>
                     <h5 class="text-muted fw-normal">To invest online, the law requires that we collect some info</h5>
@@ -208,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-lg-3 align-items-center mb-3 ssn_number_container
+                        {{-- <div class="row g-lg-3 align-items-center mb-3 ssn_number_container
                             @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality != 'US') d-none @endif">
                             <div class="col-lg-2">
                                 <label for="ssn-number"  class=" col-form-label"><span class="text-danger fs-4">*</span>
@@ -239,7 +237,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row g-lg-3 align-items-center mb-3 d-none">
                             <div class="col-lg-2">
                                 <label for="ssn-number" class="col-form-label"><span class="text-danger fs-4">*</span>
@@ -292,7 +290,7 @@
                             </div>
                         </div>
 
-                        <div class="row g-lg-3 align-items-center mb-3">
+                        {{-- <div class="row g-lg-3 align-items-center mb-3">
                             <div class="col-lg-2">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Run KYC</label>
                             </div>
@@ -302,7 +300,7 @@
                                   </div>
                             </div>
 
-                        </div>
+                        </div> --}}
                         <div class="col-12">
                             <button class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold"   type="submit">Save & Continue</button>
                         </div>

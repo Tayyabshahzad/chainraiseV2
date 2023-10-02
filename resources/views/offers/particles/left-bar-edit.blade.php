@@ -266,7 +266,7 @@
                                                 <tr>
                                                     <th  style="text-align: left">
                                                         <input type="" name="url_issuer_form_c[]"
-                                                        value="{{ $offer->regcf->url_educational_materials }}" class="mt-3 form-control no-radius"
+                                                        value="{{ $offer->regcf->url_issuer_form_c }}" class="mt-3 form-control no-radius"
                                                     style="height:33px;font-size:13px" required>
                                                     </th>
                                                 </tr>
