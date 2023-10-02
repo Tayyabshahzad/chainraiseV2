@@ -193,7 +193,7 @@ class OfferController extends Controller
                 }
             }
         }
-
+  
 
         try{
         // Checking custodial-accounts
@@ -201,7 +201,7 @@ class OfferController extends Controller
                 'Content-Type' => 'application/json',
             ])->post($this->baseUrl.'/api/trust/v1/custodial-accounts', [
                 'type' => 'personal',
-                'personalIdentityId' => $user->fortress_personal_identity,
+                'personalIdentityId' => $user->business_id,
             ]);
            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
              // dd($json_custodial_account);
