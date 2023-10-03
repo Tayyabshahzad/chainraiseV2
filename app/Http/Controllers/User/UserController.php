@@ -199,6 +199,7 @@ class UserController extends Controller
         $request->validate([
             'id' => 'required',
         ]);
+        
         try {
             $user = User::find($request->id);
             Mail::to($user)->send(new InvestorAccountDelete($user));
@@ -224,7 +225,7 @@ class UserController extends Controller
             }
 
         } catch (Exception $error) {
-//dd($error);
+dd($error);
  return response([
                 'status' => false,
                 'message' => 'Error while deleting user'
