@@ -193,7 +193,7 @@ class OfferController extends Controller
                 }
             }
         }   
-        dd($user->business_id);
+        dump($user->business_id);
   
 
         try{
