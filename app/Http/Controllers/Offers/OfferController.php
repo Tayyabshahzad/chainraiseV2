@@ -193,7 +193,7 @@ class OfferController extends Controller
                 }
             }
         }   
-        dump($user->business_id);
+        //dump($user->business_id);
   
 
         try{
@@ -205,17 +205,17 @@ class OfferController extends Controller
                 'businessIdentityId' =>$user->business_id,
             ]);
            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
-              dd($json_custodial_account);
+            //  dd($json_custodial_account);
             if($custodial_account->failed()){
             //        dd($custodial_account,$json_custodial_account);
                 return redirect()->back()->with('error','There is some error while creating custodial account ['.$json_custodial_account['title'].']');
             }
 
         }catch(Exception $custodial_account_error){
-            dd($custodial_account_error);
+           // dd($custodial_account_error);
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
-        dd(111);
+      //  dd(111);
 
         try{
             $offer = new Offer;
