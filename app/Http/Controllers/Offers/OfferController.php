@@ -202,7 +202,7 @@ class OfferController extends Controller
                 'Content-Type' => 'application/json',
             ])->post($this->baseUrl.'/api/trust/v1/custodial-accounts', [
                 'type' => 'business',
-                'personalIdentityId' => $user->business_id,
+                'businessIdentityId' =>$user->business_id,
             ]);
            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
               dd($json_custodial_account);
@@ -215,6 +215,7 @@ class OfferController extends Controller
             dd($custodial_account_error);
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
+        dd(111);
 
         try{
             $offer = new Offer;
