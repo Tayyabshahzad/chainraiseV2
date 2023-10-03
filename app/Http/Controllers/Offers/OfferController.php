@@ -211,6 +211,7 @@ class OfferController extends Controller
             }
 
         }catch(Exception $custodial_account_error){
+            dd($custodial_account_error);
             return redirect()->back()->with('error','There is some error while creating custodial account ['.$custodial_account_error.']');
         }
 
