@@ -86,12 +86,13 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
+        
 
           $offers = Offer::get();
           $users = User::with('userDetail')->where('is_primary','yes')->orderby('id','DESC')->
                   whereHas('roles',function($query){
                         $query->where('name', '!=', 'admin');
-                  })->get();
+                  })->paginate(10);
           $issuers = User::role('issuer')->orderby('id','DESC')->get();
         return view('user.index',compact('users','offers','issuers'));
     }
@@ -334,7 +335,7 @@ class UserController extends Controller
              DB::commit();
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){
-            dd($error);
+          //  dd($error);
             DB::rollBack();
             Session::put('error','Error While Creating ');
             return redirect()->back()->with('error','Error while creating investor user'.$error);
@@ -1068,7 +1069,7 @@ class UserController extends Controller
             $user->save();
             return redirect()->route('index')->with('success','Your Profile has been successfully updated');
         }catch(Exception $error){
-            dd($error);
+           // dd($error);
             return redirect()->back()->with('error','There is some error while updating profile');
         }
 
