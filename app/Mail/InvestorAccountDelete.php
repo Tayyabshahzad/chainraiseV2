@@ -10,6 +10,8 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
+
+
 class InvestorAccountDelete extends Mailable
 {
     use Queueable, SerializesModels;
@@ -19,9 +21,14 @@ class InvestorAccountDelete extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    
+
+    public function __construct($data)
     {
-        //
+        $fromAddress = env('MAIL_FROM_ADDRESS', 'noreply@investchainraise.io');
+        $fromName = env('MAIL_FROM_NAME', 'Chainraise');
+        $this->from($fromAddress, $fromName);
+        $this->data = $data;
     }
 
     /**
