@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\UPDATEKYC;
 use Illuminate\Support\Facades\Mail;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 class FrontendController extends Controller
 {
 
@@ -143,7 +145,16 @@ class FrontendController extends Controller
     }
 
     public function my_account_update(Request $request){
+
+
+        $request->validate([
+            'user_profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+       
+
         $user = Auth::user();
+        
         try{
 
             $user->name = $request->legal_name;
@@ -206,6 +217,10 @@ class FrontendController extends Controller
                 ]);
             $user->save();
             if($request->hasFile('user_profile_photo')) {
+                
+                $user->getMedia('user_profile_photo_collection')->each(function (Media $media) {
+                    $media->delete();
+                });
                 $user->addMediaFromRequest('user_profile_photo')->toMediaCollection('user_profile_photo_collection');
             }
         }catch(Exception $error){

@@ -409,6 +409,8 @@ class KycController extends Controller
             $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
         }
 
+    
+
 
 
 

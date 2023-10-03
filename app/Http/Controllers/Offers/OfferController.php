@@ -200,7 +200,7 @@ class OfferController extends Controller
             $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
                 'Content-Type' => 'application/json',
             ])->post($this->baseUrl.'/api/trust/v1/custodial-accounts', [
-                'type' => 'personal',
+                'type' => 'business',
                 'personalIdentityId' => $user->business_id,
             ]);
            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
