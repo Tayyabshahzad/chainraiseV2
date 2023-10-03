@@ -192,7 +192,8 @@ class OfferController extends Controller
                     return redirect()->back()->with('error','KYC Level Atlest L0');
                 }
             }
-        }
+        }   
+        dd($user->business_id);
   
 
         try{
