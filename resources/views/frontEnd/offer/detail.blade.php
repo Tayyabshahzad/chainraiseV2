@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('title',   $offer->name  )
 @section('page_head')
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
     <style>
         .hero-section{
             height: 100% !important;
@@ -52,8 +56,7 @@
                     <div class="modal-dialog modal-xl modal-dialog-centered video_modal" role="document">
                         <div class="modal-content video_modal_content">
                             <div class="modal-body text-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                </button>
+                                <button type="button" class="btn-close" id="video_close_button" data-bs-dismiss="modal" aria-label="Close"> </button>
                                 <!-- 16:9 aspect ratio -->
                                 <div class="ratio ratio-16x9">
                                     <iframe class="embed-responsive-item"
@@ -286,5 +289,33 @@
 
 
 
+
+@endsection
+
+@section('page_js')
+<script>
+    // Function to stop the Vimeo video when the modal is closed
+    function stopVimeoVideo() {
+        var iframe = document.getElementById('video');
+        var player = new Vimeo.Player(iframe);
+        player.pause(); // Pause the video
+    }
+
+    function stopYouTubeVideo() {
+        var youtubeIframe = document.getElementById('youtubeVideo');
+        var youtubePlayer = new YT.Player(youtubeIframe);
+
+        youtubePlayer.pauseVideo(); // Pause the YouTube video
+    }
+
+    // Attach the stopVimeoVideo function to the modal close event
+   // document.getElementById('video_close_button').addEventListener('click', stopVimeoVideo);
+
+    document.getElementById('video_close_button').addEventListener('click', function () {
+        stopVimeoVideo();
+        stopYouTubeVideo();
+    });
+
+</script>
 
 @endsection
