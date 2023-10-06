@@ -66,53 +66,53 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <div class="row mb-4">
-                    <div class="col-lg-2 col-6 text-center">
-                        <h6 class="text-white fw-normal">Offer Type</h6>
-                        <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->offer_type) }} </h6>
-                    </div>
-
-                    <div class="col-lg-2 col-6 text-center">
-                        <h6 class="text-white fw-normal">Offer Amount</h6>
-                        <h6 class="sky-blue fw-normal">  ${{ number_format($offer->size) }} </h6>
-                    </div>
-
-                    <div class="col-lg-2  col-6 text-center">
-                        <h6 class="text-white fw-normal">Securities Type </h6>
-                        <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->security_type) }} </h6>
-                    </div>
-
-                    <div class="col-lg-2  col-6 text-center fw-normal">
-                        <h6 class="text-white fw-normal">Valuation</h6>
-                        <h6 class="sky-blue fw-normal">${{ number_format( $offer->total_valuation) }}</h6>
-                    </div>
-
-                    <div class="col-lg-2  col-12 text-center">
-                        <h6 class="text-white fw-normal">Min. Investment</h6>
-                        <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
-                    </div>
-
-                </div>
+            <div class="col-lg-12 text-center">
                 <form action="{{ route('invest.submit') }}" method="get" id="investForm">
-                <div class="row px-5">
-                         @csrf
-                        <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                    <div class="col-9 px-0">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-text">$</div>
-                            <input type="text" class="form-control" id="autoSizingInputGroup" name="investment_amount"
-                            placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }} @endif"
-                            required >
+                    <div class="row mb-4">
+                        <div class="col-lg-2 col-6 text-center">
+                            <h6 class="text-white fw-normal">Offer Type</h6>
+                            <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->offer_type) }} </h6>
+                        </div>
+
+                        <div class="col-lg-2 col-6 text-center">
+                            <h6 class="text-white fw-normal">Offer Amount</h6>
+                            <h6 class="sky-blue fw-normal">  ${{ number_format($offer->size) }} </h6>
+                        </div>
+
+                        <div class="col-lg-2  col-6 text-center">
+                            <h6 class="text-white fw-normal">Securities Type </h6>
+                            <h6 class="sky-blue fw-normal">  {{ ucfirst($offer->security_type) }} </h6>
+                        </div>
+
+                        <div class="col-lg-2  col-6 text-center fw-normal">
+                            <h6 class="text-white fw-normal">Valuation</h6>
+                            <h6 class="sky-blue fw-normal">${{ number_format( $offer->total_valuation) }}</h6>
+                        </div>
+
+                        <div class="col-lg-2  col-12 text-center">
+                            <h6 class="text-white fw-normal">Min. Investment</h6>
+                            <h6 class="sky-blue fw-normal">${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
+                        </div>
+
+                    </div>
+                    <div class="row px-5">
+                            @csrf
+                            <input type="hidden" name="offer_id" value="{{ $offer->id }}">
+                        <div class="col-9 px-0">
+                            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-text">$</div>
+                                <input type="text" class="form-control" id="autoSizingInputGroup" name="investment_amount"
+                                placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }} @endif"
+                                required >
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <button type="submit"
+                            @if (Auth::user()) type="submit"  @else  disabled type="button" title="Login To Invest" @endif
+                            class="btn btn-outline-info text-white">INVEST</button>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <button type="submit"
-                        @if (Auth::user()) type="submit"  @else  disabled type="button" title="Login To Invest" @endif
-                        class="btn btn-outline-info text-white">INVEST</button>
-                    </div>
-                </div>
                 </form>
                 <div class="row px-5">
                     <div class="col-12 text-center pt-5">
@@ -120,9 +120,6 @@
                         <p class="text-white fs-5 fw-semibold">Scroll Down for Details</p>
                     </div>
                 </div>
-
-
-
             </div>
     </section>
     <!-- Hero Section End -->
