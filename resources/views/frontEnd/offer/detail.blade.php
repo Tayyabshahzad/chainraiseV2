@@ -36,7 +36,12 @@
     <!-- Hero Section Start -->
     <section class="container-fluid hero-section">
         <div class="row justify-content-center">
-            <div class="col-12 text-center" style="margin-top: 5%;">
+
+            <div class="col-12 text-center ">
+                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"   style="width: 25%!important" class="p-3 white-logo" alt="...">
+                <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
+            </div>
+            <div class="col-12 text-center" style="margin-bottom:1%;">
                 <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
                     data-bs-target="#myModal" class="btn btn-outline-light rounded-circle"
                     style=" border: 2px solid RGBA(67, 195, 254, 1); padding: 16px 25px;"><span
@@ -60,10 +65,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"   style="width: 25%!important" class="p-3 white-logo" alt="...">
-                <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
             </div>
             <div class="col-lg-12">
                 <div class="row mb-4">
