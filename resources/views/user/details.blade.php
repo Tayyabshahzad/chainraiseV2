@@ -3,6 +3,7 @@
 @section('page_name', 'Listings')
 @section('page_head')
     <style></style>
+     
 @endsection
 @section('page_content')
 
@@ -772,27 +773,33 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div
-                                            class="notice   bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
-                                            <div
-                                                class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
-                                                <div class="col-lg-12 mb-5">
+                                    <div class="col-lg-12  bg-light-dark rounded border-dark border border-dashed p-6 mb-12 " > 
+                                            <div class="row" style="padding:50px">
+                                                    <div class="col-lg-6">
+                                                        <label>  Document Front * </label> 
+                                                        <input type="file" name="kyc_document" class="form-control"/>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label> Document Back </label>
+                                                        <input type="file" name="kyc_document_back" class="form-control"/>
+                                                    </div>
+                                            </div> 
+                                            <div class="row" style="padding:50px">
+                                                <div class="col-lg-6 text-center">
+                                                    <label>  Document Front </label> <br/> 
                                                     <a href="{{ $user->getFirstMediaUrl('kyc_document_collection', 'thumb') }}"
                                                         download title="Download Document File">
                                                         <i class="la la-download"></i>
                                                     </a>
                                                 </div>
-                                                <button type="button"
-                                                    class="kyc_document_upload_btn btn btn-sm btn-dark-primary btn-square mb-1">
-                                                    <i class="fa fa-upload"></i>
-                                                    Upload Document
-                                                </button>
-                                                <input type="file" name="kyc_document"
-                                                    class="new_profile_photo  d-none change_photo"
-                                                    data-type="project_logo">
-                                            </div>
-                                        </div>
+                                                <div class="col-lg-6 text-center">
+                                                    <label> Document Back  </label> <br/>
+                                                    <a href="{{ $user->getFirstMediaUrl('kyc_document_collection_back', 'thumb') }}"
+                                                        download title="Download Document File">
+                                                        <i class="la la-download"></i>
+                                                    </a>
+                                                </div>
+                                        </div>  
                                     </div>
 
 
@@ -1822,6 +1829,7 @@
 @section('page_js')
 
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+   
     <script></script>
     <script>
         $('.information_fields').hide();
@@ -2314,5 +2322,12 @@
         Inputmask({
             "mask": "***-**-****"
         }).mask("#primary_contact_social_security");
+
+        
     </script>
+
+    <script>
+            
+    </script>
+    
 @endsection

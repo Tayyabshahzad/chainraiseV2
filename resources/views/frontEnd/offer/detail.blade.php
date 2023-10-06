@@ -277,20 +277,29 @@
                 <h3 class="fw-bolder">Documents</h3>
                 <br>
                 <div class="row ">
+
                     <div class="row gx-5">
                             @foreach($manual_offer_documents as $manual_offer_document)
-                                <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-center" style="margin-bottom:6%!important">
-                                    @if($manual_offer_document->type == "image")
+                                <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-left" style="margin-bottom:6%!important">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            @if($manual_offer_document->type == "image")
                                         <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
                                             <img src="{{ $manual_offer_document->getUrl() }}" alt=""  height="250" width="250">
                                         </a>
-                                    @elseif($manual_offer_document->type == "pdf")
-                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                            <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="90">
-                                        </a>
-                                    @endif
-                                    <br><br>
-                                    <h3>  {{ Str::ucfirst($manual_offer_document->name )}} </h3>
+                                        @elseif($manual_offer_document->type == "pdf")
+                                            <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                                <img src="{{ asset('media/PDF_file_icon.png') }}" alt="" width="40">
+                                            </a>
+                                        @endif
+                                        </div>
+                                        <div class="col-lg-10 text-left " style="padding-top:10px;">
+                                            <p style="font-size:20px;font-weight:600">  {{ Str::ucfirst($manual_offer_document->name )}} </p>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
                             @endforeach
                     </div>

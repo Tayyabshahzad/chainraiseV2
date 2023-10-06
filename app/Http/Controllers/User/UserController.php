@@ -400,6 +400,7 @@ class UserController extends Controller
     }
     public function issuerAccountUpdate(Request $request)
     {
+        
 
         $request->validate([
             //Users Table
@@ -471,9 +472,16 @@ class UserController extends Controller
         }
         if($request->has('kyc_document')){
 
-            $user->clearMediaCollection('kyc_document');
+            $user->clearMediaCollection('kyc_document_collection');
             $user->addMediaFromRequest('kyc_document')->toMediaCollection('kyc_document_collection');
         }
+
+        if($request->has('kyc_document_back')){
+
+            $user->clearMediaCollection('kyc_document_collection_back');
+            $user->addMediaFromRequest('kyc_document_back')->toMediaCollection('kyc_document_collection_back');
+        }
+
         $userDetails = UserDetail::updateOrCreate(
             ['user_id' => $user->id],
             [

@@ -52,40 +52,20 @@ class KycController extends Controller
     public function checkKyc(Request $request)
     {
 
-        $get_token = Http::withHeaders([
-            'Content-Type' => 'application/json',
-        ])->post($this->authUrl['url'], [
-            'grant_type' => $this->authUrl['grant_type'],
-            'username'   => $this->authUrl['username'],
-            'password'   => $this->authUrl['password'],
-            'audience'   => $this->authUrl['audience'],
-            'client_id'  => $this->authUrl['client_id'],
-        ]);
+        // $get_token = Http::withHeaders([
+        //     'Content-Type' => 'application/json',
+        // ])->post($this->authUrl['url'], [
+        //     'grant_type' => $this->authUrl['grant_type'],
+        //     'username'   => $this->authUrl['username'],
+        //     'password'   => $this->authUrl['password'],
+        //     'audience'   => $this->authUrl['audience'],
+        //     'client_id'  => $this->authUrl['client_id'],
+        // ]);
 
-        $token_json =  json_decode((string) $get_token->getBody(), true);
-        // $check_user_kyc_level = Http::withToken($token_json['access_token'])->
-        // withHeaders(['Content-Type' => 'application/json'])->
-        // get($this->baseUrl."/api/trust/v1/business-identities/0dc8dcdd-778f-4e87-a47d-9888aac8d184");
-
-        //1{{fortress_base_url}}/api/compliance/v1/identities?PageSize=90 Get All Records
-        // Condation Check User Type if personal or business
-        //{{fortress_base_url}}/api/trust/v1/personal-identities/{{identityId}}
+        // $token_json =  json_decode((string) $get_token->getBody(), true);
 
 
-    //   {{fortress_base_url}}/api/trust/v1/business-identities/{{businessidentityId}} Get Single Business Record
-
-    // {{fortress_base_url}}/api/trust/v1/transactions?PageSize=100 Get all transactions
-
-    // Get Offer Detail
-
-       //   {{fortress_base_url}}/api/trust/v1/business-identities/{{businessidentityId}} Return Offer Detail
-
-        // $json_identity_containers =  json_decode((string) $check_user_kyc_level->getBody(), true);
-        // dd($token_json);
-
-
-
-
+         // dd($token_json); 
         $request->validate([
             'id' => 'required',
         ]);
@@ -101,7 +81,7 @@ class KycController extends Controller
         }
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);
 //dd($decodedSsn);
-   if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
             return response([
                 'status' => 'document',
@@ -109,6 +89,7 @@ class KycController extends Controller
                 'errors' => $errors,
             ]);
         }
+    
         if ($user->user_type == null) {
             $errors[] = 'Please Update Settings Selected User Type is not Defined';
             return response([
@@ -131,7 +112,6 @@ class KycController extends Controller
             ]);
 
             $token_json =  json_decode((string) $get_token->getBody(), true);
-
             if ($get_token->failed()) {
                 $errors[] = 'Error While Creating Token';
                 return response([
@@ -210,6 +190,7 @@ class KycController extends Controller
                         'step'=>'individual step 1 Exception',
                     ]);
                 }
+            
             }
         }elseif($user->user_type  == 'entity'){
             //dump('entity calling');
@@ -312,6 +293,7 @@ class KycController extends Controller
                     ]);
                     $json_business_identity_containers =  json_decode((string) $business_identity_containers->getBody(), true);
                     $status = $business_identity_containers->status();
+
                     if ($business_identity_containers->failed()) {
                         if($status == 400){
                             $errors[] = $json_business_identity_containers['errors'];
@@ -334,55 +316,55 @@ class KycController extends Controller
                     }
 
 
-                        if(!$business_identity_containers->successful()){
-                            if($status == 400){
-                                $errors[] = $json_business_identity_containers['errors'];
-                                $errors[] = $json_business_identity_containers['title'];
-                                return response([
-                                    'status' => $status,
-                                    'success'  => false,
-                                    'errors' => $json_business_identity_containers['errors'],
-                                    'step'=>'entity business 1 not successfull',
-                                ]);
-                            }
-                            if($status == 409){
-                                $errors[] = $json_business_identity_containers['errors'];
-                                $errors[] = $json_business_identity_containers['title'];
-                                return response([
-                                    'status' => $status,
-                                    'success'  => false,
-                                    'errors' => $errors,
-                                ]);
-                            }
-                        }else{
-                            $user->business_id =  $json_business_identity_containers['id'];
-                            $user->save();
+                    if(!$business_identity_containers->successful()){
+                        if($status == 400){
+                            $errors[] = $json_business_identity_containers['errors'];
+                            $errors[] = $json_business_identity_containers['title'];
+                            return response([
+                                'status' => $status,
+                                'success'  => false,
+                                'errors' => $json_business_identity_containers['errors'],
+                                'step'=>'entity business 1 not successfull',
+                            ]);
                         }
+                        if($status == 409){
+                            $errors[] = $json_business_identity_containers['errors'];
+                            $errors[] = $json_business_identity_containers['title'];
+                            return response([
+                                'status' => $status,
+                                'success'  => false,
+                                'errors' => $errors,
+                            ]);
+                        }
+                    }else{
+                        $user->business_id =  $json_business_identity_containers['id'];
+                        $user->save();
+                    }
 
-                        if(!$business_identity_containers->successful()){
-                            if($status == 400){
-                                $errors[] = $json_business_identity_containers['errors'];
-                                $errors[] = $json_business_identity_containers['title'];
-                                return response([
-                                    'status' => $status,
-                                    'success'  => false,
-                                    'errors' => $json_business_identity_containers['errors'],
-                                    'step'=>'entity business 1 not successfull',
-                                ]);
-                            }
-                            if($status == 409){
-                                $errors[] = $json_business_identity_containers['errors'];
-                                $errors[] = $json_business_identity_containers['title'];
-                                return response([
-                                    'status' => $status,
-                                    'success'  => false,
-                                    'errors' => $errors,
-                                ]);
-                            }
-                        }else{
-                            $user->business_id =  $json_business_identity_containers['id'];
-                            $user->save();
+                    if(!$business_identity_containers->successful()){
+                        if($status == 400){
+                            $errors[] = $json_business_identity_containers['errors'];
+                            $errors[] = $json_business_identity_containers['title'];
+                            return response([
+                                'status' => $status,
+                                'success'  => false,
+                                'errors' => $json_business_identity_containers['errors'],
+                                'step'=>'entity business 1 not successfull',
+                            ]);
                         }
+                        if($status == 409){
+                            $errors[] = $json_business_identity_containers['errors'];
+                            $errors[] = $json_business_identity_containers['title'];
+                            return response([
+                                'status' => $status,
+                                'success'  => false,
+                                'errors' => $errors,
+                            ]);
+                        }
+                    }else{
+                        $user->business_id =  $json_business_identity_containers['id'];
+                        $user->save();
+                    }
 
 
 
@@ -409,9 +391,6 @@ class KycController extends Controller
             $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
         }
 
-    
-
-
 
 
         if($user->user_type  == 'entity'){
@@ -419,6 +398,49 @@ class KycController extends Controller
         }else{
             $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         }
+
+        //Upload the documents
+
+        if($user->user_type  == 'entity'){
+            if($user->identity_container_id == null || $user->business_id == null){
+                return response([
+                    'status' => false,
+                    'message' =>'Please run KYC Process First for your entity/busines account',
+                ]);
+            }
+            $id =  $user->business_id;
+            $endPoint = $this->baseUrl.'/api/trust/v1/business-identities/'.$id.'/documents';
+        }else{
+            if($user->fortress_id == null || $user->fortress_personal_identity == null){
+                return response([
+                    'status' => false,
+                    'message' =>'Please run KYC Process First for your personal/individual account',
+                ]);
+            }
+            $id =  $user->fortress_personal_identity;
+            $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
+        }
+
+        try{
+            $mediaCollection = $user->getFirstMedia('kyc_document_collection');
+            if(env('APP_ENV') == 'sandbox'){
+                $path_front = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                $path_back = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+            }else{
+                $path =  $mediaCollection->getFullUrl();
+            }
+            $document_path_front = fopen($path_front, 'r');
+            $document_path_back = fopen($path_back, 'r');
+            $url = $endPoint;
+            $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
+            attach('DocumentFront', $document_path_front)->
+            attach('DocumentBack', $document_path_back)->
+            withToken($token_json['access_token'])->
+            post($url);
+        }catch(Exception $document_error){
+
+        }
+       
 
 
 

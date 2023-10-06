@@ -192,9 +192,9 @@ class OfferController extends Controller
                     return redirect()->back()->with('error','KYC Level Atlest L0');
                 }
             }
-        }   
+        }
         //dump($user->business_id);
-  
+
 
         try{
         // Checking custodial-accounts
@@ -497,9 +497,6 @@ class OfferController extends Controller
 
     public function update(Request $request)
     {
-
-
-
         $request->validate([
             'issuer' => 'required',
             'offer_name' => 'required',
@@ -549,6 +546,7 @@ class OfferController extends Controller
             }
 
             if($request->hasFile('manual_offer_documents')) {
+               // dd(1);
                 $offer->addMultipleMediaFromRequest(['manual_offer_documents'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('manual_offer_documents');
