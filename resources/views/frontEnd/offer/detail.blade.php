@@ -5,6 +5,7 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 
 
+
     <style>
         .hero-section{
             height: 100% !important;
@@ -302,12 +303,17 @@
     }
 
     function stopYouTubeVideo() {
-        var youtubeIframe = document.getElementById('youtubeVideo');
-        var youtubePlayer = new YT.Player(youtubeIframe);
+        var youtubeIframe = document.getElementById('video');
+        var youtubePlayer;
 
-        youtubePlayer.pauseVideo(); // Pause the YouTube video
+        // Check if the YouTube iframe API is ready
+        if (typeof YT !== 'undefined' && YT.Player) {
+            youtubePlayer = new YT.Player(youtubeIframe);
+
+            // Pause the YouTube video
+            youtubePlayer.pauseVideo();
+        }
     }
-
     // Attach the stopVimeoVideo function to the modal close event
    // document.getElementById('video_close_button').addEventListener('click', stopVimeoVideo);
 

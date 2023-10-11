@@ -65,7 +65,7 @@ class KycController extends Controller
         // $token_json =  json_decode((string) $get_token->getBody(), true);
 
 
-         // dd($token_json); 
+         // dd($token_json);
         $request->validate([
             'id' => 'required',
         ]);
@@ -89,7 +89,7 @@ class KycController extends Controller
                 'errors' => $errors,
             ]);
         }
-    
+
         if ($user->user_type == null) {
             $errors[] = 'Please Update Settings Selected User Type is not Defined';
             return response([
@@ -190,7 +190,7 @@ class KycController extends Controller
                         'step'=>'individual step 1 Exception',
                     ]);
                 }
-            
+
             }
         }elseif($user->user_type  == 'entity'){
             //dump('entity calling');
@@ -295,71 +295,50 @@ class KycController extends Controller
                     $status = $business_identity_containers->status();
 
                     if ($business_identity_containers->failed()) {
-                        if($status == 400){
-                            $errors[] = $json_business_identity_containers['errors'];
-                            $errors[] = $json_business_identity_containers['title'];
-                            return response([
-                                'status' => $status,
-                                'success'  => false,
-                                'errors' => $errors,
-                                'step'=>'entity business 1 on 400 status',
-                            ]);
-                        }
-                        $errors[] = $json_business_identity_containers['errors'];
-                        $errors[] = $json_business_identity_containers['title'];
-                        return response([
-                            'status' => $status,
-                            'success'  => false,
-                            'errors' => $errors,
-                            'step'=>'entity business 1 failed',
-                        ]);
+                            if($status == 400){
+                                $errors[] = $json_business_identity_containers['errors'];
+                                $errors[] = $json_business_identity_containers['title'];
+                                return response([
+                                    'status' => $status,
+                                    'success'  => false,
+                                    'errors' => $errors,
+                                    'step'=>'entity business 1 on 400 status',
+
+                                ]);
                     }
 
-
-                    if(!$business_identity_containers->successful()){
-                        if($status == 400){
-                            $errors[] = $json_business_identity_containers['errors'];
-                            $errors[] = $json_business_identity_containers['title'];
-                            return response([
-                                'status' => $status,
-                                'success'  => false,
-                                'errors' => $json_business_identity_containers['errors'],
-                                'step'=>'entity business 1 not successfull',
-                            ]);
-                        }
-                        if($status == 409){
                             $errors[] = $json_business_identity_containers['errors'];
                             $errors[] = $json_business_identity_containers['title'];
                             return response([
                                 'status' => $status,
                                 'success'  => false,
                                 'errors' => $errors,
+                                'step'=>'entity business 1 failed',
                             ]);
-                        }
-                    }else{
-                        $user->business_id =  $json_business_identity_containers['id'];
-                        $user->save();
+
                     }
 
                     if(!$business_identity_containers->successful()){
+
                         if($status == 400){
-                            $errors[] = $json_business_identity_containers['errors'];
-                            $errors[] = $json_business_identity_containers['title'];
-                            return response([
-                                'status' => $status,
-                                'success'  => false,
-                                'errors' => $json_business_identity_containers['errors'],
-                                'step'=>'entity business 1 not successfull',
-                            ]);
+                                $errors[] = $json_business_identity_containers['errors'];
+                                $errors[] = $json_business_identity_containers['title'];
+                                return response([
+                                    'status' => $status,
+                                    'success'  => false,
+                                    'errors' => $json_business_identity_containers['errors'],
+                                    'step'=>'entity business 1 not successfull',
+                                ]);
                         }
+
                         if($status == 409){
-                            $errors[] = $json_business_identity_containers['errors'];
-                            $errors[] = $json_business_identity_containers['title'];
-                            return response([
-                                'status' => $status,
-                                'success'  => false,
-                                'errors' => $errors,
-                            ]);
+                                $errors[] = $json_business_identity_containers['errors'];
+                                $errors[] = $json_business_identity_containers['title'];
+                                return response([
+                                    'status' => $status,
+                                    'success'  => false,
+                                    'errors' => $errors,
+                                ]);
                         }
                     }else{
                         $user->business_id =  $json_business_identity_containers['id'];
@@ -381,26 +360,13 @@ class KycController extends Controller
             //dump('end Business API');
         }
 
-        ///// dump('End KYC');
-        if($user->user_type  == 'entity'){
-            $id =  $user->business_id;
-            $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
-        }  else{
-            $id =  $user->fortress_personal_identity;
-           //base URL https://api.fortressapi.com/api/trust/v1/
-            $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
-        }
-
-
-
         if($user->user_type  == 'entity'){
             $url_check_kyc =  $this->baseUrl.'/api/trust/v1/business-identities/'.$user->business_id;
         }else{
             $url_check_kyc = $this->baseUrl.'/api/trust/v1/personal-identities/'.$user->fortress_personal_identity ;
         }
 
-        //Upload the documents
-
+        ///// dump('End KYC');
         if($user->user_type  == 'entity'){
             if($user->identity_container_id == null || $user->business_id == null){
                 return response([
@@ -409,38 +375,76 @@ class KycController extends Controller
                 ]);
             }
             $id =  $user->business_id;
-            $endPoint = $this->baseUrl.'/api/trust/v1/business-identities/'.$id.'/documents';
-        }else{
-            if($user->fortress_id == null || $user->fortress_personal_identity == null){
-                return response([
-                    'status' => false,
-                    'message' =>'Please run KYC Process First for your personal/individual account',
-                ]);
+            $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
+            try{
+                $mediaCollection = $user->getFirstMedia('kyc_document_collection');
+                if(env('APP_ENV') == 'sandbox'){
+                    $path_front = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                    $path_back = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+                }else{
+                    $path =  $mediaCollection->getFullUrl();
+                }
+                $document_path_front = fopen($path_front, 'r');
+                $document_path_back = fopen($path_back, 'r');
+                $url = $endPoint;
+                $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
+                attach('DocumentFront', $document_path_front)->
+                attach('DocumentBack', $document_path_back)->
+                withToken($token_json['access_token'])->
+                post($url);
+            }catch(Exception $document_error){
+
             }
-            $id =  $user->fortress_personal_identity;
-            $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
         }
 
-        try{
-            $mediaCollection = $user->getFirstMedia('kyc_document_collection');
-            if(env('APP_ENV') == 'sandbox'){
-                $path_front = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
-                $path_back = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
-            }else{
-                $path =  $mediaCollection->getFullUrl();
-            }
-            $document_path_front = fopen($path_front, 'r');
-            $document_path_back = fopen($path_back, 'r');
-            $url = $endPoint;
-            $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
-            attach('DocumentFront', $document_path_front)->
-            attach('DocumentBack', $document_path_back)->
-            withToken($token_json['access_token'])->
-            post($url);
-        }catch(Exception $document_error){
+        // else{
+        //     $id =  $user->fortress_personal_identity;
+        //     $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
+        // }
+        //Upload the documents
 
-        }
-       
+
+
+        // if($user->user_type  == 'entity'){
+        //     if($user->identity_container_id == null || $user->business_id == null){
+        //         return response([
+        //             'status' => false,
+        //             'message' =>'Please run KYC Process First for your entity/busines account',
+        //         ]);
+        //     }
+        //     $id =  $user->business_id;
+        //     $endPoint = $this->baseUrl.'/api/trust/v1/business-identities/'.$id.'/documents';
+        // }else{
+        //     if($user->fortress_id == null || $user->fortress_personal_identity == null){
+        //         return response([
+        //             'status' => false,
+        //             'message' =>'Please run KYC Process First for your personal/individual account',
+        //         ]);
+        //     }
+        //     $id =  $user->fortress_personal_identity;
+        //     $endPoint = $this->baseUrl.'/api/trust/v1/personal-identities/'.$id.'/documents';
+        // }
+
+        // try{
+        //     $mediaCollection = $user->getFirstMedia('kyc_document_collection');
+        //     if(env('APP_ENV') == 'sandbox'){
+        //         $path_front = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+        //         $path_back = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
+        //     }else{
+        //         $path =  $mediaCollection->getFullUrl();
+        //     }
+        //     $document_path_front = fopen($path_front, 'r');
+        //     $document_path_back = fopen($path_back, 'r');
+        //     $url = $endPoint;
+        //     $upload_document = Http::attach('DocumentType', $user->identityVerification->doc_type)->
+        //     attach('DocumentFront', $document_path_front)->
+        //     attach('DocumentBack', $document_path_back)->
+        //     withToken($token_json['access_token'])->
+        //     post($url);
+        // }catch(Exception $document_error){
+
+        // }
+
 
 
 

@@ -854,9 +854,13 @@ class OfferController extends Controller
             'name' => 'required',
         ]);
 
+
+
         $media = Media::find($request->id);
         $media->name  =  $request->name;
         $media->save();
+
+
 
         return response([
             'status'=>true,
