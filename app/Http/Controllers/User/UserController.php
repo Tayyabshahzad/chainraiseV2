@@ -423,7 +423,7 @@ class UserController extends Controller
             //'legal_formation'=>'required',
             //'date_incorporation'=>'required',
             // Identity Verifiation
-            'primary_contact_social_security' => 'required',
+            //'primary_contact_social_security' => 'required',
             //'tax_entity_type'=>'required',
             //'tax_identification'=>'required',
             'nationality' => 'required',
