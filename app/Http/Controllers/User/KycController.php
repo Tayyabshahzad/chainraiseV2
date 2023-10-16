@@ -80,7 +80,7 @@ class KycController extends Controller
             ]);
         }
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);
-//dd($decodedSsn);
+
         if (!$user->getFirstMediaUrl('kyc_document_collection')) {
             $errors[] = 'Please Upload Document First';
             return response([
@@ -197,26 +197,29 @@ class KycController extends Controller
             //dump('entity calling');
             // creating container for business
             if($user->identity_container_id == null){
+                $identityContainerData = [
+                    'firstName' => $user->name,
+                    'middleName' => $user->userDetail->middle_name,
+                    'lastName' => $user->userDetail->last_name,
+                    'phone' => $user->cc . $user->phone,
+                    'email' => $user->email,
+                    "upgradeKYC" => true,
+                    "dateOfBirth" => $date_of_birth,
+                    'address' => [
+                        'street1' => $user->userDetail->address,
+                        'postalCode' => $user->userDetail->zip,
+                        'city' => $user->userDetail->city,
+                        'state' => $user->userDetail->state,
+                        'country' => $user->identityVerification->nationality,
+                    ]
+                ];
+                if ($user->check_kyc_method === 'SSN') {
+                    $identityContainerData['ssn'] = $decodedSsn;
+                }
                  try{
                     $identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',
-                    ])->post($this->baseUrl.'/api/trust/v1/identity-containers', [
-                        'firstName' => $user->name,
-                        'middleName' => $user->userDetail->middle_name,
-                        'lastName' => $user->userDetail->last_name,
-                        'phone' =>  $user->cc.$user->phone,
-                        'email' => $user->email,
-                        'ssn' => $decodedSsn,
-                        "upgradeKYC" => true,
-                        "dateOfBirth" => $date_of_birth,
-                        'address' => [
-                            'street1' => $user->userDetail->address,
-                            'postalCode' => $user->userDetail->zip,
-                            'city' => $user->userDetail->city,
-                            'state' => $user->userDetail->state,
-                            'country' => $user->identityVerification->nationality,
-                        ]
-                    ]);
+                    ])->post($this->baseUrl . '/api/trust/v1/identity-containers', $identityContainerData);
                     $json_identity_containers =  json_decode((string) $identity_containers->getBody(), true);
                     $status = $identity_containers->status();
                     if($status == 400){
@@ -264,6 +267,7 @@ class KycController extends Controller
             }
 
             if($user->business_id == null){
+
                 try{
                     $business_identity_containers = Http::withToken($token_json['access_token'])->withHeaders([
                         'Content-Type' => 'application/json',

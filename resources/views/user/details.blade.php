@@ -3,7 +3,7 @@
 @section('page_name', 'Listings')
 @section('page_head')
     <style></style>
-     
+
 @endsection
 @section('page_content')
 
@@ -163,12 +163,12 @@
                                                     <path opacity="0.3"
                                                         d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM12.5 18C12.5 17.4 12.6 17.5 12 17.5H8.5C7.9 17.5 8 17.4 8 18C8 18.6 7.9 18.5 8.5 18.5L12 18C12.6 18 12.5 18.6 12.5 18ZM16.5 13C16.5 12.4 16.6 12.5 16 12.5H8.5C7.9 12.5 8 12.4 8 13C8 13.6 7.9 13.5 8.5 13.5H15.5C16.1 13.5 16.5 13.6 16.5 13ZM12.5 8C12.5 7.4 12.6 7.5 12 7.5H8C7.4 7.5 7.5 7.4 7.5 8C7.5 8.6 7.4 8.5 8 8.5H12C12.6 8.5 12.5 8.6 12.5 8Z"
                                                         fill="currentColor" />
-                                                    <rect x="7" y="17" width="6" height="2"
-                                                        rx="1" fill="currentColor" />
-                                                    <rect x="7" y="12" width="10" height="2"
-                                                        rx="1" fill="currentColor" />
-                                                    <rect x="7" y="7" width="6" height="2"
-                                                        rx="1" fill="currentColor" />
+                                                    <rect x="7" y="17" width="6" height="2" rx="1"
+                                                        fill="currentColor" />
+                                                    <rect x="7" y="12" width="10" height="2" rx="1"
+                                                        fill="currentColor" />
+                                                    <rect x="7" y="7" width="6" height="2" rx="1"
+                                                        fill="currentColor" />
                                                     <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor" />
                                                 </svg>
                                             </span>
@@ -245,11 +245,8 @@
                 <!--end::Details-->
             </div>
         </div>
-        <!--end::Navbar-->
-
 
         <div class="flex-lg-row-fluid">
-            <!--begin:::Tabs-->
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
                 <!--begin:::Tab item-->
                 <li class="nav-item">
@@ -301,8 +298,6 @@
                         href="#kt_engagement_tab">Engagement</a>
                 </li>
             </ul>
-            <!--end:::Tabs-->
-            <!--begin:::Tab content-->
             <div class="tab-content" id="myTabContent">
                 <!--begin:::Accounts Tab pane-->
                 <div class="tab-pane fade show active" id="kt_accounts_tab" role="tabpanel">
@@ -571,27 +566,7 @@
                                     </div>
                                     <div class="row">
                                         @if ($user->hasRole('issuer'))
-                                            <div class="form-group mb-10 col-lg-4">
-                                                <label>
-                                                    Primary Contact Social Security # <small>(US Investors Only)</small>
-                                                    <span class="text-danger">*</span></label>
-                                                <div class="input-group">
-                                                    <input class="form-control"
-                                                        placeholder="Primary Contact Social Security"
-                                                        name="primary_contact_social_security"
-                                                        @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null) type="password"
-                                                    value="999-99-9999" readonly
-                                                    @else
-                                                    required
-                                                    type="text" @endif
-                                                        id="primary_contact_social_security" />
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-secondary  no-radius" id="show_ssn_field"
-                                                            type="button">x</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-10 col-lg-4">
+                                            <div class="form-group mb-10 col-lg-6">
                                                 <label> Tax Entity Type <span class="text-danger">*</span> </label>
                                                 <select class="form-select tax_entity_type" required
                                                     data-control="select2" name="tax_entity_type"
@@ -606,7 +581,7 @@
                                                     <option value="Custodial">Custodial</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-10 col-lg-4">
+                                            <div class="form-group mb-10 col-lg-6">
                                                 <label> Tax Identification # <span class="text-danger">*</span> </label>
                                                 <input type="number" class="form-control"
                                                     placeholder="Tax Identification" required name="tax_identification"
@@ -740,7 +715,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-10">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <label>Nationality <span class="text-danger">*</span></label>
                                             <select class="form-select nationality" required data-control="select2"
                                                 name="nationality" data-placeholder="Select an option"
@@ -748,7 +723,7 @@
                                                 @include('user.country')
                                             </select>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <label>Country of Residence <span class="text-danger">*</span></label>
                                             <select class="form-select country_residence" required data-control="select2"
                                                 name="country_residence" data-placeholder="Select an option"
@@ -756,7 +731,7 @@
                                                 @include('user.country')
                                             </select>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <label class="fw-semibold"> Document Type</label>
                                             <select class="form-select doc_type" data-control="select2"
                                                 data-placeholder="Select Document Type" required name="doc_type">
@@ -773,1054 +748,1079 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12  bg-light-dark rounded border-dark border border-dashed p-6 mb-12 " > 
-                                            <div class="row" style="padding:50px">
-                                                    <div class="col-lg-6">
-                                                        <label>  Document Front * </label> 
-                                                        <input type="file" name="kyc_document" class="form-control"/>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <label> Document Back </label>
-                                                        <input type="file" name="kyc_document_back" class="form-control"/>
-                                                    </div>
-                                            </div> 
+
+                                    <div
+                                        @if ($user->identityVerification && $user->identityVerification->country_residence == 'US') class="form-group mb-10 col-lg-6 primary_contact_social_security_wraper"
+                                    @else
+                                        class="form-group mb-10 col-lg-6 primary_contact_social_security_wraper d-none" @endif>
+                                        <label>
+                                            SSN Primary Contact Social Security # <small>(US Investors Only)</small>
+                                            <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Primary Contact Social Security"
+                                                name="primary_contact_social_security"
+                                                @if ($user->identityVerification && $user->identityVerification->primary_contact_social_security != null) type="password"
+                                                    value="999-99-9999" readonly
+                                                @else
+
+                                                type="text" @endif
+                                                id="primary_contact_social_security" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary  no-radius" id="show_ssn_field"
+                                                    type="button">x</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12  bg-light-dark rounded border-dark border border-dashed p-6 mb-12 document_uplaod_wrapper
+                                        @if ($user->identityVerification && $user->identityVerification->country_residence == 'US') d-none  @elseif(!$user->identityVerification)    d-none  @endif ">
+                                        <div class="row" >
+                                            <div class="col-lg-6 col-md-6">
+                                                <label> Document Front * </label>
+                                                <input type="file" name="kyc_document" class="front_doc form-control" />
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <label> Document Back * </label>
+                                                <input type="file" name="kyc_document_back" class="back_doc form-control" />
+                                            </div>
+
                                             <div class="row" style="padding:50px">
                                                 <div class="col-lg-6 text-center">
-                                                    <label>  Document Front </label> <br/> 
+                                                    <label> Document Front </label> <br />
                                                     <a href="{{ $user->getFirstMediaUrl('kyc_document_collection', 'thumb') }}"
                                                         download title="Download Document File">
                                                         <i class="la la-download"></i>
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-6 text-center">
-                                                    <label> Document Back  </label> <br/>
+                                                    <label> Document Back </label> <br />
                                                     <a href="{{ $user->getFirstMediaUrl('kyc_document_collection_back', 'thumb') }}"
                                                         download title="Download Document File">
                                                         <i class="la la-download"></i>
                                                     </a>
                                                 </div>
-                                        </div>  
-                                    </div>
-
-
-                                    <div class="row">
-
-                                            <div class="col-lg-12 text-center ">
-                                                <label class="form-check form-check-custom form-check-solid">
-                                                    <input class="form-check-input h-15px w-15px" type="checkbox"   name="account_status"
-                                                        @if ($user->status != 'inactive') checked @endif >
-                                                    <span class="form-check-label fw-semibold"> Account Status </span>
-                                                </label>
-                                            </div>
-                                    </div>
-
-
-
-
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <button type="submit" class="btn-sm btn btn-primary mr-2 no-radius btn-dark">
-                                                Update Account </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <!--end:::Accounts Tab pane-->
-                <!--end:::Accounts Tab pane-->
-
-                <!--begin:::Profile Tab pane-->
-                <div class="tab-pane fade" id="kt_profile_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Investment Profile</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0 pb-5">
-                            <form class="form" method="post" action="{{ route('user.invesment.update') }}"
-                                enctype="multipart/form-data"> @csrf
-                                <input type="hidden" name="id" value="{{ $user->id }}">
-                                <input type="hidden" name="type"
-                                    value="{{ $user->roles()->pluck('name')->implode(' ') }}">
-                                @if ($user->hasRole('investor'))
-                                    <div class="card-body">
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label>Net Worth <span class="text-danger">*</span></label>
-                                                <select class="form-select" required data-control="select2"
-                                                    data-placeholder="Net Worth*" name="net_worth">
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '0-100000') selected @endif
-                                                        value="0-100000">Less than $100,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '100001-50000') selected @endif
-                                                        value="100001-50000"> $100,001 - $250,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '250001-500000') selected @endif
-                                                        value="250001-500000"> $250,001 - $500,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '500001-1000000') selected @endif
-                                                        value="500001-1000000"> $500,001 - $1,000,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '1000001-5000000') selected @endif
-                                                        value="1000001-5000000"> $1,000,001 - $5,000,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '5000000') selected @endif
-                                                        value="5000000">more than $5,000,000</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Annual Net Income</label>
-                                                <input type="text" class="form-control" name="annual_net_income"
-                                                    @if ($user->invesmentProfie && $user->invesmentProfie->annual_net_income) value="{{ $user->invesmentProfie->annual_net_income }}" @endif
-                                                    placeholder="Annual Net Income">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label>Highest Education <span class="text-danger">*</span></label>
-                                                <select class="form-select" required data-control="select2"
-                                                    data-placeholder="Highest Education*" name="highest_education">
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'Less than High School') selected @endif
-                                                        value="Less than High School">Less than High School</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'High School Graduate') selected @endif
-                                                        value="High School Graduate">High School Graduate</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'Some College') selected @endif
-                                                        value="Some College">Some College</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Associate's Degree") selected @endif
-                                                        value="Associate's Degree">Associate's Degree</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Bachelor's Degree") selected @endif
-                                                        value="Bachelor's Degree">Bachelor's Degree</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Master's Degree") selected @endif
-                                                        value="Master's Degree">Master's Degree</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'doctorate') selected @endif
-                                                        value="doctorate">Doctorate</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'not set') selected @endif
-                                                        value="not set">(not set)</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Risk Tolerance <span class="text-danger">*</span></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Risk Tolerance*" name="risk_tolerance">
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'conservative') selected @endif
-                                                        value="conservative">Conservative</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'moderate') selected @endif
-                                                        value="moderate">Moderate</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'agresive') selected @endif
-                                                        value="agresive">Aggresive</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == '(not set)') selected @endif
-                                                        value="(not set)">(not set)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label>Investment Experience <span class="text-danger">*</span></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Investment Experience*"
-                                                    name="investment_experience">
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'none') selected @endif
-                                                        value="none">
-                                                        None</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'limited') selected @endif
-                                                        value="limited">Limited</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'good') selected @endif
-                                                        value="good">
-                                                        Good</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'extensive') selected @endif
-                                                        value="extensive">Extensive</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'not set') selected @endif
-                                                        value="not set">(not set)</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Age <span class="text-danger">*</span></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Age*" name="age">
-                                                    <option></option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '29') selected @endif
-                                                        value="29">
-                                                        Under 30</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '30-39') selected @endif
-                                                        value="30-39">
-                                                        30 - 39</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '40-49') selected @endif
-                                                        value="40-49">
-                                                        40 - 49</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '50-59') selected @endif
-                                                        value="50-59">
-                                                        50 - 59</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '60-69') selected @endif
-                                                        value="60-69">
-                                                        60 - 69</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '70-79') selected @endif
-                                                        value="70-79">
-                                                        70 - 79</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '80') selected @endif
-                                                        value="80">
-                                                        Over 79</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->age == 'not set') selected @endif
-                                                        value="">
-                                                        (not set)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label>Gender <span class="text-danger">*</span></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Gender*" name="gender">
-                                                    <option></option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'male') selected @endif
-                                                        value="male">
-                                                        Male</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'female') selected @endif
-                                                        value="female">
-                                                        Female</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'other') selected @endif
-                                                        value="other">
-                                                        Other</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'not set') selected @endif
-                                                        value="not set">(not set)</option>
-                                                </select>
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
-                                @endif
-
-                                {{-- Issuer Details  --}}
-                                @if ($user->hasRole('issuer'))
-                                    <div class="card-body">
-                                        <div class="form-group row mb-10">
-                                            <div class="col-lg-6">
-                                                <label>Assets Under Managment </label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Assets Under Managment"
-                                                    name="assets_under_management">
-                                                    <option value="" disabled selected> Assets Under Managment
-                                                    </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '0-50000000') selected @endif
-                                                        value="0-50000000"> Less than $50,000,000 </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '50000001-100000000') selected @endif
-                                                        value="50000001-100000000"> $50,000,001 - $100,000,000 </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '250000001-500000000') selected @endif
-                                                        value="250000001-500000000"> $250,000,001 - $500,000,000 </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '500000001-1000000000') selected @endif
-                                                        value="500000001-1000000000"> $500,000,001 - $1,000,000,000
-                                                    </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '1000000000') selected @endif
-                                                        value="1000000000"> more than $1,000,000,000</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '5000000') selected @endif
-                                                        value="5000000">more than $5,000,000</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label> Investment Style <span class="text-danger">*</span></label>
-                                                <select class="form-select" data-control="select2"
-                                                    data-placeholder="Investment Style" name="investment_style">
-                                                    <option value="" disabled selected> Investment Style </option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'conservative') selected @endif
-                                                        value="conservative">Conservative</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'moderate') selected @endif
-                                                        value="moderate">Moderate</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'agresive') selected @endif
-                                                        value="agresive">Aggresive</option>
-                                                    <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == '(not set)') selected @endif
-                                                        value="(not set)">(not set)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ">
-                                            <div class="col-lg-6 mb-10">
-                                                <label>Finra CRD # </label>
-                                                <input type="text" name="finra_crd"
-                                                    @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->finra_crd }}" @endif
-                                                    class="form-control" placeholder="Finra CRD">
-                                            </div>
-                                            <div class="col-lg-6 mb-10">
-                                                <label>Website URL </label>
-                                                <input type="text" name="website_url"
-                                                    @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->website }}" @endif
-                                                    class="form-control" placeholder="Website URL">
-                                            </div>
-
-                                            <div class="col-lg-6 mb-10">
-                                                <label>LinkedIn URL<span class="text-danger">*</span></label>
-                                                <input type="text" name="linkedin_url"
-                                                    @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->linkedIn }}" @endif
-                                                    class="form-control" placeholder="LinkedIn URL">
                                             </div>
                                         </div>
                                     </div>
-                                @endif
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label>Password <span class="text-danger">*</span></label>
-                                            <input type="password" name="password" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <button type="submit" class="btn-sm btn btn-primary">
-                                                Update Profile
-                                            </button>
 
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_users_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-body pt-0 pb-5">
-                            <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
-                                        id="customers_table">
-                                        <thead>
-                                            <!--begin::Table row-->
-                                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Customer Name: activate to sort column ascending"> Username
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending">First Name
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Company: activate to sort column ascending">Last Name
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Payment Method: activate to sort column ascending">Phone #
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Created Date: activate to sort column ascending">Is Active
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending">Is Primary
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending">Email Verified
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    span="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending">Notifications
-                                                </th>
-                                                <th class="" tabindex="0" aria-controls="kt_customers_table"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending">Secure Invite
-                                                </th>
-                                                <th class="" rowspan="1" colspan="1" aria-label="Actions">
-                                                    Details / Edit
-                                                </th>
-                                            </tr>
-                                            <!--end::Table row-->
-                                        </thead>
-                                        @foreach ($childs as $child)
-                                            <tr class="odd">
-                                                <td>
-                                                    {{ $child->email }}
-                                                </td>
-                                                <td>
-                                                    {{ $child->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $child->userDetail->last_name }}
-                                                </td>
-                                                <td>
-                                                    {{ Str::substr($child->phone, 0, 4) }}***
-                                                </td>
-                                                <td>
-                                                    @if ($child->status == 'active')
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="status" value="true" checked="checked">
-                                                        </label>
-                                                    @else
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="status" value="false">
-                                                        </label>
-                                                    @endif
-
-                                                </td>
-                                                <td>
-                                                    @if ($child->is_primary == true)
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="status" value="true" checked="checked">
-                                                        </label>
-                                                    @else
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="status" value="false">
-                                                        </label>
-                                                    @endif
-
-                                                </td>
-                                                <td class="">
-                                                    @if ($child->email_verified_at == null)
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="email_verified" value="true">
-                                                            <span class="form-check-label fw-semibold">Resend</span>
-                                                        </label>
-                                                    @else
-                                                        <label class="form-check form-check-custom form-check-solid me-10">
-                                                            <input class="form-check-input h-15px w-15px" type="checkbox"
-                                                                name="email_verified" value="false">
-                                                        </label>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)">Manage</a>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-secondary btn-sm">Create
-                                                        Invite
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-default getUserDetail"
-                                                        data-bs-toggle="modal" data-bs-target="#edit_new_user"
-                                                        data-id="{{ $child->id }}">
-                                                        <i class="fas fa-pen fs-3"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Card body-->
-                        @if ($user->hasRole('issuer'))
-                            <div class="card-footer">
-                                <div class="d-flex flex-row justify-content-between">
-                                    <div class="">
-                                        <button type="submit" class="btn-sm btn btn-primary mr-2">
-                                            Add Existing User
-                                        </button>
-                                    </div>
-                                    <div class="">
-                                        <button type="submit" class="btn-sm btn btn-primary mr-2" data-bs-toggle="modal"
-                                            data-bs-target="#add_new_user">
-                                            Add New User
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_accreditation_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-header border-0">
-                            <div class="card-title">
-                                <h2>Accreditation Status</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0 pb-5">
-                            <form class="form" method="post" action="{{ route('accreditation.update') }}">
-                                @csrf
-                                <div class="form-group row">
-                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                    @foreach ($accreditations as $accreditation)
-                                        <div class="col-lg-4 mb-10">
-                                            <!--begin::Card-->
-                                            <div class="card card-flush card-stretch card-bordered  py-4 h-250px">
-                                                <div class="card-header justify-content-center">
-                                                    <div class="card-title">
-                                                        <div>
-                                                            <span class="">
-                                                                <i class="{{ $accreditation->icon }} fs-3x"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body pt-2 text-center">
-                                                    <span class="fs-4"> {{ $accreditation->title }} </span><br>
-                                                    <span class="fs-4 text-success">
-                                                        @if ($accreditation->amount != null)
-                                                            Above ${{ number_format($accreditation->amount) }}
-                                                        @endif
-                                                    </span><br>
-                                                    <span> {{ $accreditation->years }} </span>
-                                                </div>
-                                                <div
-                                                    class="form-check form-check-custom form-check-solid justify-content-center">
-                                                    <input class="form-check-input" type="radio"
-                                                        value="{{ $accreditation->id }}" name="accreditation" required
-                                                        @if ($user->accreditation and $user->accreditation->id == $accreditation->id) checked @endif />
-                                                    <label class="form-check-label"></label>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Card-->
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="card-footer text-center">
-                                    <div class="d-flex flex-row justify-content-center">
-                                        <div class="">
-                                            <button type="submit" class="btn-sm btn btn-primary mr-2">
-                                                UPDATE ACCREDATION STATUS
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_transaction_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card mb-5 mb-xl-8">
-                        <!--begin::Header-->
-                        <div class="card-header border-0 pt-5">
-                            <ul class="nav nav-pills me-6 mb-2 mb-sm-0" role="tablist">
-
-                                <li class="nav-item" role="presentation">
-                                    <a class="btn btn-sm btn-light btn-color-muted btn-active-primary me-3 active"
-                                        data-bs-toggle="tab" href="#kt_transactions_table_pane" aria-selected="true"
-                                        role="tab">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                        Transactions
-                                        <!--end::Svg Icon-->
-                                    </a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="btn btn-sm btn-light btn-color-muted btn-active-primary"
-                                        data-bs-toggle="tab" href="#kt_portfolio_pane" aria-selected="false"
-                                        role="tab" tabindex="-1">
-                                        <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
-                                        Portfolio
-                                        <!--end::Svg Icon-->
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="card-toolbar">
-                                <a href="#kt_add_transaction_pane" data-bs-toggle="tab"
-                                    class="btn btn-sm btn-light-primary btn-active-primary" aria-selected="false"
-                                    role="tab">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                                    <span class="svg-icon svg-icon-2">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect opacity="0.5" x="11.364" y="20.364" width="16"
-                                                height="2" rx="1" transform="rotate(-90 11.364 20.364)"
-                                                fill="currentColor"></rect>
-                                            <rect x="4.36396" y="11.364" width="16" height="2"
-                                                rx="1" fill="currentColor"></rect>
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->Add Transaction
-                                </a>
-                            </div>
-
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body py-3">
-                            <div class="tab-content">
-                                <div class="tab-pane fade active show" id="kt_transactions_table_pane">
-                                    <!--begin::Table container-->
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle gs-0 gy-4">
-                                            <!--begin::Table head-->
-                                            <thead>
-                                                <tr class="fw-bold text-muted bg-light">
-                                                    <th class="ps-4 rounded-start">From</th>
-                                                    <th class="">To</th>
-                                                    <th class="">Amount</th>
-                                                    <th class="">Date</th>
-                                                    <th class="">KYC</th>
-                                                    <th class="">Status</th>
-                                                    <th class="">Type</th>
-                                                    <th class="">Payment Method</th>
-                                                    <th class="">E-Sign</th>
-                                                    <th class=""></th>
-                                                    <th class="rounded-end"></th>
-                                                </tr>
-                                            </thead>
-                                            <!--end::Table head-->
-                                            <!--begin::Table body-->
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-
-                                            </tbody>
-                                            <!--end::Table body-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Table container-->
-                                </div>
-                                <!--add 'show' class to display the content-->
-                                <div class="tab-pane fade active" id="kt_portfolio_pane">
-                                    <div class="text-center mt-6">
-                                        <h3>Your portfolio is currently empty</h3>
-                                        <a class="btn btn-sm btn-primary mt-6">
-                                            Start Investing Now
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade active show" id="kt_add_transaction_pane">
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--begin::Body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_documents_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card card-flush">
-                        <!--begin::Card header-->
-                        <div class="card-header pt-8">
-                            <div class="card-title">
-                                <!--begin::Search-->
-
-                                <!--end::Search-->
-                            </div>
-                            <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
-                                <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
-                                    <!--begin::Export-->
-                                    <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
-                                        data-bs-target="#modal-addFolder">
-                                        <!--begin::Svg Icon | path: icons/duotune/files/fil013.svg-->
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.3" d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z"
-                                                    fill="currentColor"></path>
-                                                <path
-                                                    d="M10.4 3.60001L12 6H21C21.6 6 22 6.4 22 7V19C22 19.6 21.6 20 21 20H3C2.4 20 2 19.6 2 19V4C2 3.4 2.4 3 3 3H9.2C9.7 3 10.2 3.20001 10.4 3.60001ZM16 12H13V9C13 8.4 12.6 8 12 8C11.4 8 11 8.4 11 9V12H8C7.4 12 7 12.4 7 13C7 13.6 7.4 14 8 14H11V17C11 17.6 11.4 18 12 18C12.6 18 13 17.6 13 17V14H16C16.6 14 17 13.6 17 13C17 12.4 16.6 12 16 12Z"
-                                                    fill="currentColor"></path>
-                                                <path opacity="0.3"
-                                                    d="M11 14H8C7.4 14 7 13.6 7 13C7 12.4 7.4 12 8 12H11V14ZM16 12H13V14H16C16.6 14 17 13.6 17 13C17 12.4 16.6 12 16 12Z"
-                                                    fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->Upload Document
-                                    </button>
-                                    <!--end::Export-->
-
-                                    <button type="button" id="kt_modal_add_event_cancel" class="btn btn-light me-3">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z"
-                                                    fill="currentColor"></path>
-                                                <path opacity="0.3"
-                                                    d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z"
-                                                    fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                        Sort Folders
-                                    </button>
-
-                                    <!--begin::Add customer-->
-                                    @if ($user->hasRole('investor'))
-                                        <button type="button" class="btn btn-dark btn-sm no-radius e_sign"
-                                            data-bs-toggle="modal" data-bs-target="#modal_e_sign">
-                                            <i class="fas fa-pen"></i>
-                                            Request E-Sign
-                                        </button>
-                                    @endif
-                                    <!--end::Add customer-->
-                                </div>
-                                <!--end::Toolbar-->
-                                <!--begin::Group actions-->
-                                <div class="d-flex justify-content-end align-items-center d-none"
-                                    data-kt-filemanager-table-toolbar="selected">
-                                    <div class="fw-bold me-5">
-                                        <span class="me-2"
-                                            data-kt-filemanager-table-select="selected_count"></span>Selected
-                                    </div>
-                                    <button type="button" class="btn btn-danger"
-                                        data-kt-filemanager-table-select="delete_selected">Delete Selected
-                                    </button>
-                                </div>
-                                <!--end::Group actions-->
-                            </div>
-                            <!--end::Card toolbar-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body">
-                            <div id="kt_file_manager_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <div class="table-responsive">
-                                    <div class="dataTables_scroll">
-
+                                <label class="col-3 col-form-label"> Check KYC BY <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-9 col-form-label">
+                                    <div class="radio-inline">
+                                        <label class="radio radio-outline radio-success">
+                                            <input type="radio" class="check_kyc_method" name="check_kyc_method"
+                                                value="SSN" required>
+                                            <span></span>BY SSN</label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label class="radio radio-outline radio-success">
+                                            <input type="radio" class="check_kyc_method" name="check_kyc_method"
+                                                value="Document" required>
+                                            <span></span>BY Document</label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="d-flex align-items-center position-relative my-1">
-                                        <h3> Documents </h3>
+                                    <div class="col-lg-12 text-center ">
+                                        <label class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                name="account_status" @if ($user->status != 'inactive') checked @endif>
+                                            <span class="form-check-label fw-semibold"> Account Status </span>
+                                        </label>
                                     </div>
-                                    @foreach ($e_documents as $e_document)
+                                </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn-sm btn btn-primary mr-2 no-radius btn-dark">
+                                        Update Account </button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <div class="tab-pane fade" id="kt_profile_tab" role="tabpanel">
+                <!--begin::Card-->
+                <div class="card pt-4 mb-6 mb-xl-9">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0">
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <h2>Investment Profile</h2>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0 pb-5">
+                        <form class="form" method="post" action="{{ route('user.invesment.update') }}"
+                            enctype="multipart/form-data"> @csrf
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="hidden" name="type"
+                                value="{{ $user->roles()->pluck('name')->implode(' ') }}">
+                            @if ($user->hasRole('investor'))
+                                <div class="card-body">
+                                    <div class="form-group row mb-10">
+                                        <div class="col-lg-6">
+                                            <label>Net Worth <span class="text-danger">*</span></label>
+                                            <select class="form-select" required data-control="select2"
+                                                data-placeholder="Net Worth*" name="net_worth">
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '0-100000') selected @endif
+                                                    value="0-100000">Less than $100,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '100001-50000') selected @endif
+                                                    value="100001-50000"> $100,001 - $250,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '250001-500000') selected @endif
+                                                    value="250001-500000"> $250,001 - $500,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '500001-1000000') selected @endif
+                                                    value="500001-1000000"> $500,001 - $1,000,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '1000001-5000000') selected @endif
+                                                    value="1000001-5000000"> $1,000,001 - $5,000,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->net_worth == '5000000') selected @endif
+                                                    value="5000000">more than $5,000,000</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Annual Net Income</label>
+                                            <input type="text" class="form-control" name="annual_net_income"
+                                                @if ($user->invesmentProfie && $user->invesmentProfie->annual_net_income) value="{{ $user->invesmentProfie->annual_net_income }}" @endif
+                                                placeholder="Annual Net Income">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-10">
+                                        <div class="col-lg-6">
+                                            <label>Highest Education <span class="text-danger">*</span></label>
+                                            <select class="form-select" required data-control="select2"
+                                                data-placeholder="Highest Education*" name="highest_education">
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'Less than High School') selected @endif
+                                                    value="Less than High School">Less than High School</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'High School Graduate') selected @endif
+                                                    value="High School Graduate">High School Graduate</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'Some College') selected @endif
+                                                    value="Some College">Some College</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Associate's Degree") selected @endif
+                                                    value="Associate's Degree">Associate's Degree</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Bachelor's Degree") selected @endif
+                                                    value="Bachelor's Degree">Bachelor's Degree</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == "Master's Degree") selected @endif
+                                                    value="Master's Degree">Master's Degree</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'doctorate') selected @endif
+                                                    value="doctorate">Doctorate</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->highest_education == 'not set') selected @endif
+                                                    value="not set">(not set)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Risk Tolerance <span class="text-danger">*</span></label>
+                                            <select class="form-select" data-control="select2"
+                                                data-placeholder="Risk Tolerance*" name="risk_tolerance">
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'conservative') selected @endif
+                                                    value="conservative">Conservative</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'moderate') selected @endif
+                                                    value="moderate">Moderate</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == 'agresive') selected @endif
+                                                    value="agresive">Aggresive</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->risk_tolerance == '(not set)') selected @endif
+                                                    value="(not set)">(not set)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-10">
+                                        <div class="col-lg-6">
+                                            <label>Investment Experience <span class="text-danger">*</span></label>
+                                            <select class="form-select" data-control="select2"
+                                                data-placeholder="Investment Experience*" name="investment_experience">
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'none') selected @endif value="none">
+                                                    None</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'limited') selected @endif
+                                                    value="limited">Limited</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'good') selected @endif value="good">
+                                                    Good</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'extensive') selected @endif
+                                                    value="extensive">Extensive</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_experience == 'not set') selected @endif
+                                                    value="not set">(not set)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Age <span class="text-danger">*</span></label>
+                                            <select class="form-select" data-control="select2" data-placeholder="Age*"
+                                                name="age">
+                                                <option></option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '29') selected @endif value="29">
+                                                    Under 30</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '30-39') selected @endif value="30-39">
+                                                    30 - 39</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '40-49') selected @endif value="40-49">
+                                                    40 - 49</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '50-59') selected @endif value="50-59">
+                                                    50 - 59</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '60-69') selected @endif value="60-69">
+                                                    60 - 69</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '70-79') selected @endif value="70-79">
+                                                    70 - 79</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == '80') selected @endif value="80">
+                                                    Over 79</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->age == 'not set') selected @endif value="">
+                                                    (not set)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-10">
+                                        <div class="col-lg-6">
+                                            <label>Gender <span class="text-danger">*</span></label>
+                                            <select class="form-select" data-control="select2" data-placeholder="Gender*"
+                                                name="gender">
+                                                <option></option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'male') selected @endif value="male">
+                                                    Male</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'female') selected @endif value="female">
+                                                    Female</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'other') selected @endif value="other">
+                                                    Other</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->gender == 'not set') selected @endif
+                                                    value="not set">(not set)</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            @endif
+
+                            {{-- Issuer Details  --}}
+                            @if ($user->hasRole('issuer'))
+                                <div class="card-body">
+                                    <div class="form-group row mb-10">
+                                        <div class="col-lg-6">
+                                            <label>Assets Under Managment </label>
+                                            <select class="form-select" data-control="select2"
+                                                data-placeholder="Assets Under Managment" name="assets_under_management">
+                                                <option value="" disabled selected> Assets Under Managment
+                                                </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '0-50000000') selected @endif
+                                                    value="0-50000000"> Less than $50,000,000 </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '50000001-100000000') selected @endif
+                                                    value="50000001-100000000"> $50,000,001 - $100,000,000 </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '250000001-500000000') selected @endif
+                                                    value="250000001-500000000"> $250,000,001 - $500,000,000 </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '500000001-1000000000') selected @endif
+                                                    value="500000001-1000000000"> $500,000,001 - $1,000,000,000
+                                                </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '1000000000') selected @endif
+                                                    value="1000000000"> more than $1,000,000,000</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->assets_under_management == '5000000') selected @endif
+                                                    value="5000000">more than $5,000,000</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label> Investment Style <span class="text-danger">*</span></label>
+                                            <select class="form-select" data-control="select2"
+                                                data-placeholder="Investment Style" name="investment_style">
+                                                <option value="" disabled selected> Investment Style </option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'conservative') selected @endif
+                                                    value="conservative">Conservative</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'moderate') selected @endif
+                                                    value="moderate">Moderate</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == 'agresive') selected @endif
+                                                    value="agresive">Aggresive</option>
+                                                <option @if ($user->invesmentProfie && $user->invesmentProfie->investment_style == '(not set)') selected @endif
+                                                    value="(not set)">(not set)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
                                         <div class="col-lg-6 mb-10">
-                                            <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
-                                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
-                                                    {{  $e_document->template_name }} </a>
-                                                <div class="mb-9">
-                                                    <!--begin::Badge-->
-                                                    <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
-                                                    <!--begin::Badge-->
+                                            <label>Finra CRD # </label>
+                                            <input type="text" name="finra_crd"
+                                                @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->finra_crd }}" @endif
+                                                class="form-control" placeholder="Finra CRD">
+                                        </div>
+                                        <div class="col-lg-6 mb-10">
+                                            <label>Website URL </label>
+                                            <input type="text" name="website_url"
+                                                @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->website }}" @endif
+                                                class="form-control" placeholder="Website URL">
+                                        </div>
+
+                                        <div class="col-lg-6 mb-10">
+                                            <label>LinkedIn URL<span class="text-danger">*</span></label>
+                                            <input type="text" name="linkedin_url"
+                                                @if ($user->invesmentProfie) value="{{ $user->invesmentProfie->linkedIn }}" @endif
+                                                class="form-control" placeholder="LinkedIn URL">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Password <span class="text-danger">*</span></label>
+                                        <input type="password" name="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <button type="submit" class="btn-sm btn btn-primary">
+                                            Update Profile
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <div class="tab-pane fade" id="kt_users_tab" role="tabpanel">
+                <!--begin::Card-->
+                <div class="card pt-4 mb-6 mb-xl-9">
+                    <div class="card-body pt-0 pb-5">
+                        <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                    id="customers_table">
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Customer Name: activate to sort column ascending"> Username
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Email: activate to sort column ascending">First Name
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Company: activate to sort column ascending">Last Name
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Payment Method: activate to sort column ascending">Phone #
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Created Date: activate to sort column ascending">Is Active
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Email: activate to sort column ascending">Is Primary
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Email: activate to sort column ascending">Email Verified
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                span="1" colspan="1"
+                                                aria-label="Email: activate to sort column ascending">Notifications
+                                            </th>
+                                            <th class="" tabindex="0" aria-controls="kt_customers_table"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Email: activate to sort column ascending">Secure Invite
+                                            </th>
+                                            <th class="" rowspan="1" colspan="1" aria-label="Actions">
+                                                Details / Edit
+                                            </th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    @foreach ($childs as $child)
+                                        <tr class="odd">
+                                            <td>
+                                                {{ $child->email }}
+                                            </td>
+                                            <td>
+                                                {{ $child->name }}
+                                            </td>
+                                            <td>
+                                                {{ $child->userDetail->last_name }}
+                                            </td>
+                                            <td>
+                                                {{ Str::substr($child->phone, 0, 4) }}***
+                                            </td>
+                                            <td>
+                                                @if ($child->status == 'active')
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="status" value="true" checked="checked">
+                                                    </label>
+                                                @else
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="status" value="false">
+                                                    </label>
+                                                @endif
+
+                                            </td>
+                                            <td>
+                                                @if ($child->is_primary == true)
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="status" value="true" checked="checked">
+                                                    </label>
+                                                @else
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="status" value="false">
+                                                    </label>
+                                                @endif
+
+                                            </td>
+                                            <td class="">
+                                                @if ($child->email_verified_at == null)
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="email_verified" value="true">
+                                                        <span class="form-check-label fw-semibold">Resend</span>
+                                                    </label>
+                                                @else
+                                                    <label class="form-check form-check-custom form-check-solid me-10">
+                                                        <input class="form-check-input h-15px w-15px" type="checkbox"
+                                                            name="email_verified" value="false">
+                                                    </label>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)">Manage</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-secondary btn-sm">Create
+                                                    Invite
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-default getUserDetail"
+                                                    data-bs-toggle="modal" data-bs-target="#edit_new_user"
+                                                    data-id="{{ $child->id }}">
+                                                    <i class="fas fa-pen fs-3"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Card body-->
+                    @if ($user->hasRole('issuer'))
+                        <div class="card-footer">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div class="">
+                                    <button type="submit" class="btn-sm btn btn-primary mr-2">
+                                        Add Existing User
+                                    </button>
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn-sm btn btn-primary mr-2" data-bs-toggle="modal"
+                                        data-bs-target="#add_new_user">
+                                        Add New User
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                <!--end::Card-->
+            </div>
+            <div class="tab-pane fade" id="kt_accreditation_tab" role="tabpanel">
+                <!--begin::Card-->
+                <div class="card pt-4 mb-6 mb-xl-9">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <h2>Accreditation Status</h2>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-5">
+                        <form class="form" method="post" action="{{ route('accreditation.update') }}">
+                            @csrf
+                            <div class="form-group row">
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                @foreach ($accreditations as $accreditation)
+                                    <div class="col-lg-4 mb-10">
+                                        <!--begin::Card-->
+                                        <div class="card card-flush card-stretch card-bordered  py-4 h-250px">
+                                            <div class="card-header justify-content-center">
+                                                <div class="card-title">
+                                                    <div>
+                                                        <span class="">
+                                                            <i class="{{ $accreditation->icon }} fs-3x"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex flex-wrap flex-center">
-                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
-                                                        <div class="fs-4 fw-bold text-gray-700">
-                                                            <i class="text-danger la la-trash"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
-                                                        @if( $e_document->source  != 'manual')
-                                                             <div class="fs-4 fw-bold text-gray-700 @if( $e_document->source  != 'manual') view_template @endif"
-                                                            data-user_id="{{   $e_document->investor_id  }}"
-                                                            data-template_id="{{   $e_document->template_id  }}"
-                                                            data-bs-toggle="modal" @if( $e_document->source  != 'manual')  data-bs-target="#modal_view_e_sign" @endif>
-                                                                <i class="text-warning la la-eye"></i>
-                                                            </div>
-                                                        @else
-                                                            <a  href="{{ $e_document->getFirstMediaUrl('e_documents', 'thumb') }}" target="_blank" class="fs-4 fw-bold text-gray-700 " >
-                                                                <i class="text-warning la la-eye"></i>
-                                                            </div>
-                                                        @endif
-
-
-                                                    </div>
-                                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
-                                                        <div class="fs-4 fw-bold text-gray-700">
-                                                            <i class="text-info la la-download"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class='text-center text-bold'>
-                                                     <h4>
-                                                        From : {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
-                                                     </h4>
-                                                     <h4>
-                                                          {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
-                                                     </h4>
-
-                                                </p>
+                                            </div>
+                                            <div class="card-body pt-2 text-center">
+                                                <span class="fs-4"> {{ $accreditation->title }} </span><br>
+                                                <span class="fs-4 text-success">
+                                                    @if ($accreditation->amount != null)
+                                                        Above ${{ number_format($accreditation->amount) }}
+                                                    @endif
+                                                </span><br>
+                                                <span> {{ $accreditation->years }} </span>
+                                            </div>
+                                            <div
+                                                class="form-check form-check-custom form-check-solid justify-content-center">
+                                                <input class="form-check-input" type="radio"
+                                                    value="{{ $accreditation->id }}" name="accreditation" required
+                                                    @if ($user->accreditation and $user->accreditation->id == $accreditation->id) checked @endif />
+                                                <label class="form-check-label"></label>
                                             </div>
                                         </div>
-                                    @endforeach
 
-                                    <div class="d-flex align-items-center position-relative my-1">
-                                        <h3> E-Sign Documents </h3>
+                                        <!--end::Card-->
                                     </div>
-                                    @foreach ($e_sign_documents as $e_document)
+                                @endforeach
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="d-flex flex-row justify-content-center">
+                                    <div class="">
+                                        <button type="submit" class="btn-sm btn btn-primary mr-2">
+                                            UPDATE ACCREDATION STATUS
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <div class="tab-pane fade" id="kt_transaction_tab" role="tabpanel">
+                <!--begin::Card-->
+                <div class="card mb-5 mb-xl-8">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                        <ul class="nav nav-pills me-6 mb-2 mb-sm-0" role="tablist">
+
+                            <li class="nav-item" role="presentation">
+                                <a class="btn btn-sm btn-light btn-color-muted btn-active-primary me-3 active"
+                                    data-bs-toggle="tab" href="#kt_transactions_table_pane" aria-selected="true"
+                                    role="tab">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                                    Transactions
+                                    <!--end::Svg Icon-->
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="btn btn-sm btn-light btn-color-muted btn-active-primary" data-bs-toggle="tab"
+                                    href="#kt_portfolio_pane" aria-selected="false" role="tab" tabindex="-1">
+                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                                    Portfolio
+                                    <!--end::Svg Icon-->
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="card-toolbar">
+                            <a href="#kt_add_transaction_pane" data-bs-toggle="tab"
+                                class="btn btn-sm btn-light-primary btn-active-primary" aria-selected="false"
+                                role="tab">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
+                                            rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor">
+                                        </rect>
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                            fill="currentColor"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Add Transaction
+                            </a>
+                        </div>
+
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body py-3">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="kt_transactions_table_pane">
+                                <!--begin::Table container-->
+                                <div class="table-responsive">
+                                    <!--begin::Table-->
+                                    <table class="table align-middle gs-0 gy-4">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr class="fw-bold text-muted bg-light">
+                                                <th class="ps-4 rounded-start">From</th>
+                                                <th class="">To</th>
+                                                <th class="">Amount</th>
+                                                <th class="">Date</th>
+                                                <th class="">KYC</th>
+                                                <th class="">Status</th>
+                                                <th class="">Type</th>
+                                                <th class="">Payment Method</th>
+                                                <th class="">E-Sign</th>
+                                                <th class=""></th>
+                                                <th class="rounded-end"></th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Table container-->
+                            </div>
+                            <!--add 'show' class to display the content-->
+                            <div class="tab-pane fade active" id="kt_portfolio_pane">
+                                <div class="text-center mt-6">
+                                    <h3>Your portfolio is currently empty</h3>
+                                    <a class="btn btn-sm btn-primary mt-6">
+                                        Start Investing Now
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade active show" id="kt_add_transaction_pane">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--begin::Body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <div class="tab-pane fade" id="kt_documents_tab" role="tabpanel">
+                <!--begin::Card-->
+                <div class="card card-flush">
+                    <!--begin::Card header-->
+                    <div class="card-header pt-8">
+                        <div class="card-title">
+                            <!--begin::Search-->
+
+                            <!--end::Search-->
+                        </div>
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
+                                <!--begin::Export-->
+                                <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
+                                    data-bs-target="#modal-addFolder">
+                                    <!--begin::Svg Icon | path: icons/duotune/files/fil013.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3" d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M10.4 3.60001L12 6H21C21.6 6 22 6.4 22 7V19C22 19.6 21.6 20 21 20H3C2.4 20 2 19.6 2 19V4C2 3.4 2.4 3 3 3H9.2C9.7 3 10.2 3.20001 10.4 3.60001ZM16 12H13V9C13 8.4 12.6 8 12 8C11.4 8 11 8.4 11 9V12H8C7.4 12 7 12.4 7 13C7 13.6 7.4 14 8 14H11V17C11 17.6 11.4 18 12 18C12.6 18 13 17.6 13 17V14H16C16.6 14 17 13.6 17 13C17 12.4 16.6 12 16 12Z"
+                                                fill="currentColor"></path>
+                                            <path opacity="0.3"
+                                                d="M11 14H8C7.4 14 7 13.6 7 13C7 12.4 7.4 12 8 12H11V14ZM16 12H13V14H16C16.6 14 17 13.6 17 13C17 12.4 16.6 12 16 12Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->Upload Document
+                                </button>
+                                <!--end::Export-->
+
+                                <button type="button" id="kt_modal_add_event_cancel" class="btn btn-light me-3">
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z"
+                                                fill="currentColor"></path>
+                                            <path opacity="0.3"
+                                                d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </span>
+                                    Sort Folders
+                                </button>
+
+                                <!--begin::Add customer-->
+                                @if ($user->hasRole('investor'))
+                                    <button type="button" class="btn btn-dark btn-sm no-radius e_sign"
+                                        data-bs-toggle="modal" data-bs-target="#modal_e_sign">
+                                        <i class="fas fa-pen"></i>
+                                        Request E-Sign
+                                    </button>
+                                @endif
+                                <!--end::Add customer-->
+                            </div>
+                            <!--end::Toolbar-->
+                            <!--begin::Group actions-->
+                            <div class="d-flex justify-content-end align-items-center d-none"
+                                data-kt-filemanager-table-toolbar="selected">
+                                <div class="fw-bold me-5">
+                                    <span class="me-2" data-kt-filemanager-table-select="selected_count"></span>Selected
+                                </div>
+                                <button type="button" class="btn btn-danger"
+                                    data-kt-filemanager-table-select="delete_selected">Delete Selected
+                                </button>
+                            </div>
+                            <!--end::Group actions-->
+                        </div>
+                        <!--end::Card toolbar-->
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body">
+                        <div id="kt_file_manager_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="table-responsive">
+                                <div class="dataTables_scroll">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <h3> Documents </h3>
+                                </div>
+                                @foreach ($e_documents as $e_document)
                                     <div class="col-lg-6 mb-10">
-                                        <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000" >
+                                        <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000">
                                             <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
-                                                {{  $e_document->template_name }} </a>
+                                                {{ $e_document->template_name }} </a>
                                             <div class="mb-9">
                                                 <!--begin::Badge-->
-                                                <div class="badge badge-lg badge-light-danger d-inline">   {{  $e_document->offer->name }} </div>
+                                                <div class="badge badge-lg badge-light-danger d-inline">
+                                                    {{ $e_document->offer->name }} </div>
                                                 <!--begin::Badge-->
                                             </div>
                                             <div class="d-flex flex-wrap flex-center">
-
-
-                                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3" style="margin-left:10px;">
+                                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
+                                                    style="margin-left:10px;">
                                                     <div class="fs-4 fw-bold text-gray-700">
-                                                        <i class="text-info la la-download"></i>
+                                                        <i class="text-danger la la-trash"></i>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <p class='text-center text-bold'>
-                                                 <h4>
-                                                    From : {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
-                                                 </h4>
-                                                 <h4>
-                                                      {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
-                                                 </h4>
-
-                                            </p>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                                </div>
-                            </div>
-                            <!--end::Table-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_payment_tab" role="tabpanel">
-                    <!--begin::Card-->
-                    <div class="card card-flush">
-                        <!--begin::Card header-->
-                        <div class="card-header pt-8">
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body">
-                            <div class="text-center">
-                                <h4>There are no payment methods</h4>
-                            </div>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel">
-                    <div class="col-lg-3 ">
-                        <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-200px mb-5 mb-xl-10"
-                            style="background-color: #F1416C;background-image:url({{ asset('assets/media/patterns/vector-1.png') }})">
-                            <!--begin::Header-->
-                            <div class="card-header pt-5">
-                                <!--begin::Title-->
-                                <div class="card-title d-flex flex-column">
-                                    <!--begin::Amount-->
-                                    <span class="fs-6 fw-bold text-white me-2 lh-1 ls-n2">Techware Labs</span>
-                                    <!--end::Amount-->
-                                    <!--begin::Subtitle-->
-                                    <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Techware Labs</span>
-                                    <!--end::Subtitle-->
-                                </div>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Card body-->
-                            <div class="card-body d-flex flex-row align-items-end pt-0">
-                                <!--begin::Progress-->
-                                <div class="d-flex flex-column align-items-center flex-column mt-3 w-100">
-
-                                    <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">191</span>
-                                    <!--end::Amount-->
-                                    <!--begin::Subtitle-->
-                                    <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Engagements</span>
-                                </div>
-                                <div class="d-flex flex-column align-items-center flex-column mt-3 w-100">
-
-                                    <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">0</span>
-                                    <!--end::Amount-->
-                                    <!--begin::Subtitle-->
-                                    <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Notes</span>
-                                </div>
-                                <!--end::Progress-->
-                            </div>
-                            <!--end::Card body-->
-                        </div>
-                    </div>
-                    <div class="card">
-                        <!--begin::Card head-->
-                        <div class="card-header card-header-stretch">
-                            <!--begin::Title-->
-                            <div class="card-title d-flex align-items-center">
-                                Filter by
-                                <div class="m-lg-4 me-6 my-1">
-                                    <select id="kt_filter_year" name="year" data-control="select2"
-                                        data-hide-search="true" class="form-select form-select-solid">
-                                        <option value="All" selected="selected">All Engagement</option>
-                                        <option value="documents">Documents</option>
-                                        <option value="email">Email</option>
-                                        <option value="notes">Notes</option>
-                                        <option value="viewed">Viewed</option>
-                                        <option value="clicked">Clicked</option>
-                                        <option value="watched">Watched</option>
-                                        <option value="invested">Invested</option>
-                                    </select>
-                                </div>
-                                <div class="me-4 my-1">
-                                    <select id="kt_filter_orders" name="orders" data-control="select2"
-                                        data-hide-search="true" data-dropdown-css-class="w-250px"
-                                        class="form-select form-select-solid">
-                                        <option value="All" selected="selected">All Offers</option>
-                                        <option value="">Techware Labs (Techware Labs)</option>
-                                    </select>
-                                </div>
-                                <div class="">
-                                    <a class="btn btn-primary">
-                                        Export
-                                    </a>
-                                </div>
-
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Card head-->
-                        <!--begin::Card body-->
-                        <div class="card-body">
-                            <!--begin::Tab Content-->
-                            <div class="tab-content">
-                                <!--begin::Tab panel-->
-                                <div id="kt_activity_today" class="card-body p-0 tab-pane fade show active"
-                                    role="tabpanel" aria-labelledby="kt_activity_today_tab">
-                                    <!--begin::Timeline-->
-                                    <div class="timeline">
-                                        <!--begin::Timeline item-->
-                                        <div class="timeline-item">
-                                            <!--begin::Timeline line-->
-                                            <div class="timeline-line w-40px"></div>
-                                            <!--end::Timeline line-->
-                                            <!--begin::Timeline icon-->
-                                            <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
-                                                <div class="symbol-label bg-light">
-                                                    <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
-                                                    <i class="fas fa-folder"></i>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                            </div>
-                                            <!--end::Timeline icon-->
-                                            <!--begin::Timeline content-->
-                                            <div class="timeline-content mb-10 mt-n1">
-                                                <!--begin::Timeline heading-->
-                                                <div class="d-flex flex-row mt-4 pe-3">
-                                                    <!--begin::Title-->
-                                                    <div class="fs-5 fw-semibold mb-2 me-5">
-                                                        Viewed Form C/A and Token Grant, Page 2
-                                                        <span class="text-muted"> for 4 minutes</span>
-
-                                                    </div>
-                                                    <div><span class="badge badge-light-primary">5 Days Ago</span></div>
-                                                    <!--end::Title-->
-
-                                                </div>
-                                                <!--end::Timeline heading-->
-
-                                            </div>
-                                            <!--end::Timeline content-->
-                                        </div>
-                                        <!--end::Timeline item-->
-                                        <!--begin::Timeline item-->
-                                        <div class="timeline-item">
-                                            <!--begin::Timeline line-->
-                                            <div class="timeline-line w-40px"></div>
-                                            <!--end::Timeline line-->
-                                            <!--begin::Timeline icon-->
-                                            <div class="timeline-icon symbol symbol-circle symbol-40px">
-                                                <div class="symbol-label bg-light">
-                                                    <i class="fas fa-eye"></i>
-                                                </div>
-                                            </div>
-                                            <!--end::Timeline icon-->
-                                            <!--begin::Timeline content-->
-                                            <div class="timeline-content mb-10 mt-n2">
-                                                <!--begin::Timeline heading-->
-                                                <div class="d-flex flex-row mt-4 pe-3">
-                                                    <!--begin::Title-->
-                                                    <div class="fs-5 fw-semibold mb-2 me-5">
-                                                        Viewed Techware Labs Techware Labs
-                                                        <span class="text-muted"> for 8 seconds</span>
-
-                                                    </div>
-                                                    <div><span class="badge badge-light-primary">5 Days Ago</span></div>
-                                                    <!--end::Title-->
-                                                </div>
-                                                <!--end::Title-->
-                                                <!--end::Timeline heading-->
-                                            </div>
-                                            <!--end::Timeline content-->
-                                        </div>
-                                        <!--end::Timeline item-->
-                                        <!--begin::Timeline item-->
-                                        <div class="timeline-item">
-                                            <!--begin::Timeline line-->
-                                            <div class="timeline-line w-40px"></div>
-                                            <!--end::Timeline line-->
-                                            <!--begin::Timeline icon-->
-                                            <div class="timeline-icon symbol symbol-circle symbol-40px">
-                                                <div class="symbol-label bg-light">
-                                                    <!--begin::Svg Icon | path: icons/duotune/coding/cod008.svg-->
-                                                    <i class="fas fa-hand-pointer"></i>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                            </div>
-                                            <!--end::Timeline icon-->
-                                            <!--begin::Timeline content-->
-                                            <div class="timeline-content mb-10 mt-n1">
-                                                <!--begin::Timeline heading-->
-                                                <div class="mb-5 pe-3">
-                                                    <!--begin::Title-->
-                                                    <div class="d-flex flex-row mt-4 pe-3">
-                                                        <!--begin::Title-->
-                                                        <div class="fs-5 fw-semibold mb-2 me-5">
-                                                            Clicked Learn More on Offerings
+                                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
+                                                    style="margin-left:10px;">
+                                                    @if ($e_document->source != 'manual')
+                                                        <div class="fs-4 fw-bold text-gray-700 @if ($e_document->source != 'manual') view_template @endif"
+                                                            data-user_id="{{ $e_document->investor_id }}"
+                                                            data-template_id="{{ $e_document->template_id }}"
+                                                            data-bs-toggle="modal"
+                                                            @if ($e_document->source != 'manual') data-bs-target="#modal_view_e_sign" @endif>
+                                                            <i class="text-warning la la-eye"></i>
                                                         </div>
-                                                        <div><span class="badge badge-light-primary">5 Days Ago</span>
-                                                        </div>
-                                                        <!--end::Title-->
-                                                    </div>
-
+                                                    @else
+                                                        <a href="{{ $e_document->getFirstMediaUrl('e_documents', 'thumb') }}"
+                                                            target="_blank" class="fs-4 fw-bold text-gray-700 ">
+                                                            <i class="text-warning la la-eye"></i>
                                                 </div>
+                                @endif
 
-                                            </div>
-                                            <!--end::Timeline content-->
-                                        </div>
-                                        <!--end::Timeline item-->
 
-                                    </div>
-                                    <!--end::Timeline-->
-                                </div>
-                                <!--end::Tab panel-->
                             </div>
-                            <!--end::Tab Content-->
+                            <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
+                                style="margin-left:10px;">
+                                <div class="fs-4 fw-bold text-gray-700">
+                                    <i class="text-info la la-download"></i>
+                                </div>
+                            </div>
                         </div>
-                        <!--end::Card body-->
+                        <p class='text-center text-bold'>
+                        <h4>
+                            From : {{ $e_document->issuer->name }} <small>( {{ $e_document->issuer->email }})</small>
+                        </h4>
+                        <h4>
+                            {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
+                        </h4>
+
+                        </p>
                     </div>
                 </div>
-                <!--end:::Engagement Tab pane-->
+                @endforeach
+
+                <div class="d-flex align-items-center position-relative my-1">
+                    <h3> E-Sign Documents </h3>
+                </div>
+                @foreach ($e_sign_documents as $e_document)
+                    <div class="col-lg-6 mb-10">
+                        <div class="d-flex flex-center flex-column py-5" style="border:1px solid #000">
+                            <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
+                                {{ $e_document->template_name }} </a>
+                            <div class="mb-9">
+                                <!--begin::Badge-->
+                                <div class="badge badge-lg badge-light-danger d-inline">
+                                    {{ $e_document->offer->name }} </div>
+                                <!--begin::Badge-->
+                            </div>
+                            <div class="d-flex flex-wrap flex-center">
+
+
+                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
+                                    style="margin-left:10px;">
+                                    <div class="fs-4 fw-bold text-gray-700">
+                                        <i class="text-info la la-download"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class='text-center text-bold'>
+                            <h4>
+                                From : {{ $e_document->issuer->name }} <small>(
+                                    {{ $e_document->issuer->email }})</small>
+                            </h4>
+                            <h4>
+                                {{ $e_document->invester->name }} <small>( {{ $e_document->invester->email }})</small>
+                            </h4>
+
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
-            <!--end:::Tab content-->
         </div>
+        <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+    </div>
+    <div class="tab-pane fade" id="kt_payment_tab" role="tabpanel">
+        <!--begin::Card-->
+        <div class="card card-flush">
+            <!--begin::Card header-->
+            <div class="card-header pt-8">
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body">
+                <div class="text-center">
+                    <h4>There are no payment methods</h4>
+                </div>
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel">
+        <div class="col-lg-3 ">
+            <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-200px mb-5 mb-xl-10"
+                style="background-color: #F1416C;background-image:url({{ asset('assets/media/patterns/vector-1.png') }})">
+                <!--begin::Header-->
+                <div class="card-header pt-5">
+                    <!--begin::Title-->
+                    <div class="card-title d-flex flex-column">
+                        <!--begin::Amount-->
+                        <span class="fs-6 fw-bold text-white me-2 lh-1 ls-n2">Techware Labs</span>
+                        <!--end::Amount-->
+                        <!--begin::Subtitle-->
+                        <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Techware Labs</span>
+                        <!--end::Subtitle-->
+                    </div>
+                    <!--end::Title-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Card body-->
+                <div class="card-body d-flex flex-row align-items-end pt-0">
+                    <!--begin::Progress-->
+                    <div class="d-flex flex-column align-items-center flex-column mt-3 w-100">
+
+                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">191</span>
+                        <!--end::Amount-->
+                        <!--begin::Subtitle-->
+                        <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Engagements</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center flex-column mt-3 w-100">
+
+                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">0</span>
+                        <!--end::Amount-->
+                        <!--begin::Subtitle-->
+                        <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Notes</span>
+                    </div>
+                    <!--end::Progress-->
+                </div>
+                <!--end::Card body-->
+            </div>
+        </div>
+        <div class="card">
+            <!--begin::Card head-->
+            <div class="card-header card-header-stretch">
+                <!--begin::Title-->
+                <div class="card-title d-flex align-items-center">
+                    Filter by
+                    <div class="m-lg-4 me-6 my-1">
+                        <select id="kt_filter_year" name="year" data-control="select2" data-hide-search="true"
+                            class="form-select form-select-solid">
+                            <option value="All" selected="selected">All Engagement</option>
+                            <option value="documents">Documents</option>
+                            <option value="email">Email</option>
+                            <option value="notes">Notes</option>
+                            <option value="viewed">Viewed</option>
+                            <option value="clicked">Clicked</option>
+                            <option value="watched">Watched</option>
+                            <option value="invested">Invested</option>
+                        </select>
+                    </div>
+                    <div class="me-4 my-1">
+                        <select id="kt_filter_orders" name="orders" data-control="select2" data-hide-search="true"
+                            data-dropdown-css-class="w-250px" class="form-select form-select-solid">
+                            <option value="All" selected="selected">All Offers</option>
+                            <option value="">Techware Labs (Techware Labs)</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <a class="btn btn-primary">
+                            Export
+                        </a>
+                    </div>
+
+                </div>
+                <!--end::Title-->
+            </div>
+            <!--end::Card head-->
+            <!--begin::Card body-->
+            <div class="card-body">
+                <!--begin::Tab Content-->
+                <div class="tab-content">
+                    <!--begin::Tab panel-->
+                    <div id="kt_activity_today" class="card-body p-0 tab-pane fade show active" role="tabpanel"
+                        aria-labelledby="kt_activity_today_tab">
+                        <!--begin::Timeline-->
+                        <div class="timeline">
+                            <!--begin::Timeline item-->
+                            <div class="timeline-item">
+                                <!--begin::Timeline line-->
+                                <div class="timeline-line w-40px"></div>
+                                <!--end::Timeline line-->
+                                <!--begin::Timeline icon-->
+                                <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
+                                    <div class="symbol-label bg-light">
+                                        <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
+                                        <i class="fas fa-folder"></i>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                </div>
+                                <!--end::Timeline icon-->
+                                <!--begin::Timeline content-->
+                                <div class="timeline-content mb-10 mt-n1">
+                                    <!--begin::Timeline heading-->
+                                    <div class="d-flex flex-row mt-4 pe-3">
+                                        <!--begin::Title-->
+                                        <div class="fs-5 fw-semibold mb-2 me-5">
+                                            Viewed Form C/A and Token Grant, Page 2
+                                            <span class="text-muted"> for 4 minutes</span>
+
+                                        </div>
+                                        <div><span class="badge badge-light-primary">5 Days Ago</span></div>
+                                        <!--end::Title-->
+
+                                    </div>
+                                    <!--end::Timeline heading-->
+
+                                </div>
+                                <!--end::Timeline content-->
+                            </div>
+                            <!--end::Timeline item-->
+                            <!--begin::Timeline item-->
+                            <div class="timeline-item">
+                                <!--begin::Timeline line-->
+                                <div class="timeline-line w-40px"></div>
+                                <!--end::Timeline line-->
+                                <!--begin::Timeline icon-->
+                                <div class="timeline-icon symbol symbol-circle symbol-40px">
+                                    <div class="symbol-label bg-light">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                </div>
+                                <!--end::Timeline icon-->
+                                <!--begin::Timeline content-->
+                                <div class="timeline-content mb-10 mt-n2">
+                                    <!--begin::Timeline heading-->
+                                    <div class="d-flex flex-row mt-4 pe-3">
+                                        <!--begin::Title-->
+                                        <div class="fs-5 fw-semibold mb-2 me-5">
+                                            Viewed Techware Labs Techware Labs
+                                            <span class="text-muted"> for 8 seconds</span>
+
+                                        </div>
+                                        <div><span class="badge badge-light-primary">5 Days Ago</span></div>
+                                        <!--end::Title-->
+                                    </div>
+                                    <!--end::Title-->
+                                    <!--end::Timeline heading-->
+                                </div>
+                                <!--end::Timeline content-->
+                            </div>
+                            <!--end::Timeline item-->
+                            <!--begin::Timeline item-->
+                            <div class="timeline-item">
+                                <!--begin::Timeline line-->
+                                <div class="timeline-line w-40px"></div>
+                                <!--end::Timeline line-->
+                                <!--begin::Timeline icon-->
+                                <div class="timeline-icon symbol symbol-circle symbol-40px">
+                                    <div class="symbol-label bg-light">
+                                        <!--begin::Svg Icon | path: icons/duotune/coding/cod008.svg-->
+                                        <i class="fas fa-hand-pointer"></i>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                </div>
+                                <!--end::Timeline icon-->
+                                <!--begin::Timeline content-->
+                                <div class="timeline-content mb-10 mt-n1">
+                                    <!--begin::Timeline heading-->
+                                    <div class="mb-5 pe-3">
+                                        <!--begin::Title-->
+                                        <div class="d-flex flex-row mt-4 pe-3">
+                                            <!--begin::Title-->
+                                            <div class="fs-5 fw-semibold mb-2 me-5">
+                                                Clicked Learn More on Offerings
+                                            </div>
+                                            <div><span class="badge badge-light-primary">5 Days Ago</span>
+                                            </div>
+                                            <!--end::Title-->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--end::Timeline content-->
+                            </div>
+                            <!--end::Timeline item-->
+
+                        </div>
+                        <!--end::Timeline-->
+                    </div>
+                    <!--end::Tab panel-->
+                </div>
+                <!--end::Tab Content-->
+            </div>
+            <!--end::Card body-->
+        </div>
+    </div>
+    <!--end:::Engagement Tab pane-->
+    </div>
+    <!--end:::Tab content-->
+    </div>
 
     </div>
     @include('user.partials.index')
@@ -1829,7 +1829,7 @@
 @section('page_js')
 
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-   
+
     <script></script>
     <script>
         $('.information_fields').hide();
@@ -1941,6 +1941,27 @@
             });
 
 
+        });
+
+        $('.country_residence').change(function() {
+            var selectedValue = $(this).val();
+            var radioInputs = $('.check_kyc_method');
+            if (selectedValue === 'US') {
+                $('.primary_contact_social_security_wraper').removeClass('d-none');
+                $('#primary_contact_social_security').attr('required', true);
+                $('.document_uplaod_wrapper').addClass('d-none');
+                $('.front_doc').attr('required', false);
+                $('.back_doc').attr('required', false);
+
+                radioInputs.filter('[value="SSN"]').prop('checked', true);
+            } else {
+                $('.primary_contact_social_security_wraper').addClass('d-none');
+                $('.document_uplaod_wrapper').removeClass('d-none');
+                $('.front_doc').attr('required', true);
+                $('.back_doc').attr('required', true);
+                $('#primary_contact_social_security').attr('required', false);
+                radioInputs.filter('[value="Document"]').prop('checked', true);
+            }
         });
     </script>
 
@@ -2108,7 +2129,7 @@
                                                             value);
                                                         toastr.error(value,
                                                             "Validation Error"
-                                                            );
+                                                        );
                                                     });
                                                 }
                                             });
@@ -2239,7 +2260,7 @@
                     if (response.status == true) {
                         toastr.success('Data has been fetched', "Success");
                         console.log(response)
-                        $('#eSignaturesIOIframe').attr('src',response.url);
+                        $('#eSignaturesIOIframe').attr('src', response.url);
 
                     } else {
 
@@ -2248,6 +2269,7 @@
                 }
             });
         });
+
 
 
 
@@ -2293,6 +2315,12 @@
             $('.legal_formation').val('{{ $user->userDetail->legal_formation }}')
         @endif
 
+        @if ($user)
+            $('.check_kyc_method').filter('[value="{{ $user->check_kyc_method }}"]').prop('checked', true)
+        @endif
+
+
+
         $('body').on('click', '.update_aml_status', function() {
             var userId = $(this).data('id');
             var url = "{{ route('user.update.kyc.check', ['id' => ':userId']) }}";
@@ -2322,12 +2350,8 @@
         Inputmask({
             "mask": "***-**-****"
         }).mask("#primary_contact_social_security");
-
-        
     </script>
 
-    <script>
-            
-    </script>
-    
+    <script></script>
+
 @endsection

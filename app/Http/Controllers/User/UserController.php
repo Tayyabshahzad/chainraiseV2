@@ -86,7 +86,7 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
-        
+
 
           $offers = Offer::get();
           $users = User::with('userDetail')->where('is_primary','yes')->orderby('id','DESC')->
@@ -200,7 +200,7 @@ class UserController extends Controller
         $request->validate([
             'id' => 'required',
         ]);
-        
+
         try {
             $user = User::find($request->id);
             Mail::to($user)->send(new InvestorAccountDelete($user));
@@ -400,14 +400,14 @@ class UserController extends Controller
     }
     public function issuerAccountUpdate(Request $request)
     {
-        
+
 
         $request->validate([
             //Users Table
             'id' => 'required',
             'first_name' => 'required',
             'phone' => 'required',
-            //'agree_consent_electronic' => 'required',
+            'check_kyc_method' => 'required|in:SSN,Document',
             // User Detail
            //'middle_name' => 'required',
            'last_name' => 'required',
@@ -444,6 +444,7 @@ class UserController extends Controller
         $user->name = $request->first_name;
         $user->phone = $request->phone;
         $user->cc = $request->cc;
+        $user->check_kyc_method = $request->check_kyc_method;
         if($request->has('account_status')){
             if($user->status == 'inactive'){
                 $user->status = 'active';
