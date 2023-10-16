@@ -381,12 +381,14 @@ class KycController extends Controller
             $id =  $user->business_id;
             $endPoint = $this->baseUrl.'/api/compliance/v1/business-identities/'.$id.'/documents';
             try{
-                $mediaCollection = $user->getFirstMedia('kyc_document_collection');
+                $mediaCollection_front = $user->getFirstMedia('kyc_document_collection');
+                $mediaCollection_back = $user->getFirstMedia('kyc_document_collection_back');
                 if(env('APP_ENV') == 'sandbox'){
                     $path_front = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
                     $path_back = "https://mgmotors.com.pk/storage/img/details_4/homepage_models-mg-zs-ev-new.jpg";
                 }else{
-                    $path =  $mediaCollection->getFullUrl();
+                    $path_front =  $mediaCollection_front->getFullUrl();
+                    $path_back =  $mediaCollection_back->getFullUrl();
                 }
                 $document_path_front = fopen($path_front, 'r');
                 $document_path_back = fopen($path_back, 'r');
