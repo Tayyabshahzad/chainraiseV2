@@ -43,8 +43,7 @@ class FrontendController extends Controller
     public function index()
     {
 
-        $offers = Offer::orderBy('id', 'desc')->where('status','active')->get();
-
+        $offers = Offer::orderBy('id', 'desc')->where('status','active')->get(); 
         $offer_coming_soon = Offer::orderBy('id', 'desc')->where('status','coming-soon')->get();
         return view('frontEnd.offer.index',compact('offers','offer_coming_soon'));
     }
@@ -151,10 +150,10 @@ class FrontendController extends Controller
             'user_profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-       
+
 
         $user = Auth::user();
-        
+
         try{
 
             $user->name = $request->legal_name;
@@ -217,7 +216,7 @@ class FrontendController extends Controller
                 ]);
             $user->save();
             if($request->hasFile('user_profile_photo')) {
-                
+
                 $user->getMedia('user_profile_photo_collection')->each(function (Media $media) {
                     $media->delete();
                 });

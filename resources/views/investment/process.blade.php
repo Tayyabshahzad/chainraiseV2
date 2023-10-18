@@ -28,6 +28,13 @@
 @section('title', 'Home')
 @section('content')
     <div class="container  p-lg-5 mt-lg-3 p-3">
+        <p class="fw-bolder mb-5">
+            <a href="{{ route('index') }}">
+                <i class="bi bi-skip-backward pe-3" style="color:#43C3FE;"></i> Back To Market Place
+            </a>
+
+        </p>
+
         <h1 class="fw-bolder mb-5"><i class="bi bi-circle-fill pe-3" style="color:#43C3FE;"></i>Invest in {{ $offer->name }}
         </h1>
         <div class="row">
@@ -39,18 +46,27 @@
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <h4 class="fw-bolder">1. Investment amount</h4>
                     <p class="text-muted">Payments are processed immediately.</p>
-                    <input type="number" class="form-control rounded-pill py-2 px-4 mb-3" value="{{ $investment_amount }}"
-                        placeholder="$500 (Click to change amount)"  style="color:#333!important" id="validationCustom02" name="investment_amount"
-                        required>
+                    <input type="text" class="form-control rounded-pill py-2 px-4 mb-3"
+                        value="{{ number_format((float) str_replace(['$', ','], '', $investment_amount)) }}"
+                        placeholder="$500 (Click to change amount)" style="color:#333!important" id="investmentAmountInput"
+                        name="investment_amount" required>
+
+
+
+
                     <div class="invalid-feedback">
                         Please Enter Investment amount
                     </div>
                     <p>You are investing as Myself / individual change</p>
                     <div class="my-5">
                         <h4 class="fw-bolder">2. Investor Limits</h4>
-                        <p>Your Investment Limit Is <span id="investment_limit_label"> {{ Auth::user()->investment_limit }} </span> </p>
-                        <input type="hidden" name="investment_limit"  class="current_investment_limit" value="{{ Auth::user()->investment_limit }}" required>
-                        <input type="hidden"   class="total_investment_limit" value="{{ Auth::user()->investment_limit }}" required>
+                        <p>Your Investment Limit Is <span id="investment_limit_label">
+                                ${{ number_format(Auth::user()->investment_limit) }}
+                            </span> </p>
+                        <input type="hidden" name="investment_limit" class="current_investment_limit"
+                            value="{{ Auth::user()->investment_limit }}" required>
+                        <input type="hidden" class="total_investment_limit" value="{{ Auth::user()->investment_limit }}"
+                            required>
                         <p class="text-muted">Have you made an investments in equity crowdfunding (REG CF) on any platform
                             in the past 12 months (including ChainRaise)?</p>
                         <div class="form-check form-switch mb-3 ms-2 mt-0">
@@ -60,7 +76,8 @@
                                 Please Check Toggle Button
                             </div>
                         </div>
-                        <input type="number" class="update_investment_limits show_investment_limit d-none form-control rounded-pill py-2 px-4 mb-3"
+                        <input type="number"
+                            class="update_investment_limits show_investment_limit d-none form-control rounded-pill py-2 px-4 mb-3"
                             id="validationCustom03" placeholder="Total Amount Invested in Crowdfunding Offerings*">
 
                         <div class="invalid-feedback">
@@ -75,9 +92,10 @@
 
 
                         <button type="button"
-                            @if(Auth::user()->fortress_id == null) data-bs-toggle="modal" data-bs-target="#kyc_data_modal"  @else  disabled  @endif
+                            @if (Auth::user()->fortress_id == null) data-bs-toggle="modal" data-bs-target="#kyc_data_modal"  @else  disabled @endif
                             class="btn btn-2 fw-semibold px-lg-5 px-3 me-2 rounded-pill show_user_detail_form">
-                            Verify My Identity   @if(Auth::user()->fortress_id != null) <small> (Your KYC Is Completed) </small>  @endif
+                            Verify My Identity @if (Auth::user()->fortress_id != null) <small>
+                                    (Your KYC Is Completed) </small> @endif
                         </button>
 
                         <svg class="spinner d-none" width="24" height="24" viewBox="0 0 24 24"
@@ -119,7 +137,7 @@
                         </svg>
                     </div>
 
-                    <div class="my-5  bank_wrapper  @if(Auth::user()->fortress_id == null) d-none @endif ">
+                    <div class="my-5  bank_wrapper  @if (Auth::user()->fortress_id == null) d-none @endif ">
                         <h4 class="fw-bolder">4. Bank information <i class="bi bi-lock-fill"></i> </h4>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item px-lg-5 border-bottom" role="presentation">
@@ -162,8 +180,10 @@
                         <div class="border px-5 py-3  bg-light mb-3">
                             <input type="checkbox" name="" id="validationCustom04" required>
                             By checking this box, I, the investor, acknowledge that I have reviewed the Issuer's
-                            <a href="{{  $offer->regcf->url_issuer_form_c }}" target="_blank">Form C and    Disclosure Materials</a>, as well as the
-                            <a href="{{  $offer->regcf->url_educational_materials }}" target="_blank"> educational materials</a> provided on the Portal, understood
+                            <a href="{{ $offer->regcf->url_issuer_form_c }}" target="_blank">Form C and Disclosure
+                                Materials</a>, as well as the
+                            <a href="{{ $offer->regcf->url_educational_materials }}" target="_blank"> educational
+                                materials</a> provided on the Portal, understood
                             the risks that come with investing in issuing companies on the Portal, and acknowledge that my
                             entire investment may be lost and I will be financially and psychologically fine if it is. I
                             understand that the decision whether to consult a professional advisor regarding my investment
@@ -188,7 +208,8 @@
                             <input type="checkbox" name="" id="validationCustom06" required>
                             By checking this box, I, the investor, acknowledge that the securities are subject to transfer
                             restrictions and that I have reviewed and understood these transfer restrictions as provided in
-                            the Portal's <a href="{{  $offer->regcf->url_educational_materials }}" target="_blank"> educational materials </a>.
+                            the Portal's <a href="{{ $offer->regcf->url_educational_materials }}" target="_blank">
+                                educational materials </a>.
                             <div class="invalid-feedback">
                                 Please Check
                             </div>
@@ -205,16 +226,15 @@
 
 
                         <div class="border px-5 py-3  bg-light mb-3">
-                            <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05" required
-                            @if($offer->eDocument)
-                                @if($offer->eDocument->status == 'queued')
-                                    disabled
-                                 @endif
-                            @endif>
+                            <input type="checkbox" class="esing_check" name="esing_check" id="validationCustom05"
+                                required
+                                @if ($offer->eDocument) @if ($offer->eDocument->status == 'queued')
+                                    disabled @endif
+                                @endif>
                             I have read and agree to the e-sign disclosure
 
                             <a href="#" class=" text-gray-700 view_template" data-user_id="{{ Auth::user()->id }}"
-                                data-template_id="@if($offer->offerEsing){{ $offer->offerEsing->template_id }}"@endif data-bs-toggle="modal"
+                                data-template_id="@if ($offer->offerEsing) {{ $offer->offerEsing->template_id }}" @endif data-bs-toggle="modal"
                                 data-bs-target="#modal_view_e_sign">
                                 (Review Document)
                             </a>
@@ -242,7 +262,7 @@
                 <div class="border text-center p-5 mb-4" style="border-radius: 40px;">
                     <h6>Deal Terms</h6>
                     <h6>Future Equity</h6>
-                    <a href="">${{ number_format( $offer->total_valuation) }} valuation cap</a>
+                    <a href="">${{ number_format($offer->total_valuation) }} valuation cap</a>
                     <p class="mt-3">
                         {{ $offer->terms }}.
                     </p>
@@ -254,14 +274,14 @@
                         investment</p>
                 </div> --}}
                 <div class="mb-3">
-                    <h4 class="fw-bolder  mb-3">FAQ & Help  </h4>
-                    @if($offer->faqs)
+                    <h4 class="fw-bolder  mb-3">FAQ & Help </h4>
+                    @if ($offer->faqs)
                         <ul>
                             @foreach ($offer->faqs as $faq)
                                 <li>
                                     {{ $faq->question }}
                                     <ul>
-                                        <li>  {{ $faq->answer }} </li>
+                                        <li> {{ $faq->answer }} </li>
                                     </ul>
                                 </li>
                             @endforeach
@@ -280,18 +300,18 @@
                     </h4>
                     <ul class="list-group list-group-flush">
 
-                        @foreach($manual_offer_documents as $manual_offer_document)
-                                <li class="list-group-item">
-                                    @if($manual_offer_document->type == "image")
-                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                            <i class="bi bi-file-earmark-image"></i> {{ $manual_offer_document->name }}
-                                        </a>
-                                    @elseif($manual_offer_document->type == "pdf")
-                                        <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                            <i class="bi bi-file-earmark-pdf"></i> {{ $manual_offer_document->name }}
-                                        </a>
-                                    @endif
-                                </li>
+                        @foreach ($manual_offer_documents as $manual_offer_document)
+                            <li class="list-group-item">
+                                @if ($manual_offer_document->type == 'image')
+                                    <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                        <i class="bi bi-file-earmark-image"></i> {{ $manual_offer_document->name }}
+                                    </a>
+                                @elseif($manual_offer_document->type == 'pdf')
+                                    <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
+                                        <i class="bi bi-file-earmark-pdf"></i> {{ $manual_offer_document->name }}
+                                    </a>
+                                @endif
+                            </li>
                         @endforeach
 
 
@@ -336,8 +356,8 @@
                             <span class="svg-icon svg-icon-1">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                        rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="currentColor" />
                                     <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                         transform="rotate(45 7.41422 6)" fill="currentColor" />
                                 </svg>
@@ -483,8 +503,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 ssn_number_container
-                            @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality != 'US') d-none @endif">
+                            <div
+                                class="col-md-12 ssn_number_container
+                            @if (isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality != 'US') d-none @endif">
                                 <div class="row mt-3">
                                     <div class="col-lg-3">
                                         <label for="ssn-number" class=" col-form-label"><span
@@ -518,9 +539,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="document_upload_container
-                            @if(isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality == 'US')  d-none @endif">
-                                <div class="col-md-12  " >
+                            <div
+                                class="document_upload_container
+                            @if (isset(Auth::user()->identityVerification) && Auth::user()->identityVerification->nationality == 'US') d-none @endif">
+                                <div class="col-md-12  ">
                                     <div class="row mt-3">
                                         <div class="col-lg-3">
                                             <label for="ssn-number" class="col-form-label"><span
@@ -546,7 +568,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 mt-3 ">
-                                    <div class="notice bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
+                                    <div
+                                        class="notice bg-light-dark rounded border-dark border border-dashed p-6 text-center mb-12 change_photo_wrapper">
                                         <div
                                             class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column change_photo_wrapper">
                                             <div class="col-lg-12 mb-5">
@@ -569,7 +592,8 @@
 
 
                             <div class="col-12 text-center run_process_button mb-3   ">
-                                <button  class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold submit_button"
+                                <button
+                                    class="btn btn-outline-dark mt-3 px-4  mt-lg-4 rounded-pill fw-semibold submit_button"
                                     type="submit"> Run KYC </button>
                             </div>
                         </form>
@@ -706,8 +730,8 @@
                         if (response.success == false) {
                             if (response.validation == false) {
                                 $.each(response.errors, function(key, value) {
-                                     toastr.error(value);
-                                 });
+                                    toastr.error(value);
+                                });
                             }
                             if (response.status == 400) {
                                 if (response.errors && response.errors.length > 0) {
@@ -933,10 +957,10 @@
             $('.past_12_months_investment_check_button').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('.show_investment_limit').removeClass('d-none')
-                    $('.show_investment_limit').attr('required',true)
+                    $('.show_investment_limit').attr('required', true)
                 } else {
                     $('.show_investment_limit').addClass('d-none')
-                    $('.show_investment_limit').attr('required',false)
+                    $('.show_investment_limit').attr('required', false)
                 }
             });
         });
@@ -950,7 +974,7 @@
                 data: {
                     user_id: user_id, // Invester id
                     template_id: template_id,
-                    offer_id:offer_id
+                    offer_id: offer_id
                 },
                 success: function(response) {
                     if (response.status == true) {
@@ -971,8 +995,8 @@
 
                 url: "{{ route('esignature.check.esing.status') }}",
                 method: 'GET',
-                data:{
-                    offer_id : offer_id
+                data: {
+                    offer_id: offer_id
                 },
                 success: function(response) {
                     if (response.status == true) {
@@ -985,8 +1009,6 @@
                 }
             });
         });
-
-
     </script>
 
     <script>
@@ -997,20 +1019,21 @@
             const $total_investment_limit = $('.total_investment_limit').val();
             // Add an input event listener to input1 using jQuery
             $update_investment_limits.on('input', function() {
-                $result  = (parseFloat($total_investment_limit) - parseFloat($update_investment_limits.val()));
+                $result = (parseFloat($total_investment_limit) - parseFloat($update_investment_limits
+                    .val()));
                 $current_investment_limit.val($result)
                 $('#investment_limit_label').html($result)
             });
             $('.nationality').on('change', function() {
                 $val = $(this).val();
-                if($val == 'US'){
-                        $('.ssn_number_container').removeClass('d-none')
-                        $('.document_upload_container').addClass('d-none')
+                if ($val == 'US') {
+                    $('.ssn_number_container').removeClass('d-none')
+                    $('.document_upload_container').addClass('d-none')
 
-                }else{
-                        $('.ssn_number_container').addClass('d-none')
-                        $('.document_upload_container').removeClass('d-none')
-                        $('#primary_contact_social_security').attr('required',false)
+                } else {
+                    $('.ssn_number_container').addClass('d-none')
+                    $('.document_upload_container').removeClass('d-none')
+                    $('#primary_contact_social_security').attr('required', false)
 
                 }
                 $('.run_process_button').removeClass('d-none')
@@ -1018,18 +1041,67 @@
         });
     </script>
 
-     <script>
+    <script>
         $(document).ready(function() {
             $('#make_investment_form').submit(function(e) {
-            // Check if the checkbox is checked
-            var isChecked = $('.esing_check').is(':checked');
-            if (!isChecked) {
-                e.preventDefault(); // Prevent form submission
-                alert('Please check the agreement checkbox.'); // Show error message
-            }
-        });
+                // Check if the checkbox is checked
+                var isChecked = $('.esing_check').is(':checked');
+                if (!isChecked) {
+                    e.preventDefault(); // Prevent form submission
+                    alert('Please check the agreement checkbox.'); // Show error message
+                }
+            });
         });
     </script>
+
+    <script>
+        // Function to format a number as a currency value without the currency symbol
+        function formatCurrencyWithoutSymbol(number) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                currencyDisplay: 'narrowSymbol',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(number);
+        }
+
+        // Get the input field
+        var inputField = document.getElementById('investmentAmountInput');
+
+        // Function to update the value in currency format
+        function updateCurrencyFormat() {
+            // Remove non-numeric characters and currency symbols
+            var numericValue = parseFloat(inputField.value.replace(/[^0-9.]/g, ''));
+
+            // Check if the value is NaN or empty
+            if (isNaN(numericValue) || inputField.value.trim() === '') {
+                inputField.value = "0"; // Display "0" if the value is NaN or empty
+            } else {
+                // Format the value as currency without the symbol
+                inputField.value = formatCurrencyWithoutSymbol(numericValue);
+            }
+        }
+
+        // Listen for a click event on the input field
+        inputField.addEventListener('click', function() {
+            // Update the currency format on click
+            updateCurrencyFormat();
+        });
+
+        // Listen for input events
+        inputField.addEventListener('input', function() {
+            // Update the currency format when the user types or pastes a value
+            updateCurrencyFormat();
+        });
+
+        // Initial currency format on page load
+        updateCurrencyFormat();
+    </script>
+
+
+
+
 
 
 

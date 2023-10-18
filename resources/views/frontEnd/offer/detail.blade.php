@@ -16,21 +16,21 @@
         }
 
         /* #myModal iframe {
-                width: 100%;
-                height: 80%;
-            }
-            .video_modal {
-            max-width: 100%;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            }
-            .video_modal_content {
-            width: 80%;
-            height: 80%;
-            } */
+                                                                        width: 100%;
+                                                                        height: 80%;
+                                                                    }
+                                                                    .video_modal {
+                                                                    max-width: 100%;
+                                                                    margin: 0;
+                                                                    height: 100vh;
+                                                                    display: flex;
+                                                                    justify-content: center;
+                                                                    align-items: center;
+                                                                    }
+                                                                    .video_modal_content {
+                                                                    width: 80%;
+                                                                    height: 80%;
+                                                                    } */
     </style>
 @endsection
 
@@ -115,8 +115,10 @@
                         </div>
                         <div class="col-3">
                             <button
-                                @if (Auth::user()) type="submit"  @else     id="show-login-message"  type="button"  @endif
-                                class="btn btn-outline-info text-white">INVEST</button>
+                                @if (Auth::user()) type="submit"  @else id="show-login-message"  type="button" @endif
+                                class="btn btn-outline-info text-white">
+                                INVEST
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -142,31 +144,30 @@
 
             <div class="col-lg-6 col-12 text-center">
 
-                @if($offer->socialMedia)
+                @if ($offer->socialMedia)
                     <a target="_blank" href="https://www.linkedin.com/{{ $offer->socialMedia->linkedIn }}">
                         <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
                     </a>
 
-                     <a target="_blank" href="https://www.telegram.com/{{ $offer->socialMedia->telegram }}">
+                    <a target="_blank" href="https://www.telegram.com/{{ $offer->socialMedia->telegram }}">
                         <i class="bi bi-send me-lg-4 me-2 icon"></i>
                     </a>
 
-                     <a target="_blank" href="https://www.instagram.com/{{ $offer->socialMedia->instagram }}">
+                    <a target="_blank" href="https://www.instagram.com/{{ $offer->socialMedia->instagram }}">
                         <i class="bi bi-instagram me-lg-4 me-2  icon"></i>
                     </a>
 
-                     <a target="_blank" href="https://www.twitter.com/{{ $offer->socialMedia->twitter }}">
+                    <a target="_blank" href="https://www.twitter.com/{{ $offer->socialMedia->twitter }}">
                         <i class="bi bi-twitter me-lg-4 me-2 icon"></i>
                     </a>
 
-                     <a target="_blank" href="https://www.youtube.com/{{ $offer->socialMedia->youtube }}">
+                    <a target="_blank" href="https://www.youtube.com/{{ $offer->socialMedia->youtube }}">
                         <i class="bi bi-youtube me-lg-4 me-2 icon"></i>
                     </a>
 
-                     <a target="_blank" href="https://www.facebook.com/{{ $offer->socialMedia->facebook }}">
+                    <a target="_blank" href="https://www.facebook.com/{{ $offer->socialMedia->facebook }}">
                         <i class="bi bi-facebook me-lg-4 me-2 icon"></i>
                     </a>
-
                 @endif
             </div>
         </div>
@@ -354,13 +355,46 @@
 
         $(document).ready(function() {
 
-            $('#show-login-message').click(function(){
+            $('#show-login-message').click(function() {
                 toastr["error"]('Need to be signed in to invest')
             });
 
         });
-
-
     </script>
+
+    <script>
+        // Function to format a number as a currency value without any currency symbol
+        function formatCurrencyWithoutSymbol(number) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                currencyDisplay: 'narrowSymbol',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(number);
+        }
+
+        // Get the input field
+        var inputField = document.getElementById('autoSizingInputGroup');
+
+        // Listen for input events on the input field
+        inputField.addEventListener('input', function() {
+            // Get the user's input
+            var inputValue = inputField.value;
+
+            // Remove non-numeric characters and any currency symbols
+            var numericValue = parseFloat(inputValue.replace(/[^0-9.]/g, ''));
+
+            // Check if the numericValue is a valid number
+            if (!isNaN(numericValue)) {
+                // Format the numeric value as a currency without any symbol and set it back in the input field
+                inputField.value = formatCurrencyWithoutSymbol(numericValue);
+            } else {
+                // If the input is not a valid number, keep the original input
+                inputField.value = inputValue;
+            }
+        });
+    </script>
+
 
 @endsection
