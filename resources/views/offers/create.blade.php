@@ -83,7 +83,8 @@
         </div>
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container">
-                <form action="{{ route('offers.save') }}" enctype="multipart/form-data" method="post" id="create_offer_form"> @csrf
+                <form action="{{ route('offers.save') }}" enctype="multipart/form-data" method="post"
+                    id="create_offer_form"> @csrf
 
                     <div class="row">
                         @include('offers.particles.left-bar')
@@ -132,7 +133,11 @@
                                                         <i class="bi bi-x fs-2"></i>
                                                     </span>
                                                     <!--end::Remove-->
+
                                                 </div>
+                                                <p class="text-danger mt-4">
+                                                    <strong> Width = 125px , Height = 125px , Max Size = 200MB </strong>
+                                                </p>
 
                                             </div>
                                             <div class="col-lg-6">
@@ -174,6 +179,9 @@
                                                     </span>
                                                     <!--end::Remove-->
                                                 </div>
+                                                <p class="text-danger mt-4">
+                                                    <strong> Width = 1200px , Height = 260px , Max Size = 200MB </strong>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="row text-dark">
@@ -201,8 +209,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <button class="btn btn-sm btn-dark no-radius" type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#modal_contact_us"> Contact Us
+                                                <button class="btn btn-sm btn-dark no-radius" type="button"
+                                                    data-bs-toggle="modal" data-bs-target="#modal_contact_us"> Contact Us
                                                 </button>
                                             </div>
                                         </div>
@@ -432,7 +440,8 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <label for=""> Add Multiple Images</label>
-                                                                    <input type="file" class="form-control" name="slider_images[]" multiple>
+                                                                    <input type="file" class="form-control"
+                                                                        name="slider_images[]" multiple>
                                                                 </div>
                                                             </div>
 
@@ -446,20 +455,27 @@
                                                             <h2> Add FAQ's</h2>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-12 text-left mt-4" style="text-align: left">
+                                                            <div class="col-lg-12 text-left mt-4"
+                                                                style="text-align: left">
                                                                 <div class="row" id="faq-container">
                                                                     <div class="faq-item">
                                                                         <div class="col-lg-12 mb-4">
-                                                                            <input type="text" class="col-lg-6 form-control question" placeholder="Question" name="question[]">
+                                                                            <input type="text"
+                                                                                class="col-lg-6 form-control question"
+                                                                                placeholder="Question" name="question[]">
                                                                         </div>
                                                                         <div class="col-lg-12 mb-4">
-                                                                            <input type="text" class="col-lg-6 form-control answer" placeholder="Answer" name="answer[]">
+                                                                            <input type="text"
+                                                                                class="col-lg-6 form-control answer"
+                                                                                placeholder="Answer" name="answer[]">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 mb-4">
-                                                                    <button type="button" id="add-faq"class="btn btn-sm btn-info"> Add Faq </button>
-                                                               </div>
+                                                                    <button type="button"
+                                                                        id="add-faq"class="btn btn-sm btn-info"> Add Faq
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -469,33 +485,39 @@
                                                     aria-labelledby="#kt_stats_widget_16_tab_link_3">
                                                     <div class="row">
                                                         <div class="col-lg-12 text-left mt-4">
-                                                            <h2>  Social Links </h2>
+                                                            <h2> Social Links </h2>
                                                         </div>
                                                         <div class="row">
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> Youtube www.youtube.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="youtube">
-                                                                        </div>
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> Telegram www.telegram.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="telegram">
-                                                                        </div>
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> Facebook www.facebook.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="facebook">
-                                                                        </div>
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> Instagram www.instagram.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="instagram">
-                                                                        </div>
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> LinkedIn www.linkedIn.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="linkedIn">
-                                                                        </div>
-                                                                        <div class="col-lg-3 mb-4">
-                                                                            <label for=""> Twitter www.twitter.com </label>
-                                                                            <input type="text" class="col-lg-6 form-control " placeholder="chainraise" name="twitter">
-                                                                        </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Youtube www.youtube.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="youtube">
+                                                            </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Telegram www.telegram.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="telegram">
+                                                            </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Facebook www.facebook.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="facebook">
+                                                            </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Instagram www.instagram.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="instagram">
+                                                            </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> LinkedIn www.linkedIn.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="linkedIn">
+                                                            </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Twitter www.twitter.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="twitter">
+                                                            </div>
                                                         </div>
 
                                                     </div>
@@ -592,7 +614,8 @@
                         <input type="text" class="form-control" name="summary_sub_title[]" placeholder="Sub-title" required >
                     </div>
                     <div class="col-lg-11 mt-3 mb-4">
-                        <textarea  class="form-control" cols="30" rows="10" name="summary_sub_description[]" id="textarea_` + no + `" required ></textarea>
+                        <textarea  class="form-control" cols="30" rows="10" name="summary_sub_description[]" id="textarea_` +
+                no + `" required ></textarea>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button type="button" class="btn btn-sm btn-danger delete_section" data-id="` + no + `"> <i class='fa fa-times'></i> </button>
@@ -644,7 +667,8 @@
                         <input type="text" class="form-control" name="text_sub_title[]" placeholder="Sub-title" required >
                     </div>
                     <div class="col-lg-11 mt-3 mb-4">
-                        <textarea  class="form-control" cols="30" rows="10" name="text_description[]" required id="textarea_` + no + `" ></textarea>
+                        <textarea  class="form-control" cols="30" rows="10" name="text_description[]" required id="textarea_` +
+                no + `" ></textarea>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button type="button" class="btn btn-sm btn-danger delete_section_text" data-id="` + no + `"> <i class='fa fa-times'></i> </button>
@@ -794,7 +818,7 @@
     <script>
         $('.add_investment_button_section').click(function() {
             var content = $(this).data('content');
-           if(content == 'Income Verification (Reg CF)'){
+            if (content == 'Income Verification (Reg CF)') {
                 $('.investment_step_button_row').append(`
                     <div class="col-lg-12  text-center button_row_wrapper">
                         <div class="overflow-auto pb-1">
@@ -812,7 +836,7 @@
                         <input type="hidden" name="investment_setups[]" value="` + content + `">
                     </div>
                 `);
-           }else if(content == 'E-Sign Document'){
+            } else if (content == 'E-Sign Document') {
                 $('.investment_step_button_row').append(`
                     <div class="col-lg-12  text-center button_row_wrapper">
                         <div class="overflow-auto pb-1">
@@ -824,15 +848,15 @@
                         <small class="text-left" style="text-align:left">
                             <label class="required"> Select Template </label>
                             <select class="form-control" name="e_sign_template" style="height:42px;font-size:13px">
-                                    @foreach($templates as $template)
-                                        <option value="{{ $template['template_id']  }}"> {{  $template['template_name'] }} </option>
+                                    @foreach ($templates as $template)
+                                        <option value="{{ $template['template_id'] }}"> {{ $template['template_name'] }} </option>
                                     @endforeach
                             </select>
                         </small>
                         <input type="hidden" name="investment_setups[]" value="` + content + `">
                     </div>
                 `);
-           }else if(content == 'Payment Method'){
+            } else if (content == 'Payment Method') {
                 $('.investment_step_button_row').append(`
                     <div class="col-lg-12  text-center button_row_wrapper">
                         <div class="overflow-auto pb-1">
@@ -880,7 +904,7 @@
                         <input type="hidden" name="investment_setups[]" value="` + content + `">
                     </div>
                 `);
-           }else{
+            } else {
                 $('.investment_step_button_row').append(`
                     <div class="col-lg-12  text-center button_row_wrapper">
                         <div class="overflow-auto pb-1">
@@ -892,7 +916,7 @@
                         <input type="hidden" name="investment_setups[]" value="` + content + `">
                     </div>
                 `);
-           }
+            }
 
 
         });
@@ -905,90 +929,88 @@
     </script>
 
     <script>
-
         $('#issuer_account').on('change', function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var id =  $(this).val();
+            var id = $(this).val();
             $.ajax({
-                    url: "{{ route('offers.check.custodial') }}",
-                    method: 'POST',
-                    data:{
-                        id:id
-                    },
-                    success: function(result) {
-                        if(result.status == false){
-                            toastr.error(result.message, "Error");
-                            $('#submit_offer').prop('disabled',true);
-                            $("#create_offer_form input").prop("disabled", true);
-                            $("#create_offer_form select").prop("disabled", true);
-                            $("#issuer_account").prop("disabled", false);
-                        }else{
-                            toastr.warning(result.message, "Warning");
-                            $("#create_offer_form input").prop("disabled", false);
-                            $("#create_offer_form select").prop("disabled", false);
-                            $('#submit_offer').prop('disabled',false);
-                        }
+                url: "{{ route('offers.check.custodial') }}",
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    if (result.status == false) {
+                        toastr.error(result.message, "Error");
+                        $('#submit_offer').prop('disabled', true);
+                        $("#create_offer_form input").prop("disabled", true);
+                        $("#create_offer_form select").prop("disabled", true);
+                        $("#issuer_account").prop("disabled", false);
+                    } else {
+                        toastr.warning(result.message, "Warning");
+                        $("#create_offer_form input").prop("disabled", false);
+                        $("#create_offer_form select").prop("disabled", false);
+                        $('#submit_offer').prop('disabled', false);
                     }
+                }
             });
 
         });
-
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('body').on('change','#issuer_account',function(event){
-                    event.preventDefault();
-                    $.ajax({
-                        url: "{{ route('invest.step.six.e.template') }}",
-                        method: 'GET',
-                        dataType: 'JSON',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success:function(response)
-                        {
-                            if(response.status == true){
-                                $('select[name="template"]').html('');
-                                    jQuery.each(response.data.data, function(index, item) {
-                                        $('select[name="templates"]').append(` <option value="`+item.template_id+`"> `+item.template_name+` </option>`);
-                                    });
-                            }
-                        },
+        $(document).ready(function() {
+            $('body').on('change', '#issuer_account', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ route('invest.step.six.e.template') }}",
+                    method: 'GET',
+                    dataType: 'JSON',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.status == true) {
+                            $('select[name="template"]').html('');
+                            jQuery.each(response.data.data, function(index, item) {
+                                $('select[name="templates"]').append(
+                                    ` <option value="` + item.template_id + `"> ` +
+                                    item.template_name + ` </option>`);
+                            });
+                        }
+                    },
 
-                    });
                 });
-
             });
+
+        });
     </script>
     <script>
-
         $(document).ready(function() {
             $('#offer_name').on('keyup', function() {
                 var str = $('#offer_name').val();
                 str = str.toLowerCase();
                 var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-                var to   = "aaaaeeeeiiiioooouuuunc------";
-                for (var i=0, l=from.length ; i<l ; i++) {
+                var to = "aaaaeeeeiiiioooouuuunc------";
+                for (var i = 0, l = from.length; i < l; i++) {
                     str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
                 }
                 str = str.replace(/[^a-z0-9 -]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .replace(/^-+|-+$/g, '');
-                 $('#offer_slug').val(str);
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+                $('#offer_slug').val(str);
             });
         });
     </script>
 
-<script>
-    // Function to add a new FAQ item
-    function addFaqItem() {
-        const faqItem = `
+    <script>
+        // Function to add a new FAQ item
+        function addFaqItem() {
+            const faqItem = `
             <div class="faq-item">
                 <div class="col-lg-12 mb-4">
                     <input type="text" class="col-lg-6 form-control question" placeholder="Question" name="question[]" >
@@ -999,13 +1021,13 @@
 
             </div>
         `;
-        $("#faq-container").append(faqItem);
-    }
+            $("#faq-container").append(faqItem);
+        }
 
-    // Event handler for the "Add FAQ" button
-    $("#add-faq").on("click", function () {
-        addFaqItem();
-    });
-</script>
+        // Event handler for the "Add FAQ" button
+        $("#add-faq").on("click", function() {
+            addFaqItem();
+        });
+    </script>
 
 @endsection
