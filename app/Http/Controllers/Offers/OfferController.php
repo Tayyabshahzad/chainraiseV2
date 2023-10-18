@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
 use App\Models\Media;
 use App\Models\OfferFAQ;
+use App\Models\SocialMediaLinks;
 use App\Models\OfferDetailTab;
 use Illuminate\Support\Carbon;
 use App\Models\OfferEsignTemplate;
@@ -162,7 +163,6 @@ class OfferController extends Controller
 
 
 
-	//dd(1);
         $user = User::find($request->issuer);
         $get_token = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -224,7 +224,7 @@ class OfferController extends Controller
             $offer->terms = $request->terms;
             $offer->issuer_id =  $request->issuer;
             $offer->name =              $request->offer_name;
-            $offer->slug =            Str::slug($request->offer_name, '-');
+              $offer->slug =            Str::slug($request->offer_name, '-');
             $offer->short_description =  $request->short_description;
             $offer->security_type =    $request->security_type;
             $offer->symbol =      $request->symbol;
@@ -260,6 +260,20 @@ class OfferController extends Controller
                         $investmentStep->priority = $priority;
                         $investmentStep->save();
                 }
+                if($request->has('youtube')){
+
+                    $socialLinks = new SocialMediaLinks;
+                    $socialLinks->offer_id = $offer->id;
+                    $socialLinks->youtube = $request->input('youtube');
+                    $socialLinks->telegram = $request->input('telegram');
+                    $socialLinks->facebook = $request->input('facebook');
+                    $socialLinks->instagram = $request->input('instagram');
+                    $socialLinks->linkedIn = $request->input('linkedIn');
+                    $socialLinks->twitter = $request->input('twitter');
+                    $socialLinks->save();
+
+                }
+
 
                 if($user->check_kyc == true ){
                     $custodial = new Custodial;
@@ -777,6 +791,30 @@ class OfferController extends Controller
                 $regCf->url_issuer_form_c =  $request['url_issuer_form_c'][0];
                 $regCf->save();
             }
+            if ($request->has('socialMediaId') && $request->input('socialMediaId') !== null) {
+                $socialLinks = SocialMediaLinks::find($request->socialMediaId);
+                $socialLinks->offer_id = $offer->id;
+                $socialLinks->youtube = $request->input('youtube');
+                $socialLinks->telegram = $request->input('telegram');
+                $socialLinks->facebook = $request->input('facebook');
+                $socialLinks->instagram = $request->input('instagram');
+                $socialLinks->linkedIn = $request->input('linkedIn');
+                $socialLinks->twitter = $request->input('twitter');
+                $socialLinks->save();
+
+            }else{
+                $socialLinks = new SocialMediaLinks;
+                $socialLinks->offer_id = $offer->id;
+                $socialLinks->youtube = $request->input('youtube');
+                $socialLinks->telegram = $request->input('telegram');
+                $socialLinks->facebook = $request->input('facebook');
+                $socialLinks->instagram = $request->input('instagram');
+                $socialLinks->linkedIn = $request->input('linkedIn');
+                $socialLinks->twitter = $request->input('twitter');
+                $socialLinks->save();
+            }
+
+
 
         }
 

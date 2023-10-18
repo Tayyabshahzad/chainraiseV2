@@ -95,6 +95,10 @@ class Offer extends Model  implements HasMedia
         return $this->hasOne(RegCF::class);
     }
 
+    public function socialMedia(){
+        return $this->hasOne(SocialMediaLinks::class);
+    }
+
 
 
 

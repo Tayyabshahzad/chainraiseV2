@@ -141,15 +141,33 @@
 
 
             <div class="col-lg-6 col-12 text-center">
-                <!-- <img src="images/social icon.png" class="img-fluid" alt="..."> -->
-                <!-- Linkedin -->
-                <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
-                <!-- Telegram-->
-                <i class="bi bi-send me-lg-4 me-2 icon"></i>
-                <!-- Twitter -->
-                <i class="bi bi-instagram me-lg-4 me-2  icon"></i>
-                <!-- Instagram -->
-                <i class="bi bi-twitter me-lg-4 me-2 icon"></i>
+
+                @if($offer->socialMedia)
+                    <a target="_blank" href="https://www.linkedin.com/{{ $offer->socialMedia->linkedIn }}">
+                        <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
+                    </a>
+
+                     <a target="_blank" href="https://www.telegram.com/{{ $offer->socialMedia->telegram }}">
+                        <i class="bi bi-send me-lg-4 me-2 icon"></i>
+                    </a>
+
+                     <a target="_blank" href="https://www.instagram.com/{{ $offer->socialMedia->instagram }}">
+                        <i class="bi bi-instagram me-lg-4 me-2  icon"></i>
+                    </a>
+
+                     <a target="_blank" href="https://www.twitter.com/{{ $offer->socialMedia->twitter }}">
+                        <i class="bi bi-twitter me-lg-4 me-2 icon"></i>
+                    </a>
+
+                     <a target="_blank" href="https://www.youtube.com/{{ $offer->socialMedia->youtube }}">
+                        <i class="bi bi-youtube me-lg-4 me-2 icon"></i>
+                    </a>
+
+                     <a target="_blank" href="https://www.facebook.com/{{ $offer->socialMedia->facebook }}">
+                        <i class="bi bi-facebook me-lg-4 me-2 icon"></i>
+                    </a>
+
+                @endif
             </div>
         </div>
     </div>
