@@ -12,22 +12,7 @@
 
         }
 
-        /* #myModal iframe {
-                                                                            width: 100%;
-                                                                            height: 80%;
-                                                                        }
-                                                                        .video_modal {
-                                                                        max-width: 100%;
-                                                                        margin: 0;
-                                                                        height: 100vh;
-                                                                        display: flex;
-                                                                        justify-content: center;
-                                                                        align-items: center;
-                                                                        }
-                                                                        .video_modal_content {
-                                                                        width: 80%;
-                                                                        height: 80%;
-                                                                        } */
+
     </style>
 @endsection
 
@@ -189,6 +174,11 @@
                     data-bs-target="#documents" type="button" role="tab" aria-controls="pills-document"
                     aria-selected="false">Documents</button>
             </li>
+            <li class="nav-item me-lg-3" role="presentation">
+                <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
+                    data-bs-target="#updates" type="button" role="tab" aria-controls="pills-document"
+                    aria-selected="false">Updates</button>
+            </li>
         </ul>
         <div class="tab-content px-lg-5 px-3 py-3" id="pills-tabContent">
             <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -308,6 +298,22 @@
                             </div>
                         @endforeach
                     </div>
+                </div>
+            </div>
+            <div class="tab-pane fade p-2" id="updates" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <h3 class="fw-bolder">Updates</h3>
+                <br>
+                <div class="row ">
+                        @foreach ($offer->updates as $update)
+                            <div class="col-lg-12 "  style="margin-bottom:1%!important">
+                                 <p>
+                                    {{ $update->update }}
+                                 </p>
+                                 <small>
+                                    Last Updated {{  $update->updated_at->diffForHumans() }}
+                                 </small>
+                            </div>
+                        @endforeach
                 </div>
             </div>
         </div>

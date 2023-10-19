@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Offers;
 
+use App\Models\OfferUpdate;
 use Exception;
 use App\Models\KYC;
 use App\Models\User;
@@ -769,7 +770,6 @@ class OfferController extends Controller
                 }
             }
             if ($request->has('question')) {
-
                 $question = $request->input('question');
                 $answers = $request->input('answer');
                 $faqIds = $request->input('faq_id');
@@ -783,6 +783,35 @@ class OfferController extends Controller
                     }
                 }
             }
+
+
+
+            if ($request->has('update_new')) {
+                for ($k = 0; $k < count($request->update_new); $k++) {
+                    $offer_updates = new OfferUpdate();
+                    $offer_updates->offer_id = $offer->id;
+                    $offer_updates->update_by = $request->issuer;
+                    $offer_updates->update = $request['update_new'][$k];
+                    $offer_updates->save();
+                }
+            }
+
+            if ($request->has('update')) {
+                $update_id = $request->input('update_id');
+                $update_content = $request->input('update');
+                foreach ($update_id as $key => $singleUpdate) {
+                    $update = OfferUpdate::find($singleUpdate);
+
+                    if ($update) {
+                        $update->update([
+                            'update' => $update_content[$key],
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }
+                }
+            }
+
+
 
             $regCf = RegCF::where('offer_id', $offer->id)->first();
             if ($regCf) {
@@ -896,6 +925,26 @@ class OfferController extends Controller
             'message' => 'Document title has been updated successfully'
         ]);
     }
+
+
+
+
+    public function deleteUpdate(Request $request)
+    {
+
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        $update = OfferUpdate::find($request->id);
+        $update->delete();
+        return response([
+            'status' => true,
+            'message' => 'Update Has been deleted'
+        ]);
+    }
+
+
 
     public function deleteDocument(Request $request)
     {

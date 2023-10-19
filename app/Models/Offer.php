@@ -99,6 +99,10 @@ class Offer extends Model  implements HasMedia
         return $this->hasOne(SocialMediaLinks::class);
     }
 
+    public function updates(){
+        return $this->hasMany(OfferUpdate::class);
+    }
+
 
 
 

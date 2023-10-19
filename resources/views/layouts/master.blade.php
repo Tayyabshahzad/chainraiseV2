@@ -240,22 +240,29 @@
                         Commission nor any state agency has reviewed the investment opportunities listed on the
                         Site.
                     </p>
-                    <p>Thankyou for using the Site. If you have questions, please contact us at info@chainraise.io
+                    <p>Thank you for using the Site. If you have questions, please contact us at info@chainraise.io
                     </p>
 
-                    <hr>
+
                     <p>
                         Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings.
-                        This
-                        fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in
-                        other
-                        ways. Issuers may pay additional fees for specified services ChainRaise provides, including
+                        This fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in
+                        other ways.
+                    </p>
+
+                    <p>
+                        Issuers may pay additional fees for specified services ChainRaise provides, including
                         reimbursement of any expenses ChainRaise incurs on their behalf. ChainRaise discloses its
-                        compensation for each offering in which an issuer invests. If an issuer pays ChainRaise in whole
+                        compensation for each offering in which an issuer invests.
+
+                    </p>
+                    <p>
+                        If an issuer pays ChainRaise in whole
                         or
                         in part with its own issuing securities, these securities will always be the same class offered
                         to
                         investors on the ChainRaise Portal.
+                    </p>
 
                         ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
                         For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of

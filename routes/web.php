@@ -288,6 +288,7 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('tile/delete', ['as' => 'tile.delete','uses' => 'OfferController@deleteTile']);
     Route::get('video/delete', ['as' => 'video.delete','uses' => 'OfferController@deleteVideo']);
     Route::get('document/delete', ['as' => 'document.delete','uses' => 'OfferController@deleteDocument']);
+    Route::get('update/delete', ['as' => 'update.delete','uses' => 'OfferController@deleteUpdate']);
     Route::get('document/update', ['as' => 'document.update','uses' => 'OfferController@updateDocument']);
     Route::get('edit/{id}', ['as' => 'edit','uses' => 'OfferController@edit']);
     Route::get('view/{id}', ['as' => 'view','uses' => 'OfferController@view']);
