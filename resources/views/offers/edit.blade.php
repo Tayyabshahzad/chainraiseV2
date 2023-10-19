@@ -97,18 +97,24 @@
                             <div class="card-body mb-3">
                                 <div class="position-relative">
 
-                                    <div class=" text-white mb-4 "
-                                        @if ($offer->getFirstMediaUrl('banner_image', 'thumb') != null) style="padding:5px 20px;background-image:url('{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}')"
-                                @else
+                                    <div class="text-white mb-4" @if ($offer->getFirstMediaUrl('cover_photo', 'thumb') != null) style="padding:5px 20px;background-image:url('{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}');background-repeat:no-repeat"
+                                        @else
                                         style="padding:5px 20px;background-image:url('https://i.stack.imgur.com/FueqW.jpg')" @endif>
                                         <div class="row">
-                                            <div class="col-lg-6">
-
+                                            <div class="col-lg-4">
+                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%" >Thumbnail Photo</h3>
                                                 <div class="image-input image-input-outline mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
                                                     <!--begin::Preview existing avatar-->
                                                     <div class="image-input-wrapper w-75px h-75px"
-                                                        style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');background-position:center">
+                                                        style="
+                                                            @if ($offer->getFirstMediaUrl('offer_thumbnail', 'thumb') != null)
+                                                                background-image: url({{ $offer->getFirstMediaUrl('offer_thumbnail', 'thumb') }});
+                                                            @else
+                                                                background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');
+                                                            @endif
+                                                                background-position:center
+                                                        ">
                                                     </div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
@@ -118,7 +124,7 @@
                                                         aria-label="Upload Logo" data-kt-initialized="1" title="Offer Logo">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="offer_image" accept=".png, .jpg, .jpeg">
+                                                        <input type="file" name="offer_thumbnail" accept=".png, .jpg, .jpeg">
                                                         <input type="hidden" name="avatar_remove">
                                                         <!--end::Inputs-->
                                                     </label>
@@ -139,20 +145,32 @@
                                                         <i class="bi bi-x fs-2"></i>
                                                     </span>
                                                     <!--end::Remove-->
+
                                                 </div>
+                                                <p class="text-danger mt-4">
+                                                    <strong>   Width = 390px , Height = 190px , Max Size = 200MB </strong>
+                                                </p>
 
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
+                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%" >Cover Photo</h3>
                                                 <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
-                                                    @if ($offer->getFirstMediaUrl('banner_image', 'thumb') != null) style="background-image:url('{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}')"
-                                            @else
-                                                    style="background-image:url('https://i.stack.imgur.com/FueqW.jpg')" @endif>
+                                                    style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
                                                     <!--begin::Preview existing avatar-->
                                                     <div class="image-input-wrapper w-75px h-75px"
-                                                        style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');background-position:center">
+                                                        style="
+                                                            @if ($offer->getFirstMediaUrl('cover_photo', 'thumb') != null)
+                                                                background-image: url({{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }});
+                                                            @else
+                                                                background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');
+                                                            @endif
+                                                                background-position:center
+                                                        ">
                                                     </div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
+
+
                                                     <label
                                                         class="btn btn-icon btn-circle btn-active-color-primary w-15px h-15px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
@@ -160,7 +178,7 @@
                                                         title="Background Image">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="banner_image"
+                                                        <input type="file" name="cover_photo"
                                                             accept=".png, .jpg, .jpeg">
                                                         <input type="hidden" name="avatar_remove">
                                                         <!--end::Inputs-->
@@ -183,7 +201,64 @@
                                                     </span>
                                                     <!--end::Remove-->
                                                 </div>
+                                                <p class="text-danger mt-4">
+                                                    <strong> Width = 1200px , Height = 260px , Max Size = 200MB </strong>
+                                                </p>
                                             </div>
+                                            <div class="col-lg-4">
+                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%" >Offer Logo</h3>
+                                                <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
+                                                    style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
+                                                    <!--begin::Preview existing avatar-->
+
+                                                    <div class="image-input-wrapper w-75px h-75px"
+                                                        style="
+                                                            @if ($offer->getFirstMediaUrl('offer_logo', 'thumb') != null)
+                                                                background-image: url({{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }});
+                                                            @else
+                                                                background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');
+                                                            @endif
+                                                                background-position:center
+                                                        ">
+                                                    </div>
+
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-15px h-15px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        aria-label="Upload Hero Image (1200 x 260)" data-kt-initialized="1"
+                                                        title="Background Image">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="offer_logo"
+                                                            accept=".png, .jpg, .jpeg">
+                                                        <input type="hidden" name="avatar_remove">
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-15px h-15px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        aria-label="Cancel avatar" data-kt-initialized="1">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-15px h-15px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        aria-label="Remove avatar" data-kt-initialized="1">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <p class="text-danger mt-4">
+                                                    <strong> Width = 125px , Height = 125px , Max Size = 200MB </strong>
+                                                </p>
+                                            </div>
+
                                         </div>
                                         <div class="row text-dark">
                                             <div class="col-lg-12">

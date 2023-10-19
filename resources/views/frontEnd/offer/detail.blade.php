@@ -3,9 +3,6 @@
 @section('page_head')
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
-
-
-
     <style>
         .hero-section {
             height: 100% !important;

@@ -33,7 +33,7 @@
             @foreach ($offers as $offer)
                 <div class="col-lg-4 mb-3  text-center offerItem">
                     <a href="{{ route('offer.details', $offer->slug) }}" >
-                        <img src="{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}" class=" img-fluid rounded" srcset="">
+                        <img src="{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}" class=" img-fluid rounded"  srcset="">
                     <div class="row text-white p-3">
                         <div class="col-8 text-start">
                             <h6>  {{ $offer->name }} </h6>
@@ -61,7 +61,7 @@
             @foreach ($offer_coming_soon as $coming_soon)
                 <div class="col-lg-4 mb-5  text-center">
                     <a href="{{ route('offer.details', $offer->slug) }}" target="_blank">
-                        <img src="{{ $coming_soon->getFirstMediaUrl('banner_image', 'thumb') }}" alt="" class="img-fluid" srcset="">
+                        <img src="{{ $coming_soon->getFirstMediaUrl('banner_image', 'thumb') }}" alt="" class="img-fluid" srcset="" style="width:390;height:190">
                     </a>
                 </div>
             @endforeach

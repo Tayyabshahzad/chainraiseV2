@@ -141,7 +141,7 @@ class OfferController extends Controller
             'size' => 'required',
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
-            'banner_image' => 'image|dimensions:min_width=1200,min_height=260|max:2000', // Example rules
+            'banner_image' => 'image|dimensions:min_width=385,min_height=185|max:2000', // Example rules
             'offer_image' => 'image|dimensions:min_width=125,min_height=125|max:2000', // Example rules
         ]);
 
@@ -181,11 +181,13 @@ class OfferController extends Controller
             if ($upgrade_existing_l0->failed()) {
                 return redirect()->back()->with('error', 'Internal Server Error ' . $json_upgrade_existing_l0['title']);
             } else {
+
                 if ($json_upgrade_existing_l0['kycLevel'] == null ||  $json_upgrade_existing_l0['kycLevel'] == '') {
                     return redirect()->back()->with('error', 'KYC Level Atlest L0');
                 }
             }
         }
+
         //dump($user->business_id);
 
 
@@ -278,12 +280,19 @@ class OfferController extends Controller
                     $custodial->save();
                 }
 
-                if ($request->hasFile('offer_image')) {
-                    $offer->addMediaFromRequest('offer_image')->toMediaCollection('offer_image');
+                if ($request->hasFile('offer_thumbnail')) {
+                    $offer->clearMediaCollection('offer_thumbnail');
+                    $offer->addMediaFromRequest('offer_thumbnail')->toMediaCollection('offer_thumbnail');
                 }
-                if ($request->hasFile('banner_image')) {
-                    $offer->addMediaFromRequest('banner_image')->toMediaCollection('banner_image');
+                if ($request->hasFile('cover_photo')) {
+                    $offer->clearMediaCollection('cover_photo');
+                    $offer->addMediaFromRequest('cover_photo')->toMediaCollection('cover_photo');
                 }
+                if ($request->hasFile('offer_logo')) {
+                    $offer->clearMediaCollection('offer_logo');
+                    $offer->addMediaFromRequest('offer_logo')->toMediaCollection('offer_logo');
+                }
+
                 $invesment_restriction = new InvestmentRestrication;
                 if ($request->min_invesment) {
                     $invesment_restriction->min_invesment = $request->min_invesment;
@@ -510,8 +519,9 @@ class OfferController extends Controller
             'investment_restrication_id' => 'required',
             'min_invesment' => 'required',
             'max_invesment' => 'required',
-            'banner_image' => 'image|dimensions:min_width=1200,min_height=260|max:2000', // Example rules
-            'offer_image' => 'image|dimensions:min_width=125,min_height=125|max:2000', // Example rules
+            'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:2000', // Example rules
+            'cover_photo' => 'image|dimensions:min_width=1200,min_height=260|max:2000', // Example rules
+            'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:2000', // Example rules
         ]);
 
         $offer = Offer::find($request->offer_id);
@@ -534,13 +544,17 @@ class OfferController extends Controller
         $offer->updated_at =    Carbon::now();
         $offer->save();
         if ($offer->save()) {
-            if ($request->hasFile('offer_image')) {
-                $offer->clearMediaCollection('offer_image');
-                $offer->addMediaFromRequest('offer_image')->toMediaCollection('offer_image');
+            if ($request->hasFile('offer_thumbnail')) {
+                $offer->clearMediaCollection('offer_thumbnail');
+                $offer->addMediaFromRequest('offer_thumbnail')->toMediaCollection('offer_thumbnail');
             }
-            if ($request->hasFile('banner_image')) {
-                $offer->clearMediaCollection('banner_image');
-                $offer->addMediaFromRequest('banner_image')->toMediaCollection('banner_image');
+            if ($request->hasFile('cover_photo')) {
+                $offer->clearMediaCollection('cover_photo');
+                $offer->addMediaFromRequest('cover_photo')->toMediaCollection('cover_photo');
+            }
+            if ($request->hasFile('offer_logo')) {
+                $offer->clearMediaCollection('offer_logo');
+                $offer->addMediaFromRequest('offer_logo')->toMediaCollection('offer_logo');
             }
             if ($request->hasFile('slider_images')) {
                 $offer->addMultipleMediaFromRequest(['slider_images'])

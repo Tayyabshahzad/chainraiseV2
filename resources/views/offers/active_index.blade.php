@@ -61,17 +61,17 @@
                                 <div class="card-body p-0">
 
                                     <div class="px-9 pt-7 card-rounded h-275px w-100"
-                                        @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null)
-                                            style="background-image: url('{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}');background-size:100%"
+                                        @if ($offer->getFirstMediaUrl('cover_photo', 'thumb') != null)
+                                            style="background-image: url('{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}');background-size:cover;background-repeat:no-repeat"
                                         @else
                                             style="background-image: url('')"
                                         @endif
                                         >
                                         <div class="d-flex text-center flex-column text-white pt-8">
                                         <span class="fs-2x pt-1">
-                                            <small class="badge-light-dark fs-0.5x no-radius"
-                                                style="font-size:20px;padding:8px;border-radius:6px;"> {{ $offer->name }}
-                                            </small>
+                                                @if ($offer->getFirstMediaUrl('offer_logo', 'thumb') != null)
+                                                    <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="" >
+                                                @endif
                                         </span>
                                         </div>
                                     </div>
