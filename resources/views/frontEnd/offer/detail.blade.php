@@ -6,28 +6,28 @@
     <style>
         .hero-section {
             height: 100% !important;
-            background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}");
+            background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}");
             background-size: cover;
             background-repeat: no-repeat;
 
         }
 
         /* #myModal iframe {
-                                                                        width: 100%;
+                                                                            width: 100%;
+                                                                            height: 80%;
+                                                                        }
+                                                                        .video_modal {
+                                                                        max-width: 100%;
+                                                                        margin: 0;
+                                                                        height: 100vh;
+                                                                        display: flex;
+                                                                        justify-content: center;
+                                                                        align-items: center;
+                                                                        }
+                                                                        .video_modal_content {
+                                                                        width: 80%;
                                                                         height: 80%;
-                                                                    }
-                                                                    .video_modal {
-                                                                    max-width: 100%;
-                                                                    margin: 0;
-                                                                    height: 100vh;
-                                                                    display: flex;
-                                                                    justify-content: center;
-                                                                    align-items: center;
-                                                                    }
-                                                                    .video_modal_content {
-                                                                    width: 80%;
-                                                                    height: 80%;
-                                                                    } */
+                                                                        } */
     </style>
 @endsection
 
@@ -39,7 +39,7 @@
         <div class="row justify-content-center">
 
             <div class="col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" style="width: 25%!important"
+                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 25%!important"
                     class="p-3 white-logo" alt="...">
                 <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
             </div>
@@ -132,7 +132,7 @@
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center p-lg-5 p-4">
             <div class="col-lg-6 col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}"
+                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}"
                     class="img-responsive offer_logo_image img-fluid b-logo" alt="...">
                 <br>
                 <strong> {{ $offer->name }} </strong>
