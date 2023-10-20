@@ -54,6 +54,17 @@
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
+                        <div class="col-lg-12">
+                            <select name="status" aria-label="Offer Status" data-control="select2"
+                                data-placeholder="Offer Status" class="form-select form-select-lg" id="status">
+                                <option value="active" @if($offer->status == 'active') selected @endif> Active </option>
+                                <option value="coming-soon" @if($offer->status == 'coming-soon') selected @endif> Coming Soon </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
+                    <div class="col-lg-12">
                         <select name="security_type" aria-label="Security Type (Optional)" data-control="select2"
                         data-placeholder="Security Type (Optional)" class="form-select form-select-lg"
                             id="security_type">

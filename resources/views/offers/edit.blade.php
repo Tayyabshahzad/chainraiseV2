@@ -109,8 +109,9 @@
                                         style="padding:5px 20px;background-image:url('https://i.stack.imgur.com/FueqW.jpg')" @endif>
                                         <div class="row">
                                             <div class="col-lg-4">
-                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%">Thumbnail
-                                                    Photo</h3>
+                                                <p style="padding:10px;background:#000;color:#fff;">
+                                                    Thumbnail  390x192 = 200 M
+                                                </p>
                                                 <div class="image-input image-input-outline mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
                                                     <!--begin::Preview existing avatar-->
@@ -154,14 +155,14 @@
                                                     <!--end::Remove-->
 
                                                 </div>
-                                                <p class="text-danger mt-4">
-                                                    <strong> Width = 390px , Height = 190px , Max Size = 200MB </strong>
-                                                </p>
+
 
                                             </div>
                                             <div class="col-lg-4">
-                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%">Cover Photo
-                                                </h3>
+
+                                                <p style="padding:10px;background:#000;color:#fff;">
+                                                    Cover  1200x650 = 200 M
+                                                </p>
                                                 <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
                                                     <!--begin::Preview existing avatar-->
@@ -207,13 +208,13 @@
                                                     </span>
                                                     <!--end::Remove-->
                                                 </div>
-                                                <p class="text-danger mt-4">
-                                                    <strong> Width = 1200px , Height = 260px , Max Size = 200MB </strong>
-                                                </p>
+
                                             </div>
                                             <div class="col-lg-4">
-                                                <h3 style="padding:10px;background:#000;color:#fff;width:50%">Offer Logo
-                                                </h3>
+
+                                                <p style="padding:10px;background:#000;color:#fff;width:80%">
+                                                    Logo  125x125 = 200 M
+                                                </p>
                                                 <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
                                                     <!--begin::Preview existing avatar-->
@@ -259,9 +260,7 @@
                                                     </span>
                                                     <!--end::Remove-->
                                                 </div>
-                                                <p class="text-danger mt-4">
-                                                    <strong> Width = 125px , Height = 125px , Max Size = 200MB </strong>
-                                                </p>
+
                                             </div>
 
                                         </div>
