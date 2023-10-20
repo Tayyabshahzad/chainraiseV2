@@ -81,14 +81,14 @@ class KycController extends Controller
         }
         $decodedSsn = Crypt::decryptString($user->identityVerification->primary_contact_social_security);
 
-        if (!$user->getFirstMediaUrl('kyc_document_collection')) {
-            $errors[] = 'Please Upload Document First';
-            return response([
-                'status' => 'document',
-                'success' => false,
-                'errors' => $errors,
-            ]);
-        }
+        // if (!$user->getFirstMediaUrl('kyc_document_collection')) {
+        //     $errors[] = 'Please Upload Document First';
+        //     return response([
+        //         'status' => 'document',
+        //         'success' => false,
+        //         'errors' => $errors,
+        //     ]);
+        // }
 
         if ($user->user_type == null) {
             $errors[] = 'Please Update Settings Selected User Type is not Defined';
