@@ -543,7 +543,7 @@ class OfferController extends Controller
         $offer->total_valuation =  $request->total_valuation;
         $offer->commencement_date =  $request->commencement_date;
         $offer->funding_end_date =    $request->funding_end_date;
-        $offer->status =               $request->status;
+        //$offer->status =               $request->status;
         $offer->updated_at =    Carbon::now();
         $offer->save();
         if ($offer->save()) {
