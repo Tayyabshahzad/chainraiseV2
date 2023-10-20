@@ -63,7 +63,7 @@
                 @foreach ($offer_coming_soon as $comingSoon)
                     <div class="col-lg-4 mb-5  text-center">
                         <a href="#" target="_blank">
-                            <img src="{{ $comingSoon->getFirstMediaUrl('banner_image', 'thumb') }}" alt=""
+                            <img src="{{ $comingSoon->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" alt=""
                                 class="img-fluid" srcset="">
                             <div class="row text-white p-3">
                                 <div class="col-8 text-start">
