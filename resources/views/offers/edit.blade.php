@@ -104,13 +104,13 @@
                                 <div class="position-relative">
 
                                     <div class="text-white mb-4"
-                                        @if ($offer->getFirstMediaUrl('cover_photo', 'thumb') != null) style="padding:5px 20px;background-image:url('{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}');background-repeat:no-repeat"
+                                        @if ($offer->getFirstMediaUrl('cover_photo', 'thumb') != null) style="padding:5px 20px;background-image:url('{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}');background-repeat:no-repeat;background-size:cover"
                                         @else
                                         style="padding:5px 20px;background-image:url('https://i.stack.imgur.com/FueqW.jpg')" @endif>
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <p style="padding:10px;background:#000;color:#fff;">
-                                                    Thumbnail  390x192 = 200 M
+                                                    Thumbnail  390x190 = 1M
                                                 </p>
                                                 <div class="image-input image-input-outline mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
@@ -161,7 +161,7 @@
                                             <div class="col-lg-4">
 
                                                 <p style="padding:10px;background:#000;color:#fff;">
-                                                    Cover  1200x650 = 200 M
+                                                    Cover  1200x650 = 1M
                                                 </p>
                                                 <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
@@ -213,7 +213,7 @@
                                             <div class="col-lg-4">
 
                                                 <p style="padding:10px;background:#000;color:#fff;width:80%">
-                                                    Logo  125x125 = 200 M
+                                                    Logo  125x125 = 1M
                                                 </p>
                                                 <div class="image-input image-input-outline  mt-3"data-kt-image-input="true"
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')">
