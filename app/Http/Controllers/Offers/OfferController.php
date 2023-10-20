@@ -522,7 +522,7 @@ class OfferController extends Controller
             'min_invesment' => 'required',
             'max_invesment' => 'required',
             'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:2000', // Example rules
-            'cover_photo' => 'image|dimensions:min_width=1200,min_height=260|max:2000', // Example rules
+            'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:2000', // Example rules
             'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:2000', // Example rules
         ]);
 
@@ -543,6 +543,7 @@ class OfferController extends Controller
         $offer->total_valuation =  $request->total_valuation;
         $offer->commencement_date =  $request->commencement_date;
         $offer->funding_end_date =    $request->funding_end_date;
+        $offer->status =               $request->status;
         $offer->updated_at =    Carbon::now();
         $offer->save();
         if ($offer->save()) {
