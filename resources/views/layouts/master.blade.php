@@ -16,9 +16,9 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title> ChainRaise Portal | @yield('title') </title>
     <style>
-        .dropdown-menu[data-bs-popper] {
 
-            width: 158% !important;
+        .customMenu[data-bs-popper]{
+            right:50%!important;
         }
     </style>
     @section('page_head')
@@ -36,7 +36,6 @@
                 <img src="{{ asset('assets/v3-images/chainrasied-logo.png') }}" alt="Logo" class="logo-mob">
             </a>
             <div>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +109,7 @@
 
                                     </a>
 
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <ul class="customMenu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <li><a class=" bi bi-person dropdown-item text-dark"
                                                 href="{{ route('my.portfolio') }}"> Portfolio</a>
                                         </li>
