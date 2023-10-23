@@ -902,35 +902,38 @@
                                                         </div>
                                                     </div>
 
-                                                        @foreach ($offer->updates as $update)
-                                                        <div class="row update-row" data-update-id="{{ $update->id }}">
-                                                            <div class="col-lg-10">
-                                                                <input type="text"
-                                                                    class="form-control form-control-sm mb-4"
-                                                                    name="update[]" id=""
-                                                                    value="{{ $update->update }}">
-                                                                <input type="hidden"
-                                                                    class="form-control form-control-sm mb-4"
-                                                                    name="update_id[]" id=""
-                                                                    value="{{ $update->id }}">
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <button type="button"class="btn btn-sm btn-danger delete-update">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </div>
+                                                    @foreach ($offer->updates as $update)
+                                                    <div class="row update-row" data-update-id="{{ $update->id }}">
+                                                        <div class="col-lg-10">
+                                                            <textarea type="text"
+                                                                class="form-control form-control-sm mb-4 summernote"
+                                                                name="update[]" id="">{{ $update->update }}</textarea>
+
+                                                            <input type="hidden"
+                                                                class="form-control form-control-sm mb-4"
+                                                                name="update_id[]" id=""
+                                                                value="{{ $update->id }}">
                                                         </div>
-                                                        @endforeach
+                                                        <div class="col-lg-2">
+                                                            <button type="button"class="btn btn-sm btn-danger delete-update">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                    @endforeach
                                                     <div class="row updateWrapper">
                                                     </div>
-
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <button class="btn btn-sm btn-info no-radius addUpdate "
                                                                 type="button"> Add Update </button>
                                                         </div>
                                                     </div>
+                                                </div>
+
+
+
+
 
                                                 </div>
                                             </div>
@@ -1487,33 +1490,39 @@
     <script>
         $(document).ready(function() {
             $('.addUpdate').on('click', function() {
-                // Create a new row
-                var newRow = $('<div class="row"></div>');
-                // Create a 10-column div for the input field
-                var inputDiv = $('<div class="col-lg-10"></div>');
-                var newInput = $(
-                    '<input type="text" name="update_new[]" class="form-control mb-4 form-control-sm" />'
-                    );
-                inputDiv.append(newInput);
+    // Create a new row
+    var newRow = $('<div class="row"></div>');
 
-                // Create a 2-column div for the delete button
-                var deleteDiv = $('<div class="col-lg-2"></div>');
-                var deleteButton = $(
-                    '<button class="btn btn-danger btn-sm" type="button"> <i class="fa fa-trash"></i> </button>'
-                    );
-                // Add an event handler to delete the appended row
-                deleteButton.on('click', function() {
-                    newRow.remove();
-                });
-                deleteDiv.append(deleteButton);
+    // Create a 10-column div for the input field
+    var inputDiv = $('<div class="col-lg-10"  style="margin-bottom:10px;"></div>');
+    var newInput = $(` <textarea type="text" name="update_new[]" class="updateTextarea form-control mb-4"></textarea>`);
+    inputDiv.append(newInput);
 
-                // Append the input and delete button divs to the new row
-                newRow.append(inputDiv);
-                newRow.append(deleteDiv);
+    // Append the input div to the new row
+    newRow.append(inputDiv);
 
-                // Append the new row to the updateWrapper
-                $('.updateWrapper').append(newRow);
-            });
+    // Create a 2-column div for the delete button
+    var deleteDiv = $('<div class="col-lg-2"></div>');
+    var deleteButton = $(
+        '<button class="btn btn-danger btn-sm" type="button"> <i class="fa fa-trash"></i> </button>'
+    );
+
+    // Add an event handler to delete the appended row
+    deleteButton.on('click', function() {
+        newRow.remove();
+    });
+    deleteDiv.append(deleteButton);
+
+    // Append the delete button div to the new row
+    newRow.append(deleteDiv);
+
+    // Append the new row to the updateWrapper
+    $('.updateWrapper').append(newRow);
+
+    // Initialize Summernote on the newly added textarea
+    newInput.summernote();
+});
+
         });
     </script>
 

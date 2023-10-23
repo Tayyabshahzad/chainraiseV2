@@ -11,6 +11,35 @@
             background-repeat: no-repeat;
 
         }
+        .image-with-initial {
+  position: relative;
+  display: inline-block;
+}
+
+.image-with-initial::before {
+  content: "T"; /* Set the content to the desired initial letter */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Optional: Add some padding to the image to prevent overlap with the initial */
+.image-with-initial img {
+  padding: 8px;
+}
+
 
 
     </style>
@@ -179,6 +208,11 @@
                     data-bs-target="#updates" type="button" role="tab" aria-controls="pills-document"
                     aria-selected="false">Updates</button>
             </li>
+            <li class="nav-item me-lg-3" role="presentation">
+                <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
+                    data-bs-target="#questions_answers" type="button" role="tab" aria-controls="pills-document"
+                    aria-selected="false">Q&A</button>
+            </li>
         </ul>
         <div class="tab-content px-lg-5 px-3 py-3" id="pills-tabContent">
             <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -307,8 +341,9 @@
                         @foreach ($offer->updates as $update)
                             <div class="col-lg-12 "  style="margin-bottom:1%!important">
                                  <p>
-                                    {{ $update->update }}
+                                    {!! $update->update !!}
                                  </p>
+                                 <br>
                                  <small>
                                     Last Updated {{  $update->updated_at->diffForHumans() }}
                                  </small>
@@ -316,12 +351,78 @@
                         @endforeach
                 </div>
             </div>
+            <div class="tab-pane fade p-2" id="questions_answers" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <h3 class="fw-bolder col-lg-12 col-md-6">Q&A</h3>
+
+                @if(Auth::user())
+                    <button class="btn btn-sm btn-info" type="button" data-bs-toggle="modal"
+                        data-bs-target="#PostQuestion" class="btn btn-outline-light rounded-circle"
+                        style=" border-radius:no-radius;"> Post A Question</button>
+                @endif
+                <hr>
+
+                @foreach ($offer->activeQuestions as $question)
+                    <div class="row">
+                        <div class="">
+                            <div class="media text-muted pt-3">
+                                <div class="col-lg-12">
+                                    <strong class="text-gray-dark">{{ $question->question }}</strong>
+                                </div>
+                                <p class="media-body pb-3 mt-2 mb-0 small lh-125 border-bottom border-gray">
+                                    @php
+                                        $answer = $question->answer;
+                                        $limit = 300;
+                                    @endphp
+                                    <span class="question-text">
+                                        {{ strlen($answer) > $limit ? substr($answer, 0, $limit) : $answer }}
+                                    </span>
+                                    @if (strlen($answer) > $limit)
+                                        <span class="read-more-content" style="display: none;">
+                                            {{ substr($answer, $limit) }}
+                                        </span>
+                                        <a href="#" class="read-more-link">Read More</a>
+                                    @endif
+                                </p>
+                                <h6 class="" style="font-size: 10px; padding-top: 10px;">
+                                    {{ $question->created_at->diffForHumans() }} Posted By {{ $question->investor->name }}
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
         </div>
 
     </div>
 
-
-
+    @if(Auth::user())
+        <div class="modal fade" id="PostQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <form action="{{  route('post.offer.question') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="offer_id" value="{{ $offer->id }}">
+                    <input type="hidden" name="investor_id" value="{{ Auth::user()->id }}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Post Your Question</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="question" id="" class="form-control" cols="20" rows="5" required placeholder="Please Enter Your Question"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    @endif
 
 
 
@@ -398,6 +499,17 @@
             }
         });
     </script>
+<script>
+    $(document).ready(function () {
+    $('.read-more-link').on('click', function (e) {
+        e.preventDefault();
+        var $readMoreLink = $(this);
+        var $readMoreContent = $readMoreLink.siblings('.read-more-content');
 
+        $readMoreContent.slideToggle();
+        $readMoreLink.hide(); // Hide the "Read More" link
+    });
+});
+    </script>
 
 @endsection

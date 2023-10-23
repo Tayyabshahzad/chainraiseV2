@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\OfferQuestion;
 use Illuminate\Http\Request;
 use App\Models\Accreditation;
 use App\Models\Folder;
@@ -779,5 +780,24 @@ class FrontendController extends Controller
                 ]);
             }
         }
+    }
+
+    public function PostQuestion(Request $request){
+
+        $request->validate([
+            'offer_id' => 'required',
+            'investor_id' => 'required',
+            'question' => 'required'
+        ]);
+        $offerQuestion = new OfferQuestion;
+        $offerQuestion->offer_id = $request->offer_id;
+        $offerQuestion->investor_id = $request->investor_id;
+        $offerQuestion->question = $request->question;
+        $offerQuestion->status = 'inactive';
+        $offerQuestion->save();
+        return redirect()->back()->with('success','Your Question Has been Posted');
+
+
+
     }
 }

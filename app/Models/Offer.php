@@ -103,6 +103,13 @@ class Offer extends Model  implements HasMedia
         return $this->hasMany(OfferUpdate::class);
     }
 
+    public function questions(){
+        return $this->hasMany(OfferQuestion::class);
+    }
+    public function activeQuestions()
+    {
+        return $this->hasMany(OfferQuestion::class)->where('status', 'active')->where('answer','!=',null)->orderBy('id','desc');
+    }
 
 
 

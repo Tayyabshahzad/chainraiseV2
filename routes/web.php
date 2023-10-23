@@ -177,6 +177,7 @@ Route::middleware(['check.profile.complete','verified','auth'])->group(function 
     Route::get('documents', [FrontendController::class, 'my_documents'])->name('my.documents');
     Route::get('portfolio', [FrontendController::class, 'portfolio'])->name('my.portfolio');
     Route::post('verify_identity', [FrontendController::class, 'verify_identity'])->name('investment.verify_identity');
+    Route::post('post/offer/question', [FrontendController::class, 'PostQuestion'])->name('post.offer.question');
 
 });
 Route::group(['as'=> 'invest.','prefix'=>'investor','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Investor'], function () {
@@ -297,6 +298,9 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('policy', ['as' => 'policy','uses' => 'OfferController@policy']);
     Route::post('policy/create', ['as' => 'policy.create','uses' => 'OfferController@policyCreate']);
     Route::post('policy/delete', ['as' => 'policy.delete','uses' => 'OfferController@policyDelete']);
+    Route::get('qa/session', ['as' => 'qa.session','uses' => 'OfferController@qaSession']);
+    Route::get('view/question/{offerId}', ['as' => 'view.question','uses' => 'OfferController@viewQuestion']);
+    Route::post('question/update', ['as' => 'update.question','uses' => 'OfferController@updateQuestion']);
 });
 
 Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Organizations'], function () {

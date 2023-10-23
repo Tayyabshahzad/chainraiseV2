@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
 use App\Models\Media;
 use App\Models\OfferFAQ;
+use App\Models\OfferQuestion;
 use App\Models\SocialMediaLinks;
 use App\Models\OfferDetailTab;
 use Illuminate\Support\Carbon;
@@ -1047,4 +1048,54 @@ class OfferController extends Controller
             ]);
         }
     }
+
+
+    public function qaSession() {
+        $questions = OfferQuestion::with('offer')->get();
+
+        $groupedQuestions = [];
+
+        foreach ($questions as $question) {
+            $offerId = $question->offer->id;
+
+            if (!isset($groupedQuestions[$offerId])) {
+                $groupedQuestions[$offerId] = [
+                    'offer' => $question->offer->name,
+                    'questions' => []
+                ];
+            }
+
+            $groupedQuestions[$offerId]['questions'][] = $question;
+        }
+
+
+        return view('offers.qasession', compact('groupedQuestions'));
+    }
+    public function viewQuestion($offerId) {
+        $questions = OfferQuestion::where('offer_id',$offerId)->where('status','inactive')->get();
+        return view('offers.view_questions', compact('questions'));
+    }
+
+    public function updateQuestion(Request $request) {
+        $questionIds = $request->input('question_id');
+        $questions = $request->only('question', 'answer', 'status');
+
+        foreach ($questionIds as $key => $questionId) {
+            $question = OfferQuestion::findOrFail($questionId);
+            $question->update([
+                'question' => $questions['question'][$key],
+                'answer' => $questions['answer'][$key],
+                'status' => $questions['status'][$key],
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Questions updated successfully');
+    }
+
+
+
+
+
+
+
 }
