@@ -789,9 +789,11 @@ class FrontendController extends Controller
             'investor_id' => 'required',
             'question' => 'required'
         ]);
+        $offer = Offer::find($request->offer_id)->issuer_id;
         $offerQuestion = new OfferQuestion;
         $offerQuestion->offer_id = $request->offer_id;
         $offerQuestion->investor_id = $request->investor_id;
+        $offerQuestion->issuer_id = $offer;
         $offerQuestion->question = $request->question;
         $offerQuestion->status = 'inactive';
         $offerQuestion->save();

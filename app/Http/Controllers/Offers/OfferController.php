@@ -51,7 +51,7 @@ class OfferController extends Controller
     public function active_index()
     {
         $issuers = User::role('issuer')->get();
-        
+
         $offers = Offer::orderBy('id', 'desc');
         if(Auth::user()->hasRole('issuer')) {
             $offers->where('issuer_id', Auth::user()->id);
@@ -1055,28 +1055,28 @@ class OfferController extends Controller
 
 
     public function qaSession() {
-        
+
 
         $questions = OfferQuestion::with('offer')->get();
         $groupedQuestions = [];
-        
+
         if (Auth::user()->hasRole('issuer')) {
-            $questions = $questions->where('investor_id', Auth::user()->id);
+            $questions = $questions->where('issuer_id', Auth::user()->id);
         }
-        
+
         foreach ($questions as $question) {
             $offerId = $question->offer->id;
-        
+
             if (!isset($groupedQuestions[$offerId])) {
                 $groupedQuestions[$offerId] = [
                     'offer' => $question->offer->name,
                     'questions' => []
                 ];
             }
-        
+
             $groupedQuestions[$offerId]['questions'][] = $question;
         }
-        
+
 
 
         return view('offers.qasession', compact('groupedQuestions'));
