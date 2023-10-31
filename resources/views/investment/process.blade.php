@@ -607,7 +607,14 @@
             <div class="modal-dialog mw-650px">
                 <!--begin::Modal content-->
                 <div class="modal-content">
+
                     <!--begin::Modal header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title"> ACH Payment</h5>
+                        <button type="button" style="border:none;background:#9e1338;color:#fff" class="close btn-sm btn-info closeAchPopup" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-18 pt-5 pb-15">
                         <div class="text-center loader_image">
                             <img src="{{ asset('assets/media/spinner.svg') }}" alt="">
@@ -1073,7 +1080,6 @@
         function updateCurrencyFormat() {
             // Remove non-numeric characters and currency symbols
             var numericValue = parseFloat(inputField.value.replace(/[^0-9.]/g, ''));
-
             // Check if the value is NaN or empty
             if (isNaN(numericValue) || inputField.value.trim() === '') {
                 inputField.value = "0"; // Display "0" if the value is NaN or empty
@@ -1097,6 +1103,10 @@
 
         // Initial currency format on page load
         updateCurrencyFormat();
+
+        $('.closeAchPopup').on('click', function (e) {
+        $('#payment_widget').modal('hide')
+    });
     </script>
 
 

@@ -173,7 +173,7 @@
 
                 @endhasrole
                 @hasrole('admin|issuer')
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -212,61 +212,11 @@
                             </a>
                             <!--end:Menu link-->
                         </div>
-                        @hasrole('admin')
-                        {{--  <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title"> Offers </span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title"> Email </span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title"> Leads </span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>  --}}
-                        @endhasrole
                     </div>
                     <!--end:Menu sub-->
-                </div>
+                </div> --}}
                 @endhasrole
-                @hasrole('issuer')
-                <div class="menu-item">
-                    <!--begin:Menu link-->
-                    <a class="menu-link" href="#">
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
-                            <span class="svg-icon svg-icon-2">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.3" d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z" fill="currentColor"></path>
-                                    <path d="M9.2 3H3C2.4 3 2 3.4 2 4V19C2 19.6 2.4 20 3 20H21C21.6 20 22 19.6 22 19V7C22 6.4 21.6 6 21 6H12L10.4 3.60001C10.2 3.20001 9.7 3 9.2 3Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </span>
-                        <span class="menu-title">Documents</span>
-                    </a>
-                    <!--end:Menu link-->
-                </div>
-                @endhasrole
+
                 @hasrole('admin|issuer')
                 <div class="menu-item">
                     <!--begin:Menu link-->
@@ -327,6 +277,7 @@
                     <!--end:Menu link-->
                 </div>
                 @endhasrole
+                @hasrole('admin')
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ route('error.logs') }}" target="_blank">
@@ -349,8 +300,8 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-
-
+                @endhasrole
+                @hasrole('admin')
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ route('user.email.log') }}"  >
@@ -373,7 +324,8 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-
+                @endhasrole
+                @hasrole('admin|issuer')
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ route('offers.qa.session') }}"  >
@@ -395,6 +347,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
+                @endhasrole
 
 
 

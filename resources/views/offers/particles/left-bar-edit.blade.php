@@ -22,9 +22,13 @@
                     <div class="col-lg-12 ">
                         <select name="issuer"  id="issuer_account" class="form-select form-select-lg" required >
                             <option value="" selected disabled > Select Issuer Account </option>
+                                @if(Auth::user()->hasRole('issuer'))
+                                    <option  selected   value="{{ Auth::user()->id }}"> {{ Auth::user()->name }} </option>
+                                @else
                                 @foreach($issuers as $issuer)
                                      <option @if($issuer->id == $offer->issuer_id) selected @else @endif value="{{ $issuer->id }}"> {{ $issuer->name }} </option>
                                 @endforeach
+                                @endif
                         </select>
                     </div>
                     <div class="col-lg-12">

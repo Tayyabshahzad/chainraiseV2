@@ -32,7 +32,7 @@ use App\Models\InvestmentRestrication;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Interfaces\OfferRepositoryInterface;
 use App\Repositories\Interfaces\RegCFRepositoryInterface;
-
+use Auth;
 class OfferController extends Controller
 {
     private $baseUrl;
@@ -50,9 +50,13 @@ class OfferController extends Controller
     }
     public function active_index()
     {
-
         $issuers = User::role('issuer')->get();
-        $offers = Offer::orderBy('id', 'desc')->get();
+        
+        $offers = Offer::orderBy('id', 'desc');
+        if(Auth::user()->hasRole('issuer')) {
+            $offers->where('issuer_id', Auth::user()->id);
+        }
+        $offers = $offers->get();
         return view('offers.active_index', compact('issuers', 'offers'));
     }
 
@@ -1051,28 +1055,34 @@ class OfferController extends Controller
 
 
     public function qaSession() {
+        
+
         $questions = OfferQuestion::with('offer')->get();
-
         $groupedQuestions = [];
-
+        
+        if (Auth::user()->hasRole('issuer')) {
+            $questions = $questions->where('investor_id', Auth::user()->id);
+        }
+        
         foreach ($questions as $question) {
             $offerId = $question->offer->id;
-
+        
             if (!isset($groupedQuestions[$offerId])) {
                 $groupedQuestions[$offerId] = [
                     'offer' => $question->offer->name,
                     'questions' => []
                 ];
             }
-
+        
             $groupedQuestions[$offerId]['questions'][] = $question;
         }
+        
 
 
         return view('offers.qasession', compact('groupedQuestions'));
     }
     public function viewQuestion($offerId) {
-        $questions = OfferQuestion::where('offer_id',$offerId)->where('status','inactive')->get();
+        $questions = OfferQuestion::where('offer_id',$offerId)->orderBy('id','desc')->get();
         return view('offers.view_questions', compact('questions'));
     }
 
@@ -1091,6 +1101,29 @@ class OfferController extends Controller
 
         return redirect()->back()->with('success', 'Questions updated successfully');
     }
+
+
+    public function deleteQuestion(Request $request) {
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        try {
+            $question = OfferQuestion::findOrFail($request->id);
+            if ($question->delete()) {
+                return response([
+                    'status' => true,
+                    'message' => 'Question has been deleted successfully'
+                ]);
+            }
+        } catch (Exception $error) {
+            return response([
+                'status' => false,
+                'message' => 'Error while deleting question'
+            ]);
+        }
+    }
+
 
 
 

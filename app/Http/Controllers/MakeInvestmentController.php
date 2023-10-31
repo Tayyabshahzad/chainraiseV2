@@ -311,10 +311,6 @@ class MakeInvestmentController extends Controller
             'offer_id' => 'required',
             'payment_type' => 'required|in:wire,ach',
             'user_guid' => 'required_if:payment_type,ach',
-            //'account_type'=>'required',
-            //'investment_limit'=>'required',
-            //'bypass_account_setup'=>'required',
-            //'templates' => 'required',
             'investment_amount' => 'required',
         ]);
         $offer = Offer::with('user')->findOrFail($request->offer_id);
@@ -328,6 +324,58 @@ class MakeInvestmentController extends Controller
             $past12MonthsInvestment = false;
         }
         $token = env('ESIGN_TOKEN');
+        $identityId = Auth::user()->fortress_personal_identity;
+        $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
+        //dd($request->offer_id,$custodial_account);
+        if (!$custodial_account) {
+            return redirect()->back()->with('error', 'Custodial Account Id Not Found for Selected Offer [Step 1]');
+        }
+
+        if ($request->payment_type == 'ach') {
+            $member_id = explode(',', $request->user_guid);
+            $filteredArray = array_filter($member_id, function ($value) {
+                return $value !== '';
+            });
+            $member_id = '';
+            foreach ($filteredArray as $value) {
+                $member_id = $value;
+            }
+        }
+
+        try {
+            $get_token = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->authUrl['url'], [
+                'grant_type' => $this->authUrl['grant_type'],
+                'username'   => $this->authUrl['username'],
+                'password'   => $this->authUrl['password'],
+                'audience'   => $this->authUrl['audience'],
+                'client_id'  => $this->authUrl['client_id'],
+            ]);
+            $token_json =  json_decode((string) $get_token->getBody(), true);
+            // dd($token_json['access_token']);
+        } catch (Exception $error) {
+            return redirect()->back()->with('error', 'Internal Server Error For Token -' . $error);
+        }
+
+
+        if ($request->payment_type == 'ach') {
+            try {
+                $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
+                $member_identity = Http::withToken($token_json['access_token'])->post(
+                    $member_identity_url,
+                    [
+                        'identityId' => $identityId, //Identity object pertaining to the end user
+                        'memberGuid' => $member_id, //member_guid returned from successful bank linking in
+                    ]
+                );
+                $member_identity =  json_decode((string) $member_identity->getBody(), true);
+            } catch (Exception $error) {
+                return redirect()->back()->with('error', 'Internal Server Error financial-institutions -' . $error);
+            }
+        }
+
+
         try {
             $e_sign = Http::get('https://esignatures.io/api/templates/' . $template_id . '?token=' . $token);
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
@@ -439,73 +487,6 @@ class MakeInvestmentController extends Controller
         } catch (Exception $esign_request_error) {
 
             return redirect()->back()->with("error", "Error While Requesting E-Sign Documents");
-        }
-
-
-
-        //  dd($json_esign_request['data']['contract']['status']);
-
-        // if($request->investment_limit == 'yes'){
-        //     $request->validate([
-        //         'total_amount_invested_crowdfunding_offerings' => 'required',
-        //     ]);
-        // }elseif($request->investment_limit == 'no'){
-        //     $request->validate([
-        //         'net_worth_greater_than_60000' => 'required',
-        //         'new_investment_amount' => 'required',
-        //     ]);
-        // }
-
-        $custodial_account = Custodial::where('offer_id', $request->offer_id)->first();
-        //dd($request->offer_id,$custodial_account);
-
-        if (!$custodial_account) {
-            return redirect()->back()->with('error', 'Custodial Account Id Not Found for Selected Offer [Step 1]');
-        }
-
-
-        if ($request->payment_type == 'ach') {
-            $member_id = explode(',', $request->user_guid);
-            $filteredArray = array_filter($member_id, function ($value) {
-                return $value !== '';
-            });
-            $member_id = '';
-            foreach ($filteredArray as $value) {
-                $member_id = $value;
-            }
-        }
-        $identityId = Auth::user()->fortress_personal_identity;
-
-        try {
-            $get_token = Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($this->authUrl['url'], [
-                'grant_type' => $this->authUrl['grant_type'],
-                'username'   => $this->authUrl['username'],
-                'password'   => $this->authUrl['password'],
-                'audience'   => $this->authUrl['audience'],
-                'client_id'  => $this->authUrl['client_id'],
-            ]);
-            $token_json =  json_decode((string) $get_token->getBody(), true);
-            // dd($token_json['access_token']);
-        } catch (Exception $error) {
-            return redirect()->back()->with('error', 'Internal Server Error For Token -' . $error);
-        }
-
-        if ($request->payment_type == 'ach') {
-            try {
-                $member_identity_url = $this->baseUrl . "/api/trust/v1/financial-institutions/members";
-                $member_identity = Http::withToken($token_json['access_token'])->post(
-                    $member_identity_url,
-                    [
-                        'identityId' => $identityId, //Identity object pertaining to the end user
-                        'memberGuid' => $member_id, //member_guid returned from successful bank linking in
-                    ]
-                );
-                $member_identity =  json_decode((string) $member_identity->getBody(), true);
-            } catch (Exception $error) {
-                return redirect()->back()->with('error', 'Internal Server Error financial-institutions -' . $error);
-            }
         }
 
 

@@ -298,9 +298,10 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('policy', ['as' => 'policy','uses' => 'OfferController@policy']);
     Route::post('policy/create', ['as' => 'policy.create','uses' => 'OfferController@policyCreate']);
     Route::post('policy/delete', ['as' => 'policy.delete','uses' => 'OfferController@policyDelete']);
-    Route::get('qa/session', ['as' => 'qa.session','uses' => 'OfferController@qaSession']);
+    Route::get('qa', ['as' => 'qa.session','uses' => 'OfferController@qaSession']);
     Route::get('view/question/{offerId}', ['as' => 'view.question','uses' => 'OfferController@viewQuestion']);
     Route::post('question/update', ['as' => 'update.question','uses' => 'OfferController@updateQuestion']);
+    Route::get('question/delete', ['as' => 'delete.question','uses' => 'OfferController@deleteQuestion']);
 });
 
 Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Organizations'], function () {
@@ -318,7 +319,7 @@ Route::group(['as'=> 'folder.','prefix'=>'folder','middleware' => ['auth','verif
 });
 
 Route::group(['as'=> 'transaction.','prefix'=>'transaction','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Transaction'], function () {
-    Route::get('transaction', ['as' => 'index','uses' => 'TransactionController@index']);
+    Route::get('/', ['as' => 'index','uses' => 'TransactionController@index']);
     Route::get('transaction/delete', ['as' => 'delete','uses' => 'TransactionController@delete']);
 });
 

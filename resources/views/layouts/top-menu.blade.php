@@ -16,12 +16,13 @@
                     <span class="menu-arrow d-lg-none"></span>
                 </span>
             </a>
-            <a href="{{route('user.account')}}" target="_blank">
-                <span class="menu-link">
-                    <span class="menu-title">My Account</span>
-                    <span class="menu-arrow d-lg-none"></span>
-                </span>
-            </a>
+
+                <a href="{{route('user.details',11)}}" target="_blank">
+                    <span class="menu-link">
+                        <span class="menu-title">My Accountd</span>
+                        <span class="menu-arrow d-lg-none"></span>
+                    </span>
+                </a>
 
             <a href="{{route('user.account')}}" target="_blank">
                 <span class="menu-link">
@@ -38,44 +39,49 @@
             </a>
         </div>
         @endhasrole
-        
-        
+
+
         @hasrole('admin|issuer')
         <div  class="menu-item menu-lg-down-accordion me-0 me-lg-2">
         <span class="menu-link">
             <span class="menu-title">
-             <a href="{{ route('offers.active.index') }}"> Offerings </a>   
+             <a href="{{ route('offers.active.index') }}"> Offerings </a>
             </span>
             <span class="menu-arrow d-lg-none"></span>
         </span>
          </div>
 
+
+
         <div  class="menu-item menu-lg-down-accordion me-0 me-lg-2">
          <span class="menu-link">
              <span class="menu-title">
-              <a href="{{route('user.account')}}"> My Account </a>  
+                @hasrole('issuer')
+                    <a href="{{route('user.details',Auth::user()->id)}}"> My Account </a>
+                @endhasrole
+
             </span>
              <span class="menu-arrow d-lg-none"></span>
          </span>
         </div>
 
-        <div 
+        <div
         class="menu-item menu-lg-down-accordion me-0 me-lg-2">
         <span class="menu-link">
             <span class="menu-title">
-               
-                <a href="{{route('user.account')}}">  My Documents </a>  
+
+                <a href="{{route('user.account')}}">  My Documents </a>
             </span>
             <span class="menu-arrow d-lg-none"></span>
         </span>
        </div>
 
          @endhasrole
-        
 
-       
 
-       
+
+
+
 
     </div>
     <!--end::Menu-->

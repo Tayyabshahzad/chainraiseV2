@@ -54,116 +54,69 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
-            <div class="card mb-5 mb-xl-8">
-                <!--begin::Header-->
-                <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Questions</span>
-                    </h3>
-
-
-                    <div class="card-toolbar ">
-
-
+            <form action="{{ route('offers.update.question') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="card mb-5 mb-xl-8">
+                    <div class="card-body py-3">
+                        <div class="text-right" >
+                            <button type="submit"  class="btn btn-sm btn-info  no-radius"> Update </button>
+                        </div>
                     </div>
                 </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body py-3">
-                    <div class="flex-lg-row-fluid">
-                        <div class="card">
-                            <div class="card-body p-0">
-                                <!--begin::Table-->
-                                <div id="kt_inbox_listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-
-                                     <form action="{{ route('offers.update.question') }}" method="post" enctype="multipart/form-data">
-                                        <button type="submit"  class="btn btn-sm btn-info mb-10"> Update </button>
-                                        @csrf
-                                        @foreach ($questions as $question )
-                                            <input type="hidden" class="form-control" name="question_id[]" id="" value="{{$question->id }}" >
-                                            <div class="mb-10">
-                                                <div class="col-lg-12 form-group mb-5">
-                                                    <strong>Question</strong>
-                                                    <input type="text" class="form-control" name="question[]" id="" value="{{$question->question }}" >
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-5">
-                                                    <strong>Answer</strong>
-                                                    <input type="text" class="form-control" name="answer[]" value="{{$question->answer }}" id="">
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-5">
+                @foreach ($questions as $question )
+                <div class="card mb-5 mb-xl-8">
+                    <div class="card-header border-0 pt-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold fs-3 mb-1">Questions - {{ $loop->iteration }}</span>
+                        </h3>
+                    </div>
+                    <div class="card-body py-3">
+                        <div class="flex-lg-row-fluid">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <!--begin::Table-->
+                                    <div id="kt_inbox_listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                        <input type="hidden" class="form-control" name="question_id[]" id="" value="{{$question->id }}" >
+                                        <div class="mb-10" >
+                                            <div class="col-lg-12 form-group mb-5">
+                                                <strong>Question</strong>
+                                                <input type="text" class="form-control" name="question[]" id="" value="{{$question->question }}" >
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-5">
+                                                <strong>Answer</strong>
+                                                <input type="text" class="form-control" name="answer[]" value="{{$question->answer }}" id="">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 form-group mb-5">
                                                     <strong>Status</strong>
                                                     <select name="status[]" class="form-control" id="">
                                                         <option value="active" @if($question->status =='active') selected @endif> Active </option>
                                                         <option value="inactive" @if($question->status =='inactive') selected @endif> Inactive </option>
                                                     </select>
-
-
+                                                </div>
+                                                <div class="col-lg-6  mb-5 text-right">
+                                                    <strong><br></strong>
+                                                    <button type="button" class="btn btn-sm btn-danger no-radius deleteQuestion" data-question_id="{{ $question->id }}"> <i class="fa fa-trash"></i> </button>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                     </form>
+                                        </div>
+                                    </div>
+                                    <!--end::Table-->
                                 </div>
-                                <!--end::Table-->
                             </div>
                         </div>
-                        <!--end::Card-->
                     </div>
-                    <!--begin::Table container-->
-
-                    <!--end::Table container-->
                 </div>
-                <!--begin::Body-->
-            </div>
+                @endforeach
+            </form>
+
+
+
         </div>
         <!--end::Content container-->
     </div>
 </div>
 
-<div class="modal fade" id="modal-policy-create" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content rounded">
-            <form action="{{ route('offers.policy.create')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body scroll-y px-10 px-lg-15 pt-10 pb-15">
-                        <h3>
-                            Policy
-                        </h3>
-                        <div class="row mt-3">
-                            <div class="col-lg-12 form-group">
-                                <textarea type="text"  class="form-control" name="content" placeholder="Policy Content" required></textarea>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-12 form-group">
-                                <button class="btn btn-sm btn-dark no-radius" type="submit"  > Add Policy </button>
-                            </div>
-                        </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="policy_edit" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content rounded">
-            <!--begin::Modal header-->
-            <div class="modal-header pb-0 border-0 justify-content-end">   </div>
-            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                    <div class="row mt-3">
-                        <div class="col-lg-12 form-group">
-                            <input type="text"  class="form-control video_url" placeholder="Enter Feature Video URL">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-lg-12 form-group">
-                            <button class="btn btn-sm btn-dark add_feature_video_btn" type="button" data-bs-dismiss="modal" > Add Feature Video </button>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -183,15 +136,15 @@
             $('#sendEmailBtn').html('Send Email');
 
         });
-        $('.deleteUser').click(function() {
-            var id = $(this).data('id');
+        $('.deleteQuestion').click(function() {
+            var id = $(this).data('question_id');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             Swal.fire({
-                title: "Are you sure to delete this policy?",
+                title: "Are you sure to delete this question?",
                 text: "This action can't undo are you sure to delete?",
                 icon: "warning",
                 showCancelButton: true,
@@ -199,8 +152,8 @@
             }).then(function(result) {
                 if (result.value) {
                     $.ajax({
-                        url: "{{ route('offers.policy.delete')}}",
-                        method: "POST",
+                        url: "{{ route('offers.delete.question')}}",
+                        method: "GET",
                         data: {
                             id: id,
                         },

@@ -52,12 +52,12 @@
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->
-            @hasrole('admin|issuer')
+            @hasrole('admin')
                 <div id="kt_app_content_container" class="app-container container-fluid">
                     <!--begin::Row-->
                     <div class="row ">
                         <!--begin::Col-->
-                         
+
                             <!--begin::Card widget 20-->
                             <div class="col-lg-4 card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-50 mb-5 mb-xl-10"  >
                                 <!--begin::Header-->
@@ -71,8 +71,8 @@
                                         <hr>
                                         <span class="text-white opacity-75 pt-1 fw-bold fs-6 text-dark"> ACTIVE ACCOUNTS </span>
                                         <!--end::Subtitle-->
-                                    </div> 
-                                </div> 
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-lg-4 card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-50 mb-5 mb-xl-10"  >
@@ -87,8 +87,8 @@
                                         <hr>
                                         <span class="text-white opacity-75 pt-1 fw-bold fs-6 "> NUMBER OF INVESTOR </span>
                                         <!--end::Subtitle-->
-                                    </div> 
-                                </div> 
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-4 card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-50 mb-5 mb-xl-10"  >
                                 <!--begin::Header-->
@@ -102,94 +102,180 @@
                                         <hr>
                                         <span class="text-white opacity-75 pt-1 fw-bold fs-6 text-dark"> TOTAL AMOUNT RAISED  </span>
                                         <!--end::Subtitle-->
-                                    </div> 
-                                </div> 
-                            </div>
-
-    
-                    </div>
-                     
-                     
-                     
-                </div>
-            @endhasrole
-            @hasrole('investor')
-                    <div class="container">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    
-                  
-                    
-                   
-
-                    
-                        @foreach($offers as $offer)
-                            <div class="row mb-15">
-                                <div class="col-lg-12 offering_row" >
-                                        <div class="row">
-                                            @if($offer->getFirstMediaUrl('banner_image', 'thumb') != null )
-                                                @php
-                                                    $banner  = $offer->getFirstMediaUrl('banner_image', 'thumb')
-                                                @endphp 
-                                            @else
-                                                @php
-                                                      $banner  = 'https://i.stack.imgur.com/FueqW.jpg'
-                                                @endphp
-                                            @endif 
-                                            <div class="col-lg-8" style="border-radius:3px;min-height:170px;max-height:170px;background-position: 100%; 
-                                            background-image: url('{{ $banner }}')">
-                                            </div>
-                                            <div class="col-lg-4" style="background-color:#fff;min-height:150px;max-height:150px;">
-                                                <div class="card-header pt-2">
-                                                    <div class="d-flex align-items-center">
-                                                        <!--begin::Icon-->
-                                                        <div class="symbol symbol-circle me-5">
-                                                            
-                                                        </div>
-                                                        <!--end::Icon-->
-                                                        <!--begin::Title-->
-                                                        <div class="d-flex flex-column">
-                                                            <h2 class="mb-1">  {{ $offer->name }} </h2>
-                                                            <div class="fw-normal ">
-                                                                <a href="#" class="text-dark">
-                                                                    {{ $offer->short_description }}
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="text-dark fw-bold mt-3">
-                                                                <span class="text-success"> {{ $offer->base_currency }} {{ $offer->size }} </span> {{ $offer->size_label }}
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-12 text-center">
-                                                                    <a href="{{ route('invest.detail',$offer->id) }}" class="btn btn-sm btn-dark mt-4 no-radius" style="width:100%"> Learn More </a>
-                                                                </div> 
-                                                            </div> 
-                                                        </div>
-                                                        
-                                                        <!--end::Title-->
-                                                    </div>
-                                                </div>
-                                                <div class="card-body pb-0">
-                                                    <!--begin::Navs-->
-                                                    <div class="d-flex overflow-auto h-55px">
-                                                        
-                                                    </div>
-                                                    <!--begin::Navs-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
+
+
                     </div>
+
+
+
+                </div>
+            @endhasrole
+            @hasrole('issuer')
+            <div id="kt_app_content_container" class="app-container container-fluid">
+
+
+										<!--begin::Col-->
+										<div class="col-xxl-12">
+											<!--begin::Security summary-->
+											<div class="card card-xxl-stretch mb-5 mb-xl-10">
+												<!--begin::Header-->
+												<div class="card-header card-header-stretch">
+													<!--begin::Title-->
+													<div class="card-title">
+														<h3 class="m-0 text-gray-900"> Summary</h3>
+													</div>
+													<!--end::Title-->
+													<!--begin::Toolbar-->
+													<div class="card-toolbar">
+														<ul class="nav nav-tabs nav-line-tabs nav-stretch border-transparent fs-5 fw-bold" id="kt_security_summary_tabs" role="tablist">
+															<li class="nav-item" role="presentation">
+																<a class="nav-link text-active-primary active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_security_summary_tab_pane_hours" data-kt-initialized="1" aria-selected="false" role="tab" tabindex="-1">Investment</a>
+															</li>
+															<li class="nav-item" role="presentation">
+																<a class="nav-link text-active-primary" data-kt-countup-tabs="true" data-bs-toggle="tab" id="kt_security_summary_tab_day" href="#kt_security_summary_tab_pane_day" data-kt-initialized="1" aria-selected="false" role="tab" tabindex="-1">Transaction  History</a>
+															</li>
+														</ul>
+													</div>
+													<!--end::Toolbar-->
+												</div>
+												<!--end::Header-->
+												<!--begin::Body-->
+												<div class="card-body pt-7 pb-0 px-0">
+													<!--begin::Tab content-->
+													<div class="tab-content">
+														<!--begin::Tab panel-->
+														<div class="tab-pane fade active show" id="kt_security_summary_tab_pane_hours" role="tabpanel">
+															<!--begin::Row-->
+															<div class="row p-0 mb-5 px-9">
+																<!--begin::Col-->
+																<div class="col">
+																	<div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-4 pb-2 my-3">
+																		<span class="fs-4 fw-semibold text-success d-block">Total Invested</span>
+																		<span class="fs-2hx fw-bold text-gray-900 counted" data-kt-countup="true" data-kt-countup-value="36899" data-kt-initialized="1">
+																			{{ number_format($totalInvested, 2) }}
+																		</span>
+																	</div>
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col">
+																	<div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-4 pb-2 my-3">
+																		<span class="fs-4 fw-semibold text-primary d-block">Date of Last Activity</span>
+																		<span class="fs-2hx fw-bold text-gray-900 counted" data-kt-countup="true" data-kt-countup-value="72" data-kt-initialized="1">
+                                                                            {{ $lastInsertedDate }}
+                                                                        </span>
+																	</div>
+																</div>
+																<!--end::Col-->
+																<!--begin::Col-->
+																<div class="col">
+																	<div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-4 pb-2 my-3">
+																		<span class="fs-4 fw-semibold text-danger d-block">Deals Funded</span>
+																		<span class="fs-2hx fw-bold text-gray-900 counted" data-kt-countup="true" data-kt-countup-value="291" data-kt-initialized="1">
+                                                                            {{ $transactions->count() }}
+                                                                        </span>
+																	</div>
+																</div>
+
+
+                                                                <div class="col">
+																	<div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-4 pb-2 my-3">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+
+                                                                                    <th scope="col" style="min-width: 120px;"> From </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> To </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Amount </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Date </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> KYC </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Status </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Type </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Payment Method</th>
+                                                                                    <th scope="col" style="min-width: 120px;"> E-Sign </th>
+                                                                                    <th scope="col" style="min-width: 120px;"> Action </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="table-group-divider">
+
+                                                                                @foreach ($transactions as $transaction)
+                                                                                    <tr>
+                                                                                        <td> {{ $transaction->user->name }} </td>
+                                                                                        <td> {{ $transaction->offer->name }} </td>
+                                                                                        <td> {{ $transaction->funds }} </td>
+                                                                                        <td> {{ $transaction->created_at }} </td>
+                                                                                        <td> {{ $transaction->kyc_status }} </td>
+                                                                                        <td> {{ $transaction->status }} </td>
+                                                                                        <td> {{ $transaction->type }} </td>
+                                                                                        <td> {{ $transaction->payment_method }} </td>
+                                                                                        <td> {{ $transaction->e_sign }} </td>
+                                                                                        <td> <button data-bs-toggle="modal" data-bs-target="#delete_transaction"
+                                                                                                class="btn btn-danger delete_payment" data-id="{{ $transaction->id }}"> <i class="fa fa-trash"></i> </button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+																	</div>
+																</div>
+
+
+																<!--end::Col-->
+															</div>
+
+
+
+														</div>
+														<!--end::Tab panel-->
+														<!--begin::Tab panel-->
+														<div class="tab-pane fade" id="kt_security_summary_tab_pane_day" role="tabpanel" aria-labelledby="#kt_security_summary_tab_day">
+															<!--begin::Row-->
+															<div class="row p-0 mb-5 px-9">
+																<!--begin::Col-->
+																<div class="col">
+																	<div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-4 pb-2 my-3">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col" style="min-width: 120px;">Investment</th>
+                                                                                    <th scope="col" style="min-width: 120px;">Transaction Amount</th>
+                                                                                    <th scope="col" style="min-width: 120px;">Status</th>
+                                                                                    <th scope="col" style="min-width: 170px;">Transaction Date</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="table-group-divider">
+                                                                                @foreach ($transactions as $transaction)
+                                                                                    <tr>
+                                                                                        <th scope=" row"><span class="px-2 me-2"   style="background-color: #43C3FE;"></span> {{ $transaction->offer->name }} </th>
+                                                                                        <td>${{ number_format($transaction->funds)  }}</td>
+                                                                                        <td> {{ $transaction->status }}</td>
+                                                                                        <td> {{ $transaction->created_at }} </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+
+														<!--end::Tab panel-->
+													</div>
+													<!--end::Tab content-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Security summary-->
+										</div>
+
+
+
+
+            </div>
             @endhasrole
             <!--end::Content container-->
 
@@ -198,32 +284,32 @@
     </div>
 
 
-   
+
 
 @endsection
 @section('page_js')
 
 
     @if(Session::has('success'))
-        @php 
+        @php
             $message = (session::get('success'));
-        @endphp 
-        <script> 
+        @endphp
+        <script>
             toastr.success('{{$message}}', "Success");
         </script>
-      
+
     @endif
 
 
     @if(Session::has('error'))
-        @php 
+        @php
             $message = (session::get('error'));
-        @endphp 
-        <script> 
+        @endphp
+        <script>
             toastr.error('{{$message}}', "Error");
         </script>
-        
+
     @endif
 
-   
+
 @endsection

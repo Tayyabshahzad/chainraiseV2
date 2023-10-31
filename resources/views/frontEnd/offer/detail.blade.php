@@ -156,29 +156,36 @@
             <div class="col-lg-6 col-12 text-center">
 
                 @if ($offer->socialMedia)
-                    <a target="_blank" href="https://www.linkedin.com/{{ $offer->socialMedia->linkedIn }}">
-                        <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
-                    </a>
-
+                    @if($offer->socialMedia->linkedIn != null)
+                        <a target="_blank" href="https://www.linkedin.com/{{ $offer->socialMedia->linkedIn }}">
+                            <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
+                        </a>
+                    @endif
+                    @if($offer->socialMedia->telegram != null)
                     <a target="_blank" href="https://www.telegram.com/{{ $offer->socialMedia->telegram }}">
                         <i class="bi bi-send me-lg-4 me-2 icon"></i>
                     </a>
-
+                    @endif
+                    @if($offer->socialMedia->instagram != null)
                     <a target="_blank" href="https://www.instagram.com/{{ $offer->socialMedia->instagram }}">
                         <i class="bi bi-instagram me-lg-4 me-2  icon"></i>
                     </a>
-
+                    @endif
+                    @if($offer->socialMedia->twitter != null)
                     <a target="_blank" href="https://www.twitter.com/{{ $offer->socialMedia->twitter }}">
                         <i class="bi bi-twitter me-lg-4 me-2 icon"></i>
                     </a>
-
+                    @endif
+                    @if($offer->socialMedia->youtube != null)
                     <a target="_blank" href="https://www.youtube.com/{{ $offer->socialMedia->youtube }}">
                         <i class="bi bi-youtube me-lg-4 me-2 icon"></i>
                     </a>
-
+                    @endif
+                    @if($offer->socialMedia->facebook != null)
                     <a target="_blank" href="https://www.facebook.com/{{ $offer->socialMedia->facebook }}">
                         <i class="bi bi-facebook me-lg-4 me-2 icon"></i>
                     </a>
+                    @endif
                 @endif
             </div>
         </div>
@@ -352,13 +359,19 @@
                 </div>
             </div>
             <div class="tab-pane fade p-2" id="questions_answers" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <h3 class="fw-bolder col-lg-12 col-md-6">Q&A</h3>
 
-                @if(Auth::user())
-                    <button class="btn btn-sm btn-info" type="button" data-bs-toggle="modal"
-                        data-bs-target="#PostQuestion" class="btn btn-outline-light rounded-circle"
-                        style=" border-radius:no-radius;"> Post A Question</button>
-                @endif
+                <div class="row">
+                    <div class="col-lg-6"> <h3 class="fw-bolder ">Q&A</h3> </div>
+                    <div class="col-lg-6 text-right" style="text-align: right">
+                        @if(Auth::user())
+                        <button class="btn btn-sm btn-info" type="button" data-bs-toggle="modal"
+                            data-bs-target="#PostQuestion" class="btn btn-outline-light rounded-circle"
+                            style=" border-radius:0;color:#fff"> Post A Question
+                        </button>
+                        @endif
+                    </div>
+                </div>
+
                 <hr>
 
                 @foreach ($offer->activeQuestions as $question)
@@ -401,22 +414,22 @@
         <div class="modal fade" id="PostQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content no-radius" style="border-radius: 0">
                 <form action="{{  route('post.offer.question') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="offer_id" value="{{ $offer->id }}">
                     <input type="hidden" name="investor_id" value="{{ Auth::user()->id }}">
                 <div class="modal-header">
                     <h5 class="modal-title">Post Your Question</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" style="border:none;background:#9e1338;color:#fff" class="close btn-sm btn-info closeQuestionPopup " data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body no-radius">
                     <textarea name="question" id="" class="form-control" cols="20" rows="5" required placeholder="Please Enter Your Question"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+                    <button type="submit" class="btn btn-primary btn-sm no-radius" style="border-radius: 0">Save changes</button>
                 </div>
                 </form>
                 </div>
@@ -508,6 +521,10 @@
 
         $readMoreContent.slideToggle();
         $readMoreLink.hide(); // Hide the "Read More" link
+    });
+
+    $('.closeQuestionPopup').on('click', function (e) {
+        $('#PostQuestion').modal('hide')
     });
 });
     </script>
