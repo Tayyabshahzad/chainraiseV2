@@ -148,9 +148,9 @@ class OfferController extends Controller
             //'min_invesment'=>'required',
             //'max_invesment'=>'required'
             //'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:1024', // Example rules
-            'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:1024', // Example rules
-            'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:1024', // Example rules
-            'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:1024', // Example rules
+            'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:3072', // Example rules
+            'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:3072', // Example rules
+            'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:3072', // Example rules
         ]);
 
         $token = env('ESIGN_TOKEN');
@@ -527,9 +527,9 @@ class OfferController extends Controller
             'investment_restrication_id' => 'required',
             'min_invesment' => 'required',
             'max_invesment' => 'required',
-            'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:1024', // Example rules
-            'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:1024', // Example rules
-            'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:1024', // Example rules
+            'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:3072', // Example rules
+            'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:3072', // Example rules
+            'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:3072', // Example rules
         ]);
 
         $offer = Offer::find($request->offer_id);
