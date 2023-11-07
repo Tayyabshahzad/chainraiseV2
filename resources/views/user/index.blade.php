@@ -352,22 +352,22 @@
                                                                     @if ($users->currentPage() > 1)
                                                                         <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Previous</a></li>
                                                                     @endif
-                                                    
+
                                                                     @for ($i = 1; $i <= $users->lastPage(); $i++)
                                                                         <li class="page-item {{ ($i == $users->currentPage()) ? 'active' : '' }}">
                                                                             <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
                                                                         </li>
                                                                     @endfor
-                                                    
+
                                                                     @if ($users->hasMorePages())
                                                                         <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}">Next</a></li>
                                                                     @endif
                                                                 </ul>
                                                             </nav>
-                                                            
+
                                                         </td>
                                                     </tr>
-                                                    
+
 
 
                                                 </tbody>
