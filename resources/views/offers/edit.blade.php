@@ -715,8 +715,8 @@
                                                                             width="200" height="200">
 
                                                                         <hr />
-                                                                        <button type="button"
-                                                                            class="btn btn-sm btn-danger">
+                                                                        <button type="button" data-id="{{ $slider_image->id  }}"
+                                                                            class="btn btn-sm btn-danger removeSliderImage">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </div>
@@ -1454,6 +1454,44 @@
                 }
             });
         });
+
+        $('.removeSliderImage').click(function() {
+            var id = $(this).data('id');
+            var $button = $(this);
+            Swal.fire({
+                title: "Are you sure to delete this Image?",
+                text: "This action can't undo are you sure to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes Delete"
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "{{ route('offers.slider.image.delete') }}",
+                        method: "GET",
+                        data: {
+                            id: id,
+                        },
+                        success: function(result) {
+                            if (result.status == true) {
+                                toastr.success(result.message, "Success");
+                                $button.closest('.col-lg-4').remove();
+                                //location.reload();
+                            } else {
+                                toastr.error(result.message, "Error");
+                            }
+                        }
+                    });
+
+
+
+
+                }
+            });
+        });
+
+
+
 
 
 

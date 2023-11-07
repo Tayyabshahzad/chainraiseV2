@@ -302,6 +302,7 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('view/question/{offerId}', ['as' => 'view.question','uses' => 'OfferController@viewQuestion']);
     Route::post('question/update', ['as' => 'update.question','uses' => 'OfferController@updateQuestion']);
     Route::get('question/delete', ['as' => 'delete.question','uses' => 'OfferController@deleteQuestion']);
+    Route::get('/media/delete', ['as' => 'slider.image.delete','uses' => 'OfferController@deleteMedia']);
 });
 
 Route::group(['as'=> 'organizations.','prefix' => 'organizations','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Organizations'], function () {

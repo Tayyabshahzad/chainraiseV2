@@ -18,7 +18,7 @@ use App\Models\OfferContact;
 use App\Models\RegCF;
 use Illuminate\Http\Request;
 use App\Models\InvestmentStep;
-use App\Models\Media;
+// use App\Models\Media;
 use App\Models\OfferFAQ;
 use App\Models\OfferQuestion;
 use App\Models\SocialMediaLinks;
@@ -32,6 +32,7 @@ use App\Models\InvestmentRestrication;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Interfaces\OfferRepositoryInterface;
 use App\Repositories\Interfaces\RegCFRepositoryInterface;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Auth;
 class OfferController extends Controller
 {
@@ -1120,6 +1121,30 @@ class OfferController extends Controller
             return response([
                 'status' => false,
                 'message' => 'Error while deleting question'
+            ]);
+        }
+    }
+
+
+
+
+
+    public function deleteMedia(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+        ]);
+        try {
+            $doc = DB::table('media')->where('id', $request->id)->delete();
+
+            return response([
+                'status' => true,
+                'message' => 'Slider Image been deleted successfully'
+            ]);
+        } catch (Exception $error) {
+            return response([
+                'status' => false,
+                'message' => 'Error while deleting Image'
             ]);
         }
     }

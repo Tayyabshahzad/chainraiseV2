@@ -35,7 +35,14 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        $query = User::query();
+        if ($this->request->has('role')) {
+            $query->whereHas('roles', function ($query) {
+                $query->where('name', $this->request->input('role'));
+            });
+        }
+        return $this->applyScopes($query);
+
     }
 
     /**

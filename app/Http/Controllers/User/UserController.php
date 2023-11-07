@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
-
+use App\DataTables\UsersDataTable;
 class UserController extends Controller
 {
     public function custom_login($email,$password)
@@ -84,18 +84,12 @@ class UserController extends Controller
 
 
     }
-    public function index(Request $request)
+    public function index(Request $request, UsersDataTable $dataTable)
     {
 
-
-          $offers = Offer::get();
-          $users = User::with('userDetail')->where('is_primary','yes')->orderby('id','DESC')->
-                  whereHas('roles',function($query){
-                        $query->where('name', '!=', 'admin');
-                  })->paginate(10);
-          $issuers = User::role('issuer')->orderby('id','DESC')->get();
-        return view('user.index',compact('users','offers','issuers'));
+        return $dataTable->render('user.index');
     }
+
 
     public function UpdateStatus(Request $request)
     {
