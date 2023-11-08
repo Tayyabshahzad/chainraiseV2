@@ -92,6 +92,7 @@
                             <option value="common stock"> Common Stock </option>
                             <option value="safe"> Safe </option>
                             <option value="crowdfund safe"> Crowdfund Safe </option>
+                            <option value="revenue share"> Revenue Share </option>
                         </select>
                     </div>
                     <div class="col-lg-12 d-none">
