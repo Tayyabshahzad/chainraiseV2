@@ -84,11 +84,51 @@ class UserController extends Controller
 
 
     }
-    public function index(Request $request, UsersDataTable $dataTable)
-    {
 
-        return $dataTable->render('user.index');
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+        $role = $request->input('role');
+
+        $query = User::with('userDetail')
+            ->where('is_primary', 'yes')
+            ->whereHas('roles', function ($query) {
+                $query->where('name', '!=', 'admin');
+            });
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('user_type', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        if (!empty($role) && $role !='all' ) {
+            $query->whereHas('roles', function ($q) use ($role) {
+                $q->where('name', $role);
+            });
+        }
+
+        $users = $query->orderBy('id', 'DESC')->paginate(20);
+        $offers = Offer::get();
+        $issuers = User::role('issuer')->orderBy('id', 'DESC')->paginate(20);
+
+        return view('user.index', compact('users', 'offers', 'issuers', 'search', 'role'));
     }
+
+
+
+    // public function index(Request $request, UsersDataTable $dataTable)
+    // {
+
+    //     if ($request->ajax()) {
+    //         $data = User::query();
+    //         //dd(1);
+    //         return Datatables::of($data)
+    //             ->make(true);
+    //     }
+    //   //
+    // }
 
 
     public function UpdateStatus(Request $request)

@@ -18,6 +18,7 @@
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico')}}" />
+
     <!--end::Global Stylesheets Bundle-->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -25,13 +26,13 @@
             border-radius: 0!important;
         }
     </style>
-    @hasrole('investor')  
-        <style> 
+    @hasrole('investor')
+        <style>
                 [data-kt-app-header-fixed=true] .app-header{
                     position: none!important;
                     width: 100%!important;
                 }
-           
+
         </style>
      @endhasrole
     @section('page_head')
@@ -64,7 +65,7 @@
 
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <div id="kt_app_header" class="app-header" @hasrole('investor') style="margin-left:-21em!important"  @endhasrole> 
+            <div id="kt_app_header" class="app-header" @hasrole('investor') style="margin-left:-21em!important"  @endhasrole>
                 <div class="app-container container-fluid d-flex align-items-stretch justify-content-between"
                     id="kt_app_header_container">
                     <!--begin::sidebar mobile toggle-->
@@ -528,7 +529,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
 
-                                        <a class="menu-link px-5" href="{{ route('logout') }}" 
+                                        <a class="menu-link px-5" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                                  Sign Out
@@ -636,10 +637,11 @@
         </span>
     </div>
 
-    
+
     <script>
         var hostUrl = "assets/";
     </script>
+
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
@@ -650,9 +652,9 @@
     <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/new-target.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script> 
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/top-up-wallet.js')}}"></script>
-     
+
     @if (Session::has('success') or Session::has('error'))
         <script>
             @if (session('success'))
@@ -665,11 +667,11 @@
 
 
     @endif
-     
-    @if ($errors->any()) 
+
+    @if ($errors->any())
             @foreach ($errors->all() as $error)
-                <script> toastr.error("{{ $error }}", "Error");</script> 
-            @endforeach 
+                <script> toastr.error("{{ $error }}", "Error");</script>
+            @endforeach
     @endif
 
     @section('page_js')

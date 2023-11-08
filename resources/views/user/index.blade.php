@@ -59,10 +59,32 @@
 
 
                         <div class="card-toolbar ">
+
                             <span data-href="{{ route('user.info.csv') }}" id="export"
-                                class="btn no-radius btn-sm btn-dark btn-sm" onclick="exportTasks (event.target);">Export
-                                Excel</span>
+                            class="btn no-radius btn-sm btn-dark btn-sm " onclick="exportTasks (event.target);">Export
+                            Excel</span>
                             &nbsp;&nbsp;
+
+                            <form action="{{ route('user.index') }}" method="GET">
+                                <div class="input-group">
+
+                                    <input type="text" name="search" class=" no-radius btn-sm " value="{{ old('search') }}" placeholder="Search users">
+                                    <select name="role" class="no-radius btn-sm ">
+                                        <option value="">All</option>
+                                        <option value="issuer" {{ old('role') === 'issuer' ? 'selected' : '' }}>Issuer</option>
+                                        <option value="investor" {{ old('role') === 'investor' ? 'selected' : '' }}>Investor</option>
+                                        <!-- Add options for other roles if needed -->
+                                    </select>
+                                    &nbsp;&nbsp;
+                                    <button type="submit" class="btn no-radius btn-sm btn-dark btn-sm">Search</button>
+                                    &nbsp;&nbsp;
+                                    <a href="{{ route('user.index') }}"   class="btn no-radius btn-sm btn-dark btn-sm">Reset</a>
+
+                                </div>
+                            </form>
+                            &nbsp;&nbsp;
+
+
 
                             <div class="card-toolbar d-none show_on_multi_check">
                                 <!--begin::Menu-->
@@ -329,17 +351,6 @@
                                                             </th>
 
 
-                                                                        {{-- <th class=" " colspan="9">
-                                                        @if ($user->status != 'active')
-                                                            <button class="btn btn-sm btn-square btn-light-danger updateStatus" data-id="{{ $user->id }}" type="button" > <i class="fa fa-check"></i> </button>
-                                                        @else
-                                                            <button class="btn btn-sm btn-square btn-light-info updateStatus" data-id="{{ $user->id }}" type="button" > <i class="fa fa-times"></i> </button>
-                                                        @endif
-                                                        <img src="https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif"
-                                                        class="img img-thumbnail d-none loader_img"
-                                                        style="width: 40px;" alt="">
-
-                                                    </th>  --}}
 
 
                                                         </tr>
