@@ -836,6 +836,7 @@ class OfferController extends Controller
                 $socialLinks->instagram = $request->input('instagram');
                 $socialLinks->linkedIn = $request->input('linkedIn');
                 $socialLinks->twitter = $request->input('twitter');
+                $socialLinks->tiktok = $request->input('tiktok');
                 $socialLinks->save();
             } else {
                 $socialLinks = new SocialMediaLinks;
@@ -846,6 +847,7 @@ class OfferController extends Controller
                 $socialLinks->instagram = $request->input('instagram');
                 $socialLinks->linkedIn = $request->input('linkedIn');
                 $socialLinks->twitter = $request->input('twitter');
+                $socialLinks->tiktok = $request->input('tiktok');
                 $socialLinks->save();
             }
         }
