@@ -31,7 +31,7 @@
                                 <option value="{{ Auth::user()->id }}"> {{ Auth::user()->name }} </option>
                             @else
                                 @foreach ($issuers as $issuer)
-                                    <option value="{{ $issuer->id }}"> {{ $issuer->name }} </option>
+                                    <option value="{{ $issuer->id }}"> {{ $issuer->name }}  | {{ $issuer->email }} </option>
                                 @endforeach
                             @endif
                         </select>
