@@ -567,6 +567,11 @@
                                                                 <input type="text" class="col-lg-6 form-control "
                                                                     placeholder="chainraise" name="twitter">
                                                             </div>
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Tiktok www.tiktok.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    placeholder="chainraise" name="tiktok">
+                                                            </div>
                                                         </div>
 
                                                     </div>

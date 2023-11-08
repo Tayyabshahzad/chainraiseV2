@@ -186,6 +186,12 @@
                         <i class="bi bi-facebook me-lg-4 me-2 icon"></i>
                     </a>
                     @endif
+
+                    @if($offer->socialMedia->tiktok != null)
+                    <a target="_blank" href="https://www.tiktok.com/{{ $offer->socialMedia->tiktok }}">
+                        <i class="bi bi-tiktok me-lg-4 me-2 icon"></i>
+                    </a>
+                    @endif
                 @endif
             </div>
         </div>

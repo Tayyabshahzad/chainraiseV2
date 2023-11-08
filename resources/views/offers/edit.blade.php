@@ -890,6 +890,17 @@
                                                                     @if ($offer->socialMedia) value="{{ $offer->socialMedia->twitter }}" @endif
                                                                     placeholder="chainraise" name="twitter">
                                                             </div>
+
+                                                            <div class="col-lg-3 mb-4">
+                                                                <label for=""> Tiktok www.tiktok.com </label>
+                                                                <input type="text" class="col-lg-6 form-control "
+                                                                    @if ($offer->socialMedia) value="{{ $offer->socialMedia->tiktok }}" @endif
+                                                                    placeholder="chainraise" name="tiktok">
+                                                            </div>
+
+
+
+
                                                         </div>
 
                                                     </div>
