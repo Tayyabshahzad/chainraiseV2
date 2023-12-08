@@ -187,14 +187,14 @@
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
-                                    <div class="pb-10 pb-lg-15"> 
-                                        <h2 class="fw-bold text-dark">Basic Information</h2> 
+                                    <div class="pb-10 pb-lg-15">
+                                        <h2 class="fw-bold text-dark">Basic Information</h2>
                                     </div>
 
                                     <div class="mb-10">
                                         <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                                             <div class="col-lg-6 ">
-                                                <select name="issuer" aria-label="Select Issuer Account" data-control="select2" 
+                                                <select name="issuer" aria-label="Select Issuer Account" data-control="select2"
                                                     data-placeholder="Select Issuer Account *"
                                                     class="form-select form-select-solid form-select-lg" id="issuer_account">
                                                     <option value=""> Select Issuer Account </option>
@@ -343,7 +343,7 @@
                                     <div class="pb-10 pb-lg-15">
                                         <!--begin::Title-->
                                         <h2 class="fw-bold text-dark">Investor Flow</h2>
-                                         
+
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
@@ -377,7 +377,7 @@
                                                                             <th class="pt-0 sorting_disabled"
                                                                                 rowspan="1" colspan="1"
                                                                                 style="width: 365.562px;"> </th>
-                                                                            
+
                                                                             <th class="pt-0 text-end sorting_disabled"
                                                                                 rowspan="1" colspan="1"
                                                                                 style="width: 78.5px;">Remove</th>
@@ -389,11 +389,11 @@
 
                                                                         <tr class="odd">
                                                                             <td>
-                                                                                <input type="text" 
+                                                                                <input type="text"
                                                                                 class="form-control form-control-solid"
                                                                                 name="null-1" value=" Select Account Type ">
                                                                             </td>
-                                                                           
+
                                                                             <td class="text-end">
                                                                                 <button type="button"
                                                                                     class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
@@ -422,11 +422,11 @@
 
                                                                         <tr class="odd">
                                                                             <td>
-                                                                                <input type="text" 
+                                                                                <input type="text"
                                                                                 class="form-control form-control-solid"
                                                                                 name="null-1" value=" Select Account Type ">
                                                                             </td>
-                                                                           
+
                                                                             <td class="text-end">
                                                                                 <button type="button"
                                                                                     class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
@@ -453,8 +453,8 @@
                                                                             </td>
                                                                         </tr>
 
-                                                                        
-                                                                       
+
+
                                                                     </tbody>
                                                                     <!--end::Table body-->
                                                                 </table>
@@ -487,43 +487,43 @@
                                                     </div>
 
                                                     <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
-                                                     
+
                                                         <div class="col-lg-12">
                                                             <input type="number" class="form-control" name="price_per_share"
                                                                 placeholder="Minimum investment (USD)">
                                                         </div>
-    
+
                                                         <div class="col-lg-12">
                                                             <input type="number" class="form-control" name="price_per_share"
                                                                 placeholder="Maximum investment (USD)">
                                                         </div>
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack"> 
+                                                            <div class="d-flex flex-stack">
                                                                 <div class="me-5">
-                                                                    <label class="required fs-6 fw-semibold">Allow fractional shares</label> 
-                                                                </div> 
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
-                                                                        <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]"> 
-                                                                    </label> 
-                                                                </div> 
+                                                                    <label class="required fs-6 fw-semibold">Allow fractional shares</label>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
+                                                                        <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]">
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
-    
+
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack"> 
+                                                            <div class="d-flex flex-stack">
                                                                 <div class="me-5">
-                                                                    <label class="required fs-6 fw-semibold"> Require investing by units </label> 
-                                                                </div> 
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
-                                                                        <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications1[]"> 
-                                                                    </label> 
-                                                                </div> 
+                                                                    <label class="required fs-6 fw-semibold"> Require investing by units </label>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
+                                                                        <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications1[]">
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                     
+
                                                 </div>
                                                 <div class="d-flex flex-column mb-15 fv-row">
                                                     <!--begin::Label-->
@@ -536,12 +536,12 @@
                                                     </div>
 
                                                     <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
-                                                     
+
                                                         <div class="col-lg-12">
                                                             <input type="number" class="form-control" name="price_per_share"
                                                                 placeholder="Review Documents Button Text">
                                                         </div>
-    
+
                                                         <div class="col-lg-12">
                                                             <input type="number" class="form-control" name="price_per_share"
                                                                 placeholder="Invest Button Text">
@@ -552,41 +552,41 @@
                                                                 placeholder=" Contact Us Button Text">
                                                         </div>
 
-                                                       
+
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack">  
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                                            <div class="d-flex flex-stack">
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
                                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]">
                                                                         <span class="form-check-label fw-semibold">Send me a notification when clicked</span>
-                                                                        
-                                                                    </label> 
-                                                                </div> 
+
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
 
 
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack">  
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                                            <div class="d-flex flex-stack">
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
                                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]">
                                                                         <span class="form-check-label fw-semibold"> Hide Contact Us Button </span>
-                                                                        
-                                                                    </label> 
-                                                                </div> 
+
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack">  
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                                            <div class="d-flex flex-stack">
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
                                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]">
                                                                         <span class="form-check-label fw-semibold"> Use  <a href=""> Calendly </a>  meeting scheduling </span>
-                                                                        
-                                                                    </label> 
-                                                                </div> 
+
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -601,14 +601,14 @@
                                                         </div>
 
                                                         <div class="col-lg-12">
-                                                            <div class="d-flex flex-stack">  
-                                                                <div class="d-flex"> 
-                                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                                            <div class="d-flex flex-stack">
+                                                                <div class="d-flex">
+                                                                    <label class="form-check form-check-custom form-check-solid">
                                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone"  name="details_notifications[]">
                                                                         <span class="form-check-label fw-semibold">  Allow User to Send Custom Message </span>
-                                                                        
-                                                                    </label> 
-                                                                </div> 
+
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -617,7 +617,7 @@
                                                                 Complete Transaction Buttons / Messages
                                                             </label>
                                                         </div>
-                                                        
+
                                                         <div class="col-lg-12">
                                                             <input type="text" class="form-control" name="price_per_share"
                                                                 placeholder=" Confirm Investment Button Text">
@@ -646,11 +646,11 @@
                                                             <input type="text" class="form-control" name="price_per_share"
                                                                 placeholder=" External URL">
                                                         </div>
-                                                     
+
                                                     </div>
-                                                     
+
                                                 </div>
- 
+
 
                                             </div>
                                             <!--end::Card body-->
@@ -660,7 +660,7 @@
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
-                       
+
                             <!--end::Step 2-->
                             <!--begin::Step 3-->
                             <div data-kt-stepper-element="content" class="pending">
@@ -704,7 +704,7 @@
                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <!--begin::Label-->
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Allow Lists: Only allow these investors </span> 
+                                            <span class="required"> Allow Lists: Only allow these investors </span>
                                         </label>
 
                                         <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -720,13 +720,13 @@
                                                 Catalan</option>
                                             </select>
                                         </div>
-                                       
+
                                     </div>
 
                                     <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <!--begin::Label-->
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Deny Lists: Disallow these investors </span> 
+                                            <span class="required"> Deny Lists: Disallow these investors </span>
                                         </label>
 
                                         <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -742,59 +742,59 @@
                                                 Catalan</option>
                                             </select>
                                         </div>
-                                       
+
                                     </div>
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Invites </span> 
+                                            <span class="required"> Invites </span>
                                         </label>
                                         <div class="col-lg-12">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold">Send me a notification when clicked</span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
 
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Accreditation </span> 
+                                            <span class="required"> Accreditation </span>
                                         </label>
                                         <div class="col-lg-12">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Allow non-accredited investors </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
 
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Editing </span> 
+                                            <span class="required"> Editing </span>
                                         </label>
                                         <div class="col-lg-12">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Allow issuer to edit this offer </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
-   
+
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
@@ -807,118 +807,118 @@
                                     <div class="pb-10 pb-lg-15">
                                         <!--begin::Title-->
                                         <h2 class="fw-bold text-dark"> Display </h2>
-                                         
+
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Display Settings </span> 
+                                            <span class="required"> Display Settings </span>
                                         </label>
-                                        <hr> 
+                                        <hr>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Enable Question & Answer Forum </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Show Funding Progress </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Show Funding End Date Countdown </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold">Show Blockchain Info </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Swap Issuer and Offer Name </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Hide Logo Container </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Hide Logo in Details </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Hide Logo in Marketplace </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Remove Hero Image Mask </span>
-                                                        
-                                                    </label> 
-                                                </div> 
+
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
                                         <label class="d-flex align-items-center form-label">
-                                            <span class="required"> Page Tabs </span> 
+                                            <span class="required"> Page Tabs </span>
                                         </label>
                                         <hr>
                                         <div class="col-lg-12 mb-4">
@@ -929,8 +929,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="fv-row mb-10 fv-plugins-icon-container"> 
-                                       
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+
                                         <div class="col-lg-12 mb-4">
                                             <input type="text" class="form-control" name="price_per_share" placeholder="Video Tab Name">
                                         </div>
@@ -946,16 +946,16 @@
                                             <input type="text" class="form-control" name="price_per_share" placeholder="Q&A Tab Name">
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <div class="d-flex flex-stack">  
-                                                <div class="d-flex"> 
-                                                    <label class="form-check form-check-custom form-check-solid"> 
+                                            <div class="d-flex flex-stack">
+                                                <div class="d-flex">
+                                                    <label class="form-check form-check-custom form-check-solid">
                                                         <input class="form-check-input h-20px w-20px" type="checkbox" value="phone" name="details_notifications[]">
                                                         <span class="form-check-label fw-semibold"> Hide Contact Us Tab </span>
-                                                    </label> 
-                                                </div> 
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -1107,21 +1107,21 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-account.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/widgets.bundle.js') }}"></script>
 
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/js/custom/apps/subscriptions/add/advanced.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/apps/subscriptions/add/advanced.js' }}"></script>
 
     <script>
-       
+
 
         $('#issuer_account').on('change', function() {
           alert( this.value );

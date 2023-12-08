@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('page_head')
-    <link rel="stylesheet" href="{{ asset('assets/css/style-setup.css') }}">
+    <link rel="stylesheet" href="{{ env('APP_URL') . '/css/style-setup.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
         .error {

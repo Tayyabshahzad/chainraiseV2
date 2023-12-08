@@ -9,15 +9,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Vendor Stylesheets(used for this page only)-->
-    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ env('APP_URL') . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/assets/plugins/custom/datatables/datatables.bundle.css' }}" rel="stylesheet" type="text/css" />
     <!--end::Vendor Stylesheets-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico')}}" />
+    <link href="{{ env('APP_URL') . '/assets/plugins/global/plugins.bundle.css' }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/assets/css/style.bundle.css' }}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{ env('APP_URL') . '/assets/media/logos/favicon.ico' }}" />
+
 
     <!--end::Global Stylesheets Bundle-->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -91,7 +90,8 @@
                     <!--begin::Mobile logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="{{ route('dashboard') }}" class="d-lg-none">
-                            <img alt="Logo" src="{{ asset('assets/logo/logo.png') }}" class="h-30px" />
+                            <img alt="Logo" src="{{ env('APP_URL') . '/logo/logo.png' }}" class="h-30px" />
+
                         </a>
                     </div>
                     <!--end::Mobile logo-->
@@ -461,7 +461,7 @@
                             @if(Auth::user()->getFirstMediaUrl('profile_photo', 'thumb'))
                                 @php $photo_path = Auth::user()->getFirstMediaUrl('profile_photo', 'thumb')@endphp
                             @else
-                                @php $photo_path = "{{ asset('assets/media/avatars/300-1.jpg')}}";  @endphp
+                                @php $photo_path = "{{ env('APP_URL') . '/media/avatars/300-1.jpg')}}";  @endphp
                             @endif
 
                                 <!--end::Menu-->
@@ -476,7 +476,7 @@
                                     @if(Auth::user()->getFirstMediaUrl('profile_photo', 'thumb'))
                                         <img src="{{ Auth::user()->getFirstMediaUrl('profile_photo', 'thumb') }}" alt="user" />
                                     @else
-                                        <img src="{{ asset('assets/media/avatars/300-1.jpg')}}" alt="user" />
+                                        <img src="{{ env('APP_URL') . '/media/avatars/300-1.jpg'}}" alt="user" />
                                     @endif
                                 </div>
                                 <!--begin::User account menu-->
@@ -490,7 +490,7 @@
                                                 @if(Auth::user()->getFirstMediaUrl('profile_photo', 'thumb'))
                                                     <img src="{{ Auth::user()->getFirstMediaUrl('profile_photo', 'thumb') }}" alt="user" />
                                                 @else
-                                                    <img src="{{ asset('assets/media/avatars/300-1.jpg')}}" alt="user" />
+                                                    <img src="{{ env('APP_URL') . '/media/avatars/300-1.jpg'}}" alt="user" />
                                                 @endif
                                             </div>
                                             <!--end::Avatar-->
@@ -642,18 +642,18 @@
         var hostUrl = "assets/";
     </script>
 
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-    <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/new-target.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/custom/utilities/modals/top-up-wallet.js')}}"></script>
+    <script src="{{ env('APP_URL') . '/assets/plugins/global/plugins.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/scripts.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/widgets.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/widgets.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/apps/chat/chat.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/utilities/modals/upgrade-plan.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/utilities/modals/create-app.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/utilities/modals/new-target.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/utilities/modals/users-search.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/assets/plugins/custom/datatables/datatables.bundle.js'}}"></script>
+    <script src="{{ env('APP_URL') . '/assets/js/custom/utilities/modals/top-up-wallet.js'}}"></script>
 
     @if (Session::has('success') or Session::has('error'))
         <script>

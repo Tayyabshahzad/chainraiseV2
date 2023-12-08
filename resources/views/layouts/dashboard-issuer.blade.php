@@ -30,19 +30,21 @@ License: For each use you must have a valid license purchased only from above li
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Vendor Stylesheets(used for this page only)-->
-		<link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ env('APP_URL') . '/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-		<link href="{{ asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ env('APP_URL') . '/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ env('APP_URL') . '/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_app_body" data-kt-app-layout="light-header" data-kt-app-header-fixed="true" data-kt-app-toolbar-enabled="true" class="app-default">
 		<!--begin::Theme mode setup on page load-->
-		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
+		<script>
+        var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }
+        </script>
 		<!--end::Theme mode setup on page load-->
 		<!--begin::App-->
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -6926,7 +6928,7 @@ License: For each use you must have a valid license purchased only from above li
 										</div>
 										<!--end::Col-->
 									</div>
-									 
+
 								</div>
 								<!--end::Content container-->
 							</div>
@@ -6967,26 +6969,28 @@ License: For each use you must have a valid license purchased only from above li
 			</div>
 			<!--end::Page-->
 		</div>
-		 
-		 
-		  
-	 
+
+
+
+
 		<script>var hostUrl = "assets/";</script>
-		 
-		<script src="{{ asset('assets/plugins/global/plugins.bundle.js')}}"></script>
-		<script src="{{ asset('assets/js/scripts.bundle.js')}}"></script>
-		 
-		<script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
-		 
-		<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+
+		<script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/scripts.bundle.js'}}"></script>
+
+		<script src="{{ env('APP_URL') . '/plugins/custom/fullcalendar/fullcalendar.bundle.js'}}"></script>
+
+		<script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js'}}"></script>
+
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="{{ asset('assets/js/widgets.bundle.js')}}"></script>
-		<script src="{{ asset('assets/js/custom/widgets.js')}}"></script>
-		<script src="{{ asset('assets/js/custom/apps/chat/chat.js')}}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+
+        <script src="{{ env('APP_URL') . '/js/widgets.bundle.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/custom/widgets.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/custom/apps/chat/chat.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/custom/utilities/modals/upgrade-plan.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-app.js'}}"></script>
+		<script src="{{ env('APP_URL') . '/js/custom/utilities/modals/users-search.js'}}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

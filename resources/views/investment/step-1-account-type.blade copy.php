@@ -144,7 +144,7 @@
                                                 @csrf
                                                 <input type="" name="external_account" id="external_account" value="{{ $external_account->external_account_id }}">
                                                 <!--begin::Label-->
-                                                <label class="required fw-semibold fs-6 mb-5">Account Type</label>  
+                                                <label class="required fw-semibold fs-6 mb-5">Account Type</label>
                                                 <div class="row row-cols-1 row-cols-md-2 g-5">
                                                     <div class="col">
                                                         <input type="radio" class="btn-check" name="account_type"
@@ -177,7 +177,7 @@
                                                             </span>
                                                         </label>
                                                         <!--end::Option-->
-                                                    </div> 
+                                                    </div>
                                                     <div class="col">
                                                         <!--begin::Option-->
                                                         <input type="radio" class="btn-check" name="account_type"
@@ -212,7 +212,7 @@
                                                             </span>
                                                         </label>
                                                         <!--end::Option-->
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                             </form>
                                                 <!--end::Row-->
@@ -642,7 +642,7 @@
                                             <div class="col-lg-12">
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                       
+
                                                         <img src="{{ $offer->getFirstMediaUrl('offer_image')}}"
                                                             class="img img-thumbnail img-circle" alt="">
                                                     </div>
@@ -650,7 +650,7 @@
                                                         <strong class="text-dark">
                                                            {{ $offer->name }}
                                                         </strong>
-                                                        
+
                                                         <p class="fw-normal">
                                                             {{ $offer->short_description }}
                                                         </p>
@@ -658,7 +658,7 @@
                                                             {{ $offer->size }}
                                                         </p>
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -910,7 +910,7 @@
 @section('page_js')
 
 
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-account.js') }}"></script>
     <script>
         $('.update_profile_photo').click(function() {
             var imgBtnWrapper = $(this).closest('.change_photo_wrapper');
@@ -1013,7 +1013,7 @@
     </script>
 
     <script>
-         
+
          $('.make_payment').click(function(){
             $('.make_payment').html('Loading ...');
             $.ajaxSetup({
@@ -1042,23 +1042,23 @@
                             setTimeout(() => {
                                 window.location.href = "{{ route('dashboard')}}";
                             }, 3000);
-                           
+
                         }
                     },
 
             });
          });
-       
+
     </script>
     <script>
         $('body').on('click','.next_button',function(){
-           
+
            if($('.connect_bank').hasClass('current')){
                 $('.next_button').hide();
-           } 
+           }
         });
-         
-        
+
+
     </script>
 
 

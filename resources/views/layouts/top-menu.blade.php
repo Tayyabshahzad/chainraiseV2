@@ -24,14 +24,14 @@
                     </span>
                 </a>
 
-            <a href="{{route('user.account')}}" target="_blank">
+            <a href="#" target="_blank">
                 <span class="menu-link">
                     <span class="menu-title">My Documents</span>
                     <span class="menu-arrow d-lg-none"></span>
                 </span>
             </a>
 
-            <a href="{{route('user.account')}}" target="_blank">
+            <a href="#" target="_blank">
                 <span class="menu-link">
                     <span class="menu-title">Portfolio</span>
                     <span class="menu-arrow d-lg-none"></span>
@@ -65,16 +65,15 @@
          </span>
         </div>
 
-        <div
-        class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+        {{-- <div class="menu-item menu-lg-down-accordion me-0 me-lg-2">
         <span class="menu-link">
             <span class="menu-title">
 
-                <a href="{{route('user.account')}}">  My Documents </a>
+                <a href="#">  My Documents </a>
             </span>
             <span class="menu-arrow d-lg-none"></span>
         </span>
-       </div>
+       </div> --}}
 
          @endhasrole
 

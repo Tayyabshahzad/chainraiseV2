@@ -1,8 +1,14 @@
-import './bootstrap';
+import { createApp } from 'vue';
+import LayoutComponent from './components/Layout.vue';
+import OffersComponent from './components/Offers.vue';
 
-import Alpine from 'alpinejs';
-import 'laravel-datatables-vite';
+const app = createApp(LayoutComponent);
 
-window.Alpine = Alpine;
+app.component('offers', OffersComponent);
 
-Alpine.start();
+const appElement = document.getElementById('app');
+const initialOffers = JSON.parse(appElement.getAttribute('data-offers'));
+
+app.config.globalProperties.initialOffers = initialOffers;
+
+app.mount('#app');

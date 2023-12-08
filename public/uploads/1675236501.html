@@ -293,7 +293,7 @@
                                                                 <div class="overlay">
                                                                     <div
                                                                         class="overlay-wrapper rounded bg-light text-center">
-                                                                        <img src="{{ asset('assets/media/dummy.png') }}"
+                                                                        <img src="{{ env('APP_URL') . '/media/dummy.png') }}"
                                                                             alt="" id="set_profile_photo"
                                                                             class="set_profile_photo mw-100 w-200px">
                                                                     </div>
@@ -322,8 +322,8 @@
                                             <!--end: Wizard Step 1-->
                                             <!--begin: Wizard Step 2-->
                                             {{-- <div class="pb-5" data-wizard-type="step-content">
-                                     
-                        
+
+
                                 </div> --}}
 
                                             <!--end: Wizard Step 2-->
@@ -787,7 +787,7 @@
                                                 </div>
                                             </div>
                                             <div class="pb-5" data-wizard-type="step-content">
-                                                 
+
                                                 <div class="row" id="smtp_default_setting">
                                                     <div class="col-lg-12">
                                                         <h4 class="mb-8">
@@ -802,7 +802,7 @@
                                                                          Area
                                                                    </label>
                                                                    <input type="text"    value="area" name="tax_type[]" required>
-                                                                    <div class="input-group"> 
+                                                                    <div class="input-group">
                                                                        <input type="number"
                                                                        class="form-control"
                                                                        placeholder="Enter Tax By Area Value"
@@ -817,9 +817,9 @@
                                                                 <div class="form-group">
                                                                     <label for="">
                                                                         Percentage
-                                                                   </label>  
+                                                                   </label>
                                                                    <input type="text" value="percentage" name="tax_type[]" required>
-                                                                    <div class="input-group"> 
+                                                                    <div class="input-group">
                                                                        <input type="number"
                                                                        class="form-control"
                                                                        placeholder="Enter Tax By Percentage Value"
@@ -829,11 +829,11 @@
                                                                 </div>
                                                             </div>
 
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                                 
+
                                             </div>
 
                                             <!--end: Wizard Step 4-->
@@ -875,7 +875,7 @@
     @include('admin.project.models.index')
 @endsection
 @section('page_js')
-    <script src="{{ asset('assets/js/pages/custom/wizard/wizard-3.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/pages/custom/wizard/wizard-3.js') }}"></script>
     @include('admin.project.models.js.wizard');
     @if (Session::has('tab'))
         <script>
@@ -1169,9 +1169,9 @@
                     reader.readAsDataURL(blob);
                     reader.onloadend = function() {
                         var base64data = reader.result;
-                        //  $('#uploaded_image').attr('src', base64data); 
+                        //  $('#uploaded_image').attr('src', base64data);
                         modalProfileLogo.modal('hide');
-                        // var imgSize = blob.files[0].size;         
+                        // var imgSize = blob.files[0].size;
                         var fd = new FormData();
                         // var files = $('#uplodfile')[0].files;
                         fd.append('file', blob);
@@ -1195,7 +1195,7 @@
 
 
 
-            // additional files code here    
+            // additional files code here
             var file_no = 0;
             $('.project_additonal_files').click(function(event) {
                 file_no++;
@@ -1204,14 +1204,14 @@
                 <div class="col-lg-6 mt-4">
                     <label style="float: left;">Choose File<span class="text-danger">*</span></label>
                     <input type="file" name="document_file[]" class="document_file form-control">
-                </div> 
+                </div>
                 <div class="col-lg-4 mt-4">
                     <label style="float: left;">File Name<span class="text-danger">*</span></label>
                     <input type="text" name="document_name[]" class="document_name form-control" required placeholder="File Name">
                 </div>
                 <div class="col-lg-2 mt-4 pt-1">
                     <button class="btn btn-sm btn-light-danger btn-square remove_document_row" type="button">  <i class="la la-times"></i> </button>
-                </div> 
+                </div>
             </div>
        `);
             });

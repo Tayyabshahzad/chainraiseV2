@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'View Offer')
 @section('page_name', 'Listings')
-@section('page_head') 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script> 
+@section('page_head')
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     .section_wrapper{
@@ -48,15 +48,15 @@
                             <span class="bullet bg-gray-400 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                                <a href="{{ route('offers.index') }}" class="text-muted text-hover-primary">  Offers </a>  
+                                <a href="{{ route('offers.index') }}" class="text-muted text-hover-primary">  Offers </a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-400 w-5px h-2px"></span>
                         </li>
-                        <li class="breadcrumb-item text-muted">View</li> 
+                        <li class="breadcrumb-item text-muted">View</li>
                     </ul>
                     <!--end::Breadcrumb-->
-                </div> 
+                </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
                 </div>
                 <!--end::Actions-->
@@ -76,7 +76,7 @@
             <div id="kt_app_content_container" class="app-container">
                 <form action="{{ route('offers.update') }}" enctype="multipart/form-data" method="post"> @csrf
                     <input type="hidden" name="id" value="{{ $offer->id }}">
-                <div class="row"> 
+                <div class="row">
                    @include('offers.particles.left-bar-view')
                     <div class="col-lg-9">
                         <div class="card-body mb-3">
@@ -89,19 +89,19 @@
                                         style="background-image:url('https://i.stack.imgur.com/FueqW.jpg')"
                                     @endif
                                     ></div>
-                                </div> 
-                                <div class="position-absolute text-white mb-4 ms-10 bottom-0"> 
+                                </div>
+                                <div class="position-absolute text-white mb-4 ms-10 bottom-0">
                                     <div class="row">
-                                        <div class="col-lg-3" > 
+                                        <div class="col-lg-3" >
                                             <div class="image-input image-input-outline mt-3"data-kt-image-input="true"
-                                                @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null) 
+                                                @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null)
                                                         style="background-image:url('{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}')"
                                                 @else
                                                         style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')"
                                                 @endif
-                                                > 
-                                                <div class="image-input-wrapper w-75px h-75px" 
-                                                @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null) 
+                                                >
+                                                <div class="image-input-wrapper w-75px h-75px"
+                                                @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null)
                                                 style="background-image:url('{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}')"
                                                 @else
                                                         style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg')"
@@ -109,7 +109,7 @@
                                                 ></div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
-                                                
+
                                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-15px h-15px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Upload Logo" data-kt-initialized="1">
                                                     <i class="bi bi-pencil-fill fs-7"></i>
                                                     <!--begin::Inputs-->
@@ -138,8 +138,8 @@
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');background-position:center"
                                                 @endif>
                                                 <!--begin::Preview existing avatar-->
-                                                <div class="image-input-wrapper w-75px h-75px" 
-                                                @if ($offer->getFirstMediaUrl('banner_image', 'thumb') != null) 
+                                                <div class="image-input-wrapper w-75px h-75px"
+                                                @if ($offer->getFirstMediaUrl('banner_image', 'thumb') != null)
                                                     style="background-image:url('{{ $offer->getFirstMediaUrl('banner_image', 'thumb') }}')"
                                                 @else
                                                     style="background-image: url('https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg');background-position:center"
@@ -166,7 +166,7 @@
                                                 <!--end::Remove-->
                                             </div>
                                         </div>
-                                         
+
                                     </div>
                                     <div class="row text-dark" >
                                         <div class="col-lg-12">
@@ -181,23 +181,23 @@
                                        <div class="col-lg-6  mt-3 ">
                                             <div class="fs-5 fw-semibold text-success">
                                                 ({{ $offer->base_currency }}) <span id="offer_size_label">
-                                                {{ $offer->size }} 
-                                                  </span> 
+                                                {{ $offer->size }}
+                                                  </span>
                                                   <i class="text-dark">  Offer Size </i>
-                                            </div> 
-                                       </div> 
+                                            </div>
+                                       </div>
                                        <div class="col-lg-6">
                                         <button class="btn btn-sm btn-dark"   data-bs-toggle="modal" data-bs-target="#modal_contact_us">   Contact Us
                                         </button>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="col-xl-12 mb-5 mb-xl-10">
                                 <!--begin::Tables widget 16-->
                                 <div class="card card-flush h-xl-100">
-                                     
+
                                     <div class="card-body pt-6">
                                         <!--begin::Nav-->
                                         <ul class="nav nav-pills nav-pills-custom mb-3" role="tablist">
@@ -205,7 +205,7 @@
                                             <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
                                                 <!--begin::Link-->
                                                 <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2 active" id="kt_stats_widget_16_tab_link_1" data-bs-toggle="pill" href="#kt_stats_widget_16_tab_1" aria-selected="true" role="tab" style="width:140px;">
-                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">OFFER DETAILS</span> 
+                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">OFFER DETAILS</span>
                                                     <span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-primary"></span>
                                                 </a>
                                                 <!--end::Link-->
@@ -216,8 +216,8 @@
                                                 <!--begin::Link-->
                                                 <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2" id="kt_stats_widget_16_tab_link_2" data-bs-toggle="pill" href="#kt_stats_widget_16_tab_2" aria-selected="false" tabindex="-1" role="tab"  style="width:140px;">
                                                     <!--begin::Icon-->
-                                                   
-                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1"> 
+
+                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
                                                         VIDEO
                                                     </span>
                                                     <!--end::Title-->
@@ -227,17 +227,17 @@
                                                 </a>
                                                 <!--end::Link-->
                                             </li>
-                                            <li class="nav-item mb-3 me-3 me-lg-6" role="presentation"> 
-                                                <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2" id="kt_stats_widget_16_tab_link_3" data-bs-toggle="pill" href="#kt_stats_widget_16_tab_3" aria-selected="false" tabindex="-1" role="tab"  style="width:140px;"> 
-                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1"> 
+                                            <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
+                                                <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden  h-50px pt-5 pb-2" id="kt_stats_widget_16_tab_link_3" data-bs-toggle="pill" href="#kt_stats_widget_16_tab_3" aria-selected="false" tabindex="-1" role="tab"  style="width:140px;">
+                                                    <span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
                                                         CONTACT US
-                                                    </span> 
+                                                    </span>
                                                     <span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-primary"></span>
                                                     <!--end::Bullet-->
                                                 </a>
                                                 <!--end::Link-->
                                             </li>
-                                            
+
                                         </ul>
                                         <!--end::Nav-->
                                         <!--begin::Tab Content-->
@@ -249,9 +249,9 @@
                                                         <button class="btn btn-default btn-sm btn-dark w-40" type="button" data-bs-toggle="modal" data-bs-target="#modal_new_sections">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-                                                    </div> 
+                                                    </div>
                                                </div>
-                                            </div> 
+                                            </div>
                                             <div class="tab-pane fade" id="kt_stats_widget_16_tab_2" role="tabpanel" aria-labelledby="#kt_stats_widget_16_tab_link_2">
                                                 <div class="row">
                                                     <div class="col-lg-12 text-right" style="text-align: right">
@@ -267,10 +267,10 @@
                                                         <div class="row">
                                                             <div class="col-lg-6 mb-4">
                                                                <span class="bt-label btn-light-info">
-                                                                    <i class="fa fa-location"></i> 
+                                                                    <i class="fa fa-location"></i>
                                                                </span>
                                                                &nbsp;
-                                                               <label class="required fs-6 fw-semibold mb-2">   Address  </label> 
+                                                               <label class="required fs-6 fw-semibold mb-2">   Address  </label>
                                                                 <p id="address_label"> &nbsp; </p>
                                                             </div>
                                                             <div class="col-lg-4 mb-4">
@@ -282,13 +282,13 @@
                                                         <div class="row">
                                                             <div class="col-lg-6 mb-4">
                                                                 <span class="bt-label btn-light-info">
-                                                                    <i class="fa fa-mobile"></i> 
+                                                                    <i class="fa fa-mobile"></i>
                                                                </span>
                                                                &nbsp;
-                                                                <label class="required fs-6 fw-semibold mb-2"> 
+                                                                <label class="required fs-6 fw-semibold mb-2">
                                                                     Phone
                                                                 </label>
-                                                                 
+
                                                                 <p id="phone_label"> &nbsp; </p>
                                                             </div>
                                                             <div class="col-lg-4 mb-4">
@@ -302,7 +302,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="row mb-3">
                                                                     <div class="col-lg-12">
-                                                                        <label class="required fs-6 fw-semibold mb-2"> 
+                                                                        <label class="required fs-6 fw-semibold mb-2">
                                                                             Schedule a Meeting
                                                                         </label>
                                                                         <br>
@@ -313,7 +313,7 @@
 
                                                                 <div class="row mb-3 mt-3" >
                                                                     <div class="col-lg-12">
-                                                                        <label class="required fs-6 fw-semibold mb-2"> 
+                                                                        <label class="required fs-6 fw-semibold mb-2">
                                                                             Contact Us
                                                                         </label>
                                                                         <textarea type="text" class="form-control " placeholder="Type your message here." ></textarea>
@@ -325,17 +325,17 @@
                                                                       <input type="text" name=""class="form-control " placeholder="Addtl. Contact Emails (comma delimited list)">
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                
+
                                                             </div>
                                                         </div>
-  
+
                                                     </div>
                                                </div>
                                             </div>
-                                            
+
                                         </div>
                                         <!--end::Tab Content-->
                                     </div>
@@ -344,9 +344,9 @@
                                 <!--end::Tables widget 16-->
                             </div>
                         </div>
-                        
+
                     </div>
-                </div> 
+                </div>
             </form>
 
             </div>
@@ -357,22 +357,22 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-account.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/widgets.bundle.js') }}"></script>
 
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js' }}"></script>
+    <script src="{{ env('APP_URL') . '/js/scripts.bundle.js' }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/js/custom/apps/subscriptions/add/advanced.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/apps/subscriptions/add/advanced.js'  }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
-       
+
         $('#issuer_account').on('change', function() {
             var conceptName = $('#issuer_account').find(":selected").text();
             $('#issuer_account_label').html(conceptName);
@@ -392,24 +392,24 @@
         $('#offer_phone').on('keyup', function() {
           $('#phone_label').html(this.value);
         });
-        
+
         $('#offer_schedule_meeting').on('keyup', function() {
           $('.meeting_button').removeClass('d-none');
         });
         var no = 0;
         $('#modal_new_sections').on('click','.summary_section',function(){
             no++;
-        
+
             $('#section_row').append(`
                 <div class="row section_`+no+`">
                 <div class="col-lg-6 mt-3 mb-4">
-                    <input type="text" class="form-control" name="title[]" value="Summary" > 
+                    <input type="text" class="form-control" name="title[]" value="Summary" >
                 </div>
                 <div class="col-lg-6 mt-3 mb-4">
-                    <input type="text" class="form-control" name="title[]" placeholder="Sub-title" > 
+                    <input type="text" class="form-control" name="title[]" placeholder="Sub-title" >
                 </div>
                 <div class="col-lg-11 mt-3 mb-4">
-                    <textarea  class="form-control" cols="30" rows="10" name="offer_description[]" id="textarea_`+no+`" ></textarea> 
+                    <textarea  class="form-control" cols="30" rows="10" name="offer_description[]" id="textarea_`+no+`" ></textarea>
                 </div>
                 <div class="col-lg-1 mt-3 mb-4">
                     <button class="btn btn-sm btn-danger delete_section" data-id="`+no+`"> <i class='fa fa-times'></i> </button>
@@ -417,25 +417,25 @@
                 </div>
             `);
             $('#textarea_'+no).summernote();
-        
+
         });
-        
+
         $('#modal_new_sections').on('click','.tiles_section',function(){
             $('#section_row').append(`
                 <div class="row section_`+no+`">
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                         <div class="tiles_box">
-                            <input type="file" class="form-control" name="title[]"> 
+                            <input type="file" class="form-control" name="title[]">
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                          <div class="tiles_box">
-                            <input type="file" class="form-control" name="title[]"> 
+                            <input type="file" class="form-control" name="title[]">
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6 tiles_box_warpper">
                          <div class="tiles_box">
-                            <input type="file" class="form-control" name="title[]"> 
+                            <input type="file" class="form-control" name="title[]">
                         </div>
                     </div>
                     <div class="col-lg-4 mt-6 mb-6">
@@ -452,13 +452,13 @@
             $('#section_row').append(`
                 <div class="no++;row section_`+no+`">
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="title[]" value="Title" > 
+                        <input type="text" class="form-control" name="title[]" value="Title" >
                     </div>
                     <div class="col-lg-6 mt-3 mb-4">
-                        <input type="text" class="form-control" name="title[]" placeholder="Sub-title" > 
+                        <input type="text" class="form-control" name="title[]" placeholder="Sub-title" >
                     </div>
                     <div class="col-lg-11 mt-3 mb-4">
-                        <textarea  class="form-control" cols="30" rows="10" name="offer_description[]" id="textarea_`+no+`" ></textarea> 
+                        <textarea  class="form-control" cols="30" rows="10" name="offer_description[]" id="textarea_`+no+`" ></textarea>
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button class="btn btn-sm btn-danger delete_section" data-id="`+no+`"> <i class='fa fa-times'></i> </button>
@@ -473,7 +473,7 @@
             $('#section_row').append(`
                 <div class="row section_`+no+`">
                     <div class="col-lg-11 mt-3 mb-4">
-                        <input type="file" class="form-control" name="title[]" value="Title" > 
+                        <input type="file" class="form-control" name="title[]" value="Title" >
                     </div>
                     <div class="col-lg-1 mt-3 mb-4">
                         <button class="btn btn-sm btn-danger delete_section" data-id="`+no+`"> <i class='fa fa-times'></i> </button>
@@ -502,24 +502,24 @@
                             <div class="col-lg-12 text-center">
                                 <button class='btn btn-sm '> <i class='text-danger fa fa-trash'></i> </button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 `);
                 $('.modalCloseBtn').click();
-            } 
-         
+            }
+
         });
-        
-        
+
+
     </script>
     <script>
     $(document).ready(function() {
         $('.summernote').summernote();
     });
-    
+
     $('#section_row').on('click','.delete_section',function(){
         var id = $(this).data('id');
-        $("#section_1").remove(); 
+        $("#section_1").remove();
     });
     </script>
 

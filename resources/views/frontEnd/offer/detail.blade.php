@@ -1,538 +1,451 @@
-@extends('layouts.master')
-@section('title', $offer->name)
-@section('page_head')
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <style>
-        .hero-section {
-            height: 100% !important;
-            background: linear-gradient(rgb(137 126 126 / 50%), rgb(0 0 0)), url("{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}");
-            background-size: cover;
-            background-repeat: no-repeat;
+<!doctype html>
+<html lang="en">
 
-        }
-        .image-with-initial {
-  position: relative;
-  display: inline-block;
-}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chainrasie</title>
+    <link rel="stylesheet" href="{{  asset('vue/css/detail-2-style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-.image-with-initial::before {
-  content: "T"; /* Set the content to the desired initial letter */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  line-height: 32px;
-  border-radius: 50%;
-  z-index: 1;
-  opacity: 0.8;
-  pointer-events: none;
-}
+        <style>
+            .container-bg{
+                background-image: url("{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}")!important;
+            }
+        </style>
+</head>
 
-/* Optional: Add some padding to the image to prevent overlap with the initial */
-.image-with-initial img {
-  padding: 8px;
-}
-
-
-
-    </style>
-@endsection
-
-@section('content')
-    <!-- Hero Section Start -->
-
-    <!-- Hero Section Start -->
-    <section class="container-fluid hero-section">
-        <div class="row justify-content-center">
-
-            <div class="col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 25%!important"
-                    class="p-3 white-logo" alt="...">
-                <p class="text-white fs-5 fw-semibold mb-4"> {{ $offer->name }} </p>
+<body>
+    <!-- Header Start -->
+    <nav class="navbar navbar-expand-lg bg-dark-color" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link" href="#">Investors</a>
+                    </li>
+                    <li class="nav-item dropdown px-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Learn
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">FAQ</a></li>
+                            <li><a class="dropdown-item" href="#">Business</a></li>
+                            <li><a class="dropdown-item" href="#">Blockchain</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link" href="#">Real Estate</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link" href="#">Tech</a>
+                    </li>
+                </ul>
+                <button type="button" class="btn transparent_btn mx-3 px-4" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Login</button>
+                <button type="button" class="btn color_btn px-4">Signup</button>
             </div>
-            <div class="col-12 text-center" style="margin-bottom:1%;">
-                <button type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
-                    data-bs-target="#myModal" class="btn btn-outline-light rounded-circle"
-                    style=" border: 2px solid RGBA(67, 195, 254, 1); padding: 16px 25px;"><span
-                        class="bi bi-play-fill fs-2"></span>
-                </button>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered video_modal" role="document">
-                        <div class="modal-content video_modal_content">
-                            <div class="modal-body text-end">
-                                <button type="button" class="btn-close" id="video_close_button" data-bs-dismiss="modal"
-                                    aria-label="Close"> </button>
-                                <!-- 16:9 aspect ratio -->
-                                <div class="ratio ratio-16x9">
-                                    <iframe class="embed-responsive-item" src="{{ $offer->feature_video }}" id="video"
-                                        allowscriptaccess="always"></iframe>
+        </div>
+    </nav>
+    <!-- Header End -->
 
+    <!-- Hero Section Start -->
+    <section class="p-lg-5 p-3 hero-bg">
+        <div class="container container-bg rounded">
+            <div class="row align-items-end position-relative " style="height: 600px;">
+                <div class="col-lg-6 p-lg-5">
+                    <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="Logo" srcset="">
+
+                    <h1 class="explore-detail">{{ $offer->name }}</h1>
+                    <div class="d-grid gap-2 d-md-block pt-lg-3">
+                        <button class="btn text-white px-lg-5 fw-semibold" style="background-color: #FF7A00 !important;"
+                            type="button"> 30 Days
+                            Left <img src="{{ asset('vue/images/info.png')}}">
+                        </button>
+                        <button class="btn px-lg-5 fw-semibold"
+                            style="background-color: #ffffff !important; color: #294FF6 !important;" type="button">
+                            US${{ number_format($offer->total_valuation) }} <span class="text-dark">Raised</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-lg-5 text-white text-end">
+                    <p class="tab-text text-lg-start">{{ $offer->short_description }}.</p>
+                    <img src="{{ asset('vue/images/Group 12578.png')}}" alt="" srcset="" class="img-fluid">
+                </div>
+                <div class="col-lg-12 play-btn">
+
+                    <a type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
+                        data-bs-target="#myModal">
+                        <img src="{{ asset('vue/images/Group 12576.png')}}" alt="Video Paly Button">
+                    </a>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                    <!-- 16:9 aspect ratio -->
+                                    <div class="ratio ratio-16x9">
+                                        <iframe class="embed-responsive-item"
+                                            src="{{ $offer->feature_video }}"
+                                            id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 text-center">
-                <form action="{{ route('invest.submit') }}" method="get" id="investForm">
-                    <div class="row mb-4">
-                        <div class="col-lg-2 col-6 text-center">
-                            <h6 class="text-white fw-normal">Offer Type</h6>
-                            <h6 class="sky-blue fw-normal"> {{ ucfirst($offer->offer_type) }} </h6>
-                        </div>
 
-                        <div class="col-lg-2 col-6 text-center">
-                            <h6 class="text-white fw-normal">Offer Amount</h6>
-                            <h6 class="sky-blue fw-normal"> ${{ number_format($offer->size) }} </h6>
-                        </div>
-
-                        <div class="col-lg-2  col-6 text-center">
-                            <h6 class="text-white fw-normal">Securities Type </h6>
-                            <h6 class="sky-blue fw-normal"> {{ ucfirst($offer->security_type) }} </h6>
-                        </div>
-
-                        <div class="col-lg-2  col-6 text-center fw-normal">
-                            <h6 class="text-white fw-normal">Valuation</h6>
-                            <h6 class="sky-blue fw-normal">${{ number_format($offer->total_valuation) }}</h6>
-                        </div>
-
-                        <div class="col-lg-2  col-12 text-center">
-                            <h6 class="text-white fw-normal">Min. Investment</h6>
-                            <h6 class="sky-blue fw-normal">
-                                ${{ number_format($offer->investmentRestrictions->min_invesment) }}</h6>
-                        </div>
-
-                    </div>
-                    <div class="row px-5">
-                        @csrf
-                        <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                        <div class="col-9 px-0">
-                            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                            <div class="input-group">
-                                <div class="input-group-text">$</div>
-                                <input type="text" class="form-control" id="autoSizingInputGroup"
-                                    name="investment_amount"
-                                    placeholder="@if ($offer->investmentRestrictions) {{ number_format($offer->investmentRestrictions->min_invesment) }} @endif"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <button
-                                @if (Auth::user()) type="submit"  @else id="show-login-message"  type="button" @endif
-                                class="btn btn-outline-info text-white">
-                                INVEST
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <div class="row px-5">
-                    <div class="col-12 text-center pt-5">
-                        <a href="#detail"><i class="bi bi-arrow-down-circle fs-3 sky-blue"></i></a>
-                        <p class="text-white fs-5 fw-semibold">Scroll Down for Details</p>
-                    </div>
-                </div>
             </div>
     </section>
     <!-- Hero Section End -->
-    <!-- Faq Section Start -->
-    <div class="container-fluid">
-        <div class="row align-items-center justify-content-center p-lg-5 p-4">
-            <div class="col-lg-6 col-12 text-center ">
-                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}"
-                    class="img-responsive offer_logo_image img-fluid b-logo" alt="...">
-                <br>
-                <strong> {{ $offer->name }} </strong>
-            </div>
-
-
-            <div class="col-lg-6 col-12 text-center">
-
-                @if ($offer->socialMedia)
-                    @if($offer->socialMedia->linkedIn != null)
-                        <a target="_blank" href="https://www.linkedin.com/{{ $offer->socialMedia->linkedIn }}">
-                            <i class="bi bi-linkedin me-lg-4 me-2 icon"></i>
-                        </a>
-                    @endif
-                    @if($offer->socialMedia->telegram != null)
-                    <a target="_blank" href="https://www.telegram.com/{{ $offer->socialMedia->telegram }}">
-                        <i class="bi bi-send me-lg-4 me-2 icon"></i>
-                    </a>
-                    @endif
-                    @if($offer->socialMedia->instagram != null)
-                    <a target="_blank" href="https://www.instagram.com/{{ $offer->socialMedia->instagram }}">
-                        <i class="bi bi-instagram me-lg-4 me-2  icon"></i>
-                    </a>
-                    @endif
-                    @if($offer->socialMedia->twitter != null)
-                    <a target="_blank" href="https://www.twitter.com/{{ $offer->socialMedia->twitter }}">
-                        <i class="bi bi-twitter me-lg-4 me-2 icon"></i>
-                    </a>
-                    @endif
-                    @if($offer->socialMedia->youtube != null)
-                    <a target="_blank" href="https://www.youtube.com/{{ $offer->socialMedia->youtube }}">
-                        <i class="bi bi-youtube me-lg-4 me-2 icon"></i>
-                    </a>
-                    @endif
-                    @if($offer->socialMedia->facebook != null)
-                    <a target="_blank" href="https://www.facebook.com/{{ $offer->socialMedia->facebook }}">
-                        <i class="bi bi-facebook me-lg-4 me-2 icon"></i>
-                    </a>
-                    @endif
-
-                    @if($offer->socialMedia->tiktok != null)
-                    <a target="_blank" href="https://www.tiktok.com/{{ $offer->socialMedia->tiktok }}">
-                        <i class="bi bi-tiktok me-lg-4 me-2 icon"></i>
-                    </a>
-                    @endif
-                @endif
-            </div>
-        </div>
-    </div>
-    <!-- Faq Section End -->
-    <div id="detail" class="container-fluid p-0 m-0">
-        <ul class="nav nav-pills mb-3 mt-3 px-lg-5 py-3 bg-dark" id="pills-tab" role="tablist">
-            <li class="nav-item me-lg-3" role="presentation">
-                <button class="nav-link active text-white" id="pills-home-tab" data-bs-toggle="pill"
-                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                    aria-selected="true">Overview</button>
-            </li>
-            @if ($offer->offerVideos->count() > 0)
-                <li class="nav-item me-lg-3" role="presentation">
-                    <button class="nav-link text-white" id="pills-videos-tab" data-bs-toggle="pill"
-                        data-bs-target="#deal-video" type="button" role="tab" aria-controls="pills-deal-videos"
-                        aria-selected="false">Videos</button>
-                </li>
-            @endif
-            <li class="nav-item me-lg-3" role="presentation">
-                <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
-                    data-bs-target="#documents" type="button" role="tab" aria-controls="pills-document"
-                    aria-selected="false">Documents</button>
-            </li>
-            <li class="nav-item me-lg-3" role="presentation">
-                <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
-                    data-bs-target="#updates" type="button" role="tab" aria-controls="pills-document"
-                    aria-selected="false">Updates</button>
-            </li>
-            <li class="nav-item me-lg-3" role="presentation">
-                <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
-                    data-bs-target="#questions_answers" type="button" role="tab" aria-controls="pills-document"
-                    aria-selected="false">Q&A</button>
-            </li>
-        </ul>
-        <div class="tab-content px-lg-5 px-3 py-3" id="pills-tabContent">
-            <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                @foreach ($offer->offerDetail as $offerDetail)
-                    @if ($offerDetail->input == 'summary')
-                        <div class="col-lg-11 mt-4">
-                            {!! $offerDetail->description !!}
-                        </div>
-                    @elseif($offerDetail->input == 'text')
-                        <div class="col-lg-6 mt-4">
-                            <h6>{{ $offerDetail->heading }}</h6>
-                        </div>
-                        <div class="col-lg-6 mt-4">
-                            <h5>{{ $offerDetail->sub_heading }}</h6>
-                        </div>
-                        <div class="col-lg-12 mt-4">
-                            {!! $offerDetail->description !!}
-                        </div>
-                    @elseif($offerDetail->input == 'tiles')
-                        <div class="row">
-                            @if ($offerDetail->offerTiles)
-                                @foreach ($offerDetail->offerTiles as $tiles)
-                                    <div class="col-lg-6 col-md-6  p-3">
-                                        <figure class="figure">
-                                            <img src="{{ asset('files/' . $tiles->path) }}"
-                                                class="img img-thumbnail figure-img img-fluid rounded" alt="..."
-                                                style="width:200px">
-                                        </figure>
+    <section class="bg-dark-color p-lg-5 p-3 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 ps-lg-0">
+                    <ul class="nav nav-pills nav-fill" style="background-color: #333333;" id="pills-tab" role="tablist">
+                        <li class="nav-item me-lg-3" role="presentation">
+                            <button class="nav-link active text-white" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#overview" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Overview</button>
+                        </li>
+                        <li class="nav-item me-lg-3" role="presentation">
+                            <button class="nav-link text-white" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#videos" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Videos</button>
+                        </li>
+                        <li class="nav-item me-lg-3" role="presentation">
+                            <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#updates" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">Updates</button>
+                        </li>
+                        <li class="nav-item me-lg-3" role="presentation">
+                            <button class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#qa" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">Q&A</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content py-lg-4 py-3" id="pills-tabContent">
+                        <div class="tab-pane fade show active p-2" id="overview" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <h1 class="tab-text">Overview</h1>
+                            <p class="tab-text text-white">
+                                @foreach ($offer->offerDetail as $offerDetail)
+                                @if ($offerDetail->input == 'summary')
+                                    <div class="col-lg-11 mt-4">
+                                        {!! $offerDetail->description !!}
                                     </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    @endif
-                @endforeach
-                @if ($slider_images->count() > 0)
-                    <div class="row">
-                        <div class="col">
-                            <h2 class="fs-2 fw-bolder my-5">Company Deck </h2>
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                                <div class="carousel-indicators">
-                                    @for ($i = 0; $i <= $slider_images->count(); $i++)
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide-to="{{ $i }}" class="active" aria-current="true"
-                                            aria-label="Slide {{ $i }}"></button>
-                                    @endfor
-
-                                </div>
-                                <div class="carousel-inner">
-                                    @foreach ($slider_images as $slider_image)
-                                        <div class="carousel-item @if ($loop->first) active @endif">
-                                            <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}"
-                                                class="d-block w-100" alt="...">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                            <!-- <img src="images/desktop.png" class="img-fluid" alt="" srcset=""> -->
-                        </div>
-                    </div>
-                @endif
-            </div>
-            <div class="tab-pane fade p-2" id="deal-video" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <h3 class="fw-bolder">Videos</h3>
-                <br />
-                <div class="row">
-                    @foreach ($offer->offerVideos as $video)
-                        <div class="col-lg-4 mb-10">
-                            <iframe src="{{ $video->url }}" frameborder="0" style="width: 100%"
-                                height="350"></iframe>
-                            <br />
-                            <h3 class="text-center mt-3"> {{ $video->description }} </h3>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="tab-pane fade p-2" id="documents" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <h3 class="fw-bolder">Documents</h3>
-                <br>
-                <div class="row ">
-
-                    <div class="row gx-5">
-                        @foreach ($manual_offer_documents as $manual_offer_document)
-                            <div class="col-lg-4 mb-3  col-md-4 col-sm-6 col-xs-6 text-left"
-                                style="margin-bottom:6%!important">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        @if ($manual_offer_document->type == 'image')
-                                            <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                                <img src="{{ $manual_offer_document->getUrl() }}" alt=""
-                                                    height="250" width="250">
-                                            </a>
-                                        @elseif($manual_offer_document->type == 'pdf')
-                                            <a href="{{ $manual_offer_document->getUrl() }}" target="_blank">
-                                                <img src="{{ asset('media/PDF_file_icon.png') }}" alt=""
-                                                    width="40">
-                                            </a>
+                                @elseif($offerDetail->input == 'text')
+                                    <div class="col-lg-6 mt-4">
+                                        <h6>{{ $offerDetail->heading }}</h6>
+                                    </div>
+                                    <div class="col-lg-6 mt-4">
+                                        <h5>{{ $offerDetail->sub_heading }}</h6>
+                                    </div>
+                                    <div class="col-lg-12 mt-4">
+                                        {!! $offerDetail->description !!}
+                                    </div>
+                                @elseif($offerDetail->input == 'tiles')
+                                    <div class="row">
+                                        @if ($offerDetail->offerTiles)
+                                            @foreach ($offerDetail->offerTiles as $tiles)
+                                                <div class="col-lg-6 col-md-6  p-3">
+                                                    <figure class="figure">
+                                                        <img src="{{ asset('files/' . $tiles->path) }}"
+                                                            class="img img-thumbnail figure-img img-fluid rounded" alt="..."
+                                                            style="width:200px">
+                                                    </figure>
+                                                </div>
+                                            @endforeach
                                         @endif
                                     </div>
-                                    <div class="col-lg-10 text-left " style="padding-top:10px;">
-                                        <p style="font-size:20px;font-weight:600">
-                                            {{ Str::ucfirst($manual_offer_document->name) }} </p>
-                                    </div>
+                                @endif
+                            @endforeach
+                            </p>
+                            <hr>
+                            @if ($slider_images->count() > 0)
+
+                            <h1 class="tab-text py-lg-4 py-3">Pitch Deck</h1>
+
+                            <div class="row gx-0 gy-4">
+                                @foreach ($slider_images as $slider_image)
+                                <div class="col-lg-4">
+                                    <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" alt="" srcset="" class="img-fluid">
                                 </div>
-
-
+                                @endforeach
 
                             </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade p-2" id="updates" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <h3 class="fw-bolder">Updates</h3>
-                <br>
-                <div class="row ">
-                        @foreach ($offer->updates as $update)
-                            <div class="col-lg-12 "  style="margin-bottom:1%!important">
-                                 <p>
-                                    {!! $update->update !!}
-                                 </p>
-                                 <br>
-                                 <small>
-                                    Last Updated {{  $update->updated_at->diffForHumans() }}
-                                 </small>
-                            </div>
-                        @endforeach
-                </div>
-            </div>
-            <div class="tab-pane fade p-2" id="questions_answers" role="tabpanel" aria-labelledby="pills-contact-tab">
-
-                <div class="row">
-                    <div class="col-lg-6"> <h3 class="fw-bolder ">Q&A</h3> </div>
-                    <div class="col-lg-6 text-right" style="text-align: right">
-                        @if(Auth::user())
-                        <button class="btn btn-sm btn-info" type="button" data-bs-toggle="modal"
-                            data-bs-target="#PostQuestion" class="btn btn-outline-light rounded-circle"
-                            style=" border-radius:0;color:#fff"> Post A Question
-                        </button>
-                        @endif
-                    </div>
-                </div>
-
-                <hr>
-
-                @foreach ($offer->activeQuestions as $question)
-                    <div class="row">
-                        <div class="">
-                            <div class="media text-muted pt-3">
-                                <div class="col-lg-12">
-                                    <strong class="text-gray-dark">{{ $question->question }}</strong>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade p-2" id="videos" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="row gy-3">
+                                <h1 class="tab-text">Videos</h1>
+                                @foreach ($offer->offerVideos as $video)
+                                <div class="col-lg-4 m-3">
+                                    <iframe src="{{ $video->url }}" frameborder="0"></iframe>
+                                    <br>
+                                    <p class="text-center text-white"> {{ $video->description }} </p>
                                 </div>
-                                <p class="media-body pb-3 mt-2 mb-0 small lh-125 border-bottom border-gray">
-                                    @php
-                                        $answer = $question->answer;
-                                        $limit = 300;
-                                    @endphp
-                                    <span class="question-text">
-                                        {{ strlen($answer) > $limit ? substr($answer, 0, $limit) : $answer }}
-                                    </span>
-                                    @if (strlen($answer) > $limit)
-                                        <span class="read-more-content" style="display: none;">
-                                            {{ substr($answer, $limit) }}
-                                        </span>
-                                        <a href="#" class="read-more-link">Read More</a>
-                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-2" id="updates" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <h1 class="tab-text">Recent Updates</h1>
+
+                            @foreach ($offer->updates as $update)
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <p class="fw-bolder text-white mb-0">New Issuer Account Setup </p>
+                                </div>
+                                <div class="col-6 text-lg-end">
+                                    <p class="text-white mb-0"> Last Update {{  $update->updated_at->diffForHumans() }} </p>
+                                </div>
+                            </div>
+
+                            <div class=" my-3 ps-4 py-4 pe-3 bg-image-modal rounded">
+                                <div>
+                                    <p class=" fw-semibold tab-text  mb-0">
+                                        {!! $update->update !!}
+
+                                    </p>
+                                </div>
+                            </div>
+
+                            @endforeach
+
+
+                        </div>
+                        <div class="tab-pane fade p-2" id="qa" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <h1 class="tab-text">Q & A</h1>
+                            <p class="text-white"> <strong>Can’t find an answer to your question?</strong> Use the form
+                                at the bottom
+                                of
+                                this page to submit your questions.
+                            </p>
+
+
+                            @foreach ($offer->activeQuestions as $question)
+                            <div>
+                                <h5 class="fw-bolder fs-4 mb-0 text-white">
+                                  {{ Str::ucfirst($question->investor->name) }}
+                                </h5>
+                            </div>
+                            <div class="my-3 ps-4 py-4 pe-3 rounded bg-image-modal">
+                                <p class=" fw-semibold tab-text mb-0">
+                                    {{  $question->question }}
                                 </p>
-                                <h6 class="" style="font-size: 10px; padding-top: 10px;">
-                                    {{ $question->created_at->diffForHumans() }} Posted By {{ $question->investor->name }}
-                                </h6>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="ms-5">
+                                <h5 class="fw-bolder fs-4 mb-0 text-white">
+                                    @if($question->issuer){{ Str::ucfirst($question->issuer->name) }}@endif
+                                </h5>
+                            </div>
+                            <div class="my-3 ps-4 py-4 pe-3 ms-5 rounded bg-image-modal ">
+                                <p class=" fw-semibold tab-text mb-0">
+                                    {{ $question->answer }}
+                                </p>
+                                <div>
+                                </div>
+                            </div>
+
+                            @endforeach
+                            <h1 class="fw-bolder tab-text mt-5">Submit Question
+                            </h1>
+                            <form action="{{  route('post.offer.question') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="offer_id" value="{{ $offer->id }}">
+                                <div class="mb-3 text-end">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Maximum 500 Characters
+                                    </label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="question" required rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"  @if(!Auth::user())  disabled @endif  >Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 side-col-bg px-lg-4">
+                    <div class="my-lg-4 p-lg-4 bg-image-modal">
+                        <p class="text-white"><b>LAST CHANCE</b></p>
+                        <div class="text-white border-style-div text-center p-3">
+                            <p class="mb-0"><b>Closing on 3 nov</b></p>
+                            <p>@11.59 pm new York time</p>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col border-end">07<br>Day</div>
+                                <div class="col border-end">16<br>Hour</div>
+                                <div class="col border-end">09<br>Min</div>
+                                <div class="col">33<br>Sec</div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    <div class="row  text-white">
+                        <div class="col-4 border-end"><span class="blue">Offer Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
+                        <div class="col-4 border-end"><span class="blue">Offer Amount</span><br>${{ number_format($offer->size) }}</div>
+                        <div class="col-4 "><span class="blue">Securities Type</span><br>{{ ucfirst($offer->security_type)}}</div>
+                        <div class="py-2">
+                            <hr>
+                        </div>
+                        <div class="col-4 border-end"><span class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}</div>
+                        <div class="col-4"><span class="blue">Min. Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}</div>
+                        <div class="py-2">
+                            <hr>
+                        </div>
+                        <div>
+                            <p><b>Almost Sold out</b></p>
+                            <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 25%"></div>
+                            </div>
+                        </div>
+                        <div class="row pt-2 mx-0 px-0">
+                            <div class="col-6">
+                                <p>Total Investment Raised</p>
+                            </div>
+                            <div class="col-6 text-lg-end">
+                                <p>${{ number_format($offer->total_valuation) }}</p>
+                            </div>
+                        </div>
+                        <div class="row pt-2 mx-0 px-0">
+                            <div class="col-4">
+                                <span class="blue">Invest</span><br>min ${{ number_format($offer->investmentRestrictions->min_invesment) }}
+                            </div>
+                            <div class="col-8 text-lg-end">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$</span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="floatingInputGroup1"
+                                            placeholder="Username">
+                                        <label for="floatingInputGroup1">Invest</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-12 mx-auto">
+                            <button class="btn color_btn" type="button">Invest Now</button>
+                            <button class="btn transparent_btn" type="button">Add to Watchlist</button>
+                        </div>
+                        <div class="py-3">
+                            <hr>
+                        </div>
+                        <div>
+                            <p class="mb-0 pb-0"><b>Document(s)</b></p>
+                            <div class="py-3">
+                                <hr>
+                            </div>
+                            <div class="row">
+                                @foreach ($manual_offer_documents as $manual_offer_document)
+                                    @if($manual_offer_document->type == 'pdf')
+                                        <div class="col-10">
+                                            <img src="{{ asset('vue/images/pdf (1).png')}}" alt="">
+                                            <span class="ps-3"> {{ Str::ucfirst($manual_offer_document->name) }} </span>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="{{ $manual_offer_document->getUrl() }}" download="{{ Str::ucfirst($manual_offer_document->name) }}">
+                                                <img src="{{ asset('vue/images/Group 12584.png')}}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
 
 
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+    </section>
 
+
+
+    <footer class="bg-dark-color">
+        <div class="container">
+            <div class="row pt-lg-4 pb-lg-2">
+                <div class="col-lg-3">
+                    <a href="#">
+                        <img src="{{ asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
+                    </a>
+                </div>
+                <div class="col-lg-9 text-white">
+                    <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 text-lg-start ms-lg-0 ps-lg-0">
+                    <ul class="d-flex m-lg-0 py-lg-3 px-lg-0">
+                        <li class="nav-item px-lg-3">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item px-lg-3">
+                            <a class="nav-link" href="#">Educational Materials</a>
+                        </li>
+                        <li class="nav-item px-lg-3">
+                            <a class="nav-link" href="#">Privacy Policy</a>
+                        </li>
+                        <li class="nav-item px-lg-3">
+                            <a class="nav-link" href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 my-lg-auto text-lg-end">
+                    <img src="{{ asset('vue/images/social.png')}}" alt="Logo">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <hr>
+            <p class="text-white py-lg-4 text-lg-center my-0">© Copyright 2023 - investchainraise</p>
+        </div>
+    </footer>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-image-modal">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <a class="py-lg-4" href="#">
+                        <img src="{{ asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
+                    </a>
+                    <div class="d-grid gap-2">
+                        <button class="btn transparent_btn" type="button">Button</button>
+                        <button class="btn transparent_btn" type="button">Button</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
 
-    @if(Auth::user())
-        <div class="modal fade" id="PostQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content no-radius" style="border-radius: 0">
-                <form action="{{  route('post.offer.question') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                    <input type="hidden" name="investor_id" value="{{ Auth::user()->id }}">
-                <div class="modal-header">
-                    <h5 class="modal-title">Post Your Question</h5>
-                    <button type="button" style="border:none;background:#9e1338;color:#fff" class="close btn-sm btn-info closeQuestionPopup " data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body no-radius">
-                    <textarea name="question" id="" class="form-control" cols="20" rows="5" required placeholder="Please Enter Your Question"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm no-radius" style="border-radius: 0">Save changes</button>
-                </div>
-                </form>
-                </div>
-            </div>
-        </div>
-    @endif
-
-
-
-@endsection
-
-@section('page_js')
-    <script>
-        // Function to stop the Vimeo video when the modal is closed
-        function stopVimeoVideo() {
-            var iframe = document.getElementById('video');
-            var player = new Vimeo.Player(iframe);
-            player.pause(); // Pause the video
-        }
-
-        function stopYouTubeVideo() {
-            var youtubeIframe = document.getElementById('video');
-            var youtubePlayer;
-
-            // Check if the YouTube iframe API is ready
-            if (typeof YT !== 'undefined' && YT.Player) {
-                youtubePlayer = new YT.Player(youtubeIframe);
-
-                // Pause the YouTube video
-                youtubePlayer.pauseVideo();
-            }
-        }
-        // Attach the stopVimeoVideo function to the modal close event
-        // document.getElementById('video_close_button').addEventListener('click', stopVimeoVideo);
-
-        document.getElementById('video_close_button').addEventListener('click', function() {
-            stopVimeoVideo();
-            stopYouTubeVideo();
-        });
-
-        $(document).ready(function() {
-
-            $('#show-login-message').click(function() {
-                toastr["error"]('Need to be signed in to invest')
-            });
-
-        });
-    </script>
-
-    <script>
-        // Function to format a number as a currency value without any currency symbol
-        function formatCurrencyWithoutSymbol(number) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                currencyDisplay: 'narrowSymbol',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2
-            }).format(number);
-        }
-
-        // Get the input field
-        var inputField = document.getElementById('autoSizingInputGroup');
-
-        // Listen for input events on the input field
-        inputField.addEventListener('input', function() {
-            // Get the user's input
-            var inputValue = inputField.value;
-
-            // Remove non-numeric characters and any currency symbols
-            var numericValue = parseFloat(inputValue.replace(/[^0-9.]/g, ''));
-
-            // Check if the numericValue is a valid number
-            if (!isNaN(numericValue)) {
-                // Format the numeric value as a currency without any symbol and set it back in the input field
-                inputField.value = formatCurrencyWithoutSymbol(numericValue);
-            } else {
-                // If the input is not a valid number, keep the original input
-                inputField.value = inputValue;
-            }
-        });
-    </script>
-<script>
-    $(document).ready(function () {
-    $('.read-more-link').on('click', function (e) {
-        e.preventDefault();
-        var $readMoreLink = $(this);
-        var $readMoreContent = $readMoreLink.siblings('.read-more-content');
-
-        $readMoreContent.slideToggle();
-        $readMoreLink.hide(); // Hide the "Read More" link
-    });
-
-    $('.closeQuestionPopup').on('click', function (e) {
-        $('#PostQuestion').modal('hide')
-    });
-});
-    </script>
-
-@endsection
+</html>

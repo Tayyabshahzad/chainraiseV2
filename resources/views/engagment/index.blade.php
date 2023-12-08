@@ -178,6 +178,6 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
 
 @endsection

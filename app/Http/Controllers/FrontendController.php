@@ -46,11 +46,18 @@ class FrontendController extends Controller
 
         $offers = Offer::orderBy('id', 'desc')->where('status', 'active')->get();
         $offer_coming_soon = Offer::orderBy('id', 'desc')->where('status', 'coming-soon')->get();
-        return view('frontEnd.offer.index', compact('offers', 'offer_coming_soon'));
+
+        $activeOffers = Offer::orderBy('id', 'desc')->where('status', 'active')->take(3)->get();
+        $remainingOffers = Offer::orderBy('id', 'desc')->where('status', 'active')->skip(3)->take(PHP_INT_MAX)->get();
+
+
+        //return view('vue.index',compact('offers'));
+        return view('frontEnd.offer.index', compact('activeOffers', 'remainingOffers'));
     }
 
     public function detail($slug)
     {
+
 
         $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'offerVideos', 'eDocuments', 'offerEsing')->where('slug', $slug)->first();
         $slider_images = DB::table('media')
@@ -786,13 +793,13 @@ class FrontendController extends Controller
 
         $request->validate([
             'offer_id' => 'required',
-            'investor_id' => 'required',
+            //'investor_id' => 'required',
             'question' => 'required'
         ]);
         $offer = Offer::find($request->offer_id)->issuer_id;
         $offerQuestion = new OfferQuestion;
         $offerQuestion->offer_id = $request->offer_id;
-        $offerQuestion->investor_id = $request->investor_id;
+        $offerQuestion->investor_id = Auth::user()->id;
         $offerQuestion->issuer_id = $offer;
         $offerQuestion->question = $request->question;
         $offerQuestion->status = 'inactive';

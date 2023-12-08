@@ -2,7 +2,7 @@
 @section('title', 'Account Users')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page_content')
     <div class="d-flex flex-column-fluid">
@@ -81,13 +81,13 @@
                                                 <input type="password" class="form-control" placeholder="Re-enter password"
                                                     name="password_confirmation" id="confirm_password">
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <button type="submit" class="btn btn-success btn-square"> Update</button>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
     <script>
         var avatar5 = new KTImageInput('kt_image_5');
     </script>

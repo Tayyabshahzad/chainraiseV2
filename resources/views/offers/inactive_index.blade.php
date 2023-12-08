@@ -30,8 +30,8 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">In Active Offers</li>
-                       
-                         
+
+
                         <!--end::Item-->
                     </ul>
                     <!--end::Breadcrumb-->
@@ -59,10 +59,10 @@
                             <div class="card card-xl-stretch mb-xl-8">
                                 <div class="card-body p-0">
                                     <div class="px-9 pt-7 card-rounded h-275px w-100"
-                                        @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null) 
+                                        @if ($offer->getFirstMediaUrl('offer_image', 'thumb') != null)
                                             style="background-image: url('{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}');background-size:100%"
                                         @else
-                                            style="background-image: url('')" 
+                                            style="background-image: url('')"
                                         @endif
                                         >
                                         <div class="d-flex text-center flex-column text-white pt-8">
@@ -199,13 +199,13 @@
                                         @hasrole('investor')
                                             <div class="row">
                                                 <div class="col-lg-12" style="text-align: center">
-                                                    <a href="{{ route('dashboard') }}" class="btn btn-info btn-sm no-radius" > 
+                                                    <a href="{{ route('dashboard') }}" class="btn btn-info btn-sm no-radius" >
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                         @endhasrole
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -221,11 +221,11 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
     <script></script>
     <script>
         $('.deleteOffer').click(function() {
-            var id = $(this).data('id'); 
+            var id = $(this).data('id');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -243,7 +243,7 @@
                         url: "{{ route('offers.delete') }}",
                         method: "POST",
                         data: {
-                            id: id, 
+                            id: id,
                         },
                         success: function(result) {
                             if(result.status == true){
@@ -260,7 +260,7 @@
 
         });
 
-       
+
     </script>
 
 

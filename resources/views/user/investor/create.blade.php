@@ -3,7 +3,7 @@
 @section('page_name','Individual Investor')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page_content')
 
@@ -99,7 +99,7 @@
                                     <label>Last Name: <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name')}}"/>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group row mb-10">
                                 <div class="col-lg-2">
                                     <label>Title:</label>
@@ -117,18 +117,18 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" placeholder="-000-000-0000"  name="phone" 
-                                            id="phone_number" 
-                                            value="{{ old('phone')}}"/> 
+                                            <input type="text" class="form-control" placeholder="-000-000-0000"  name="phone"
+                                            id="phone_number"
+                                            value="{{ old('phone')}}"/>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <label>Date of Birth <span class="text-danger">*</span> </label> 
+                                    <label>Date of Birth <span class="text-danger">*</span> </label>
                                     <input type="date" class="form-control"  placeholder="Date of Birth*" required name="dob" value="{{ old('dob')}}">
                                 </div>
-                                <div class="col-lg-2 "> 
+                                <div class="col-lg-2 ">
                                     <div class="image-input image-input-outline image-input-empty" data-kt-image-input="true" style="background-image: url('{{asset('assets/media/svg/avatars/blank.svg')}}')">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-125px h-125px" style="background-image: none;"></div>
@@ -241,9 +241,9 @@
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-lg-12 text-right" style="text-align: right"> 
+                                <div class="col-lg-12 text-right" style="text-align: right">
                                     <button type="submit" class="btn-sm no-radius btn btn-dark">Save Account</button>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -87,7 +87,7 @@
                 <img src="{{ $offer->getFirstMediaUrl('offer_image', 'thumb') }}" class="img-fluid b-logo" alt="..." style="width:10%">
             </div>
             <div class="col-6 text-end">
-                <img src="{{ asset('assets/v2_images/social icon.png') }}" class="img-fluid" alt="...">
+                <img src="{{ env('APP_URL') . '/v2_images/social icon.png') }}" class="img-fluid" alt="...">
             </div>
         </div>
     </div>
@@ -160,8 +160,8 @@
                         @endif
                     @endforeach
                 </p>
-                 
-                
+
+
             </div>
             <div class="tab-pane fade p-2" id="deal-terms" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h3 class="fw-bolder">Deal Terms</h3>

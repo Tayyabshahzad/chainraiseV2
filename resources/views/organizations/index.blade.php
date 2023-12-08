@@ -2,7 +2,7 @@
 @section('title', 'Organizations')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page_content')
 
@@ -70,7 +70,7 @@
                                 </td>
                             </tr>
                             @endforeach
-                    
+
                         </tbody>
                     </table>
                     <!--end: Datatable-->
@@ -79,9 +79,9 @@
 
         </div>
         <!--end::Container-->
- 
+
     </div>
- 
+
 
 <!-- Modal-->
 @include('organizations.partials.index')
@@ -91,17 +91,17 @@
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
+
     <script>
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-         
+
          $("#organizations-table").on("click", ".editOrganization", function(e) {
-             
+
             var id = $(this).data('id');
             var name = $(this).data('name');
             var category = $(this).data('category');
@@ -137,8 +137,8 @@
                             } else {
                                 toastr.error(response.message, "error");
                             }
-                            
-                            
+
+
                         }
                     });
                 }

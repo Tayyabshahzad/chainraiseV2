@@ -1624,7 +1624,7 @@
     <div class="tab-pane fade" id="kt_engagement_tab" role="tabpanel">
         <div class="col-lg-3 ">
             <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-md-200px mb-5 mb-xl-10"
-                style="background-color: #F1416C;background-image:url({{ asset('assets/media/patterns/vector-1.png') }})">
+                style="background-color: #F1416C;background-image:url({{ env('APP_URL') . '/media/patterns/vector-1.png' }})">
                 <!--begin::Header-->
                 <div class="card-header pt-5">
                     <!--begin::Title-->
@@ -1828,7 +1828,7 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
 
     <script></script>
     <script>

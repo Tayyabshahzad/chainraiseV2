@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ env('APP_URL') . '/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -57,11 +57,11 @@
         <!--begin::Page bg image-->
         <style>
             body {
-                background-image: url(' {{ asset('assets/media/auth/bg4.jpg') }}');
+                background-image: url(' {{ env('APP_URL') . '/media/auth/bg4.jpg') }}');
             }
 
             [data-theme="dark"] body {
-                background-image: url(' {{ asset('assets/media/auth/bg4-dark.jpg') }}');
+                background-image: url(' {{ env('APP_URL') . '/media/auth/bg4-dark.jpg') }}');
             }
         </style>
         <!--end::Page bg image-->
@@ -96,7 +96,7 @@
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
                                 <h1 class="text-dark fw-bolder mb-3">Sign In</h1>
-                               
+
                             </div>
                             <!--begin::Heading-->
                             <!--begin::Login options-->
@@ -107,7 +107,7 @@
                                     <a href="#"
                                         class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
                                         <img alt="Logo"
-                                            src="{{ asset('assets/media/svg/brand-logos/google-icon.svg') }}"
+                                            src="{{ env('APP_URL') . '/media/svg/brand-logos/google-icon.svg') }}"
                                             class="h-15px me-3" />Sign in with Google</a>
                                     <!--end::Google link=-->
                                 </div>
@@ -118,10 +118,10 @@
                                     <a href="#"
                                         class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
                                         <img alt="Logo"
-                                            src="{{ asset('assets/media/svg/brand-logos/apple-black.svg') }}"
+                                            src="{{ env('APP_URL') . '/media/svg/brand-logos/apple-black.svg') }}"
                                             class="theme-light-show h-15px me-3" />
                                         <img alt="Logo"
-                                            src="{{ asset('assets/media/svg/brand-logos/apple-black-dark.svg') }}"
+                                            src="{{ env('APP_URL') . '/media/svg/brand-logos/apple-black-dark.svg') }}"
                                             class="theme-dark-show h-15px me-3" />Sign in with Apple</a>
                                     <!--end::Google link=-->
                                 </div>
@@ -202,11 +202,11 @@
     <!--begin::Javascript-->
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/js/custom/authentication/sign-in/general.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/authentication/sign-in/general.js') }}"></script>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     <script></script>

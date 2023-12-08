@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\RegCFRepositoryInterface;
 use App\Repositories\OfferRepository;
 use App\Repositories\RegCFRepository;
+use Illuminate\Support\Facades\DB;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
          if (env('APP_ENV_URL') === 'production') {
              \URL::forceScheme('https');
          }
+
         $accreditations = Accreditation::get();
         view()->share('accreditations', $accreditations);
     }

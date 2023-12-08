@@ -271,7 +271,7 @@
                                                                     width="600" valign="top" bgcolor="#1B1B1B">
                                                                     <!--[if gte mso 9]>
             <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:547px;">
-                <v:fill type="frame" src="{{ asset('assets/email_images/header-7-image-2.jpg') }}" color="#1B1B1B"></v:fill>
+                <v:fill type="frame" src="{{ env('APP_URL') . '/email_images/header-7-image-2.jpg') }}" color="#1B1B1B"></v:fill>
                 <v:textbox inset="26px,29px,26px,26px">
                     <div>
             <![endif]-->
@@ -485,7 +485,7 @@
                                                                                                                         valign="top">
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/facebook-gray.png') }}"
+                                                                                                                            <img src="{{ env('APP_URL') . '/email_images/facebook-gray.png') }}"
                                                                                                                                 width="20"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -494,7 +494,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/twitter-gray.png') }}"
+                                                                                                                            <img src="{{ env('APP_URL') . '/email_images/twitter-gray.png') }}"
                                                                                                                                 width="21"
                                                                                                                                 height="18"
                                                                                                                                 alt=""
@@ -503,7 +503,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/instagram-gray.png') }}"
+                                                                                                                            <img src="{{ env('APP_URL') . '/email_images/instagram-gray.png') }}"
                                                                                                                                 width="21"
                                                                                                                                 height="20"
                                                                                                                                 alt=""
@@ -512,7 +512,7 @@
                                                                                                                         <span>&nbsp;&nbsp;</span>
                                                                                                                         <a href="http://example.com"
                                                                                                                             style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('assets/email_images/pinterest-gray.png') }}"
+                                                                                                                            <img src="{{ env('APP_URL') . '/email_images/pinterest-gray.png') }}"
                                                                                                                                 width="20"
                                                                                                                                 height="20"
                                                                                                                                 alt=""

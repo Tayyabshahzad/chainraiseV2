@@ -26,4 +26,8 @@ class OfferQuestion extends Model
     public function investor(){
         return $this->belongsTo(User::class,'investor_id');
     }
+
+    public function issuer(){
+        return $this->belongsTo(User::class,'issuer_id');
+    }
 }

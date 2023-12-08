@@ -2,7 +2,7 @@
 @section('title', 'Account Issuer Create')
 @section('page_head')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .toast {
         top: 10px;
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-lg-3 ">
                                 <label for=""> Upload Profile Image </label><br>
-                                <div class="text-center image-input image-input-empty image-input-outline" id="kt_image_5" style="background-image: url({{ asset('assets/media/users/blank.png') }})">
+                                <div class="text-center image-input image-input-empty image-input-outline" id="kt_image_5" style="background-image: url({{ env('APP_URL') . '/media/users/blank.png') }})">
                                     <div class="image-input-wrapper"></div>
 
                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
@@ -216,16 +216,15 @@
 <script>
     var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 </script>
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-<script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-daterangepicker.js') }}"></script>
+<script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
+<script src="{{ env('APP_URL') . '/js/pages/crud/forms/widgets/bootstrap-daterangepicker.js' }}"></script>
 
 <script>
     $(function() {
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('
-            user.index ') !!}',
+            ajax: '{!! route('user.index ') !!}',
             columns: [{
                     data: function(data) {
                         return data.DT_RowIndex;

@@ -1,4 +1,4 @@
- 
+
 @extends('layouts.app')
 @section('title', 'Dashboard')
 @section('page_name', 'Dashboard')
@@ -619,7 +619,7 @@
                                                                     </label>
                                                                     <input type="text" class="form-control" name="new_investment_amount" id="" value="{{ $investment_amount}}">
                                                                 </div>
-                                                                 
+
                                                                 <div class="col-lg-12 pt-3 fw-bold text-center"
                                                                     style="color:#b73d3d!important">
                                                                     After updating, please review the above question again, and
@@ -819,7 +819,7 @@
                                                 </div>
                                             </div>
                                         @elseif($investmentStep->title == 'E-Sign Document')
-                                         
+
                                             <div class="content_{{ $investmentStep->priority }}"
                                                 data-kt-stepper-element="content">
                                                 <div class="w-100">
@@ -831,14 +831,14 @@
                                                         SIGN SUBSCRIPTION AGREEMENT & TOKEN GRANK
                                                     </h5>
                                                     <div class="row row-cols-1 row-cols-md-2 g-5">
-                                                        <div class="col-lg-12">  
+                                                        <div class="col-lg-12">
                                                             <input type="hidden" name="templates" value="{{  $offer->offerEsing->template_id}}"/>
-                                                            <button type="button" class="no-radius btn btn-sm btn-dark view_template" 
+                                                            <button type="button" class="no-radius btn btn-sm btn-dark view_template"
                                                             data-template="{{  $offer->offerEsing->template_id}}"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#e_template_model" >
-                                                               Get Template Name  
-                                                            </button>                                                           
+                                                               Get Template Name
+                                                            </button>
                                                             <div class="row">
                                                                 <div class="col-lg-12 mt-5" style="text-align: right">
                                                                     <button type="button"
@@ -846,8 +846,8 @@
                                                                         btn btn-sm btn-dark no-radius move_to_next"
                                                                         data-order="{{ $investmentStep->priority }}">
                                                                         Next
-                                                                    </button> 
-                                                                </div>  
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             @if($loop->last)
                                                             <div class="row row-cols-1 row-cols-md-2 g-5">
@@ -865,7 +865,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif 
+                                        @endif
                                     @endforeach
                                     <div class="modal fade" id="e_sign_model" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog mw-650px">
@@ -896,10 +896,10 @@
                                                             var mxConnect = new window.MXConnect({
                                                                 id: "load_widget", //id of where the widget will load into
                                                                 iframeTitle: "Connect",
-                                                                
+
                                                                 onEvent: function(type, payload) {
-                                                                  
-                                                                   arr.push(payload.member_guid); 
+
+                                                                   arr.push(payload.member_guid);
                                                                    $('#user_guid').val(arr);
                                                                    console.log(arr);
                                                                 },
@@ -948,7 +948,7 @@
                         <li>
                             Name: <b class="template_name"></b>
                         </li>
-                    </ul>    
+                    </ul>
                 </div>
                 <!--end::Modal body-->
             </div>
@@ -957,7 +957,7 @@
     </div>
 @endsection
 @section('page_js')
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-account.js') }}"></script>
     <script>
         $('body').on('click', '.move_to_next', function() {
             // $('.current').removeClas('current');
@@ -970,7 +970,7 @@
             $('.content_' + new_order).addClass('current');
         });
         $('body').on('click', '.check_kyc', function(event) {
-    
+
             event.preventDefault();
             $('.spinner').removeClass('d-none');
             $('.check_kyc').addClass('d-none');
@@ -1001,7 +1001,7 @@
                         }
                         if (response.status == 200) {
                             $('.check_kyc').addClass('d-none');
-                            //$('.submit_for_step_3').removeClass('d-none'); 
+                            //$('.submit_for_step_3').removeClass('d-none');
                             toastr.success('Verification Completed', "Success");
                             setTimeout(function() {
                                 $('.kyc_move').click()
@@ -1061,7 +1061,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var template = $(this).data('template');  
+            var template = $(this).data('template');
             var url = '{{ route('invest.get.template') }}';
             $.ajax({
                 url: url,
@@ -1076,9 +1076,9 @@
             });
 
 
-            
+
         });
-        
+
     </script>
     <script></script>
 @endsection

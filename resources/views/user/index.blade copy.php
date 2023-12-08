@@ -352,22 +352,22 @@
                                                                     @if ($users->currentPage() > 1)
                                                                         <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Previous</a></li>
                                                                     @endif
-                                                    
+
                                                                     @for ($i = 1; $i <= $users->lastPage(); $i++)
                                                                         <li class="page-item {{ ($i == $users->currentPage()) ? 'active' : '' }}">
                                                                             <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
                                                                         </li>
                                                                     @endfor
-                                                    
+
                                                                     @if ($users->hasMorePages())
                                                                         <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}">Next</a></li>
                                                                     @endif
                                                                 </ul>
                                                             </nav>
-                                                            
+
                                                         </td>
                                                     </tr>
-                                                    
+
 
 
                                                 </tbody>
@@ -395,7 +395,7 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $('.deleteUser').click(function() {

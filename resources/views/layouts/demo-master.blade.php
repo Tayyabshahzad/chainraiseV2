@@ -11,11 +11,11 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('media/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('front-end/css/style.css') }}">
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" /> 
+    <link href="{{ env('APP_URL') . '/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-    <title> Chain Rasied Portal | @yield('title') </title> 
+    <title> Chain Rasied Portal | @yield('title') </title>
     <style>
         .bg-image {
             background-image: url("{{ asset('media/portfolio/background-chainraise.jpg') }}");
@@ -110,7 +110,7 @@
             font-style: italic;
             margin-top:6px;
         }
-        
+
     </style>
     @section('page_head')
     @show
@@ -163,8 +163,8 @@
             </div>
         </div>
     </div>
-    
- 
+
+
 
 
     @section('content')
@@ -190,8 +190,8 @@
                                 class="col-3 border border-dark d-flex align-items-center justify-content-center py-2 ">
                                 <a href="{{ route('login.google') }}">
                                     <i class="fab fa-google" style="font-size: 25px;"></i>
-                                </a> 
-                            </div> 
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="container py-3 px-5 ">
@@ -211,7 +211,7 @@
                         <div class="d-flex flex-column text-center">
                             <label class="error error_message"></label>
                             <label class="success success_message"></label>
-                            
+
                             <form id="loginForm">
                                 <div class="my-3">
                                     <input type="email" class="form-control" id="email"
@@ -283,8 +283,8 @@
                                 class="col-3 border border-dark d-flex align-items-center justify-content-center py-2 ">
                                 <a href="{{ route('login.google') }}">
                                     <i class="fab fa-google" style="font-size: 25px;"></i>
-                                </a> 
-                            </div> 
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="container py-3 px-5 ">
@@ -326,7 +326,7 @@
                                 <div class="my-3 ">
                                     <input type="password" class="form-control user_password" id="password12"
                                         placeholder="Your password..." required name="password_confirmation">
-                                </div> 
+                                </div>
                                 <div class="row">
                                     <div class="col-5 d-flex align-items-center">
                                         <div class="form-group form-check">
@@ -364,7 +364,7 @@
     </div>
 
 
-   
+
 
 
 
@@ -397,9 +397,9 @@
                     <h5 class="text-uppercase mb-4 cc">Company</h5>
 
                     <ul class="list-unstyled">
-                        
+
                         <li>
-                            <a href="{{ asset('assets/documents/terms-of-Use-ChainRaise.pdf') }}" download="Terms-of-Use-ChainRaise.pdf" class="text-white">Terms & Conditions</a>
+                            <a href="{{ env('APP_URL') . '/documents/terms-of-Use-ChainRaise.pdf') }}" download="Terms-of-Use-ChainRaise.pdf" class="text-white">Terms & Conditions</a>
                         </li>
                         <li>
                             <a href="{{ route('privacy.policy') }}" class="text-white">Privacy Policy</a>
@@ -456,7 +456,7 @@
                         <p>Thank you for using the Site. If you have questions, please contact us at&nbsp;<a href="mailto:info@chainraise.io">info@chainraise.io</a></p>
                         </div>
 
-                     
+
                 </div>
             </div>
             <!--Grid row-->
@@ -464,14 +464,14 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-      
-        
+
+
         <!-- Copyright -->
     </footer>
 
 
 
-    
+
 <script>
     $(document).ready(function() {
         $('.show_password').change(function() {
@@ -492,7 +492,7 @@
 
         $('.account_type').click(function() {
             $('.account_type_wrapper_row').hide('slow');
-           
+
             $('.row_individual').removeClass('d-none');
             $(window).scrollTop(0);
             if ($(this).val() == 'individual') {
@@ -530,7 +530,7 @@
             $('#update_profile').submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
-               
+
                 var value = formData.get('account_type');
                 console.log(value)
                 $.ajax({
@@ -552,9 +552,9 @@
                         console.log(xhr.responseText);
                     }
                 });
-            }); 
+            });
 
-        }); 
+        });
 
     });
 
@@ -591,32 +591,32 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: "{{  route('login') }}",  
+                    url: "{{  route('login') }}",
                     data: formData,
-                    success: function(response) {  
+                    success: function(response) {
                         console.log(response)
-                        $('.success_message').text('Login Success Page Reloading  ....'); 
+                        $('.success_message').text('Login Success Page Reloading  ....');
                         setTimeout(function() {
                            // location.reload();
                            window.location = response.route;
-                        }, 2000); 
+                        }, 2000);
                     },
                     error: function(xhr, status, error) {
-                         
-                        var errorMessage = JSON.parse(xhr.responseText);   
+
+                        var errorMessage = JSON.parse(xhr.responseText);
                         $('.error_message').text(errorMessage.message);
                         setTimeout(function() {
                         $('.submit_button').prop('disabled', false);
                         }, 100);
-                       // $('.submit_button').prop('disabled ',false); 
+                       // $('.submit_button').prop('disabled ',false);
 
-                        $('.submit_button').text('Sign In'); 
-                    } 
+                        $('.submit_button').text('Sign In');
+                    }
                 });
             }
         });
     });
-</script> 
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
@@ -639,10 +639,10 @@
 @endif
 
 
- 
-    @if ($errors->any()) 
-        
-        <script> 
+
+    @if ($errors->any())
+
+        <script>
             var notyf = new Notyf({
                 position: {
                     x: 'right',
@@ -650,14 +650,14 @@
                 },
             });
             @foreach ($errors->all() as $error)
-                notyf.error('{{  $error }}'); 
-            @endforeach 
-           
+                notyf.error('{{  $error }}');
+            @endforeach
+
          </script>
-       
+
     @endif
 
-    
+
         @if (session('error'))
             <script>
                 var notyf = new Notyf({
@@ -666,7 +666,7 @@
                     y: 'top',
                 },
                 });
-                notyf.error('{{ session('error') }}'); 
+                notyf.error('{{ session('error') }}');
             </script>
         @endif
 

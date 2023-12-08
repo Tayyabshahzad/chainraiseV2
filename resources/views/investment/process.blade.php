@@ -6,7 +6,9 @@
     <!-- Add SweetAlert CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/style1-v3.css') }}">
+
+    <link rel="stylesheet" href="{{ env('APP_URL') . '/css/style1-v3.css' }}">
+
     <style>
         ::placeholder {
 
@@ -261,8 +263,8 @@
             <div class="col-lg-4">
                 <div class="border text-center p-5 mb-4" style="border-radius: 40px;">
                     <h6>Deal Terms</h6>
-                    <h6>Future Equity</h6>
-                    <a href="">${{ number_format($offer->total_valuation) }} valuation cap</a>
+                    {{-- <h6>Future Equity</h6>
+                    <a href="">${{ number_format($offer->total_valuation) }} valuation cap</a> --}}
                     <p class="mt-3">
                         {{ $offer->terms }}.
                     </p>
@@ -273,7 +275,7 @@
                         reservation is ready to convert into an
                         investment</p>
                 </div> --}}
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <h4 class="fw-bolder  mb-3">FAQ & Help </h4>
                     @if ($offer->faqs)
                         <ul>
@@ -288,7 +290,7 @@
                         </ul>
                     @endif
 
-                </div>
+                </div> --}}
                 <div class="mb-3">
                     <h4 class="fw-bolder mb-3">Need help?
                     </h4>
@@ -370,7 +372,9 @@
                             @csrf
 
                             <div class="text-center d-none kyc_loader_image" style="position: absolute;top:20%">
-                                <img src="{{ asset('assets/media/spinner.svg') }}" alt="">
+
+                                <img src="{{ env('APP_URL') . '/media/spinner.svg' }}" alt="">
+
                             </div>
                             <div class="col-md-12 ">
                                 <div class="row mt-3">
@@ -617,7 +621,8 @@
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-18 pt-5 pb-15">
                         <div class="text-center loader_image">
-                            <img src="{{ asset('assets/media/spinner.svg') }}" alt="">
+                            <img src="{{ env('APP_URL') . '/media/spinner.svg' }}" alt="">
+
                         </div>
                         <div id="load_widget"></div>
                         <input type="hidden" name="user_guid" id="user_guid" required>
@@ -642,7 +647,8 @@
                     <!--begin::Modal header-->
                     <div class="modal-body scroll-y mx-5 mx-xl-18 pt-5 pb-15">
                         <div class="text-center loader_image">
-                            <img src="{{ asset('assets/media/spinner.svg') }}" alt="">
+                            <img src="{{ env('APP_URL') . '/media/spinner.svg' }}" alt="">
+
                         </div>
                         <div class="row" id="account_details">
                         </div>
