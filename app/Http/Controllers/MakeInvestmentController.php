@@ -63,10 +63,9 @@ class MakeInvestmentController extends Controller
     public function submitInvestment(Request $request)
     {
 
-
         $request->validate([
             'offer_id' => 'required',
-            'investment_amount' => 'required',
+            'investment_amount' => 'nullable', // Making investment_amount optional
         ]);
         if (Auth::user()->status  == 'inactive') {
             return redirect()->back()->with('error', 'Your account has been inactive, Please Contact System Administrator');
@@ -83,7 +82,6 @@ class MakeInvestmentController extends Controller
             return redirect()->back()->with('error', 'Only User With Role Investor Can Invest');
         }
         $investment_amount = $request->investment_amount;
-
         $offer = Offer::with('user', 'user.userDetail', 'investmentRestrictions', 'offerDetail', 'investmentSteps')->find($request->offer_id);
         $investmentSteps = InvestmentStep::where('offer_id', $offer->id)->orderBy('priority', 'asc')->get();
         $user = User::where('id', Auth::user()->id)->first();

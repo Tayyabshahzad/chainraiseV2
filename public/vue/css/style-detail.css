@@ -56,13 +56,21 @@ body {
     background-color: #E86C12;
 }
 
-.rotate-div {
+/* .rotate-div {
     transform: rotate(-310deg);
 
     right: -10% !important;
     width: 200px;
     border-top-right-radius: 100px;
 
+} */
+.rotate-div {
+    transform: rotate(-310deg);
+    right: -5% !important;
+    top: 30px !important;
+    width: 120px !important;
+    /* border-top-right-radius: 100px; */
+    border-radius: 70px 70px 0px 0px !important;
 }
 
 .trend {
@@ -92,6 +100,25 @@ h1 {
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     font-weight: 700 !important;
+}
+
+h1.explore {
+    font-size: 55px !important;
+}
+
+h1.explore-detail {
+    font-size: 40px !important;
+}
+
+h1.tab-text {
+    font-size: 24px !important;
+}
+
+p.tab-text {
+    font-family: var(--secondry-font);
+    font-size: 16px !important;
+    text-align: justify !important;
+    color: white !important;
 }
 
 h1.second {
@@ -125,6 +152,16 @@ h6 {
     border: 1px solid white !important;
 }
 
+.nav-link {
+    color: white !important;
+    font-family: var(--secondry-font);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    font-weight: 700 !important;
+    font-family: var(--secondry-font);
+}
 
 .bg-color-dark {
     background: linear-gradient(to right, #4e54c8, #8f94fb);
@@ -212,6 +249,84 @@ ul.dropdown-menu.show {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.blue {
+    color: #42E8E0;
+}
+
+.rounded-search {
+    border-radius: 100px !important;
+}
+
+.rounded-search.p-5 {
+    position: absolute !important;
+    bottom: 20px !important;
+}
+
+.card.gradient-box {
+    background-color: none !important;
+}
+
+.gradient-box {
+    /* border-width: 3px !important;
+    border-style: solid !important;
+
+    border-image:
+        linear-gradient(to left,
+            #715FDE,
+            #2F87A5) 1 100% !important; */
+    border: 1px solid #715FDE !important;
+    border-radius: 70px 70px 50px 50px !important;
+    box-shadow: 10px 10px 5px #715FDE;
+
+}
+
+.gradient-box-2 {
+    /* border-width: 3px !important;
+    border-style: solid !important;
+
+    border-image:
+        linear-gradient(to left,
+            #715FDE,
+            #2F87A5) 1 100% !important; */
+    border: 1px solid #715FDE !important;
+    border-radius: 70px 70px 50px 50px !important;
+    box-shadow: 10px 10px 5px #2F87A5;
+
+}
+
+.container-bg {
+    background-image: url('../images/Mark\ group.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.team-bg {
+    background-image: url('../images/Rectangle\ 96.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.side-col-bg {
+    background-image: url('../images/Rectangle\ 101.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.border-style-div {
+    border: 1px dashed white !important;
+    border-radius: 5px;
+}
+
+.play-btn {
+    position: absolute;
+    text-align: center;
+    top: 30%;
+}
+
 
 @media only screen and (max-width: 768px) {
 

@@ -601,18 +601,18 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
-    <script src="{{ env('APP_URL') . '/js/custom/utilities/modals/create-account.js' }}"></script>
-    <script src="{{ env('APP_URL') . '/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
 
-    <script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js' }}"></script>
-    <script src="{{ env('APP_URL') . '/js/scripts.bundle.js' }}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.js' }}"></script>
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ env('APP_URL') . '/js/custom/apps/subscriptions/add/advanced.js' }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/subscriptions/add/advanced.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>

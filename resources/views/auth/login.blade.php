@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{ env('APP_URL') . '/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ env('APP_URL') . '/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -57,11 +57,11 @@
         <!--begin::Page bg image-->
         <style>
             body {
-                background-image: url(' {{ env('APP_URL') . '/media/auth/bg4.jpg') }}');
+                background-image: url('{{ asset('media/auth/bg4.jpg') }}');
             }
 
             [data-theme="dark"] body {
-                background-image: url(' {{ env('APP_URL') . '/media/auth/bg4-dark.jpg') }}');
+                background-image: url('{{ asset('media/auth/bg4-dark.jpg') }}');
             }
         </style>
         <!--end::Page bg image-->
@@ -73,7 +73,7 @@
                 <div class="d-flex flex-center flex-lg-start flex-column">
                     <!--begin::Logo-->
                     <a href="{{ route('login') }}" class="mb-7">
-                        <img alt="Logo" src="{{asset('assets/logo/logo.png')}}" class="h-50px me-3" />
+                        <img alt="Logo" src="{{ asset('assets/logo/logo.png')}}" class="h-50px me-3" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
@@ -215,11 +215,11 @@
     <!--begin::Javascript-->
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{ env('APP_URL') . '/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ env('APP_URL') . '/js/scripts.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ env('APP_URL') . '/js/custom/authentication/sign-in/general.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/authentication/sign-in/general.js') }}"></script>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     <script></script>

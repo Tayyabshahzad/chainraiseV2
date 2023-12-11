@@ -208,7 +208,9 @@ Route::group(['as'=> 'invest.','prefix'=>'invest','middleware' => ['auth','verif
 
 
 
-Route::get('login', function () {  return redirect()->route('index'); })->name('login');
+Route::get('login', function () {
+      return view('auth.login');
+ })->name('login');
 Route::get('login-test', function () { return view('auth.login_test');});
 Route::get('db2', function () {   return view('layouts.dashboard-issuer'); });
 Route::group(['as'=> 'role.','prefix'=>'roles','middleware' => ['auth','verified','check.profile.complete'],'namespace'=>'App\Http\Controllers\Role'], function () {
