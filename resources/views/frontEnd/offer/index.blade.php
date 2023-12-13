@@ -91,7 +91,7 @@
                                             <p class="card-text text-white">{{  $active->short_description  }}</p>
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <p class="text-white mb-0 pb-0">Offer Type</p>
+                                                    <p class="text-white mb-0 pb-0">Min Invesment</p>
                                                     <b class="text-white">{{    $active->investmentRestrictions->min_invesment  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -141,7 +141,7 @@
                                             <p class="card-text text-white">{{  $active->short_description  }}</p>
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <p class="text-white mb-0 pb-0">Offer Type</p>
+                                                    <p class="text-white mb-0 pb-0">Min Invesment</p>
                                                     <b class="text-white">{{    $active->investmentRestrictions->min_invesment  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
