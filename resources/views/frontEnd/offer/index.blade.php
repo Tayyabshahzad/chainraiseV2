@@ -67,6 +67,8 @@
 </section>
 <section class="bg-dark-color p-lg-5 p-3">
     <div class="container">
+
+
         <div class="row">
             <div class="col-12">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -88,7 +90,12 @@
                                                 <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 100px;height:100px"  class="img-fluid shield">
                                             </div>
                                             <h5 class="card-title text-white"> {{ $active->name }} </h5>
-                                            <p class="card-text text-white">{{  $active->short_description  }}</p>
+                                            <div style="height: 80px">
+                                                <p class="card-text text-white" style="min-height:20px">{{  substr($active->short_description, 0, 80); }}</p>
+                                            </div>
+
+
+
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Min Invesment</p>
@@ -138,7 +145,10 @@
                                                 <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 100px;height:100px" class="img-fluid shield">
                                             </div>
                                             <h5 class="card-title text-white"> {{ $active->name }} </h5>
-                                            <p class="card-text text-white">{{  $active->short_description  }}</p>
+
+                                            <div style="height: 80px">
+                                                <p class="card-text text-white" style="min-height:20px">{{  substr($active->short_description, 0, 80); }}</p>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Min Invesment</p>
