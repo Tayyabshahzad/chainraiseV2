@@ -92,7 +92,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
-                                                    <b class="text-white">{{  $active->short_description  }}</b>
+                                                    <b class="text-white">{{    $active->investmentRestrictions->min_invesment  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
@@ -107,11 +107,11 @@
                                                 Available for 30
                                                 days.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
-                                                <form action="{{ route('invest.submit') }}">
+                                                {{-- <form action="{{ route('invest.submit') }}">
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
-                                                </form>
-
+                                                </form> --}}
+                                                <a href="{{ $active->ext_url }}" target="_blank" class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</a>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button">Learn  More</a>
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
-                                                    <b class="text-white">{{  $active->short_description  }}</b>
+                                                    <b class="text-white">{{    $active->investmentRestrictions->min_invesment  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
@@ -157,10 +157,11 @@
                                                 Available for 30
                                                 days.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
-                                                <form action="{{ route('invest.submit') }}">
+                                                {{-- <form action="{{ route('invest.submit') }}">
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
-                                                </form>
+                                                </form> --}}
+                                                <a href="{{ $active->ext_url }}" target="_blank" class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</a>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button">Learn  More</a>
                                             </div>
                                         </div>

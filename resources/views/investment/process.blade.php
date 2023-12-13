@@ -275,19 +275,7 @@
                                     </div>
                                     <div class="container mt-4">
                                         <p class="form4-text">
-                                            I’ve read the Investor FAQ. I understand startups are risky and can afford
-                                            to
-                                            lose my entire investment. I understand these investments are not
-                                            easily resold. I can wait years for a return.I understand that does not
-                                            offer
-                                            investment advice. I am making my own investment decisions.I am
-                                            complying with my Annual investment limit. I understand that I may cancel
-                                            anytime until four days after making my investment or until my funds are
-                                            disbursed, whichever is later. I agree to the contracts with my electronic
-                                            signature and authorise it to debit my account. I agree to the LLC
-                                            Agreement. I understand that if I’m an Accredited investor I may be
-                                            transitioned
-                                            into a concurrent Reg D.
+                                            By checking this box, I, the investor, acknowledge that I have reviewed the Issuer's Form C and Disclosure Materials, as well as the educational materials provided on the Portal, understood the risks that come with investing in issuing companies on the Portal, and acknowledge that my entire investment may be lost and I will be financially and psychologically fine if it is. I understand that the decision whether to consult a professional advisor regarding my investment is my decision and that the Portal does not offer any investment advice or suggestions.
                                         </p>
                                     </div>
                                     <div class="container mt-4">

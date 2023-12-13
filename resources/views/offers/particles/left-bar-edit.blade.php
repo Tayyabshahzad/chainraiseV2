@@ -34,6 +34,10 @@
                     <div class="col-lg-12">
                         <input type="text" class="form-control" name="offer_name" value="{{ $offer->name }}" id="offer_name" required>
                     </div>
+                    <div class="col-lg-12">
+                        <label for="">Ext Url</label>
+                        <input type="text" class="form-control" name="ext_url" value="{{ $offer->ext_url }}" id="ext_url" required>
+                    </div>
                 </div>
 
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">

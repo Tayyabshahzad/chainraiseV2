@@ -225,6 +225,7 @@ class OfferController extends Controller
             $offer->feature_video  = $request->feature_video_url;
             $offer->offer_type  = $request->offer_type;
             $offer->terms = $request->terms;
+            $offer->ext_url = $request->ext_url;
             $offer->issuer_id =  $request->issuer;
             $offer->name =              $request->offer_name;
             $offer->slug =            Str::slug($request->offer_name, '-');

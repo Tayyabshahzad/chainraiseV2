@@ -305,7 +305,7 @@
                             </div>
                         </div>
                         <div class="d-grid gap-2 col-12 mx-auto">
-                            <button class="btn color_btn" type="submit">Invest Now</button>
+                            <a href="{{  $offer->ext_url }}" class="btn color_btn" target="_blank">Invest Now</a>
                             <button class="btn transparent_btn" type="button">Add to Watchlist</button>
                         </div>
                     </form>
