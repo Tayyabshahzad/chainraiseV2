@@ -85,7 +85,7 @@
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
                                         <div class="card-body bg-dark">
                                             <div class="d-flex justify-content-end">
-                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" class="img-fluid shield">
+                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 100px;height:100px"  class="img-fluid shield">
                                             </div>
                                             <h5 class="card-title text-white"> {{ $active->name }} </h5>
                                             <p class="card-text text-white">{{  $active->short_description  }}</p>
@@ -135,7 +135,7 @@
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
                                         <div class="card-body bg-dark">
                                             <div class="d-flex justify-content-end">
-                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" class="img-fluid shield">
+                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}" style="width: 100px;height:100px" class="img-fluid shield">
                                             </div>
                                             <h5 class="card-title text-white"> {{ $active->name }} </h5>
                                             <p class="card-text text-white">{{  $active->short_description  }}</p>
