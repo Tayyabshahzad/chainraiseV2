@@ -99,11 +99,11 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Min Invesment</p>
-                                                    <b class="text-white">{{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
+                                                    <b class="text-white">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
-                                                    <b class="text-white">{{  number_format($active->total_valuation)  }}</b>
+                                                    <b class="text-white">${{  number_format($active->total_valuation)  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
@@ -152,11 +152,11 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Min Invesment</p>
-                                                    <b class="text-white">{{  number_format($active->investmentRestrictions->min_invesment,2)    }}</b>
+                                                    <b class="text-white">${{  number_format($active->investmentRestrictions->min_invesment,2)    }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
-                                                    <b class="text-white">{{  number_format($active->total_valuation)  }}</b>
+                                                    <b class="text-white">${{  number_format($active->total_valuation,2)  }}</b>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
