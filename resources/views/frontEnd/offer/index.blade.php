@@ -172,7 +172,7 @@
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
                                                 </form> --}}
                                                 <a href="{{ $active->ext_url }}" target="_blank" class="btn color_btn" style="width: 400px" > <b>Invest Now</b> </a>
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button">Learn  More</a>
+                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b>Learn  More</b></a>
                                             </div>
                                         </div>
                                     </div>
