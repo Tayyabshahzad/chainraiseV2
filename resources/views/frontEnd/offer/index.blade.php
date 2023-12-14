@@ -118,7 +118,7 @@
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
                                                 </form> --}}
-                                                <a href="#"  class="btn color_btn" style="width: 400px" disabled > <b>Comming Soon</b> </a>
+                                                <button   class="btn color_btn" style="width: 400px"  disabled> <b>Comming Soon</b> </button>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
                                             </div>
                                         </div>
@@ -171,7 +171,7 @@
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
                                                 </form> --}}
-                                                <a href="#" class="btn color_btn" style="width: 400px" disabled> <b>Comming Soon</b> </a>
+                                                <button   class="btn color_btn" style="width: 400px"  disabled> <b>Comming Soon</b> </button>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b>Learn  More</b></a>
                                             </div>
                                         </div>
