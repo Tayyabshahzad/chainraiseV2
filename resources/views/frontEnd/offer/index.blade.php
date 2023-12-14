@@ -97,28 +97,28 @@
 
 
                                             <div class="row">
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 mx-0">
                                                     <p class="text-white mb-0 pb-0">Min Invesment</p>
                                                     <b class="text-white">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 mx-0">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
                                                     <b class="text-white">${{  number_format($active->total_valuation)  }}</b>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 mx-0">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
                                                     <b class="text-white">{{  $active->offer_type  }}</b>
                                                 </div>
                                             </div>
-                                            <span class="badge  my-3"> <img src="{{  asset('vue/images/clock.png')  }}"> Limited Stock
-                                                Available for 30
-                                                days.</span>
+                                            <span class="badge  my-3" style="text-wrap:balance;text-align:left;padding:13px;">
+                                                Due to our escrow partner switch, this offering with be back online soon.
+                                            </span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 {{-- <form action="{{ route('invest.submit') }}">
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
                                                 </form> --}}
-                                                <a href="{{ $active->ext_url }}" target="_blank" class="btn color_btn" style="width: 400px" > <b>Invest Now</b> </a>
+                                                <a href="#"  class="btn color_btn" style="width: 400px" disabled > <b>Comming Soon</b> </a>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
                                             </div>
                                         </div>
@@ -150,28 +150,28 @@
                                                 <p class="card-text text-white" style="min-height:20px">{{  substr($active->short_description, 0, 80); }}</p>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p class="text-white mb-0 pb-0">Min Invesment</p>
+                                                <div class="col-lg-4 mx-0">
+                                                    <p class="text-white mb-0 pb-0 ">Min Invesment</p>
                                                     <b class="text-white">${{  number_format($active->investmentRestrictions->min_invesment,2)    }}</b>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 mx-0">
                                                     <p class="text-white mb-0 pb-0">Total Valuation</p>
                                                     <b class="text-white">${{  number_format($active->total_valuation,2)  }}</b>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 mx-0">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
                                                     <b class="text-white">{{  $active->offer_type  }}</b>
                                                 </div>
                                             </div>
-                                            <span class="badge  my-3"> <img src="{{  asset('vue/images/clock.png')  }}"> Limited Stock
-                                                Available for 30
-                                                days.</span>
+                                            <span class="badge  my-3" style="text-wrap:balance;text-align:left;padding:13px;">
+                                                Due to our escrow partner switch, this offering with be back online soon.
+                                            </span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 {{-- <form action="{{ route('invest.submit') }}">
                                                     <input type="hidden" name="offer_id" value="{{ $active->id }}">
                                                     <button class="btn color_btn" style="width: 400px" href="{{ route('invest.submit') }}" >Invest Now</button>
                                                 </form> --}}
-                                                <a href="{{ $active->ext_url }}" target="_blank" class="btn color_btn" style="width: 400px" > <b>Invest Now</b> </a>
+                                                <a href="#" class="btn color_btn" style="width: 400px" disabled> <b>Comming Soon</b> </a>
                                                 <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b>Learn  More</b></a>
                                             </div>
                                         </div>
