@@ -39,7 +39,7 @@
             <div class="col-lg-6 hero-play py-5 d-flex justify-content-center align-items-center">
                 <a type="button" data-bs-toggle="modal" data-src="https://player.vimeo.com/video/235215203"
                     data-bs-target="#myModal">
-                    <img src="{{ asset('vue/images/Group 12576.png') }}" alt="">
+                    {{-- <img src="{{ asset('vue/images/Group 12576.png') }}" alt=""> --}}
                 </a>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
