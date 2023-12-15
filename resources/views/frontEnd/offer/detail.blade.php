@@ -313,7 +313,8 @@
                     <div class="py-3">
                         <hr>
                     </div>
-                    <div>
+
+                    <div class="pb-5">
                         <p class="mb-0 pb-0"><b>Document(s)</b></p>
                         <div class="py-3">
                             <hr>
@@ -334,9 +335,9 @@
                                 @endif
                             @endforeach
                         </div>
-
-
                     </div>
+
+
                 </div>
 
             </div>
