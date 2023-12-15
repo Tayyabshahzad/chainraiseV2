@@ -116,6 +116,7 @@
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
                                                     class="img-fluid me-2">
+                                                    Tranding
                                             </p>
                                         </div>
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
@@ -233,7 +234,7 @@
                             <div class="position-absolute bg-orange p-1 px-lg-4 rotate-div">
                                 <p class="trend text-white text-lg-end mb-0">
                                     <img src="{{  asset('vue/images/flame.svg')}}"
-                                        class="img-fluid me-2">
+                                        class="img-fluid me-2">Tranding
                                 </p>
                             </div>
                             <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
