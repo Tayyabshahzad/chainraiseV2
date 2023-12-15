@@ -26,14 +26,20 @@
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
                     <a class="btn color_btn px-lg-5" href="https://chainraise.io/">
-                        <img src="{{  asset('vue/images/Group.png') }}"> Explore Tech
+                        <img src="{{  asset('vue/images/Group.png') }}"> Explore Offerings
                     </a>
-                    <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
+                    {{-- <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
                         <img src="{{  asset('vue/images/Group.png') }}">
                         Explore
                         Real
                         Estate
-                    </a>
+                    </a> --}}
+
+                    <p class="text-white py-4 my-lg-3 pe-lg-4">
+                        ChainRaise Portal LLC is a SEC registered Funding Portal and member of FINRA.<br/>Investing involves risks, including the risk of loss and liquidity risk
+                    </p>
+
+
                 </div>
             </div>
             <div class="col-lg-6 hero-play py-5 d-flex justify-content-center align-items-center">
