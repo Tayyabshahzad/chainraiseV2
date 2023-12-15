@@ -28,7 +28,7 @@
                     <a class="btn color_btn px-lg-5" href="{{  route('index') }}">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Tech
                     </a>
-                    <a class="btn transparent_btn px-lg-4 ms-lg-3"  href="{{  route('index') }}">
+                    <a class="btn transparent_btn px-l ms-lg-3"  href="{{  route('index') }}">
                         <img src="{{  asset('vue/images/Group.png') }}">
                         Explore
                         Real
@@ -117,7 +117,7 @@
 
                                 <div class="col-lg-4">
                                     <div class="card bg-dark">
-                                        <div class="position-absolute bg-orange p-1 px-lg-4 rotate-div">
+                                        <div class="position-absolute bg-orange p-1 px-l rotate-div">
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
                                                     class="img-fluid me-2">
@@ -175,7 +175,7 @@
 
                                 <div class="col-lg-4">
                                     <div class="card bg-dark">
-                                        <div class="position-absolute bg-orange p-1 px-lg-4 rotate-div">
+                                        <div class="position-absolute bg-orange p-1 px-l rotate-div">
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
                                                     class="img-fluid me-2">Tranding
@@ -241,7 +241,7 @@
                     @foreach ($activeOffers as $active)
                     <div class="col-lg-4 py-2">
                         <div class="card bg-dark">
-                            <div class="position-absolute bg-orange p-1 px-lg-4 rotate-div">
+                            <div class="position-absolute bg-orange p-1 px-4 rotate-div">
                                 <p class="trend text-white text-lg-end mb-0">
                                     <img src="{{  asset('vue/images/flame.svg')}}"
                                         class="img-fluid me-2">Tranding
