@@ -239,7 +239,7 @@
             </div>
             <div class="col-lg-4 side-col-bg px-lg-4">
                 <div class="my-lg-4 p-lg-4 bg-image-modal">
-                    <p class="text-white"><b>LAST CHANCE</b></p>
+                    <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
                     <div class="text-white border-style-div text-center p-3">
                         <p class="mb-0"><b>Closing on 3 nov</b></p>
                         <p>@11.59 pm new York time</p>
@@ -271,7 +271,7 @@
                         <hr>
                     </div>
                     <div>
-                        <p><b>Almost Sold out</b></p>
+                        {{-- <p><b>Almost Sold out</b></p> --}}
                         <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar" style="width: 25%"></div>
@@ -306,7 +306,7 @@
                         </div>
                         <div class="d-grid gap-2 col-12 mx-auto">
                             <a href="{{  $offer->ext_url }}" class="btn color_btn" target="_blank">Invest Now</a>
-                            <button class="btn transparent_btn" type="button">Add to Watchlist</button>
+                            {{-- <button class="btn transparent_btn" type="button">Add to Watchlist</button> --}}
                         </div>
                     </form>
 
