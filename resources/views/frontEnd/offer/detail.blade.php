@@ -26,7 +26,7 @@
                     </button>
                     <button class="btn px-lg-5 fw-semibold"
                         style="background-color: #ffffff !important; color: #294FF6 !important;" type="button">
-                        US${{ number_format($offer->total_valuation) }} <span class="text-dark">Raised</span>
+                        ${{ number_format($offer->total_valuation) }} <span class="text-dark">Raised</span>
                     </button>
                 </div>
             </div>

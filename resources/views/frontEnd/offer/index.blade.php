@@ -25,10 +25,10 @@
                     companies, Real
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
-                    <a class="btn color_btn px-lg-5" href="{{  route('index') }}">
+                    <a class="btn color_btn px-lg-5" href="https://chainraise.io/">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Tech
                     </a>
-                    <a class="btn transparent_btn px-l ms-lg-3"  href="{{  route('index') }}">
+                    <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
                         <img src="{{  asset('vue/images/Group.png') }}">
                         Explore
                         Real
