@@ -120,7 +120,7 @@
 
 
 
-                    <ul class="footer_social text-lg-start text-center">
+                    <ul class="footer_social text-lg-end text-center">
                         <li>
                             <a href="https://www.facebook.com/chainraise.io">
                                 <i class="bi bi-facebook"></i>
