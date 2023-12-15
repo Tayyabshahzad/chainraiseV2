@@ -88,7 +88,7 @@
     <footer class="bg-dark-color">
         <div class="container">
             <div class="row pt-lg-4 pb-lg-2">
-                <div class="col-lg-3">
+                <div class="col-lg-3 text-lg-start text-center">
                     <a href="{{  route('index') }}">
                         <img src="{{  asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
                     </a>
@@ -99,7 +99,7 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-lg-6 text-lg-start ms-lg-0 ps-lg-0">
+                <div class="col-lg-6  ms-lg-0 ps-lg-0 text-lg-start text-center">
                     <ul class="d-flex m-lg-0 py-lg-3 px-lg-0">
                         <li class="nav-item px-lg-3">
                             <a class="nav-link active" aria-current="page" href="{{  route('index') }}">Home</a>
@@ -120,7 +120,7 @@
 
 
 
-                    <ul class="footer_social">
+                    <ul class="footer_social text-lg-start text-center">
                         <li>
                             <a href="https://www.facebook.com/chainraise.io">
                                 <i class="bi bi-facebook"></i>
@@ -159,21 +159,6 @@
                             </a>
                         </li>
                     </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
 
                 <div class="col-lg-12   text-white " style="margin-top:15px;">
@@ -253,7 +238,7 @@
 
 
             <hr>
-            <p class="text-white py-lg-4 text-lg-center my-0">© Copyright 2023 - investchainraise</p>
+            <p class="text-white py-lg-4 text-lg-center my-0 text-lg-start text-center py-3">© Copyright 2023 - investchainraise</p>
         </div>
     </footer>
 
