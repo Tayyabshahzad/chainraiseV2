@@ -57,11 +57,12 @@ body {
 
 .rotate-div {
     transform: rotate(-310deg);
-
-    right: -10% !important;
-    width: 200px;
-    border-top-right-radius: 100px;
+    right: -2% !important;
+    top: 8%;
+    border-radius: 3px;
 }
+
+
 
 .trend {
     font-size: 12.69px;
@@ -421,6 +422,10 @@ h6.second {
 
     h1 {
         font-size: 50px !important;
+    }
+
+    .abc {
+        font-size: 12px;
     }
 
     h6 {
