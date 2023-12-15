@@ -117,7 +117,7 @@
 
                                 <div class="col-lg-4">
                                     <div class="card bg-dark">
-                                        <div class="position-absolute bg-orange p-1 px-l rotate-div">
+                                        <div class="position-absolute bg-orange p-1 px-4 rotate-div">
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
                                                     class="img-fluid me-2">
