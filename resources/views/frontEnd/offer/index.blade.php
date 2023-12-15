@@ -6,6 +6,8 @@
         .hero-play{
             background-image: url("{{ asset('vue/images/image-3.png') }}");
         }
+
+
     </style>
 @endsection
 @section('page_content')
@@ -23,12 +25,15 @@
                     companies, Real
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
-                    <button class="btn color_btn px-lg-5" type="button"><img src="{{  asset('vue/images/Group.png') }}"> Explore
-                        Tech</button>
-                    <button class="btn transparent_btn px-lg-4 ms-lg-3" type="button"><img src="{{  asset('vue/images/Group.png') }}">
+                    <a class="btn color_btn px-lg-5" href="{{  route('index') }}">
+                        <img src="{{  asset('vue/images/Group.png') }}"> Explore Tech
+                    </a>
+                    <a class="btn transparent_btn px-lg-4 ms-lg-3"  href="{{  route('index') }}">
+                        <img src="{{  asset('vue/images/Group.png') }}">
                         Explore
                         Real
-                        Estate</button>
+                        Estate
+                    </a>
                 </div>
             </div>
             <div class="col-lg-6 hero-play d-flex justify-content-center align-items-center">
@@ -126,7 +131,10 @@
                                             </div>
 
                                             <h5 class="card-title text-white">{{ $active->name }}</h5>
-                                            <p class="card-text text-white h-50">{{  substr($active->short_description, 0, 80); }}</p>
+                                            <div style="height: 70px">
+                                                <p class="card-text text-white h-50">{{  substr($active->short_description, 0, 80); }}</p>
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-lg-4 border-end"
                                                     style="border-color: #959595 !important;">
@@ -180,7 +188,9 @@
                                             </div>
 
                                             <h5 class="card-title text-white">{{ $active->name }}</h5>
-                                            <p class="card-text text-white h-50">{{  substr($active->short_description, 0, 80); }}</p>
+                                            <div style="height: 70px">
+                                                <p class="card-text text-white h-50">{{  substr($active->short_description, 0, 80); }}</p>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-lg-4 border-end"
                                                     style="border-color: #959595 !important;">
@@ -294,16 +304,17 @@
             </div>
             <div class="col-lg-7 ps-lg-4">
                 <h1 class="third">SIGN UP</h1>
-                <h6 class="animate__animated animate__fadeInRight third">
+                <h6 class="third">
                     New users will be prompted to create an
                     account and provide
-                    initial information for a customized setup.</h6>
+                    initial information for a customized setup.
+                </h6>
             </div>
         </div>
         <div class="row align-items-center p-lg-5">
             <div class="col-lg-7">
                 <h1 class="third">EXPLORE</h1>
-                <h6 class="animate__animated animate__fadeInLeft third">Explore our
+                <h6 class=" third">Explore our
                     marketplace for investment opportunities after
                     creating your account.</h6>
             </div>
@@ -318,7 +329,7 @@
             </div>
             <div class="col-lg-7">
                 <h1 class="third">INVEST</h1>
-                <h6 class="animate__animated animate__fadeInRight third">Once you've
+                <h6 class="third">Once you've
                     identified the right opportunity, you'll
                     initiate the KCY (Know Your Customer) process to verify your identity and complete the required
                     investor documents.</h6>
