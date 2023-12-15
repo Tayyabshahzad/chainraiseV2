@@ -100,7 +100,7 @@
                 <h6 class="third">Explore all of our offerings and become a fractional owner of a startup company.</h6>
             </div>
             <div class="col-lg-3 text-end">
-                <button type="button" class="btn color_btn px-lg-5">View all</button>
+                <a href="https://chainraise.io/" class="btn color_btn px-lg-5">View all</a>
             </div>
         </div>
     </div>
