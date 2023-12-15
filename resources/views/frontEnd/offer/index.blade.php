@@ -95,7 +95,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-9 position-relative">
-                <hr class="verticle-line-bar">
+                <hr class="verticle-line-bar" style="width: 90px !important;">
                 <h1 class="second">Explore startups raising Capital</h1>
                 <h6 class="third">Explore all of our offerings and become a fractional owner of a startup company.</h6>
             </div>
@@ -105,6 +105,7 @@
         </div>
     </div>
 </section>
+
 <section class="bg-dark-color p-lg-5 p-3">
     <div class="container">
         <div class="row">
