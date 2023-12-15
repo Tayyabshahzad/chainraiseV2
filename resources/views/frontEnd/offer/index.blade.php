@@ -246,19 +246,19 @@
                                 <h5 class="card-title text-white">{{ $active->name }}</h5>
                                 <p class="card-text text-white h-50">{{  substr($active->short_description, 0, 80); }}</p>
                                 <div class="row">
-                                    <div class="col-lg-4 border-end"
+                                    <div class="col-4 border-end pe-0"
                                         style="border-color: #959595 !important;">
-                                        <p class="text-white mb-0 pb-0">Min Invesment</p>
-                                        <b class="text-white">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
+                                        <p class="text-white mb-0 pb-0 abc">Min Invesment</p>
+                                        <b class="text-white abc">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                     </div>
-                                    <div class="col-lg-4 border-end"
+                                    <div class="col-4 border-end"
                                         style="border-color: #959595 !important;">
-                                        <p class="text-white mb-0 pb-0">Total Valuation</p>
-                                        <b class="text-white">${{  number_format($active->total_valuation)  }}</b>
+                                        <p class="text-white mb-0 pb-0 abc">Total Valuation</p>
+                                        <b class="text-white abc">${{  number_format($active->total_valuation)  }}</b>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <p class="text-white mb-0 pb-0">Offer Type</p>
-                                        <b class="text-white">{{  $active->offer_type  }}</b>
+                                    <div class="col-4">
+                                        <p class="text-white mb-0 pb-0 abc">Offer Type</p>
+                                        <b class="text-white abc">{{  $active->offer_type  }}</b>
                                     </div>
                                 </div>
                                 <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
