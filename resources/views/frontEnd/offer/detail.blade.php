@@ -322,7 +322,7 @@
                         <div class="row">
                             @foreach ($manual_offer_documents as $manual_offer_document)
                                 @if ($manual_offer_document->type == 'pdf')
-                                    <div class="col-10">
+                                    <div class="col-10 pe-0 pb-3">
                                         <img src="{{ asset('vue/images/pdf (1).png') }}" alt="">
                                         <span class="ps-3"> {{ Str::ucfirst($manual_offer_document->name) }} </span>
                                     </div>
