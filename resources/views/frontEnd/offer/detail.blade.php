@@ -241,14 +241,15 @@
                 <div class="my-lg-4 p-lg-4 bg-image-modal">
                     <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
                     <div class="text-white border-style-div text-center p-3">
-                        <p class="mb-0"><b>Closing on 3 nov</b></p>
-                        <p>@11.59 pm new York time</p>
+                        <p class="mb-0"><b>Closing on  {{ $remainingTimeArray['remainingMonths']  }} </b></p>
+                        <p> {{ $remainingTimeArray['formated']  }} New York time</p>
                         <hr>
+
                         <div class="row pt-3">
-                            <div class="col border-end">07<br>Day</div>
-                            <div class="col border-end">16<br>Hour</div>
-                            <div class="col border-end">09<br>Min</div>
-                            <div class="col">33<br>Sec</div>
+                            <div class="col border-end"> {{ $remainingTimeArray['remainingDays'] }}<br>Days</div>
+                            <div class="col border-end"> {{ $remainingTimeArray['hours'] }}<br>Hour</div>
+                            <div class="col border-end"> {{ $remainingTimeArray['minutes'] }}<br>Min</div>
+                            <div class="col"> {{ $remainingTimeArray['seconds'] }}<br>Sec</div>
                         </div>
                     </div>
                 </div>
@@ -305,8 +306,8 @@
                             </div>
                         </div>
                         <div class="d-grid gap-2 col-12 mx-auto">
-                            <a href="{{  $offer->ext_url }}" class="btn color_btn" target="_blank">Invest Now</a>
-                            {{-- <button class="btn transparent_btn" type="button">Add to Watchlist</button> --}}
+                            {{-- <a href="{{ route('offer.details',$offer->id)  }}" class="btn color_btn" target="_blank">Invest Now</a> --}}
+                            <button class="btn transparent_btn" type="submit">Invest Now</button>
                         </div>
                     </form>
 

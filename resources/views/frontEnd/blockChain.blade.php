@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('page_title','Investor')
+@section('page_title','Block Chain')
 @section('page_style')
     <link rel="stylesheet" href="{{ asset('vue/css/style-listing.css') }}">
     <style>
@@ -11,34 +11,88 @@
 @section('page_content')
 <div class="container-fluid bg-image-tree">
 
-    <div class="row ">
+    <div class="row">
         <div class="col-lg-12 text-center p-5">
-            <h3 class="">Investors</h3>
-            <h1 class="display-1">Giving you the power to<br>create your ideal
-                portfolio</h1>
-            <a class="btn color_btn px-lg-5" href="https://chainraise.io/">
-                <img src="{{  asset('vue/images/Group.png') }}"> Invest
-            </a>
+            <h6>BLOCKCHAIN TECHNOLOGY</h6>
+            <h1 class="display-1 px-lg-5">Welcome to a New Era of
+                Financial Innovation</h1>
         </div>
     </div>
 </div>
 <!-- Heading End -->
 <!-- Before Footer Section Start -->
 <div class="container-fluid section-bg py-5">
-    <div class="container border border-white p-5  ">
-        <div class="row ">
-            <div class="col-lg-12 text-center">
-                <h1 class="second">Browse the new investment opportunities and get excited about the future</h1>
-                <hr class="horizontal-line-bar">
-                <h6 class="third">ChainRaise Portal offers you with investment
-                    opportunities to create your ideal portfolio. Want
-                    to go hunting for the next big tech company? Great, we have tech companies with potential to
-                    grow big! Want to create a diversified portfolio of real estate? Great! We have real estate
-                    opportunities for you to select your best fit.</h6>
-                <a class="btn color_btn px-lg-5 mt-3" href="https://chainraise.io/">
-                    <img src="https://investchainraise.io/vue/images/Group.png"> RAISE CAPITAL
-                </a>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="third">Save Costs and Streamline Administration
+                </h1>
+                <h6 class="third">ChainRaise Technologies provides the
+                    ability to bring your cap table onto the blockchain, making it a smart cap table. A smart cap
+                    table, also called a Mirror-table, streamlines, automates, and saves you cost on the logistical
+                    mess of taking on investors.
+                    .</h6>
+                <ul class="text-white px-0 mx-0">
+                    <li>- Cap table management – real-time information at your fingertips.</li>
+                    <li>- Investor communications – streamline document sharing and reporting</li>
+                    <li>- Automate dividends and bonuses</li>
+                    <li>- Set rules for access and trading with fine-grained controls.
+                    </li>
+                </ul>
             </div>
+            <div class="col-lg-5 p-5">
+                <img src="{{ asset('vue/images/Asset-5-1024x842-1.png.webp') }}" class="img-fluid" alt="Hero Video">
+            </div>
+
+        </div>
+        <div class="row align-items-center">
+
+            <div class="col-lg-5 p-5">
+                <img src="{{ asset('vue/images/diamond.png.webp') }}" class="img-fluid" alt="Hero Video">
+            </div>
+            <div class="col-lg-7">
+                <h1 class="third">Automate Compliance
+                </h1>
+                <h6 class="third">
+                    The blockchain allows for automated compliance! This allows for the Issuer to program the
+                    compliance into the token, and ensure all regulations are being followed at all times.
+                </h6>
+                <ul class="text-white px-0 mx-0">
+                    <li>- Automated KYC/ AML, Accreditation and E- Docs</li>
+                    <li>- SEC registered Transfer Agent services</li>
+                    <li>- CR enforces your compliance rules on every transfer, powered by blockchain technology</li>
+                    <li>- Securities Recovery Process
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="third">Enhanced Investor Experience
+                </h1>
+                <h6 class="third">ChainRaise Technologies offers Blockchain services to enhance your investment! Our
+                    in house platform offers business owners, real estate owners, etc the ability to create Security
+                    Tokens. Security Tokens are representations of securities issued using a blockchain
+                    infrastructure. As they are securities, the typical securities laws from the issuer and investor
+                    jurisdictions apply. If the Issuer chooses to tokenize the cap table, it provides;
+                </h6>
+                <ul class="text-white px-0 mx-0">
+                    <li>- Rapid Transfer of Ownership
+                    </li>
+                    <li>- Fast and Low Cost Settlements
+                    </li>
+                    <li>- Increased Transparency
+                    </li>
+                    <li>- Quickly Assess Your Portfolio
+
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5 p-5">
+                <img src="{{ asset('vue/images/noGlowHome-2048x1332.png.webp') }}" class="img-fluid" alt="Hero Video">
+            </div>
+
         </div>
     </div>
 </div>
@@ -529,4 +583,5 @@
         </div>
     </div>
 </div>
+
 @endsection

@@ -142,16 +142,16 @@
                     <div class="col-lg-12">
                         <label for=""> Commencement Date </label>
                         <div class="position-relative d-flex">
-                            <input type="date" class="form-control"
-                            value="{{ $offer->commencement_date}}"
+                            <input type="datetime-local" class="form-control"
+                            value="{{ $offer->commencement_date}}" required
                             placeholder="Commencement Date?" name="commencement_date" />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <label for=""> Funding end date</label>
                         <div class="position-relative d-flex">
-                            <input type="date" class="form-control"
-                            value="{{ $offer->funding_end_date}}"
+                            <input type="datetime-local" class="form-control"
+                            value="{{ $offer->funding_end_date}}" required
                             placeholder="Funding end date?" name="funding_end_date" />
                         </div>
                     </div>

@@ -54,7 +54,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
                     </li>
                     <li class="nav-item px-lg-3">
-                        <a class="nav-link" href="https://chainraise.io/investors/">Investors</a>
+                        <a class="nav-link" href="{{  route('investors') }}">Investors</a>
                     </li>
                     <li class="nav-item dropdown px-lg-3">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -62,8 +62,9 @@
                             Learn
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="https://chainraise.io/investors/">FAQ</a></li>
-                            <li><a class="dropdown-item" href="https://chainraise.io/businesses/">Business</a></li>
+                            <li><a class="dropdown-item" href="{{  route('faq')  }}">FAQ</a></li>
+                            <li><a class="dropdown-item" href="{{  route('businesses') }}">Business</a></li>
+                            <li><a class="dropdown-item" href="{{  route('blockchain') }}">Block Chain</a></li>
 
                         </ul>
                     </li>
@@ -250,26 +251,34 @@
                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <a href="#">
+                <div class="modal-body text-center">
+                    <a href="#" class="text-center">
                         <img src="{{  asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
                     </a>
                     <div class="d-grid gap-2 mt-4">
-                        <button class="btn transparent_btn" type="button"><img src="{{ asset('vue/images/google.png') }}" alt="" srcset="">
-                            Login with Google</button>
-                        <button class="btn transparent_btn" type="button"><img src="{{  asset('vue/images/image 42.png') }}" alt=""
-                                srcset="">Login
-                            with Facebook</button>
+                        <a class="btn transparent_btn" href="{{ route('login.google') }}">
+                            <img src="{{ asset('vue/images/google.png') }}" alt="" srcset="">
+                            Login with Google
+                        </a>
+                        <a class="btn transparent_btn" href="#">
+                            <img src="{{  asset('vue/images/image 42.png') }}" alt=""
+                                srcset=""> Login
+                            with Facebook
+                        </a>
+
+                        <button class="btn transparent_btn" type="button">
+                           <i class="fa fa-envelope"></i> Login with Email
+                        </button>
                     </div>
                     <div class="my-3">
                         <p class="text-center text-white">By signing up I agree to ChainRaise's
-                            <a href="#" style="color: #42E8E0">Terms of Service</a>
+                            <a href="#" style="color: #42e8e031">Terms of Service</a>
                             and <a href="#" style="color: #42E8E0">Privacy Policy .</a>
                         </p>
                     </div>
                     <hr class="my-4">
                     <div class="my-3">
-                        <p class="text-center text-white">Already have an account?
+                        <p class="text-center text-white">Don't have account?
                             <a href="#" style="color: #42E8E0">Sign in.</a>
                         </p>
                     </div>

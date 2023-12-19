@@ -164,6 +164,7 @@ Route::middleware('check.profile.complete')->group(function () {
     Route::get('investors', [FrontendController::class, 'investors'])->name('investors');
     Route::get('businesses', [FrontendController::class, 'businesses'])->name('businesses');
     Route::get('flow-chart', [TestController::class, 'flow_chart'])->name('flow_chart');
+    Route::get('block-chain', [FrontendController::class, 'blockChain'])->name('blockchain');
     Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
     Route::get('/offers/sort/{order?}',[FrontendController::class,'sort'])->name('offers.sort');
 

@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\UPDATEKYC;
 use Illuminate\Support\Facades\Mail;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
+use Illuminate\Support\Carbon;
 class FrontendController extends Controller
 {
 
@@ -86,7 +86,32 @@ class FrontendController extends Controller
         $temp_name = 'Not Found';
         $created_at = 'Not Found';
         $manual_offer_documents = $offer->getMedia('manual_offer_documents');
-        return view('frontEnd.offer.detail', compact('offer', 'slider_images', 'temp_name', 'created_at', 'manual_offer_documents'));
+
+        $closingTime = $offer->funding_end_date;
+        $carbonClosingTime = Carbon::parse($closingTime, 'America/New_York')->addHour(); // Add one hour to make it a future time
+
+        $now = Carbon::now('America/New_York');
+        $formattedClosingDate = $carbonClosingTime->format('j M');
+
+        $remainingTime = $now->diff($carbonClosingTime);
+        $remainingDays = $remainingTime->days;
+        $remainingMonths = $carbonClosingTime->diffInMonths($now);
+
+        $remainingHours = $remainingTime->h;
+        $remainingMinutes = $remainingTime->i;
+        $remainingSeconds = $remainingTime->s;
+        $offerClosingTime = $carbonClosingTime->format('@h.i a');
+        $remainingTimeArray = [
+            'formated'=>$offerClosingTime,
+            'remainingMonths' => $formattedClosingDate,
+            'remainingDays' => $remainingDays,
+            'hours' => $remainingHours,
+            'minutes' => $remainingMinutes,
+            'seconds' => $remainingSeconds,
+        ];
+
+
+        return view('frontEnd.offer.detail', compact('offer', 'slider_images', 'temp_name', 'created_at', 'manual_offer_documents','remainingTimeArray'));
     }
 
 
@@ -136,6 +161,15 @@ class FrontendController extends Controller
     {
         return view('frontEnd.businesses');
     }
+
+
+    function blockChain()
+    {
+        return view('frontEnd.blockChain');
+    }
+
+
+
 
     public function sort($order)
     {

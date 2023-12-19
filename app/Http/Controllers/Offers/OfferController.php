@@ -141,8 +141,8 @@ class OfferController extends Controller
             'offer_name' => 'required',
             'slug' => 'required|unique:offers,slug',
             'status' => 'required',
-            //'short_description' => 'required',
-            //'security_type' => 'required',
+            'commencement_date' => 'required|date',
+            'funding_end_date' => 'required|date',
             // 'symbol' => 'required',
             'offer_type' => 'required',
             'size' => 'required',
@@ -153,6 +153,7 @@ class OfferController extends Controller
             'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:3072', // Example rules
             'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:3072', // Example rules
         ]);
+
 
         $token = env('ESIGN_TOKEN');
         try {
@@ -529,6 +530,8 @@ class OfferController extends Controller
             'investment_restrication_id' => 'required',
             'min_invesment' => 'required',
             'max_invesment' => 'required',
+            'commencement_date' => 'required|date',
+            'funding_end_date' => 'required|date',
             //'offer_thumbnail' => 'image|dimensions:min_width=390,min_height=190|max:3072', // Example rules
             //'cover_photo' => 'image|dimensions:min_width=1200,min_height=650|max:3072', // Example rules
             //'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:3072', // Example rules
