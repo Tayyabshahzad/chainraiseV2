@@ -145,7 +145,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 border-end"
                                                     style="border-color: #959595 !important;">
-                                                    <p class="text-white mb-0 pb-0">Min Invesment</p>
+                                                    <p class="text-white mb-0 pb-0">Min Investment</p>
                                                     <b class="text-white">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                                 </div>
                                                 <div class="col-lg-4 border-end"
@@ -164,7 +164,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
+                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +202,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 border-end"
                                                     style="border-color: #959595 !important;">
-                                                    <p class="text-white mb-0 pb-0">Min Invesment</p>
+                                                    <p class="text-white mb-0 pb-0">Min Investment</p>
                                                     <b class="text-white">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                                 </div>
                                                 <div class="col-lg-4 border-end"
@@ -220,7 +221,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn fw-bold" type="button" disabled>Coming Soon</button>
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
+                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
                                             </div>
                                         </div>
                                     </div>
