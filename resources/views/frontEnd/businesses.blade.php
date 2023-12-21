@@ -1,7 +1,13 @@
 @extends('layouts.master')
 @section('page_title','Business')
 @section('page_style')
-    <link rel="stylesheet" href="{{ asset('vue/css/style-listing.css') }}">
+
+    <link rel="stylesheet" href="{{  asset('vue/css/style-business.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         .bg-image-tree{
             background-image: url("{{ asset('vue/images/hero-bg.png') }}");
@@ -9,6 +15,7 @@
     </style>
 @endsection
 @section('page_content')
+
 <div class="container-fluid section-bg py-5">
     <div class="row ">
         <div class="col-lg-12 text-center py-4">
@@ -425,6 +432,8 @@
     </div>
     <!-- Faq for investor End -->
 </div>
+<!-- 2nd Section Start -->
+<!-- Before Footer Section Start -->
 <div class="container-fluid bg-dark-color">
     <div class="container">
         <div class="row">
@@ -484,6 +493,22 @@
                 <h5 class="mt-2">Don’t Allow
                     VC’s to Bully</h5>
                 <p>VC firms will use their leverage, telling you 20% equity is standard. Not around here!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Faq for investor End -->
+<div class="container-fluid section-bg py-5">
+    <div class="container p-lg-5 p-3  ">
+        <div class="row ">
+            <div class="col-lg-12 text-center">
+                <h1 class="second">Looking to have your business funded?</h1>
+                <h6 class="third">At ChainRaise, we are passionate about helping startups succeed. We know that it
+                    takes more than just a great idea to create a successful business. It takes hard work,
+                    dedication, and access to capital. That’s why we’ve made it our mission to connect startups with
+                    the funding they need to grow and thrive. And we’re not alone in this endeavor.</h6>
+                <a class="btn btn-primary px-lg-5 mt-3" href="https://chainraise.io/"> RAISE CAPITAL
+                </a>
             </div>
         </div>
     </div>

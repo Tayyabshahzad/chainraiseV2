@@ -1,16 +1,29 @@
 @extends('layouts.master')
 @section('page_title','FAQ')
 @section('page_style')
-    <link rel="stylesheet" href="{{ asset('vue/css/style-listing.css') }}">
+    <link rel="stylesheet" href="{{  asset('vue/css/style-business.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        .bg-image-tree{
+        .footer_social li {
+            display: inline-block;
+            margin-right: 10px;
+            color: white !important;
+
+        }
+
+         .bg-image-tree{
             background-image: url("{{ asset('vue/images/hero-bg.png') }}");
+        }
+        .section-bg{
+            background-image: url("{{ asset('vue/images/section-bg.png') }}");
         }
     </style>
 @endsection
 @section('page_content')
-
-
 <div class="container-fluid section-bg py-5">
     <div class="row ">
         <div class="col-lg-12 text-center py-4">
@@ -35,7 +48,8 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">ChainRaise is a digital asset platform, that raises money
+                                    <p class="border-start ps-2">ChainRaise is a digital asset platform, that raises
+                                        money
                                         for real estate
                                         opportunities and businesses. Using blockchain technology, we make startup
                                         investment and
@@ -54,7 +68,8 @@
                             <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">If you’re over 18, you can invest with us! (If you’re
+                                    <p class="border-start ps-2">If you’re over 18, you can invest with us! (If
+                                        you’re
                                         younger, good for you for
                                         getting an early start! You’ll need a parent to set up a trust, or something
                                         equivalent, so that
@@ -79,14 +94,15 @@
                             <div id="flush-collapseThree" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">For more than two hundred years investors have publicly
+                                    <p class="border-start ps-2">For more than two hundred years investors have
+                                        publicly
                                         traded stocks and bonds.
                                         But those types of investments have their limitations, leading investors to
                                         alternative securities
                                         for the purpose of generating income, diversifying portfolios, boosting
                                         returns, or raising funds
                                         for other projects.</p>
-                                    <p class="black-font">These alternatives include real estate, stock or
+                                    <p class="border-start ps-2">These alternatives include real estate, stock or
                                         membership units in
                                         privately-held businesses, private equity, commodities, venture capital,
                                         farmland/timberland,
@@ -95,7 +111,8 @@
                                         collections or antique coins. In short, a multitude of investment options
                                         are available beyond the
                                         floor of the New York Stock Exchange.</p>
-                                    <p class="black-font">Why do people invest in alternative securities? Some of
+                                    <p class="border-start ps-2">Why do people invest in alternative securities?
+                                        Some of
                                         the most prevalent
                                         reasons include favorable economic conditions, less dependence on typical
                                         market fluctuations,
@@ -116,8 +133,9 @@
                             <div id="flush-collapsefour" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body ">
-                                    <p class="black-font">
-                                    <p class="black-font">Title III limits how much you can invest each year – not
+
+                                    <p class="border-start ps-2">Title III limits how much you can invest each year
+                                        – not
                                         only in any one
                                         company, or through any Funding Portal, but in all companies through all
                                         Funding Portals. These
@@ -128,28 +146,33 @@
                                         are calculated on a rolling 12-month interval, and every investment in a
                                         Regulation Crowdfunding
                                         offering on any portal will count toward your annual limit.</p>
-                                    <p class="black-font">For non-accredited investors, the maximum amount you can
+                                    <p class="border-start ps-2">For non-accredited investors, the maximum amount
+                                        you can
                                         invest in all Title III
                                         offerings during a 12-month period is:</p>
-                                    <p class="black-font">If your annual income or net worth is less than $107,000,
+                                    <p class="border-start ps-2">If your annual income or net worth is less than
+                                        $107,000,
                                         you may invest the
                                         greater of:</p>
-                                    <ul class="ps-3" style="list-style: disc;">
+                                    <ul class="border-start ps-2" style="list-style: disc;">
                                         <li>$2,200; or</li>
                                         <li>5% of the greater of your annual income or net worth.</li>
                                     </ul>
-                                    <p class="black-font">If your annual income and net worth are both at least
+                                    <p class="border-start ps-2">If your annual income and net worth are both at
+                                        least
                                         $107,000, you can invest
                                         the lesser of:</p>
-                                    <ul class="ps-3" style="list-style: disc;"></ul>
-                                    <li>$107,000; or</li>
-                                    <li>10% of the greater of your annual income or net worth.</li>
+                                    <ul class="ps-3" style="list-style: disc;">
+                                        <li>$107,000; or</li>
+                                        <li>10% of the greater of your annual income or net worth.</li>
+                                    </ul>
                                     </ul class="
                                         ps-3" style="list-style: disc;">
-                                    <p class="black-font">There are no investment limits for accredited
+                                    <p class="border-start ps-2">There are no investment limits for accredited
                                         investors. Once you are verified
                                         as an accredited investor, you are free to invest without limits.</p>
-                                    <p class="black-font">You and your spouse may choose to combine your incomes
+                                    <p class="border-start ps-2">You and your spouse may choose to combine your
+                                        incomes
                                         and assets to invest,
                                         in which case you will both be treated as a single investor when
                                         determining how much you can
@@ -169,7 +192,8 @@
                             <div id="flush-collapsefive" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingfive" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">To calculate your net worth, add up all of your assets and
+                                    <p class="border-start ps-2">To calculate your net worth, add up all of your
+                                        assets and
                                         subtract all
                                         liabilities. For purposes of crowdfunding, the value of your primary
                                         residence is not included in
@@ -188,7 +212,8 @@
                             <div id="flush-collapsesix" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">First, create and verify an account on the ChainRaise
+                                    <p class="border-start ps-2">First, create and verify an account on the
+                                        ChainRaise
                                         Portal. chainRaise may or
                                         may not ask for your proof of income to determine your investment limit. You
                                         can then browse
@@ -217,7 +242,7 @@
                             <div id="flush-collapse7" class="accordion-collapse collapse"
                                 aria-labelledby="flush-heading7" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">The SEC requires any amendment to an offering be
+                                    <p class="border-start ps-2">The SEC requires any amendment to an offering be
                                         reconfirmed with outstanding
                                         investment commitments within 5 business days; if an issuer fails to do so,
                                         or you as an investor
@@ -238,7 +263,8 @@
                             <div id="flush-collapseeight" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingeight" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">You can cancel an investment commitment at any time up to
+                                    <p class="border-start ps-2">You can cancel an investment commitment at any time
+                                        up to
                                         48 hours before the
                                         offering deadline. If you make an investment commitment within 48 hours
                                         before the offering
@@ -262,7 +288,8 @@
                             <div id="flush-collapsenine" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingnine" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">Can I Buy Crowdfunding Securities Directly from An Issuing
+                                    <p class="border-start ps-2">Can I Buy Crowdfunding Securities Directly from An
+                                        Issuing
                                         Company?</p>
                                 </div>
                             </div>
@@ -278,7 +305,7 @@
                             <div id="flush-collapseten" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingten" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">If an offering has more investors than needed or an
+                                    <p class="border-start ps-2">If an offering has more investors than needed or an
                                         issuing company reaches its
                                         target early, said issuing company will prioritize investors with a larger
                                         investment amount. While
@@ -297,7 +324,8 @@
                             <div id="flush-collapseelev" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingelev" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">A third-party credit rating is not required for issuers on
+                                    <p class="border-start ps-2">A third-party credit rating is not required for
+                                        issuers on
                                         the ChainRaise
                                         Portal. Investors, therefore, have little to no objective measures to gauge
                                         an issuing company’s
@@ -320,7 +348,8 @@
                             <div id="flush-collapsetwe" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingtwe" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">Yes, unless your country’s regulations forbid you from
+                                    <p class="border-start ps-2">Yes, unless your country’s regulations forbid you
+                                        from
                                         doing so.</p>
                                 </div>
                             </div>
@@ -336,7 +365,8 @@
                             <div id="flush-collapsethr" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingthr" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">It could be a short time, a long time, or never. Investing
+                                    <p class="border-start ps-2">It could be a short time, a long time, or never.
+                                        Investing
                                         in issuing companies
                                         on a Funding Portal, especially startups, involves high amounts of risk.
                                         ChainRaise therefore
@@ -361,7 +391,8 @@
                             <div id="flush-collapseforthteen" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingforthteen" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">A fundraising round may close earlier than its published
+                                    <p class="border-start ps-2">A fundraising round may close earlier than its
+                                        published
                                         deadline on the
                                         offering. In this case, you will receive a notice of the new deadline at
                                         least 5 business days prior
@@ -384,7 +415,8 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font"></p>Speculative. Investments in startups and early-stage
+                                    <p class="border-start ps-2"></p>Speculative. Investments in startups and
+                                    early-stage
                                     ventures are
                                     speculative and these enterprises often fail. Unlike an investment in a mature
                                     business where there is
@@ -392,7 +424,8 @@
                                     venture often relies on
                                     the development of a new product or service that may or may not find a market.
                                     You should be able to
-                                    afford and be prepared to lose your entire investment.<p class="black-font">
+                                    afford and be prepared to lose your entire investment.</p>
+                                    <p class="border-start ps-2">
                                         Illiquidity. You will be
                                         limited in your ability to resell your investment for the first year and may
                                         need to hold your
@@ -401,14 +434,16 @@
                                         exchange where you can quickly and easily trade securities on a market, you
                                         may have to locate an
                                         interested buyer when you do seek to resell your crowdfunded investment.</p>
-                                    <p class="black-font">Cancellation restrictions. Once you make an investment
+                                    <p class="border-start ps-2">Cancellation restrictions. Once you make an
+                                        investment
                                         commitment for a
                                         crowdfunding offering, you will be committed to make that investment (unless
                                         you cancel your
                                         commitment within a specified period of time). As detailed in the box below
                                         for Changing your mind,
                                         the ability to cancel your commitment is limited.</p>
-                                    <p class="black-font">Valuation and capitalization. Your crowdfunding investment
+                                    <p class="border-start ps-2">Valuation and capitalization. Your crowdfunding
+                                        investment
                                         may purchase an
                                         equity stake in a startup. Unlike listed companies that are valued publicly
                                         through market-driven
@@ -418,7 +453,8 @@
                                         additional classes of equity
                                         with rights that are superior to the class of equity being sold through
                                         crowdfunding.</p>
-                                    <p class="black-font">Limited disclosure. The company must disclose information
+                                    <p class="border-start ps-2">Limited disclosure. The company must disclose
+                                        information
                                         about the company, its
                                         business plan, the offering, and its anticipated use of proceeds, among
                                         other things. An early-stage
