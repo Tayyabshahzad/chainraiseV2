@@ -303,7 +303,7 @@
         <div class="row align-items-center">
             <div class="col-lg-7 position-relative">
                 <hr class="verticle-line-bar">
-                <h1 class="third">How to Invest</h1>
+                <h1 class="third">HOW TO INVEST</h1>
                 <h6 class="third">Create an account, find your favorite offering, become a fractional owner.</h6>
             </div>
         </div>
