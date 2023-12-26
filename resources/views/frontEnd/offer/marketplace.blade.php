@@ -7,7 +7,6 @@
             background-image: url("{{ asset('vue/images/image-3.png') }}");
         }
 
-
     </style>
 @endsection
 @section('page_content')
@@ -19,7 +18,7 @@
             <h1 class="second">Build an Ambitious Portfolio.</h1>
         </div>
         <div class="row text-white text-end">
-            {{-- <p>Sort by</p> --}}
+            <p></p>
         </div>
         <div class="row g-3">
             @foreach ($offers as $offer)
