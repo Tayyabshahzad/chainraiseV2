@@ -25,7 +25,7 @@
                     companies, Real
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
-                    <a class="btn color_btn px-lg-5" href="https://chainraise.io/">
+                    <a class="btn color_btn px-lg-5" href="{{  route('marketplace') }}">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Offerings
                     </a>
                     {{-- <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
@@ -106,7 +106,7 @@
                 <h6 class="third">Explore all of our offerings and become a fractional owner of a startup company.</h6>
             </div>
             <div class="col-lg-3 text-end">
-                <a href="https://chainraise.io/" class="btn color_btn px-lg-5">View all</a>
+                <a href="{{ route('marketplace') }}" class="btn color_btn px-lg-5">View all</a>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
                                                     class="img-fluid me-2">
-                                                    Tranding
+                                                    Trending
                                             </p>
                                         </div>
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
@@ -164,8 +164,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
-                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
+                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                         <div class="position-absolute bg-orange p-1 px-4 rotate-div">
                                             <p class="trend text-white text-lg-end mb-0">
                                                 <img src="{{  asset('vue/images/flame.svg')}}"
-                                                    class="img-fluid me-2">Tranding
+                                                    class="img-fluid me-2">Trending
                                             </p>
                                         </div>
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
@@ -212,7 +212,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <p class="text-white mb-0 pb-0">Offer Type</p>
-                                                    <b class="text-white">{{  $active->offer_type  }}</b>
+                                                    <b class="text-white"> {{  $active->offer_type  }} </b>
                                                 </div>
                                             </div>
                                             <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
@@ -221,8 +221,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn fw-bold" type="button" disabled>Coming Soon</button>
-                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
-                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
+                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
+                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
                                             </div>
                                         </div>
                                     </div>

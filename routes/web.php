@@ -157,6 +157,7 @@ Route::get('login/facebook/callback', [App\Http\Controllers\SocialiteController:
 
 Route::middleware('check.profile.complete')->group(function () {
     Route::get('/', [FrontendController::class, 'index'])->name('index');
+    Route::get('marketplace', [FrontendController::class, 'marketplace'])->name('marketplace');
     Route::get('offer/{id}', [FrontendController::class, 'detail'])->name('offer.details');
     Route::get('offer/v2/{id}', [FrontendController::class, 'detail_v2'])->name('offer.details.v2');
     Route::get('faq', [FrontendController::class, 'faq'])->name('faq');

@@ -273,10 +273,10 @@
                     </div>
                     <div>
                         {{-- <p><b>Almost Sold out</b></p> --}}
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                        {{-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar" style="width: 25%"></div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row pt-2 mx-0 px-0">
                         <div class="col-6">
