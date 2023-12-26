@@ -164,8 +164,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
-                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
+                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
+                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
                                             </div>
                                         </div>
                                     </div>
@@ -221,8 +221,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn fw-bold" type="button" disabled>Coming Soon</button>
-                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
+                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
                                             </div>
                                         </div>
                                     </div>
