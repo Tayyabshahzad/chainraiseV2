@@ -161,6 +161,7 @@ h1.business {
 .badge-class {
     color: #FF7A00;
     font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Proxima Nova;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

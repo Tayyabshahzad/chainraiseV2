@@ -65,7 +65,7 @@
 <section class="bg-dark-color p-lg-5 p-3 ">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 ps-lg-0">
+            <div class="col-lg-7 ps-lg-0">
                 <ul class="nav nav-pills nav-fill" style="background-color: #333333;" id="pills-tab" role="tablist">
                     <li class="nav-item me-lg-3" role="presentation">
                         <button class="nav-link active text-white" id="pills-home-tab" data-bs-toggle="pill"
@@ -237,7 +237,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-4 side-col-bg px-lg-4">
+            <div class="col-lg-5 side-col-bg px-lg-4">
                 <div class="my-lg-4 p-lg-4 bg-image-modal">
                     <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
                     <div class="text-white border-style-div text-center p-3">

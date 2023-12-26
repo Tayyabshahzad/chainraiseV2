@@ -35,36 +35,15 @@
                         Estate
                     </a> --}}
 
-                    <p class="text-white py-4 my-lg-3 pe-lg-4">
-                        ChainRaise Portal LLC is a SEC registered Funding Portal and member of FINRA.<br/>Investing involves risks, including the risk of loss and liquidity risk
-                    </p>
+                    <h6 class="text-white py-4 my-lg-3 pe-lg-4 " style="font-size:15px!important;line-height:25px!important">
+                        ChainRaise Portal LLC is a SEC registered Funding Portal and member of FINRA. Investing involves risks, including the risk of loss and liquidity risk
+                    </h6>
 
 
                 </div>
             </div>
-            <div class="col-lg-6 hero-play py-5 d-flex justify-content-center align-items-center">
-                <a type="button" data-bs-toggle="modal" data-src="https://player.vimeo.com/video/235215203"
-                    data-bs-target="#myModal">
-                    {{-- <img src="{{ asset('vue/images/Group 12576.png') }}" alt=""> --}}
-                </a>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body text-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                </button>
-                                <!-- 16:9 aspect ratio -->
-                                <div class="ratio ratio-16x9">
-                                    <iframe class="embed-responsive-item"
-                                        src="https://player.vimeo.com/video/235215203?autoplay=1&amp;playsinline=1&amp;color&amp;autopause=0&amp;loop=1&amp;muted=1&amp;title=0&amp;portrait=0&amp;byline=0#t="
-                                        id="video" allowscriptaccess="always" allow="autoplay"></iframe>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-6 my-auto">
+                <img src="{{ asset('vue/images/image-3.png') }}" class="img-fluid" alt="">
             </div>
         </div>
 
@@ -164,8 +143,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
-                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
+                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -221,8 +200,8 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn fw-bold" type="button" disabled>Coming Soon</button>
-                                                <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button>
-                                                {{-- <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a> --}}
+                                                {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
+                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
                                             </div>
                                         </div>
                                     </div>
