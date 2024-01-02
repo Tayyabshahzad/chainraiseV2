@@ -136,14 +136,14 @@
                                                     <b class="text-white">{{  $active->offer_type  }}</b>
                                                 </div>
                                             </div>
-                                            <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
+                                            {{-- <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
                                                 style="text-align: left !important;">
                                                 Due to our escrow partner switch, this offering with be back online
-                                                soon.</span>
+                                                soon.</span> --}}
                                             <div class="d-grid gap-2 col-12 mx-auto">
 
                                                 @if($active->ext_url != null)
-                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Invest Now</b></a>
+                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Learn  More </b></a>
                                                 @else
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
                                                 @endif
