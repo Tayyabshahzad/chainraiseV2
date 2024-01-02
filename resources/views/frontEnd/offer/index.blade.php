@@ -100,7 +100,7 @@
                         <div class=" ">
                             <div class="row">
                                 @foreach ($activeOffers as $active)
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" style="margin-bottom: 10px">
                                     <div class="card bg-dark">
                                         <div class="position-absolute bg-orange p-1 px-4 rotate-div">
                                             <p class="trend text-white text-lg-end mb-0">
