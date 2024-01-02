@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-lg-12">
                         <label for="">Ext Url</label>
-                        <input type="text" class="form-control" name="ext_url" value="{{ $offer->ext_url }}" id="ext_url" required>
+                        <input type="text" class="form-control" name="ext_url" value="{{ $offer->ext_url }}" id="ext_url" >
                     </div>
                 </div>
 
