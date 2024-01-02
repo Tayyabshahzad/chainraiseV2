@@ -142,7 +142,7 @@
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
                                                 <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                                <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
+                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Learn  More </b></a>
                                                 {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                                             </div>
                                         </div>
