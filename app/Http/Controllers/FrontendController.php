@@ -47,7 +47,7 @@ class FrontendController extends Controller
         $offers = Offer::orderBy('id', 'desc')->where('status', 'active')->get();
         $offer_coming_soon = Offer::orderBy('id', 'desc')->where('status', 'coming-soon')->get();
 
-        $activeOffers = Offer::orderBy('id', 'desc')->where('status', 'active')->take(3)->get();
+        $activeOffers = Offer::orderBy('id', 'desc')->where('status', 'active')->get();
         $remainingOffers = Offer::orderBy('id', 'desc')->where('status', 'active')->skip(3)->take(PHP_INT_MAX)->get();
 
 
