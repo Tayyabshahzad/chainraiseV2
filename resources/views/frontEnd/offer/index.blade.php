@@ -136,9 +136,7 @@
                                                     <b class="text-white">{{  $active->offer_type  }}</b>
                                                 </div>
                                             </div>
-                                            <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
-                                                style="text-align: left !important;">
-                                               </span>
+                                            <span class="  text-wrap col-12 my-3 mx-auto py-2 px-3"   style="text-align: left !important;"> </span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
 
                                                 @if($active->ext_url != null)
