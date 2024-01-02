@@ -141,8 +141,12 @@
                                                 Due to our escrow partner switch, this offering with be back online
                                                 soon.</span>
                                             <div class="d-grid gap-2 col-12 mx-auto">
-                                                {{-- <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button> --}}
-                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Invest </b></a>
+
+                                                @if($active->ext_url != null)
+                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Invest Now</b></a>
+                                                @else
+                                                <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
+                                                @endif
                                                 {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                                             </div>
                                         </div>
