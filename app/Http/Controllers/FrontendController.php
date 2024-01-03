@@ -55,6 +55,12 @@ class FrontendController extends Controller
         return view('frontEnd.offer.index', compact('activeOffers', 'remainingOffers'));
     }
 
+    public function consultation()
+    {
+        return view('frontEnd.consultation');
+    }
+
+
 
     public function marketplace(){
         $offers = Offer::orderBy('id', 'desc')->where('status', 'active')->get();
