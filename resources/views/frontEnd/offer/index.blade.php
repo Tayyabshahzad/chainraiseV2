@@ -25,7 +25,7 @@
                     companies, Real
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
-                    <a class="btn color_btn px-lg-5" href="{{  route('marketplace') }}">
+                    <a class="btn color_btn px-lg-5" href="#">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Offerings
                     </a>
                     {{-- <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
@@ -85,7 +85,7 @@
                 <h6 class="third">Explore all of our offerings and become a fractional owner of a startup company.</h6>
             </div>
             <div class="col-lg-3 text-end">
-                <a href="{{ route('marketplace') }}" class="btn color_btn px-lg-5">View all</a>
+                <a href="#" class="btn color_btn px-lg-5">View all</a>
             </div>
         </div>
     </div>
