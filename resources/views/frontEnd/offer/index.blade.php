@@ -25,7 +25,7 @@
                     companies, Real
                     Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
-                    <a class="btn color_btn px-lg-5" href="#">
+                    <a class="btn color_btn px-lg-5" href="{{ route('marketplace') }}">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Offerings
                     </a>
                     {{-- <a class="btn transparent_btn px-l ms-lg-3"  href="https://chainraise.io/">
@@ -85,7 +85,7 @@
                 <h6 class="third">Explore all of our offerings and become a fractional owner of a startup company.</h6>
             </div>
             <div class="col-lg-3 text-end">
-                <a href="#" class="btn color_btn px-lg-5">View all</a>
+                <a href="{{ route('marketplace') }}" class="btn color_btn px-lg-5">View all</a>
             </div>
         </div>
     </div>
@@ -102,13 +102,7 @@
                                 @foreach ($activeOffers as $active)
                                 <div class="col-lg-4" style="margin-bottom: 10px">
                                     <div class="card bg-dark">
-                                        <div class="position-absolute bg-orange p-1 px-4 rotate-div">
-                                            <p class="trend text-white text-lg-end mb-0">
-                                                <img src="{{  asset('vue/images/flame.svg')}}"
-                                                    class="img-fluid me-2">
-                                                    Trending
-                                            </p>
-                                        </div>
+
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
                                         <div class="card-body ">
                                             <div class="d-flex justify-content-end">
@@ -140,9 +134,9 @@
                                             <div class="d-grid gap-2 col-12 mx-auto">
 
                                                 @if($active->ext_url != null)
-                                                <a href="{{  $active->ext_url  }}" class="btn transparent_btn" target="_blank" ><b> Learn  More </b></a>
+                                                    <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" ><b> Learn  More </b></a>
                                                 @else
-                                                <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
+                                                    <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
                                                 @endif
                                                 {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                                             </div>

@@ -31,7 +31,7 @@
                             <p class="badge-class">{{  $offer->offer_type  }}</p>
                         </div>
                         <p class="card-text text-white mt-2" style="height: 50px;">
-                            {{  substr($offer->short_description, 0, 80); }}
+                            {{  substr($offer->short_description, 0, 80) }}
 
                         </p>
 
@@ -39,9 +39,12 @@
 
                 </div>
                 <div class="d-grid gap-2 col-12 mx-auto mt-10">
+                @if($offer->ext_url != null)
+                    <a href="{{ route('offer.details', $offer->slug) }}" style="margin-top:5px" class="btn transparent_btn" ><b> Learn  More </b></a>
+                @else
+                    <button class="btn color_btn" type="button" disabled style="margin-top:5px" ><b>Coming Soon</b> </button>
+                @endif
 
-                    <a href="{{ route('offer.details', $offer->slug) }}" style="margin-top:5px" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
-                    {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
                 </div>
 
             </div>
