@@ -292,22 +292,28 @@
                             <div class="col-4">
                                 <span class="blue">Invest</span><br>min
                                 ${{ number_format($offer->investmentRestrictions->min_invesment) }}
+                                <br><br>
                             </div>
                             <div class="col-8 text-lg-end">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">$</span>
+                                    {{-- <span class="input-group-text">$</span>
                                     <div class="form-floating">
                                         <input type="text" required name="investment_amount" class="form-control" id="floatingInputGroup1"
                                             placeholder="Username" min="{{  $offer->investmentRestrictions->min_invesment }}">
                                         <label for="floatingInputGroup1">Invest</label>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>
                         </div>
                         <div class="d-grid gap-2 col-12 mx-auto">
                             {{-- <a href="{{ route('offer.details',$offer->id)  }}" class="btn color_btn" target="_blank">Invest Now</a> --}}
-                            <button class="btn transparent_btn" type="submit">Invest Now</button>
+                            @if($offer->ext_url != null)
+                            <a href="{{  $offer->ext_url  }}" class="btn transparent_btn " target="_blank" ><b> Invest Now </b></a>
+                            @else
+                            <button class="btn transparent_btn" type="button" disabled><b>Coming Soon</b> </button>
+                            @endif
+
                         </div>
                     </form>
 
