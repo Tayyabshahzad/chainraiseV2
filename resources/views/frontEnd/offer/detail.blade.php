@@ -20,14 +20,14 @@
 
                 <h1 class="explore-detail">{{ $offer->name }}</h1>
                 <div class="d-grid gap-2 d-md-block pt-lg-3">
-                    <button class="btn text-white px-lg-5 fw-semibold" style="background-color: #FF7A00 !important;"
+                    {{-- <button class="btn text-white px-lg-5 fw-semibold" style="background-color: #FF7A00 !important;"
                         type="button"> 30 Days
                         Left <img src="{{ asset('vue/images/info.png') }}">
                     </button>
                     <button class="btn px-lg-5 fw-semibold"
                         style="background-color: #ffffff !important; color: #294FF6 !important;" type="button">
                         ${{ number_format($offer->total_valuation) }} <span class="text-dark">Raised</span>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
             <div class="col-lg-6 p-lg-5 text-white text-end">
@@ -279,12 +279,12 @@
                         </div> --}}
                     </div>
                     <div class="row pt-2 mx-0 px-0">
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <p>Total Investment Raised</p>
                         </div>
                         <div class="col-6 text-lg-end">
                             <p>${{ number_format($offer->total_valuation) }}</p>
-                        </div>
+                        </div> --}}
                     </div>
                     <form action="{{ route('invest.submit') }}" method="get" id="investForm">
                         <input type="hidden" name="offer_id" value="{{ $offer->id }}">
