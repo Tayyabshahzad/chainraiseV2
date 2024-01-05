@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-lg-6 p-lg-5 text-white text-end">
-                <p class="tab-text text-lg-start">{{ $offer->short_description }}.</p>
+                {{-- <p class="tab-text text-lg-start">{{ $offer->short_description }}.</p> --}}
 
                 {{-- <img src="{{ asset('vue/images/Group 12578.png') }}" alt="" srcset="" class="img-fluid"> --}}
             </div>z
