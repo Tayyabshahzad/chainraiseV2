@@ -237,116 +237,117 @@
 
                 </div>
             </div>
-            <div class="col-lg-5 side-col-bg px-lg-4">
-                <div class="my-lg-4 p-lg-4 bg-image-modal">
-                    <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
-                    <div class="text-white border-style-div text-center p-3">
-                        <p class="mb-0"><b>Closing on  {{ $remainingTimeArray['remainingMonths']  }} </b></p>
-                        <p> {{ $remainingTimeArray['formated']  }} New York time</p>
-                        <hr>
+            <div class="col-lg-5">
+                <div class="side-col-bg p-lg-4">
+                    <div class="p-lg-4 bg-image-modal">
+                        <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
+                        <div class="text-white border-style-div text-center p-3">
+                            <p class="mb-0"><b>Closing on  {{ $remainingTimeArray['remainingMonths']  }} </b></p>
+                            <p> {{ $remainingTimeArray['formated']  }} New York time</p>
+                            <hr>
 
-                        <div class="row pt-3">
-                            <div class="col border-end"> {{ $remainingTimeArray['remainingDays'] }}<br>Days</div>
-                            <div class="col border-end"> {{ $remainingTimeArray['hours'] }}<br>Hour</div>
-                            <div class="col border-end"> {{ $remainingTimeArray['minutes'] }}<br>Min</div>
-                            <div class="col"> {{ $remainingTimeArray['seconds'] }}<br>Sec</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row  text-white">
-                    <div class="col-4 border-end"><span class="blue">Offer
-                            Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
-                    <div class="col-4 border-end"><span class="blue">Offer
-                            Amount</span><br>${{ number_format($offer->size) }}</div>
-                    <div class="col-4 "><span class="blue">Securities
-                            Type</span><br>{{ ucfirst($offer->security_type) }}</div>
-                    <div class="py-2">
-                        <hr>
-                    </div>
-                    <div class="col-4 border-end"><span
-                            class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}</div>
-                    <div class="col-4"><span class="blue">Min.
-                            Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}
-                    </div>
-                    <div class="py-2">
-                        <hr>
-                    </div>
-                    <div>
-                        {{-- <p><b>Almost Sold out</b></p> --}}
-                        {{-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 25%"></div>
-                        </div> --}}
-                    </div>
-                    <div class="row pt-2 mx-0 px-0">
-                        {{-- <div class="col-6">
-                            <p>Total Investment Raised</p>
-                        </div>
-                        <div class="col-6 text-lg-end">
-                            <p>${{ number_format($offer->total_valuation) }}</p>
-                        </div> --}}
-                    </div>
-                    <form action="{{ route('invest.submit') }}" method="get" id="investForm">
-                        <input type="hidden" name="offer_id" value="{{ $offer->id }}">
-                    <div class="row pt-2 mx-0 px-0">
-                            <div class="col-4">
-                                <span class="blue">Invest</span><br>min
-                                ${{ number_format($offer->investmentRestrictions->min_invesment) }}
-                                <br><br>
+                            <div class="row pt-3">
+                                <div class="col border-end"> {{ $remainingTimeArray['remainingDays'] }}<br>Days</div>
+                                <div class="col border-end"> {{ $remainingTimeArray['hours'] }}<br>Hour</div>
+                                <div class="col border-end"> {{ $remainingTimeArray['minutes'] }}<br>Min</div>
+                                <div class="col"> {{ $remainingTimeArray['seconds'] }}<br>Sec</div>
                             </div>
-                            <div class="col-8 text-lg-end">
-                                <div class="input-group mb-3">
-                                    {{-- <span class="input-group-text">$</span>
-                                    <div class="form-floating">
-                                        <input type="text" required name="investment_amount" class="form-control" id="floatingInputGroup1"
-                                            placeholder="Username" min="{{  $offer->investmentRestrictions->min_invesment }}">
-                                        <label for="floatingInputGroup1">Invest</label>
-                                    </div> --}}
+                        </div>
+                    </div>
+                    <div class="row  pt-3 text-white">
+                        <div class="col-4 border-end"><span class="blue">Offer
+                                Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
+                        <div class="col-4 border-end"><span class="blue">Offer
+                                Amount</span><br>${{ number_format($offer->size) }}</div>
+                        <div class="col-4 "><span class="blue">Securities
+                                Type</span><br>{{ ucfirst($offer->security_type) }}</div>
+                        <div class="py-2">
+                            <hr>
+                        </div>
+                        <div class="col-4 border-end"><span
+                                class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}</div>
+                        <div class="col-4"><span class="blue">Min.
+                                Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}
+                        </div>
+                        <div class="py-2">
+                            <hr>
+                        </div>
+                        <div>
+                            {{-- <p><b>Almost Sold out</b></p> --}}
+                            {{-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 25%"></div>
+                            </div> --}}
+                        </div>
+                        <div class="row pt-2 mx-0 px-0">
+                            {{-- <div class="col-6">
+                                <p>Total Investment Raised</p>
+                            </div>
+                            <div class="col-6 text-lg-end">
+                                <p>${{ number_format($offer->total_valuation) }}</p>
+                            </div> --}}
+                        </div>
+                        <form action="{{ route('invest.submit') }}" method="get" id="investForm">
+                            <input type="hidden" name="offer_id" value="{{ $offer->id }}">
+                        <div class="row pt-2 mx-0 px-0">
+                                <div class="col-4">
+                                    <span class="blue">Invest</span><br>min
+                                    ${{ number_format($offer->investmentRestrictions->min_invesment) }}
+                                    <br><br>
                                 </div>
+                                <div class="col-8 text-lg-end">
+                                    <div class="input-group mb-3">
+                                        {{-- <span class="input-group-text">$</span>
+                                        <div class="form-floating">
+                                            <input type="text" required name="investment_amount" class="form-control" id="floatingInputGroup1"
+                                                placeholder="Username" min="{{  $offer->investmentRestrictions->min_invesment }}">
+                                            <label for="floatingInputGroup1">Invest</label>
+                                        </div> --}}
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 col-12 mx-auto">
+                                {{-- <a href="{{ route('offer.details',$offer->id)  }}" class="btn color_btn" target="_blank">Invest Now</a> --}}
+                                @if($offer->ext_url != null)
+                                <a href="{{  $offer->ext_url  }}" class="btn transparent_btn " target="_blank" ><b> Invest Now </b></a>
+                                @else
+                                <button class="btn transparent_btn" type="button" disabled><b>Coming Soon</b> </button>
+                                @endif
 
                             </div>
-                        </div>
-                        <div class="d-grid gap-2 col-12 mx-auto">
-                            {{-- <a href="{{ route('offer.details',$offer->id)  }}" class="btn color_btn" target="_blank">Invest Now</a> --}}
-                            @if($offer->ext_url != null)
-                            <a href="{{  $offer->ext_url  }}" class="btn transparent_btn " target="_blank" ><b> Invest Now </b></a>
-                            @else
-                            <button class="btn transparent_btn" type="button" disabled><b>Coming Soon</b> </button>
-                            @endif
+                        </form>
 
-                        </div>
-                    </form>
-
-                    <div class="py-3">
-                        <hr>
-                    </div>
-
-                    <div class="pb-5">
-                        <p class="mb-0 pb-0"><b>Document(s)</b></p>
                         <div class="py-3">
                             <hr>
                         </div>
-                        <div class="row">
-                            @foreach ($manual_offer_documents as $manual_offer_document)
-                                @if ($manual_offer_document->type == 'pdf')
-                                    <div class="col-10 pe-0 pb-3">
-                                        <img src="{{ asset('vue/images/pdf (1).png') }}" alt="">
-                                        <span class="ps-3"> {{ Str::ucfirst($manual_offer_document->name) }} </span>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="{{ $manual_offer_document->getUrl() }}"
-                                            download="{{ Str::ucfirst($manual_offer_document->name) }}">
-                                            <img src="{{ asset('vue/images/Group 12584.png') }}" alt="">
-                                        </a>
-                                    </div>
-                                @endif
-                            @endforeach
+
+                        <div class="pb-5">
+                            <p class="mb-0 pb-0"><b>Document(s)</b></p>
+                            <div class="py-3">
+                                <hr>
+                            </div>
+                            <div class="row">
+                                @foreach ($manual_offer_documents as $manual_offer_document)
+                                    @if ($manual_offer_document->type == 'pdf')
+                                        <div class="col-10 pe-0 pb-3">
+                                            <img src="{{ asset('vue/images/pdf (1).png') }}" alt="">
+                                            <span class="ps-3"> {{ Str::ucfirst($manual_offer_document->name) }} </span>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="{{ $manual_offer_document->getUrl() }}"
+                                                download="{{ Str::ucfirst($manual_offer_document->name) }}">
+                                                <img src="{{ asset('vue/images/Group 12584.png') }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
-
             </div>
         </div>
     </div>
