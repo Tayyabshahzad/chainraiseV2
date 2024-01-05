@@ -31,11 +31,8 @@ html {
     scroll-behavior: smooth;
 }
 
-
 body {
-    font-family: var(--primary-font);
-    font-size: 100%;
-    font-weight: 400;
+    font-family: var(--secondry-font);
 }
 
 /*===== Variable Define =====*/
@@ -76,11 +73,12 @@ body {
     color: white;
 }
 
+
 h3 {
-    font-family: var(--primary-font);
+    font-family: var(--primary-font) !important;
     font-size: 76px !important;
     color: #daf9ff !important;
-    line-height: 100px !important;
+    line-height: 107px !important;
     font-weight: 400 !important;
 }
 
@@ -93,6 +91,57 @@ h3 {
     width: 88px;
 }
 
+.bg-image-tree {
+    background: url(../images/hero-bg.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
+
+.bg-invester {
+    background: url(../images/Group\ 12544.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg-invester-inner {
+    background: url(../images/Mark\ group.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.bg-image {
+    background: url(../images/background-image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+}
+
+h3.business {
+    font-size: 24px !important;
+    line-height: 30px !important;
+}
+
+h1.business {
+    font-size: 48px !important;
+    font-family: var(--primary-font);
+    background-image: linear-gradient(to right, #8a77ff, #a5f0ff) !important;
+
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+h5.market-title {
+    color: white;
+    font-size: 24px;
+    font-family: var(--secondry-font);
+}
+
 .right-section {
     width: 731px;
     color: #22dbff;
@@ -100,6 +149,33 @@ h3 {
     border-radius: 5px;
     background: linear-gradient(239deg, rgba(34, 219, 255, 0.25) 17.15%, rgba(73, 33, 251, 0.25) 108.38%);
     backdrop-filter: blur(71px);
+}
+
+.card-bg {
+    border-radius: 5px;
+    background: black !important;
+    border: 0 !important;
+
+
+}
+
+
+
+.badge-class {
+    color: #FF7A00 !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    background-color: #ff7a003d !important;
+    padding: 0px 12px !important;
+    border-radius: 20px !important;
+    font-family: var(--secondry-font) !important;
+
+
+}
+
+.test {
+    background-image: url(../images/Card.png);
 }
 
 .left-section {
@@ -260,26 +336,71 @@ img.card-img-top {
     border-radius: 30px 30px 0px 0px;
 }
 
-h1.display {
-    line-height: 90px !important;
+button {
+    font-family: var(--secondry-font) !important;
+    font-size: 18px !important;
+}
+
+h1.display-1 {
+    line-height: 107px !important;
+    font-size: 106px !important;
 }
 
 h1.second {
-    font-size: 50px !important;
+    font-size: 56px !important;
+    font-family: var(--secondry-font) !important;
+    font-weight: 800 !important;
 }
 
 h1.third {
-    font-size: 50px !important;
+    font-size: 56px !important;
+    font-family: var(--secondry-font) !important;
+    font-weight: 800 !important;
+
 }
 
 h6.third {
-    font-size: 24px !important;
+    font-size: 26px !important;
+    font-family: var(--secondry-font) !important;
 }
 
 h6 {
     color: #dcdcdc !important;
     font-size: 32px !important;
     font-weight: 400 !important;
+    font-family: var(--secondry-font) !important;
+}
+
+h5 {
+    font-family: var(--secondry-font) !important;
+}
+
+.card-title {
+    font-size: 18px !important;
+    font-family: var(--secondry-font) !important;
+
+}
+
+p {
+    font-family: var(--secondry-font) !important;
+    font-weight: 400 !important;
+    color: #dcdcdc !important;
+}
+
+p.card-text {
+    color: #D1CCCC !important;
+}
+
+.price {
+    font-family: var(--secondry-font) !important;
+    font-size: 14px;
+    color: white;
+
+}
+
+p.title {
+    font-size: 14px !important;
+    font-family: var(--secondry-font) !important;
 }
 
 .color_btn {
@@ -303,7 +424,7 @@ h6 {
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.show {
     font-weight: 700 !important;
-    font-family: var(--secondry-font);
+    font-family: var(--secondry-font) !important;
 }
 
 .bg-color-dark {
@@ -320,6 +441,7 @@ h6 {
     color: #ff9696 !important;
     background-color: #343434 !important;
     border-radius: 50px !important;
+    font-family: var(--secondry-font) !important;
 }
 
 .carousel-control-prev-icon {
@@ -370,7 +492,7 @@ h6 {
 
 .verticle-line-bar {
     position: absolute !important;
-    height: 10px !important;
+    height: 5px !important;
     width: 120px !important;
     margin: 1rem 0px !important;
     background: linear-gradient(to right, #4b20fb, #20cded);
@@ -415,31 +537,97 @@ h6.second {
     font-size: 24px;
 }
 
+.accordion {
+    --bs-accordion-bg: #fff0 !important;
+    --bs-accordion-color: rgb(255, 255, 255) !important;
+    --bs-accordion-btn-color: white !important;
+
+}
+
+.accordion-button:not(.collapsed) {
+    color: white !important;
+    background-color: #fff0 !important;
+}
+
+.accordion-button:focus {
+    border-color: white !important;
+    box-shadow: none;
+}
+
+.accordion-button::after {
+
+    background-image: url("../images/plus.png") !important;
+
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("../images/minus-sign.png") !important;
+    transform: none !important;
+}
+
+.width-increase {
+    width: 135px !important;
+}
+
 @media only screen and (max-width: 768px) {
     h3 {
         font-size: 35px !important;
         line-height: 50px !important;
     }
 
+    h1.business {
+        font-size: 25px !important;
+    }
+
+    .aa {
+        font-size: 16px !important;
+    }
+
+    .width-increase {
+        width: 92px !important;
+    }
+
     h1 {
         font-size: 50px !important;
     }
 
+    h1.display-1 {
+        line-height: 50px !important;
+        font-size: 40px !important;
+    }
+
+    .price {
+        font-size: 11px !important;
+
+
+    }
+
+    p.title {
+        font-size: 11px !important;
+    }
+
     .abc {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     h6 {
-        font-size: 20px !important;
+        font-size: 14px !important;
+    }
+
+    p {
+        font-size: 14px !important;
     }
 
     h1.second {
         font-size: 24px !important;
-        text-align: center;
     }
 
     h6.second {
-        font-size: 20px !important;
+        font-size: 14px !important;
+    }
+
+    .verticle-line-bar {
+        left: 4px !important;
     }
 
     h1.third {
@@ -447,7 +635,13 @@ h6.second {
     }
 
     h6.third {
-        font-size: 20px !important;
+        font-size: 14px !important;
+    }
+
+    .xyz {
+        font-size: 14px !important;
+        padding: 6px !important;
+        text-align: center;
     }
 
     .carousel-control-next {

@@ -6,8 +6,6 @@
         .hero-play{
             background-image: url("{{ asset('vue/images/image-3.png') }}");
         }
-
-
     </style>
 @endsection
 @section('page_content')
