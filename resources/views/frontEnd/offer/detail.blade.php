@@ -130,7 +130,7 @@
 
                             <h1 class="tab-text py-lg-4 py-3">Pitch Deck</h1>
 
-                            <div class="row gx-0 gy-4">
+                            <div class="row g-3 gy-4">
                                 @foreach ($slider_images as $slider_image)
                                     <div class="col-lg-4">
                                         <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}"
