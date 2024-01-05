@@ -238,7 +238,7 @@
                 </div>
             </div>
             <div class="col-lg-5 ">
-                <div class="side-col-bg p-lg-4 position-sticky">
+                <div class="side-col-bg p-lg-4" style="position:sticky;top:0;">
                     <div class="p-lg-4 bg-image-modal">
                         <p class="text-white"><b>INVEST IN OUR OFFERING</b></p>
                         <div class="text-white border-style-div text-center p-3">
