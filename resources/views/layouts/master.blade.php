@@ -63,7 +63,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{  route('faq')  }}">FAQ</a></li>
                             <li><a class="dropdown-item" href="{{  route('businesses') }}">Business</a></li>
-                            <li><a class="dropdown-item" href="{{  route('blockchain') }}">Block Chain</a></li>
+                            {{-- <li><a class="dropdown-item" href="{{  route('blockchain') }}">Block Chain</a></li> --}}
 
                         </ul>
                     </li>
@@ -153,11 +153,11 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="https://discord.com/invite/Xau7zzmQk5">
                                 <i class="bi bi-discord"></i>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
 
