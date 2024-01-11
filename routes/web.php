@@ -13,6 +13,7 @@ use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\SPPX\ApiController;
 /*
 //Updated Routes
 |--------------------------------------------------------------------------
@@ -29,8 +30,9 @@ Route::get('emails', function(){
     return view('email.transaction.canceled');
 });
 
-
-
+Route::get('api-sppx', [ApiController::class, 'listing']);
+Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
+Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
 
 Route::get('patch-webhook', function(){
         $webhook_URL   = env('WebURL');

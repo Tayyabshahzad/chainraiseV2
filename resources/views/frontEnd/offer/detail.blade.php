@@ -2,6 +2,8 @@
 @extends('layouts.master')
 @section('page_title','Details')
 @section('page_style')
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vue/css/style-detail.css') }}">
     <style>
         .container-bg {
@@ -132,9 +134,12 @@
 
                             <div class="row g-3 gy-4">
                                 @foreach ($slider_images as $slider_image)
+
                                     <div class="col-lg-4">
-                                        <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}"
-                                            alt="" srcset="" class="img-fluid">
+                                        <a href="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" class="popup-link" data-title="Image 1">
+                                            <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" class="img-fluid rounded" alt="Image 1">
+                                        </a>
+
                                     </div>
                                 @endforeach
 
@@ -354,3 +359,17 @@
 </section>
 @endsection
 
+@section('page_js')
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('.popup-link').magnificPopup({type:'image'});
+  });
+</script>
+
+@endsection
