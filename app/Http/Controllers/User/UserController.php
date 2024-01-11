@@ -32,6 +32,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use App\DataTables\UsersDataTable;
+use App\Models\KYC;
 class UserController extends Controller
 {
     public function custom_login($email,$password)
@@ -338,6 +339,14 @@ class UserController extends Controller
             }elseif($request->account_type == 'issuer') {
                 $user->assignRole('issuer');
             }
+            $document_status =  "Not Uploaded";
+            KYC::updateOrCreate(
+                ['user_id' => $user->id],
+                [   'kyc_level' => 'L2',
+                    'doc_status'=> $document_status
+                ]
+            );
+
              event(new Registered($user));
              Mail::to($user)->send(new WelcomeEmail($user));
              $data = " <h4>  Hi  $user->name , </h4>
@@ -369,7 +378,7 @@ class UserController extends Controller
              DB::commit();
              return redirect()->route('user.index')->with('success','New investor user has been created');
         }catch(Exception $error){
-          //  dd($error);
+
             DB::rollBack();
             Session::put('error','Error While Creating ');
             return redirect()->back()->with('error','Error while creating investor user'.$error);

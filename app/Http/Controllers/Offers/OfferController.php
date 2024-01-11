@@ -155,70 +155,70 @@ class OfferController extends Controller
         ]);
 
 
-        $token = env('ESIGN_TOKEN');
-        try {
-            $e_sign = Http::get('https://esignatures.io/api/templates/' . $request->e_sign_template . '?token=' . $token);
-            $json_e_sign = json_decode((string) $e_sign->getBody(), true);
-            if (!$e_sign->successful()) {
-                return redirect()->back()->with('error', 'Error While Fetching E template');
-            }
-        } catch (Exception $esign_error) {
-            return redirect()->back()->with("error", "Server Error while fetching template");
-        }
+        // $token = env('ESIGN_TOKEN');
+        // try {
+        //     $e_sign = Http::get('https://esignatures.io/api/templates/' . $request->e_sign_template . '?token=' . $token);
+        //     $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+        //     if (!$e_sign->successful()) {
+        //         return redirect()->back()->with('error', 'Error While Fetching E template');
+        //     }
+        // } catch (Exception $esign_error) {
+        //     return redirect()->back()->with("error", "Server Error while fetching template");
+        // }
 
 
 
         $user = User::find($request->issuer);
-        $get_token = Http::withHeaders([
-            'Content-Type' => 'application/json',
-        ])->post($this->authUrl['url'], [
-            'grant_type' => $this->authUrl['grant_type'],
-            'username'   => $this->authUrl['username'],
-            'password'   => $this->authUrl['password'],
-            'audience'   => $this->authUrl['audience'],
-            'client_id'  => $this->authUrl['client_id'],
-        ]);
-        $token_json =  json_decode((string) $get_token->getBody(), true);
-        if ($get_token->failed()) {
-            //dd($token_json);
-            return redirect()->back()->with('error', 'Internal Server Error While Creating Token [' . $token_json['error'] . ']');
-        }
+        // $get_token = Http::withHeaders([
+        //     'Content-Type' => 'application/json',
+        // ])->post($this->authUrl['url'], [
+        //     'grant_type' => $this->authUrl['grant_type'],
+        //     'username'   => $this->authUrl['username'],
+        //     'password'   => $this->authUrl['password'],
+        //     'audience'   => $this->authUrl['audience'],
+        //     'client_id'  => $this->authUrl['client_id'],
+        // ]);
+        // $token_json =  json_decode((string) $get_token->getBody(), true);
+        // if ($get_token->failed()) {
+        //     //dd($token_json);
+        //     return redirect()->back()->with('error', 'Internal Server Error While Creating Token [' . $token_json['error'] . ']');
+        // }
 
 
-        if ($user->check_kyc == true) {
-            $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->withHeaders(['Content-Type' => 'application/json'])->get($this->baseUrl . '/api/trust/v1/personal-identities/' . $user->fortress_personal_identity);
-            $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
-            if ($upgrade_existing_l0->failed()) {
-                return redirect()->back()->with('error', 'Internal Server Error ' . $json_upgrade_existing_l0['title']);
-            } else {
+        // if ($user->check_kyc == true) {
+        //     $upgrade_existing_l0 = Http::withToken($token_json['access_token'])->withHeaders(['Content-Type' => 'application/json'])->get($this->baseUrl . '/api/trust/v1/personal-identities/' . $user->fortress_personal_identity);
+        //     $json_upgrade_existing_l0 = json_decode((string) $upgrade_existing_l0->getBody(), true);
+        //     if ($upgrade_existing_l0->failed()) {
+        //         return redirect()->back()->with('error', 'Internal Server Error ' . $json_upgrade_existing_l0['title']);
+        //     } else {
 
-                if ($json_upgrade_existing_l0['kycLevel'] == null ||  $json_upgrade_existing_l0['kycLevel'] == '') {
-                    return redirect()->back()->with('error', 'KYC Level Atlest L0');
-                }
-            }
-        }
+        //         if ($json_upgrade_existing_l0['kycLevel'] == null ||  $json_upgrade_existing_l0['kycLevel'] == '') {
+        //             return redirect()->back()->with('error', 'KYC Level Atlest L0');
+        //         }
+        //     }
+        // }
 
         //dump($user->business_id);
 
 
-        try {
-            // Checking custodial-accounts
-            $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($this->baseUrl . '/api/trust/v1/custodial-accounts', [
-                'type' => 'business',
-                'businessIdentityId' => $user->business_id,
-            ]);
-            $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
-            //  dd($json_custodial_account);
-            if ($custodial_account->failed()) {
-                //        dd($custodial_account,$json_custodial_account);
-                return redirect()->back()->with('error', 'There is some error while creating custodial account [' . $json_custodial_account['title'] . ']');
-            }
-        } catch (Exception $custodial_account_error) {
-            // dd($custodial_account_error);
-            return redirect()->back()->with('error', 'There is some error while creating custodial account [' . $custodial_account_error . ']');
-        }
+        // try {
+        //     // Checking custodial-accounts
+        //     $custodial_account = Http::withToken($token_json['access_token'])->withHeaders([
+        //         'Content-Type' => 'application/json',
+        //     ])->post($this->baseUrl . '/api/trust/v1/custodial-accounts', [
+        //         'type' => 'business',
+        //         'businessIdentityId' => $user->business_id,
+        //     ]);
+        //     $json_custodial_account =  json_decode((string) $custodial_account->getBody(), true);
+        //     //  dd($json_custodial_account);
+        //     if ($custodial_account->failed()) {
+        //         //        dd($custodial_account,$json_custodial_account);
+        //         return redirect()->back()->with('error', 'There is some error while creating custodial account [' . $json_custodial_account['title'] . ']');
+        //     }
+        // } catch (Exception $custodial_account_error) {
+        //     // dd($custodial_account_error);
+        //     return redirect()->back()->with('error', 'There is some error while creating custodial account [' . $custodial_account_error . ']');
+        // }
         //  dd(111);
 
         try {
@@ -251,13 +251,13 @@ class OfferController extends Controller
                 }
                 $priority = 0;
                 foreach ($request->investment_setups as $setup) {
-                    if ($setup == 'E-Sign Document') {
-                        $offer_esign_template = new OfferEsignTemplate;
-                        $offer_esign_template->offer_id = $offer->id;
-                        $offer_esign_template->template_name = $json_e_sign['data']['template_name'];
-                        $offer_esign_template->template_id = $request->e_sign_template;
-                        $offer_esign_template->save();
-                    }
+                    // if ($setup == 'E-Sign Document') {
+                    //     $offer_esign_template = new OfferEsignTemplate;
+                    //     $offer_esign_template->offer_id = $offer->id;
+                    //     $offer_esign_template->template_name = $json_e_sign['data']['template_name'];
+                    //     $offer_esign_template->template_id = $request->e_sign_template;
+                    //     $offer_esign_template->save();
+                    // }
                     $priority++;
                     $investmentStep = new InvestmentStep;
                     $investmentStep->offer_id = $offer->id;
@@ -279,17 +279,17 @@ class OfferController extends Controller
                 }
 
 
-                if ($user->check_kyc == true) {
-                    $custodial = new Custodial;
-                    $custodial->user_id = $request->issuer;
-                    $custodial->offer_id = $offer->id;
-                    $custodial->custodial_id = $json_custodial_account['id'];
-                    $custodial->ownerIdentityId = $json_custodial_account['ownerIdentityId'];
-                    $custodial->accountStatus = $json_custodial_account['accountStatus'];
-                    $custodial->accountType = $json_custodial_account['accountType'];
-                    $custodial->accountNumber = $json_custodial_account['accountNumber'];
-                    $custodial->save();
-                }
+                // if ($user->check_kyc == true) {
+                //     $custodial = new Custodial;
+                //     $custodial->user_id = $request->issuer;
+                //     $custodial->offer_id = $offer->id;
+                //     // $custodial->custodial_id = $json_custodial_account['id'];
+                //     // $custodial->ownerIdentityId = $json_custodial_account['ownerIdentityId'];
+                //     // $custodial->accountStatus = $json_custodial_account['accountStatus'];
+                //     // $custodial->accountType = $json_custodial_account['accountType'];
+                //     // $custodial->accountNumber = $json_custodial_account['accountNumber'];
+                //     $custodial->save();
+                // }
 
                 if ($request->hasFile('offer_thumbnail')) {
                     $offer->clearMediaCollection('offer_thumbnail');
@@ -512,7 +512,7 @@ class OfferController extends Controller
                 return redirect()->route('offers.active.index')->with('success', 'Offer has been created successfully');
             }
         } catch (Exception $error) {
-
+            dd($error);
             return redirect()->back()->with('error', 'Error while creating offer' . $error);
         }
     }
@@ -762,14 +762,16 @@ class OfferController extends Controller
                 }
             }
 
-            foreach ($request->investment_setups as $setup) {
-                if ($setup == 'E-Sign Document') {
-                    $offer_esign_template = OfferEsignTemplate::where('offer_id', $offer->id)->first();
-                    $offer_esign_template->offer_id = $offer->id;
-                    $offer_esign_template->template_id = $request->e_sign_template;
-                    $offer_esign_template->save();
-                }
-            }
+            // foreach ($request->investment_setups as $setup) {
+            //     if ($setup == 'E-Sign Document') {
+            //         $offer_esign_template = OfferEsignTemplate::where('offer_id', $offer->id)->first();
+            //         $offer_esign_template->offer_id = $offer->id;
+            //         $offer_esign_template->template_id = $request->e_sign_template;
+            //         $offer_esign_template->save();
+            //     }
+            // }
+
+
             if ($request->has('new_question')) {
 
                 $question = $request->input('new_question');

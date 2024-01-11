@@ -3,7 +3,6 @@
 @section('page_name','Individual Investor')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page_content')
 

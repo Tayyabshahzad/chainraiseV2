@@ -269,12 +269,7 @@
                                                                     background="images/header-7-image-2.jpg'"
                                                                     style="vertical-align: top; background-color: #1B1B1B; background-image: url('images/header-7-image-2.jpg'); background-position: top center; background-size: cover; width: 600px"
                                                                     width="600" valign="top" bgcolor="#1B1B1B">
-                                                                    <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:547px;">
-                <v:fill type="frame" src="{{ env('APP_URL') . '/email_images/header-7-image-2.jpg') }}" color="#1B1B1B"></v:fill>
-                <v:textbox inset="26px,29px,26px,26px">
-                    <div>
-            <![endif]-->
+
                                                                     <div class="pc-header-box-in"
                                                                         style="padding: 29px 26px 26px;">
                                                                         <table border="0" cellpadding="0"

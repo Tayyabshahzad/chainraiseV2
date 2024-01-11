@@ -255,10 +255,7 @@
                                                 <tr>
                                                     <th  style="text-align: left">
                                                         <select class="form-control" name="e_sign_template"  style="height:42px;font-size:13px">
-                                                            @foreach ($templates as $template)
-                                                                <option @if($offer->offerEsing->template_id == $template['template_id'] ) selected @endif value="{{ $template['template_id'] }}">
-                                                                    {{ $template['template_name'] }} </option>
-                                                            @endforeach
+
                                                         </select>
                                                     </th>
                                                 </tr>

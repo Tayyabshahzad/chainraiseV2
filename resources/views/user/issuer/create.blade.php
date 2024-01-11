@@ -3,7 +3,7 @@
 @section('page_name','Issuer')
 @section('page_head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link href="{{ env('APP_URL') . '/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page_content')
 
@@ -242,7 +242,7 @@
                                                     </b> </a>
                                             </li>
                                             <li>
-                                                <a href="{{ env('APP_URL') . '/documents/forme-fortress-fevocable-trust.docx') }}"
+                                                <a href="{{ asset('documents/forme-fortress-fevocable-trust.docx') }}"
                                                     download="Forme-Fortress-Revocable-Trust.docx"> <b>Fortress
                                                         Trust Account Agreement</b> </a>
                                             </li>
