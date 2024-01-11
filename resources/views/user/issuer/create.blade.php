@@ -63,12 +63,12 @@
                                 <input type="hidden" name="type" value="issuer">
                                 <div class="col-lg-3">
                                     <label>Email Address: <span class="text-danger">*</span></label>
-                                    <input type="hidden" required name="account_type" value="issuer" />
-                                    <input type="email" class="form-control " placeholder="Email Address*" required name="email" value="{{ old('email') }}" />
+                                    <input type="hidden"  name="account_type" value="issuer" />
+                                    <input type="email" class="form-control " placeholder="Email Address*"  name="email" value="{{ old('email') }}" />
                                 </div>
                                 <div class="col-lg-3">
                                     <label>First Name: <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="First Name*" required name="first_name" value="{{ old('first_name') }}" />
+                                    <input type="text" class="form-control" placeholder="First Name*"  name="first_name" value="{{ old('first_name') }}" />
                                 </div>
                                 <div class="col-lg-3">
                                     <label>Middle Name: <span class="text-danger"></span></label>
@@ -104,7 +104,7 @@
                                 <div class="col-lg-3">
                                     <label>Date of Birth <span class="text-danger">*</span> </label>
                                     <div class="input-group" id="">
-                                        <input type="date" class="form-control" placeholder="Date of Birth*" required name="dob" value="{{ old('dob') }}">
+                                        <input type="date" class="form-control" placeholder="Date of Birth*"  name="dob" value="{{ old('dob') }}">
                                         <div class="input-group-append">
 
                                         </div>
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Entity Name <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="entity_name" value="{{ old('entity_name') }}" placeholder="Entity Name*" required>
+                                    <input type="text" class="form-control" name="entity_name" value="{{ old('entity_name') }}" placeholder="Entity Name*" >
                                 </div>
                             </div>
                             <div class="form-group row mb-10">
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Street Address <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="address" value="{{ old('street_address') }}" placeholder="Street Address*" required>
+                                    <input type="text" class="form-control" name="address" value="{{ old('street_address') }}" placeholder="Street Address*" >
                                 </div>
 
                                 <div class="col-lg-4">
@@ -172,24 +172,24 @@
 
                                 <div class="col-lg-4">
                                     <label>City <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="city" id="city" value="{{ old('city') }}" placeholder="City" required>
+                                    <input type="text" class="form-control" name="city" id="city" value="{{ old('city') }}" placeholder="City" >
                                 </div>
                             </div>
                             <div class="form-group row mb-10">
 
                                 <div class="col-lg-4">
                                     <label>State Region<span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" placeholder="State / Region" required>
+                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" placeholder="State / Region" >
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Zip Code <span class="text-danger">*</span> </label>
-                                    <input type="number" class="form-control" name="zip_code" id="zip_code" min="5" value="{{ old('zip_code') }}" placeholder="Zip Code" required>
+                                    <input type="number" class="form-control" name="zip_code" id="zip_code" min="5" value="{{ old('zip_code') }}" placeholder="Zip Code" >
                                 </div>
                             </div>
                             <div class="form-group row mb-10">
                                 <div class="col-lg-4">
                                     <label>State/Region of Legal Formation <span class="text-danger">*</span> </label>
-                                    <select name="legal_formation" id="" class="form-control legal_formation" required>
+                                    <select name="legal_formation" id="" class="form-control legal_formation" >
                                             <option value="ccorp"> CCORP </option>
                                             <option value="llc">  LLC </option>
                                             <option value="partnership">  PARTNERSHIP </option>
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Date of Incorporation <span class="text-danger">*</span> </label>
-                                    <input type="date" class="form-control"   placeholder="Date of Incorporation*" required name="date_incorporation" value="{{ old('date_incorporation') }}">
+                                    <input type="date" class="form-control"   placeholder="Date of Incorporation*"  name="date_incorporation" value="{{ old('date_incorporation') }}">
 
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                 <div class="form-group row">
                                     <div class="d-flex align-items-center mb-3">
                                         <label class="form-check form-check-custom form-check-solid me-10">
-                                            <input class="form-check-input h-15px w-15px" type="checkbox"   required name="e_sign_agreement"  >
+                                            <input class="form-check-input h-15px w-15px" type="checkbox"    name="e_sign_agreement"  >
                                             <span class="form-check-label fw-semibold" style="color:#ffffff">
                                                 I have read the <a  href="https://fortresstrustcompany.com/disclosures-e-sign" target="_blank"> E-Sign Agreement </a> and understand I will not receive documents in the mail.
                                             </span>
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <label class="form-check form-check-custom form-check-solid me-10">
-                                            <input class="form-check-input h-15px w-15px" type="checkbox" required name="disclosures">
+                                            <input class="form-check-input h-15px w-15px" type="checkbox"  name="disclosures">
                                             <span class="form-check-label fw-semibold" style="color:#ffffff">  I have read and agree to the following: </span>
                                         </label>
                                     </div>
