@@ -6,6 +6,9 @@
         .hero-play{
             background-image: url("{{ asset('vue/images/image-3.png') }}");
         }
+        .tab-content li {
+           color: #fff;
+        }
     </style>
 @endsection
 @section('page_content')

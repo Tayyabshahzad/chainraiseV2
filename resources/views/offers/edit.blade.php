@@ -1579,7 +1579,6 @@
     <script>
         $('.delete-update').click(function() {
 
-
             var row = $(this).closest('.update-row');
             var updateId = row.data('update-id');
             Swal.fire({
@@ -1614,7 +1613,6 @@
         $('#security_type').change(function(){
                 $('#security_type').change(function () {
                 var selectedValue = $(this).val();
-
                 // Hide all input elements first
                 $('input[name="safe"], input[name="structure_safe"]').addClass('d-none');
                 // Show the appropriate input based on the selected value
@@ -1624,6 +1622,7 @@
                     $('input[name="structure_safe"]').removeClass('d-none').attr('required', 'required');
                 }
             });
+        });
 
 
     </script>

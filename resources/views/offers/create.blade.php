@@ -1085,7 +1085,11 @@
             addFaqItem();
         });
 
-            $('#security_type').change(function(){
+
+    </script>
+
+    <script>
+        $('#security_type').change(function(){
                 $('#security_type').change(function () {
                 var selectedValue = $(this).val();
 
@@ -1100,7 +1104,5 @@
             });
         });
     </script>
-
-
 
 @endsection
