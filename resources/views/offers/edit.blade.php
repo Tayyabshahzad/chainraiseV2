@@ -476,7 +476,7 @@
                                                                     </div>
                                                                     <div class="col-lg-1 mt-4">
                                                                         <button type="button"
-                                                                            class="no-radius btn btn-sm btn-light-danger remove_filed"
+                                                                            class="no-radius btn btn-sm btn-light-danger delete-summary"
                                                                             data-method="summary"
                                                                             data-id="{{ $offerDetail->id }}">
                                                                             <i class="fa fa-trash"></i>
@@ -971,18 +971,17 @@
 @endsection
 @section('page_js')
 
-    <script src="{{ asset('asset/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('asset/js/custom/utilities/modals/create-account.js') }}"></script>
-    <script src="{{ asset('asset/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}"></script>
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
 
-    <script src="{{ asset('asset/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('asset/js/scripts.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('asset/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('asset/js/custom/apps/subscriptions/add/advanced.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/subscriptions/add/advanced.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
@@ -1281,37 +1280,14 @@
         $('.remove_filed').click(function() {
             var id = $(this).data('id');
             var summary = $(this).data('method');
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            Swal.fire({
-                title: "Are you sure to delete this file?",
-                text: "This action can't undo are you sure to delete?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes Delete"
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                        url: "{{ route('offers.delete') }}",
-                        method: "POST",
-                        data: {
-                            id: id,
-                        },
-                        success: function(result) {
-                            if (result.status == true) {
-                                toastr.success(result.message, "Success");
-                                location.reload();
-                            } else {
-                                toastr.error(result.message, "Error");
-                            }
-                        }
-                    });
 
-                }
-            });
+
 
         });
 
@@ -1624,7 +1600,41 @@
             });
         });
 
+        $('.delete-summary').click(function(){
+            var id = $(this).data('id');
+            var summary = $(this).data('method');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: "Are you sure to delete this file?",
+                text: "This action can't undo are you sure to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes Delete"
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "{{ route('offers.summary.delete') }}",
+                        method: "POST",
+                        data: {
+                            id: id,
+                        },
+                        success: function(result) {
+                            if (result.status == true) {
+                                toastr.success(result.message, "Success");
+                                location.reload();
+                            } else {
+                                toastr.error(result.message, "Error");
+                            }
+                        }
+                    });
 
+                }
+            });
+        });
     </script>
 
 

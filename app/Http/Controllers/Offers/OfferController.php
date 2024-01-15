@@ -902,7 +902,27 @@ class OfferController extends Controller
             ]);
         }
     }
+    public function deleteOfferSummary(Request $request){
 
+        $request->validate([
+            'id' => 'required',
+        ]);
+        try {
+            $summary = OfferDetailTab::find($request->id);
+            if($summary){
+                $summary->delete();
+            }
+            return response([
+                'status' => true,
+                'message' => 'Summary been deleted successfully'
+            ]);
+        } catch (Exception $error) {
+            return response([
+                'status' => false,
+                'message' => 'Error while deleting Summary'
+            ]);
+        }
+    }
     public function deleteVideo(Request $request)
     {
         $request->validate([

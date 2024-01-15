@@ -292,6 +292,7 @@ Route::group(['as'=> 'offers.','prefix'=>'offers','middleware' => ['auth','verif
     Route::get('list', ['as' => 'list','uses' => 'OfferController@list']);
     Route::post('save', ['as' => 'save','uses' => 'OfferController@save']);
     Route::post('delete', ['as' => 'delete','uses' => 'OfferController@delete']);
+    Route::post('delete/offer/summary', ['as' => 'summary.delete','uses' => 'OfferController@deleteOfferSummary']);
     Route::post('delete/faq', ['as' => 'delete.faq','uses' => 'OfferController@deleteFaq']);
     Route::get('tile/delete', ['as' => 'tile.delete','uses' => 'OfferController@deleteTile']);
     Route::get('video/delete', ['as' => 'video.delete','uses' => 'OfferController@deleteVideo']);
