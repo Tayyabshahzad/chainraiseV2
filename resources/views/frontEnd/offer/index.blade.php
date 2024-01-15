@@ -7,7 +7,7 @@
             background-image: url("{{ asset('vue/images/image-3.png') }}");
         }
         .tab-content li {
-           color: #fff;
+           color: #fff!important;
         }
     </style>
 @endsection
