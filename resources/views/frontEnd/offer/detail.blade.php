@@ -260,23 +260,21 @@
                         </div>
                     </div>
                     <div class="row  pt-3 text-white">
-                        <div class="col-4 border-end"><span class="blue">Offer
-                                Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
-                        <div class="col-4 border-end"><span class="blue">Offer
-                                Amount</span><br>${{ number_format($offer->size) }}</div>
-                        <div class="col-4 "><span class="blue">Securities
-                                Type</span><br>{{ ucfirst($offer->security_type) }}</div>
+                        <div class="col-4 border-end"><span class="blue">Offer   Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
+                        <div class="col-4 border-end"><span class="blue">Offer    Amount</span><br>${{ number_format($offer->size) }}</div>
+                        <div class="col-4 border-end"><span  class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}  </div>
                         <div class="py-2">
                             <hr>
                         </div>
-                        <div class="col-4 border-end"><span
-                                class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}</div>
-                        <div class="col-4"><span class="blue">Min.
-                                Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}
-                        </div>
-                        <div class="py-2">
-                            <hr>
-                        </div>
+                        <div class="col-4 "><span class="blue">Securitiy Type</span><br>    {{ ucfirst($offer->security_type) }}</div>
+                        @if($offer->security_type == 'SAFE')
+                            <div class="col-4 "><span class="blue">SAFE</span><br>    {{ ucfirst($offer->safe) }}</div>
+                        @elseif($offer->security_type == 'Structure-SAFE')
+                            <div class="col-4 "><span class="blue">Structure-SAFE</span><br>    {{ ucfirst($offer->structure_safe) }}</div>
+                        @endif
+
+                        <div class="col-4"><span class="blue">Min.    Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}  </div>
+                        <div class="py-2"> <hr> </div>
                         <div>
                             {{-- <p><b>Almost Sold out</b></p> --}}
                             {{-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"

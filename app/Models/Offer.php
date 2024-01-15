@@ -26,6 +26,8 @@ class Offer extends Model  implements HasMedia
         'funding_end_date',
         'status',
         'feature_video',
+        'safe',
+        'structure_safe',
     ];
 
     public function user()

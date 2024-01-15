@@ -154,7 +154,6 @@ class OfferController extends Controller
             'offer_logo' => 'image|dimensions:min_width=125,min_height=125|max:3072', // Example rules
         ]);
 
-
         // $token = env('ESIGN_TOKEN');
         // try {
         //     $e_sign = Http::get('https://esignatures.io/api/templates/' . $request->e_sign_template . '?token=' . $token);
@@ -232,6 +231,8 @@ class OfferController extends Controller
             $offer->slug =            Str::slug($request->offer_name, '-');
             $offer->short_description =  $request->short_description;
             $offer->security_type =    $request->security_type;
+            $offer->safe =    $request->safe;
+            $offer->structure_safe =    $request->structure_safe;
             $offer->symbol =      $request->symbol;
             $offer->size =        $request->size;
             $offer->size_label =    $request->size_label;

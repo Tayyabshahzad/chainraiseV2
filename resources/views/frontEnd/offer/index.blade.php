@@ -169,8 +169,7 @@
                         <div class="card bg-dark">
                             <div class="position-absolute bg-orange p-1 px-4 rotate-div">
                                 <p class="trend text-white text-lg-end mb-0">
-                                    <img src="{{  asset('vue/images/flame.svg')}}"
-                                        class="img-fluid me-2">Tranding
+
                                 </p>
                             </div>
                             <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
@@ -184,7 +183,7 @@
                                 <div class="row">
                                     <div class="col-4 border-end pe-0"
                                         style="border-color: #959595 !important;">
-                                        <p class="text-white mb-0 pb-0 abc">Min Invesment</p>
+                                        <p class="text-white mb-0 pb-0 abc">Min Investment</p>
                                         <b class="text-white abc">${{  number_format(  $active->investmentRestrictions->min_invesment)  }}</b>
                                     </div>
                                     <div class="col-4 border-end"
@@ -199,7 +198,7 @@
                                 </div>
                                 <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
                                     style="text-align: left !important;">
-                                    Due to our escrow partner switch, this offering with be back online
+                                    Due to our escrow partner switch, this offering will be be back online
                                     soon.</span>
                                 <div class="d-grid gap-2 col-12 mx-auto">
                                     <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>

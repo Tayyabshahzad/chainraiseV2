@@ -95,9 +95,14 @@
                             <option value="revenue share"> Revenue Share </option>
                         </select>
                     </div>
+                    <div class="col-lg-12">
+                        <input type="number" class="form-control d-none" name="safe"  placeholder="SAFE">
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="number" class="form-control d-none" name="structure_safe"  placeholder="Structure-SAFE">
+                    </div>
                     <div class="col-lg-12 d-none">
-                        <input type="text" class="form-control" name="symbol" id="symbol"
-                            placeholder="Offer Symbol *" value="o">
+                        <input type="text" class="form-control" name="symbol" id="symbol" placeholder="Offer Symbol *" value="o">
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
@@ -140,10 +145,8 @@
                         <input type="text" class="form-control" name="share_unit_label"
                             placeholder="Share/Unit Label (default: shares)">
                     </div>
-                    <div class="col-lg-12">
-                        <input type="number" class="form-control" name="total_valuation"
-                            placeholder="Total Valuation / NAV (if applicable)?">
-                    </div>
+
+
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">

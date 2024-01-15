@@ -79,9 +79,15 @@
                             <option value="" selected disabled> Security Type (Optional) </option>
                             <option value="Equity"> Equity </option>
                             <option value="SAFE"> SAFE </option>
-                            <option value="Structure-SAFE"> Structure-SAFE </option>
+                            <option value="Structure-SAFE"> Structure -SAFE </option>
                             <option value="revenue share"> Revenue Share </option>
                         </select>
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="number" class="form-control @if($offer->security_type != "SAFE") d-none @endif" name="safe"  value="{{ $offer->safe}}"  placeholder="SAFE">
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="number" class="form-control @if($offer->security_type != "Structure-SAFE") d-none @endif"  value="{{ $offer->structure_safe}}" name="structure_safe"  placeholder="Structure-SAFE">
                     </div>
                     <div class="col-lg-12 d-none">
                         <input type="text" class="form-control"  name="symbol"  id="symbol" placeholder="Offer Symbol *" value="{{ $offer->symbol}}">
@@ -137,6 +143,15 @@
                         value="{{ $offer->total_valuation}}"
                         placeholder="Total Valuation / NAV (if applicable)?">
                     </div>
+
+                    <div class="col-lg-12">
+                        <input type="number" class="form-control" name="total_valuation"
+                        value="{{ $offer->total_valuation }}"
+                        placeholder="Total Valuation / NAV (if applicable)?">
+                    </div>
+
+
+
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">

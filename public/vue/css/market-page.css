@@ -153,7 +153,19 @@ h5.market-title {
 
 .card-bg {
     border-radius: 5px;
-    background: black !important;
+    /* background: black !important; */
+    /* background: rgb(0, 0, 0 0.8) !important; */
+    -webkit-backdrop-filter: blur(71px) !important;
+    backdrop-filter: blur(71px) !important;
+    background: rgb(34, 219, 255) !important;
+    background: linear-gradient(278deg, rgba(34, 219, 255, 0.25253851540616246) 28%, rgba(73, 33, 251, 0.3085609243697479) 100%) !important;
+
+
+
+
+
+
+
     border: 0 !important;
 
 
@@ -341,6 +353,12 @@ button {
     font-size: 18px !important;
 }
 
+.btn {
+    font-family: var(--secondry-font) !important;
+    font-size: 18px !important;
+
+}
+
 h1.display-1 {
     line-height: 107px !important;
     font-size: 106px !important;
@@ -359,16 +377,33 @@ h1.third {
 
 }
 
-h6.third {
-    font-size: 26px !important;
-    font-family: var(--secondry-font) !important;
-}
+
 
 h6 {
     color: #dcdcdc !important;
     font-size: 32px !important;
     font-weight: 400 !important;
     font-family: var(--secondry-font) !important;
+}
+
+h6.other {
+    font-size: 24px !important;
+}
+
+h5.mt-2 {
+    font-size: 18px !important;
+}
+
+button.accordion-button.collapsed {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.accordion-button:focus {
+
+    box-shadow: 0 4px 6px -6px #ffff !important;
+    border-color: white !important;
+
 }
 
 h5 {
@@ -569,6 +604,15 @@ h6.second {
     width: 135px !important;
 }
 
+h6.third {
+    color: #D3D3D3 !important;
+    font-size: 24px !important;
+    font-style: normal;
+    font-family: var(--secondry-font) !important;
+    font-weight: 400 !important;
+
+}
+
 @media only screen and (max-width: 768px) {
     h3 {
         font-size: 35px !important;
@@ -657,10 +701,7 @@ h6.second {
 
     }
 
-    h6.third {
-        font-size: 24px;
 
-    }
 }
 
 

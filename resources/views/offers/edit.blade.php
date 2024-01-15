@@ -1611,7 +1611,24 @@
         });
 
 
+        $('#security_type').change(function(){
+                $('#security_type').change(function () {
+                var selectedValue = $(this).val();
+
+                // Hide all input elements first
+                $('input[name="safe"], input[name="structure_safe"]').addClass('d-none');
+                // Show the appropriate input based on the selected value
+                if (selectedValue === 'SAFE') {
+                    $('input[name="safe"]').removeClass('d-none').attr('required', 'required');
+                } else if (selectedValue === 'Structure-SAFE') {
+                    $('input[name="structure_safe"]').removeClass('d-none').attr('required', 'required');
+                }
+            });
+
+
     </script>
+
+
 
 
 @endsection
