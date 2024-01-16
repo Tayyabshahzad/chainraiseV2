@@ -35,7 +35,7 @@
                                 <div class="col-lg-4" style="margin-bottom:2em">
                                     <div class="card bg-dark">
 
-                                        <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
+                                        <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1" style="height:200px">
                                         <div class="card-body ">
                                             <div class="d-flex justify-content-end">
                                                 <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield">
