@@ -19,6 +19,9 @@
             background-blend-mode: multiply;
             background-color: #000000ab;
         }
+        ::marker {
+        color: white;
+    }
     </style>
 @endsection
 
