@@ -36,7 +36,7 @@
                     grow big! Want to create a diversified portfolio of real estate? Great! We have real estate
                     opportunities for you to select your best fit.</h6>
                 <a class="btn color_btn px-lg-5 mt-3" href="https://chainraise.io/">
-                    <img src="https://investchainraise.io/vue/images/Group.png"> RAISE CAPITAL
+                    <img src="{{  asset('vue/images/Group.png') }}"> RAISE CAPITAL
                 </a>
             </div>
         </div>
