@@ -88,149 +88,144 @@
     <footer class="bg-dark-color">
         <div class="container">
             <div class="row pt-lg-4 pb-lg-2">
-                <div class="col-lg-3 text-lg-start text-center">
+                <div class="col-lg-12 text-lg-start text-center">
                     <a href="{{  route('index') }}">
                         <img src="{{  asset('vue/images/logo.png')}}" alt="Logo" width="250px" height="50px">
                     </a>
                 </div>
-                <div class="col-lg-9 text-white">
-
-                </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-lg-6  ms-lg-0 ps-lg-0 text-lg-start text-center">
-                    <ul class="d-flex m-lg-0 py-lg-3 px-lg-0">
+                <div class="col-lg-6 text-lg-start ms-lg-0 ps-lg-0">
+                    <ul class="d-flex m-lg-0 py-3 px-lg-0 m-0 p-0">
                         <li class="nav-item px-lg-3">
-                            <a class="nav-link active" aria-current="page" href="{{  route('index') }}">Home</a>
+                            <a class="nav-link  xyz" href="#">Educational Materials</a>
                         </li>
                         <li class="nav-item px-lg-3">
-                            <a class="nav-link" href="https://chainraise.io/wp-content/uploads/2022/09/NEW-Educational-Materials-ChainRaise-Portal-LLC-9_28_22.docx.pdf">Educational Materials</a>
+                            <a class="nav-link  xyz" href="#">Privacy Policy</a>
                         </li>
                         <li class="nav-item px-lg-3">
-                            <a class="nav-link" href="https://chainraise.io/wp-content/uploads/2022/05/Privacy-Policy-ChainRaise-LLC-2.pdf">Privacy Policy</a>
-                        </li>
-                        <li class="nav-item px-lg-3">
-                            <a class="nav-link" href="https://chainraiseio.wpengine.com/wp-content/uploads/2022/05/Terms-of-Use-ChainRaise.pdf">Terms of Use</a>
+                            <a class="nav-link  xyz" href="#">Terms of Use</a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-6 my-lg-auto text-lg-end">
-
-
-
-
-                    <ul class="footer_social text-lg-end text-center">
-                        <li>
+                <div class="col-lg-6 my-auto">
+                    <ul
+                        class="d-flex justify-content-lg-end justify-content-center text-white align-items-center mb-0 pb-0">
+                        <li class="pe-3">
                             <a href="https://www.facebook.com/chainraise.io">
-                                <i class="bi bi-facebook"></i>
+                                <i class="bi bi-facebook text-white"></i>
                             </a>
                         </li>
 
-                        <li>
+                        <li class="pe-3">
                             <a href="https://www.instagram.com/chainraise.io/">
-                                <i class="bi bi-instagram"></i>
+                                <i class="bi bi-instagram text-white"></i>
                             </a>
                         </li>
 
 
-                        <li>
+                        <li class="pe-3">
                             <a href="https://www.linkedin.com/company/chainraise-io/">
-                                <i class="bi bi-linkedin"></i>
+                                <i class="bi bi-linkedin text-white"></i>
                             </a>
                         </li>
 
 
-                        <li>
+                        <li class="pe-3">
                             <a href="https://twitter.com/chainraise_io">
-                                <i class="bi bi-twitter"></i>
+                                <i class="bi bi-twitter text-white"></i>
+                            </a>
+                        </li>
+
+                        <li class="pe-3">
+                            <a href="https://www.youtube.com/@chainraise3485">
+                                <i class="bi bi-youtube text-white"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a href="https://www.youtube.com/@chainraise3485">
-                                <i class="bi bi-youtube"></i>
+                            <a href="https://discord.com/invite/Xau7zzmQk5">
+                                <i class="bi bi-discord text-white"></i>
                             </a>
                         </li>
-
-                        {{-- <li>
-                            <a href="https://discord.com/invite/Xau7zzmQk5">
-                                <i class="bi bi-discord"></i>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
-
-                <div class="col-lg-12   text-white " style="margin-top:15px;">
-                    <p>
-                        This website, which we refer to as the “Site,” is used by two different companies: <br>
-                        ChainRaise Portal LLC and ChainRaise Fund LLC. <br/>ChainRaise Fund LLC offers investments under Rule 506(c) issued by the
+                <div class="col-12 text-white py-3">
+                    <p> This website, which we refer to as the “Site,” is used by two different companies: </p>
+                    <p> ChainRaise Portal LLC and ChainRaise Fund LLC. </p>
+                    <p> ChainRaise Fund LLC offers investments under Rule 506(c) issued by the
                         Securities and Exchange Commission (SEC). These investments are offered to accredited
                         investors
-                        only.<br/> ChainRaise Portal LLC is a “funding portal” as defined in section 3(a)(80) of the Securities
+                        only.</p>
+                    <p>ChainRaise Portal LLC is a “funding portal” as defined in section 3(a)(80) of the Securities
                         Exchange Act of 1934. Here, you can review investment opportunities of companies offering
                         securities
                         under section 4(a)(6) of the Securities Act of 1933, also known as Regulation Crowdfunding
                         or
                         Reg
-                        CF. These investments are offered to everyone, not just to accredited investors.<br/>
-                        By using this Site,
+                        CF. These investments are offered to everyone, not just to accredited investors.</p>
+
+                    <p>By using this Site,
                         you are subject to our Terms of Use and our Privacy Policy. Please read these carefully
                         before
                         using
-                        the Site.<br/>
-                       Although our website offers investors the opportunity to invest in a variety of companies,
+                        the Site.</p>
+                    <p>Although our website offers investors the opportunity to invest in a variety of companies,
                         we do not make recommendations regarding the appropriateness of a particular investment
                         opportunity
                         for any particular investor. We are not investment advisers. Investors must make their own
-                        investment decisions, either alone or with their personal advisors. <br/>
-                        You should view all of the
+                        investment decisions, either alone or with their personal advisors. </p>
+                    <p>You should view all of the
                         investment opportunities on our website as risky. You should consider investing only if you
                         can
-                        afford to lose your entire investment. <br/>
-                        We provide financial projections for some of the investment
+                        afford to lose your entire investment. </p>
+                    <p> We provide financial projections for some of the investment
                         opportunities listed on the Site. All such financial projections are only estimates based on
                         current
                         conditions and current assumptions. The actual result of any investment is likely to be
                         different
-                        than the original projection, often by a large amount. <br/>
-                      Neither the Securities and Exchange
+                        than the original projection, often by a large amount. </p>
+                    <p>Neither the Securities and Exchange
                         Commission nor any state agency has reviewed the investment opportunities listed on the
                         Site.
-                        <br/>
-                        Thank you for using the Site. If you have questions, please contact us at info@chainraise.io
-                        <br/>
+                    </p>
+                    <p>Thank you for using the Site. If you have questions, please contact us at info@chainraise.io
+                    </p>
+
+
+                    <p>
                         Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings.
                         This fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in
                         other ways.
-                        <br/>
+                    </p>
+
+                    <p>
                         Issuers may pay additional fees for specified services ChainRaise provides, including
                         reimbursement of any expenses ChainRaise incurs on their behalf. ChainRaise discloses its
                         compensation for each offering in which an issuer invests.
-                        <br/>
+
+                    </p>
+                    <p>
                         If an issuer pays ChainRaise in whole
                         or
                         in part with its own issuing securities, these securities will always be the same class offered
                         to
-                        investors on the ChainRaise Portal.<br/>
+                        investors on the ChainRaise Portal.
+                    </p>
 
-                        ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
-                        For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of
-                        privately
-                        held securities. Every secondary transaction is unique, and fees will differ per transaction.
-
-
+                    ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
+                    For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of
+                    privately
+                    held securities. Every secondary transaction is unique, and fees will differ per transaction.
                 </div>
             </div>
         </div>
         <div class="container-fluid">
-
-
             <hr>
-            <p class="text-white py-lg-4 text-lg-center my-0 text-lg-start text-center py-3">© Copyright 2023 - investchainraise</p>
+            <p class="text-white py-lg-4 text-center my-0">© Copyright {{ \Carbon\Carbon::now()->format('Y') }} - <a href="https://chainraise.io/">Chainraise</a> </p>
         </div>
     </footer>
-
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="border-radius: 10px;">
