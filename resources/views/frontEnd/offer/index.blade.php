@@ -170,11 +170,7 @@
                     @foreach ($activeOffers as $active)
                     <div class="col-lg-4 py-2">
                         <div class="card bg-dark">
-                            <div class="position-absolute bg-orange p-1 px-4 rotate-div">
-                                <p class="trend text-white text-lg-end mb-0">
 
-                                </p>
-                            </div>
                             <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
                             <div class="card-body ">
                                 <div class="d-flex justify-content-end">
@@ -224,47 +220,46 @@
         <div class="row align-items-center">
             <div class="col-lg-7 position-relative">
                 <hr class="verticle-line-bar">
-                <h1 class="third">HOW TO INVEST</h1>
+                <h1 class="third">How to Invest</h1>
                 <h6 class="third">Create an account, find your favorite offering, become a fractional owner.</h6>
             </div>
         </div>
         <div class="row align-items-center p-lg-5">
-            <div class="col-lg-5">
+            <div class="col-lg-5 pb-lg-0 pb-5">
                 <img src="{{  asset('vue/images/mob.png')}}" class="img-fluid" alt="Hero Video">
             </div>
-            <div class="col-lg-7 ps-lg-4">
+            <div class="col-lg-7 ps-lg-4 order-lg-last order-first">
                 <h1 class="third">SIGN UP</h1>
                 <h6 class="third">
-                    New users will be prompted to create an
-                    account and provide
-                    initial information for a customized setup.
+                    New users will be prompted to create an account and provide initial information for a customized
+                    setup.
                 </h6>
             </div>
         </div>
         <div class="row align-items-center p-lg-5">
             <div class="col-lg-7">
                 <h1 class="third">EXPLORE</h1>
-                <h6 class=" third">Explore our
-                    marketplace for investment opportunities after
-                    creating your account.</h6>
+                <h6 class="third">
+                    Explore our marketplace for investment opportunities after creating your account.
+                </h6>
             </div>
-            <div class="col-lg-5 text-end">
+            <div class="col-lg-5 text-end mb-lg-0 pb-5">
                 <img src="{{  asset('vue/images/mob-2.png')}}" class="img-fluid" alt="Hero Video">
             </div>
 
         </div>
         <div class="row align-items-center p-lg-5">
             <div class="col-lg-5">
-                <img src="{{  asset('vue/images/mob3.png')}}" class="img-fluid" alt="Hero Video">
+                <img src="{{  asset('vue/images/mob3.png') }}" class="img-fluid" alt="Hero Video">
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7  order-lg-last order-first">
                 <h1 class="third">INVEST</h1>
-                <h6 class="third">Once you've
-                    identified the right opportunity, you'll
-                    initiate the KCY (Know Your Customer) process to verify your identity and complete the required
-                    investor documents.</h6>
+                <h6 class="third">Once you've identified the right
+                    opportunity, you'll initiate the KCY (Know Your Customer) process to verify your identity and
+                    complete the required investor documents.</h6>
             </div>
         </div>
     </div>
 </section>
+
 @endsection
