@@ -1,8 +1,16 @@
 <div class="col-lg-3 pt-4">
     <div class="row">
-        <div class="col-lg-12 text-center">
+        <div class="col-lg-6 text-center">
             <button type="submit" class="btn btn-sm btn-dark no-radius" id="submit_offer"> UPDATE CHANGES</button>
         </div>
+        <div class="col-lg-6 text-center">
+            <a href="{{ route('offer.details',$offer->slug)  }}" class="btn btn-sm btn-dark no-radius" target="_blank">
+                    View Offer
+            </a>
+        </div>
+
+
+    </a>
     </div>
     <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
         <div class="w-100 mb-3">

@@ -280,13 +280,18 @@
 
                                         @hasrole('admin|issuer')
                                             <div class="row">
-                                                <div class="col-lg-6" style="text-align: right;">
+                                                <div class="col-lg-4" style="text-align: right;">
                                                     <a href="{{ route('offers.edit',$offer->id) }}" class="btn-light-warning no-radius  btn badge py-3 px-4 fs-7 badge-light-warning">  <i class="la la-edit"></i> </a>
                                                 </div>
-                                                <div class="col-lg-6 text-left">
+                                                <div class="col-lg-4 text-center">
                                                     <button class="btn-light-danger no-radius btn badge py-3 px-4 fs-7 badge-light-danger deleteOffer" data-id="{{ $offer->id }}">
                                                             <i class="la la-trash"></i>
                                                     </button>
+                                                </div>
+                                                <div class="col-lg-4 text-right">
+                                                    <a href="{{ route('offer.details',$offer->slug)  }}" class="btn-light-info no-radius btn badge py-3 px-4 fs-7 badge-light-info " target="_blank">
+                                                            <i class="la la-eye"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         @endhasrole
