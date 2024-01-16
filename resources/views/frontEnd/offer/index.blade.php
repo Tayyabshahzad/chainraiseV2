@@ -199,10 +199,15 @@
                                     style="text-align: left !important;">
                                     Due to our escrow partner switch, this offering will be be back online
                                     soon.</span>
-                                <div class="d-grid gap-2 col-12 mx-auto">
-                                    <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
-                                    <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" type="button"><b> Learn  More </b></a>
-                                </div>
+                                    <div class="d-grid gap-2 col-12 mx-auto">
+
+                                        @if($active->ext_url != null)
+                                            <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn" ><b> Learn  More </b></a>
+                                        @else
+                                            <button class="btn color_btn" type="button" disabled><b>Coming Soon</b> </button>
+                                        @endif
+                                        {{-- <button class="btn transparent_btn"   type="button" disabled><b> Learn  More </b></button> --}}
+                                    </div>
                             </div>
                         </div>
                     </div>
