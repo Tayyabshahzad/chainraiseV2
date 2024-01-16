@@ -9,6 +9,16 @@
         .container-bg {
             background-image: url("{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}") !important;
         }
+        .play-btn {
+            position: absolute!important;
+            top: 50%!important;
+            transform: translateY(-50%)!important;
+            text-align: center!important;
+        }
+        .container-bg {
+            background-blend-mode: multiply;
+            background-color: #000000ab;
+        }
     </style>
 @endsection
 
@@ -18,8 +28,7 @@
     <div class="container container-bg rounded">
         <div class="row align-items-end position-relative " style="height: 600px;">
             <div class="col-lg-6 p-lg-5">
-                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="Offer Logo" >
-
+                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="Offer Logo" width="92" height="92">
                 <h1 class="explore-detail">{{ $offer->name }}</h1>
                 <div class="d-grid gap-2 d-md-block pt-lg-3">
                     {{-- <button class="btn text-white px-lg-5 fw-semibold" style="background-color: #FF7A00 !important;"
@@ -32,11 +41,7 @@
                     </button> --}}
                 </div>
             </div>
-            <div class="col-lg-6 p-lg-5 text-white text-end">
-                {{-- <p class="tab-text text-lg-start">{{ $offer->short_description }}.</p> --}}
 
-                {{-- <img src="{{ asset('vue/images/Group 12578.png') }}" alt="" srcset="" class="img-fluid"> --}}
-            </div>z
             <div class="col-lg-12 play-btn">
                 <a type="button" data-bs-toggle="modal" data-src="{{ $offer->feature_video }}"
                     data-bs-target="#myModal">
