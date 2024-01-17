@@ -320,7 +320,7 @@
                             <div class="d-grid gap-2 col-12 mx-auto">
                                 {{-- <a href="{{ route('offer.details',$offer->id)  }}" class="btn color_btn" target="_blank">Invest Now</a> --}}
                                 @if($offer->ext_url != null)
-                                <a href="{{  $offer->ext_url  }}" class="btn transparent_btn " target="_blank" ><b> Invest Now </b></a>
+                                <a href="{{  $offer->ext_url  }}" class="btn transparent_btn "  ><b> Invest Now </b></a>
                                 @else
                                 <button class="btn transparent_btn" type="button" disabled><b>Coming Soon</b> </button>
                                 @endif
