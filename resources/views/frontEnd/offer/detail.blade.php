@@ -11,8 +11,7 @@
         }
         .play-btn {
             position: absolute!important;
-            top: 50%!important;
-            transform: translateY(-50%)!important;
+
             text-align: center!important;
         }
         .container-bg {
