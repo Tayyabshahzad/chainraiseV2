@@ -74,9 +74,9 @@
                         <a class="nav-link" href="#">Tech</a>
                     </li> --}}
                 </ul>
-                {{-- <button type="button" class="btn transparent_btn mx-3 px-4" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">Login</button>
-                <button type="button" class="btn color_btn px-4">Signup</button> --}}
+                <a href="https://chainraise.sppx.io/sso?destination=/" target="_blank" class="btn transparent_btn mx-3 px-4">Login</a>
+
+                {{-- <button type="button" class="btn color_btn px-4">Signup</button> --}}
             </div>
         </div>
     </nav>

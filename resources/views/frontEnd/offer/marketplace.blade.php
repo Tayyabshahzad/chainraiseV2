@@ -128,7 +128,7 @@
                                 </div>
                                 <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
                                     style="text-align: left !important;">
-                                    Due to our escrow partner switch, this offering will be be back online
+                                    Due to our escrow partner switch, this offering will be back online
                                     soon.</span>
                                     <div class="d-grid gap-2 col-12 mx-auto">
 
