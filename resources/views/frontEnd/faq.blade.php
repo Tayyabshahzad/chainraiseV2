@@ -94,14 +94,7 @@
                             <div id="flush-collapseThree" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="border-start ps-2">For more than two hundred years investors have
-                                        publicly
-                                        traded stocks and bonds.
-                                        But those types of investments have their limitations, leading investors to
-                                        alternative securities
-                                        for the purpose of generating income, diversifying portfolios, boosting
-                                        returns, or raising funds
-                                        for other projects.</p>
+                                     
                                     <p class="border-start ps-2">These alternatives include real estate, stock or
                                         membership units in
                                         privately-held businesses, private equity, commodities, venture capital,

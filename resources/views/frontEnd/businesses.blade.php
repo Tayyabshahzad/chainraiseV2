@@ -449,7 +449,7 @@
                     colors="primary:#4030e8,secondary:#3080e8" style="width:120px;height:120px">
                 </lord-icon>
                 <h5 class="mt-2">Align with Your Community</h5>
-                <p>Allow your customers to succeed with you! Why not make them rich alongside you?</p>
+                <p>Empower your customers to own a part of the company they support!</p>
             </div>
             <div class="col-lg-4 text-center px-3 text-white">
                 <lord-icon src="https://cdn.lordicon.com/yrxnwkni.json" trigger="hover"
@@ -481,18 +481,15 @@
                 <lord-icon src="https://cdn.lordicon.com/uutnmngi.json" trigger="hover"
                     colors="primary:#4030e8,secondary:#3080e8" style="width:120px;height:120px">
                 </lord-icon>
-                <h5 class="mt-2">Spend Less Time
-                    Raising of Support</h5>
-                <p>Our system will automate the raising of capital, bringing in investors 24/7. No distractions for
-                    you!</p>
+                <h5 class="mt-2">Leverage Technology</h5>
+                <p>Our platform is available to process eligible investments 24/7.</p>
             </div>
             <div class="col-lg-4 text-center px-3 text-white">
                 <lord-icon src="https://cdn.lordicon.com/awteodmg.json" trigger="hover"
                     colors="primary:#4030e8,secondary:#3080e8" style="width:120px;height:120px">
                 </lord-icon>
-                <h5 class="mt-2">Don’t Allow
-                    VC’s to Bully</h5>
-                <p>VC firms will use their leverage, telling you 20% equity is standard. Not around here!</p>
+                <h5 class="mt-2">Dictate the Terms</h5>
+                <p>Set the Terms of Your Capital Raise!</p>
             </div>
         </div>
     </div>

@@ -47,9 +47,8 @@
                 <h1 class="second">Join the
                     investor
                     community </h1>
-                <h6 class="third text-lg-start text-center">We make the process of investing easier than ever
-                    before. On one platform,
-                    access investments from many industries.</h6>
+                <h6 class="third text-lg-start text-center">
+                    On one platform, access investments from many industries.</h6>
             </div>
             <div class="col-lg-6">
                 <div class="row">
@@ -124,11 +123,7 @@
                         <div id="flush-collapseOne" class="accordion-collapse collapse"
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <p>ChainRaise is a digital asset platform, that raises money for
-                                    real estate
-                                    opportunities and businesses. Using blockchain technology, we make startup
-                                    investment and
-                                    fundraising safe and secure for everyone involved.</p>
+                                <p>ChainRaise is a licensed and registered Crowdfunding Portal designed for blockchain companies, tech start-ups, real estate and more designed to process eligible investments.  </p>
                             </div>
                         </div>
                     </div>

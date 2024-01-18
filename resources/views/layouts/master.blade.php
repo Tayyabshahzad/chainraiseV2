@@ -161,72 +161,44 @@
                     </ul>
                 </div>
                 <div class="col-12 text-white py-3">
-                    <p> This website, which we refer to as the “Site,” is used by two different companies: </p>
-                    <p> ChainRaise Portal LLC and ChainRaise Fund LLC. </p>
-                    <p> ChainRaise Fund LLC offers investments under Rule 506(c) issued by the
-                        Securities and Exchange Commission (SEC). These investments are offered to accredited
-                        investors
-                        only.</p>
-                    <p>ChainRaise Portal LLC is a “funding portal” as defined in section 3(a)(80) of the Securities
-                        Exchange Act of 1934. Here, you can review investment opportunities of companies offering
-                        securities
-                        under section 4(a)(6) of the Securities Act of 1933, also known as Regulation Crowdfunding
-                        or
-                        Reg
-                        CF. These investments are offered to everyone, not just to accredited investors.</p>
 
-                    <p>By using this Site,
-                        you are subject to our Terms of Use and our Privacy Policy. Please read these carefully
-                        before
-                        using
-                        the Site.</p>
-                    <p>Although our website offers investors the opportunity to invest in a variety of companies,
-                        we do not make recommendations regarding the appropriateness of a particular investment
-                        opportunity
-                        for any particular investor. We are not investment advisers. Investors must make their own
-                        investment decisions, either alone or with their personal advisors. </p>
-                    <p>You should view all of the
-                        investment opportunities on our website as risky. You should consider investing only if you
-                        can
-                        afford to lose your entire investment. </p>
-                    <p> We provide financial projections for some of the investment
-                        opportunities listed on the Site. All such financial projections are only estimates based on
-                        current
-                        conditions and current assumptions. The actual result of any investment is likely to be
-                        different
-                        than the original projection, often by a large amount. </p>
-                    <p>Neither the Securities and Exchange
-                        Commission nor any state agency has reviewed the investment opportunities listed on the
-                        Site.
-                    </p>
-                    <p>Thank you for using the Site. If you have questions, please contact us at info@chainraise.io
-                    </p>
-
-
+                
                     <p>
-                        Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings.
-                        This fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in
-                        other ways.
+                        <strong>
+                            Important Message
+                        </strong>
+                        <br/>
+                        In Making An Investment Decision, Investors Must Rely On Their Own Examination Of The Issuer And The Terms Of The Offering, Including The Merits And Risks Involved. Investments On Startengine Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
                     </p>
 
                     <p>
-                        Issuers may pay additional fees for specified services ChainRaise provides, including
-                        reimbursement of any expenses ChainRaise incurs on their behalf. ChainRaise discloses its
-                        compensation for each offering in which an issuer invests.
-
+                        <strong>
+                            <a href="https://chainraise.io"> www.ChainRaise.io </a>  
+                        </strong> 
+                        is a website owned and operated by ChainRaise, LLC. (“ChainRaise”), which is neither a registered broker-dealer, investment advisor nor funding portal.
                     </p>
                     <p>
-                        If an issuer pays ChainRaise in whole
-                        or
-                        in part with its own issuing securities, these securities will always be the same class offered
-                        to
-                        investors on the ChainRaise Portal.
+                        Unless indicated otherwise with respect to a particular issuer, all securities-related activity is conducted by the regulated affiliate of ChainRaise: ChainRaise Portal, LLC, a funding portal registered with the US Securities and Exchange Commission (SEC) and as a member of the Financial Industry Regulatory Authority (FINRA).
+                    </p>
+                    <p>
+                        ChainRaise Portal, LLC is a “funding portal” as defined in section 3(a)(80) of the Securities Exchange Act of 1934. Here, you can review investment opportunities of companies offering securities under section 4(a)(6) of the Securities Act of 1933, also known as Regulation Crowdfunding or Reg CF. These investments are offered to everyone, not just to accredited investors.
+                    </p>
+                    <p>
+                        Issuers pay ChainRaise a fee to use the ChainRaise communication Portal for Reg CF offerings. This fee may be paid as a flat fee, commission based on the amount of money issuers raise, or in other ways.
+                    </p>
+                    <p>
+                        We provide financial projections for some of the investment opportunities listed on the Site. All such financial projections are only estimates based on current conditions and current assumptions. The actual result of any investment is likely to be different than the original projection, often by a large amount.
+                    </p>
+                    <p>
+                        Any securities offered on this website have not been recommended or approved by any federal or state securities commission or regulatory authority. ChainRaise and its affiliates do not provide any investment advice or recommendation and do not provide any legal or tax advice with respect to any securities. All securities listed on this site are being offered by, and all information included on this site is the responsibility of, the applicable issuer of such securities. ChainRaise does not verify the adequacy, accuracy or completeness of any information. Neither ChainRaise nor any of its officers, directors, agents and employees makes any warranty, express or implied, of any kind whatsoever related to the adequacy, accuracy, or completeness of any information on this site or the use of information on this site. 
+                    </p>
+                    <p>
+                        By accessing this site and any pages on this site, you agree to be bound by our Terms of use and Privacy Policy, as may be amended from time to time without notice or liability.
+
+
                     </p>
 
-                    ChainRaise does not charge a fee to investors for offerings via Reg CF or Reg A.
-                    For secondary transactions, ChainRaise may receive a fee for the purchase and/or sale of
-                    privately
-                    held securities. Every secondary transaction is unique, and fees will differ per transaction.
+                    
                 </div>
             </div>
         </div>
