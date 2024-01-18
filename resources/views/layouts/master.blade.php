@@ -61,8 +61,8 @@
                             Learn
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{  route('faq')  }}">FAQ</a></li>
-                            <li><a class="dropdown-item" href="{{  route('businesses') }}">Business</a></li>
+                            <li><a class="dropdown-item text-white" href="{{  route('faq')  }}">FAQ</a></li>
+                            <li><a class="dropdown-item text-white" href="{{  route('businesses') }}">Business</a></li>
                             {{-- <li><a class="dropdown-item" href="{{  route('blockchain') }}">Block Chain</a></li> --}}
 
                         </ul>

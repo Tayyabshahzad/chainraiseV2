@@ -5,6 +5,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vue/css/style-detail.css') }}">
+
     <style>
         .container-bg {
             background-image: url("{{ $offer->getFirstMediaUrl('cover_photo', 'thumb') }}") !important;
@@ -21,11 +22,13 @@
         ::marker {
         color: white;
     }
+
     </style>
+    <link rel="stylesheet" href="{{ asset('assets/image-gallery/css/lightbox.min.css') }}">
 @endsection
 
 @section('page_content')
-<!-- Hero Section Start -->
+<!---- Hero Section Start -->
 <section class="p-lg-5 p-3 hero-bg">
     <div class="container container-bg rounded">
         <div class="row align-items-end position-relative " style="height: 600px;">
@@ -143,8 +146,9 @@
                                 @foreach ($slider_images as $slider_image)
 
                                     <div class="col-lg-4">
-                                        <a href="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" class="popup-link" data-title="Image 1">
-                                            <img src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" class="img-fluid rounded" alt="Image 1">
+                                        <a class="example-image-link " href="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}"
+                                            data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
+                                            <img class="example-image img-fluid rounded" src="{{ asset('storage/' . $slider_image->id . '/' . $slider_image->file_name) }}" alt=""/>
                                         </a>
 
                                     </div>
@@ -365,16 +369,11 @@
 @endsection
 
 @section('page_js')
-
+<script src="{{ asset('assets/image-gallery/js/lightbox-plus-jquery.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 <script>
-  $(document).ready(function () {
-    $('.popup-link').magnificPopup({type:'image'});
-  });
+
 </script>
 
 @endsection
