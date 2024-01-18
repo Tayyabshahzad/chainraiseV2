@@ -28,6 +28,7 @@ class Offer extends Model  implements HasMedia
         'feature_video',
         'safe',
         'structure_safe',
+        'order_number'
     ];
 
     public function user()

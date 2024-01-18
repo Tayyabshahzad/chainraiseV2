@@ -51,31 +51,6 @@
     </div>
 </section>
 
-<!-- Hero Section End -->
-<!-- 2nd Section Start -->
-{{--
-<section class="p-lg-5 p-3 section-bg">
-    <div class=" container">
-        <div class="row">
-            <div class="col-12 text-lg-center">
-                <h1 class="second">We
-                    collaborate with 200+ leading companies
-                </h1>
-                <h6 class="second px-lg-5 mx-lg-5 text-center ">Lorem Ipsum has been the
-                    industry's
-                    standard
-                    dummy text ever
-                    since the 1500s,
-                    when
-                    an unknown
-                    been the industry's standard dummy </h6>
-                <hr class="horizontal-line-bar">
-                <img src="{{  asset('vue/images/Group 877.png')}}" class="img-fluid mt-5" alt="Hero Video">
-            </div>
-        </div>
-    </div>
-</section> --}}
-
 
 <section class="bg-dark-color p-lg-5 p-3">
     <div class="container">

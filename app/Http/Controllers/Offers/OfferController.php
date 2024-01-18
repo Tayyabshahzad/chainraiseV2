@@ -52,8 +52,8 @@ class OfferController extends Controller
     public function active_index()
     {
         $issuers = User::role('issuer')->get();
-
-        $offers = Offer::orderBy('id', 'desc');
+       
+        $offers = Offer::orderBy('order_number', 'desc');
         if(Auth::user()->hasRole('issuer')) {
             $offers->where('issuer_id', Auth::user()->id);
         }
@@ -557,6 +557,7 @@ class OfferController extends Controller
         $offer->commencement_date =  $request->commencement_date;
         $offer->funding_end_date =    $request->funding_end_date;
         $offer->status =               $request->status;
+        $offer->order_number = $request->order_number;
         $offer->updated_at =    Carbon::now();
         $offer->save();
         if ($offer->save()) {

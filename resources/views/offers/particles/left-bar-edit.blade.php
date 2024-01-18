@@ -25,8 +25,13 @@
                 </span>
                 <!--end::Svg Icon-->
             </div>
+
             <div id="basic_info" class="collapse mb-3">
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
+                    <div class="col-lg-12">
+                        <label for="order_by">Order #</label>
+                        <input type="number" class="form-control" min="0" value="{{ $offer->order_number }}" id="order_by" name="order_number" >
+                    </div>
                     <div class="col-lg-12 ">
                         <select name="issuer"  id="issuer_account" class="form-select form-select-lg" required >
                             <option value="" selected disabled > Select Issuer Account </option>

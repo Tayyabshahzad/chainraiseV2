@@ -277,6 +277,31 @@
 
                                         </div>
 
+                                        <div class="d-flex align-items-center mb-6">
+                                            <!--begin::Symbol-->
+                                            <div class="symbol symbol-45px w-40px me-5">
+                                                <span class="symbol-label bg-lighten">
+                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                                    <span class="svg-icon svg-icon-1">
+                                                        <i class="fa fa-sort"></i>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                            </div>
+                                            <div class="d-flex align-items-center flex-wrap w-100">
+                                                <!--begin::Title-->
+                                                <div class="mb-1 pe-3 flex-grow-1">
+                                                    <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bold">
+                                                         Order #
+                                                    </a>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="fw-bold"> {{  ucfirst($offer->order_number)  }}     </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
 
                                         @hasrole('admin|issuer')
                                             <div class="row">
