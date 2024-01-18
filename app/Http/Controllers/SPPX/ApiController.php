@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Http;
 class ApiController extends Controller
 {
 
+    public $endpoint;
+    public function __construct()
+    {
+        $this->endpoint = "https://crdev.sppx.io/api/v0/";
+    }
+
     public function login()
     {
         // Your login API endpoint and credentials
@@ -17,20 +23,17 @@ class ApiController extends Controller
             "username" => "api.chainraise",
             "password" => "Westridge151!"
         ];
-
         // Make the login API request
         $loginResponse = Http::post($loginEndpoint, $credentials);
-
         // Extract the access token
         $accessToken = $loginResponse['token']['access_token'];
-
         // Use the access token in subsequent requests or store it securely
-
         return $accessToken;
     }
 
 
     public function listing(){
+    
         $accessToken = $this->login();
         $listingEndpoint = 'https://crdev.sppx.io/api/v0/public';
         $listingResponse = Http::withHeaders([
@@ -92,6 +95,10 @@ public function register()
         // If registration fails for other reasons, redirect back to the registration form with an error message
         return redirect()->back()->with('error', $data['status']['memo'] ?? 'Registration failed');
     }
+}
+
+public function profile(){
+    return view('sppx.profile');
 }
 
 

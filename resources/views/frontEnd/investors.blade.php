@@ -14,8 +14,7 @@
     <div class="row ">
         <div class="col-lg-12 text-center p-5">
             <h3 class="">Investors</h3>
-            <h1 class="display-1">Giving you the power to<br>create your ideal
-                portfolio</h1>
+            <h1 class="display-1  py-5">Giving you the power to create your portfolio</h1>
             <a class="btn color_btn px-lg-5" href="https://chainraise.io/">
                 <img src="{{  asset('vue/images/Group.png') }}"> Invest
             </a>
@@ -30,12 +29,9 @@
             <div class="col-lg-12 text-center">
                 <h1 class="second">Browse the new investment opportunities and get excited about the future</h1>
                 <hr class="horizontal-line-bar">
-                <h6 class="third">ChainRaise Portal offers you with investment
-                    opportunities to create your ideal portfolio. Want
-                    to go hunting for the next big tech company? Great, we have tech companies with potential to
-                    grow big! Want to create a diversified portfolio of real estate? Great! We have real estate
-                    opportunities for you to select your best fit.</h6>
-                <a class="btn color_btn px-lg-5 mt-3" href="https://chainraise.io/">
+                <h6 class="third">ChainRaise Portal offers you investment opportunities to create a diversified portfolio in various industries including tech startups, real estate and more. 
+                </h6>
+                <a class="btn color_btn px-lg-5 mt-3" href="https://chainraise.io/consultation">
                     <img src="{{  asset('vue/images/Group.png') }}"> RAISE CAPITAL
                 </a>
             </div>

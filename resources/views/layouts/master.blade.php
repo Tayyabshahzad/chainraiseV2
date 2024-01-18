@@ -19,6 +19,7 @@
             .footer_social li {
               display: inline-block;
               margin-right: 10px;
+              color: white !important;
             }
 
             .footer_social a {
@@ -28,6 +29,14 @@
             .footer_social i {
               font-size: 24px;
               color: #ffffff;
+            }
+
+            .bg-image-tree {
+                background-image: url("{{ asset('vue/images/hero-bg.png') }}");
+            }
+
+            .section-bg {
+                background-image: url("{{ asset('vue/images/section-bg.png') }}");
             }
           </style>
     @section('page_style')

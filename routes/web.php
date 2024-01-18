@@ -30,9 +30,15 @@ Route::get('emails', function(){
     return view('email.transaction.canceled');
 });
 
-Route::get('api-sppx', [ApiController::class, 'listing']);
-Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
-Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
+Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'], function () {
+    Route::get('listing', [ApiController::class, 'listing']);
+    Route::get('profile', [ApiController::class, 'profile'])->name('profile');
+    Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
+    Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
+});
+
+
+
 
 Route::get('patch-webhook', function(){
         $webhook_URL   = env('WebURL');
