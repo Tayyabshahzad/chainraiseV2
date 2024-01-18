@@ -233,7 +233,7 @@
                 <img src="{{  asset('vue/images/mob3.png') }}" class="img-fluid" alt="Hero Video">
             </div>
             <div class="col-lg-7  order-lg-last order-first">
-                <h1 class="third">INVEST</h1>
+                <h1 class="third"> INVEST </h1>
                 <h6 class="third">Once you've identified the right
                     opportunity, you'll initiate the KCY (Know Your Customer) process to verify your identity and
                     complete the required investor documents.</h6>
