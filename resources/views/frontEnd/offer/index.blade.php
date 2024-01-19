@@ -21,10 +21,7 @@
         <div class="row justify-content-between">
             <div class="col-lg-6 px-lg-0">
                 <h1 class="display-1">Next-Gen Companies</h1>
-                <h6 class="my-lg-3 pe-lg-4">Screened Investments in Artificial Intelligence,
-                    Blockchain
-                    companies, Real
-                    Estate, and more.</h6>
+                <h6 class="my-lg-3 pe-lg-4">Explore Investments in Artificial Intelligence, Blockchain Companies, <br/>Real  Estate, and more.</h6>
                 <div class="d-grid gap-2 d-md-block pt-lg-3 py-3">
                     <a class="btn color_btn px-lg-5" href="{{ route('marketplace') }}">
                         <img src="{{  asset('vue/images/Group.png') }}"> Explore Offerings

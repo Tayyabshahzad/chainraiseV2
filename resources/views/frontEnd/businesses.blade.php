@@ -34,18 +34,15 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    What Is Chain Raise
+                                    What Is ChainRaise
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <p class="black-font">ChainRaise is a digital asset platform, that raises money
-                                        for
-                                        real estate
-                                        opportunities and businesses. Using blockchain technology, we make startup
-                                        investment and
-                                        fundraising safe and secure for everyone involved.</p>
+                                    <p class="black-font">
+                                        ChainRaise is a FINRA licensed Crowdfunding platform that allows eligible companies to raise up tp $5m from accredited and non-accredited investors.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -93,9 +90,7 @@
                                     <p class="black-font">ChainRaise does not charge a fee to investors for
                                         offerings
                                         via Reg CF.</p>
-                                    <p class="black-font">ChainRaise charges a flat fee for Reg D and Reg A+
-                                        offerings.
-                                    </p>
+
                                     <p class="black-font">Private investment funds offered by ChainRaise may be
                                         managed
                                         by an affiliated entity. These affiliated companies may be entitled to:</p>
