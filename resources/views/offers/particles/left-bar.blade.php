@@ -25,6 +25,7 @@
             <div id="basic_info" class="collapse mb-3">
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12 ">
+                        <label for="issuer_account">Select Issuer Account</label>
                         <select name="issuer" id="issuer_account" class="form-select form-select-lg" required>
                             <option value="" selected disabled> Select Issuer Account </option>
                             @if(Auth::user()->hasRole('issuer'))
@@ -37,10 +38,12 @@
                         </select>
                     </div>
                     <div class="col-lg-12">
+                        <label for="offer_name">Offer Name</label>
                         <input type="text" class="form-control" name="offer_name" placeholder="Offer Name *"
                             id="offer_name" required>
                     </div>
                     <div class="col-lg-12">
+                        <label for="ext_url">Slug</label>
                         <input type="text" class="form-control" name="slug" placeholder="Slug" id="offer_slug"
                             readonly required>
                     </div>
@@ -48,16 +51,19 @@
 
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
+                        <label for="short_description">Short Description</label>
                         <input type="text" class="form-control" name="short_description" id="short_description"
                             placeholder="Short Description (Optional)">
                     </div>
 
                     <div class="col-lg-12">
+                        <label for="terms">Terms</label>
                         <input type="text" class="form-control" name="terms"  id="terms" placeholder="Offer Terms">
                     </div>
 
                     <div class="col-lg-12">
                         <div class="col-lg-12">
+                            <label for="">Offer Type</label>
                             <select name="offer_type" aria-label="Offer Tags (filters assets in marketplace)"
                                 data-control="select2" data-placeholder="Offer Tags (filters assets in marketplace)"
                                 class="form-select form-select-lg offer_type" id="offer_tags">
@@ -73,6 +79,7 @@
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
                         <div class="col-lg-12">
+                            <label for="status">Status</label>
                             <select name="status" aria-label="Offer Status" data-control="select2"
                                 data-placeholder="Offer Status" class="form-select form-select-lg" id="status">
                                 <option value="active"> Active </option>
@@ -85,6 +92,7 @@
 
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
+                        <label for="security_type">Security Type </label>
                         <select name="security_type" aria-label="Security Type (Optional)" data-control="select2"
                             data-placeholder="Security Type (Optional)" class="form-select form-select-lg"
                             id="security_type">
@@ -102,11 +110,13 @@
                         <input type="number" class="form-control d-none" name="structure_safe"  placeholder="Structure-SAFE">
                     </div>
                     <div class="col-lg-12 d-none">
+                        <label for="symbol">Offer Symbol</label>
                         <input type="text" class="form-control" name="symbol" id="symbol" placeholder="Offer Symbol *" value="o">
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
+                        <label for="offer_tags">Offer Tags</label>
                         <select name="offer_tags " aria-label="Offer Tags (filters assets in marketplace)"
                             data-control="select2" multiple
                             data-placeholder="Offer Tags (filters assets in marketplace)"
@@ -117,6 +127,7 @@
                         </select>
                     </div>
                     <div class="col-lg-12">
+                        <label for="offer_size">Offer Size</label>
                         <input type="number" class="form-control" name="size" id="offer_size"
                             placeholder="Enter Amount" required>
                     </div>
@@ -124,11 +135,13 @@
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
 
                     <div class="col-lg-12">
+                        <label for="size_label">Size Label</label>
                         <input type="text" class="form-control" name="size_label" id="size_label"
                             placeholder="Offer Size Label (default: offering size)">
                     </div>
 
                     <div class="col-lg-12">
+                        <label for="base_currency">Base Currency</label>
                         <select name="base_currency" id="base_currency" class="form-select  form-select-md" required>
                             <option value="USD">USD</option>
                             <option value="GBP">GBP</option>
@@ -136,12 +149,14 @@
                         </select>
                     </div>
                     <div class="col-lg-12">
+                        <label for="price_per_unit">Price Per Unit</label>
                         <input type="number" class="form-control" name="price_per_unit"
                             placeholder="Price per share/unit (if applicable)?">
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 g-5 mb-8">
                     <div class="col-lg-12">
+                        <label for="share_unit_label">Share Unit Label</label>
                         <input type="text" class="form-control" name="share_unit_label"
                             placeholder="Share/Unit Label (default: shares)">
                     </div>

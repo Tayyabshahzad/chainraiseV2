@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-new')
 @section('page_title', 'API-Profile')
 @section('page_style')
     <link rel="stylesheet" href="{{ asset('vue/css/style-listing.css') }}">
@@ -11,7 +11,7 @@
 
 <section class="p-lg-5 p-3 hero-bg">
     <div class="container">
-         
+
         <div class="row justify-content-between">
             <div class="col-lg-12 px-lg-0">
                 <div id="carouselExample" class="" data-bs-ride="carousel">
@@ -37,7 +37,7 @@
                                         <label>Password</label>
                                         <input type="text" name="username" class="form-control"/>
                                     </div>
-                                </div>  
+                                </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group py-2">
@@ -52,24 +52,24 @@
                                         <label>Last Name</label>
                                         <input type="text" name="username" class="form-control"/>
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="col-12">
                                     <button class="btn btn-sm btn-info" style="padding:8px 60px"> Update </button>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-             
+
         </div>
 
     </div>
 </section>
 
- 
 
 
-   
+
+
 
 @endsection

@@ -62,7 +62,7 @@
                     @endif
                 @endif
 
-            
+
         </div>
 
     </div>
@@ -78,9 +78,9 @@
                 <div id="carouselExample" class="" data-bs-ride="carousel">
                     <div class="">
                         <div class=" ">
-                            
 
-                           
+
+
                         </div>
                     </div>
                 </div>

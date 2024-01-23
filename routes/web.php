@@ -31,10 +31,15 @@ Route::get('emails', function(){
 });
 
 Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'], function () {
-    Route::get('listing', [ApiController::class, 'listing']);
-    Route::get('profile', [ApiController::class, 'profile'])->name('profile');
-    Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
-    Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
+    Route::get('listing', [ApiController::class, 'listing'])->name('offer-listing');
+    Route::get('details/{uid?}', [ApiController::class, 'details'])->name('offer-details');
+    Route::get('invest-now', [ApiController::class, 'investNow'])->name('invest-now');
+   // Route::inertia('profile', [ApiController::class, 'profile'])->name('profile');
+    // web.php
+    Route::get('profile', [ApiController::class, 'ProfilePage'])->name('profile');
+    // Route::inertia('/sppx/profile', 'ProfilePage')->name('profile');
+    // Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
+    // Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
 });
 
 

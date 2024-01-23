@@ -2,8 +2,8 @@
 @extends('layouts.master')
 @section('page_title','Details')
 @section('page_style')
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="{{ asset('vue/css/style-detail.css') }}">
 
     <style>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="col-lg-6 p-lg-5 text-white text-end">
-                <p class="tab-text text-lg-start">  {{$offer->short_description }}  </p>
+                <p class=" text-lg-start">  {{$offer->short_description }}  </p>
                 <img src="images/Group 12578.png" alt="" srcset="" class="img-fluid">
             </div>
 
@@ -278,15 +278,15 @@
                     <div class="row  pt-3 text-white">
                         <div class="col-4 border-end"><span class="blue">Offer   Type</span><br>{{ ucfirst($offer->offer_type) }}</div>
                         <div class="col-4 border-end"><span class="blue">Offer    Amount</span><br>${{ number_format($offer->size) }}</div>
-                        <div class="col-4 border-end"><span  class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}  </div>
+                        <div class="col-4  "><span  class="blue">Valuation</span><br>${{ number_format($offer->total_valuation) }}  </div>
                         <div class="py-2">
                             <hr>
                         </div>
-                        <div class="col-4 "><span class="blue">Securitiy Type</span><br>    {{ ucfirst($offer->security_type) }}</div>
+                        <div class="col-4 b  border-end "><span class="blue">Security Type</span><br>    {{ ucfirst($offer->security_type) }}</div>
                         @if($offer->security_type == 'SAFE')
-                            <div class="col-4 "><span class="blue">SAFE</span><br>    {{ ucfirst($offer->safe) }}</div>
+                            <div class="col-4   border-end"><span class="blue">SAFE</span><br>    {{ ucfirst($offer->safe) }}</div>
                         @elseif($offer->security_type == 'Structure-SAFE')
-                            <div class="col-4 "><span class="blue">Structure-SAFE</span><br>    {{ ucfirst($offer->structure_safe) }}</div>
+                            <div class="col-4  border-end "><span class="blue">Structure-SAFE</span><br>    {{ ucfirst($offer->structure_safe) }}</div>
                         @endif
 
                         <div class="col-4"><span class="blue">Min.    Investment</span><br>${{ number_format($offer->investmentRestrictions->min_invesment) }}  </div>
@@ -377,8 +377,6 @@
 <script src="{{ asset('assets/image-gallery/js/lightbox-plus-jquery.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
-<script>
 
-</script>
 
 @endsection

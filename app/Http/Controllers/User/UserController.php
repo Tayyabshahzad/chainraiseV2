@@ -100,7 +100,8 @@ class UserController extends Controller
         if (!empty($search)) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', '%' . $search . '%')
-                    ->orWhere('user_type', 'LIKE', '%' . $search . '%');
+                    ->orWhere('user_type', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%');
             });
         }
 

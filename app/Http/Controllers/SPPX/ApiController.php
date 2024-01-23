@@ -5,44 +5,76 @@ namespace App\Http\Controllers\SPPX;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 class ApiController extends Controller
 {
 
     public $endpoint;
     public function __construct()
     {
-        $this->endpoint = "https://crdev.sppx.io/api/v0/";
+        $this->endpoint = "https://crdev.sppx.io/api/v0";
     }
 
     public function login()
     {
         // Your login API endpoint and credentials
-        $loginEndpoint = 'https://crdev.sppx.io/api/v0/user/login/';
+        $loginEndpoint = $this->endpoint.'/user/login/';
         $credentials = [
             "grant_type" => "password",
-            "username" => "api.chainraise",
-            "password" => "Westridge151!"
+            "username" => "zideqyxij",
+            "password" => "123123123"
         ];
-        // Make the login API request
         $loginResponse = Http::post($loginEndpoint, $credentials);
-        // Extract the access token
         $accessToken = $loginResponse['token']['access_token'];
-        // Use the access token in subsequent requests or store it securely
         return $accessToken;
     }
 
 
-    public function listing(){
-    
+    public function listing()
+    {
         $accessToken = $this->login();
-        $listingEndpoint = 'https://crdev.sppx.io/api/v0/public';
+        return Inertia::render('Sppx/Listing', [
+            'accessToken' => $accessToken,
+            'profileUrl' => route('api.profile'),
+        ]);
+    }
+
+    public function details($uuid)
+    {
+        $accessToken = $this->login();
         $listingResponse = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $accessToken,
-        ])->get($listingEndpoint);
+                 'Authorization' => 'Bearer ' . $accessToken,
+         ])->get($this->endpoint.'/public/'.$uuid);
+        //  https://{{sppx-host}}/api/v0/public/26aa2259-52e9-4b07-8bfc-2cb51db3773f
         $jsonResponse = json_decode($listingResponse->body(), true);
 
-        return view('sppx.index',compact('jsonResponse'));
+        return Inertia::render('Sppx/Detail', [
+            'accessToken' => $accessToken,
+            'offer'=> $jsonResponse,
+        ]);
     }
+
+
+    public function investNow()
+    {
+         
+        return Inertia::render('Sppx/Invest');
+    }
+
+    
+
+
+    // public function listing(){
+
+
+    //     // $accessToken = $this->login();
+    //     // $listingEndpoint = 'https://crdev.sppx.io/api/v0/public';
+    //     // $listingResponse = Http::withHeaders([
+    //     //     'Authorization' => 'Bearer ' . $accessToken,
+    //     // ])->get($listingEndpoint);
+    //     // $jsonResponse = json_decode($listingResponse->body(), true);
+    //     return view('sppx.index',compact('jsonResponse'));
+    // }
 
     public function loginApi()
 {
@@ -97,8 +129,20 @@ public function register()
     }
 }
 
-public function profile(){
-    return view('sppx.profile');
+public function ProfilePage(){
+
+
+    $accessToken = $this->login();
+    $profileInfo = Http::withHeaders([
+             'Authorization' => 'Bearer ' . $accessToken,
+    ])->get($this->endpoint.'/user/profile');
+    $jsonResponse = json_decode($profileInfo->body(), true);
+    return Inertia::render('Sppx/Profile', [
+        'accessToken' => $accessToken,
+        'profileDetail'=> $jsonResponse,
+        'profileUrl' => route('api.profile'),
+    ]);
+
 }
 
 
