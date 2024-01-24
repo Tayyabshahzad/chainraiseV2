@@ -50,6 +50,7 @@ class ApiController extends Controller
 
         return Inertia::render('Sppx/Detail', [
             'accessToken' => $accessToken,
+            'investUrl' => route('api.invest-now'),
             'offer'=> $jsonResponse,
         ]);
     }
@@ -57,7 +58,6 @@ class ApiController extends Controller
 
     public function investNow()
     {
-         
         return Inertia::render('Sppx/Invest');
     }
 

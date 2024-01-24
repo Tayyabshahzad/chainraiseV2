@@ -70,7 +70,7 @@
                           </div>
                           <span class="text-wrap col-12 my-3 mx-auto py-2 px-3" style="text-align: left !important;"></span>
                           <div class="d-grid gap-2 col-12 mx-auto">
-                            <a :href="route('invest-now')" class="btn transparent_btn"><b>Invest</b></a>
+                            <a :href="investUrl"  class="btn transparent_btn"><b>Invest</b></a>
                           </div>
                         </div>
                       </div>
@@ -95,6 +95,7 @@ export default {
   },
   props: {
     offer: Object,
+    investUrl: String
   },
   mounted(){
  

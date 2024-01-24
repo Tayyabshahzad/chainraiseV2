@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chainrasie | @yield('page_title')</title>
+    <title> Chainraise  | @yield('page_title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-12 text-white py-3">
 
-                
+
                     <p>
                         <strong>
                             Important Message
@@ -173,8 +173,8 @@
 
                     <p>
                         <strong>
-                            <a href="https://chainraise.io"> www.ChainRaise.io </a>  
-                        </strong> 
+                            <a href="https://chainraise.io"> www.ChainRaise.io </a>
+                        </strong>
                         is a website owned and operated by ChainRaise, LLC. (“ChainRaise”), which is neither a registered broker-dealer, investment advisor nor funding portal.
                     </p>
                     <p>
@@ -190,7 +190,7 @@
                         We provide financial projections for some of the investment opportunities listed on the Site. All such financial projections are only estimates based on current conditions and current assumptions. The actual result of any investment is likely to be different than the original projection, often by a large amount.
                     </p>
                     <p>
-                        Any securities offered on this website have not been recommended or approved by any federal or state securities commission or regulatory authority. ChainRaise and its affiliates do not provide any investment advice or recommendation and do not provide any legal or tax advice with respect to any securities. All securities listed on this site are being offered by, and all information included on this site is the responsibility of, the applicable issuer of such securities. ChainRaise does not verify the adequacy, accuracy or completeness of any information. Neither ChainRaise nor any of its officers, directors, agents and employees makes any warranty, express or implied, of any kind whatsoever related to the adequacy, accuracy, or completeness of any information on this site or the use of information on this site. 
+                        Any securities offered on this website have not been recommended or approved by any federal or state securities commission or regulatory authority. ChainRaise and its affiliates do not provide any investment advice or recommendation and do not provide any legal or tax advice with respect to any securities. All securities listed on this site are being offered by, and all information included on this site is the responsibility of, the applicable issuer of such securities. ChainRaise does not verify the adequacy, accuracy or completeness of any information. Neither ChainRaise nor any of its officers, directors, agents and employees makes any warranty, express or implied, of any kind whatsoever related to the adequacy, accuracy, or completeness of any information on this site or the use of information on this site.
                     </p>
                     <p>
                         By accessing this site and any pages on this site, you agree to be bound by our Terms of use and Privacy Policy, as may be amended from time to time without notice or liability.
@@ -198,7 +198,7 @@
 
                     </p>
 
-                    
+
                 </div>
             </div>
         </div>
