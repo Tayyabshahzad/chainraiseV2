@@ -38,7 +38,7 @@
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1" style="height:200px">
                                         <div class="card-body ">
                                             <div class="d-flex justify-content-end">
-                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield">
+                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield rounded-circle">
                                             </div>
 
                                             <h5 class="card-title text-white">{{ $active->name }}</h5>
