@@ -34,7 +34,7 @@
         <div class="row align-items-end position-relative " style="height: 600px;">
 
             <div class="col-lg-8 pt-lg-5 ps-lg-5 pb-lg-3 p-3">
-                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="Offer Logo" width="92" height="92">
+                <img src="{{ $offer->getFirstMediaUrl('offer_logo', 'thumb') }}" alt="Offer Logo" width="92" height="92" class="rounded-circle">
                 <h1 class="explore-detail pt-3"> {{ $offer->name }} </h1>
                 <p class=" text-lg-start text-white">  {{$offer->short_description }}  </p>
             </div>
