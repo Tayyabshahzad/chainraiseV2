@@ -126,10 +126,12 @@
                                         <b class="text-white abc">{{  $active->offer_type  }}</b>
                                     </div>
                                 </div>
+                                @if($active->ext_url == null)
                                 <span class="badge text-wrap col-12 my-3 mx-auto py-2 px-3"
-                                    style="text-align: left !important;">
-                                    Due to our escrow partner switch, this offering will be back online
-                                    soon.</span>
+                                style="text-align: left !important;">
+                                Due to our escrow partner switch, this offering will be be back online
+                                soon.</span>
+                            @endif
                                     <div class="d-grid gap-2 col-12 mx-auto">
 
                                         @if($active->ext_url != null)

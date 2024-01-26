@@ -79,7 +79,7 @@
                                         <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1" style="height:200px">
                                         <div class="card-body ">
                                             <div class="d-flex justify-content-end">
-                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield">
+                                                <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield rounded-circle">
                                             </div>
 
                                             <h5 class="card-title text-white">{{ $active->name }}</h5>
@@ -146,7 +146,7 @@
                             <img src="{{ $active->getFirstMediaUrl('offer_thumbnail', 'thumb') }}" class="card-img-top" alt="Image 1">
                             <div class="card-body ">
                                 <div class="d-flex justify-content-end">
-                                    <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield">
+                                    <img src="{{ $active->getFirstMediaUrl('offer_logo', 'thumb') }}"  style="width: 100px;height:100px" class="img-fluid shield rounded-circle">
                                 </div>
 
                                 <h5 class="card-title text-white">{{ $active->name }}</h5>
@@ -173,7 +173,7 @@
                                         Due to our escrow partner switch, this offering will be be back online
                                         soon.</span>
                                     @endif
-                                    <div class="d-grid gap-2 col-12 mx-auto"> 
+                                    <div class="d-grid gap-2 col-12 mx-auto">
                                         @if($active->ext_url != null)
                                             <a href="{{ route('offer.details', $active->slug) }}" class="btn transparent_btn my-3"   ><b> Learn  More </b></a>
                                         @else
