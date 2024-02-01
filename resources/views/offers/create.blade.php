@@ -903,11 +903,7 @@
                         </div>
                         <small class="text-left" style="text-align:left">
                             <label class="required"> Select Template </label>
-                            <select class="form-control" name="e_sign_template" style="height:42px;font-size:13px">
-                                    @foreach ($templates as $template)
-                                        <option value="{{ $template['template_id'] }}"> {{ $template['template_name'] }} </option>
-                                    @endforeach
-                            </select>
+
                         </small>
                         <input type="hidden" name="investment_setups[]" value="` + content + `">
                     </div>

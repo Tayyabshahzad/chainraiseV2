@@ -52,7 +52,7 @@ class OfferController extends Controller
     public function active_index()
     {
         $issuers = User::role('issuer')->get();
-       
+
         $offers = Offer::orderBy('order_number', 'desc');
         if(Auth::user()->hasRole('issuer')) {
             $offers->where('issuer_id', Auth::user()->id);
@@ -107,21 +107,23 @@ class OfferController extends Controller
     public function create()
     {
 
+        $issuers = User::role('issuer')->get();
+        return view('offers.create', compact('issuers'));
 
-        $token = env('ESIGN_TOKEN');
-        try {
-            $e_sign = Http::get('https://esignatures.io/api/templates?token=' . $token);
-            $json_e_sign = json_decode((string) $e_sign->getBody(), true);
-            if (!$e_sign->successful()) {
-                Session::put('error', 'Esignatures Error');
-                return redirect()->back();
-            }
-            $templates = $json_e_sign['data'];
-            $issuers = User::role('issuer')->get();
-            return view('offers.create', compact('issuers', 'templates'));
-        } catch (Exception $error) {
-            return $error;
-        }
+        // $token = env('ESIGN_TOKEN');
+        // try {
+        //     $e_sign = Http::get('https://esignatures.io/api/templates?token=' . $token);
+        //     $json_e_sign = json_decode((string) $e_sign->getBody(), true);
+        //     if (!$e_sign->successful()) {
+        //         Session::put('error', 'Esignatures Error');
+        //         return redirect()->back();
+        //     }
+        //     $templates = $json_e_sign['data'];
+        //     $issuers = User::role('issuer')->get();
+        //     return view('offers.create', compact('issuers', 'templates'));
+        // } catch (Exception $error) {
+        //     return $error;
+        // }
     }
     public function e_template(Request $request)
     {
