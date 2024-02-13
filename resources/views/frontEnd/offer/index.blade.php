@@ -9,6 +9,9 @@
         .tab-content li {
            color: #fff!important;
         }
+        .hero-banner-image{
+            width: 30rem;
+        }
     </style>
 @endsection
 @section('page_content')
@@ -40,8 +43,8 @@
 
                 </div>
             </div>
-            <div class="col-lg-6 my-auto">
-                <img src="{{ asset('vue/images/image-3.png') }}" class="img-fluid" alt="">
+            <div class="col-lg-6 my-auto justify-content-center hero-banner-image">
+                <img src="{{ asset('vue/images/chain-raise-mobile.png') }}" class="img-fluid" alt="">
             </div>
         </div>
 

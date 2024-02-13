@@ -1,9 +1,7 @@
 
 @extends('layouts.master')
-@section('page_title','Details')
+@section('page_title',$offer->name)
 @section('page_style')
-
-
     <link rel="stylesheet" href="{{ asset('vue/css/style-detail.css') }}">
 
     <style>
