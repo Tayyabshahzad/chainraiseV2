@@ -37,9 +37,10 @@ Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'
    // Route::inertia('profile', [ApiController::class, 'profile'])->name('profile');
     // web.php
     Route::get('profile', [ApiController::class, 'ProfilePage'])->name('profile');
-    // Route::inertia('/sppx/profile', 'ProfilePage')->name('profile');
-    // Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
-    // Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
+    Route::inertia('/sppx/profile', 'ProfilePage')->name('profile');
+    Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
+    Route::get('check-auth', [ApiController::class, 'checkAuth'])->name('check.auth');
+    Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
 });
 
 

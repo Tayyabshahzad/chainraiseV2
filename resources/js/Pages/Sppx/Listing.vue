@@ -34,7 +34,7 @@
                           </div>
                           <span class="text-wrap col-12 my-3 mx-auto py-2 px-3" style="text-align: left !important;"></span>
                           <div class="d-grid gap-2 col-12 mx-auto">
-                           
+
                             <a :href="'details/'+listing.uuid"   class="btn transparent_btn"><b>Learn More</b></a>
                           </div>
                         </div>
@@ -55,14 +55,14 @@ import { usePage } from '@inertiajs/inertia-vue3';
 export default {
  data() {
     return {
-      listings: [], 
+      listings: [],
     };
   },
   props: {
     accessToken: String,
     profileUrl: String,
   },
-  computed: { 
+  computed: {
   },
 
   mounted(){
@@ -72,14 +72,10 @@ export default {
   methods: {
     async fetchListings(accessToken) {
         try {
-            const response = await axios.get('https://crdev.sppx.io/api/v0/public', {
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken, // Replace with your actual access token variable
-                },
-            });
+            const response = await axios.get('https://crdev.sppx.io/api/v0/public');
             // Log the fetched data to the console
             this.listings = response.data.issues;
-            this.offerDetail = response.data.issues.uuid; 
+            this.offerDetail = response.data.issues.uuid;
 
         } catch (error) {
             console.error('Error:', error);
