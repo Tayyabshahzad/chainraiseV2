@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
              \URL::forceScheme('https');
          }
 
-        // $accreditations = Accreditation::get();
-        // view()->share('accreditations', $accreditations);
+        $accreditations = Accreditation::get();
+        view()->share('accreditations', $accreditations);
     }
 }
