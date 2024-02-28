@@ -284,8 +284,7 @@ class ApiController extends Controller
     public function registerModel(Request $request)
     {
       
-        $accessToken = $this->login();
-        dd($accessToken);
+        $accessToken = $this->login(); 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
         ])->post('https://crdev.sppx.io/api/v0/user/register', [
