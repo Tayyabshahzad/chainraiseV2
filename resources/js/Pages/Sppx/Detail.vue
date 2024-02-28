@@ -10,6 +10,15 @@
                 <div>
                   <h1>Detail</h1>
                   <div class="row">
+                    <div class="col-lg-6 py-2" style="margin-bottom:20px">
+                        <button class="btn btn-sm btn-info" v-if="isLoggedIn" @click="logout()"> Logout </button>
+
+                    </div>
+
+
+
+
+
                     <div class="col-lg-12"   style="margin-bottom: 10px">
                       <div class="card bg-dark">
                         <img  v-if="offer.issue.media.thumb.url" :src="offer.issue.media.thumb.url" class="card-img-top" alt="Image 1" style="height: 17em;">
@@ -69,10 +78,10 @@
 
                           </div>
 
-                          <p id="token" class="text-white">  ddd</p>
+
                           <span class="text-wrap col-12 my-3 mx-auto py-2 px-3" style="text-align: left !important;"></span>
                           <div class="d-grid gap-2 col-12 mx-auto">
-                             <a v-if="isLoggedIn" @click="investNow" class="btn transparent_btn"><b>Invest Now</b></a>
+                             <a v-if="isLoggedIn" @click="investNow(offer.issue.uuid)" class="btn transparent_btn" data-bs-toggle="modal" data-bs-target="#investDecision"><b>Invest Now</b></a>
                              <button v-if="!isLoggedIn && !spinner"  class="btn transparent_btn" data-bs-toggle="modal" data-bs-target="#loginModal"> <b>Login to Invest</b> </button>
                              <div class="text-center" v-if="spinner">
                                 <img src="https://i.stack.imgur.com/qq8AE.gif" width="20"/>
@@ -115,6 +124,66 @@
         </div>
         <div class="modal-footer">
           <button type="button" @click="loginUser" class="btn btn-sm btn-info">Login</button>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#registerModal" class="btn btn-sm btn-info">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade"  id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+          <button type="button" id="closeModal"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form >
+                <div class="form-group">
+                  <lable> Username </lable>
+                  <input type="text" name="reg_username" id="reg_username" class="form-control" required/>
+                </div>
+
+                <div class="form-group">
+                    <lable> Email </lable>
+                    <input type="email" name="reg_email" id="reg_email" class="form-control" required/>
+                  </div>
+
+                <div class="form-group">
+                  <lable> Password </lable>
+                  <input type="password" name="reg_password" id="reg_password" class="form-control" required/>
+                </div>
+                <div class="form-group text-center">
+                        <span class="text-danger" id="reg_error_message"></span>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" @click="registerUser" class="btn btn-sm btn-info">Register</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade"  id="investDecision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" id="closeModal"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+
+            <div class="text-center" v-if="investSpinner">
+                <img src="https://i.stack.imgur.com/qq8AE.gif" width="20"/>
+             </div>
+
+            <a :href="this.accreditation+'/'+offer.issue.uuid" class="btn btn-sm btn-warning" v-if="completeProfileButton" > Complete Your Profile </a> <br/><br/>
+            <button class="btn btn-sm btn-success" v-if="investNowButton"> Invest Now </button>
+
+            <p id="investMessage" class="text-center text-danger"> </p>
+
 
         </div>
       </div>
@@ -137,6 +206,9 @@ export default {
         listing:'',
         isLoggedIn: false,
         spinner:true,
+        completeProfileButton: false,
+        investNowButton:false,
+        investSpinner:true
     };
   },
   props: {
@@ -144,12 +216,17 @@ export default {
     investUrl: String,
     loginRoute: String,
     checkAuthRoute:String,
+    logOut:String,
+    accreditation:String,
+    registerUserRoute:String
   },
   mounted(){
+
     this.checkLoggedIn();
   },
   methods: {
     checkLoggedIn() {
+        console.log("checkLoggedIn")
         axios.get(this.checkAuthRoute)
         .then(response => {
             this.spinner = false;
@@ -160,8 +237,6 @@ export default {
             }
         })
         .catch(error => {
-
-            console.log(error);
         });
     },
     loginUser() {
@@ -185,21 +260,56 @@ export default {
         console.error(error);
       });
     },
-    investNow(){
+    logout(){
+         axios.get(this.logOut)
+        .then(response => {
+            if (response.data.status === true) {
+                this.isLoggedIn = false;
+            }
+        })
+        .catch(error => {  console.log(error); });
+    },
 
-        const uuid = this.offer.issue.uuid;
-
-        axios.get(this.investUrl,{
-            uuid:this.uuid
+    investNow(uuid){
+        axios.post(this.investUrl,{
+            data:uuid
         })
         .then(response => {
-            alert(this.investUrl);
+            this.investSpinner = false
+            if(response.data.status == true){
+                this.investNowButton = true;
+                this.completeProfileButton  = false;
+                document.getElementById('investMessage').textContent = response.data.message;
+            }else if(response.data.status == false){
+                this.investNowButton = false;
+                this.completeProfileButton  = true;
+                document.getElementById('investMessage').textContent = response.data.message;
+            }
+
         })
         .catch(error => {
             console.error("error");
             console.error(error);
         });
-    }
+    },
+    registerUser() {
+      const reg_username = document.getElementById('reg_username').value;
+      const reg_email = document.getElementById('reg_email').value;
+      const reg_password = document.getElementById('reg_password').value;
+      
+      axios.post(this.registerUserRoute, {
+        reg_username: reg_username,
+        reg_email: reg_email,
+        reg_password: reg_password
+      })
+      .then(response => {
+        document.getElementById('reg_error_message').textContent = response.data.message; 
+      })
+      .catch(error => {
+        document.getElementById('reg_error_message').textContent = response.data.message; 
+       
+      });
+    },
 
   }
 

@@ -48,7 +48,10 @@ class ApiController extends Controller
                 'investUrl' => route('api.invest-now'),
                 'offer' => $cachedData,
                 'loginRoute' => route('api.loginApi'),
-                'checkAuthRoute' => route('api.check.auth')
+                'checkAuthRoute' => route('api.check.auth'),
+                'logOut'=> route('api.log.out'),
+                'accreditation'=> route('api.setup.accreditation'),
+                'registerUserRoute'=> route('api.register.api.user')
             ]);
         }
         $listingResponse = Http::get($this->endpoint.'/public/'.$uuid);
@@ -64,8 +67,31 @@ class ApiController extends Controller
 
     public function investNow(Request $request)
     {
-        dd($request);
-        return Inertia::render('Sppx/Invest');
+
+        $uuid = $request->data;
+        $access_token = session('access_token');
+        //dd($access_token); 
+        $certifyResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $access_token,
+        ])->get($this->endpoint.'/issue/'.$uuid.'/certify')->json();
+
+        if (isset($certifyResponse['accreditation']) && $certifyResponse['accreditation']['accredited'] === 'yes') {
+            // Accreditation process is complete
+
+            return response([
+                'status' => true,
+                'message' => "Your accreditation process is complete. Please Click on Invest Now Button",
+                'data' => $certifyResponse
+            ]);
+        } else {
+            return response([
+                'status'  => false,
+                'message' => "Your accreditation process is not complete.",
+                'data'    => $certifyResponse
+            ]);
+
+        }
+
     }
 
 
@@ -106,7 +132,7 @@ class ApiController extends Controller
             $expiresIn = $data['token']['expires_in'] ?? 1800;
            // Cache::put('access_token_' . $request->username, $data['token']['access_token'], $expiresIn);
             // Cache::put('access_session_token_' . $sessionId, $data['token']['access_token'], $expiresIn);
-            session(['is_login' => true]);
+            session(['access_token' => $data['token']['access_token']]);
 
             return response([
                 'status' => true,
@@ -123,7 +149,6 @@ class ApiController extends Controller
         }
     }
 
-
     public function register()
     {
         $accessToken = $this->login();
@@ -138,10 +163,8 @@ class ApiController extends Controller
         ]);
 
         $data = json_decode($response->body(), true);
-
         if ($response->successful()) {
             // If registration is successful, redirect to a dashboard or another page
-
             return "Registration successful";
         } elseif ($response->status() == 307 && $data['status']['memo'] == 'User mail already exists') {
             // If user email already exists, redirect to the login page with an error message
@@ -154,12 +177,12 @@ class ApiController extends Controller
 
     public function ProfilePage(){
 
-
         $accessToken = $this->login();
         $profileInfo = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $accessToken,
         ])->get($this->endpoint.'/user/profile');
         $jsonResponse = json_decode($profileInfo->body(), true);
+
         return Inertia::render('Sppx/Profile', [
             'accessToken' => $accessToken,
             'profileDetail'=> $jsonResponse,
@@ -171,7 +194,7 @@ class ApiController extends Controller
     public function checkAuth(Request $request){
 
     //s   dd(session(['is_login']));
-        $isLogin = session('is_login');
+        $isLogin = session('access_token');
         if ($isLogin ==  true) {
             return response()->json([
                 'status' => true,
@@ -187,6 +210,131 @@ class ApiController extends Controller
         }
 
     }
+
+    public function logOut(Request $request){
+
+        $token = session('access_token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->post($this->endpoint.'/user/logout');
+        $jsonResponse = json_decode($response->body(), true);
+        if ($response->successful()) {
+            $forget = session()->forget('access_token');
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+
+    }
+
+
+    public function accreditationSetup($uuid){
+
+        $accessToken = $this->login();
+        return Inertia::render('Sppx/AccreditationSetup', [
+            'accessToken' => $accessToken,
+            'saveAccreditation' => route('api.save.accreditation'),
+            'uuid' => $uuid,
+        ]);
+
+    }
+
+    public function accreditationSetupSave(Request $request){ 
+        $data = [
+            'accept' => 'yes',
+            'initials' => $request->initials, // Set your initials here
+            'accreditation' => [
+                'accredited' => 'no',
+                'income' => $request->income,
+                'joint' => 'no',
+                'networth' => $request->networth,
+                'regcf' => $request->regcf,
+                'dno' => 'yes',
+                'exam' => 'Series 82'
+            ]
+        ];
+
+        $access_token = session('access_token');
+        $certifyResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $access_token,
+        ])->post($this->endpoint.'/issue/'.$request->uuid.'/certify',$data);
+        $data = json_decode($certifyResponse->body(), true);
+
+        if ($certifyResponse->successful()) {
+            // Return a success response
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Accreditation saved successfully.',
+                // You can include any additional data you want to send back to the client
+            ], 200);
+        } else {
+            // Return an error response
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error saving accreditation. Please try again later.',
+                // You can include any additional data you want to send back to the client
+            ], 500);
+        }
+
+
+
+    }
+
+
+    public function registerModel(Request $request)
+    {
+      
+        $accessToken = $this->login();
+        dd($accessToken);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+        ])->post('https://crdev.sppx.io/api/v0/user/register', [
+            'user' => [
+                'username' => request('reg_username'),
+                'email' => request('reg_email'),
+                'password' => request('reg_password'),
+            ],
+        ]);
+        
+        $data = json_decode($response->body(), true);
+        
+        if ($response->successful()) {
+            if($data['status']['code'] == "403" ){
+                return response()->json([
+                    'status' => false,
+                    'message'=> $data['status']['memo'] 
+                ]); 
+            } 
+           
+            // If registration is successful, redirect to a dashboard or another page 
+            return response()->json([
+                'status' => true,
+                'message'=>"Registration successful"
+            ]); 
+ 
+        } elseif ($response->status() == 422 && isset($data['errors']) && $data['errors']['email']) {
+            // If user email already exists, redirect to the login page with an error message 
+
+            return response()->json([
+                'status' => false,
+                'message'=>"User email already exists. Please login."
+            ]); 
+
+        } else {
+            // If registration fails for other reasons, redirect back to the registration form with an error message
+
+            return response()->json([
+                'status' => false,
+                'message'=>$data['status']['memo'] ?? 'Registration failed'
+            ]); 
+
+            
+        }
+    }
+
+
+
+
 
 
 }
