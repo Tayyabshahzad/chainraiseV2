@@ -30,23 +30,6 @@ Route::get('emails', function(){
     return view('email.transaction.canceled');
 });
 
-Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'], function () {
-    Route::get('listing', [ApiController::class, 'listing'])->name('offer-listing');
-    Route::get('details/{uid?}', [ApiController::class, 'details'])->name('offer-details');
-    Route::post('invest-now', [ApiController::class, 'investNow'])->name('invest-now');
-   // Route::inertia('profile', [ApiController::class, 'profile'])->name('profile');
-    // web.php
-    Route::get('profile', [ApiController::class, 'ProfilePage'])->name('profile');
-
-    Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
-    Route::get('api-logout', [ApiController::class, 'logOut'])->name('log.out');
-    Route::get('check-auth', [ApiController::class, 'checkAuth'])->name('check.auth');
-    Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
-    Route::post('register/user', [ApiController::class, 'registerModel'])->name('register.api.user');
-    Route::get('setup-accreditation/{uuid?}', [ApiController::class, 'accreditationSetup'])->name('setup.accreditation');
-    Route::post('setup-accreditation', [ApiController::class, 'accreditationSetupSave'])->name('save.accreditation');
-});
-
 
 
 
