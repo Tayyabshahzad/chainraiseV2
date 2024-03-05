@@ -1,0 +1,12 @@
+{
+  "resources/css/app.css": {
+    "file": "public/vue/app-1c4c05b2.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "public/vue/app-888df4bb.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
