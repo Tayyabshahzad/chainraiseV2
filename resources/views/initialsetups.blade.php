@@ -1,6 +1,7 @@
 @extends('layouts.master')
-@section('page_head')
-    <link rel="stylesheet" href="{{ env('APP_URL') . '/css/style-setup.css') }}">
+@section('page_style')
+    <link rel="stylesheet" href="{{ asset('assets/css/style-setup.css') }}">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
         .error {
@@ -10,7 +11,7 @@
     </style>
 @endsection
 @section('title', 'Home')
-@section('content')
+@section('page_content')
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-7">
