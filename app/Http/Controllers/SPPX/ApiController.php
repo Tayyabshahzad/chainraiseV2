@@ -22,8 +22,8 @@ class ApiController extends Controller
         $loginEndpoint = $this->endpoint.'/user/login/';
         $credentials = [
             "grant_type" => "password",
-            "username" => "zideqyxij",
-            "password" => "123123123"
+            "username"   => "api.chainraise",
+            "password"   => "ChangeMe24!"
         ];
         $loginResponse = Http::post($loginEndpoint, $credentials);
         $accessToken = $loginResponse['token']['access_token'];
@@ -70,7 +70,7 @@ class ApiController extends Controller
 
         $uuid = $request->data;
         $access_token = session('access_token');
-        //dd($access_token); 
+        //dd($access_token);
         $certifyResponse = Http::withHeaders([
             'Authorization' => 'Bearer ' . $access_token,
         ])->get($this->endpoint.'/issue/'.$uuid.'/certify')->json();
@@ -239,7 +239,7 @@ class ApiController extends Controller
 
     }
 
-    public function accreditationSetupSave(Request $request){ 
+    public function accreditationSetupSave(Request $request){
         $data = [
             'accept' => 'yes',
             'initials' => $request->initials, // Set your initials here
@@ -283,8 +283,8 @@ class ApiController extends Controller
 
     public function registerModel(Request $request)
     {
-      
-        $accessToken = $this->login(); 
+
+        $accessToken = $this->login();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
         ])->post('https://crdev.sppx.io/api/v0/user/register', [
@@ -294,30 +294,30 @@ class ApiController extends Controller
                 'password' => request('reg_password'),
             ],
         ]);
-        
+
         $data = json_decode($response->body(), true);
-        
+
         if ($response->successful()) {
             if($data['status']['code'] == "403" ){
                 return response()->json([
                     'status' => false,
-                    'message'=> $data['status']['memo'] 
-                ]); 
-            } 
-           
-            // If registration is successful, redirect to a dashboard or another page 
+                    'message'=> $data['status']['memo']
+                ]);
+            }
+
+            // If registration is successful, redirect to a dashboard or another page
             return response()->json([
                 'status' => true,
                 'message'=>"Registration successful"
-            ]); 
- 
+            ]);
+
         } elseif ($response->status() == 422 && isset($data['errors']) && $data['errors']['email']) {
-            // If user email already exists, redirect to the login page with an error message 
+            // If user email already exists, redirect to the login page with an error message
 
             return response()->json([
                 'status' => false,
                 'message'=>"User email already exists. Please login."
-            ]); 
+            ]);
 
         } else {
             // If registration fails for other reasons, redirect back to the registration form with an error message
@@ -325,9 +325,9 @@ class ApiController extends Controller
             return response()->json([
                 'status' => false,
                 'message'=>$data['status']['memo'] ?? 'Registration failed'
-            ]); 
+            ]);
 
-            
+
         }
     }
 
