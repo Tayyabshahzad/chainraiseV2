@@ -169,7 +169,7 @@
                             Important Message
                         </strong>
                         <br/>
-                        In Making An Investment Decision, Investors Must Rely On Their Own Examination Of The Issuer And The Terms Of The Offering, Including The Merits And Risks Involved. Investments On Startengine Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
+                        In Making An Investment Decision, Investors Must Rely On Their Own Examination Of The Issuer And The Terms Of The Offering, Including The Merits And Risks Involved. Investments On Chainraise Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
                     </p>
 
                     <p>

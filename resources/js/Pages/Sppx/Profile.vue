@@ -41,76 +41,69 @@
                                 </div> 
 
 
-                                <div class="form-group py-2">
-                                    <label>Password</label>
-                                    <input type="text" name="password" v-model="formData.user.email"  class="form-control"/>
-                                </div> 
+                                
                             </div>
 
 
-                            <div class="col-lg-12">
-                                <div class="col-lg-12 text-center"> <h6> Address</h6> </div>
-                                
-                                <div class="form-group py-2">
+                            <div>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-12 text-center"> <h6> Address</h6> </div>
+                                    
+                                    <div class="form-group py-2">
                                         <label>Name</label> 
                                         <input type="text" name="name" v-model="formData.user.address.name"  class="form-control"/>
+                                    </div>
+                        
+                                    <div class="form-group py-2">
+                                        <label>Street</label>
+                                        <input type="text" name="street" v-model="formData.user.address.street" class="form-control"/>
+                                    </div>
+                        
+                                    <div class="form-group py-2">
+                                        <label>Unit</label>
+                                        <input type="text" name="unit" v-model="formData.user.address.unit" class="form-control"/>
+                                    </div>
+                        
+                                    <div class="form-group py-2">
+                                        <label>City</label>
+                                        <input type="text" name="city" v-model="formData.user.address.city"  class="form-control"/>
+                                    </div> 
+                        
+                                    <div class="form-group py-2">
+                                        <label>State</label>
+                                        <input type="text" name="state" v-model="formData.user.address.state"  class="form-control"/>
+                                    </div> 
+                        
+                                    <div class="form-group py-2">
+                                        <label>Zipcode</label>
+                                        <input type="text" name="zipcode" v-model="formData.user.address.zipcode"  class="form-control"/>
+                                    </div> 
+                        
+                                    <div class="form-group py-2">
+                                        <label>Country</label>
+                                        <input type="text" name="country" v-model="formData.user.address.country"  class="form-control"/>
+                                    </div> 
                                 </div>
-
-                                <div class="form-group py-2">
-                                    <label>Street</label>
-                                    <input type="text" name="street" v-model="formData.user.address.street" class="form-control"/>
-                                </div>
-
-                                <div class="form-group py-2">
-                                    <label>Unit</label>
-                                    <input type="text" name="unit" v-model="formData.user.address.unit" class="form-control"/>
-                                </div>
-
-                                <div class="form-group py-2">
-                                    <label>City</label>
-                                    <input type="text" name="city" v-model="formData.user.address.city"  class="form-control"/>
-                                </div> 
-
-                                <div class="form-group py-2">
-                                    <label>State</label>
-                                    <input type="text" name="state" v-model="formData.user.address.state"  class="form-control"/>
-                                </div> 
-
-
-                                <div class="form-group py-2">
-                                    <label>Zipcode</label>
-                                    <input type="text" name="state" v-model="formData.user.address.zipcode"  class="form-control"/>
-                                </div> 
-
-                                <div class="form-group py-2">
-                                    <label>Country</label>
-                                    <input type="text" name="state" v-model="formData.user.address.country"  class="form-control"/>
-                                </div> 
- 
                             </div>
 
 
                             <div class="col-lg-12">
                                 <div class="col-lg-12 text-center"> <h6> Phone Info</h6> </div>
                                 <div class="form-group py-2">
-                                        <label>Name</label>
-                                        <input type="text" name="username" v-model="formData.user.phone.name"  class="form-control"/>
+                                    <label>Name</label>
+                                    <input type="text" name="username" v-model="formData.user.phone.name"  class="form-control"/>
                                 </div>
-
+                    
                                 <div class="form-group py-2">
                                     <label>Number</label>
                                     <input type="text" name="username" v-model="formData.user.phone.number" class="form-control"/>
                                 </div> 
-
-
+                    
                                 <div class="form-group py-2">
                                     <label>Type</label>
                                     <input type="text" name="username" v-model="formData.user.phone.type" class="form-control"/>
                                 </div> 
-
-
                             </div>
-
                             
                             <div class="col-12"> 
                                 <button type="submit" class="btn btn-sm btn-info" style="padding: 8px 60px">Update</button>
@@ -127,35 +120,36 @@
 </template>
 
 <script>
-import axios from 'axios'; // Import axios
-import { usePage } from '@inertiajs/inertia-vue3';
+import axios from 'axios';
+
 export default {
-    data() {
+  data() {
     return {
       formData: {
-        user: {  
-          email:'',
+        user: {
+          email: '',
+          password: '', // Ensure you have a password field
           name: {
             first: '',
             middle: '',
             last: '',
             initials: '',
           },
-         
           address: {
             name: '',
             street: '',
             unit: '',
             city: '',
+            state: '',
+            zipcode: '',
+            country: '',
           },
-
           phone: {
             name: '',
-            number: '', 
-            type: '', 
+            number: '',
+            type: '',
           },
         },
-        
       },
     };
   },
@@ -163,44 +157,41 @@ export default {
     accessToken: String,
     profileUrl: String,
     profileDetail: Object,
+    updateProfileUrl: String,
   },
-  created(){
-    this.formData.user.name.first = this.profileDetail.user.name.first
-    this.formData.user.name.middle = this.profileDetail.user.name.middle
-    this.formData.user.name.last = this.profileDetail.user.name.last
-    this.formData.user.name.initials = this.profileDetail.user.name.initials 
-    // Address
+  mounted() {
+    if (this.profileDetail) {
+        this.formData.user.name.first = this.profileDetail.user.name.first;
+        this.formData.user.name.middle = this.profileDetail.user.name.middle;
+        this.formData.user.name.last = this.profileDetail.user.name.last;
+        this.formData.user.name.initials = this.profileDetail.user.name.initials;
+        this.formData.user.email = this.profileDetail.user.email;
+            // Populate other fields as needed
 
-    this.formData.user.address.name = this.profileDetail.user.address.name 
-    this.formData.user.address.street = this.profileDetail.user.address.street 
-    this.formData.user.address.unit = this.profileDetail.user.address.unit 
-    this.formData.user.address.city = this.profileDetail.user.address.city 
-    this.formData.user.address.state = this.profileDetail.user.address.state 
-    this.formData.user.address.zipcode = this.profileDetail.user.address.zipcode 
-    this.formData.user.address.country = this.profileDetail.user.address.country  
+        this.formData.user.address.name = this.profileDetail.user.address.name;
+        this.formData.user.address.street = this.profileDetail.user.address.street;
+        this.formData.user.address.unit = this.profileDetail.user.address.unit;
+        this.formData.user.address.city = this.profileDetail.user.address.city;
+        this.formData.user.address.state = this.profileDetail.user.address.state;
+        this.formData.user.address.zipcode = this.profileDetail.user.address.zipcode;
+        this.formData.user.address.country = this.profileDetail.user.address.country;
 
-    //phone
-
-    this.formData.user.phone.name = this.profileDetail.user.phone.name 
-    this.formData.user.phone.number = this.profileDetail.user.phone.number 
-    this.formData.user.phone.type = this.profileDetail.user.phone.type 
-  },
-  mounted(){
-     
+        this.formData.user.phone.name = this.profileDetail.user.phone.name;
+        this.formData.user.phone.number = this.profileDetail.user.phone.number;
+        this.formData.user.phone.type = this.profileDetail.user.phone.type;
+    }
   },
   methods: {
+   
     async submitForm() {
-        try {
-            const response = await axios.post('https://crdev.sppx.io/api/v0/user/profile', this.formData, {
-                headers: {
-                    'Authorization': 'Bearer ' + this.accessToken,
-                },
-        });  
-    console.log('Profile', response);  
-} catch (error) {
-    console.error('Error:', error);
-}
+        axios.post(this.updateProfileUrl,this.formData)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {  console.log(error); });
+
+     
     },
-},
+  },
 };
 </script>

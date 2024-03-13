@@ -90,11 +90,10 @@ export default {
 
         axios.post(this.saveAccreditation,postData)
         .then(response => {
-            if (response.status === 200) {
-                // Show success message to the user
-                alert('Accreditation saved successfully: ' + response.data.status.memo);
+            console.log(response.data.status)
+            if (response.data.status === true) {
+                alert(response.data.message);
             } else {
-                // Show error message to the user
                 alert('Error saving accreditation. Please try again later.');
             }
         })

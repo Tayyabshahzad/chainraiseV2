@@ -275,7 +275,7 @@ class UserController extends Controller
     }
     public function save(Request $request)
     {
-
+        dd(1);
         $request->validate([
             'email' => 'required|unique:users',
             //'first_name' => 'required',
@@ -410,6 +410,7 @@ class UserController extends Controller
             'agree_consent_electronic' => 'required',
             //'password' => 'required',
         ]);
+
         DB::beginTransaction();
         try{
             $user = new User;

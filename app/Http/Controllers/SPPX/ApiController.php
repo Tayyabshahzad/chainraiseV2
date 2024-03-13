@@ -46,6 +46,8 @@ class ApiController extends Controller
         if ($cachedData) {
             return Inertia::render('Sppx/Detail', [
                 'investUrl' => route('api.invest-now'),
+                'certifyUrl'  => route('api.certify.Url'),
+                'pledge'  => route('api.pledge'),
                 'offer' => $cachedData,
                 'loginRoute' => route('api.loginApi'),
                 'checkAuthRoute' => route('api.check.auth'),
@@ -70,29 +72,70 @@ class ApiController extends Controller
 
         $uuid = $request->data;
         $access_token = session('access_token');
-        //dd($access_token);
-        $certifyResponse = Http::withHeaders([
+        $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $access_token,
-        ])->get($this->endpoint.'/issue/'.$uuid.'/certify')->json();
+        ])->get($this->endpoint.'/issue/'.$uuid.'/certify');
+        $certifyResponse = json_decode($response->body(), true);
 
-        if (isset($certifyResponse['accreditation']) && $certifyResponse['accreditation']['accredited'] === 'yes') {
-            // Accreditation process is complete
+        if($response->successful()){
+            if($certifyResponse['status']['code'] == "401"){
+                return response([
+                    'status' => false,
+                    'message' => $certifyResponse['status']['reason'] . " / ".  $certifyResponse['status']['memo']
+                ]);
+            }
+            if($certifyResponse['status']['code'] == "200"){ 
+                return response([
+                    'status' => true,
+                    'message' => $certifyResponse['status']['reason'] . " / ".  $certifyResponse['status']['memo']
+                ]);
+            }
 
-            return response([
-                'status' => true,
-                'message' => "Your accreditation process is complete. Please Click on Invest Now Button",
-                'data' => $certifyResponse
-            ]);
-        } else {
-            return response([
-                'status'  => false,
-                'message' => "Your accreditation process is not complete.",
-                'data'    => $certifyResponse
-            ]);
+            if (isset($certifyResponse['accreditation']) && $certifyResponse['accreditation']['accredited'] === 'yes') {
+                return response([
+                    'status' => true,
+                    'message' => "Your accreditation process is complete. Please Click on Invest Now Button",
+                    'data' => $certifyResponse
+                ]);
+            } else {
 
+                return response([
+                    'status'  => false,
+                    'message' => "Your accreditation process is not complete.",
+                    'data'    => $certifyResponse
+                ]);
+
+            }
         }
 
+
+
     }
+
+    public function pledge($uuid)
+    {
+        
+
+        $access_token = session('access_token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $access_token,
+        ])->get($this->endpoint.'/issue/'.$uuid.'/pledge');
+        $pledgeResponse = json_decode($response->body(), true);
+
+
+        
+       // dd($pledgeResponse);
+        return Inertia::render('Sppx/Pledge', [
+            'uuid' => $uuid, 
+        ]);
+
+        
+
+    }
+
+
+
+
 
 
 
@@ -177,19 +220,68 @@ class ApiController extends Controller
 
     public function ProfilePage(){
 
-        $accessToken = $this->login();
+        $access_token = session('access_token');
         $profileInfo = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $accessToken,
+                'Authorization' => 'Bearer ' . $access_token,
         ])->get($this->endpoint.'/user/profile');
         $jsonResponse = json_decode($profileInfo->body(), true);
-
         return Inertia::render('Sppx/Profile', [
-            'accessToken' => $accessToken,
+            'accessToken' => $access_token,
             'profileDetail'=> $jsonResponse,
             'profileUrl' => route('api.profile'),
+            'updateProfileUrl' => route('api.profile.update')
         ]);
 
     }
+
+    public function ProfileUpdate(Request $request){
+
+        $userData = $request->input('user');
+        $access_token = session('access_token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $access_token,
+        ])->post($this->endpoint.'/user/profile', [
+            'user' => [
+                'name' => [
+                    'first' => $userData['name']['first'],
+                    'middle' => $userData['name']['middle'],
+                    'last' => $userData['name']['last'],
+                    'initials' => $userData['name']['initials'],
+                    'email' => $userData['email'], // Moved email here
+                ],
+                'address' => [
+                    'name' => $userData['address']['name'],
+                    'street' => $userData['address']['street'],
+                    'unit' => $userData['address']['unit'],
+                    'city' => $userData['address']['city'],
+                    'state' => $userData['address']['state'],
+                    'zipcode' => $userData['address']['zipcode'],
+                    'country' => $userData['address']['country'],
+                ],
+                'phone' => [
+                    'name' => $userData['phone']['name'], // Assuming 'name' should be part of the phone details
+                    'number' => $userData['phone']['number'],
+                    'type' => $userData['phone']['type'],
+                ],
+            ],
+        ]);
+        $jsonResponse = json_decode($response->body(), true);
+        dd($jsonResponse);
+        
+        if ($response->successful()) {
+            if($jsonResponse['status']['code'] == "200"){
+                return response([
+                    'status' => true,
+                    'message' => $jsonResponse['status']['reason']
+                ]);
+            }
+        } 
+         
+
+    }
+
+
+    
 
     public function checkAuth(Request $request){
 
@@ -244,7 +336,7 @@ class ApiController extends Controller
             'accept' => 'yes',
             'initials' => $request->initials, // Set your initials here
             'accreditation' => [
-                'accredited' => 'no',
+                'accredited' => 'yes',
                 'income' => $request->income,
                 'joint' => 'no',
                 'networth' => $request->networth,
@@ -258,16 +350,25 @@ class ApiController extends Controller
         $certifyResponse = Http::withHeaders([
             'Authorization' => 'Bearer ' . $access_token,
         ])->post($this->endpoint.'/issue/'.$request->uuid.'/certify',$data);
-        $data = json_decode($certifyResponse->body(), true);
-
+        $certifyResponseJson = json_decode($certifyResponse->body(), true);
+        dd($certifyResponseJson);
         if ($certifyResponse->successful()) {
-            // Return a success response
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Accreditation saved successfully.',
-                // You can include any additional data you want to send back to the client
-            ], 200);
+            if($certifyResponseJson['status']['code'] == "200"){
+                return response([
+                    'status' => true,
+                    'message' => $certifyResponseJson['status']['reason'] . " / ".  $certifyResponseJson['status']['memo']
+                ]);
+            }
+
+            if($certifyResponseJson['status']['code'] == "401"){
+                return response([
+                    'status' => false,
+                    'message' => $certifyResponseJson['status']['reason'] . " / ".  $certifyResponseJson['status']['memo']
+                ]);
+            }
+
         } else {
+
             // Return an error response
             return response()->json([
                 'status' => 'error',

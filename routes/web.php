@@ -37,6 +37,7 @@ Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'
    // Route::inertia('profile', [ApiController::class, 'profile'])->name('profile');
     // web.php
     Route::get('profile', [ApiController::class, 'ProfilePage'])->name('profile');
+    Route::post('profile-update', [ApiController::class, 'ProfileUpdate'])->name('profile.update');
 
     Route::post('api-login', [ApiController::class, 'loginApi'])->name('loginApi');
     Route::get('api-logout', [ApiController::class, 'logOut'])->name('log.out');
@@ -45,6 +46,8 @@ Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'
     Route::post('register/user', [ApiController::class, 'registerModel'])->name('register.api.user');
     Route::get('setup-accreditation/{uuid?}', [ApiController::class, 'accreditationSetup'])->name('setup.accreditation');
     Route::post('setup-accreditation', [ApiController::class, 'accreditationSetupSave'])->name('save.accreditation');
+    Route::post('certifyUrl', [ApiController::class, 'pledge'])->name('certify.Url');
+    Route::get('pledge/{uuid?}', [ApiController::class, 'pledge'])->name('pledge');
 });
 
 

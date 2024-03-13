@@ -180,7 +180,7 @@
              </div>
 
             <a :href="this.accreditation+'/'+offer.issue.uuid" class="btn btn-sm btn-warning" v-if="completeProfileButton" > Complete Your Profile </a> <br/><br/>
-            <button class="btn btn-sm btn-success" v-if="investNowButton"> Invest Now </button>
+            <a :href="this.pledge+'/'+offer.issue.uuid"  class="btn btn-sm btn-success" type="button" v-if="investNowButton" > Pledge Now </a>
 
             <p id="investMessage" class="text-center text-danger"> </p>
 
@@ -214,6 +214,8 @@ export default {
   props: {
     offer: Object,
     investUrl: String,
+    pledge: String,
+    certifyUrl: String,
     loginRoute: String,
     checkAuthRoute:String,
     logOut:String,
@@ -292,22 +294,41 @@ export default {
             console.error(error);
         });
     },
+
+    certifyNow(uuid){
+       
+       axios.post(this.certifyUrl,{
+            data:uuid
+        })
+        .then(response => {
+             console.log(response)
+
+        })
+        .catch(error => {
+            console.error("error");
+            console.error(error);
+        });
+    },
+
+
+
+
     registerUser() {
       const reg_username = document.getElementById('reg_username').value;
       const reg_email = document.getElementById('reg_email').value;
       const reg_password = document.getElementById('reg_password').value;
-      
+
       axios.post(this.registerUserRoute, {
         reg_username: reg_username,
         reg_email: reg_email,
         reg_password: reg_password
       })
       .then(response => {
-        document.getElementById('reg_error_message').textContent = response.data.message; 
+        document.getElementById('reg_error_message').textContent = response.data.message;
       })
       .catch(error => {
-        document.getElementById('reg_error_message').textContent = response.data.message; 
-       
+        document.getElementById('reg_error_message').textContent = response.data.message;
+
       });
     },
 
