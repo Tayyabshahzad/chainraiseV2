@@ -169,13 +169,9 @@
                             Important Message
                         </strong>
                         <br/>
-                        In Making An Investment Decision, Investors Must Rely On Their Own Examination Of The Issuer And The Terms Of The Offering, Including The Merits And Risks Involved. Investments On Startengine Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
-                    </p>
-
-                    <p>
-                        <strong>
-                            <a href="https://chainraise.io"> www.ChainRaise.io </a>
-                        </strong>
+                        In Making An Investment Decision, Investors Must Rely On Their Own Examination Of The Issuer And The Terms Of The Offering, Including The Merits And Risks Involved. Investments On Chainraise Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
+erits And Risks Involved. Investments On Startengine Are Speculative, Illiquid, And Involve A High Degree Of Risk, Including The Possible Loss Of Your Entire Investment.
+                 </strong>
                         is a website owned and operated by ChainRaise, LLC. (“ChainRaise”), which is neither a registered broker-dealer, investment advisor nor funding portal.
                     </p>
                     <p>
