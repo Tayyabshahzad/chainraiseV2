@@ -81,7 +81,9 @@
 
                           <span class="text-wrap col-12 my-3 mx-auto py-2 px-3" style="text-align: left !important;"></span>
                           <div class="d-grid gap-2 col-12 mx-auto">
-                             <a v-if="isLoggedIn" @click="investNow(offer.issue.uuid)" class="btn transparent_btn" data-bs-toggle="modal" data-bs-target="#investDecision"><b>Invest Now</b></a>
+                             <!-- <a v-if="isLoggedIn"  :href="route('api.investor.certification')"   class="btn transparent_btn" ><b>Invest Now</b></a> -->
+
+                             <a v-if="isLoggedIn" :href="route('api.investor.certification',offer.issue.uuid)" class="btn transparent_btn"><b>Invest Now</b></a>
                              <button v-if="!isLoggedIn && !spinner"  class="btn transparent_btn" data-bs-toggle="modal" data-bs-target="#loginModal"> <b>Login to Invest</b> </button>
                              <div class="text-center" v-if="spinner">
                                 <img src="https://i.stack.imgur.com/qq8AE.gif" width="20"/>
@@ -179,9 +181,9 @@
                 <img src="https://i.stack.imgur.com/qq8AE.gif" width="20"/>
              </div>
 
-            <a :href="this.accreditation+'/'+offer.issue.uuid" class="btn btn-sm btn-warning" v-if="completeProfileButton" > Complete Your Profile </a> <br/><br/>
+            <a :href="this.accreditation+'/'+offer.issue.uuid" class="btn btn-sm btn-warning" v-if="accreditationProcess" > Complete Your Accreditation Process </a> <br/><br/>
             <a :href="this.pledge+'/'+offer.issue.uuid"  class="btn btn-sm btn-success" type="button" v-if="investNowButton" > Pledge Now </a>
-
+            <a :href="this.profile" class="btn btn-sm btn-info" v-if="updateProfile" > Update Your Profile </a> <br/><br/>
             <p id="investMessage" class="text-center text-danger"> </p>
 
 
@@ -200,6 +202,8 @@ import axios from 'axios'; // Import axios
 import { usePage } from '@inertiajs/inertia-vue3';
 import $ from 'jquery';
 
+
+
 export default {
  data() {
     return {
@@ -208,7 +212,9 @@ export default {
         spinner:true,
         completeProfileButton: false,
         investNowButton:false,
-        investSpinner:true
+        investSpinner:true,
+        updateProfile:false,
+        accreditationProcess:false
     };
   },
   props: {
@@ -220,7 +226,8 @@ export default {
     checkAuthRoute:String,
     logOut:String,
     accreditation:String,
-    registerUserRoute:String
+    registerUserRoute:String,
+    profile:String
   },
   mounted(){
 
@@ -228,9 +235,9 @@ export default {
   },
   methods: {
     checkLoggedIn() {
-        console.log("checkLoggedIn")
         axios.get(this.checkAuthRoute)
         .then(response => {
+            console.log(response)
             this.spinner = false;
             if (response.data.status === true) {
                 this.isLoggedIn = true;
@@ -239,6 +246,8 @@ export default {
             }
         })
         .catch(error => {
+            this.spinner = false;
+
         });
     },
     loginUser() {
@@ -283,8 +292,20 @@ export default {
                 this.completeProfileButton  = false;
                 document.getElementById('investMessage').textContent = response.data.message;
             }else if(response.data.status == false){
-                this.investNowButton = false;
-                this.completeProfileButton  = true;
+
+                if(response.data.initials == false){
+                    this.investNowButton = false;
+                    this.completeProfileButton  = false;
+                    this.updateProfile  = true;
+
+                }else if(response.data.accreditation ==  false){
+                    this.accreditationProcess  = true;
+                    this.updateProfile  = false;
+                }else{
+                    this.investNowButton = false;
+                    this.completeProfileButton  = true;
+                }
+
                 document.getElementById('investMessage').textContent = response.data.message;
             }
 
@@ -296,7 +317,7 @@ export default {
     },
 
     certifyNow(uuid){
-       
+
        axios.post(this.certifyUrl,{
             data:uuid
         })
@@ -309,8 +330,6 @@ export default {
             console.error(error);
         });
     },
-
-
 
 
     registerUser() {
@@ -331,6 +350,10 @@ export default {
 
       });
     },
+
+    computed: {
+
+  },
 
   }
 

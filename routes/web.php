@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\SPPX\ApiController;
+use App\Http\Controllers\SPPX\InvestorCertificationController;
+
 /*
 //Updated Routes
 |--------------------------------------------------------------------------
@@ -34,6 +36,19 @@ Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'
     Route::get('listing', [ApiController::class, 'listing'])->name('offer-listing');
     Route::get('details/{uid?}', [ApiController::class, 'details'])->name('offer-details');
     Route::post('invest-now', [ApiController::class, 'investNow'])->name('invest-now');
+    Route::get('investor-certification/{uid?}', [InvestorCertificationController::class, 'investorCertification'])->name('investor.certification');
+    Route::post('setup-accreditation', [InvestorCertificationController::class, 'accreditationSetupSave'])->name('save.accreditation');
+    Route::get('pledge-portfolio/{uuid?}', [InvestorCertificationController::class, 'pledgePortfolio'])->name('pledge');
+    Route::post('pledge-portfolio/submit', [InvestorCertificationController::class, 'pledgeSubmit'])->name('pledge.submit');
+    Route::get('pledge-portfolio/cancel/{uuid?}', [InvestorCertificationController::class, 'pledgeCancel'])->name('pledge.cancel');
+    Route::get('ach-enroll/{uuid?}/{txn?}', [InvestorCertificationController::class, 'achEnroll'])->name('ach.enroll');
+    Route::post('ach-add', [InvestorCertificationController::class, 'achAdd'])->name('ach.add');
+    Route::get('fund/{UUID_TXN?}', [InvestorCertificationController::class, 'fund'])->name('ach.fund');
+    Route::post('post-fund', [InvestorCertificationController::class, 'postFund'])->name('post.fund');
+    Route::get('investment-portfolio', [InvestorCertificationController::class, 'investmentPortfolio'])->name('investment.portfolio');
+
+
+
    // Route::inertia('profile', [ApiController::class, 'profile'])->name('profile');
     // web.php
     Route::get('profile', [ApiController::class, 'ProfilePage'])->name('profile');
@@ -45,9 +60,11 @@ Route::group(['as'=> 'api.','prefix'=>'sppx','namespace'=>'App\Http\Controllers'
     Route::post('api-register', [ApiController::class, 'register'])->name('registerApi');
     Route::post('register/user', [ApiController::class, 'registerModel'])->name('register.api.user');
     Route::get('setup-accreditation/{uuid?}', [ApiController::class, 'accreditationSetup'])->name('setup.accreditation');
-    Route::post('setup-accreditation', [ApiController::class, 'accreditationSetupSave'])->name('save.accreditation');
+
     Route::post('certifyUrl', [ApiController::class, 'pledge'])->name('certify.Url');
-    Route::get('pledge/{uuid?}', [ApiController::class, 'pledge'])->name('pledge');
+    // Route::get('pledge/{uuid?}', [ApiController::class, 'pledge'])->name('pledge');
+    // Route::post('pledge/submit', [ApiController::class, 'pledgeSubmit'])->name('pledge.submit');
+   // Route::get('pledge/portfolio', [ApiController::class, 'pledgePortfolio'])->name('pledge.portfolio');
 });
 
 

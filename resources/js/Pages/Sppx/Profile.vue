@@ -16,23 +16,23 @@
                             <div class="col-lg-12">
                                 <div class="col-lg-12 text-center"> <h6> Personal Info</h6></div>
                                 <div class="form-group py-2">
-                                        <label>First Name</label>
-                                        <input type="text" name="first"   v-model="formData.user.name.first"  class="form-control"/>
+                                        <label>First Name *</label>
+                                        <input type="text" name="first"   v-model="formData.user.name.first"  required class="form-control"/>
                                 </div>
 
                                 <div class="form-group py-2">
-                                    <label>Middle Name</label>
-                                    <input type="text" name="middle" v-model="formData.user.name.middle" class="form-control"/>
+                                    <label>Middle Name *</label>
+                                    <input type="text" name="middle" v-model="formData.user.name.middle" required class="form-control"/>
                                 </div>
 
                                 <div class="form-group py-2">
-                                    <label>Last Name</label>
-                                    <input type="text" name="last" v-model="formData.user.name.last" class="form-control"/>
+                                    <label>Last Name *</label>
+                                    <input type="text" name="last" v-model="formData.user.name.last" required class="form-control"/>
                                 </div>
 
                                 <div class="form-group py-2">
-                                    <label>Initials</label>
-                                    <input type="text" name="initials" v-model="formData.user.name.initials"  class="form-control"/>
+                                    <label>Initials * </label>
+                                    <input type="text" name="initials" v-model="formData.user.name.initials"  required class="form-control"/>
                                 </div> 
 
                                 <div class="form-group py-2">
@@ -50,39 +50,43 @@
                                     <div class="col-lg-12 text-center"> <h6> Address</h6> </div>
                                     
                                     <div class="form-group py-2">
-                                        <label>Name</label> 
-                                        <input type="text" name="name" v-model="formData.user.address.name"  class="form-control"/>
+                                        <label>Country *</label>
+                                        <input type="text" name="country" v-model="formData.user.address.country"  required class="form-control"/>
+                                    </div> 
+
+                                    <div class="form-group py-2">
+                                        <label>Address 1 *</label>
+                                        <input type="text" name="street" v-model="formData.user.address.street" required class="form-control"/>
                                     </div>
                         
+                                   
+                                    
+                                    
+                                    
                                     <div class="form-group py-2">
-                                        <label>Street</label>
-                                        <input type="text" name="street" v-model="formData.user.address.street" class="form-control"/>
-                                    </div>
-                        
-                                    <div class="form-group py-2">
-                                        <label>Unit</label>
-                                        <input type="text" name="unit" v-model="formData.user.address.unit" class="form-control"/>
-                                    </div>
-                        
-                                    <div class="form-group py-2">
-                                        <label>City</label>
-                                        <input type="text" name="city" v-model="formData.user.address.city"  class="form-control"/>
+                                        <label>City *</label>
+                                        <input type="text" name="city" v-model="formData.user.address.city"  required class="form-control"/>
                                     </div> 
-                        
+
+                                    
                                     <div class="form-group py-2">
-                                        <label>State</label>
-                                        <input type="text" name="state" v-model="formData.user.address.state"  class="form-control"/>
+                                        <label>State *</label>
+                                        <input type="text" name="state" v-model="formData.user.address.state" required class="form-control"/>
                                     </div> 
-                        
+
                                     <div class="form-group py-2">
-                                        <label>Zipcode</label>
-                                        <input type="text" name="zipcode" v-model="formData.user.address.zipcode"  class="form-control"/>
+                                        <label>Zipcode *</label>
+                                        <input type="text" name="zipcode" v-model="formData.user.address.zipcode" required class="form-control"/>
                                     </div> 
+
+                                    
                         
-                                    <div class="form-group py-2">
-                                        <label>Country</label>
-                                        <input type="text" name="country" v-model="formData.user.address.country"  class="form-control"/>
-                                    </div> 
+                                    
+                        
+                        
+                                   
+                        
+                                    
                                 </div>
                             </div>
 
@@ -186,7 +190,11 @@ export default {
     async submitForm() {
         axios.post(this.updateProfileUrl,this.formData)
         .then(response => {
-            console.log(response);
+            console.log(response); 
+            if(response.data.status == true){ 
+                
+                alert("Profile Updated");
+            }
         })
         .catch(error => {  console.log(error); });
 

@@ -76,7 +76,7 @@ export default {
             // Log the fetched data to the console
             this.listings = response.data.issues;
             this.offerDetail = response.data.issues.uuid;
-
+            console.log(response)
         } catch (error) {
             console.error('Error:', error);
         }

@@ -84,11 +84,10 @@ class OfferController extends Controller
         try {
             $e_sign = Http::get('https://esignatures.io/api/templates?token=' . $token);
             $json_e_sign = json_decode((string) $e_sign->getBody(), true);
-            if (!$e_sign->successful()) {
-                Session::put('error', 'Esignatures Error');
-                return redirect()->back();
+            if($e_sign->successful()) {
+                $templates = $json_e_sign['data'];
             }
-            $templates = $json_e_sign['data'];
+    
             $issuers = User::role('issuer')->get();
         } catch (Exception $error) {
             return $error;
